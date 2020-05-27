@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>blog on Sbloggel</title>
-    <link>https://sbloggel.netlify.app/categories/blog/</link>
+    <link>/categories/blog/</link>
     <description>Recent content in blog on Sbloggel</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 25 Mar 2020 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://sbloggel.netlify.app/categories/blog/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/categories/blog/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>SIR model</title>
-      <link>https://sbloggel.netlify.app/2020/03/25/sir-model/</link>
+      <link>/2020/03/25/sir-model/</link>
       <pubDate>Wed, 25 Mar 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://sbloggel.netlify.app/2020/03/25/sir-model/</guid>
+      <guid>/2020/03/25/sir-model/</guid>
       <description>Here I want to show some sample calculations using the SIR model (https://simple.wikipedia.org/wiki/SIR_model, https://en.wikipedia.org/wiki/Compartmental_models_in_epidemiology).
 The SIR is a simple ordinary differential equation model that describes the dynamics of an epidemic within a population. The model has three variables:
  \(S\) (= susceptible) quantifies the susceptible individuals \(I\) (= infectious) quantifies the individuals who are infected with the disease and can transmit the disease to susceptible individuals \(R\) (= recovered) quantifies the individuals who have recovered from the disease and can no longer be infected with the disease  The following equations describe the dynamics of the model: \[ \frac{dS}{dt} = -\frac{\beta I S}{N} \]</description>
@@ -24,10 +24,10 @@ The SIR is a simple ordinary differential equation model that describes the dyna
     
     <item>
       <title>First post</title>
-      <link>https://sbloggel.netlify.app/2020/03/17/first-post/</link>
+      <link>/2020/03/17/first-post/</link>
       <pubDate>Tue, 17 Mar 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://sbloggel.netlify.app/2020/03/17/first-post/</guid>
+      <guid>/2020/03/17/first-post/</guid>
       <description> Let us see, if plotting works:
 plot(1:10) </description>
     </item>
