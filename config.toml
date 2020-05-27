@@ -21,7 +21,6 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 
 [params]
     description = "Sebastian's blog about statistics and maybe other topics"
-    rssLimit = 2000000
 
     # options for highlight.js (version, additional languages, and theme)
     highlightjsVersion = "9.12.0"

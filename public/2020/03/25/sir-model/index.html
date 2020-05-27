@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.71.1" />
+
+
+<title>SIR model - Sbloggel</title>
+<meta property="og:title" content="SIR model - Sbloggel">
+
+
+  <link href='https://sbloggel.netlify.app/favicon.ico' rel='icon' type='image/x-icon'/>
+
+
+
+  
+
+
+
+
+
+
+
+
+<link href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo">
+    <img src="/images/logo.png"
+         width="50"
+         height="50"
+         alt="Logo">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="/about/">About</a></li>
+    
+    <li><a href="/">Blog</a></li>
+    
+    <li><a href="/index.xml">RSS feed</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+    <span class="article-duration">2 min read</span>
+    
+
+    <h1 class="article-title">SIR model</h1>
+
+    
+    <span class="article-date">2020-03-25</span>
+    
+
+    <div class="article-content">
+      
+
+
+<p>Here I want to show some sample calculations using the SIR model (<a href="https://simple.wikipedia.org/wiki/SIR_model" class="uri">https://simple.wikipedia.org/wiki/SIR_model</a>, <a href="https://en.wikipedia.org/wiki/Compartmental_models_in_epidemiology" class="uri">https://en.wikipedia.org/wiki/Compartmental_models_in_epidemiology</a>).</p>
+<p>The SIR is a simple ordinary differential equation model that describes the dynamics of an epidemic within a population. The model has three variables:</p>
+<ul>
+<li><span class="math inline">\(S\)</span> (= susceptible) quantifies the susceptible individuals</li>
+<li><span class="math inline">\(I\)</span> (= infectious) quantifies the individuals who are infected with the disease and can transmit the disease to susceptible individuals</li>
+<li><span class="math inline">\(R\)</span> (= recovered) quantifies the individuals who have recovered from the disease and can no longer be infected with the disease</li>
+</ul>
+<p>The following equations describe the dynamics of the model:
+<span class="math display">\[ \frac{dS}{dt} = -\frac{\beta I S}{N} \]</span></p>
+<p><span class="math display">\[ \frac{dI}{dt} = \frac{\beta I S}{N} - \lambda I \]</span></p>
+<p><span class="math display">\[ \frac{dR}{dt} = \lambda I \]</span></p>
+<p>In the following, we solve the model equations for a random parameter set.</p>
+<p>Furthermore, we fix <span class="math inline">\(N\)</span> to <span class="math inline">\(1\)</span> and set the initial conditions in a way that <span class="math inline">\(S + I + R = 1\)</span> so that <span class="math inline">\(S\)</span>, <span class="math inline">\(R\)</span> and <span class="math inline">\(I\)</span> describe fractions of the population.</p>
+<pre class="r"><code>parameters &lt;- c(beta = 2, 
+                gamma = 1)
+
+infected_initial &lt;- 0.01
+initial_condition &lt;- 
+  c(S = 1 - infected_initial,
+    I = infected_initial,
+    R = 0)
+
+timepoints &lt;- seq(0, 15, by = .1)</code></pre>
+<p>Then we define the model equations in R:</p>
+<pre class="r"><code>SIR_ODE = function(time, state, parameters){
+  with(as.list(c(state, parameters)), {
+    dS &lt;- -beta * I * S
+    dI &lt;- beta * I * S - gamma * I
+    dR &lt;- gamma * I
+    list(c(dS, dI, dR))
+    })
+  }</code></pre>
+<p>Finally, we use the function <code>ode</code> from the <code>deSolve</code> package to solve the ordinary differential equations:</p>
+<pre class="r"><code>library(deSolve)
+result &lt;- ode(y = initial_condition, 
+             times = timepoints, 
+             func = SIR_ODE, 
+             parms = parameters)</code></pre>
+<p>Now we use the builtin <code>plot</code> function from the <code>deSolve</code>-package to visualize the solution:</p>
+<pre class="r"><code>plot(result)</code></pre>
+<p><img src="/post/2020-03-25-sir-model_files/figure-html/builtin_deSolve_plotting-1.png" width="100%" /></p>
+<p>We can make some plots that are nicer looking in my taste with the <code>lattice</code> package. To rearrange the data from “wide” to “long” format (as needed for the <code>lattice</code> package), we use the <code>tidyverse</code> package.</p>
+<pre class="r"><code>library(lattice)
+library(tidyverse)
+
+# convert data from wide to long format:
+long &lt;- as.data.frame(result) %&gt;% 
+  pivot_longer(cols = c(&#39;S&#39;, &#39;I&#39;, &#39;R&#39;), 
+               names_to = &#39;variable&#39;)
+
+# order factor levels so they appear in the plots in the desired order:
+long$variable = factor(long$variable, levels = c(&#39;S&#39;, &#39;I&#39;, &#39;R&#39;))
+
+# plot all three variables in the same panel:
+xyplot(value ~ time, 
+       data = long, 
+       group = variable, 
+       auto.key = list(space = &#39;right&#39;, 
+                       lines = TRUE, 
+                       points = FALSE), 
+       type = &#39;l&#39;,
+       lwd = 3)</code></pre>
+<p><img src="/post/2020-03-25-sir-model_files/figure-html/lattice_plotting-1.png" width="100%" /></p>
+<pre class="r"><code># plot the variables in seperate panels:
+xyplot(value ~ time | variable, 
+       data = long, 
+       type = &#39;l&#39;, 
+       lwd = 3)</code></pre>
+<p><img src="/post/2020-03-25-sir-model_files/figure-html/lattice_plotting-2.png" width="100%" /></p>
+
+    </div>
+  </article>
+
+  
+<section id="comments">
+  <div id="disqus_thread"></div>
+  <script>
+  var disqus_config = function () {
+  
+  };
+  (function() {
+    var inIFrame = function() {
+      var iframe = true;
+      try { iframe = window.self !== window.top; } catch (e) {}
+      return iframe;
+    };
+    if (inIFrame()) return;
+    var d = document, s = d.createElement('script');
+    s.src = '//sbloggel.disqus.com/embed.js'; s.async = true;
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
+          </li>
+          <li>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="/images/hugo-logo.png" alt="Img link to Hugo website" width="22" height="22"></a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+    
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+<script src="/js/math-code.js"></script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+    
+  </body>
+</html>
+
