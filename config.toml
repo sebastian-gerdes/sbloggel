@@ -1,26 +1,27 @@
-baseurl = "/"
+baseurl = "https://sbloggel.netlify.app/"
 languageCode = "en-us"
-title = "A Hugo website"
+title = "Sbloggel"
 theme = "hugo-lithium"
 googleAnalytics = ""
-disqusShortname = ""
+disqusShortname = "sbloggel"
 ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 
 [permalinks]
     post = "/:year/:month/:day/:slug/"
 
 [[menu.main]]
+    name = "Blog"
+    url = "/"
+[[menu.main]]
+    name = "RSS feed"
+    url = "/index.xml"
+[[menu.main]]
     name = "About"
     url = "/about/"
-[[menu.main]]
-    name = "GitHub"
-    url = "https://github.com/rstudio/blogdown"
-[[menu.main]]
-    name = "Twitter"
-    url = "https://twitter.com/rstudio"
 
 [params]
-    description = "A website built through Hugo and blogdown."
+    description = "Sebastian's blog about statistics and maybe other topics"
+    rssLimit = 2000000
 
     # options for highlight.js (version, additional languages, and theme)
     highlightjsVersion = "9.12.0"
