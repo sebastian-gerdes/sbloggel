@@ -1,36 +1,111 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>blog on Sbloggel</title>
-    <link>/categories/blog/</link>
-    <description>Recent content in blog on Sbloggel</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Wed, 25 Mar 2020 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/categories/blog/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>SIR model</title>
-      <link>/2020/03/25/sir-model/</link>
-      <pubDate>Wed, 25 Mar 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/2020/03/25/sir-model/</guid>
-      <description>Here I want to show some sample calculations using the SIR model (https://simple.wikipedia.org/wiki/SIR_model, https://en.wikipedia.org/wiki/Compartmental_models_in_epidemiology).
-The SIR is a simple ordinary differential equation model that describes the dynamics of an epidemic within a population. The model has three variables:
- \(S\) (= susceptible) quantifies the susceptible individuals \(I\) (= infectious) quantifies the individuals who are infected with the disease and can transmit the disease to susceptible individuals \(R\) (= recovered) quantifies the individuals who have recovered from the disease and can no longer be infected with the disease  The following equations describe the dynamics of the model: \[ \frac{dS}{dt} = -\frac{\beta I S}{N} \]</description>
-    </item>
-    
-    <item>
-      <title>First post</title>
-      <link>/2020/03/17/first-post/</link>
-      <pubDate>Tue, 17 Mar 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/2020/03/17/first-post/</guid>
-      <description> Let us see, if plotting works:
-plot(1:10) </description>
-    </item>
-    
-  </channel>
-</rss>
+  <title>blog on Sbloggel</title>
+  <link>https://sbloggel.netlify.app/categories/blog/</link>
+  <description>Recent content in blog on Sbloggel</description>
+  <generator>Hugo -- gohugo.io</generator>
+<language>en-us</language>
+<lastBuildDate>Wed, 25 Mar 2020 00:00:00 +0000</lastBuildDate>
+
+<atom:link href="https://sbloggel.netlify.app/categories/blog/index.xml" rel="self" type="application/rss+xml" />
+
+
+<item>
+  <title>SIR model</title>
+  <link>https://sbloggel.netlify.app/2020/03/25/sir-model/</link>
+  <pubDate>Wed, 25 Mar 2020 00:00:00 +0000</pubDate>
+  
+<guid>https://sbloggel.netlify.app/2020/03/25/sir-model/</guid>
+  <description>
+
+
+&lt;p&gt;Here I want to show some sample calculations using the SIR model (&lt;a href=&#34;https://simple.wikipedia.org/wiki/SIR_model&#34; class=&#34;uri&#34;&gt;https://simple.wikipedia.org/wiki/SIR_model&lt;/a&gt;, &lt;a href=&#34;https://en.wikipedia.org/wiki/Compartmental_models_in_epidemiology&#34; class=&#34;uri&#34;&gt;https://en.wikipedia.org/wiki/Compartmental_models_in_epidemiology&lt;/a&gt;).&lt;/p&gt;
+&lt;p&gt;The SIR is a simple ordinary differential equation model that describes the dynamics of an epidemic within a population. The model has three variables:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(S\)&lt;/span&gt; (= susceptible) quantifies the susceptible individuals&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(I\)&lt;/span&gt; (= infectious) quantifies the individuals who are infected with the disease and can transmit the disease to susceptible individuals&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(R\)&lt;/span&gt; (= recovered) quantifies the individuals who have recovered from the disease and can no longer be infected with the disease&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The following equations describe the dynamics of the model:
+&lt;span class=&#34;math display&#34;&gt;\[ \frac{dS}{dt} = -\frac{\beta I S}{N} \]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[ \frac{dI}{dt} = \frac{\beta I S}{N} - \lambda I \]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[ \frac{dR}{dt} = \lambda I \]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;In the following, we solve the model equations for a random parameter set.&lt;/p&gt;
+&lt;p&gt;Furthermore, we fix &lt;span class=&#34;math inline&#34;&gt;\(N\)&lt;/span&gt; to &lt;span class=&#34;math inline&#34;&gt;\(1\)&lt;/span&gt; and set the initial conditions in a way that &lt;span class=&#34;math inline&#34;&gt;\(S + I + R = 1\)&lt;/span&gt; so that &lt;span class=&#34;math inline&#34;&gt;\(S\)&lt;/span&gt;, &lt;span class=&#34;math inline&#34;&gt;\(R\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(I\)&lt;/span&gt; describe fractions of the population.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;parameters &amp;lt;- c(beta = 2, 
+                gamma = 1)
+
+infected_initial &amp;lt;- 0.01
+initial_condition &amp;lt;- 
+  c(S = 1 - infected_initial,
+    I = infected_initial,
+    R = 0)
+
+timepoints &amp;lt;- seq(0, 15, by = .1)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Then we define the model equations in R:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;SIR_ODE = function(time, state, parameters){
+  with(as.list(c(state, parameters)), {
+    dS &amp;lt;- -beta * I * S
+    dI &amp;lt;- beta * I * S - gamma * I
+    dR &amp;lt;- gamma * I
+    list(c(dS, dI, dR))
+    })
+  }&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Finally, we use the function &lt;code&gt;ode&lt;/code&gt; from the &lt;code&gt;deSolve&lt;/code&gt; package to solve the ordinary differential equations:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(deSolve)
+result &amp;lt;- ode(y = initial_condition, 
+             times = timepoints, 
+             func = SIR_ODE, 
+             parms = parameters)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now we use the builtin &lt;code&gt;plot&lt;/code&gt; function from the &lt;code&gt;deSolve&lt;/code&gt;-package to visualize the solution:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;plot(result)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://sbloggel.netlify.app/post/2020-03-25-sir-model_files/figure-html/builtin_deSolve_plotting-1.png&#34; width=&#34;100%&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;We can make some plots that are nicer looking in my taste with the &lt;code&gt;lattice&lt;/code&gt; package. To rearrange the data from “wide” to “long” format (as needed for the &lt;code&gt;lattice&lt;/code&gt; package), we use the &lt;code&gt;tidyverse&lt;/code&gt; package.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(lattice)
+library(tidyverse)
+
+# convert data from wide to long format:
+long &amp;lt;- as.data.frame(result) %&amp;gt;% 
+  pivot_longer(cols = c(&amp;#39;S&amp;#39;, &amp;#39;I&amp;#39;, &amp;#39;R&amp;#39;), 
+               names_to = &amp;#39;variable&amp;#39;)
+
+# order factor levels so they appear in the plots in the desired order:
+long$variable = factor(long$variable, levels = c(&amp;#39;S&amp;#39;, &amp;#39;I&amp;#39;, &amp;#39;R&amp;#39;))
+
+# plot all three variables in the same panel:
+xyplot(value ~ time, 
+       data = long, 
+       group = variable, 
+       auto.key = list(space = &amp;#39;right&amp;#39;, 
+                       lines = TRUE, 
+                       points = FALSE), 
+       type = &amp;#39;l&amp;#39;,
+       lwd = 3)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://sbloggel.netlify.app/post/2020-03-25-sir-model_files/figure-html/lattice_plotting-1.png&#34; width=&#34;100%&#34; /&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# plot the variables in seperate panels:
+xyplot(value ~ time | variable, 
+       data = long, 
+       type = &amp;#39;l&amp;#39;, 
+       lwd = 3)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://sbloggel.netlify.app/post/2020-03-25-sir-model_files/figure-html/lattice_plotting-2.png&#34; width=&#34;100%&#34; /&gt;&lt;/p&gt;
+</description>
+  </item>
+  
+<item>
+  <title>First post</title>
+  <link>https://sbloggel.netlify.app/2020/03/17/first-post/</link>
+  <pubDate>Tue, 17 Mar 2020 00:00:00 +0000</pubDate>
+  
+<guid>https://sbloggel.netlify.app/2020/03/17/first-post/</guid>
+  <description>
+
+
+&lt;p&gt;Let us see, if plotting works:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;plot(1:10)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://sbloggel.netlify.app/post/2020-03-17-first-post_files/figure-html/unnamed-chunk-1-1.png&#34; width=&#34;100%&#34; /&gt;&lt;/p&gt;
+</description>
+  </item>
+  
+</channel>
+  </rss>
