@@ -1,9 +1,5 @@
 project:
-  type: 
-    website:
-      comments:
-        utterances:
-          repo: sebastian-gerdes/sbloggel2_comments
+  type: website
   output-dir: docs
 
 website:
@@ -17,4 +13,3 @@ format:
   html:
     theme: cosmo
     css: styles.css
-
