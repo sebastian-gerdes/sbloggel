@@ -1,0 +1,51 @@
+---
+title: 'R interfaces to trial registries'
+date: '2022-10-25'
+author: 'Sebastian Gerdes'
+# categories: [testing]
+---
+
+## Package 'clinicaltrialr'
+
+```{r clinicaltrialr}
+library('tidyverse')
+
+library('ggVennDiagram')
+library('clinicaltrialr') 
+
+results_q_twist <- ct_read_results('https://www.clinicaltrials.gov/ct2/results?cond=&term=Q-TWiST&type=&rslt=&age_v=&gndr=&intr=&titles=&outc=&spons=&lead=&id=&cntry=&state=&city=&dist=&locn=&rsub=&strd_s=&strd_e=&prcd_s=&prcd_e=&sfpd_s=&sfpd_e=&rfpd_s=&rfpd_e=&lupd_s=&lupd_e=&sort=')
+results_qas <- ct_read_results('https://www.clinicaltrials.gov/ct2/results?cond=&term=%22quality+adjusted+survival%22&type=&rslt=&age_v=&gndr=&intr=&titles=&outc=&spons=&lead=&id=&cntry=&state=&city=&dist=&locn=&rsub=&strd_s=&strd_e=&prcd_s=&prcd_e=&sfpd_s=&sfpd_e=&rfpd_s=&rfpd_e=&lupd_s=&lupd_e=&sort=')
+
+str(results_qas)
+
+# List of items
+x <- list('Keyword "Quality-adjusted survival"' = results_qas$`NCT Number`, 
+          'Keyword "Q-TWiST"' = results_q_twist$`NCT Number`)
+
+# 2D Venn diagram
+ggVennDiagram(x) + theme(legend.position = 'none')
+```
+
+## Package 'rclinicaltrials'
+
+```{r rclinicaltrials}
+library(rclinicaltrials)
+# z <- clinicaltrials_search(query = 'lime+disease') 
+# str(z)
+clinicaltrials_count(query = "myeloma") 
+clinicaltrials_count(query = "29485tksrw@")
+
+y <- clinicaltrials_download(query = 'myeloma', count = 10, include_results = TRUE)
+str(y)
+
+```
+
+## Package 'cthist'
+
+-   https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9249399/
+
+```{r cthist}
+library(tidyverse)
+library(cthist)
+library(lubridate)
+```

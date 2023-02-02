@@ -1,0 +1,99 @@
+---
+title: 'Timeline'
+author: 'Sebastian Gerdes'
+date: '2022-09-08'
+# categories: [testing]
+---
+
+```{r function_definitions}
+format_ods_data_frame <- 
+  function(dat, 
+           colnames = TRUE, 
+           type_definition = TRUE) {
+    
+    result <- dat
+    
+    if (colnames) {
+      result <- result[-1, ]
+      colnames(result) <- dat[1, ]
+    }
+    
+    if (type_definition) {
+      type_defs <- result[1, ]
+      result <- result[-1, ]
+      for (i in 1:ncol(dat)) {
+        if (type_defs[i] == 'Factor') {
+          result[result[, i] == '', i] <- NA
+          result[, i] <- as.factor(result[, i])  
+        }
+        if (type_defs[i] == 'Numeric')
+          result[, i] <- as.numeric(result[, i])
+        if (type_defs[i] == 'Character')
+          result[, i] <- as.character(result[, i])
+      }
+    }
+    rownames(result) <- NULL
+    return(result)
+  }
+
+plot_timeline <- function(label,
+                          begin, 
+                          end, 
+                          group = NULL) {
+  n <- length(label)
+  if(is.null(group)) {
+    group <- 1:n
+  } else {
+    group <- as.numeric(group)
+  }
+  timeline_colors <- rainbow(max(group), 
+                             s = 0.1)
+  par(mar = c(3.1, 2.1, 2.1, 2.1))
+  plot(0, type = 'n',
+       ylab = '', xlab = '', yaxt = 'n',
+       ylim = c(n, 0), 
+       xlim = range(begin, end))
+  grid()
+  rect(xleft = begin,
+       xright = end,
+       ybottom = 0:(n - 1) + 0.1,
+       ytop = 1:n - 0.1,
+       col = timeline_colors[group])
+  text((begin + end) / 2,
+       1:n - 0.5,
+       label)
+}
+```
+
+```{r init}
+library('readODS')
+Modernism <- format_ods_data_frame(
+  read.ods('Art_Modernism.ods', 
+           sheet = 1))
+```
+
+```{r, fig.width = 11}
+par(mar = c(3.1, 2.1, 2.1, 2.1))
+plot(0, type = 'n',
+     ylab = '', xlab = '', yaxt = 'n',
+     ylim = c(nrow(Modernism), 0), 
+     xlim = range(Modernism$Begin, Modernism$End))
+grid()
+rect(xleft = Modernism$Begin,
+     xright = Modernism$End,
+     ybottom = 0:(nrow(Modernism) - 1) + 0.1,
+     ytop = 1:nrow(Modernism) - 0.1,
+     col = rainbow(nrow(Modernism), 
+                   s = 0.2))
+text((Modernism$Begin + Modernism$End) / 2,
+     1:nrow(Modernism) - 0.5,
+     Modernism$Label)
+```
+
+```{r fig.width = 11, fig.height = 9}
+painters <- format_ods_data_frame(
+  read.ods('Painters.ods', sheet = 1))
+
+with(painters, 
+     plot_timeline(Label, Begin, End, group = Group))
+```

@@ -1,0 +1,60 @@
+---
+title: 'Model meadow'
+author: 'Sebastian Gerdes'
+date: '2022-10-19'
+# categories: [testing]
+---
+
+## General linear model
+
+## Generalized linear model
+
+### Binary data
+
+### Count data
+
+## Mixed effect models
+
+## Models for survival data
+
+### Kaplan-Meier
+
+```{r}
+
+```
+
+### Cox-PH
+
+### Competing risks
+
+### Multistate models
+
+```{r}
+library(survival)
+library(mstate)
+tmat <- transMat(list(c(2,3,4), c(3,4), c(4), c()), c('tox', 'twist', 'rel', 'death'))
+
+data <- data.frame(id = c(1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 1, 2, 3, 3, 3, 4, 4, 4, 5, 5, 5),
+                   from = c(1, 1, 1, 2, 2, 1, 1, 1, 2, 2, 3, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1), 
+                   to = c(2, 3, 4, 3, 4, 2, 3, 4, 3, 4, 4, 4, 2, 3, 4, 2, 3, 4, 2, 3, 4),
+                   start_time = c(0, 0, 0, 5, 5, 0, 0, 0, 4, 4, 8, 9, 0, 0, 0, 0 , 0 , 0, 0, 0, 0),
+                   stop_time = c(5, 5, 5, 8, 8, 4, 4, 4, 9, 9, 12, 13, 2, 2, 2, 3, 3, 3, 7, 7, 7),
+                   status = c(1, 0, 0, 0, 1, 1, 0 , 0 , 0, 1, 0, 0, 0 , 0, 1, 0 , 1, 0, 0 , 0 , 0), 
+                   group = c('a', 'a', 'a', 'a', 'a', 'b', 'b', 'b', 'b', 'b', 'a', 'b', 'a', 'a', 'a', 'b', 'b', 'b', 'b', 'b', 'b'))
+data$trans <- data$to - 1
+
+fm <- coxph(Surv(time = start_time, time2 = stop_time, event = status) ~ strata(trans), data = data)
+
+fm_msfit <- msfit(object = fm, trans = tmat)
+plot(fm_msfit)
+
+p_model <- probtrans(fm_msfit, predt = 0)
+p_model
+plot(p_model, use.ggplot = TRUE)
+plot(p_model, use.ggplot = TRUE, type = 'separate', conf.int = 0.95,conf.type = 'log')
+
+```
+
+## Machine learning models
+
+### Neural nets

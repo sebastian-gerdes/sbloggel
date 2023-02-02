@@ -1,0 +1,79 @@
+---
+title: 'Humidity'
+author: 'Sebastian Gerdes'
+date: '2022-09-08'
+# categories: [testing]
+
+---
+
+```{r init}
+# devtools::install_github('sebastian-gerdes/smisc')
+library('smisc')
+library('knitr')
+library('tibble') 
+library('lattice')
+```
+
+```{r}
+plot(absolute_humidity, -20, 20, log = 'y')
+```
+
+```{r}
+volume_of_flat <- 120 * 3
+relative_humidity_inside <- 50
+relative_humidity_outside <- 70
+temperature_inside <- 20
+temperature_outside <- 0
+(water_in_air_inside <- absolute_humidity(relative_humidity = relative_humidity_inside,
+                                  temperature = temperature_inside) * volume_of_flat)
+
+(water_in_air_outside <- absolute_humidity(relative_humidity = relative_humidity_outside,
+                                  temperature = temperature_outside) * volume_of_flat)
+water_out <- water_in_air_inside - water_in_air_outside
+```
+
+Conclusion: Airing once with an indoor temperature of `r temperature_inside` degress Celsius with a relative humidity of `r relative_humidity_inside`% and an outdoor temperature of `r temperature_outside` degrees Celsius with a relative outdoor humidity of `r relative_humidity_outside`% transports approx. `r signif(water_out, 2)` liters of water out of the flat, assuming a volume of 360 $m^3$ of the flat.
+
+```{r fig.height=12, fig.width=12}
+temperatures <- seq(from = -10, to = 35)
+relative_humidities <- seq(from = 0, to = 100, by = 5)
+result <- matrix(nrow = length(temperatures), 
+                 ncol = length(relative_humidities), 
+                 dimnames = list(temperatures, relative_humidities))
+for (i in 1:length(temperatures)) {
+  for (j in 1:length(relative_humidities)){
+    result[i, j] <- absolute_humidity(temperature = temperatures[i], 
+                                      relative_humidity = relative_humidities[j])
+  }
+}
+my_breaks <- c(0.5, 0.7, 1, 1.5, 2, 3, 4, 6, 8, 10, 12, 16, 20, 30) / 1000
+contour(result, levels = c(0.5, 1, 2, 3, 4, 10, 20) / 1000)
+contourplot(result, at = my_breaks,
+            scales=list(x=list(rot=90)), 
+            xlab = 'Temperature (degrees Celsius)',
+            ylab = 'Relative humidity (%)')
+
+```
+
+## Absolute humidity in 1 $m^3$ at a relative humiditiy of 100%
+
+```{r}
+# scenario 1:
+temperatures <- seq(from = -10, to = 35, by = 5)
+relative_humidities <- seq(from = 0, to = 100, by = 10)
+result <- matrix(nrow = length(temperatures), 
+                 ncol = length(relative_humidities), 
+                 dimnames = list(temperatures, relative_humidities))
+for (i in 1:length(temperatures)) {
+  for (j in 1:length(relative_humidities)){
+    result[i, j] <- absolute_humidity(temperature = temperatures[i], 
+                                      relative_humidity = relative_humidities[j])
+  }
+}
+
+kable(round(result, digits = 2)) 
+# scenario 2:
+temperatures <- -10:30
+abs_humidity <- round(absolute_humidity(temperature = temperatures), digits = 3)
+kable(tibble(temperatures = temperatures, abs_humidity = abs_humidity))
+```

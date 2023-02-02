@@ -1,0 +1,126 @@
+---
+title: 'SIRS model dynamics'
+author: Sebastian Gerdes
+date: '2023-01-19'
+# categories: [testing]
+---
+
+## Loading the required libraries
+
+```{r}
+#| label: init
+#| message: false
+library('ggplot2')
+library('tidyverse')
+library('deSolve')
+theme_set(theme_bw())
+```
+
+```{r}
+#| label: explore_model_dynamics
+#| fig.width: 10
+#| fig.height: 10
+#| eval: true
+#| cache: false
+sir_ode_deterministic <- function(t, state, pars) {
+  with(as.list(c(state, pars)), {
+    dS <- - beta * I * S + lambda * R
+    dI <- beta * I * S - gamma * I
+    dR <- gamma * I - lambda * R
+    return(list(c(dS = dS, dI = dI, dR = dR)))
+  }) 
+}
+
+
+infected_initial <- 0.5
+initial_condition <- 
+  c(S = 1 - infected_initial,
+    I = infected_initial,
+    R = 0)
+
+step_length <- 1
+max_time <- 100
+timepoints <- seq(0, max_time, by = step_length)
+grid_values <- 2^(-1:1)
+grid_values <- 2^(-2:2)
+grid_values <- 2^(-3:3)
+
+result <- tibble()
+for(beta in grid_values) {
+  for(gamma in grid_values) {
+    for(lambda in grid_values) {
+      parameters <- list(beta = beta, 
+                         gamma = gamma,
+                         lambda = lambda)
+      solution <- ode(y = initial_condition, 
+                      times = timepoints,
+                      func = sir_ode_deterministic,
+                      parms = parameters) %>% 
+        unclass %>% as_tibble
+      solution$beta <- beta
+      solution$gamma <- gamma
+      solution$lambda <- lambda
+      result <- rbind(result, solution)
+    }
+  }
+}
+
+result <- pivot_longer(result, cols = c('S', 'I', 'R'))
+
+last <- result[result$time == max_time, ]
+
+last %>%
+  ggplot(aes(beta, value, colour = name)) + geom_point() + geom_line() +
+  facet_grid(rows = vars(gamma), cols = vars(lambda), labeller = label_both) +
+  ylab('Fraction') + xlab('beta') + labs(colour = 'Compartment') +
+  scale_x_continuous(trans='log10')
+
+last %>%
+  ggplot(aes(x = beta, y = value, fill = name)) + geom_area() +
+  facet_grid(rows = vars(gamma), cols = vars(lambda), labeller = label_both) +
+  ylab('Fraction') + xlab('beta') + labs(colour = 'Compartment') +
+  scale_x_continuous(trans='log10')
+
+```
+
+## Analytical
+
+Solution in terms of parameters in red.
+
+### Equilibrium conditions:
+
+$$S + I + R = 1 \qquad (1)$$ $$0 = -\beta I S + \lambda R \qquad (2)$$ $$0 = \beta I S - \gamma I \qquad (3)$$ $$0 = \gamma I - \lambda R \qquad (4)$$
+
+### Algebraic transformation:
+
+$$ R = 1 - S - I \qquad (1b)$$ [ $$ S = \gamma / \beta \qquad (3b)$$ ]{style="color: red;"}
+
+### Plugging in:
+
+$$ (3b) \rightarrow (2): I = \lambda / \gamma R  \qquad (5)$$ [ $$ (1b) \rightarrow (5): I = \frac{\lambda(\beta - \gamma)}{\beta(\gamma + \lambda)} \qquad (6)$$ $$ (3b) + (6) \rightarrow (1b): R = \frac{\gamma(\beta - \gamma)}{\beta(\gamma + \lambda)} \qquad (7)$$ ]{style="color: red;"}
+
+### Plots
+
+```{r}
+last_w <- pivot_wider(last, names_from = name, values_from = value)
+last_w$S + last_w$I + last_w$R
+
+last_w$S_calc <- pmin(1, last_w$gamma / last_w$beta)
+last_w$I_calc <- pmax(0, pmin(1, with(last_w, (lambda * (beta - gamma))) / (beta * (gamma + lambda))))
+last_w$R_calc <- pmax(0, pmin(1, with(last_w, (gamma * (beta - gamma)) / (beta * (gamma + lambda)))))
+ggplot(last_w, aes(S, S_calc)) + geom_point()
+ggplot(last_w, aes(I, I_calc)) + geom_point()
+ggplot(last_w, aes(R, R_calc)) + geom_point()
+last_w$I_calc <- 1 - last_w$S_calc - last_w$R_calc
+
+last <- pivot_longer(last_w, cols = c('S_calc', 'I_calc', 'R_calc'))
+glimpse(last)
+
+
+last %>%
+  ggplot(aes(x = beta, y = value, fill = name)) + geom_area() +
+  facet_grid(rows = vars(gamma), cols = vars(lambda), labeller = label_both) +
+  ylab('Fraction') + xlab('beta') + labs(colour = 'Compartment') +
+  scale_x_continuous(trans='log10', breaks = grid_values)
+
+```

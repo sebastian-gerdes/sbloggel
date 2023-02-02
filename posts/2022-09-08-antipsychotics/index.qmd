@@ -1,0 +1,64 @@
+---
+title: 'Antipsychotics'
+author: 'Sebastian Gerdes'
+date: '2022-09-08'
+# categories: [testing]
+---
+
+```{r LoadPackages, echo = FALSE, message = FALSE}
+library('readODS')
+library('knitr')
+```
+
+```{r FunctionDefinitions, echo = FALSE}
+format_ods_data_frame <- 
+  function(dat, 
+           colnames = TRUE, 
+           type_definition = TRUE) {
+    
+    result <- dat
+    
+    if (colnames) {
+      result <- result[-1, ]
+      colnames(result) <- dat[1, ]
+    }
+    
+    if (type_definition) {
+      type_defs <- result[1, ]
+      result <- result[-1, ]
+      for (i in 1:ncol(dat)) {
+        if (type_defs[i] == 'Factor') {
+          result[result[, i] == '', i] <- NA
+          result[, i] <- as.factor(result[, i])  
+        }
+        if (type_defs[i] == 'Numeric')
+          result[, i] <- as.numeric(result[, i])
+      }
+    }
+    rownames(result) <- NULL
+    return(result)
+  }
+```
+
+# Dopamin-Rezeptoren
+
+-   D_1/D_5-Gruppe: Signalübertragung durch stimulatorisches G-Protein --\> cAMP hoch
+-   D_2/D_3/D_4-Gruppe: Signalübertragung durch hemmendes G-Protein --\> cAMP runter
+
+# Wichtige dopaminerge Neuronensysteme
+
+-   Nigrostriatales System: Motorik (damit auch EPS)
+-   Mesolimbisches / mesokortikales System: Hauptangriffsort der Antipsychotika
+-   Tuberoinfundibuläres System: vermittelt die neuroendokrinologischen NW, insbesondere Prolaktin-Anstieg
+
+# Antipsychotika
+
+```{r ReadData, echo =  FALSE, message = FALSE, results = 'hide'}
+ap <- read.ods('Antipsychotics.ods', sheet = 1)
+ap <- format_ods_data_frame(ap)
+```
+
+```{r Tabellen, echo = FALSE}
+kable(ap, align = rep('c', ncol(ap)))
+kable(summary(ap))
+```

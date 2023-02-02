@@ -1,0 +1,44 @@
+---
+title: 'Kids per person and carbon footprint'
+author: 'Sebastian Gerdes'
+date: '2022-10-19'
+# categories: [testing]
+---
+
+## Background
+
+Here I want collect a few resources on how much the number of kids you get affects your carbone footprint.
+
+## Interesting links
+
+-   https://iopscience.iop.org/article/10.1088/1748-9326/aa7541/meta
+-   https://www.lunduniversity.lu.se/article/four-lifestyle-choices-most-reduce-your-carbon-footprint
+-   https://www.arte.tv/de/videos/086893-003-A/re-kinderlos-dem-klima-zuliebe/
+
+## Calculations
+
+```{r}
+nr_of_generations_considered <-10
+nr_of_kids_per_person <- 1.7
+
+nr_of_persons <- function(nr_of_generations_considered, nr_of_kids_per_person = 1.7) {
+  responsibility_per_kid <-(1/2)^(1:nr_of_generations_considered)
+  kids_per_generations <- nr_of_kids_per_person^(1:nr_of_generations_considered)
+  total <- sum(responsibility_per_kid * kids_per_generations)
+  return(total)
+}
+
+nr_of_persons_v <- Vectorize(nr_of_persons)
+
+plot(nr_of_persons_v, 1, 100, log = 'x', xlab = 'Number of generations considered on log scale',
+     ylab = 'For how many descendents a person is responsible')
+```
+
+Do calcuation with geometric series:
+
+```{r}
+foo <- function(nr_of_kids_per_person) {
+  1 / (1 - (nr_of_kids_per_person / 2))
+}  
+plot(foo, 0, 1.9)
+```

@@ -1,0 +1,115 @@
+---
+title: 'Simulate time to-event-data'
+author: 'Sebastian Gerdes'
+date: '2022-10-25'
+# categories: [testing]
+---
+
+## Intro
+
+In this post, two methods to draw from a survival time distribution defined by an arbitrary hazard function are demonstrated. First, some central equations of survival analysis are given in order to refresh the background and establish a consistent notation. Then, the two different approaches are demonstrated.
+
+## Mathematical aspects
+
+-   Taken from [wikipedia](https://en.wikipedia.org/wiki/Survival_analysis#General_formulation) - at this wikipedia page also further explanation can be found
+-   Survival function $S$ $$ S(t) = Pr(T > t) $$
+-   Hazard function $\lambda$ $$ \lambda(t) = - S'(t) / S(t) $$
+-   Cumulative hazard function $\Lambda$ $$ \Lambda(t)  = \int_0^t{\lambda(u) du} $$
+-   Relation between $\Lambda$ and $S$ $$ S(t) = exp(-\Lambda(t)) $$
+
+## Ad hoc code to draw from survival time distribution
+
+```{r ad_hoc_method}
+set.seed(1)
+library('survival')
+
+# define hazard function:
+lambda <- Vectorize(
+  function(t) {
+    abs(sin(t))
+  })
+
+# hazard for t = 7:
+lambda(7) 
+
+plot(lambda, from = 0, to = 10, xlab = 't', ylab = expression(lambda))
+
+
+# define function that computes cumulative hazard function:
+Lambda <- Vectorize(
+  function(t) {
+    integrate(lambda,
+              subdivisions = 1e3L,
+              lower = 0, 
+              upper = t)$value
+  })
+
+# cumulative hazard for t = 3
+Lambda(3) 
+
+plot(Lambda, from = 0, to = 10, xlab = 't', ylab = expression(Lambda))
+
+# define function that computes survival function 
+# from cumulative hazard function:
+S <- Vectorize(
+  function(t) {
+    exp(-Lambda(t))
+  })
+
+plot(S, from = 0, to = 10, xlab = 't')
+
+# determine at which time cumulative hazard
+# reaches 2e1 (i. e. S(t) < 1e-8)
+# the value is used as upper bound for
+# optimization to find the quantile
+upper_bound <- optimize(
+  function(x) {
+    abs(Lambda(x) - 2e1)
+  }, 
+  interval = c(0, 1e2))$minimum
+
+# define function to compute quantile of survival function
+quantile_function <- Vectorize(
+  function(t) {
+    optimize(function(x) {
+      abs(S(x) - t)}, 
+      interval = c(0, upper_bound))$min
+  })
+
+# compute some quantiles for hazard function
+# that has been specified above:
+quantile_function(c(0.25, 0.5, 0.75))
+
+# evaluate how long it takes to determine 10 quantiles:
+microbenchmark::microbenchmark(quantile_function(1:10))
+
+# draw n random numbers from survival distribution 
+# defined by hazard function above
+(times <- quantile_function(runif(n = 20)))
+
+plot(survfit(Surv(times) ~ 1), xlab = 't', ylab = 'S')
+```
+
+## More sophisticated solution using the coxed package
+
+-   Solution found [here](https://cran.r-project.org/web/packages/coxed/vignettes/simulating_survival_data.html#user-specified-hazard-functions):
+
+```{r coxed_method, message = FALSE}
+library('coxed')
+
+my.hazard <- function(t){ 
+  abs(sin(t)) * 0.01
+}
+
+simdata <- sim.survdata(N = 100, 
+                        T = 1000, 
+                        hazard.fun = my.hazard)
+
+plot(survfit(Surv(simdata$data$y) ~ 1), xlab = 't', ylab = 'S')
+```
+
+## Conclusion
+
+It is possible to draw survival times defined by an arbitrary hazard function with just a few lines of code. However, the code is not very time-efficient and there might be issues with numerical stability in certain constellations - hence, plausibility of the results needs to be checked manually.
+
+The coxed package provides convenient, more sophisticated methods to achieve a similar goal. However, the coxed approach might be more difficult to adapt to specific situations since the code base is more rigid.

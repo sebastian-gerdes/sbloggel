@@ -1,0 +1,41 @@
+---
+title: 'Contribution plots'
+author: 'Sebastian Gerdes'
+date: '2023-01-05'
+# categories: [testing]
+---
+
+## Contribution plot using ggplot2 and plotly
+
+```{r contribution_plot}
+library('tibble')
+library('ggplot2')
+library('RColorBrewer')
+library('plotly')
+theme_set(theme_minimal())
+#help(package = 'RColorBrewer')
+nr_of_clones <- 11
+nr_of_timepoins <- 20
+
+dat <- tibble(t = rep(1:nr_of_timepoins, each = nr_of_clones),
+              p = abs(rnorm(nr_of_clones * nr_of_timepoins)),
+              s = rep(1:nr_of_clones, nr_of_timepoins))
+
+dat$p <- dat$p / rep(tapply(dat$p, dat$t, sum), each = nr_of_clones)
+
+# my_cols <- rainbow(nr_of_clones)
+my_cols <- brewer.pal(nr_of_clones, 'Spectral')
+
+(g <- ggplot(dat, aes(x = t, y = p, group = factor(s), fill = factor(s))) + 
+  geom_area(alpha = 0.65) + 
+  scale_fill_manual(name = 'State', values = my_cols) +
+  xlab('Time') + ylab('Relative contibution'))
+ggplotly(g)
+```
+
+## Another plotly plot
+
+```{r another_plotly_plot}
+(g <- ggplot(cars, aes(dist, speed)) + geom_point())
+ggplotly(g)
+```

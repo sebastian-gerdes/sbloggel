@@ -1,0 +1,42 @@
+---
+title: 'Retrieving and plotting COVID-19 data'
+author: 'Sebastian Gerdes'
+date: '2022-10-16'
+# categories: [testing]
+---
+
+## Background
+
+The COVID19 package allows to conveniently retrieve statistical data about the COVID-19 pandemy. Here, the data for Germany are retrieved and two exploratory plots are created.
+
+## Loading libraries
+
+```{r init}
+library('ggplot2')
+library('COVID19')
+```
+
+## Retrieving the data
+
+```{r data_retrieval, cache = TRUE}
+deu <- covid19('Germany', level = 1) 
+```
+
+## Plotting total number of confirmed cases
+
+```{r plot_confirmed_cases_total}
+ggplot(data = deu, aes(date, confirmed)) + geom_point() + 
+  geom_smooth()  + scale_y_log10()
+```
+
+## Plotting new cases
+
+```{r plot_new_confirmed_cases}
+dat <- data.frame(date = deu$date[-1], new_cases = diff(deu$confirmed))
+ggplot(data = dat, aes(date, new_cases)) + geom_point() + 
+  geom_smooth()  + scale_y_log10()
+```
+
+## Conclusion
+
+This package allows convenient retrieval of a lot of data about the COVID-19 pandemy.

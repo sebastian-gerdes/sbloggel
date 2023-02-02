@@ -1,0 +1,31 @@
+---
+title: 'Psychopharmaca and time'
+author: 'Sebastian Gerdes'
+date: '2022-09-08'
+# categories: [testing]
+---
+
+```{r}
+library('lattice')
+library('readxl')
+
+dat <- read_excel('Psychopharmaka_Data.xlsx')
+
+
+dat <- dat[order(dat$Jahr), ]
+
+
+stripplot(order(dat$Jahr) ~ Jahr, data = dat, 
+          panel = 
+            function(x, y, subscripts, ...) {
+              panel.grid(h = -1, v = -1)
+              lsegments(x0 = x, y0 = y - 0.2, 
+                        x1 = x, y1 = y - 0.6,
+                        lwd = 3)
+              ltext(x = x, y = y, 
+                    labels = dat$Substanz[subscripts])
+              }, 
+          xlim = c(1945, 2015), 
+          ylab = '')
+
+```

@@ -1,0 +1,65 @@
+---
+title: 'Sustainibility data'
+author: 'Sebastian Gerdes'
+date: '2023-01-10'
+# categories: [testing]
+---
+
+```{r}
+#| include: false
+d3 <- function(x) {
+  format(x, scientific = TRUE, digits = 3)
+}
+```
+
+## Wie viel Energie liefert die Sonne?
+
+-   Quelle: [Blog](https://www.dlr.de/blogs/home/energie/frage-der-woche-wie-viel-energie-schickt-uns-die-sonne-jeden-tag.aspx)
+-   Energie pro Jahr:
+
+```{r}
+# Wie viele Watt pro qm Erdoberfläche liefert die Sonne im Mittel:
+watt_per_sqm <- 1340
+# Wie groß ist die Oberfläche der Erde:
+surface_earth_sqm <- 5.1e14
+# Wie viel Sonnenenergie erreicht die Erde pro Jahr:
+energy_sun_per_year_joule <- watt_per_sqm * surface_earth_sqm * 60 * 60 * 24 * 365.25
+(energy_per_year_kwh <- energy_sun_per_year_joule / 3.6e6)
+```
+
+## Weltenergiebedarf
+
+-   [Wikipedia](https://de.wikipedia.org/wiki/Weltenergiebedarf): Weltenergiebedarf 574 Exajoule = 5.74e20
+
+```{r}
+# Weltenergiebedarf:
+world_energy_consumption_joule <- 5.74e20
+(world_energy_consumption_kwh <- world_energy_consumption_joule / 3.6e6)
+# Wie viel mal so viel Energie liefert die Sonne:
+fac <- energy_sun_per_year_joule / world_energy_consumption_joule
+```
+
+Die Welt liefert also ca. `r d3(fac)` mal so viel Energie wie von den Menschen verbraucht wird. Bei einem Wirkungsgrad von
+
+```{r}
+# angenommene Effizienz von Photovoltaikanlagen:
+assumed_efficiency <- 0.1
+# Welcher Anteil der Erde müsste mit 'mittleren' PV-Anlagen bedeckt sein, um den Weltenergiebedarf mit PV-Anlagen abdecken zu können:
+fraction_earth <- 1 / (assumed_efficiency * fac)
+# Weltbevölkerung:
+population_earth <- 8e9
+# Wie viel 
+(pv_per_person <- surface_earth_sqm * fraction_earth / population_earth)
+```
+
+## Deutschland
+
+-   [Wikipedia](https://de.wikipedia.org/wiki/Weltenergiebedarf): Weltenergiebedarf 574 Exajoule = 5.74e20
+
+```{r}
+(energy_consumption_germany_joule <- 3.3 * 1e3 * 1e9 * 3.6e6)
+surface_germany_sqm <- 3e5 * 1e6
+energy_sun_germany_year_joule <- watt_per_sqm * surface_germany_sqm * 60 * 60 * 24 * 365.24
+# Anteil der Fläche in Deutschland, der mit PV-Anlagen ausgestatted sein müsste:
+energy_consumption_germany_joule / (energy_sun_germany_year_joule * assumed_efficiency)
+```
