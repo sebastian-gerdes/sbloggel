@@ -5,3 +5,5 @@
 /.quarto/
 .DS_Store
 sbloggel2.Rproj
+_freeze
+_site
