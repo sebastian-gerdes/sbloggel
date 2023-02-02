@@ -1,5 +1,9 @@
 project:
-  type: website
+  type: 
+    website:
+      comments:
+        utterances:
+          repo: sebastian-gerdes/sbloggel2_comments
   output-dir: docs
 
 website:
@@ -16,3 +20,4 @@ format:
 
 
 
+https://github.com/sebastian-gerdes/sbloggel2_comments
