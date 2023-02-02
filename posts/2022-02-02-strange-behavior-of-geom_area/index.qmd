@@ -5,9 +5,12 @@ date: '2023-02-02'
 # categories: [testing]
 ---
 
-## Additional material for Stackoverflow
+## Background
+I have asked a question related to this issue on stackoverflow and I am providing the plots on this page. Here is the question on stackoverflow:
+
 [Link to stackoverflow](https://stackoverflow.com/questions/75322838/is-this-behavior-of-geom-area-strange-or-am-i-missing-something)
 
+## Illustration of the problem
 ```{r}
 library('tidyr')
 library('tibble')
