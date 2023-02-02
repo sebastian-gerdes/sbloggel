@@ -5,6 +5,8 @@ date: '2023-02-02'
 # categories: [testing]
 ---
 
+## Additional material for Stackoverflow
+[Link to stackoverflow](https://stackoverflow.com/questions/75322838/is-this-behavior-of-geom-area-strange-or-am-i-missing-something)
 
 ```{r}
 library('tidyr')

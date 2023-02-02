@@ -16,6 +16,7 @@ library('deSolve')
 theme_set(theme_bw())
 ```
 
+## Simulate ODEs
 ```{r}
 #| label: explore_model_dynamics
 #| fig.width: 10
@@ -84,25 +85,9 @@ last %>%
 
 ss <- last %>% group_by(beta, gamma, lambda) %>% summarise(ss = sum(value))
 
-part <- last %>% filter(gamma == 8)
-part <- part %>% mutate(value_new = round(value))
-
-max(part$value - part$value_new)
-
-part %>% ggplot(aes(x = beta, y = value_new, fill = name)) + geom_area() +
-  facet_grid(cols = vars(lambda), labeller = label_both) +
-  ylab('Fraction') + xlab('beta') + labs(fill = 'Compartment') +
-  scale_x_continuous(trans = 'log10')
-
-part %>% ggplot(aes(x = beta, y = value, fill = name)) + geom_area() +
-  facet_grid(cols = vars(lambda), labeller = label_both) +
-  ylab('Fraction') + xlab('beta') + labs(fill = 'Compartment') +
-  scale_x_continuous(trans = 'log10')
-
-
 ```
 
-## Analytical
+## Analytical approach
 
 Solution in terms of parameters in red.
 
@@ -122,8 +107,6 @@ $$ (3b) \rightarrow (2): I = \lambda / \gamma R  \qquad (5)$$ [ $$ (1b) \rightar
 
 ```{r}
 last_w <- pivot_wider(last, names_from = name, values_from = value)
-last_w$S + last_w$I + last_w$R
-
 last_w$S_calc <- pmin(1, last_w$gamma / last_w$beta)
 last_w$I_calc <- pmax(0, pmin(1, with(last_w, (lambda * (beta - gamma))) / (beta * (gamma + lambda))))
 last_w$R_calc <- pmax(0, pmin(1, with(last_w, (gamma * (beta - gamma)) / (beta * (gamma + lambda)))))
