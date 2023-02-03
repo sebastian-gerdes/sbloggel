@@ -3,7 +3,8 @@ project:
   output-dir: docs
 
 website:
-  title: "Seb's personal blog"
+  title: "Sbloggel"
+  favicon: "favicon.ico"
   navbar:
     right:
       - about.qmd
