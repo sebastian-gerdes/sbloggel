@@ -5,6 +5,9 @@ project:
 website:
   title: "Seb's blog"
   favicon: "favicon.ico"
+  repo-url: https://github.com/sebastian-gerdes/sbloggel2
+  repo-actions: [edit]
+  open-graph: true
   navbar:
     right:
       - about.qmd
