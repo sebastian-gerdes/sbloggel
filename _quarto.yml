@@ -6,7 +6,7 @@ website:
   title: "Seb's blog"
   favicon: "favicon.ico"
   repo-url: https://github.com/sebastian-gerdes/sbloggel2
-  repo-actions: [edit]
+  repo-actions: [source]
   open-graph: true
   navbar:
     right:
