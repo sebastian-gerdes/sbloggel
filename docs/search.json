@@ -389,7 +389,7 @@
     "href": "posts/2023_02_21-manual_colors_in_ggplot2/index.html",
     "title": "Manual colors in ggplot2",
     "section": "",
-    "text": "library(ggplot2)\niris |> ggplot(aes(Sepal.Length, Sepal.Width, colour = Species)) + geom_point(size = 3) +\n  scale_colour_manual(values = c('lightgray', 'blue', 'black'), aesthetics = c('colour', 'fill'))"
+    "text": "library(ggplot2)\niris |> ggplot(aes(Sepal.Length, Sepal.Width, colour = Species)) + \n  geom_point(size = 3) +\n  scale_colour_manual(values = c('lightgray', 'blue', 'black'), \n                      aesthetics = c('colour', 'fill'))"
   },
   {
     "objectID": "posts/2023-02-02-strange-behavior-of-geom_area/index.html",
