@@ -1,0 +1,13 @@
+---
+title: 'Manual colors in ggplot2'
+author: Sebastian Gerdes
+date: '2023-02-21'
+# categories: [testing]
+---
+
+```{r}
+library(ggplot2)
+iris |> ggplot(aes(Sepal.Length, Sepal.Width, colour = Species)) + geom_point(size = 3) +
+  scale_colour_manual(values = c('lightgray', 'blue', 'black'), aesthetics = c('colour', 'fill'))
+```
+
