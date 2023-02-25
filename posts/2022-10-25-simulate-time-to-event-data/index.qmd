@@ -24,16 +24,16 @@ set.seed(1)
 library('survival')
 
 # define hazard function:
-lambda <- Vectorize(
-  function(t) {
-    abs(sin(t))
-  })
+lambda <- function(t) {
+  abs(sin(t))
+}
 
-# hazard for t = 7:
-lambda(7) 
 
+# hazard for t = 7 and t = 12:
+lambda(c(7, 12)) 
+
+# plot hazard function:
 plot(lambda, from = 0, to = 10, xlab = 't', ylab = expression(lambda))
-
 
 # define function that computes cumulative hazard function:
 Lambda <- Vectorize(
@@ -47,6 +47,7 @@ Lambda <- Vectorize(
 # cumulative hazard for t = 3
 Lambda(3) 
 
+# plot cumulative hazard function:
 plot(Lambda, from = 0, to = 10, xlab = 't', ylab = expression(Lambda))
 
 # define function that computes survival function 
@@ -56,6 +57,7 @@ S <- Vectorize(
     exp(-Lambda(t))
   })
 
+# plot survival function:
 plot(S, from = 0, to = 10, xlab = 't')
 
 # determine at which time cumulative hazard
