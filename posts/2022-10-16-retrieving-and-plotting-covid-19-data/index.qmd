@@ -2,7 +2,8 @@
 title: 'Retrieving and plotting COVID-19 data'
 author: 'Sebastian Gerdes'
 date: '2022-10-16'
-# categories: [testing]
+categories:
+  - R
 ---
 
 ## Background

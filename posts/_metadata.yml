@@ -19,3 +19,5 @@ page-layout: article
 comments:
   utterances:
     repo: sebastian-gerdes/sbloggel_comments
+
+title-block-categories: false

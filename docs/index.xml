@@ -175,6 +175,7 @@
 Berners-Lee, Mike. 2020. <em>How <span>Bad</span> <span>Are</span> <span>Bananas</span>?: <span>The</span> Carbon Footprint of Everything - 2020 New Edition</em>. New ed. updat. and expand. Profile Books.
 </div>
 </div></section></div> ]]></description>
+  <category>Sustainibility</category>
   <guid>https://sbloggel.netlify.app/posts/2023-02-27-how-bad-are-bananas/index.html</guid>
   <pubDate>Sun, 26 Feb 2023 23:00:00 GMT</pubDate>
 </item>
@@ -260,6 +261,7 @@ Attaching package: 'Ryacas'</code></pre>
 </section>
 
  ]]></description>
+  <category>R</category>
   <guid>https://sbloggel.netlify.app/posts/2023-02-25-interfaces-to-cas-from-r/index.html</guid>
   <pubDate>Fri, 24 Feb 2023 23:00:00 GMT</pubDate>
 </item>
@@ -287,6 +289,7 @@ Attaching package: 'Ryacas'</code></pre>
 
 
  ]]></description>
+  <category>R</category>
   <guid>https://sbloggel.netlify.app/posts/2023_02_21-manual_colors_in_ggplot2/index.html</guid>
   <pubDate>Mon, 20 Feb 2023 23:00:00 GMT</pubDate>
 </item>
@@ -452,6 +455,7 @@ loaded via a namespace (and not attached):
 </section>
 
  ]]></description>
+  <category>R</category>
   <guid>https://sbloggel.netlify.app/posts/2023-02-02-strange-behavior-of-geom_area/index.html</guid>
   <pubDate>Wed, 01 Feb 2023 23:00:00 GMT</pubDate>
 </item>
@@ -607,6 +611,7 @@ loaded via a namespace (and not attached):
 </section>
 
  ]]></description>
+  <category>R</category>
   <guid>https://sbloggel.netlify.app/posts/2023-01-20-sirs-model-dynamics/index.html</guid>
   <pubDate>Wed, 18 Jan 2023 23:00:00 GMT</pubDate>
 </item>
@@ -691,6 +696,7 @@ loaded via a namespace (and not attached):
 </section>
 
  ]]></description>
+  <category>Sustainibility</category>
   <guid>https://sbloggel.netlify.app/posts/2023-01-10-sustainibility-data/index.html</guid>
   <pubDate>Mon, 09 Jan 2023 23:00:00 GMT</pubDate>
 </item>
@@ -775,6 +781,7 @@ Attaching package: 'plotly'</code></pre>
 </section>
 
  ]]></description>
+  <category>R</category>
   <guid>https://sbloggel.netlify.app/posts/2023-01-05-contribution-plots/index.html</guid>
   <pubDate>Wed, 04 Jan 2023 23:00:00 GMT</pubDate>
 </item>
@@ -861,6 +868,7 @@ Attaching package: 'plotly'</code></pre>
 
 
  ]]></description>
+  <category>R</category>
   <guid>https://sbloggel.netlify.app/posts/2022-12-20-flowcharts/index.html</guid>
   <pubDate>Mon, 19 Dec 2022 23:00:00 GMT</pubDate>
 </item>
@@ -1157,6 +1165,7 @@ Attaching package: 'lubridate'</code></pre>
 </section>
 
  ]]></description>
+  <category>R</category>
   <guid>https://sbloggel.netlify.app/posts/2022-11-24-r-interfaces-to-trial-registries/index.html</guid>
   <pubDate>Mon, 24 Oct 2022 22:00:00 GMT</pubDate>
 </item>
@@ -1321,6 +1330,7 @@ accurate nanosecond times to avoid potential integer overflows</code></pre>
 </section>
 
  ]]></description>
+  <category>R</category>
   <guid>https://sbloggel.netlify.app/posts/2022-10-25-simulate-time-to-event-data/index.html</guid>
   <pubDate>Mon, 24 Oct 2022 22:00:00 GMT</pubDate>
 </item>
@@ -1381,6 +1391,7 @@ accurate nanosecond times to avoid potential integer overflows</code></pre>
 </section>
 
  ]]></description>
+  <category>Sustainibility</category>
   <guid>https://sbloggel.netlify.app/posts/2022-10-19-kids-per-person-and-carbonc-footprint/index.html</guid>
   <pubDate>Tue, 18 Oct 2022 22:00:00 GMT</pubDate>
 </item>
@@ -1533,6 +1544,7 @@ attr(,"class")
 </section>
 
  ]]></description>
+  <category>R</category>
   <guid>https://sbloggel.netlify.app/posts/2022-10-19-model-meadow/index.html</guid>
   <pubDate>Tue, 18 Oct 2022 22:00:00 GMT</pubDate>
 </item>
@@ -1632,6 +1644,7 @@ To hide this message use 'verbose = FALSE'.</code></pre>
 </section>
 
  ]]></description>
+  <category>R</category>
   <guid>https://sbloggel.netlify.app/posts/2022-10-16-retrieving-and-plotting-covid-19-data/index.html</guid>
   <pubDate>Sat, 15 Oct 2022 22:00:00 GMT</pubDate>
 </item>
@@ -1770,6 +1783,7 @@ Attaching package: 'brms'</code></pre>
 </section>
 
  ]]></description>
+  <category>R</category>
   <guid>https://sbloggel.netlify.app/posts/2022-10-16-leo-s-project/index.html</guid>
   <pubDate>Sat, 15 Oct 2022 22:00:00 GMT</pubDate>
 </item>
@@ -1893,6 +1907,7 @@ Attaching package: 'brms'</code></pre>
 </section>
 
  ]]></description>
+  <category>R</category>
   <guid>https://sbloggel.netlify.app/posts/2022-10-04-sir-like-model-with-desolve-in-deterministic-and-stochastic-version/index.html</guid>
   <pubDate>Mon, 03 Oct 2022 22:00:00 GMT</pubDate>
 </item>
@@ -2526,6 +2541,7 @@ depreciated in the next version. Use read_ods instead.</code></pre>
 </section>
 
  ]]></description>
+  <category>Psychiatry</category>
   <guid>https://sbloggel.netlify.app/posts/2022-09-08-antipsychotics/index.html</guid>
   <pubDate>Wed, 07 Sep 2022 22:00:00 GMT</pubDate>
 </item>
@@ -2644,6 +2660,7 @@ the next version. Use read_ods instead.</code></pre>
 
 
  ]]></description>
+  <category>R</category>
   <guid>https://sbloggel.netlify.app/posts/2022-09-08-timeline/index.html</guid>
   <pubDate>Wed, 07 Sep 2022 22:00:00 GMT</pubDate>
 </item>
@@ -2686,6 +2703,7 @@ the next version. Use read_ods instead.</code></pre>
 
 
  ]]></description>
+  <category>Psychiatry</category>
   <guid>https://sbloggel.netlify.app/posts/2022-09-08-psychopharmaca-and-time/index.html</guid>
   <pubDate>Wed, 07 Sep 2022 22:00:00 GMT</pubDate>
 </item>
@@ -2723,6 +2741,7 @@ the next version. Use read_ods instead.</code></pre>
 </section>
 
  ]]></description>
+  <category>Mishmash</category>
   <guid>https://sbloggel.netlify.app/posts/2022-09-08-chess-ressources/index.html</guid>
   <pubDate>Wed, 07 Sep 2022 22:00:00 GMT</pubDate>
 </item>
@@ -3157,6 +3176,7 @@ the next version. Use read_ods instead.</code></pre>
 </section>
 
  ]]></description>
+  <category>Sustainibility</category>
   <guid>https://sbloggel.netlify.app/posts/2022-09-08-humidity/index.html</guid>
   <pubDate>Wed, 07 Sep 2022 22:00:00 GMT</pubDate>
 </item>

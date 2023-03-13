@@ -2,7 +2,8 @@
 title: 'Interfaces to computer algebra systems in R'
 author: Sebastian Gerdes
 date: '2023-02-25'
-# categories: [testing]
+categories:
+  - R
 ---
 Herre, I have collected a few resources in the field of computer algebra systems that have an interface to `R`.
 

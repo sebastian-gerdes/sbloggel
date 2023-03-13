@@ -2,7 +2,8 @@
 title: 'Chess ressources'
 author: 'Sebastian Gerdes'
 date: '2022-09-08'
-# categories: [testing]
+categories:
+  - Mishmash
 ---
 
 ## chess related packages on cran:

@@ -2,7 +2,8 @@
 title: "Leo's project"
 author: 'Sebastian Gerdes'
 date: '2022-10-16'
-# categories: [testing]
+categories:
+  - R
 ---
 
 

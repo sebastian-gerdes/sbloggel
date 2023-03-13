@@ -2,7 +2,8 @@
 title: 'Model meadow'
 author: 'Sebastian Gerdes'
 date: '2022-10-19'
-# categories: [testing]
+categories:
+  - R
 ---
 
 ## General linear model

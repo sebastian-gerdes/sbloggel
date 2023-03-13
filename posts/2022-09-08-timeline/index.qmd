@@ -2,7 +2,8 @@
 title: 'Timeline'
 author: 'Sebastian Gerdes'
 date: '2022-09-08'
-# categories: [testing]
+categories:
+  - R
 ---
 
 ```{r function_definitions}
