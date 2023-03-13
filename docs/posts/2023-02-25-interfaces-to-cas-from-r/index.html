@@ -9,7 +9,7 @@
 <meta name="author" content="Sebastian Gerdes">
 <meta name="dcterms.date" content="2023-02-25">
 
-<title>Seb’s blog - Interfaces for symbolic math in R</title>
+<title>Seb’s blog - Interfaces to computer algebra systems in R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -127,7 +127,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 
 <link rel="stylesheet" href="../../styles.css">
-<meta property="og:title" content="Seb’s blog - Interfaces for symbolic math in R">
+<meta property="og:title" content="Seb’s blog - Interfaces to computer algebra systems in R">
+<meta property="og:description" content="Herre, I have collected a few resources in the field of computer algebra systems that have an interface to R.">
 <meta property="og:site-name" content="Seb's blog">
 </head>
 
@@ -171,7 +172,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Interfaces for symbolic math in R</h1>
+      <h1 class="title">Interfaces to computer algebra systems in R</h1>
                       </div>
   </div>
     
@@ -216,6 +217,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 
 
+<p>Herre, I have collected a few resources in the field of computer algebra systems that have an interface to <code>R</code>.</p>
 <section id="general" class="level2">
 <h2 class="anchored" data-anchor-id="general">General</h2>
 <ul>
@@ -226,11 +228,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="maxima" class="level2">
 <h2 class="anchored" data-anchor-id="maxima">Maxima</h2>
 <ul>
-<li><a href="https://rcst.github.io/rim/">Rim package</a></li>
+<li><a href="https://rcst.github.io/rim/">Rim package</a>
+<ul>
 <li>extended search path according to <a href="https://techpp.com/2021/09/08/set-path-variable-in-macos-guide/">these</a> instructions</li>
 <li>posted issue on rim package github site because it is still not working <a href="https://github.com/rcst/rim/issues/30">here</a></li>
 <li>edited /etc/launch.d</li>
 <li>added shell script /usr/bin/maxima</li>
+</ul></li>
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">system</span>(<span class="st">'export PATH=${PATH}:/Applications/Maxima.app/Contents/Resources/opt/bin'</span>)</span>

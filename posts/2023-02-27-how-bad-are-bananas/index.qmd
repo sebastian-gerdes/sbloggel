@@ -18,12 +18,9 @@ dat$short_item <- substr(dat$Item, 1, 40)
 ```
 
 
-
-
-## Discovery
 Recently, I have come a across a book that I find really wonderful: "How bad are bananas" by Mike Berners-Lee @berners-lee_how_2020.
 
-I would really like to use some of the data for a school project (of course citing the source in an adequate manner). It would be nice to use the data to develop a simple footprint calculator that is available online. Explicite permission from the author to use the data from his book with appropriate inidication of the data source is pending.
+I would really like to use some of the data for a school project (of course citing the source in an adequate manner). It would be nice to use the data to develop a simple footprint calculator that is available online. Explicite permission from the author to use the data from his book with appropriate inidication of the data source is pending, however, with proper citation it should be okay to use the data I figure.
 
 ## Table
 Here, I started to collect some of the data in the book and put them in a table:

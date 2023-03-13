@@ -77,19 +77,19 @@ We can make some plots that are nicer looking in my taste with the `lattice` pac
 ```{r lattice_plotting}
 library(lattice)
 library(tidyverse)
+theme_set(theme_bw())
 
 # convert data from wide to long format:
 long <- as.data.frame(result) %>% 
-  pivot_longer(cols = c('S', 'I', 'R'), 
-               names_to = 'variable')
+  pivot_longer(cols = c('S', 'I', 'R'))
 
 # order factor levels so they appear in the plots in the desired order:
-long$variable = factor(long$variable, levels = c('S', 'I', 'R'))
+long$name = factor(long$name, levels = c('S', 'I', 'R'))
 
 # plot all three variables in the same panel:
 xyplot(value ~ time, 
        data = long, 
-       group = variable, 
+       group = name, 
        auto.key = list(space = 'right', 
                        lines = TRUE, 
                        points = FALSE), 
@@ -97,7 +97,7 @@ xyplot(value ~ time,
        lwd = 3)
 
 # plot the variables in separate panels:
-xyplot(value ~ time | variable, 
+xyplot(value ~ time | name, 
        data = long, 
        type = 'l', 
        lwd = 3)
@@ -106,10 +106,12 @@ xyplot(value ~ time | variable,
 Very similar plots can be made with the `ggplot2` library:
 
 ```{r ggplot2_plotting}
-ggplot(data = long, aes(time, value, colour = variable)) + geom_line() + theme_classic() +
+long %>% ggplot(aes(time, value, colour = name)) + 
+  geom_line(size = 2) + 
   labs(x = 'Time', y = 'Fraction', colour = 'Compartment')
 
-ggplot(data = long, aes(time, value)) + geom_line() +
-  labs(x = 'Time', y = 'Fraction', colour = 'Compartment') + facet_wrap(~ variable) + theme_classic()
-
+long %>% ggplot(aes(time, value)) + 
+  geom_line(size = 2) +
+  facet_wrap(~ name) +
+  labs(x = 'Time', y = 'Fraction', colour = 'Compartment') 
 ```

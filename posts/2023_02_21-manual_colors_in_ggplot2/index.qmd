@@ -4,7 +4,7 @@ author: Sebastian Gerdes
 date: '2023-02-21'
 # categories: [testing]
 ---
-
+After several instances of "relearning" how to use custom colour palettes in `R`, I have written this post in order to save some time when I want to use custom colours the next time. 
 ```{r}
 library(ggplot2)
 iris |> ggplot(aes(Sepal.Length, Sepal.Width, colour = Species)) + 

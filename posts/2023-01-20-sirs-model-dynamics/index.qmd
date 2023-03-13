@@ -2,6 +2,9 @@
 title: 'SIRS model dynamics'
 author: Sebastian Gerdes
 date: '2023-01-19'
+embed-resources: true
+execute:
+  cache: false
 # categories: [testing]
 ---
 
@@ -68,61 +71,90 @@ for(beta in grid_values) {
 
 result <- pivot_longer(result, cols = c('S', 'I', 'R'))
 
-last <- result[result$time == max_time, ]
-last$name <- factor(last$name, levels = c('S', 'I', 'R'))
+last <- result %>% 
+  filter(time == max_time) %>% 
+  mutate(name = factor(name, levels = c('S', 'I', 'R')))
 
 last %>%
-  ggplot(aes(beta, value, colour = name)) + geom_point() + geom_line() +
-  facet_grid(rows = vars(gamma), cols = vars(lambda), labeller = label_both) +
-  ylab('Fraction') + xlab('beta') + labs(colour = 'Compartment') +
+  ggplot(aes(beta, value, colour = name)) + 
+  geom_point() + geom_line() +
+  facet_grid(rows = vars(gamma), 
+             cols = vars(lambda), 
+             labeller = label_both) +
+  labs(xlab = 'beta', ylab = 'Fraction', colour = 'Compartment') +
   scale_x_continuous(trans='log10')
 
 last %>%
-  ggplot(aes(x = beta, y = value, fill = name)) + geom_area() +
-  facet_grid(rows = vars(gamma), cols = vars(lambda), labeller = label_both) +
-  ylab('Fraction') + xlab('beta') + labs(fill = 'Compartment') +
+  ggplot(aes(x = beta, y = value, fill = name)) +
+  geom_area() +
+  facet_grid(rows = vars(gamma), 
+             cols = vars(lambda), 
+             labeller = label_both) +
+  labs(xlab = 'beta', ylab = 'Fraction', fill = 'Compartment') +
   scale_x_continuous(trans='log10')
 
-ss <- last %>% group_by(beta, gamma, lambda) %>% summarise(ss = sum(value))
-
+ss <- last %>% 
+  group_by(beta, gamma, lambda) %>% 
+  summarise(ss = sum(value))
 ```
 
 ## Analytical approach
-
 Solution in terms of parameters in red.
 
-### Equilibrium conditions:
+### Equilibrium conditions
 
-$$S + I + R = 1 \qquad (1)$$ $$0 = -\beta I S + \lambda R \qquad (2)$$ $$0 = \beta I S - \gamma I \qquad (3)$$ $$0 = \gamma I - \lambda R \qquad (4)$$
+$$
+\begin{align}
+1 &= S + I + R  \qquad &(1) \\
+0 &= -\beta I S + \lambda R \qquad &(2) \\
+0 &= \beta I S - \gamma I \qquad &(3) \\ 
+0 &= \gamma I - \lambda R \qquad &(4)
+\end{align}
+$$
 
-### Algebraic transformation:
+### Algebraic transformation
 
-$$ R = 1 - S - I \qquad (1b)$$ [ $$ S = \gamma / \beta \qquad (3b)$$ ]{style="color: red;"}
+$$ 
+\begin{align}
+R &= 1 - S - I \qquad &(1b) \\
+S &= \gamma / \beta \qquad &(3b)
+\end{align}
+$$
 
-### Plugging in:
+### Plugging in
 
-$$ (3b) \rightarrow (2): I = \lambda / \gamma R  \qquad (5)$$ [ $$ (1b) \rightarrow (5): I = \frac{\lambda(\beta - \gamma)}{\beta(\gamma + \lambda)} \qquad (6)$$ $$ (3b) + (6) \rightarrow (1b): R = \frac{\gamma(\beta - \gamma)}{\beta(\gamma + \lambda)} \qquad (7)$$ ]{style="color: red;"}
+$$ 
+\begin{align}
+(3b) \rightarrow (2): \quad I &= \lambda / \gamma R  \qquad &(5) \\ 
+(1b) \rightarrow (5): \quad I &= \frac{\lambda(\beta - \gamma)}{\beta(\gamma + \lambda)} \qquad &(6) \\
+(3b) + (6) \rightarrow (1b): R &= \frac{\gamma(\beta - \gamma)}{\beta(\gamma + \lambda)} \qquad &(7)
+\end{align}
+$$
 
 ### Plots
 
 ```{r}
 last_w <- pivot_wider(last, names_from = name, values_from = value)
 last_w$S_calc <- pmin(1, last_w$gamma / last_w$beta)
-last_w$I_calc <- pmax(0, pmin(1, with(last_w, (lambda * (beta - gamma))) / (beta * (gamma + lambda))))
-last_w$R_calc <- pmax(0, pmin(1, with(last_w, (gamma * (beta - gamma)) / (beta * (gamma + lambda)))))
-ggplot(last_w, aes(S, S_calc)) + geom_point()
-ggplot(last_w, aes(I, I_calc)) + geom_point()
-ggplot(last_w, aes(R, R_calc)) + geom_point()
+last_w$I_calc <- 
+  pmax(0, pmin(1, with(last_w, (lambda * (beta - gamma))) / 
+                 (beta * (gamma + lambda))))
+last_w$R_calc <- 
+  pmax(0, pmin(1, with(last_w, (gamma * (beta - gamma)) / 
+                         (beta * (gamma + lambda)))))
+
 last_w$I_calc <- 1 - last_w$S_calc - last_w$R_calc
 
-last <- pivot_longer(last_w, cols = c('S_calc', 'I_calc', 'R_calc'))
-glimpse(last)
+last <- last_w %>% 
+  pivot_longer(cols = c('S_calc', 'I_calc', 'R_calc'))
 
 
 last %>%
-  ggplot(aes(x = beta, y = value, fill = name)) + geom_area() +
-  facet_grid(rows = vars(gamma), cols = vars(lambda), labeller = label_both) +
-  ylab('Fraction') + xlab('beta') + labs(colour = 'Compartment') +
+  ggplot(aes(x = beta, y = value, fill = name)) + 
+  geom_area() +
+  facet_grid(rows = vars(gamma), 
+             cols = vars(lambda), 
+             labeller = label_both) +
+  labs(ylab = 'Fraction',  xlab = 'beta', colour = 'Compartment') +
   scale_x_continuous(trans='log10')
-
 ```

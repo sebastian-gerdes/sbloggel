@@ -4,20 +4,18 @@ author: Sebastian Gerdes
 date: '2023-02-25'
 # categories: [testing]
 ---
----
-title: "Interfaces for symbolic math in R"
-format: html
----
+Herre, I have collected a few resources in the field of computer algebra systems that have an interface to `R`.
+
 ## General
 * CRAN task view: Section "Multi-Precision Arithmetic and Symbolic Mathematics" on [this](https://cran.r-hub.io/web/views/NumericalMathematics.html) site
 * [Blog article](https://blog.ephorie.de/doing-maths-symbolically-r-as-a-computer-algebra-system-cas)
 
 ## Maxima
 * [Rim package](https://rcst.github.io/rim/)
-* extended search path according to [these](https://techpp.com/2021/09/08/set-path-variable-in-macos-guide/) instructions
-* posted issue on rim package github site because it is still not working [here](https://github.com/rcst/rim/issues/30)
-* edited /etc/launch.d
-* added shell script /usr/bin/maxima
+  * extended search path according to [these](https://techpp.com/2021/09/08/set-path-variable-in-macos-guide/) instructions
+  * posted issue on rim package github site because it is still not working [here](https://github.com/rcst/rim/issues/30)
+  * edited /etc/launch.d
+  * added shell script /usr/bin/maxima
 
 ```{r}
 system('export PATH=${PATH}:/Applications/Maxima.app/Contents/Resources/opt/bin')
