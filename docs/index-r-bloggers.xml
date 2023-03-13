@@ -6,10 +6,10 @@
       version="2.0">
 <channel>
 <title>Seb&#39;s blog</title>
-<link>https://sbloggel2.netlify.app/index.html#category=r-bloggers</link>
-<atom:link href="https://sbloggel2.netlify.app/index-r-bloggers.xml" rel="self" type="application/rss+xml"/>
+<link>https://sbloggel.netlify.app/index.html#category=r-bloggers</link>
+<atom:link href="https://sbloggel.netlify.app/index-r-bloggers.xml" rel="self" type="application/rss+xml"/>
 <description>Seb&#39;s private blog about statistics and other topics</description>
 <generator>quarto-1.2.269</generator>
-<lastBuildDate>Mon, 13 Mar 2023 13:15:13 GMT</lastBuildDate>
+<lastBuildDate>Mon, 13 Mar 2023 13:18:00 GMT</lastBuildDate>
 </channel>
 </rss>

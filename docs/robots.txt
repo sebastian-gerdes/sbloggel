@@ -1,1 +1,1 @@
-Sitemap: https://sbloggel2.netlify.app/sitemap.xml
+Sitemap: https://sbloggel.netlify.app/sitemap.xml
