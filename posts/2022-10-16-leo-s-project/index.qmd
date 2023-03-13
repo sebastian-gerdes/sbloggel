@@ -5,6 +5,7 @@ date: '2022-10-16'
 # categories: [testing]
 ---
 
+
 # Part 1: Simulating data
 
 ## Background
