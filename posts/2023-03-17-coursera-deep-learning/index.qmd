@@ -33,6 +33,7 @@ theme_set(theme_bw())
 ### Exponentially moving averages:
 $$V_t = \beta V_{t-1} + (1 - \beta) \theta_t$$
 * this corresponds approximately to averaging over $\frac{1}{1-\beta}$ entries
+
 ### Gradient descent with momentum
 * gradients with exponentially moving average
 * if learning rate too large risk of diverging
@@ -90,7 +91,6 @@ $$ L(\hat{y}, y) = - \sum^C_{j = 1} y_j log \hat{y_j} $$
 * potential help: add a Training-dev set
 * training error, training-dev error, dev error
 * data mismatch problem
-![Alt text](screenshots/data_mismatch.png)
 * Data augmentation: when sampling only a small subset of all possible examples overfitting may occur (e. g. cars in a video game)
 * Transfer learning: example image recognition
   * train network to a lot of images

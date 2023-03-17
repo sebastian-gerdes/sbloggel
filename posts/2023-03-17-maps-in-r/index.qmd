@@ -1,0 +1,11 @@
+---
+title: 'Web-scraping in R'
+author: Sebastian Gerdes
+date: '2023-03-17'
+categories:
+  - R
+execute: 
+  echo: false
+---
+
+[Link](https://nrennie.rbind.io/blog/web-scraping-rvest-london-marathon/)
