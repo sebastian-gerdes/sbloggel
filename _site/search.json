@@ -77,27 +77,6 @@
     "text": "Link"
   },
   {
-    "objectID": "posts/2023-03-17-dekarbonisierung-fernwaerme/index.html",
-    "href": "posts/2023-03-17-dekarbonisierung-fernwaerme/index.html",
-    "title": "How bad are bananas",
-    "section": "",
-    "text": "Recently, I have come a across a book that I find really wonderful: “How bad are bananas” by Mike Berners-Lee Berners-Lee (2020).\nI would really like to use some of the data for a school project (of course citing the source in an adequate manner). It would be nice to use the data to develop a simple footprint calculator that is available online. Explicite permission from the author to use the data from his book with appropriate inidication of the data source is pending, however, with proper citation it should be okay to use the data I figure."
-  },
-  {
-    "objectID": "posts/2023-03-17-dekarbonisierung-fernwaerme/index.html#table",
-    "href": "posts/2023-03-17-dekarbonisierung-fernwaerme/index.html#table",
-    "title": "How bad are bananas",
-    "section": "Table",
-    "text": "Table\nHere, I started to collect some of the data in the book and put them in a table:\n\n\n\n\n\n\n\n\n\nCO2e\nItem\n\n\n\n\n0.20\nPint of tap water\n\n\n0.03\nspam mail picked up by filter\n\n\n0.20\nshort e-mail from phone to phone\n\n\n0.30\nshort e-mail from laptop to laptop\n\n\n17.00\nlong email that takes 10 minutes to write and 3 minutes to read, sent from laptop to laptop\n\n\n26.00\nan email that takes you 10 minutes to write, sent to 100 people, 99 of whom take 3 seconds to realise they should ignore it and on the whom reads it\n\n\n0.50\none simple google search\n\n\n5.60\n5 minutes web browsing from a smartphone\n\n\n8.20\n5 minutes web browsing from a laptop\n\n\n0.80\nsingle text message\n\n\n3.00\nvery lightweight plastic carrier bag\n\n\n10.00\nheavier supermarket bag\n\n\n50.00\nheavweight ‘bag for life’\n\n\n2.00\nDyson Airblade\n\n\n10.00\none paper towel\n\n\n11.00\nstandard electric dryer\n\n\n12.00\nrecycled and lightweight paper carrier bag\n\n\n80.00\na fashion paper bag from mainly virgin paper\n\n\n8.00\nquick expert ironing of a shirt\n\n\n14.00\naverage ironing\n\n\n40.00\nironing of a thorougly crumped shirt\n\n\n2.00\none hour zoom call on 13-inch Mac-Book Pro\n\n\n10.00\none hour zoom call on an averagely efficient laptop\n\n\n50.00\none hour zoom call on desktop computer\n\n\n28.00\n100g portion of carrots – local, in season, full-size varieties\n\n\n83.00\n100g portion of carrots – local, in season, baby carrots\n\n\n90.00\n100g portion of carrots – full-size varieties, shipped within Europe"
-  },
-  {
-    "objectID": "posts/2023-03-17-dekarbonisierung-fernwaerme/index.html#plots",
-    "href": "posts/2023-03-17-dekarbonisierung-fernwaerme/index.html#plots",
-    "title": "How bad are bananas",
-    "section": "Plots",
-    "text": "Plots"
-  },
-  {
     "objectID": "posts/2022-11-24-r-interfaces-to-trial-registries/index.html",
     "href": "posts/2022-11-24-r-interfaces-to-trial-registries/index.html",
     "title": "R interfaces to trial registries",
@@ -152,132 +131,6 @@
     "title": "Antipsychotics",
     "section": "",
     "text": "Dopamin-Rezeptoren\n\nD_1/D_5-Gruppe: Signalübertragung durch stimulatorisches G-Protein –> cAMP hoch\nD_2/D_3/D_4-Gruppe: Signalübertragung durch hemmendes G-Protein –> cAMP runter\n\n\n\nWichtige dopaminerge Neuronensysteme\n\nNigrostriatales System: Motorik (damit auch EPS)\nMesolimbisches / mesokortikales System: Hauptangriffsort der Antipsychotika\nTuberoinfundibuläres System: vermittelt die neuroendokrinologischen NW, insbesondere Prolaktin-Anstieg\n\n\n\nAntipsychotika\n\n\nWarning in read.ods(\"Antipsychotics.ods\", sheet = 1): read.ods will be\ndepreciated in the next version. Use read_ods instead.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSubstanz\nKlasse\nTrizyklisch\nTyp\nPotenz\nD1\nD2\nD3\nSer2\nM1\nalpha1\nH1\n\n\n\n\nAmisulprid\nBenzamid\n0\nAAP\nNA\n0\n3\n3\n0\n0\n0\n0\n\n\nAripiprazol\nPhenylpiperazinylcholin\n0\nAAP\nNA\n0\n3\n3\n2\n0\n1\n1\n\n\nAsenapin\nDibenzooxepinpyrrol\n0\nAAP\nNA\n1\n1\n2\n2\n0\n1\n1\n\n\nBenperidol\nButyrophenon\n0\nKAP\nHP\n0\n3\n2\n2\n0\n1\n0\n\n\nBromperidol\nButyrophenon\n0\nKAP\nHP\n1\n3\n2\n0\n0\n1\n0\n\n\nChorprothixen\nThioxanthen\n1\nKAP\nNP\n2\n1\n1\n2\n1\n1\n3\n\n\nClozapin\nDibenzodiazepin\n1\nAAP\nNA\n2\n1\n2\n3\n3\n1\n3\n\n\nFlupentixol\nThioxeanthen\n1\nKAP\nHP\n2\n3\n3\n2\n0\n1\n1\n\n\nFluphenazin\nPhenothiazin\n1\nKAP\nHP\n2\n3\n3\n2\n0\n2\n2\n\n\nFluspirilen\nDiphenylbutylpiperidin\n0\nKAP\nHP\n1\n3\n2\n1\n0\n0\n0\n\n\nHaloperidol\nButyrophenon\n0\nKAP\nHP\n2\n3\n2\n1\n0\n2\n0\n\n\nLevomepromazin\nPhenothiazin\n1\nKAP\nNP\n0\n1\n1\n1\n2\n2\n2\n\n\nLoxapin\nDibenzoxazepin\n1\nKAP\nMP\n0\n3\n1\n3\n2\n3\n3\n\n\nLurasidon\nBenzoisothiazol\n0\nAAP\nNA\n1\n3\n2\n3\n0\n2\n0\n\n\nMelperon\nButyrophenon\n0\nKAPA\nNP\n0\n1\n1\n2\n0\n1\n1\n\n\nOlanzapin\nThienobenzazepin\n1\nAAP\nNA\n2\n3\n2\n3\n2\n2\n3\n\n\nPaliperidon\nBenzisoxazol\n0\nAAP\nNA\n0\n3\n1\n3\n0\n1\n1\n\n\nPerazin\nPhenothiazin\n1\nKAP\nMP\n0\n2\n2\n2\n1\n2\n3\n\n\nPerphenazin\nPhenothiazin\n1\nKAP\nHP\n0\n3\n3\n2\n0\n2\n2\n\n\nPimozid\nDiphenylbutylpiperidin\n0\nKAP\nHP\n0\n3\n3\n2\n0\n0\n0\n\n\nPipameron\nButyrophenon\n0\nKAP\nNP\n0\n1\n1\n2\n0\n1\n0\n\n\nProthipendyl\nPhenothiazin\n1\nKAP\nNP\nNA\n1\nNA\nNA\nNA\nNA\nNA\n\n\nQuetiapin\nDibenzothiazepin\n1\nAAP\nNA\n1\n1\n1\n1\n0\n1\n2\n\n\nRisperidon\nBenzisoxazol\n0\nAAP\nNA\n2\n3\n2\n3\n0\n3\n1\n\n\nSertindol\nIndol\n0\nAAP\nNA\n2\n3\n1\n3\n0\n2\n0\n\n\nSulpirid\nBenzamid\n0\nKAPA\nMP\n0\n1\n3\n0\n0\n0\n0\n\n\nThioridazin\nPhenothiazin\n1\nKAP\nNP\n1\n2\n1\n2\n3\n3\n1\n\n\nZiprasidon\nBenzisothiazin\n0\nAAP\nNA\n1\n2\n2\n3\n0\n1\n2\n\n\nZuclopenthixol\nThioxanthen\n1\nKAP\nMP\n2\n3\n2\n0\n3\n3\n3\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSubstanz\nKlasse\nTrizyklisch\nTyp\nPotenz\nD1\nD2\nD3\nSer2\nM1\nalpha1\nH1\n\n\n\n\n\nAmisulprid : 1\nPhenothiazin : 6\nMin. :0.0000\nAAP :11\nHP : 8\nMin. :0.0000\nMin. :1.000\nMin. :1.000\nMin. :0.000\nMin. :0.0000\nMin. :0.000\nMin. :0.00\n\n\n\nAripiprazol : 1\nButyrophenon : 5\n1st Qu.:0.0000\nKAP :16\nMP : 4\n1st Qu.:0.0000\n1st Qu.:1.000\n1st Qu.:1.000\n1st Qu.:1.000\n1st Qu.:0.0000\n1st Qu.:1.000\n1st Qu.:0.00\n\n\n\nAsenapin : 1\nBenzamid : 2\nMedian :0.0000\nKAPA: 2\nNP : 6\nMedian :1.0000\nMedian :3.000\nMedian :2.000\nMedian :2.000\nMedian :0.0000\nMedian :1.000\nMedian :1.00\n\n\n\nBenperidol : 1\nBenzisoxazol : 2\nMean :0.4483\nNA\nNA’s:11\nMean :0.8929\nMean :2.276\nMean :1.929\nMean :1.857\nMean :0.6071\nMean :1.429\nMean :1.25\n\n\n\nBromperidol : 1\nDiphenylbutylpiperidin: 2\n3rd Qu.:1.0000\nNA\nNA\n3rd Qu.:2.0000\n3rd Qu.:3.000\n3rd Qu.:2.250\n3rd Qu.:3.000\n3rd Qu.:1.0000\n3rd Qu.:2.000\n3rd Qu.:2.00\n\n\n\nChorprothixen: 1\nThioxanthen : 2\nMax. :1.0000\nNA\nNA\nMax. :2.0000\nMax. :3.000\nMax. :3.000\nMax. :3.000\nMax. :3.0000\nMax. :3.000\nMax. :3.00\n\n\n\n(Other) :23\n(Other) :10\nNA\nNA\nNA\nNA’s :1\nNA\nNA’s :1\nNA’s :1\nNA’s :1\nNA’s :1\nNA’s :1"
-  },
-  {
-    "objectID": "posts/2023-03-17-strogatz-nonlinear-dynamics-and-chaos/index.html",
-    "href": "posts/2023-03-17-strogatz-nonlinear-dynamics-and-chaos/index.html",
-    "title": "Großwärmepumpen für das Fernwärmenetz Dresden",
-    "section": "",
-    "text": "dabei fast ausschließlich Gas als Energieträger (mündliche Auskunft von Hr. Riccardo Worf)\n“Mehr als 120.000 Wohnungen und über 5.700 Geschäftsgebäude werden durch das rund 578 Kilometer (Stand 2016) lange Fernwärmenetz versorgt.” (https://www.drewag.de/wps/portal/drewag/cms/menu_main/privatkunden/produkte/waerme/fernwaerme)"
-  },
-  {
-    "objectID": "posts/2023-03-17-strogatz-nonlinear-dynamics-and-chaos/index.html#studie-wärmepumpen-auch-für-das-fernwärmenetz-sinnvoll",
-    "href": "posts/2023-03-17-strogatz-nonlinear-dynamics-and-chaos/index.html#studie-wärmepumpen-auch-für-das-fernwärmenetz-sinnvoll",
-    "title": "Großwärmepumpen für das Fernwärmenetz Dresden",
-    "section": "Studie: Wärmepumpen auch für das Fernwärmenetz sinnvoll",
-    "text": "Studie: Wärmepumpen auch für das Fernwärmenetz sinnvoll\n\nStudie: Fernwärme essenziell für Klimaziel (https://wien.orf.at/stories/3125796/)\nStudie: TU Wien-Studie: Wärmepumpen auch fürs Fernwärmenetz sinnvoll (https://www.ee-news.ch/de/erneuerbare/article/38197/tu-wien-studie-warmepumpen-auch-furs-fernwarmenetz-sinnvoll)\nStärkste Großwärmepumpe Mitteleuropas pumpt in Wien (https://www.wienenergie.at/blog/staerkste-grosswaermepumpe-mitteleuropas-pumpt-in-wien/)"
-  },
-  {
-    "objectID": "posts/2023-03-17-strogatz-nonlinear-dynamics-and-chaos/index.html#idee",
-    "href": "posts/2023-03-17-strogatz-nonlinear-dynamics-and-chaos/index.html#idee",
-    "title": "Großwärmepumpen für das Fernwärmenetz Dresden",
-    "section": "Idee",
-    "text": "Idee\n\nKann eine Bürgerinitiative die Sachsenenergie motivieren, zeitnah und mit hoher Priorität an der Einführung von Fernwärmekraftwerden zu arbeiten?\nund damit ökolgisch Sinnvolles erreichen, auch wenn es (zumindest kurzfristig) nicht die ökonomischste Lösung ist?"
-  },
-  {
-    "objectID": "posts/2023-03-17-strogatz-nonlinear-dynamics-and-chaos/index.html#wien-als-modell",
-    "href": "posts/2023-03-17-strogatz-nonlinear-dynamics-and-chaos/index.html#wien-als-modell",
-    "title": "Großwärmepumpen für das Fernwärmenetz Dresden",
-    "section": "Wien als Modell?",
-    "text": "Wien als Modell?\n\nin Wien ca. 16 Mrd. Euro notwendig, um Wien bis 2040 CO2-emissionsfrei zu machen\n\ndas entspricht:\n\nca. 8000 Euro pro Person über den gesamten Zeitraum\nca. 400 Euro pro Person pro Jahr\n\n\nfalls übertragbar auf Dresden: ca. 4.4^{9} Euro insgesamt\nQuelle: Studie https://positionen.wienenergie.at/wp-content/uploads/2021/10/WE-DECARB21-Studie.pdf"
-  },
-  {
-    "objectID": "posts/2023-03-17-strogatz-nonlinear-dynamics-and-chaos/index.html#fernwärme-erreicht-eher-nicht-die-üblichen-temperaturen",
-    "href": "posts/2023-03-17-strogatz-nonlinear-dynamics-and-chaos/index.html#fernwärme-erreicht-eher-nicht-die-üblichen-temperaturen",
-    "title": "Großwärmepumpen für das Fernwärmenetz Dresden",
-    "section": "Fernwärme erreicht eher nicht die üblichen Temperaturen",
-    "text": "Fernwärme erreicht eher nicht die üblichen Temperaturen\n\nQuelle (https://www.wienenergie.at/blog/staerkste-grosswaermepumpe-mitteleuropas-pumpt-in-wien/): übliche Temperatur für Fernwärmehauptleitungen 100° C - 150° C, Fernwärme erreicht 95 ° C\nWie kann das kompensiert werden? Ist das schon ein Knock-Out?"
-  },
-  {
-    "objectID": "posts/2023-03-17-strogatz-nonlinear-dynamics-and-chaos/index.html#wer-entscheidet-was-die-drewag-macht",
-    "href": "posts/2023-03-17-strogatz-nonlinear-dynamics-and-chaos/index.html#wer-entscheidet-was-die-drewag-macht",
-    "title": "Großwärmepumpen für das Fernwärmenetz Dresden",
-    "section": "Wer entscheidet was die Drewag macht?",
-    "text": "Wer entscheidet was die Drewag macht?\n\nDrewag zu 90% in kommunaler Hand (Quelle: https://de.wikipedia.org/wiki/Drewag)"
-  },
-  {
-    "objectID": "posts/2023-03-17-strogatz-nonlinear-dynamics-and-chaos/index.html#finanzierungsideen",
-    "href": "posts/2023-03-17-strogatz-nonlinear-dynamics-and-chaos/index.html#finanzierungsideen",
-    "title": "Großwärmepumpen für das Fernwärmenetz Dresden",
-    "section": "Finanzierungsideen",
-    "text": "Finanzierungsideen\n\n(optional und freiwillig?) deutlich höhere Preise für “grüne” Energie\nSchulden\nSubventionen von Land / Bund\nSpenden"
-  },
-  {
-    "objectID": "posts/2023-03-17-strogatz-nonlinear-dynamics-and-chaos/index.html#finanzierung-über-grünen-wahltarif",
-    "href": "posts/2023-03-17-strogatz-nonlinear-dynamics-and-chaos/index.html#finanzierung-über-grünen-wahltarif",
-    "title": "Großwärmepumpen für das Fernwärmenetz Dresden",
-    "section": "Finanzierung über grünen Wahltarif?",
-    "text": "Finanzierung über grünen Wahltarif?\n\naktuell laut Website der Drewag 120000 Wohnungen an das Fernwärmenetz angeschlossen\nGrobe Abschätzung: 1000 Euro Heizkosten pro Wohnung pro Jahr, bei 10% der Nutzer Bereitschaft 20% mehr zu bezahlen um Investition in Großwärmepumpe zu finanzieren ergeben 2,4 Millionen Euro pro Jahr\n2,4 Millionen Euro pro Jahr ermöglichen Finanzierung von ca. 35 Millionen Euro über 20 Jahre bei Zinssatz 3% p.a. (Restschuld nach 20 Jahren 0 Euro)"
-  },
-  {
-    "objectID": "posts/2023-03-17-strogatz-nonlinear-dynamics-and-chaos/index.html#kontaktaufnahme-zur-grünen-liga-dresden",
-    "href": "posts/2023-03-17-strogatz-nonlinear-dynamics-and-chaos/index.html#kontaktaufnahme-zur-grünen-liga-dresden",
-    "title": "Großwärmepumpen für das Fernwärmenetz Dresden",
-    "section": "Kontaktaufnahme zur Grünen Liga Dresden",
-    "text": "Kontaktaufnahme zur Grünen Liga Dresden\n\n25.7. Jonas Bechtel"
-  },
-  {
-    "objectID": "posts/2023-03-17-strogatz-nonlinear-dynamics-and-chaos/index.html#kontaktaufnahme-zur-drewag-1",
-    "href": "posts/2023-03-17-strogatz-nonlinear-dynamics-and-chaos/index.html#kontaktaufnahme-zur-drewag-1",
-    "title": "Großwärmepumpen für das Fernwärmenetz Dresden",
-    "section": "Kontaktaufnahme zur Drewag (1)",
-    "text": "Kontaktaufnahme zur Drewag (1)\n\n26.7. Telefonat mit Riccardo Worf (Vertriebler “Fernwärme für Bestandsgebäude”): entsprechende Überlegungen seien nicht konkret vorhanden, Anträge seien auch sehr kompliziert, für weitere Überlegungen eher seinen Chef Swen-Sören Börner kontaktieren, er erhalte derzeit viele Anrufe von Kunden mit ähnlichen Ideen\nFernwärmeansprechpartner bei der Sachsenenergie: https://www.drewag.de/wps/portal/drewag/cms/menu_main/privatkunden/produkte/waerme/fernwaerme"
-  },
-  {
-    "objectID": "posts/2023-03-17-strogatz-nonlinear-dynamics-and-chaos/index.html#kontaktaufnahme-zur-drewag-2",
-    "href": "posts/2023-03-17-strogatz-nonlinear-dynamics-and-chaos/index.html#kontaktaufnahme-zur-drewag-2",
-    "title": "Großwärmepumpen für das Fernwärmenetz Dresden",
-    "section": "Kontaktaufnahme zur Drewag (2)",
-    "text": "Kontaktaufnahme zur Drewag (2)\n\nSwen-Sören Börner (0351 860 4253): 4.8. gerade im Urlaub, bittet um erneuten Anruf am 8.8. unter 01713697777"
-  },
-  {
-    "objectID": "posts/2023-03-17-strogatz-nonlinear-dynamics-and-chaos/index.html#kontaktaufnahme-zu-egneos",
-    "href": "posts/2023-03-17-strogatz-nonlinear-dynamics-and-chaos/index.html#kontaktaufnahme-zu-egneos",
-    "title": "Großwärmepumpen für das Fernwärmenetz Dresden",
-    "section": "Kontaktaufnahme zu egNeos",
-    "text": "Kontaktaufnahme zu egNeos\n\n26.7.\n10.8.: Antwort von Susann Koschker: die großen sind träge, kleinere Projekte sind aussichtsreicher"
-  },
-  {
-    "objectID": "posts/2023-03-17-strogatz-nonlinear-dynamics-and-chaos/index.html#kontaktaufnahme-zu-vereinigung-zur-förderung-der-nutzung-erneuerbarer-energien",
-    "href": "posts/2023-03-17-strogatz-nonlinear-dynamics-and-chaos/index.html#kontaktaufnahme-zu-vereinigung-zur-förderung-der-nutzung-erneuerbarer-energien",
-    "title": "Großwärmepumpen für das Fernwärmenetz Dresden",
-    "section": "Kontaktaufnahme zu Vereinigung zur Förderung der Nutzung Erneuerbarer Energien",
-    "text": "Kontaktaufnahme zu Vereinigung zur Förderung der Nutzung Erneuerbarer Energien\n\n26.7. 10Antwort"
-  },
-  {
-    "objectID": "posts/2023-03-17-strogatz-nonlinear-dynamics-and-chaos/index.html#kontaktaufnahme-zu-wissenschaftlern-in-wien",
-    "href": "posts/2023-03-17-strogatz-nonlinear-dynamics-and-chaos/index.html#kontaktaufnahme-zu-wissenschaftlern-in-wien",
-    "title": "Großwärmepumpen für das Fernwärmenetz Dresden",
-    "section": "Kontaktaufnahme zu Wissenschaftlern in Wien",
-    "text": "Kontaktaufnahme zu Wissenschaftlern in Wien"
-  },
-  {
-    "objectID": "posts/2023-03-17-strogatz-nonlinear-dynamics-and-chaos/index.html#kontaktaufnahme-eva-jähnigen",
-    "href": "posts/2023-03-17-strogatz-nonlinear-dynamics-and-chaos/index.html#kontaktaufnahme-eva-jähnigen",
-    "title": "Großwärmepumpen für das Fernwärmenetz Dresden",
-    "section": "Kontaktaufnahme Eva Jähnigen",
-    "text": "Kontaktaufnahme Eva Jähnigen\n\nam 4.8. Mail geschrieben https://www.dresden.de/de/rathaus/politik/beigeordnete/gb7.php\nAntwort von Fr. Helzig (Klimaschutzstab) am 9.8.: offen für Gespräch\nAm 29.8. Telefonat zustande gekommen: Anliegen geschildert, den Rat bekommen sich direkt an den Vorstand der SachsenEnergie Dr. Brinkmann zu wenden. Die Stadt sei aufgrund der AG-Struktur gegenüber der SachsenEnergie nicht weisungsberechtigt (erscheint mit merkwürdig, da ja zu 90% im Besitz der Stadt)."
-  },
-  {
-    "objectID": "posts/2023-03-17-strogatz-nonlinear-dynamics-and-chaos/index.html#kontaktaufnahme-ochsner",
-    "href": "posts/2023-03-17-strogatz-nonlinear-dynamics-and-chaos/index.html#kontaktaufnahme-ochsner",
-    "title": "Großwärmepumpen für das Fernwärmenetz Dresden",
-    "section": "Kontaktaufnahme Ochsner",
-    "text": "Kontaktaufnahme Ochsner\n\nhttps://www.ochsner.com/de-de/ochsner-produkte/waermepumpen-fuer-grosse-leistungen/\nTelefon: 069 2566948\n4.8.: zuständige Kollegen im Betriebsurlaub, erneut probieren ab 8.8.\nFrage für Einschätzung der Machbarkeit: Wie hoch Investition pro 1000 Haushalte für Wärmepumpe?"
-  },
-  {
-    "objectID": "posts/2023-03-17-strogatz-nonlinear-dynamics-and-chaos/index.html#weitere-industrieansprechpartner",
-    "href": "posts/2023-03-17-strogatz-nonlinear-dynamics-and-chaos/index.html#weitere-industrieansprechpartner",
-    "title": "Großwärmepumpen für das Fernwärmenetz Dresden",
-    "section": "Weitere Industrieansprechpartner",
-    "text": "Weitere Industrieansprechpartner\n\nhttps://dimplex.de/dimplex/com-waermepumpen\nhttps://www.viessmann.ch/de/wohngebaeude/waermepumpe/grosswaermepumpen.html https://www.heliotherm.com/produkte/grosswaermepumpen/"
-  },
-  {
-    "objectID": "posts/2023-03-17-strogatz-nonlinear-dynamics-and-chaos/index.html#kontaktaufnahme-compass-lexecon",
-    "href": "posts/2023-03-17-strogatz-nonlinear-dynamics-and-chaos/index.html#kontaktaufnahme-compass-lexecon",
-    "title": "Großwärmepumpen für das Fernwärmenetz Dresden",
-    "section": "Kontaktaufnahme Compass Lexecon",
-    "text": "Kontaktaufnahme Compass Lexecon\n\nAutor der Studie https://positionen.wienenergie.at/wp-content/uploads/2021/10/WE-DECARB21-Studie.pdf\nAnsprechpartner Herr Gaue, am 4.8. per Mail kontaktiert\ninformatives Videotelefonat hat stattgefunden"
   },
   {
     "objectID": "posts/2022-09-08-timeline/index.html",
@@ -683,7 +536,7 @@
     "href": "index.html",
     "title": "Blog posts",
     "section": "",
-    "text": "Web-scraping in R\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nMar 17, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nGroßwärmepumpen für das Fernwärmenetz Dresden\n\n\n\n\n\n\n\nSustainibility\n\n\n\n\n\n\n\n\n\n\n\nMar 17, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nOfficial python tutorial\n\n\n\n\n\n\n\nSelf-study\n\n\n\n\n\n\n\n\n\n\n\nMar 17, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nMaps in R\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nMar 17, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nCoursera Deep Learning Specialization\n\n\n\n\n\n\n\nSelf-study\n\n\n\n\n\n\n\n\n\n\n\nMar 17, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nSelf-study: McElreath - Statistical Rethinking\n\n\n\n\n\n\n\nSelf-study\n\n\n\n\n\n\n\n\n\n\n\nMar 17, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nHow bad are bananas\n\n\n\n\n\n\n\nSustainibility\n\n\n\n\n\n\n\n\n\n\n\nFeb 27, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nHow bad are bananas\n\n\n\n\n\n\n\nSustainibility\n\n\n\n\n\n\n\n\n\n\n\nFeb 27, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nSelf-study: Deep Learning by Goodfellow et al.\n\n\n\n\n\n\n\nSelf-study\n\n\n\n\n\n\n\n\n\n\n\nFeb 27, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nInterfaces to computer algebra systems in R\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nFeb 25, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nManual colors in ggplot2\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nFeb 21, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nStrange behavior in ggplot2\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nFeb 2, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nSIRS model dynamics\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nJan 19, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nSustainibility data\n\n\n\n\n\n\n\nSustainibility\n\n\n\n\n\n\n\n\n\n\n\nJan 10, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nContribution plots\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nJan 5, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nFlowcharts\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nDec 20, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nR interfaces to trial registries\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nOct 25, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nSimulate time to-event-data\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nOct 25, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nKids per person and carbon footprint\n\n\n\n\n\n\n\nSustainibility\n\n\n\n\n\n\n\n\n\n\n\nOct 19, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nModel meadow\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nOct 19, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nRetrieving and plotting COVID-19 data\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nOct 16, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nLeo’s project\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nOct 16, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nSIR-like model with deSolve in deterministic and stochastic version\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nOct 4, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nAntipsychotics\n\n\n\n\n\n\n\nPsychiatry\n\n\n\n\n\n\n\n\n\n\n\nSep 8, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nTimeline\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nSep 8, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nPsychopharmaca and time\n\n\n\n\n\n\n\nPsychiatry\n\n\n\n\n\n\n\n\n\n\n\nSep 8, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nChess ressources\n\n\n\n\n\n\n\nMishmash\n\n\n\n\n\n\n\n\n\n\n\nSep 8, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nHumidity\n\n\n\n\n\n\n\nSustainibility\n\n\n\n\n\n\n\n\n\n\n\nSep 8, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nSIR model\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nJul 19, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\nNo matching items"
+    "text": "Web-scraping in R\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nMar 17, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nOfficial python tutorial\n\n\n\n\n\n\n\nSelf-study\n\n\n\n\n\n\n\n\n\n\n\nMar 17, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nMaps in R\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nMar 17, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nCoursera Deep Learning Specialization\n\n\n\n\n\n\n\nSelf-study\n\n\n\n\n\n\n\n\n\n\n\nMar 17, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nSelf-study: McElreath - Statistical Rethinking\n\n\n\n\n\n\n\nSelf-study\n\n\n\n\n\n\n\n\n\n\n\nMar 17, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nHow bad are bananas\n\n\n\n\n\n\n\nSustainibility\n\n\n\n\n\n\n\n\n\n\n\nFeb 27, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nSelf-study: Deep Learning by Goodfellow et al.\n\n\n\n\n\n\n\nSelf-study\n\n\n\n\n\n\n\n\n\n\n\nFeb 27, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nInterfaces to computer algebra systems in R\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nFeb 25, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nManual colors in ggplot2\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nFeb 21, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nStrange behavior in ggplot2\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nFeb 2, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nSIRS model dynamics\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nJan 19, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nSustainibility data\n\n\n\n\n\n\n\nSustainibility\n\n\n\n\n\n\n\n\n\n\n\nJan 10, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nContribution plots\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nJan 5, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nFlowcharts\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nDec 20, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nR interfaces to trial registries\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nOct 25, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nSimulate time to-event-data\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nOct 25, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nKids per person and carbon footprint\n\n\n\n\n\n\n\nSustainibility\n\n\n\n\n\n\n\n\n\n\n\nOct 19, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nModel meadow\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nOct 19, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nRetrieving and plotting COVID-19 data\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nOct 16, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nLeo’s project\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nOct 16, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nSIR-like model with deSolve in deterministic and stochastic version\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nOct 4, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nAntipsychotics\n\n\n\n\n\n\n\nPsychiatry\n\n\n\n\n\n\n\n\n\n\n\nSep 8, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nTimeline\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nSep 8, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nPsychopharmaca and time\n\n\n\n\n\n\n\nPsychiatry\n\n\n\n\n\n\n\n\n\n\n\nSep 8, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nChess ressources\n\n\n\n\n\n\n\nMishmash\n\n\n\n\n\n\n\n\n\n\n\nSep 8, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nHumidity\n\n\n\n\n\n\n\nSustainibility\n\n\n\n\n\n\n\n\n\n\n\nSep 8, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nSIR model\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nJul 19, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "about.html",
