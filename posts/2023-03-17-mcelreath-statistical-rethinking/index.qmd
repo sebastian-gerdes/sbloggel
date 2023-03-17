@@ -1,0 +1,67 @@
+---
+title: 'Self-study: McElreath - Statistical Rethinking'
+author: Sebastian Gerdes
+date: '2023-03-17'
+categories:
+  - Self-study
+execute: 
+  echo: false
+---
+
+## General stuff
+* [Website of the book](https://xcelab.net/rm/statistical-rethinking/)
+* [Statistical rethinking lectures on youtube](https://www.youtube.com/playlist?list=PLDcUM9US4XdMROZ57-OIRtIK0aOynbgZN)
+
+```{r init}
+# install.packages("cmdstanr", repos = c("https://mc-stan.org/r-packages/", getOption("repos")))
+# cmdstanr::install_cmdstan()
+# install.packages(c("coda","mvtnorm","devtools","loo","dagitty","shape"))
+# devtools::install_github("rmcelreath/rethinking")
+
+# library('rethinking')
+# help(package = 'rethinking')
+
+```
+
+
+## Lecture 1
+```{r lecture_1}
+p_grid <- seq(from = 0, to = 1, length.out = 1000)
+prior_1 <- rep(1, 1000)
+prior_1 <- prior_1 / sum(prior_1)
+likelihood_1 <- dbinom(x = 6, size = 9, prob = p_grid)
+posterior_1 <- prior_1 * likelihood_1
+posterior_1 <- posterior_1 / sum(posterior_1)
+
+plot(prior_1)
+plot(likelihood_1)
+plot(posterior_1)
+
+prior_2 <- posterior_1
+likelihood_2 <- dbinom(x = 4, 
+                     size = 9, 
+                     prob = p_grid)
+posterior_2 <- prior_2 * likelihood_2
+posterior_2 <- posterior_2 / sum(posterior_2)
+plot(posterior_2)
+
+
+# do it all in one step
+prior_3 <- rep(1, 1000)
+prior_3 <- prior_3 / sum(prior_3)
+
+likelihood_3 <- dbinom(x = 10, 
+                     size = 18, 
+                     prob = p_grid)
+posterior_3 <- prior_3 * likelihood_3
+posterior_3 <- posterior_3 / sum(posterior_3)
+
+plot(posterior_3)
+
+cbind(posterior_2, posterior_3)[sort(sample(50)), ]
+```
+
+## Lecture 2 - Bayesian inference
+* Bayesian data analysis: 
+  * For each possible explanation of the data, count all the ways data can happen.
+  * Explanations with more ways to produce the data are more plausibel

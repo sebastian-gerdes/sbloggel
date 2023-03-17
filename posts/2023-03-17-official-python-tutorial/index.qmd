@@ -1,0 +1,54 @@
+---
+title: 'Official python tutorial'
+author: Sebastian Gerdes
+date: '2023-03-17'
+categories:
+  - Self-study
+execute: 
+  echo: false
+---
+This document contains my study notes on the official [python tutorial](https://docs.python.org/3/tutorial/index.html).
+
+Also it might be worthwile to look at the [official language definition]( https://docs.python.org/3/reference/index.html#reference-index).
+
+
+##  2. Using the [Python Interpreter](https://docs.python.org/3/tutorial/interpreter.html)
+```{python}
+the_world_is_flat = True
+if the_world_is_flat:
+  print("Be careful not to fall off!")
+```
+
+## 3. An Informal Introduction to Python
+[Source](https://docs.python.org/3/tutorial/introduction.html)
+
+```{python}
+spam = 1 
+text = "# This is not a comment because it's inside quotes."
+squares = [1, 4, 9, 16, 25]
+squares[0]
+squares[-1]
+squares[-3:]
+squares[:]
+squares + [36, 49, 64, 81, 100]
+cubes = [1, 8, 27, 65, 125]  # something's wrong here
+4 ** 3  # the cube of 4 is 64, not 65!
+
+cubes[3] = 64  # replace the wrong value
+cubes
+
+cubes.append(216)  # add the cube of 6
+cubes.append(7 ** 3)  # and the cube of 7
+cubes
+```
+
+```{python}
+
+# Fibonacci series:
+# the sum of two elements defines the next
+a, b = 0, 1
+while a < 10:
+    print(a)
+    a, b = b, a+b
+```
+

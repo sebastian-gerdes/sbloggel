@@ -1,0 +1,112 @@
+---
+title: 'Coursera Deep Learning Specialization'
+author: Sebastian Gerdes
+date: '2023-03-17'
+categories:
+  - Self-study
+execute: 
+  echo: false
+---
+```{r}
+#| label: init
+#| include: false
+library('ggplot2')
+library('tibble')
+library('tidyr')
+theme_set(theme_bw())
+```
+
+
+## Study questions
+* How to input images of different dimensions in a neural net?
+* I don't quite understand yet how convolutions finally integrate more than just local information. In my understanding this can only happen efficiently in the fully connected layers then?
+* Understand cost function and understand the derivatives
+* Keras works with float32 (single float) - double is never used? Single is sufficient?
+* Read a little about Boltzmann machines
+
+## Course 2, Week 2
+### Mini-batch Gradient Descent
+* how do I controll this in Keras / PyTorch / whatever?
+* mini batch size = 1 -> stochastic gradient descent
+* mini batch size power of 2 
+
+### Exponentially moving averages:
+$$V_t = \beta V_{t-1} + (1 - \beta) \theta_t$$
+* this corresponds approximately to averaging over $\frac{1}{1-\beta}$ entries
+### Gradient descent with momentum
+* gradients with exponentially moving average
+* if learning rate too large risk of diverging
+* local minima are not the main problem - the problem are saddle points!
+* ball on a hill: velocity is stored in the  average, new gradient is the acceleration
+* $\beta = 0.9$ averaging over approx. the last 10 iterations 
+* Update rule:
+$$ V_{dw} = \beta V_{dw} + (1-\beta) dW$$
+* often approximated by:
+$$ V_{dw} = \beta V_{dw} + dW$$
+
+### Root Mean Square Propagation
+* dW is small, db is large (is this true?), here we call the hyperparameter $\beta_2$, also $\epsilon = 10^{-8}$
+$$ S_{dW} := \beta S_{dW} + (1 - \beta) dW^2$$
+$$ W := W - \alpha \frac{dW}{\sqrt{S_{dW}} + \epsilon}$$
+$$ S_{db} := \beta S_{db} + (1 - \beta) db^2$$
+$$ W := W - \alpha \frac{db}{\sqrt{S_{db}} + \epsilon}$$
+
+### Adaptive moment estimation optimization algorithm (Adam)
+Initiliazation: $V_{dW} = 0$, $S_{dW} = 0$, $V_{db} = 0$, $S_{db} = 0$, 
+$$ V_{dW} = \beta_1 V_{dW} + (1 - \beta_1) dW$$
+$$ V_{db} = \beta_1 V_{db} + (1 - \beta_1) db$$
+$$ S_{dW} = \beta_2 S_{dW} + (1 - beta_2) dW^2$$
+$$ S_{db} = \beta_2 S_{db} + (1 - beta_2) db^2$$
+Typically implemented with bias correction
+$$ V_{dW}^{corrected} = V_{dW} / (1 - \beta_1 ^ t)$$
+$$ V_{db}^{corrected} = V_{db} / (1 - \beta_1 ^ t)$$
+$$ S_{dW}^{corrected} = S_{dW} / (1 - \beta_2 ^ t)$$
+$$ S_{db}^{corrected} = S_{db} / (1 - \beta_2 ^ t)$$
+Update rule:
+$w := w - \alpha \frac{V_{dW}^{corrected}}{\sqrt{S^{corrected}_{dW}} + \epsilon}$
+$b := b - \alpha \frac{V_{db}^{corrected}}{\sqrt{S^{corrected}_{db}} + \epsilon}$
+Hyperparameters:
+
+* $\alpha$ needs to be tuned
+* $\beta_1$: usually 0.9
+* $\beta_2$: usually 0.999
+* $ \epsilon$:usually $10e-8$
+
+### Learning rate decay
+$$ \alpha = 1 / (1 + {decayrate} \times {epochnumber})  \alpha_0$$ 
+
+### Softmax activation function
+$$ a_i = \frac{\exp{z_i}}{\sum_{j=1}^{n}{\exp{z_j}}}$$
+
+### Softmax regression
+* generalization of logistic regression to $n$ classes
+* Likelihood:
+$$ L(\hat{y}, y) = - \sum^C_{j = 1} y_j log \hat{y_j} $$
+
+## Course 3, Week 2
+* Avoidable bias: discrepancy between Bayes' error and training error
+
+### Bias and variance with mismatched data distrubtions
+* potential help: add a Training-dev set
+* training error, training-dev error, dev error
+* data mismatch problem
+![Alt text](screenshots/data_mismatch.png)
+* Data augmentation: when sampling only a small subset of all possible examples overfitting may occur (e. g. cars in a video game)
+* Transfer learning: example image recognition
+  * train network to a lot of images
+  * now x-rays: delete weights of the last layer of the network and retrain them (a few x-rays available for training) or all parameters of the network (a lot of x-rays available for training)
+* Multitask learning - output vector, doesn't have to be fully labeled
+* Transfer learning currently learned more frequently than multitask learning
+* Multitask learning: each class should have similar number of items
+
+## Course 4
+* strided and padded convolution
+* cross-correlation (without flipping) vs. convolution (flipping around vertical and horizontal axis) - in ML, cross-correlation is by convention also called convolution
+* convolutions over volumes ($n_c$ = number of channels)
+$$ n \times n \times n_c * f \times f \times n_c \rightarrow (n - f + 1) * (n - f + 1) * n_c^{prime}$$ 
+* prime means in the next layer
+
+### Pooling
+* max pooling: only hyperparameters stride, padding (usually zero) and f
+* average pooling: rarely used, very sometimes for example to collapse spatial dimension (e.g. 7x7 with 1000 channels to 1x1 with 1000 channels)
+* no parameters to learn

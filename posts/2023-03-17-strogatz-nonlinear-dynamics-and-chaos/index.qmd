@@ -1,0 +1,90 @@
+---
+title: "Großwärmepumpen für das Fernwärmenetz Dresden"
+author: Sebastian Gerdes
+date: '2023-03-17'
+categories:
+  - Sustainibility
+execute: 
+  echo: false
+---
+
+## In Dresden großes vorhandenes (ausbaubares?) Fernwärmenetz
+- dabei fast ausschließlich Gas als Energieträger (mündliche Auskunft von Hr. Riccardo Worf)
+- "Mehr als 120.000 Wohnungen und über 5.700 Geschäftsgebäude werden durch das rund 578 Kilometer (Stand 2016) lange Fernwärmenetz versorgt. " (https://www.drewag.de/wps/portal/drewag/cms/menu_main/privatkunden/produkte/waerme/fernwaerme)
+
+## Studie: Wärmepumpen auch für das Fernwärmenetz sinnvoll
+- Studie: Fernwärme essenziell für Klimaziel (https://wien.orf.at/stories/3125796/)
+- Studie: TU Wien-Studie: Wärmepumpen auch fürs Fernwärmenetz sinnvoll (https://www.ee-news.ch/de/erneuerbare/article/38197/tu-wien-studie-warmepumpen-auch-furs-fernwarmenetz-sinnvoll)
+- Stärkste Großwärmepumpe Mitteleuropas pumpt in Wien (https://www.wienenergie.at/blog/staerkste-grosswaermepumpe-mitteleuropas-pumpt-in-wien/)
+
+## Idee
+- Kann eine Bürgerinitiative die Sachsenenergie motivieren, zeitnah und mit hoher Priorität an der Einführung von Fernwärmekraftwerden zu arbeiten?
+- und damit ökolgisch Sinnvolles erreichen, auch wenn es (zumindest kurzfristig) nicht die ökonomischste Lösung ist?
+
+## Wien als Modell?
+- in Wien ca. 16 Mrd. Euro notwendig, um Wien bis 2040 CO2-emissionsfrei zu machen
+  - das entspricht:
+    - ca. `r (x <- 1.6e10 / 2e6)` Euro pro Person über den gesamten Zeitraum
+    - ca. `r x / 20` Euro pro Person pro Jahr
+- falls übertragbar auf Dresden: ca. `r x * 5.5e5` Euro insgesamt
+
+- Quelle: Studie https://positionen.wienenergie.at/wp-content/uploads/2021/10/WE-DECARB21-Studie.pdf
+
+## Fernwärme erreicht eher nicht die üblichen Temperaturen
+- Quelle (https://www.wienenergie.at/blog/staerkste-grosswaermepumpe-mitteleuropas-pumpt-in-wien/): übliche Temperatur für Fernwärmehauptleitungen 100° C - 150° C, Fernwärme erreicht 95 ° C
+- Wie kann das kompensiert werden? Ist das schon ein Knock-Out?
+
+## Wer entscheidet was die Drewag macht?
+- Drewag zu 90% in kommunaler Hand (Quelle: https://de.wikipedia.org/wiki/Drewag)
+
+## Finanzierungsideen
+- (optional und freiwillig?) deutlich höhere Preise für "grüne" Energie
+- Schulden
+- Subventionen von Land / Bund
+- Spenden
+
+## Finanzierung über grünen Wahltarif?
+- aktuell laut Website der Drewag 120000 Wohnungen an das Fernwärmenetz angeschlossen
+- Grobe Abschätzung: 1000 Euro Heizkosten pro Wohnung pro Jahr, bei 10% der Nutzer Bereitschaft 20% mehr zu bezahlen um Investition in Großwärmepumpe zu finanzieren ergeben 2,4 Millionen Euro pro Jahr
+- 2,4 Millionen Euro pro Jahr ermöglichen Finanzierung von ca. 35 Millionen Euro über 20 Jahre bei Zinssatz 3% p.a. (Restschuld nach 20 Jahren 0 Euro)
+
+## Kontaktaufnahme zur Grünen Liga Dresden
+- 25.7. Jonas Bechtel
+
+## Kontaktaufnahme zur Drewag (1)
+- 26.7. Telefonat mit Riccardo Worf (Vertriebler "Fernwärme für Bestandsgebäude"): entsprechende Überlegungen seien nicht konkret vorhanden, Anträge seien auch sehr kompliziert, für weitere Überlegungen eher seinen Chef Swen-Sören Börner kontaktieren, er erhalte derzeit viele Anrufe von Kunden mit ähnlichen Ideen
+- Fernwärmeansprechpartner bei der Sachsenenergie: https://www.drewag.de/wps/portal/drewag/cms/menu_main/privatkunden/produkte/waerme/fernwaerme
+
+## Kontaktaufnahme zur Drewag (2)
+- Swen-Sören Börner (0351 860 4253): 4.8. gerade im Urlaub, bittet um erneuten Anruf am 8.8. unter 01713697777
+
+## Kontaktaufnahme zu egNeos
+- 26.7.
+- 10.8.: Antwort von Susann Koschker: die großen sind träge, kleinere Projekte sind aussichtsreicher
+
+## Kontaktaufnahme zu Vereinigung zur Förderung der Nutzung Erneuerbarer Energien
+- 26.7.
+10Antwort 
+
+## Kontaktaufnahme zu Wissenschaftlern in Wien
+
+## Kontaktaufnahme Eva Jähnigen
+- am 4.8. Mail geschrieben https://www.dresden.de/de/rathaus/politik/beigeordnete/gb7.php
+- Antwort von Fr. Helzig (Klimaschutzstab) am 9.8.: offen für Gespräch
+- Am 29.8. Telefonat zustande gekommen: Anliegen geschildert, den Rat bekommen sich direkt an den Vorstand der SachsenEnergie Dr. Brinkmann zu wenden. Die Stadt sei aufgrund der AG-Struktur gegenüber der SachsenEnergie nicht weisungsberechtigt (erscheint mit merkwürdig, da ja zu 90% im Besitz der Stadt).
+
+## Kontaktaufnahme Ochsner
+- https://www.ochsner.com/de-de/ochsner-produkte/waermepumpen-fuer-grosse-leistungen/
+- Telefon: 069 2566948
+- 4.8.: zuständige Kollegen im Betriebsurlaub, erneut probieren ab 8.8.
+- Frage für Einschätzung der Machbarkeit: Wie hoch Investition pro 1000 Haushalte für Wärmepumpe?
+
+## Weitere Industrieansprechpartner
+- https://dimplex.de/dimplex/com-waermepumpen
+- https://www.viessmann.ch/de/wohngebaeude/waermepumpe/grosswaermepumpen.html
+https://www.heliotherm.com/produkte/grosswaermepumpen/
+
+##  Kontaktaufnahme Compass Lexecon
+- Autor der Studie https://positionen.wienenergie.at/wp-content/uploads/2021/10/WE-DECARB21-Studie.pdf
+- Ansprechpartner Herr Gaue, am 4.8. per Mail kontaktiert
+- informatives Videotelefonat hat stattgefunden
