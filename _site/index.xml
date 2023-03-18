@@ -220,6 +220,32 @@
   <pubDate>Thu, 16 Mar 2023 23:00:00 GMT</pubDate>
 </item>
 <item>
+  <title>Self-study: Deep Learning by Goodfellow et al.</title>
+  <dc:creator>Sebastian Gerdes</dc:creator>
+  <link>https://sbloggel.netlify.app/posts/2023-03-17-goodfellow-deep-learning/index.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<div class="cell">
+
+</div>
+<section id="linear-algebra" class="level2">
+<h2 class="anchored" data-anchor-id="linear-algebra">Linear Algebra</h2>
+</section>
+<section id="probability-and-information-theory" class="level2">
+<h2 class="anchored" data-anchor-id="probability-and-information-theory">Probability and Information Theory</h2>
+
+
+</section>
+
+ ]]></description>
+  <category>Self-study</category>
+  <guid>https://sbloggel.netlify.app/posts/2023-03-17-goodfellow-deep-learning/index.html</guid>
+  <pubDate>Thu, 16 Mar 2023 23:00:00 GMT</pubDate>
+</item>
+<item>
   <title>Self-study: McElreath - Statistical Rethinking</title>
   <dc:creator>Sebastian Gerdes</dc:creator>
   <link>https://sbloggel.netlify.app/posts/2023-03-17-mcelreath-statistical-rethinking/index.html</link>
@@ -537,32 +563,6 @@ Berners-Lee, Mike. 2020. <em>How <span>Bad</span> <span>Are</span> <span>Bananas
 </div></section></div> ]]></description>
   <category>Sustainibility</category>
   <guid>https://sbloggel.netlify.app/posts/2023-02-27-how-bad-are-bananas/index.html</guid>
-  <pubDate>Sun, 26 Feb 2023 23:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Self-study: Deep Learning by Goodfellow et al.</title>
-  <dc:creator>Sebastian Gerdes</dc:creator>
-  <link>https://sbloggel.netlify.app/posts/2023-03-17-goodfellow-deep-learning/index.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<div class="cell">
-
-</div>
-<section id="linear-algebra" class="level2">
-<h2 class="anchored" data-anchor-id="linear-algebra">Linear Algebra</h2>
-</section>
-<section id="probability-and-information-theory" class="level2">
-<h2 class="anchored" data-anchor-id="probability-and-information-theory">Probability and Information Theory</h2>
-
-
-</section>
-
- ]]></description>
-  <category>Self-study</category>
-  <guid>https://sbloggel.netlify.app/posts/2023-03-17-goodfellow-deep-learning/index.html</guid>
   <pubDate>Sun, 26 Feb 2023 23:00:00 GMT</pubDate>
 </item>
 <item>
