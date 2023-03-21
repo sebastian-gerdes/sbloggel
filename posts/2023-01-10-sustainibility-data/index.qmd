@@ -40,7 +40,7 @@ world_energy_consumption_joule <- 5.74e20
 fac <- energy_sun_per_year_joule / world_energy_consumption_joule
 ```
 
-Die Welt liefert also ca. `r d3(fac)` mal so viel Energie wie von den Menschen verbraucht wird. Bei einem Wirkungsgrad von
+Die Welt liefert also ca. `r d3(fac)` mal so viel Energie wie von den Menschen verbraucht wird.
 
 ```{r}
 # angenommene Effizienz von Photovoltaikanlagen:

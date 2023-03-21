@@ -6,7 +6,7 @@ website:
   title: "Seb's blog"
   site-url: https://sbloggel.netlify.app/
   description: "Seb's private blog about statistics and other topics"
-  favicon: "favicon.ico"
+  favicon: "images/favicon.ico"
   repo-url: https://github.com/sebastian-gerdes/sbloggel
   repo-actions: [source]
   open-graph: true
