@@ -2,6 +2,7 @@ project:
   type: website
 
 website:
+  # title: "![](/images/favicon.ico) Seb's blog"
   title: "Seb's blog"
   site-url: https://sbloggel.netlify.app/
   description: "Seb's private blog about statistics and other topics"
@@ -13,8 +14,9 @@ website:
     hypothesis:
       theme: clean
   navbar:
-    right:
+    left:
       - about.qmd
+    right:
       - icon: rss
         href: index.xml
       - icon: github
@@ -23,3 +25,5 @@ format:
   html:
     theme: cosmo
     css: styles.css
+    title-block-banner: true
+
