@@ -9,6 +9,8 @@ execute:
 ---
 This document contains my study notes on the official [python tutorial](https://docs.python.org/3/tutorial/index.html).
 
+[Here](https://peps.python.org/pep-0008/#introduction) is a link to the PEP 8 style guide.
+
 Also it might be worthwile to look at the [official language definition]( https://docs.python.org/3/reference/index.html#reference-index).
 
 

@@ -12,4 +12,4 @@ about:
 
 My name is Sebastian Gerdes (email: first name dot last name at posteo dot de) and this is my personal blog. I intend to publish some posts about statistics and maybe other topics as well on this site. 
  
-Here is the [link](index.qmd) to the blog roll!
+Here is the [link](index.qmd) to the blog posts!

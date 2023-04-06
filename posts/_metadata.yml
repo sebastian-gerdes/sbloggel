@@ -5,7 +5,7 @@
 freeze: true
 
 # Enable banner style title blocks
-title-block-banner: true
+# title-block-banner: true
 
 # Author name of all blog posts
 author: 'Sebastian Gerdes'
@@ -19,5 +19,6 @@ page-layout: article
 # comments:
 #   utterances:
 #     repo: sebastian-gerdes/sbloggel_comments
+
 
 title-block-categories: false

@@ -9,14 +9,13 @@
 <link>https://sbloggel.netlify.app/index.html</link>
 <atom:link href="https://sbloggel.netlify.app/index.xml" rel="self" type="application/rss+xml"/>
 <description>Seb&#39;s private blog about statistics and other topics</description>
-<generator>quarto-1.2.269</generator>
+<generator>quarto-1.2.335</generator>
 <lastBuildDate>Thu, 16 Mar 2023 23:00:00 GMT</lastBuildDate>
 <item>
   <title>Web-scraping in R</title>
   <dc:creator>Sebastian Gerdes</dc:creator>
   <link>https://sbloggel.netlify.app/posts/2023-03-17-maps-in-r/index.html</link>
   <description><![CDATA[ 
-
 
 
 
@@ -37,8 +36,8 @@
 
 
 
-
 <p>This document contains my study notes on the official <a href="https://docs.python.org/3/tutorial/index.html">python tutorial</a>.</p>
+<p><a href="https://peps.python.org/pep-0008/#introduction">Here</a> is a link to the PEP 8 style guide.</p>
 <p>Also it might be worthwile to look at the <a href="https://docs.python.org/3/reference/index.html#reference-index">official language definition</a>.</p>
 <section id="using-the-python-interpreter" class="level2">
 <h2 class="anchored" data-anchor-id="using-the-python-interpreter">2. Using the <a href="https://docs.python.org/3/tutorial/interpreter.html">Python Interpreter</a></h2>
@@ -52,7 +51,7 @@
 <h2 class="anchored" data-anchor-id="an-informal-introduction-to-python">3. An Informal Introduction to Python</h2>
 <p><a href="https://docs.python.org/3/tutorial/introduction.html">Source</a></p>
 <div class="cell" data-execution_count="2">
-<div class="cell-output cell-output-display" data-execution_count="11">
+<div class="cell-output cell-output-display" data-execution_count="2">
 <pre><code>[1, 8, 27, 64, 125, 216, 343]</code></pre>
 </div>
 </div>
@@ -84,7 +83,6 @@
 
 
 
-
 <p><a href="https://nrennie.rbind.io/blog/2022-12-17-r-packages-for-visualising-spatial-data/">Link</a></p>
 
 
@@ -99,7 +97,6 @@
   <dc:creator>Sebastian Gerdes</dc:creator>
   <link>https://sbloggel.netlify.app/posts/2023-03-17-coursera-deep-learning/index.html</link>
   <description><![CDATA[ 
-
 
 
 
@@ -227,7 +224,6 @@
 
 
 
-
 <div class="cell">
 
 </div>
@@ -236,8 +232,36 @@
 </section>
 <section id="probability-and-information-theory" class="level2">
 <h2 class="anchored" data-anchor-id="probability-and-information-theory">Probability and Information Theory</h2>
+<ul>
+<li>“Researchers have made compelling arguments for quantifying uncertainty using probability since at least the 1980s.”</li>
+<li>Three sources of uncertainty:
+<ul>
+<li>Inherent stochasticity (e. g. quantum mechanics, card shuffling)</li>
+<li>Incomplete observability (e. g. Monty hall problem)</li>
+<li>Incomplete modeling</li>
+</ul></li>
+<li>Probability of used as degree of belief</li>
+</ul>
+<section id="random-variables-3.2" class="level3">
+<h3 class="anchored" data-anchor-id="random-variables-3.2">Random variables (3.2)</h3>
+<ul>
+<li>notation:
+<ul>
+<li>random variable: plain typeface</li>
+<li>values it can take with lowerscript letters</li>
+<li>vector-valued: bold</li>
+</ul></li>
+</ul>
+</section>
+<section id="probability-distribution-3.3" class="level3">
+<h3 class="anchored" data-anchor-id="probability-distribution-3.3">Probability distribution (3.3)</h3>
+<ul>
+<li>discrete variables: probability mass function (notation: usually <img src="https://latex.codecogs.com/png.latex?P">)</li>
+<li>notation: <img src="https://latex.codecogs.com/png.latex?x%20%5Csim%20P(x)"></li>
+</ul>
 
 
+</section>
 </section>
 
  ]]></description>
@@ -250,7 +274,6 @@
   <dc:creator>Sebastian Gerdes</dc:creator>
   <link>https://sbloggel.netlify.app/posts/2023-03-17-mcelreath-statistical-rethinking/index.html</link>
   <description><![CDATA[ 
-
 
 
 
@@ -360,7 +383,6 @@
   <dc:creator>Sebastian Gerdes</dc:creator>
   <link>https://sbloggel.netlify.app/posts/2023-02-27-how-bad-are-bananas/index.html</link>
   <description><![CDATA[ 
-
 
 
 
@@ -573,7 +595,6 @@ Berners-Lee, Mike. 2020. <em>How <span>Bad</span> <span>Are</span> <span>Bananas
 
 
 
-
 <p>Herre, I have collected a few resources in the field of computer algebra systems that have an interface to <code>R</code>.</p>
 <section id="general" class="level2">
 <h2 class="anchored" data-anchor-id="general">General</h2>
@@ -659,7 +680,6 @@ Attaching package: 'Ryacas'</code></pre>
 
 
 
-
 <p>After several instances of “relearning” how to use custom colour palettes in <code>R</code>, I have written this post in order to save some time when I want to use custom colours the next time.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;">library</span>(ggplot2)</span>
@@ -684,7 +704,6 @@ Attaching package: 'Ryacas'</code></pre>
   <dc:creator>Sebastian Gerdes</dc:creator>
   <link>https://sbloggel.netlify.app/posts/2023-02-02-strange-behavior-of-geom_area/index.html</link>
   <description><![CDATA[ 
-
 
 
 
@@ -853,7 +872,6 @@ loaded via a namespace (and not attached):
 
 
 
-
 <section id="loading-the-required-libraries" class="level2">
 <h2 class="anchored" data-anchor-id="loading-the-required-libraries">Loading the required libraries</h2>
 <div class="cell">
@@ -1009,7 +1027,6 @@ loaded via a namespace (and not attached):
 
 
 
-
 <section id="wie-viel-energie-liefert-die-sonne" class="level2">
 <h2 class="anchored" data-anchor-id="wie-viel-energie-liefert-die-sonne">Wie viel Energie liefert die Sonne?</h2>
 <ul>
@@ -1091,7 +1108,6 @@ loaded via a namespace (and not attached):
   <dc:creator>Sebastian Gerdes</dc:creator>
   <link>https://sbloggel.netlify.app/posts/2023-01-05-contribution-plots/index.html</link>
   <description><![CDATA[ 
-
 
 
 
@@ -1179,7 +1195,6 @@ Attaching package: 'plotly'</code></pre>
 
 
 
-
 <p>Source: https://cran.r-project.org/web/packages/Gmisc/vignettes/Grid-based_flowcharts.html</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;">library</span>(Gmisc, <span class="at" style="color: #657422;">quietly =</span> <span class="cn" style="color: #8f5902;">TRUE</span>)</span>
@@ -1263,7 +1278,6 @@ Attaching package: 'plotly'</code></pre>
   <dc:creator>Sebastian Gerdes</dc:creator>
   <link>https://sbloggel.netlify.app/posts/2022-11-24-r-interfaces-to-trial-registries/index.html</link>
   <description><![CDATA[ 
-
 
 
 
@@ -1563,7 +1577,6 @@ Attaching package: 'lubridate'</code></pre>
 
 
 
-
 <section id="intro" class="level2">
 <h2 class="anchored" data-anchor-id="intro">Intro</h2>
 <p>In this post, two methods to draw from a survival time distribution defined by an arbitrary hazard function are demonstrated. First, some central equations of survival analysis are given in order to refresh the background and establish a consistent notation. Then, the two different approaches are demonstrated.</p>
@@ -1728,7 +1741,6 @@ accurate nanosecond times to avoid potential integer overflows</code></pre>
 
 
 
-
 <section id="background" class="level2">
 <h2 class="anchored" data-anchor-id="background">Background</h2>
 <p>Here I want collect a few resources on how much the number of kids you get affects your carbone footprint.</p>
@@ -1786,7 +1798,6 @@ accurate nanosecond times to avoid potential integer overflows</code></pre>
   <dc:creator>Sebastian Gerdes</dc:creator>
   <link>https://sbloggel.netlify.app/posts/2022-10-19-model-meadow/index.html</link>
   <description><![CDATA[ 
-
 
 
 
@@ -1942,7 +1953,6 @@ attr(,"class")
 
 
 
-
 <section id="background" class="level2">
 <h2 class="anchored" data-anchor-id="background">Background</h2>
 <p>The COVID19 package allows to conveniently retrieve statistical data about the COVID-19 pandemy. Here, the data for Germany are retrieved and two exploratory plots are created.</p>
@@ -2039,7 +2049,6 @@ To hide this message use 'verbose = FALSE'.</code></pre>
   <dc:creator>Sebastian Gerdes</dc:creator>
   <link>https://sbloggel.netlify.app/posts/2022-10-16-leo-s-project/index.html</link>
   <description><![CDATA[ 
-
 
 
 

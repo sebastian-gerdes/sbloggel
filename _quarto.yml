@@ -1,6 +1,5 @@
 project:
   type: website
-  # output-dir: docs
 
 website:
   title: "Seb's blog"
@@ -10,6 +9,9 @@ website:
   repo-url: https://github.com/sebastian-gerdes/sbloggel
   repo-actions: [source]
   open-graph: true
+  comments: 
+    hypothesis:
+      theme: clean
   navbar:
     right:
       - about.qmd

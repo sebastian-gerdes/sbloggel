@@ -14,3 +14,21 @@ execute:
 
 ## Linear Algebra
 ## Probability and Information Theory
+* "Researchers have made compelling arguments for quantifying uncertainty using probability since at least the 1980s."
+* Three sources of uncertainty:
+  * Inherent stochasticity (e. g. quantum mechanics, card shuffling)
+  * Incomplete observability (e. g. Monty hall problem)
+  * Incomplete modeling
+* Probability of used as degree of belief
+
+### Random variables (3.2)
+* notation: 
+  * random variable: plain typeface
+  * values it can take with lowerscript letters
+  * vector-valued: bold
+
+### Probability distribution (3.3)
+* discrete variables: probability mass function (notation: usually $P$)
+* notation: $x \sim P(x)$
+
+  
