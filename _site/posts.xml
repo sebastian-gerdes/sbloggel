@@ -6,8 +6,8 @@
       version="2.0">
 <channel>
 <title>Seb&#39;s blog</title>
-<link>https://sbloggel.netlify.app/index.html</link>
-<atom:link href="https://sbloggel.netlify.app/index.xml" rel="self" type="application/rss+xml"/>
+<link>https://sbloggel.netlify.app/posts.html</link>
+<atom:link href="https://sbloggel.netlify.app/posts.xml" rel="self" type="application/rss+xml"/>
 <description>Seb&#39;s private blog about statistics and other topics</description>
 <generator>quarto-1.2.335</generator>
 <lastBuildDate>Fri, 05 May 2023 22:00:00 GMT</lastBuildDate>
@@ -16,7 +16,6 @@
   <dc:creator>Sebastian Gerdes</dc:creator>
   <link>https://sbloggel.netlify.app/posts/2023-05-06-minimal-traffic-jam-model/index.html</link>
   <description><![CDATA[ 
-
 
 
 
@@ -55,7 +54,6 @@
 
 
 
-
 <p>Idea: create a model in which proximity and number of people are balanced</p>
 
 
@@ -73,7 +71,6 @@
 
 
 
-
 <p><a href="https://nrennie.rbind.io/blog/web-scraping-rvest-london-marathon/">Link</a></p>
 
 
@@ -88,7 +85,6 @@
   <dc:creator>Sebastian Gerdes</dc:creator>
   <link>https://sbloggel.netlify.app/posts/2023-03-17-official-python-tutorial/index.html</link>
   <description><![CDATA[ 
-
 
 
 
@@ -139,7 +135,6 @@
 
 
 
-
 <p><a href="https://nrennie.rbind.io/blog/2022-12-17-r-packages-for-visualising-spatial-data/">Link</a></p>
 
 
@@ -154,7 +149,6 @@
   <dc:creator>Sebastian Gerdes</dc:creator>
   <link>https://sbloggel.netlify.app/posts/2023-03-17-coursera-deep-learning/index.html</link>
   <description><![CDATA[ 
-
 
 
 
@@ -282,7 +276,6 @@
 
 
 
-
 <div class="cell">
 
 </div>
@@ -352,7 +345,6 @@
   <dc:creator>Sebastian Gerdes</dc:creator>
   <link>https://sbloggel.netlify.app/posts/2023-03-17-mcelreath-statistical-rethinking/index.html</link>
   <description><![CDATA[ 
-
 
 
 
@@ -462,7 +454,6 @@
   <dc:creator>Sebastian Gerdes</dc:creator>
   <link>https://sbloggel.netlify.app/posts/2023-02-27-how-bad-are-bananas/index.html</link>
   <description><![CDATA[ 
-
 
 
 
@@ -675,7 +666,6 @@ Berners-Lee, Mike. 2020. <em>How <span>Bad</span> <span>Are</span> <span>Bananas
 
 
 
-
 <p>Herre, I have collected a few resources in the field of computer algebra systems that have an interface to <code>R</code>.</p>
 <section id="general" class="level2">
 <h2 class="anchored" data-anchor-id="general">General</h2>
@@ -761,7 +751,6 @@ Attaching package: 'Ryacas'</code></pre>
 
 
 
-
 <p>After several instances of “relearning” how to use custom colour palettes in <code>R</code>, I have written this post in order to save some time when I want to use custom colours the next time.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;">library</span>(ggplot2)</span>
@@ -786,7 +775,6 @@ Attaching package: 'Ryacas'</code></pre>
   <dc:creator>Sebastian Gerdes</dc:creator>
   <link>https://sbloggel.netlify.app/posts/2023-02-02-strange-behavior-of-geom_area/index.html</link>
   <description><![CDATA[ 
-
 
 
 
@@ -955,7 +943,6 @@ loaded via a namespace (and not attached):
 
 
 
-
 <section id="loading-the-required-libraries" class="level2">
 <h2 class="anchored" data-anchor-id="loading-the-required-libraries">Loading the required libraries</h2>
 <div class="cell">
@@ -1111,7 +1098,6 @@ loaded via a namespace (and not attached):
 
 
 
-
 <section id="wie-viel-energie-liefert-die-sonne" class="level2">
 <h2 class="anchored" data-anchor-id="wie-viel-energie-liefert-die-sonne">Wie viel Energie liefert die Sonne?</h2>
 <ul>
@@ -1193,7 +1179,6 @@ loaded via a namespace (and not attached):
   <dc:creator>Sebastian Gerdes</dc:creator>
   <link>https://sbloggel.netlify.app/posts/2023-01-05-contribution-plots/index.html</link>
   <description><![CDATA[ 
-
 
 
 
@@ -1281,7 +1266,6 @@ Attaching package: 'plotly'</code></pre>
 
 
 
-
 <p>Source: https://cran.r-project.org/web/packages/Gmisc/vignettes/Grid-based_flowcharts.html</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;">library</span>(Gmisc, <span class="at" style="color: #657422;">quietly =</span> <span class="cn" style="color: #8f5902;">TRUE</span>)</span>
@@ -1365,7 +1349,6 @@ Attaching package: 'plotly'</code></pre>
   <dc:creator>Sebastian Gerdes</dc:creator>
   <link>https://sbloggel.netlify.app/posts/2022-11-24-r-interfaces-to-trial-registries/index.html</link>
   <description><![CDATA[ 
-
 
 
 
@@ -1665,7 +1648,6 @@ Attaching package: 'lubridate'</code></pre>
 
 
 
-
 <section id="intro" class="level2">
 <h2 class="anchored" data-anchor-id="intro">Intro</h2>
 <p>In this post, two methods to draw from a survival time distribution defined by an arbitrary hazard function are demonstrated. First, some central equations of survival analysis are given in order to refresh the background and establish a consistent notation. Then, the two different approaches are demonstrated.</p>
@@ -1830,7 +1812,6 @@ accurate nanosecond times to avoid potential integer overflows</code></pre>
 
 
 
-
 <section id="background" class="level2">
 <h2 class="anchored" data-anchor-id="background">Background</h2>
 <p>Here I want collect a few resources on how much the number of kids you get affects your carbone footprint.</p>
@@ -1888,7 +1869,6 @@ accurate nanosecond times to avoid potential integer overflows</code></pre>
   <dc:creator>Sebastian Gerdes</dc:creator>
   <link>https://sbloggel.netlify.app/posts/2022-10-19-model-meadow/index.html</link>
   <description><![CDATA[ 
-
 
 
 

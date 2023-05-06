@@ -12,6 +12,8 @@ execute:
 #| cache: false
 #| include: false
 library('tidyverse')
+library('usethis')
+
 set.seed(1)
 ```
 

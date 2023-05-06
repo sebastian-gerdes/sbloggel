@@ -10,12 +10,14 @@ website:
   repo-url: https://github.com/sebastian-gerdes/sbloggel
   repo-actions: [source]
   open-graph: true
-  comments: 
-    hypothesis:
-      theme: clean
+  # comments: 
+  #   hypothesis:
+  #     theme: clean
   navbar:
     left:
-      - about.qmd
+      # - about.qmd
+      - text: Posts
+        file: posts.qmd
     right:
       - icon: rss
         href: index.xml
@@ -25,5 +27,5 @@ format:
   html:
     theme: cosmo
     css: styles.css
-    title-block-banner: true
+    title-block-banner: false
 
