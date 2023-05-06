@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Sebastian Gerdes">
-<meta name="dcterms.date" content="2023-02-25">
+<meta name="dcterms.date" content="2023-05-06">
 
-<title>Seb’s blog - Interfaces to computer algebra systems in R</title>
+<title>Seb’s blog - Minimal traffic jam model</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -133,8 +133,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 
 <link rel="stylesheet" href="../../styles.css">
-<meta property="og:title" content="Seb’s blog - Interfaces to computer algebra systems in R">
-<meta property="og:description" content="Herre, I have collected a few resources in the field of computer algebra systems that have an interface to R.">
+<meta property="og:title" content="Seb’s blog - Minimal traffic jam model">
 <meta property="og:site-name" content="Seb's blog">
 </head>
 
@@ -180,7 +179,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Interfaces to computer algebra systems in R</h1>
+      <h1 class="title">Minimal traffic jam model</h1>
                                     </div>
   </div>
     
@@ -197,7 +196,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">February 25, 2023</p>
+        <p class="date">May 6, 2023</p>
       </div>
     </div>
     
@@ -213,11 +212,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#general" id="toc-general" class="nav-link active" data-scroll-target="#general">General</a></li>
-  <li><a href="#maxima" id="toc-maxima" class="nav-link" data-scroll-target="#maxima">Maxima</a></li>
-  <li><a href="#ryacas" id="toc-ryacas" class="nav-link" data-scroll-target="#ryacas">Ryacas</a></li>
+  <li><a href="#resources" id="toc-resources" class="nav-link active" data-scroll-target="#resources">Resources</a></li>
+  <li><a href="#first-try" id="toc-first-try" class="nav-link" data-scroll-target="#first-try">First try</a></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/sebastian-gerdes/sbloggel/blob/main/posts/2023-02-25-interfaces-to-cas-from-r/index.qmd" class="toc-action">View source</a></p></div></div></nav>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/sebastian-gerdes/sbloggel/blob/main/posts/2023-05-06-minimal-traffic-jam-model/index.qmd" class="toc-action">View source</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content">
@@ -225,73 +223,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 
 
-<p>Herre, I have collected a few resources in the field of computer algebra systems that have an interface to <code>R</code>.</p>
-<section id="general" class="level2">
-<h2 class="anchored" data-anchor-id="general">General</h2>
+<section id="resources" class="level2">
+<h2 class="anchored" data-anchor-id="resources">Resources</h2>
 <ul>
-<li>CRAN task view: Section “Multi-Precision Arithmetic and Symbolic Mathematics” on <a href="https://cran.r-hub.io/web/views/NumericalMathematics.html">this</a> site</li>
-<li><a href="https://blog.ephorie.de/doing-maths-symbolically-r-as-a-computer-algebra-system-cas">Blog article</a></li>
+<li><a href="https://www.javatpoint.com/traffic-flow-simulation-in-python">In Python</a> - also locally in folder <code>additional</code></li>
 </ul>
 </section>
-<section id="maxima" class="level2">
-<h2 class="anchored" data-anchor-id="maxima">Maxima</h2>
-<ul>
-<li><a href="https://rcst.github.io/rim/">Rim package</a>
-<ul>
-<li>extended search path according to <a href="https://techpp.com/2021/09/08/set-path-variable-in-macos-guide/">these</a> instructions</li>
-<li>posted issue on rim package github site because it is still not working <a href="https://github.com/rcst/rim/issues/30">here</a></li>
-<li>edited /etc/launch.d</li>
-<li>added shell script /usr/bin/maxima</li>
-</ul></li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">system</span>(<span class="st">'export PATH=${PATH}:/Applications/Maxima.app/Contents/Resources/opt/bin'</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">system</span>(<span class="st">'echo $PATH'</span>)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rim)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Maxima successfully registered as knitr engine!</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">help</span>(<span class="at">package=</span><span class="st">'rim'</span>)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>rim<span class="sc">::</span><span class="fu">maxima.isInstalled</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] TRUE</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>rim<span class="sc">::</span><span class="fu">maxima.get</span>(<span class="st">"1+1;"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>(%o1) 2</code></pre>
-</div>
-</div>
-</section>
-<section id="ryacas" class="level2">
-<h2 class="anchored" data-anchor-id="ryacas">Ryacas</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Ryacas)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>
-Attaching package: 'Ryacas'</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following object is masked from 'package:stats':
-
-    integrate</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following objects are masked from 'package:base':
-
-    %*%, det, diag, diag&lt;-, lower.tri, upper.tri</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as_r</span>(<span class="fu">yac_str</span>(<span class="st">"Simplify(a*b*a^2/b-a^3)"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">yac_str</span>(<span class="st">'Simplify(x^2 + 2*(x-3)^3)'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "2*x^3-17*x^2+54*x-54"</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">yac_str</span>(<span class="st">"TeXForm(x^2 - 1)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "x ^{2} - 1"</code></pre>
-</div>
+<section id="first-try" class="level2">
+<h2 class="anchored" data-anchor-id="first-try">First try</h2>
+<div class="cell" data-hash="index_cache/html/first_try_f8ae7cbb01903964407910bdffc99611">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>get_acceleration <span class="ot">&lt;-</span> <span class="cf">function</span>(s, s_n, d_n) {</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>l <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>cars <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">cars =</span> <span class="fu">runif</span>(n, <span class="dv">0</span>, l),</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>               <span class="at">speed =</span> <span class="fu">runif</span>(n, <span class="dv">0</span>, <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 

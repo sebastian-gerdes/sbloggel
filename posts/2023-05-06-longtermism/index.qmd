@@ -1,0 +1,22 @@
+---
+title: 'Longtermism'
+author: Sebastian Gerdes
+date: '2023-05-06'
+draft: true
+categories:
+  - R
+toc: true
+execute: 
+  echo: false
+  cache: true
+---
+
+```{r}
+#| label: init
+#| cache: false
+#| include: false
+library('tidyverse')
+set.seed(1)
+```
+
+Idea: create a model in which proximity and number of people are balanced

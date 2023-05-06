@@ -31,4 +31,28 @@ execute:
 * discrete variables: probability mass function (notation: usually $P$)
 * notation: $x \sim P(x)$
 
-  
+## General statistics
+### Law of total probability
+$B_n$: partition of entire sample space $\rightarrow \sum p(B_n) = 1$
+$$
+P(A) = \sum_n P(A \cap B_n)
+$$
+
+### Statistical independence
+$$
+p(A|B) = p(A)
+$$
+
+### Conditional probability
+$$
+P(A | B) = \frac{A \cap B}{P(B)}
+$$
+
+### Bayes` theorem
+$$
+\begin{align}
+\frac{P(A|B)}{P(B|A)} &= \frac{P(A)}{P(B)} \\
+P(A|B) \cdot P(B) &= P(B|A) \cdot P(A)
+\end{align}
+$$
+

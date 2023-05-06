@@ -264,6 +264,25 @@
 <li>discrete variables: probability mass function (notation: usually <img src="https://latex.codecogs.com/png.latex?P">)</li>
 <li>notation: <img src="https://latex.codecogs.com/png.latex?x%20%5Csim%20P(x)"></li>
 </ul>
+</section>
+</section>
+<section id="general-statistics" class="level2">
+<h2 class="anchored" data-anchor-id="general-statistics">General statistics</h2>
+<section id="law-of-total-probability" class="level3">
+<h3 class="anchored" data-anchor-id="law-of-total-probability">Law of total probability</h3>
+<p><img src="https://latex.codecogs.com/png.latex?B_n">: partition of entire sample space <img src="https://latex.codecogs.com/png.latex?%5Crightarrow%20%5Csum%20p(B_n)%20=%201"> <img src="https://latex.codecogs.com/png.latex?%0AP(A)%20=%20%5Csum_n%20P(A%20%5Ccap%20B_n)%0A"></p>
+</section>
+<section id="statistical-independence" class="level3">
+<h3 class="anchored" data-anchor-id="statistical-independence">Statistical independence</h3>
+<p><img src="https://latex.codecogs.com/png.latex?%0Ap(A%7CB)%20=%20p(A)%0A"></p>
+</section>
+<section id="conditional-probability" class="level3">
+<h3 class="anchored" data-anchor-id="conditional-probability">Conditional probability</h3>
+<p><img src="https://latex.codecogs.com/png.latex?%0AP(A%20%7C%20B)%20=%20%5Cfrac%7BA%20%5Ccap%20B%7D%7BP(B)%7D%0A"></p>
+</section>
+<section id="bayes-theorem" class="level3">
+<h3 class="anchored" data-anchor-id="bayes-theorem">Bayes` theorem</h3>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cbegin%7Balign%7D%0A%5Cfrac%7BP(A%7CB)%7D%7BP(B%7CA)%7D%20&amp;=%20%5Cfrac%7BP(A)%7D%7BP(B)%7D%20%5C%5C%0AP(A%7CB)%20%5Ccdot%20P(B)%20&amp;=%20P(B%7CA)%20%5Ccdot%20P(A)%0A%5Cend%7Balign%7D%0A"></p>
 
 
 </section>

@@ -406,6 +406,13 @@
     "text": "Probability and Information Theory\n\n“Researchers have made compelling arguments for quantifying uncertainty using probability since at least the 1980s.”\nThree sources of uncertainty:\n\nInherent stochasticity (e. g. quantum mechanics, card shuffling)\nIncomplete observability (e. g. Monty hall problem)\nIncomplete modeling\n\nProbability of used as degree of belief\n\n\nRandom variables (3.2)\n\nnotation:\n\nrandom variable: plain typeface\nvalues it can take with lowerscript letters\nvector-valued: bold\n\n\n\n\nProbability distribution (3.3)\n\ndiscrete variables: probability mass function (notation: usually \\(P\\))\nnotation: \\(x \\sim P(x)\\)"
   },
   {
+    "objectID": "posts/2023-03-17-goodfellow-deep-learning/index.html#general-statistics",
+    "href": "posts/2023-03-17-goodfellow-deep-learning/index.html#general-statistics",
+    "title": "Self-study: Deep Learning by Goodfellow et al.",
+    "section": "General statistics",
+    "text": "General statistics\n\nLaw of total probability\n\\(B_n\\): partition of entire sample space \\(\\rightarrow \\sum p(B_n) = 1\\) \\[\nP(A) = \\sum_n P(A \\cap B_n)\n\\]\n\n\nStatistical independence\n\\[\np(A|B) = p(A)\n\\]\n\n\nConditional probability\n\\[\nP(A | B) = \\frac{A \\cap B}{P(B)}\n\\]\n\n\nBayes` theorem\n\\[\n\\begin{align}\n\\frac{P(A|B)}{P(B|A)} &= \\frac{P(A)}{P(B)} \\\\\nP(A|B) \\cdot P(B) &= P(B|A) \\cdot P(A)\n\\end{align}\n\\]"
+  },
+  {
     "objectID": "posts/2022-12-20-flowcharts/index.html",
     "href": "posts/2022-12-20-flowcharts/index.html",
     "title": "Flowcharts",
