@@ -20,7 +20,7 @@ website:
         file: posts.qmd
     right:
       - icon: rss
-        href: index.xml
+        href: posts.xml
       - icon: github
         href: https://github.com/sebastian-gerdes/
 format:
