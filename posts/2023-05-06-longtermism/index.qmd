@@ -2,7 +2,7 @@
 title: 'Longtermism'
 author: Sebastian Gerdes
 date: '2023-05-06'
-draft: true
+draft: false
 categories:
   - R
 toc: true

@@ -10,7 +10,61 @@
 <atom:link href="https://sbloggel.netlify.app/index.xml" rel="self" type="application/rss+xml"/>
 <description>Seb&#39;s private blog about statistics and other topics</description>
 <generator>quarto-1.2.335</generator>
-<lastBuildDate>Thu, 16 Mar 2023 23:00:00 GMT</lastBuildDate>
+<lastBuildDate>Fri, 05 May 2023 22:00:00 GMT</lastBuildDate>
+<item>
+  <title>Minimal traffic jam model</title>
+  <dc:creator>Sebastian Gerdes</dc:creator>
+  <link>https://sbloggel.netlify.app/posts/2023-05-06-minimal-traffic-jam-model/index.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="resources" class="level2">
+<h2 class="anchored" data-anchor-id="resources">Resources</h2>
+<ul>
+<li><a href="https://www.javatpoint.com/traffic-flow-simulation-in-python">In Python</a> - also locally in folder <code>additional</code></li>
+</ul>
+</section>
+<section id="first-try" class="level2">
+<h2 class="anchored" data-anchor-id="first-try">First try</h2>
+<div class="cell" data-hash="index_cache/html/first_try_f8ae7cbb01903964407910bdffc99611">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1">get_acceleration <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="cf" style="color: #003B4F;">function</span>(s, s_n, d_n) {</span>
+<span id="cb1-2">  </span>
+<span id="cb1-3">}</span>
+<span id="cb1-4"></span>
+<span id="cb1-5">n <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="dv" style="color: #AD0000;">100</span></span>
+<span id="cb1-6">l <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="dv" style="color: #AD0000;">100</span></span>
+<span id="cb1-7">cars <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">tibble</span>(<span class="at" style="color: #657422;">cars =</span> <span class="fu" style="color: #4758AB;">runif</span>(n, <span class="dv" style="color: #AD0000;">0</span>, l),</span>
+<span id="cb1-8">               <span class="at" style="color: #657422;">speed =</span> <span class="fu" style="color: #4758AB;">runif</span>(n, <span class="dv" style="color: #AD0000;">0</span>, <span class="dv" style="color: #AD0000;">1</span>))</span></code></pre></div>
+</div>
+
+
+</section>
+
+ ]]></description>
+  <category>R</category>
+  <guid>https://sbloggel.netlify.app/posts/2023-05-06-minimal-traffic-jam-model/index.html</guid>
+  <pubDate>Fri, 05 May 2023 22:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Longtermism</title>
+  <dc:creator>Sebastian Gerdes</dc:creator>
+  <link>https://sbloggel.netlify.app/posts/2023-05-06-longtermism/index.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>Idea: create a model in which proximity and number of people are balanced</p>
+
+
+
+ ]]></description>
+  <category>R</category>
+  <guid>https://sbloggel.netlify.app/posts/2023-05-06-longtermism/index.html</guid>
+  <pubDate>Fri, 05 May 2023 22:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Web-scraping in R</title>
   <dc:creator>Sebastian Gerdes</dc:creator>
@@ -1981,245 +2035,6 @@ attr(,"class")
   <category>R</category>
   <guid>https://sbloggel.netlify.app/posts/2022-10-19-model-meadow/index.html</guid>
   <pubDate>Tue, 18 Oct 2022 22:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Retrieving and plotting COVID-19 data</title>
-  <dc:creator>Sebastian Gerdes</dc:creator>
-  <link>https://sbloggel.netlify.app/posts/2022-10-16-retrieving-and-plotting-covid-19-data/index.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<section id="background" class="level2">
-<h2 class="anchored" data-anchor-id="background">Background</h2>
-<p>The COVID19 package allows to conveniently retrieve statistical data about the COVID-19 pandemy. Here, the data for Germany are retrieved and two exploratory plots are created.</p>
-</section>
-<section id="loading-libraries" class="level2">
-<h2 class="anchored" data-anchor-id="loading-libraries">Loading libraries</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;">library</span>(<span class="st" style="color: #20794D;">'ggplot2'</span>)</span>
-<span id="cb1-2"><span class="fu" style="color: #4758AB;">library</span>(<span class="st" style="color: #20794D;">'COVID19'</span>)</span></code></pre></div>
-</div>
-</section>
-<section id="retrieving-the-data" class="level2">
-<h2 class="anchored" data-anchor-id="retrieving-the-data">Retrieving the data</h2>
-<div class="cell" data-hash="index_cache/html/data_retrieval_70c9100d15bd9b074e25663966460e74">
-<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1">deu <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">covid19</span>(<span class="st" style="color: #20794D;">'Germany'</span>, <span class="at" style="color: #657422;">level =</span> <span class="dv" style="color: #AD0000;">1</span>) </span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>We have invested a lot of time and effort in creating COVID-19 Data Hub, please cite the following when using it:
-
-To cite package 'COVID19' in publications use:
-
-  Guidotti, E., Ardia, D., (2020), "COVID-19 Data Hub", Journal of Open
-  Source Software 5(51):2376, doi: 10.21105/joss.02376.
-
-A BibTeX entry for LaTeX users is
-
-  @Article{,
-    title = {COVID-19 Data Hub},
-    year = {2020},
-    doi = {10.21105/joss.02376},
-    author = {Emanuele Guidotti and David Ardia},
-    journal = {Journal of Open Source Software},
-    volume = {5},
-    number = {51},
-    pages = {2376},
-  }
-
-To hide this message use 'verbose = FALSE'.</code></pre>
-</div>
-</div>
-</section>
-<section id="plotting-total-number-of-confirmed-cases" class="level2">
-<h2 class="anchored" data-anchor-id="plotting-total-number-of-confirmed-cases">Plotting total number of confirmed cases</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><span class="fu" style="color: #4758AB;">ggplot</span>(<span class="at" style="color: #657422;">data =</span> deu, <span class="fu" style="color: #4758AB;">aes</span>(date, confirmed)) <span class="sc" style="color: #5E5E5E;">+</span> <span class="fu" style="color: #4758AB;">geom_point</span>() <span class="sc" style="color: #5E5E5E;">+</span> </span>
-<span id="cb4-2">  <span class="fu" style="color: #4758AB;">geom_smooth</span>()  <span class="sc" style="color: #5E5E5E;">+</span> <span class="fu" style="color: #4758AB;">scale_y_log10</span>()</span></code></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>`geom_smooth()` using method = 'gam' and formula = 'y ~ s(x, bs = "cs")'</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: Removed 11 rows containing non-finite values (`stat_smooth()`).</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: Removed 11 rows containing missing values (`geom_point()`).</code></pre>
-</div>
-<div class="cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2022-10-16-retrieving-and-plotting-covid-19-data/index_files/figure-html/plot_confirmed_cases_total-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-</section>
-<section id="plotting-new-cases" class="level2">
-<h2 class="anchored" data-anchor-id="plotting-new-cases">Plotting new cases</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1">dat <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">data.frame</span>(<span class="at" style="color: #657422;">date =</span> deu<span class="sc" style="color: #5E5E5E;">$</span>date[<span class="sc" style="color: #5E5E5E;">-</span><span class="dv" style="color: #AD0000;">1</span>], <span class="at" style="color: #657422;">new_cases =</span> <span class="fu" style="color: #4758AB;">diff</span>(deu<span class="sc" style="color: #5E5E5E;">$</span>confirmed))</span>
-<span id="cb8-2"><span class="fu" style="color: #4758AB;">ggplot</span>(<span class="at" style="color: #657422;">data =</span> dat, <span class="fu" style="color: #4758AB;">aes</span>(date, new_cases)) <span class="sc" style="color: #5E5E5E;">+</span> <span class="fu" style="color: #4758AB;">geom_point</span>() <span class="sc" style="color: #5E5E5E;">+</span> </span>
-<span id="cb8-3">  <span class="fu" style="color: #4758AB;">geom_smooth</span>()  <span class="sc" style="color: #5E5E5E;">+</span> <span class="fu" style="color: #4758AB;">scale_y_log10</span>()</span></code></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>`geom_smooth()` using method = 'gam' and formula = 'y ~ s(x, bs = "cs")'</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: Removed 18 rows containing non-finite values (`stat_smooth()`).</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: Removed 18 rows containing missing values (`geom_point()`).</code></pre>
-</div>
-<div class="cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2022-10-16-retrieving-and-plotting-covid-19-data/index_files/figure-html/plot_new_confirmed_cases-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-</section>
-<section id="conclusion" class="level2">
-<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
-<p>This package allows convenient retrieval of a lot of data about the COVID-19 pandemy.</p>
-
-
-</section>
-
- ]]></description>
-  <category>R</category>
-  <guid>https://sbloggel.netlify.app/posts/2022-10-16-retrieving-and-plotting-covid-19-data/index.html</guid>
-  <pubDate>Sat, 15 Oct 2022 22:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Leo’s project</title>
-  <dc:creator>Sebastian Gerdes</dc:creator>
-  <link>https://sbloggel.netlify.app/posts/2022-10-16-leo-s-project/index.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<section id="part-1-simulating-data" class="level1">
-<h1>Part 1: Simulating data</h1>
-<section id="background" class="level2">
-<h2 class="anchored" data-anchor-id="background">Background</h2>
-<p>In hematological cancers, blood stem cells can be transferred to a patient after chemothery. The blood stem cells may proliferate in the patient and populate the patient’s peripheral blood afterwards.</p>
-<p>Chimerism is defined as the ratio of the number of blood cells originating from the transplanted cells and the total number of blood cells in the patient’s blood.</p>
-<p>Here, a sigmoidal model for the temporal development of chimerism after transplantion is introduced and in silico data are simulated.</p>
-<p>Leo also posted a question about this model on the <code>STAN</code> forum: https://discourse.mc-stan.org/t/bad-diagnostics-with-multilevel-models/29091?u=leonhardschwager</p>
-</section>
-<section id="initialization" class="level2">
-<h2 class="anchored" data-anchor-id="initialization">Initialization</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;">library</span>(<span class="st" style="color: #20794D;">'tidyverse'</span>)</span>
-<span id="cb1-2"><span class="fu" style="color: #4758AB;">set.seed</span>(<span class="dv" style="color: #AD0000;">1</span>)</span></code></pre></div>
-</div>
-</section>
-<section id="definition-of-model-function-to-predict-chimerism" class="level2">
-<h2 class="anchored" data-anchor-id="definition-of-model-function-to-predict-chimerism">Definition of model function to predict chimerism</h2>
-<ul>
-<li>Source: https://en.wikipedia.org/wiki/Logistic_function</li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1">calc_chimerism <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="cf" style="color: #003B4F;">function</span>(day, <span class="at" style="color: #657422;">d =</span> <span class="dv" style="color: #AD0000;">1</span>, <span class="at" style="color: #657422;">b =</span> <span class="dv" style="color: #AD0000;">1</span>, <span class="at" style="color: #657422;">e =</span> <span class="dv" style="color: #AD0000;">5</span>) {</span>
-<span id="cb2-2"><span class="co" style="color: #5E5E5E;"># day: for which day the chimerism shall be calculated</span></span>
-<span id="cb2-3"><span class="co" style="color: #5E5E5E;"># d: maximum value of the curve</span></span>
-<span id="cb2-4"><span class="co" style="color: #5E5E5E;"># b: the logistic growth rate or steepness of the curve</span></span>
-<span id="cb2-5"><span class="co" style="color: #5E5E5E;"># e:  location of the midpoint of the sigmoid function</span></span>
-<span id="cb2-6">  d <span class="sc" style="color: #5E5E5E;">/</span> (<span class="dv" style="color: #AD0000;">1</span> <span class="sc" style="color: #5E5E5E;">+</span> <span class="fu" style="color: #4758AB;">exp</span>(<span class="sc" style="color: #5E5E5E;">-</span>b <span class="sc" style="color: #5E5E5E;">*</span> (day <span class="sc" style="color: #5E5E5E;">-</span> e)))</span>
-<span id="cb2-7">}</span>
-<span id="cb2-8"></span>
-<span id="cb2-9"><span class="co" style="color: #5E5E5E;"># plot the function with default values:</span></span>
-<span id="cb2-10"><span class="fu" style="color: #4758AB;">ggplot</span>() <span class="sc" style="color: #5E5E5E;">+</span> <span class="fu" style="color: #4758AB;">stat_function</span>(<span class="at" style="color: #657422;">fun =</span> calc_chimerism) <span class="sc" style="color: #5E5E5E;">+</span> </span>
-<span id="cb2-11">  <span class="fu" style="color: #4758AB;">xlim</span>(<span class="dv" style="color: #AD0000;">0</span>, <span class="dv" style="color: #AD0000;">10</span>) <span class="sc" style="color: #5E5E5E;">+</span> <span class="fu" style="color: #4758AB;">labs</span>(<span class="at" style="color: #657422;">x =</span> <span class="st" style="color: #20794D;">'Time'</span>, <span class="at" style="color: #657422;">y =</span> <span class="st" style="color: #20794D;">'Chimerism'</span>)</span></code></pre></div>
-<div class="cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2022-10-16-leo-s-project/index_files/figure-html/define_chimerism_function-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-</section>
-<section id="set-parameters" class="level2">
-<h2 class="anchored" data-anchor-id="set-parameters">Set parameters</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1">nr_of_patients <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="dv" style="color: #AD0000;">10</span></span>
-<span id="cb3-2">nr_of_measurements <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="dv" style="color: #AD0000;">10</span> <span class="co" style="color: #5E5E5E;"># per patient</span></span>
-<span id="cb3-3">d <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">runif</span>(<span class="at" style="color: #657422;">n =</span> nr_of_patients, <span class="at" style="color: #657422;">min =</span> <span class="fl" style="color: #AD0000;">0.6</span>, <span class="at" style="color: #657422;">max =</span> <span class="dv" style="color: #AD0000;">1</span>)</span>
-<span id="cb3-4">b <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">rnorm</span>(<span class="at" style="color: #657422;">n =</span> nr_of_patients, <span class="at" style="color: #657422;">mean =</span> <span class="dv" style="color: #AD0000;">1</span>, <span class="at" style="color: #657422;">sd =</span> <span class="fl" style="color: #AD0000;">0.1</span>)</span>
-<span id="cb3-5">e <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">runif</span>(<span class="at" style="color: #657422;">n =</span> nr_of_patients, <span class="at" style="color: #657422;">min =</span> <span class="dv" style="color: #AD0000;">5</span>, <span class="at" style="color: #657422;">max =</span> <span class="dv" style="color: #AD0000;">15</span>)</span></code></pre></div>
-</div>
-</section>
-<section id="construct-independent-values" class="level2">
-<h2 class="anchored" data-anchor-id="construct-independent-values">Construct independent values</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1">dat <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">tibble</span>(<span class="at" style="color: #657422;">patient_id =</span> <span class="fu" style="color: #4758AB;">factor</span>(<span class="dv" style="color: #AD0000;">1</span><span class="sc" style="color: #5E5E5E;">:</span>nr_of_patients), </span>
-<span id="cb4-2">              <span class="at" style="color: #657422;">d =</span> d, </span>
-<span id="cb4-3">              <span class="at" style="color: #657422;">b =</span> b, </span>
-<span id="cb4-4">              <span class="at" style="color: #657422;">e =</span> e) <span class="sc" style="color: #5E5E5E;">%&gt;%</span></span>
-<span id="cb4-5">  <span class="fu" style="color: #4758AB;">expand_grid</span>(<span class="at" style="color: #657422;">measurement =</span> <span class="dv" style="color: #AD0000;">1</span><span class="sc" style="color: #5E5E5E;">:</span>nr_of_measurements)</span>
-<span id="cb4-6"></span>
-<span id="cb4-7"><span class="co" style="color: #5E5E5E;"># compute timepoints symetrical equidistant </span></span>
-<span id="cb4-8"><span class="co" style="color: #5E5E5E;"># in both directions of the sigmoid midpoint </span></span>
-<span id="cb4-9"><span class="co" style="color: #5E5E5E;"># of the curve:</span></span>
-<span id="cb4-10">dat<span class="sc" style="color: #5E5E5E;">$</span>day <span class="ot" style="color: #003B4F;">&lt;-</span> dat<span class="sc" style="color: #5E5E5E;">$</span>e <span class="sc" style="color: #5E5E5E;">*</span> <span class="dv" style="color: #AD0000;">2</span> <span class="sc" style="color: #5E5E5E;">*</span> dat<span class="sc" style="color: #5E5E5E;">$</span>measurement <span class="sc" style="color: #5E5E5E;">/</span> nr_of_measurements</span></code></pre></div>
-</div>
-</section>
-<section id="apply-model-function-to-calculate-dependendant-values" class="level2">
-<h2 class="anchored" data-anchor-id="apply-model-function-to-calculate-dependendant-values">Apply model function to calculate dependendant values</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1">dat<span class="sc" style="color: #5E5E5E;">$</span>chimerism <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">calc_chimerism</span>(<span class="at" style="color: #657422;">day =</span> dat<span class="sc" style="color: #5E5E5E;">$</span>day, </span>
-<span id="cb5-2">                                <span class="at" style="color: #657422;">d =</span> dat<span class="sc" style="color: #5E5E5E;">$</span>d, </span>
-<span id="cb5-3">                                <span class="at" style="color: #657422;">b =</span> dat<span class="sc" style="color: #5E5E5E;">$</span>b, </span>
-<span id="cb5-4">                                <span class="at" style="color: #657422;">e =</span> dat<span class="sc" style="color: #5E5E5E;">$</span>e)</span></code></pre></div>
-</div>
-</section>
-<section id="plot-the-simulated-data" class="level2">
-<h2 class="anchored" data-anchor-id="plot-the-simulated-data">Plot the simulated data</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><span class="fu" style="color: #4758AB;">ggplot</span>(dat, <span class="fu" style="color: #4758AB;">aes</span>(day, chimerism)) <span class="sc" style="color: #5E5E5E;">+</span> </span>
-<span id="cb6-2">  <span class="fu" style="color: #4758AB;">geom_point</span>() <span class="sc" style="color: #5E5E5E;">+</span> <span class="fu" style="color: #4758AB;">geom_line</span>() <span class="sc" style="color: #5E5E5E;">+</span> </span>
-<span id="cb6-3">  <span class="fu" style="color: #4758AB;">facet_wrap</span>(<span class="sc" style="color: #5E5E5E;">~</span> patient_id, <span class="at" style="color: #657422;">ncol =</span> <span class="dv" style="color: #AD0000;">3</span>, <span class="at" style="color: #657422;">scales =</span> <span class="st" style="color: #20794D;">'free_x'</span>) <span class="sc" style="color: #5E5E5E;">+</span> </span>
-<span id="cb6-4">  <span class="fu" style="color: #4758AB;">xlim</span>(<span class="dv" style="color: #AD0000;">0</span>, <span class="cn" style="color: #8f5902;">NA</span>) <span class="sc" style="color: #5E5E5E;">+</span> <span class="fu" style="color: #4758AB;">ylim</span>(<span class="dv" style="color: #AD0000;">0</span>, <span class="dv" style="color: #AD0000;">1</span>)</span></code></pre></div>
-<div class="cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2022-10-16-leo-s-project/index_files/figure-html/plot_data-1.png" class="img-fluid" width="672"></p>
-</div>
-<div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><span class="fu" style="color: #4758AB;">ggplot</span>(dat, <span class="fu" style="color: #4758AB;">aes</span>(day, chimerism, <span class="at" style="color: #657422;">color =</span> patient_id)) <span class="sc" style="color: #5E5E5E;">+</span> </span>
-<span id="cb7-2">  <span class="fu" style="color: #4758AB;">geom_point</span>() <span class="sc" style="color: #5E5E5E;">+</span> <span class="fu" style="color: #4758AB;">geom_line</span>() <span class="sc" style="color: #5E5E5E;">+</span> </span>
-<span id="cb7-3">  <span class="fu" style="color: #4758AB;">ylim</span>(<span class="dv" style="color: #AD0000;">0</span>, <span class="dv" style="color: #AD0000;">1</span>)</span></code></pre></div>
-<div class="cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2022-10-16-leo-s-project/index_files/figure-html/plot_data-2.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-</section>
-<section id="conclusion" class="level2">
-<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
-</section>
-</section>
-<section id="part-2-fitting-models" class="level1">
-<h1>Part 2: Fitting models</h1>
-<section id="fitting-a-simple-model" class="level2">
-<h2 class="anchored" data-anchor-id="fitting-a-simple-model">Fitting a simple model</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><span class="fu" style="color: #4758AB;">library</span>(<span class="st" style="color: #20794D;">'brms'</span>)</span></code></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: Rcpp</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading 'brms' package (version 2.18.0). Useful instructions
-can be found by typing help('brms'). A more detailed introduction
-to the package is available through vignette('brms_overview').</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>
-Attaching package: 'brms'</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following object is masked from 'package:stats':
-
-    ar</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><span class="co" style="color: #5E5E5E;"># help(package = 'brms')</span></span>
-<span id="cb13-2"><span class="co" style="color: #5E5E5E;"># prior1 &lt;- prior(normal(1, 0.1), nlpar = ')</span></span></code></pre></div>
-</div>
-
-
-</section>
-</section>
-
- ]]></description>
-  <category>R</category>
-  <guid>https://sbloggel.netlify.app/posts/2022-10-16-leo-s-project/index.html</guid>
-  <pubDate>Sat, 15 Oct 2022 22:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>

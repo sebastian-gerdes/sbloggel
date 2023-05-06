@@ -5,7 +5,7 @@ date: 2023-05-06
 categories:
   - R
 toc: true
-draft: true
+draft: false
 execute: 
   echo: false
   cache: true
