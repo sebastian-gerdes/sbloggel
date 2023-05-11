@@ -16,13 +16,15 @@ website:
   navbar:
     left:
       # - about.qmd
+      - text: About
+        file: about.qmd
       - text: Posts
-        file: posts.qmd
+        file: index.qmd
     right:
       - icon: rss
         href: posts.xml
-      - icon: github
-        href: https://github.com/sebastian-gerdes/
+      # - icon: github
+      #   href: https://github.com/sebastian-gerdes/
 format:
   html:
     theme: cosmo

@@ -1,0 +1,11 @@
+---
+title: "Seb's blog"
+output: 
+  github_document:
+    toc: true
+    toc_depth: 3
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+This is the github repository for my blog hosted at [https://sbloggel.netlify.app/](https://sbloggel.netlify.app/).

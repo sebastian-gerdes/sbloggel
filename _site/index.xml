@@ -6,8 +6,8 @@
       version="2.0">
 <channel>
 <title>Seb&#39;s blog</title>
-<link>https://sbloggel.netlify.app/posts.html</link>
-<atom:link href="https://sbloggel.netlify.app/posts.xml" rel="self" type="application/rss+xml"/>
+<link>https://sbloggel.netlify.app/index.html</link>
+<atom:link href="https://sbloggel.netlify.app/index.xml" rel="self" type="application/rss+xml"/>
 <description>Seb&#39;s private blog about statistics and other topics</description>
 <generator>quarto-1.2.335</generator>
 <lastBuildDate>Fri, 05 May 2023 22:00:00 GMT</lastBuildDate>
@@ -55,6 +55,7 @@
 
 
 <p>Idea: create a model in which proximity and number of people are balanced</p>
+<p>“Love thy neighbor as thyself.”</p>
 
 
 

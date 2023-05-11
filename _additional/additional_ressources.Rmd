@@ -1,10 +1,7 @@
 ---
-title: 'Blog Sbloggel'
-self-contained: true
+title: 'Additional resources'
 toc: true
-execute: 
-  echo: false
-  cache: true
+embed-resources: true
 ---
 
 ```{r}
@@ -17,14 +14,15 @@ library('usethis')
 set.seed(1)
 ```
 
+## Create new post
 ```{r}
 #| label: new_post
 #| execute: false
 library('fs')
-ll <- readLines('_additional/sample_post.qmd')
+ll <- readLines('sample_post.qmd')
 post_date <- format(Sys.Date(), "%Y-%m-%d")
 post_title <- 'Minimal traffic jam model'
-post_dir <- gsub(" ", "-", tolower(paste0('posts/', post_date, '-', post_title)))
+post_dir <- gsub(" ", "-", tolower(paste0('../posts/', post_date, '-', post_title)))
 
 ll[2] <- paste0('title: ', post_title)
 ll[4] <- paste0('date: ', post_date)
