@@ -1,0 +1,13 @@
+---
+title: 'Interesting R packages'
+author: Sebastian Gerdes
+date: '2023-03-17'
+categories:
+  - R
+execute: 
+  echo: false
+---
+
+* Flow charts in R: [ggflowchart](https://nrennie.rbind.io/blog/introducing-ggflowchart/)
+* Web scraping: [rvest](https://nrennie.rbind.io/blog/web-scraping-rvest-london-marathon/)
+* Spatial data / maps: [Recommendations from Nicola Rennie's blog](https://nrennie.rbind.io/blog/2022-12-17-r-packages-for-visualising-spatial-data/)

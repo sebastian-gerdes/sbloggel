@@ -70,11 +70,11 @@
     "text": "Conclusion\nThis package allows convenient retrieval of a lot of data about the COVID-19 pandemy."
   },
   {
-    "objectID": "posts/2023-03-17-maps-in-r/index.html",
-    "href": "posts/2023-03-17-maps-in-r/index.html",
-    "title": "Web-scraping in R",
+    "objectID": "posts/2023-03-17-interesting-r-packages/index.html",
+    "href": "posts/2023-03-17-interesting-r-packages/index.html",
+    "title": "Interesting R packages",
     "section": "",
-    "text": "Link"
+    "text": "Flow charts in R: ggflowchart\nWeb scraping: rvest\nSpatial data / maps: Recommendations from Nicola Rennie’s blog"
   },
   {
     "objectID": "posts/2022-11-24-r-interfaces-to-trial-registries/index.html",
@@ -266,13 +266,6 @@
     "text": "3. An Informal Introduction to Python\nSource\n\n\n[1, 8, 27, 64, 125, 216, 343]\n\n\n\n\n0\n1\n1\n2\n3\n5\n8"
   },
   {
-    "objectID": "posts/2023-03-17-webscraping-in-r/index.html",
-    "href": "posts/2023-03-17-webscraping-in-r/index.html",
-    "title": "Maps in R",
-    "section": "",
-    "text": "Link"
-  },
-  {
     "objectID": "posts/2023-01-10-sustainibility-data/index.html",
     "href": "posts/2023-01-10-sustainibility-data/index.html",
     "title": "Sustainibility data",
@@ -427,13 +420,6 @@
     "text": "General statistics\n\nLaw of total probability\n\\(B_n\\): partition of entire sample space \\(\\rightarrow \\sum p(B_n) = 1\\) \\[\nP(A) = \\sum_n P(A \\cap B_n)\n\\]\n\n\nStatistical independence\n\\[\np(A|B) = p(A)\n\\]\n\n\nConditional probability\n\\[\nP(A | B) = \\frac{A \\cap B}{P(B)}\n\\]\n\n\nBayes` theorem\n\\[\n\\begin{align}\n\\frac{P(A|B)}{P(B|A)} &= \\frac{P(A)}{P(B)} \\\\\nP(A|B) \\cdot P(B) &= P(B|A) \\cdot P(A)\n\\end{align}\n\\]"
   },
   {
-    "objectID": "posts/2022-12-20-flowcharts/index.html",
-    "href": "posts/2022-12-20-flowcharts/index.html",
-    "title": "Flowcharts",
-    "section": "",
-    "text": "Source: https://cran.r-project.org/web/packages/Gmisc/vignettes/Grid-based_flowcharts.html\n\nlibrary(Gmisc, quietly = TRUE)\nlibrary(glue)\nlibrary(htmlTable)\nlibrary(grid)\nlibrary(magrittr)\n\norg_cohort <- boxGrob(glue(\"Stockholm population\",\n                           \"n = {pop}\",\n                           pop = txtInt(1632798),\n                           .sep = \"\\n\"))\neligible <- boxGrob(glue(\"Eligible\",\n                          \"n = {pop}\",\n                           pop = txtInt(10032),\n                           .sep = \"\\n\"))\nincluded <- boxGrob(glue(\"Randomized\",\n                         \"n = {incl}\",\n                         incl = txtInt(122),\n                         .sep = \"\\n\"))\ngrp_a <- boxGrob(glue(\"Treatment A\",\n                      \"n = {recr}\",\n                      recr = txtInt(43),\n                      .sep = \"\\n\"))\n\ngrp_b <- boxGrob(glue(\"Treatment B\",\n                      \"n = {recr}\",\n                      recr = txtInt(122 - 43 - 30),\n                      .sep = \"\\n\"))\n\nexcluded <- boxGrob(glue(\"Excluded (n = {tot}):\",\n                         \" - not interested: {uninterested}\",\n                         \" - contra-indicated: {contra}\",\n                         tot = 30,\n                         uninterested = 12,\n                         contra = 30 - 12,\n                         .sep = \"\\n\"),\n                    just = \"left\")\n\ngrid.newpage()\nvert <- spreadVertical(org_cohort,\n                       eligible = eligible,\n                       included = included,\n                       grps = grp_a)\ngrps <- alignVertical(reference = vert$grps,\n                      grp_a, grp_b) %>%\n  spreadHorizontal()\nvert$grps <- NULL\n\nexcluded <- moveBox(excluded,\n                    x = .8,\n                    y = coords(vert$included)$top + distance(vert$eligible, vert$included, half = TRUE, center = FALSE))\n\nfor (i in 1:(length(vert) - 1)) {\n  connectGrob(vert[[i]], vert[[i + 1]], type = \"vert\") %>%\n    print\n}\nconnectGrob(vert$included, grps[[1]], type = \"N\")\nconnectGrob(vert$included, grps[[2]], type = \"N\")\n\nconnectGrob(vert$eligible, excluded, type = \"L\")\n\n# Print boxes\nvert\ngrps\nexcluded"
-  },
-  {
     "objectID": "posts/2022-09-08-chess-ressources/index.html",
     "href": "posts/2022-09-08-chess-ressources/index.html",
     "title": "Chess ressources",
@@ -518,34 +504,6 @@
     "text": "Lecture 2 - Bayesian inference\n\nBayesian data analysis:\n\nFor each possible explanation of the data, count all the ways data can happen.\nExplanations with more ways to produce the data are more plausibel"
   },
   {
-    "objectID": "posts/2023-02-25-interfaces-to-cas-from-r/index.html",
-    "href": "posts/2023-02-25-interfaces-to-cas-from-r/index.html",
-    "title": "Interfaces to computer algebra systems in R",
-    "section": "",
-    "text": "Herre, I have collected a few resources in the field of computer algebra systems that have an interface to R."
-  },
-  {
-    "objectID": "posts/2023-02-25-interfaces-to-cas-from-r/index.html#general",
-    "href": "posts/2023-02-25-interfaces-to-cas-from-r/index.html#general",
-    "title": "Interfaces to computer algebra systems in R",
-    "section": "General",
-    "text": "General\n\nCRAN task view: Section “Multi-Precision Arithmetic and Symbolic Mathematics” on this site\nBlog article"
-  },
-  {
-    "objectID": "posts/2023-02-25-interfaces-to-cas-from-r/index.html#maxima",
-    "href": "posts/2023-02-25-interfaces-to-cas-from-r/index.html#maxima",
-    "title": "Interfaces to computer algebra systems in R",
-    "section": "Maxima",
-    "text": "Maxima\n\nRim package\n\nextended search path according to these instructions\nposted issue on rim package github site because it is still not working here\nedited /etc/launch.d\nadded shell script /usr/bin/maxima\n\n\n\nsystem('export PATH=${PATH}:/Applications/Maxima.app/Contents/Resources/opt/bin')\nsystem('echo $PATH')\nlibrary(rim)\n\nMaxima successfully registered as knitr engine!\n\nhelp(package='rim')\nrim::maxima.isInstalled()\n\n[1] TRUE\n\nrim::maxima.get(\"1+1;\")\n\n(%o1) 2"
-  },
-  {
-    "objectID": "posts/2023-02-25-interfaces-to-cas-from-r/index.html#ryacas",
-    "href": "posts/2023-02-25-interfaces-to-cas-from-r/index.html#ryacas",
-    "title": "Interfaces to computer algebra systems in R",
-    "section": "Ryacas",
-    "text": "Ryacas\n\nlibrary(Ryacas)\n\n\nAttaching package: 'Ryacas'\n\n\nThe following object is masked from 'package:stats':\n\n    integrate\n\n\nThe following objects are masked from 'package:base':\n\n    %*%, det, diag, diag<-, lower.tri, upper.tri\n\nas_r(yac_str(\"Simplify(a*b*a^2/b-a^3)\"))\n\n[1] 0\n\nyac_str('Simplify(x^2 + 2*(x-3)^3)')\n\n[1] \"2*x^3-17*x^2+54*x-54\"\n\nyac_str(\"TeXForm(x^2 - 1)\")\n\n[1] \"x ^{2} - 1\""
-  },
-  {
     "objectID": "posts/2022-09-08-humidity/index.html",
     "href": "posts/2022-09-08-humidity/index.html",
     "title": "Humidity",
@@ -564,7 +522,7 @@
     "href": "index.html",
     "title": "Blog posts",
     "section": "",
-    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\nMinimal traffic jam model\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nMay 6, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nLongtermism\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nMay 6, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nWeb-scraping in R\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nMar 17, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nOfficial python tutorial\n\n\n\n\n\n\n\nSelf-study\n\n\n\n\n\n\n\n\n\n\n\nMar 17, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nMaps in R\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nMar 17, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nCoursera Deep Learning Specialization\n\n\n\n\n\n\n\nSelf-study\n\n\n\n\n\n\n\n\n\n\n\nMar 17, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nSelf-study: Deep Learning by Goodfellow et al.\n\n\n\n\n\n\n\nSelf-study\n\n\n\n\n\n\n\n\n\n\n\nMar 17, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nSelf-study: McElreath - Statistical Rethinking\n\n\n\n\n\n\n\nSelf-study\n\n\n\n\n\n\n\n\n\n\n\nMar 17, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nHow bad are bananas\n\n\n\n\n\n\n\nSustainibility\n\n\n\n\n\n\n\n\n\n\n\nFeb 27, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nInterfaces to computer algebra systems in R\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nFeb 25, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nManual colors in ggplot2\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nFeb 21, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nStrange behavior in ggplot2\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nFeb 2, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nSIRS model dynamics\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nJan 19, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nSustainibility data\n\n\n\n\n\n\n\nSustainibility\n\n\n\n\n\n\n\n\n\n\n\nJan 10, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nContribution plots\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nJan 5, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nFlowcharts\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nDec 20, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nR interfaces to trial registries\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nOct 25, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nSimulate time to-event-data\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nOct 25, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nKids per person and carbon footprint\n\n\n\n\n\n\n\nSustainibility\n\n\n\n\n\n\n\n\n\n\n\nOct 19, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nModel meadow\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nOct 19, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nRetrieving and plotting COVID-19 data\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nOct 16, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nLeo’s project\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nOct 16, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nSIR-like model with deSolve in deterministic and stochastic version\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nOct 4, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nAntipsychotics\n\n\n\n\n\n\n\nPsychiatry\n\n\n\n\n\n\n\n\n\n\n\nSep 8, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nTimeline\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nSep 8, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nPsychopharmaca and time\n\n\n\n\n\n\n\nPsychiatry\n\n\n\n\n\n\n\n\n\n\n\nSep 8, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nChess ressources\n\n\n\n\n\n\n\nMishmash\n\n\n\n\n\n\n\n\n\n\n\nSep 8, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nHumidity\n\n\n\n\n\n\n\nSustainibility\n\n\n\n\n\n\n\n\n\n\n\nSep 8, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nSIR model\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nJul 19, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\nNo matching items"
+    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\nMinimal traffic jam model\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nMay 6, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nLongtermism\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nMay 6, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nInteresting R packages\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nMar 17, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nOfficial python tutorial\n\n\n\n\n\n\n\nSelf-study\n\n\n\n\n\n\n\n\n\n\n\nMar 17, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nCoursera Deep Learning Specialization\n\n\n\n\n\n\n\nSelf-study\n\n\n\n\n\n\n\n\n\n\n\nMar 17, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nSelf-study: Deep Learning by Goodfellow et al.\n\n\n\n\n\n\n\nSelf-study\n\n\n\n\n\n\n\n\n\n\n\nMar 17, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nSelf-study: McElreath - Statistical Rethinking\n\n\n\n\n\n\n\nSelf-study\n\n\n\n\n\n\n\n\n\n\n\nMar 17, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nHow bad are bananas\n\n\n\n\n\n\n\nSustainibility\n\n\n\n\n\n\n\n\n\n\n\nFeb 27, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nManual colors in ggplot2\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nFeb 21, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nStrange behavior in ggplot2\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nFeb 2, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nSIRS model dynamics\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nJan 19, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nSustainibility data\n\n\n\n\n\n\n\nSustainibility\n\n\n\n\n\n\n\n\n\n\n\nJan 10, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nContribution plots\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nJan 5, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nR interfaces to trial registries\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nOct 25, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nSimulate time to-event-data\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nOct 25, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nKids per person and carbon footprint\n\n\n\n\n\n\n\nSustainibility\n\n\n\n\n\n\n\n\n\n\n\nOct 19, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nModel meadow\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nOct 19, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nRetrieving and plotting COVID-19 data\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nOct 16, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nLeo’s project\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nOct 16, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nSIR-like model with deSolve in deterministic and stochastic version\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nOct 4, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nAntipsychotics\n\n\n\n\n\n\n\nPsychiatry\n\n\n\n\n\n\n\n\n\n\n\nSep 8, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nTimeline\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nSep 8, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nPsychopharmaca and time\n\n\n\n\n\n\n\nPsychiatry\n\n\n\n\n\n\n\n\n\n\n\nSep 8, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nChess ressources\n\n\n\n\n\n\n\nMishmash\n\n\n\n\n\n\n\n\n\n\n\nSep 8, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nHumidity\n\n\n\n\n\n\n\nSustainibility\n\n\n\n\n\n\n\n\n\n\n\nSep 8, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nSIR model\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nJul 19, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "about.html",
