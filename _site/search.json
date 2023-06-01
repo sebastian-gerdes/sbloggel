@@ -21,13 +21,6 @@
     "text": "Calculations\n\nnr_of_generations_considered <-10\nnr_of_kids_per_person <- 1.7\n\nnr_of_persons <- function(nr_of_generations_considered, nr_of_kids_per_person = 1.7) {\n  responsibility_per_kid <-(1/2)^(1:nr_of_generations_considered)\n  kids_per_generations <- nr_of_kids_per_person^(1:nr_of_generations_considered)\n  total <- sum(responsibility_per_kid * kids_per_generations)\n  return(total)\n}\n\nnr_of_persons_v <- Vectorize(nr_of_persons)\n\nplot(nr_of_persons_v, 1, 100, log = 'x', xlab = 'Number of generations considered on log scale',\n     ylab = 'For how many descendents a person is responsible')\n\n\n\n\nDo calcuation with geometric series:\n\nfoo <- function(nr_of_kids_per_person) {\n  1 / (1 - (nr_of_kids_per_person / 2))\n}  \nplot(foo, 0, 1.9)"
   },
   {
-    "objectID": "posts/2023_02_21-manual_colors_in_ggplot2/index.html",
-    "href": "posts/2023_02_21-manual_colors_in_ggplot2/index.html",
-    "title": "Manual colors in ggplot2",
-    "section": "",
-    "text": "After several instances of “relearning” how to use custom colour palettes in R, I have written this post in order to save some time when I want to use custom colours the next time.\n\nlibrary(ggplot2)\niris |> ggplot(aes(Sepal.Length, Sepal.Width, colour = Species)) + \n  geom_point(size = 3) +\n  scale_colour_manual(values = c('lightgray', 'blue', 'black'), \n                      aesthetics = c('colour', 'fill'))"
-  },
-  {
     "objectID": "posts/2022-10-16-retrieving-and-plotting-covid-19-data/index.html",
     "href": "posts/2022-10-16-retrieving-and-plotting-covid-19-data/index.html",
     "title": "Retrieving and plotting COVID-19 data",
@@ -75,6 +68,27 @@
     "title": "Interesting R packages",
     "section": "",
     "text": "Flow charts in R: ggflowchart\nWeb scraping: rvest\nSpatial data / maps: Recommendations from Nicola Rennie’s blog"
+  },
+  {
+    "objectID": "posts/2023-03-17-interesting-r-packages/index.html#r-packages-built-from-a-single-.rmd-file",
+    "href": "posts/2023-03-17-interesting-r-packages/index.html#r-packages-built-from-a-single-.rmd-file",
+    "title": "Interesting R packages",
+    "section": "R packages built from a single *.RMD file",
+    "text": "R packages built from a single *.RMD file\nLink"
+  },
+  {
+    "objectID": "posts/2023-03-17-interesting-r-packages/index.html#interfaces-to-computer-algebra-systems-in-r",
+    "href": "posts/2023-03-17-interesting-r-packages/index.html#interfaces-to-computer-algebra-systems-in-r",
+    "title": "Interesting R packages",
+    "section": "Interfaces to computer algebra systems in R",
+    "text": "Interfaces to computer algebra systems in R\nHerre, I have collected a few resources in the field of computer algebra systems that have an interface to R.\n\nGeneral\n\nCRAN task view: Section “Multi-Precision Arithmetic and Symbolic Mathematics” on this site\nBlog article\n\n\n\nMaxima\n\nRim package\n\nextended search path according to these instructions\nposted issue on rim package github site because it is still not working here\nedited /etc/launch.d\nadded shell script /usr/bin/maxima\n\n\n\n\nMaxima successfully registered as knitr engine!\n\n\n[1] TRUE\n\n\n(%o1) 2\n\n\n\n(%i1) lambda_S: beta * psi;\n\n(%o1) beta*psi\n\n(%i2) Lambda_S: integrate(lambda_S, t);\n\n(%o2) beta*psi*t\n\n(%i3) S_S: exp(-Lambda_S);\n\n(%o3) %e^-(beta*psi*t)\n\n(%i4) assume(beta > 0);\n\n(%o4) [beta > 0]\n\n(%i5) assume(psi > 0);\n\n(%o5) [psi > 0]\n\n(%i6) E_S: integrate(S_S, t, 0, inf);\n\n(%o6) 1/(beta*psi)\n\n(%i7) tex(''E_S);\n\n(%o7) false\n\n\n\n\nRyacas\n\n\n\nAttaching package: 'Ryacas'\n\n\nThe following object is masked from 'package:stats':\n\n    integrate\n\n\nThe following objects are masked from 'package:base':\n\n    %*%, det, diag, diag<-, lower.tri, upper.tri\n\n\n[1] 0\n\n\n[1] \"2*x^3-17*x^2+54*x-54\"\n\n\n[1] \"x ^{2} - 1\""
+  },
+  {
+    "objectID": "posts/2023-03-17-interesting-r-packages/index.html#flowcharts",
+    "href": "posts/2023-03-17-interesting-r-packages/index.html#flowcharts",
+    "title": "Interesting R packages",
+    "section": "Flowcharts",
+    "text": "Flowcharts\nSource: https://cran.r-project.org/web/packages/Gmisc/vignettes/Grid-based_flowcharts.html"
   },
   {
     "objectID": "posts/2022-11-24-r-interfaces-to-trial-registries/index.html",
@@ -247,23 +261,30 @@
   {
     "objectID": "posts/2023-03-17-official-python-tutorial/index.html",
     "href": "posts/2023-03-17-official-python-tutorial/index.html",
-    "title": "Official python tutorial",
+    "title": "Python study notes",
     "section": "",
-    "text": "This document contains my study notes on the official python tutorial.\nHere is a link to the PEP 8 style guide.\nAlso it might be worthwile to look at the official language definition."
+    "text": "This section contains my study notes on the official python tutorial.\nHere is a link to the PEP 8 style guide.\nAlso it might be worthwile to look at the official language definition."
   },
   {
     "objectID": "posts/2023-03-17-official-python-tutorial/index.html#using-the-python-interpreter",
     "href": "posts/2023-03-17-official-python-tutorial/index.html#using-the-python-interpreter",
-    "title": "Official python tutorial",
+    "title": "Python study notes",
     "section": "2. Using the Python Interpreter",
     "text": "2. Using the Python Interpreter\n\n\nBe careful not to fall off!"
   },
   {
     "objectID": "posts/2023-03-17-official-python-tutorial/index.html#an-informal-introduction-to-python",
     "href": "posts/2023-03-17-official-python-tutorial/index.html#an-informal-introduction-to-python",
-    "title": "Official python tutorial",
+    "title": "Python study notes",
     "section": "3. An Informal Introduction to Python",
-    "text": "3. An Informal Introduction to Python\nSource\n\n\n[1, 8, 27, 64, 125, 216, 343]\n\n\n\n\n0\n1\n1\n2\n3\n5\n8"
+    "text": "3. An Informal Introduction to Python\nSource\n\n\n1\n\n\n25\n\n\n[9, 16, 25]\n\n\n[1, 4, 9, 16, 25]\n\n\n[1, 4, 9, 16, 25, 36, 49, 64, 81, 100]\n\n\n64\n\n\n[1, 8, 27, 64, 125]\n\n\n[1, 8, 27, 64, 125, 216, 343]\n\n\n\n\n0\n1\n1\n2\n3\n5\n8"
+  },
+  {
+    "objectID": "posts/2023-03-17-official-python-tutorial/index.html#seaborn",
+    "href": "posts/2023-03-17-official-python-tutorial/index.html#seaborn",
+    "title": "Python study notes",
+    "section": "Seaborn",
+    "text": "Seaborn\n\nGallery"
   },
   {
     "objectID": "posts/2023-01-10-sustainibility-data/index.html",
@@ -382,7 +403,7 @@
     "href": "posts/2022-10-25-simulate-time-to-event-data/index.html#ad-hoc-code-to-draw-from-survival-time-distribution",
     "title": "Simulate time to-event-data",
     "section": "Ad hoc code to draw from survival time distribution",
-    "text": "Ad hoc code to draw from survival time distribution\n\nset.seed(1)\nlibrary('survival')\n\n# define hazard function:\nlambda <- function(t) {\n  abs(sin(t))\n}\n\n\n# hazard for t = 7 and t = 12:\nlambda(c(7, 12)) \n\n[1] 0.6569866 0.5365729\n\n# plot hazard function:\nplot(lambda, from = 0, to = 10, xlab = 't', ylab = expression(lambda))\n\n\n\n# define function that computes cumulative hazard function:\nLambda <- Vectorize(\n  function(t) {\n    integrate(lambda,\n              subdivisions = 1e3L,\n              lower = 0, \n              upper = t)$value\n  })\n\n# cumulative hazard for t = 3\nLambda(3) \n\n[1] 1.989992\n\n# plot cumulative hazard function:\nplot(Lambda, from = 0, to = 10, xlab = 't', ylab = expression(Lambda))\n\n\n\n# define function that computes survival function \n# from cumulative hazard function:\nS <- Vectorize(\n  function(t) {\n    exp(-Lambda(t))\n  })\n\n# plot survival function:\nplot(S, from = 0, to = 10, xlab = 't')\n\n\n\n# determine at which time cumulative hazard\n# reaches 2e1 (i. e. S(t) < 1e-8)\n# the value is used as upper bound for\n# optimization to find the quantile\nupper_bound <- optimize(\n  function(x) {\n    abs(Lambda(x) - 2e1)\n  }, \n  interval = c(0, 1e2))$minimum\n\n# define function to compute quantile of survival function\nquantile_function <- Vectorize(\n  function(t) {\n    optimize(function(x) {\n      abs(S(x) - t)}, \n      interval = c(0, upper_bound))$min\n  })\n\n# compute some quantiles for hazard function\n# that has been specified above:\nquantile_function(c(0.25, 0.5, 0.75))\n\n[1] 1.9674130 1.2589101 0.7779829\n\n# evaluate how long it takes to determine 10 quantiles:\nmicrobenchmark::microbenchmark(quantile_function(1:10))\n\nWarning in microbenchmark::microbenchmark(quantile_function(1:10)): less\naccurate nanosecond times to avoid potential integer overflows\n\n\nUnit: milliseconds\n                    expr      min       lq     mean   median       uq   max\n quantile_function(1:10) 10.16788 10.62542 11.70089 10.76422 13.39013 17.73\n neval\n   100\n\n# draw n random numbers from survival distribution \n# defined by hazard function above\n(times <- quantile_function(runif(n = 20)))\n\n [1] 0.9040743 1.0566904 2.0173300 1.9328205 0.8170795 1.3620799 2.4072092\n [8] 0.7842570 3.8702329 0.5462974 1.0317729 1.1427625 1.6834271 1.3608340\n[15] 1.2579906 2.3602768 1.1977742 4.2861974 1.8556640 2.1505993\n\nplot(survfit(Surv(times) ~ 1), xlab = 't', ylab = 'S')"
+    "text": "Ad hoc code to draw from survival time distribution\n\nset.seed(1)\nlibrary('survival')\n\n# define hazard function:\nlambda <- function(t) {\n  abs(sin(t))\n}\n\n\n# hazard for t = 7 and t = 12:\nlambda(c(7, 12)) \n\n[1] 0.6569866 0.5365729\n\n# plot hazard function:\nplot(lambda, from = 0, to = 10, xlab = 't', ylab = expression(lambda))\n\n\n\n# define function that computes cumulative hazard function:\nLambda <- Vectorize(\n  function(t) {\n    integrate(lambda,\n              subdivisions = 1e3L,\n              lower = 0, \n              upper = t)$value\n  })\n\n# cumulative hazard for t = 3\nLambda(3) \n\n[1] 1.989992\n\n# plot cumulative hazard function:\nplot(Lambda, from = 0, to = 10, xlab = 't', ylab = expression(Lambda))\n\n\n\n# define function that computes survival function \n# from cumulative hazard function:\nS <- Vectorize(\n  function(t) {\n    exp(-Lambda(t))\n  })\n\n# plot survival function:\nplot(S, from = 0, to = 10, xlab = 't')\n\n\n\n# determine at which time cumulative hazard\n# reaches 2e1 (i. e. S(t) < 1e-8)\n# the value is used as upper bound for\n# optimization to find the quantile\nupper_bound <- optimize(\n  function(x) {\n    abs(Lambda(x) - 2e1)\n  }, \n  interval = c(0, 1e2))$minimum\n\n# define function to compute quantile of survival function\nquantile_function <- Vectorize(\n  function(t) {\n    optimize(function(x) {\n      abs(S(x) - t)}, \n      interval = c(0, upper_bound))$min\n  })\n\n# compute some quantiles for hazard function\n# that has been specified above:\nquantile_function(c(0.25, 0.5, 0.75))\n\n[1] 1.9674130 1.2589101 0.7779829\n\n# evaluate how long it takes to determine 10 quantiles:\nmicrobenchmark::microbenchmark(quantile_function(1:10))\n\nWarning in microbenchmark::microbenchmark(quantile_function(1:10)): less\naccurate nanosecond times to avoid potential integer overflows\n\n\nUnit: milliseconds\n                    expr      min       lq     mean   median       uq      max\n quantile_function(1:10) 9.994488 10.30584 11.27298 10.64501 12.41992 14.83216\n neval\n   100\n\n# draw n random numbers from survival distribution \n# defined by hazard function above\n(times <- quantile_function(runif(n = 20)))\n\n [1] 0.9040743 1.0566904 2.0173300 1.9328205 0.8170795 1.3620799 2.4072092\n [8] 0.7842570 3.8702329 0.5462974 1.0317729 1.1427625 1.6834271 1.3608340\n[15] 1.2579906 2.3602768 1.1977742 4.2861974 1.8556640 2.1505993\n\nplot(survfit(Surv(times) ~ 1), xlab = 't', ylab = 'S')"
   },
   {
     "objectID": "posts/2022-10-25-simulate-time-to-event-data/index.html#more-sophisticated-solution-using-the-coxed-package",
@@ -418,6 +439,13 @@
     "title": "Self-study: Deep Learning by Goodfellow et al.",
     "section": "General statistics",
     "text": "General statistics\n\nLaw of total probability\n\\(B_n\\): partition of entire sample space \\(\\rightarrow \\sum p(B_n) = 1\\) \\[\nP(A) = \\sum_n P(A \\cap B_n)\n\\]\n\n\nStatistical independence\n\\[\np(A|B) = p(A)\n\\]\n\n\nConditional probability\n\\[\nP(A | B) = \\frac{A \\cap B}{P(B)}\n\\]\n\n\nBayes` theorem\n\\[\n\\begin{align}\n\\frac{P(A|B)}{P(B|A)} &= \\frac{P(A)}{P(B)} \\\\\nP(A|B) \\cdot P(B) &= P(B|A) \\cdot P(A)\n\\end{align}\n\\]"
+  },
+  {
+    "objectID": "posts/2023_02_21-manual-colors-in-ggplot2/index.html",
+    "href": "posts/2023_02_21-manual-colors-in-ggplot2/index.html",
+    "title": "Manual colors in ggplot2",
+    "section": "",
+    "text": "After several instances of “relearning” how to use custom colour palettes in R, I have written this post in order to save some time when I want to use custom colours the next time.\n\nlibrary(ggplot2)\niris |> ggplot(aes(Sepal.Length, Sepal.Width, colour = Species)) + \n  geom_point(size = 3) +\n  scale_colour_manual(values = c('lightgray', 'blue', 'black'), \n                      aesthetics = c('colour', 'fill'))"
   },
   {
     "objectID": "posts/2022-09-08-chess-ressources/index.html",
@@ -522,7 +550,7 @@
     "href": "index.html",
     "title": "Blog posts",
     "section": "",
-    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\nMinimal traffic jam model\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nMay 6, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nLongtermism\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nMay 6, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nInteresting R packages\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nMar 17, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nOfficial python tutorial\n\n\n\n\n\n\n\nSelf-study\n\n\n\n\n\n\n\n\n\n\n\nMar 17, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nCoursera Deep Learning Specialization\n\n\n\n\n\n\n\nSelf-study\n\n\n\n\n\n\n\n\n\n\n\nMar 17, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nSelf-study: Deep Learning by Goodfellow et al.\n\n\n\n\n\n\n\nSelf-study\n\n\n\n\n\n\n\n\n\n\n\nMar 17, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nSelf-study: McElreath - Statistical Rethinking\n\n\n\n\n\n\n\nSelf-study\n\n\n\n\n\n\n\n\n\n\n\nMar 17, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nHow bad are bananas\n\n\n\n\n\n\n\nSustainibility\n\n\n\n\n\n\n\n\n\n\n\nFeb 27, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nManual colors in ggplot2\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nFeb 21, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nStrange behavior in ggplot2\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nFeb 2, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nSIRS model dynamics\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nJan 19, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nSustainibility data\n\n\n\n\n\n\n\nSustainibility\n\n\n\n\n\n\n\n\n\n\n\nJan 10, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nContribution plots\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nJan 5, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nR interfaces to trial registries\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nOct 25, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nSimulate time to-event-data\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nOct 25, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nKids per person and carbon footprint\n\n\n\n\n\n\n\nSustainibility\n\n\n\n\n\n\n\n\n\n\n\nOct 19, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nModel meadow\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nOct 19, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nRetrieving and plotting COVID-19 data\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nOct 16, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nLeo’s project\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nOct 16, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nSIR-like model with deSolve in deterministic and stochastic version\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nOct 4, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nAntipsychotics\n\n\n\n\n\n\n\nPsychiatry\n\n\n\n\n\n\n\n\n\n\n\nSep 8, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nTimeline\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nSep 8, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nPsychopharmaca and time\n\n\n\n\n\n\n\nPsychiatry\n\n\n\n\n\n\n\n\n\n\n\nSep 8, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nChess ressources\n\n\n\n\n\n\n\nMishmash\n\n\n\n\n\n\n\n\n\n\n\nSep 8, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nHumidity\n\n\n\n\n\n\n\nSustainibility\n\n\n\n\n\n\n\n\n\n\n\nSep 8, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nSIR model\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nJul 19, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\nNo matching items"
+    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\nMinimal traffic jam model\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nMay 6, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nLongtermism\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nMay 6, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nInteresting R packages\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nMar 17, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nPython study notes\n\n\n\n\n\n\n\nSelf-study\n\n\n\n\n\n\n\n\n\n\n\nMar 17, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nCoursera Deep Learning Specialization\n\n\n\n\n\n\n\nSelf-study\n\n\n\n\n\n\n\n\n\n\n\nMar 17, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nSelf-study: Deep Learning by Goodfellow et al.\n\n\n\n\n\n\n\nSelf-study\n\n\n\n\n\n\n\n\n\n\n\nMar 17, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nSelf-study: McElreath - Statistical Rethinking\n\n\n\n\n\n\n\nSelf-study\n\n\n\n\n\n\n\n\n\n\n\nMar 17, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nHow bad are bananas\n\n\n\n\n\n\n\nSustainibility\n\n\n\n\n\n\n\n\n\n\n\nFeb 27, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nManual colors in ggplot2\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nFeb 21, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nStrange behavior in ggplot2\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nFeb 2, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nSIRS model dynamics\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nJan 19, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nSustainibility data\n\n\n\n\n\n\n\nSustainibility\n\n\n\n\n\n\n\n\n\n\n\nJan 10, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nContribution plots\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nJan 5, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nR interfaces to trial registries\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nOct 25, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nSimulate time to-event-data\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nOct 25, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nKids per person and carbon footprint\n\n\n\n\n\n\n\nSustainibility\n\n\n\n\n\n\n\n\n\n\n\nOct 19, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nModel meadow\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nOct 19, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nRetrieving and plotting COVID-19 data\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nOct 16, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nLeo’s project\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nOct 16, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nSIR-like model with deSolve in deterministic and stochastic version\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nOct 4, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nAntipsychotics\n\n\n\n\n\n\n\nPsychiatry\n\n\n\n\n\n\n\n\n\n\n\nSep 8, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nTimeline\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nSep 8, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nPsychopharmaca and time\n\n\n\n\n\n\n\nPsychiatry\n\n\n\n\n\n\n\n\n\n\n\nSep 8, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nChess ressources\n\n\n\n\n\n\n\nMishmash\n\n\n\n\n\n\n\n\n\n\n\nSep 8, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nHumidity\n\n\n\n\n\n\n\nSustainibility\n\n\n\n\n\n\n\n\n\n\n\nSep 8, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n\n\nSIR model\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nJul 19, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "about.html",

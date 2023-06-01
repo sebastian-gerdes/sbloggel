@@ -72,13 +72,122 @@
 
 
 
+<section id="short-notes-about-r-packages" class="level2">
+<h2 class="anchored" data-anchor-id="short-notes-about-r-packages">Short notes about R packages</h2>
 <ul>
 <li>Flow charts in R: <a href="https://nrennie.rbind.io/blog/introducing-ggflowchart/">ggflowchart</a></li>
 <li>Web scraping: <a href="https://nrennie.rbind.io/blog/web-scraping-rvest-london-marathon/">rvest</a></li>
 <li>Spatial data / maps: <a href="https://nrennie.rbind.io/blog/2022-12-17-r-packages-for-visualising-spatial-data/">Recommendations from Nicola Rennie’s blog</a></li>
 </ul>
+</section>
+<section id="r-packages-built-from-a-single-.rmd-file" class="level2">
+<h2 class="anchored" data-anchor-id="r-packages-built-from-a-single-.rmd-file">R packages built from a single *.RMD file</h2>
+<p><a href="https://github.com/ThinkR-open/fusen">Link</a></p>
+</section>
+<section id="interfaces-to-computer-algebra-systems-in-r" class="level2">
+<h2 class="anchored" data-anchor-id="interfaces-to-computer-algebra-systems-in-r">Interfaces to computer algebra systems in R</h2>
+<p>Herre, I have collected a few resources in the field of computer algebra systems that have an interface to <code>R</code>.</p>
+<section id="general" class="level3">
+<h3 class="anchored" data-anchor-id="general">General</h3>
+<ul>
+<li>CRAN task view: Section “Multi-Precision Arithmetic and Symbolic Mathematics” on <a href="https://cran.r-hub.io/web/views/NumericalMathematics.html">this</a> site</li>
+<li><a href="https://blog.ephorie.de/doing-maths-symbolically-r-as-a-computer-algebra-system-cas">Blog article</a></li>
+</ul>
+</section>
+<section id="maxima" class="level3">
+<h3 class="anchored" data-anchor-id="maxima">Maxima</h3>
+<ul>
+<li><a href="https://rcst.github.io/rim/">Rim package</a>
+<ul>
+<li>extended search path according to <a href="https://techpp.com/2021/09/08/set-path-variable-in-macos-guide/">these</a> instructions</li>
+<li>posted issue on rim package github site because it is still not working <a href="https://github.com/rcst/rim/issues/30">here</a></li>
+<li>edited /etc/launch.d</li>
+<li>added shell script /usr/bin/maxima</li>
+</ul></li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stderr">
+<pre><code>Maxima successfully registered as knitr engine!</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(%o1) 2</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode maxima code-with-copy"><code class="sourceCode maxima"><span id="cb4-1">(%<span class="cn" style="color: #8f5902;">i1</span>) <span class="cn" style="color: #8f5902;">lambda_S</span>: <span class="fu" style="color: #4758AB;">beta</span> * <span class="fu" style="color: #4758AB;">psi</span>;</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(%o1) beta*psi</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode maxima code-with-copy"><code class="sourceCode maxima"><span id="cb6-1">(%<span class="cn" style="color: #8f5902;">i2</span>) <span class="cn" style="color: #8f5902;">Lambda_S</span>: <span class="fu" style="color: #4758AB;">integrate</span>(<span class="cn" style="color: #8f5902;">lambda_S</span>, <span class="cn" style="color: #8f5902;">t</span>);</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(%o2) beta*psi*t</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode maxima code-with-copy"><code class="sourceCode maxima"><span id="cb8-1">(%<span class="cn" style="color: #8f5902;">i3</span>) <span class="cn" style="color: #8f5902;">S_S</span>: <span class="fu" style="color: #4758AB;">exp</span>(-<span class="cn" style="color: #8f5902;">Lambda_S</span>);</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(%o3) %e^-(beta*psi*t)</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode maxima code-with-copy"><code class="sourceCode maxima"><span id="cb10-1">(%<span class="cn" style="color: #8f5902;">i4</span>) <span class="fu" style="color: #4758AB;">assume</span>(<span class="fu" style="color: #4758AB;">beta</span> &gt; <span class="dv" style="color: #AD0000;">0</span>);</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(%o4) [beta &gt; 0]</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode maxima code-with-copy"><code class="sourceCode maxima"><span id="cb12-1">(%<span class="cn" style="color: #8f5902;">i5</span>) <span class="fu" style="color: #4758AB;">assume</span>(<span class="fu" style="color: #4758AB;">psi</span> &gt; <span class="dv" style="color: #AD0000;">0</span>);</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(%o5) [psi &gt; 0]</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode maxima code-with-copy"><code class="sourceCode maxima"><span id="cb14-1">(%<span class="cn" style="color: #8f5902;">i6</span>) <span class="cn" style="color: #8f5902;">E_S</span>: <span class="fu" style="color: #4758AB;">integrate</span>(<span class="cn" style="color: #8f5902;">S_S</span>, <span class="cn" style="color: #8f5902;">t</span>, <span class="dv" style="color: #AD0000;">0</span>, <span class="va" style="color: #111111;">inf</span>);</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(%o6) 1/(beta*psi)</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode maxima code-with-copy"><code class="sourceCode maxima"><span id="cb16-1">(%<span class="cn" style="color: #8f5902;">i7</span>) <span class="fu" style="color: #4758AB;">tex</span>(<span class="do" style="color: #5E5E5E;
+font-style: italic;">''</span><span class="cn" style="color: #8f5902;">E_S</span>);</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(%o7) false</code></pre>
+</div>
+</div>
+</section>
+<section id="ryacas" class="level3">
+<h3 class="anchored" data-anchor-id="ryacas">Ryacas</h3>
+<div class="cell">
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'Ryacas'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:stats':
+
+    integrate</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:base':
+
+    %*%, det, diag, diag&lt;-, lower.tri, upper.tri</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "2*x^3-17*x^2+54*x-54"</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "x ^{2} - 1"</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="flowcharts" class="level2">
+<h2 class="anchored" data-anchor-id="flowcharts">Flowcharts</h2>
+<p>Source: https://cran.r-project.org/web/packages/Gmisc/vignettes/Grid-based_flowcharts.html</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="https://sbloggel.netlify.app/posts/2023-03-17-interesting-r-packages/index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
 
 
+</section>
 
  ]]></description>
   <category>R</category>
@@ -86,19 +195,22 @@
   <pubDate>Thu, 16 Mar 2023 23:00:00 GMT</pubDate>
 </item>
 <item>
-  <title>Official python tutorial</title>
+  <title>Python study notes</title>
   <dc:creator>Sebastian Gerdes</dc:creator>
   <link>https://sbloggel.netlify.app/posts/2023-03-17-official-python-tutorial/index.html</link>
   <description><![CDATA[ 
 
 
 
-<p>This document contains my study notes on the official <a href="https://docs.python.org/3/tutorial/index.html">python tutorial</a>.</p>
+<section id="official-python-tutorial" class="level2">
+<h2 class="anchored" data-anchor-id="official-python-tutorial">Official python tutorial</h2>
+<p>This section contains my study notes on the official <a href="https://docs.python.org/3/tutorial/index.html">python tutorial</a>.</p>
 <p><a href="https://peps.python.org/pep-0008/#introduction">Here</a> is a link to the PEP 8 style guide.</p>
 <p>Also it might be worthwile to look at the <a href="https://docs.python.org/3/reference/index.html#reference-index">official language definition</a>.</p>
+</section>
 <section id="using-the-python-interpreter" class="level2">
 <h2 class="anchored" data-anchor-id="using-the-python-interpreter">2. Using the <a href="https://docs.python.org/3/tutorial/interpreter.html">Python Interpreter</a></h2>
-<div class="cell" data-execution_count="1">
+<div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>Be careful not to fall off!</code></pre>
 </div>
@@ -107,12 +219,33 @@
 <section id="an-informal-introduction-to-python" class="level2">
 <h2 class="anchored" data-anchor-id="an-informal-introduction-to-python">3. An Informal Introduction to Python</h2>
 <p><a href="https://docs.python.org/3/tutorial/introduction.html">Source</a></p>
-<div class="cell" data-execution_count="2">
-<div class="cell-output cell-output-display" data-execution_count="2">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>1</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>25</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[9, 16, 25]</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1, 4, 9, 16, 25]</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1, 4, 9, 16, 25, 36, 49, 64, 81, 100]</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>64</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1, 8, 27, 64, 125]</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
 <pre><code>[1, 8, 27, 64, 125, 216, 343]</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="3">
+<div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>0
 1
@@ -121,6 +254,22 @@
 3
 5
 8</code></pre>
+</div>
+</div>
+</section>
+<section id="seaborn" class="level2">
+<h2 class="anchored" data-anchor-id="seaborn">Seaborn</h2>
+<ul>
+<li><a href="https://seaborn.pydata.org/examples/index.html">Gallery</a></li>
+</ul>
+<div class="cell" data-fig.heihgt="10">
+<div class="cell-output-display">
+<p><img src="https://sbloggel.netlify.app/posts/2023-03-17-official-python-tutorial/index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="544"></p>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="https://sbloggel.netlify.app/posts/2023-03-17-official-python-tutorial/index_files/figure-html/unnamed-chunk-5-3.png" class="img-fluid" width="480"></p>
 </div>
 </div>
 
@@ -649,7 +798,7 @@ Berners-Lee, Mike. 2020. <em>How <span>Bad</span> <span>Are</span> <span>Bananas
 <item>
   <title>Manual colors in ggplot2</title>
   <dc:creator>Sebastian Gerdes</dc:creator>
-  <link>https://sbloggel.netlify.app/posts/2023_02_21-manual_colors_in_ggplot2/index.html</link>
+  <link>https://sbloggel.netlify.app/posts/2023_02_21-manual-colors-in-ggplot2/index.html</link>
   <description><![CDATA[ 
 
 
@@ -662,7 +811,7 @@ Berners-Lee, Mike. 2020. <em>How <span>Bad</span> <span>Are</span> <span>Bananas
 <span id="cb1-4">  <span class="fu" style="color: #4758AB;">scale_colour_manual</span>(<span class="at" style="color: #657422;">values =</span> <span class="fu" style="color: #4758AB;">c</span>(<span class="st" style="color: #20794D;">'lightgray'</span>, <span class="st" style="color: #20794D;">'blue'</span>, <span class="st" style="color: #20794D;">'black'</span>), </span>
 <span id="cb1-5">                      <span class="at" style="color: #657422;">aesthetics =</span> <span class="fu" style="color: #4758AB;">c</span>(<span class="st" style="color: #20794D;">'colour'</span>, <span class="st" style="color: #20794D;">'fill'</span>))</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2023_02_21-manual_colors_in_ggplot2/index_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="672"></p>
+<p><img src="https://sbloggel.netlify.app/posts/2023_02_21-manual-colors-in-ggplot2/index_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 
@@ -670,7 +819,7 @@ Berners-Lee, Mike. 2020. <em>How <span>Bad</span> <span>Are</span> <span>Bananas
 
  ]]></description>
   <category>R</category>
-  <guid>https://sbloggel.netlify.app/posts/2023_02_21-manual_colors_in_ggplot2/index.html</guid>
+  <guid>https://sbloggel.netlify.app/posts/2023_02_21-manual-colors-in-ggplot2/index.html</guid>
   <pubDate>Mon, 20 Feb 2023 23:00:00 GMT</pubDate>
 </item>
 <item>
@@ -1564,8 +1713,8 @@ accurate nanosecond times to avoid potential integer overflows</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Unit: milliseconds
-                    expr      min       lq     mean   median       uq   max
- quantile_function(1:10) 10.16788 10.62542 11.70089 10.76422 13.39013 17.73
+                    expr      min       lq     mean   median       uq      max
+ quantile_function(1:10) 9.994488 10.30584 11.27298 10.64501 12.41992 14.83216
  neval
    100</code></pre>
 </div>

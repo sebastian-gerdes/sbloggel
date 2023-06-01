@@ -1,13 +1,17 @@
 ---
-title: 'Official python tutorial'
+title: 'Python study notes'
 author: Sebastian Gerdes
 date: '2023-03-17'
 categories:
   - Self-study
 execute: 
   echo: false
+  cache: false
+engine: knitr
 ---
-This document contains my study notes on the official [python tutorial](https://docs.python.org/3/tutorial/index.html).
+
+## Official python tutorial
+This section contains my study notes on the official [python tutorial](https://docs.python.org/3/tutorial/index.html).
 
 [Here](https://peps.python.org/pep-0008/#introduction) is a link to the PEP 8 style guide.
 
@@ -54,3 +58,60 @@ while a < 10:
     a, b = b, a+b
 ```
 
+## Seaborn
+* [Gallery](https://seaborn.pydata.org/examples/index.html)
+```{python}
+#| fig-width: 5
+#| fig-heihgt: 10
+
+
+import seaborn as sns
+import matplotlib as mp
+import matplotlib.pyplot as plt
+
+# Apply the default theme
+sns.set_theme()
+
+# Load an example dataset
+
+
+dots = sns.load_dataset("dots")
+
+sns.set(rc={'figure.figsize':(10, 3)})
+
+sns.relplot(
+  data=dots, kind="line",
+  x="time", y="firing_rate", col="align", # style = "choice",
+  hue="choice", size="coherence", 
+  facet_kws=dict(sharex=False)
+  )
+#mp.pyplot.show()
+
+```
+
+
+```{python}
+#| fig-width: 5
+#| fig-height: 5
+# sns.set_theme(style="whitegrid")
+
+x = (5,5)
+
+sns.set(rc={'figure.figsize': x})
+
+
+# Load the example diamonds dataset
+diamonds = sns.load_dataset("diamonds")
+
+# Draw a scatter plot while assigning point colors and sizes to different
+# variables in the dataset
+f, ax = plt.subplots(figsize=x)
+sns.despine(f, left=True, bottom=True)
+clarity_ranking = ["I1", "SI2", "SI1", "VS2", "VS1", "VVS2", "VVS1", "IF"]
+sns.scatterplot(x="carat", y="price",
+                hue="clarity", size="depth",
+                palette="ch:r=-.2,d=.3_r",
+                hue_order=clarity_ranking,
+                sizes=(1, 8), linewidth=0,
+                data=diamonds, ax=ax)
+```
