@@ -10,7 +10,268 @@
 <atom:link href="https://sbloggel.netlify.app/index.xml" rel="self" type="application/rss+xml"/>
 <description>Seb&#39;s private blog about statistics and other topics</description>
 <generator>quarto-1.2.475</generator>
-<lastBuildDate>Fri, 05 May 2023 22:00:00 GMT</lastBuildDate>
+<lastBuildDate>Wed, 07 Jun 2023 22:00:00 GMT</lastBuildDate>
+<item>
+  <title>Specifying mixed effects in lme4</title>
+  <dc:creator>Sebastian Gerdes</dc:creator>
+  <link>https://sbloggel.netlify.app/posts/2023-06-08-specifying-mixed-effects-models/index.html</link>
+  <description><![CDATA[ 
+
+
+
+<section id="description-of-trial" class="level2">
+<h2 class="anchored" data-anchor-id="description-of-trial">Description of trial</h2>
+<ul>
+<li><img src="https://latex.codecogs.com/png.latex?n"> individuals (<img src="https://latex.codecogs.com/png.latex?i%20=%201,%202,%20..,%20n">) are measured <img src="https://latex.codecogs.com/png.latex?m"> times (<img src="https://latex.codecogs.com/png.latex?j%20=%201,%202,%20...,%20m">) pre-intervention (denoted <img src="https://latex.codecogs.com/png.latex?y_%7Bij%7D%5E%7Bpre%7D">) and post-intervention (denoted <img src="https://latex.codecogs.com/png.latex?y_%7Bij%7D%5E%7Bpost%7D">)</li>
+</ul>
+</section>
+<section id="underlying-probability-model" class="level2">
+<h2 class="anchored" data-anchor-id="underlying-probability-model">Underlying probability model</h2>
+<section id="notation" class="level3">
+<h3 class="anchored" data-anchor-id="notation">Notation</h3>
+<ul>
+<li><img src="https://latex.codecogs.com/png.latex?%5Cbeta_0"> fixed effect intercept</li>
+<li><img src="https://latex.codecogs.com/png.latex?%5Cbeta_1"> fixed effect of intervention</li>
+<li><img src="https://latex.codecogs.com/png.latex?%5Cepsilon%20%5Csim%20%5Cmathcal%7BN%7D(%5Cmu%20=%200,%20sd%20=%20%5Csigma_0)">, for reasons of better legibility sub- and superscript are omitted here</li>
+<li><img src="https://latex.codecogs.com/png.latex?b_%7B1,i%7D"> random effect baseline, <img src="https://latex.codecogs.com/png.latex?b_%7B1,i%7D%20%5Csim%20%5Cmathcal%7BN%7D(%5Cmu%20=%200,%20sd%20=%20%5Csigma_1)"></li>
+<li><img src="https://latex.codecogs.com/png.latex?b_%7B2,i%7D"> random effect of intervention, <img src="https://latex.codecogs.com/png.latex?b_%7B2,i%7D%20%5Csim%20%5Cmathcal%7BN%7D(%5Cmu%20=%200,%20sd%20=%20%5Csigma_2)"></li>
+</ul>
+</section>
+<section id="parameters-of-the-model-to-be-estimated" class="level3">
+<h3 class="anchored" data-anchor-id="parameters-of-the-model-to-be-estimated">Parameters of the model to be estimated</h3>
+<ul>
+<li><img src="https://latex.codecogs.com/png.latex?%5Cbeta_0">, <img src="https://latex.codecogs.com/png.latex?%5Cbeta_1">, <img src="https://latex.codecogs.com/png.latex?%5Csigma_0">, <img src="https://latex.codecogs.com/png.latex?%5Csigma_1"> and <img src="https://latex.codecogs.com/png.latex?%5Csigma_2"></li>
+</ul>
+</section>
+<section id="model-equations" class="level3">
+<h3 class="anchored" data-anchor-id="model-equations">Model equations</h3>
+<ul>
+<li>Measurement pre intervention: <img src="https://latex.codecogs.com/png.latex?%5Cbegin%7Balign%7D%0Ay_%7Bij%7D%5E%7Bpre%7D%20=%20%5Cbeta_0%20+%20b_i%20+%20%5Cepsilon_%7Bij%7D%5E%7Bpre%7D%0A%5Cend%7Balign%7D"></li>
+<li>Measurement post-intervention: <img src="https://latex.codecogs.com/png.latex?%5Cbegin%7Balign%7D%0Ay_%7Bij%7D%5E%7Bpost%7D%20=%20%5Cbeta_0%20+%20%5Cbeta_1%20+%20b_%7B1,i%7D%20+%20b_%7B2,i%7D%20+%20%5Cepsilon_%7Bij%7D%5E%7Bpost%7D%0A%5Cend%7Balign%7D"></li>
+</ul>
+</section>
+<section id="simulate-data" class="level3">
+<h3 class="anchored" data-anchor-id="simulate-data">Simulate data</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="co" style="color: #5E5E5E;"># size of sample:</span></span>
+<span id="cb1-2">n <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="dv" style="color: #AD0000;">20</span></span>
+<span id="cb1-3">m <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="dv" style="color: #AD0000;">5</span></span>
+<span id="cb1-4"></span>
+<span id="cb1-5"><span class="co" style="color: #5E5E5E;"># model parameters:</span></span>
+<span id="cb1-6">beta_0 <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="dv" style="color: #AD0000;">0</span></span>
+<span id="cb1-7">beta_1 <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="dv" style="color: #AD0000;">1</span></span>
+<span id="cb1-8">sigma_0 <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="dv" style="color: #AD0000;">2</span></span>
+<span id="cb1-9">sigma_1 <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="dv" style="color: #AD0000;">1</span></span>
+<span id="cb1-10">sigma_2 <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="dv" style="color: #AD0000;">5</span></span>
+<span id="cb1-11"></span>
+<span id="cb1-12"><span class="co" style="color: #5E5E5E;"># construct data:</span></span>
+<span id="cb1-13">patients <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">tibble</span>(<span class="at" style="color: #657422;">patient_id =</span> <span class="dv" style="color: #AD0000;">1</span><span class="sc" style="color: #5E5E5E;">:</span>n, </span>
+<span id="cb1-14">                   <span class="at" style="color: #657422;">patient_re =</span> <span class="fu" style="color: #4758AB;">rnorm</span>(n, <span class="dv" style="color: #AD0000;">0</span>, sigma_1),</span>
+<span id="cb1-15">                   <span class="at" style="color: #657422;">treatment_re =</span> <span class="fu" style="color: #4758AB;">rnorm</span>(n, <span class="dv" style="color: #AD0000;">0</span>, sigma_2))</span>
+<span id="cb1-16"></span>
+<span id="cb1-17">dat <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">expand_grid</span>(patients,</span>
+<span id="cb1-18">                   <span class="at" style="color: #657422;">replicate =</span> <span class="dv" style="color: #AD0000;">1</span><span class="sc" style="color: #5E5E5E;">:</span>m,</span>
+<span id="cb1-19">                   <span class="at" style="color: #657422;">timepoint =</span> <span class="fu" style="color: #4758AB;">c</span>(<span class="st" style="color: #20794D;">'pre'</span>, <span class="st" style="color: #20794D;">'post'</span>))</span>
+<span id="cb1-20"></span>
+<span id="cb1-21">dat <span class="ot" style="color: #003B4F;">&lt;-</span> dat <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb1-22">  <span class="fu" style="color: #4758AB;">mutate</span>(<span class="at" style="color: #657422;">y =</span> beta_0 <span class="sc" style="color: #5E5E5E;">+</span> </span>
+<span id="cb1-23">           patient_re <span class="sc" style="color: #5E5E5E;">+</span> </span>
+<span id="cb1-24">           <span class="fu" style="color: #4758AB;">ifelse</span>(timepoint <span class="sc" style="color: #5E5E5E;">==</span> <span class="st" style="color: #20794D;">'post'</span>, treatment_re <span class="sc" style="color: #5E5E5E;">+</span> beta_1, <span class="dv" style="color: #AD0000;">0</span>) <span class="sc" style="color: #5E5E5E;">+</span> </span>
+<span id="cb1-25">           <span class="fu" style="color: #4758AB;">rnorm</span>(n <span class="sc" style="color: #5E5E5E;">*</span> m <span class="sc" style="color: #5E5E5E;">*</span> <span class="dv" style="color: #AD0000;">2</span>, <span class="dv" style="color: #AD0000;">0</span>, sigma_0))</span>
+<span id="cb1-26"></span>
+<span id="cb1-27"><span class="co" style="color: #5E5E5E;"># make timepoint a factor to get order in plots right:</span></span>
+<span id="cb1-28">dat <span class="ot" style="color: #003B4F;">&lt;-</span> dat <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb1-29">  <span class="fu" style="color: #4758AB;">mutate</span>(<span class="at" style="color: #657422;">timepoint =</span> <span class="fu" style="color: #4758AB;">factor</span>(timepoint, <span class="at" style="color: #657422;">levels =</span> <span class="fu" style="color: #4758AB;">c</span>(<span class="st" style="color: #20794D;">'pre'</span>, <span class="st" style="color: #20794D;">'post'</span>)))</span></code></pre></div>
+</div>
+</section>
+<section id="tabular-characteristics" class="level3">
+<h3 class="anchored" data-anchor-id="tabular-characteristics">Tabular characteristics</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1">dat <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb2-2">  <span class="fu" style="color: #4758AB;">group_by</span>(timepoint) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb2-3">  <span class="fu" style="color: #4758AB;">summarize</span>(<span class="at" style="color: #657422;">mean =</span> <span class="fu" style="color: #4758AB;">mean</span>(y)) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
+<span id="cb2-4">  <span class="fu" style="color: #4758AB;">kable</span>()</span></code></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped">
+<thead>
+<tr class="header">
+<th style="text-align: left;">timepoint</th>
+<th style="text-align: right;">mean</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">pre</td>
+<td style="text-align: right;">0.1868025</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">post</td>
+<td style="text-align: right;">1.1930561</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="visualize-data" class="level3">
+<h3 class="anchored" data-anchor-id="visualize-data">Visualize data</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="cf" style="color: #003B4F;">if</span>(n <span class="sc" style="color: #5E5E5E;">&lt;</span> <span class="fl" style="color: #AD0000;">1e2</span>) {</span>
+<span id="cb3-2">  dat <span class="sc" style="color: #5E5E5E;">|&gt;</span></span>
+<span id="cb3-3">    <span class="fu" style="color: #4758AB;">ggplot</span>(<span class="fu" style="color: #4758AB;">aes</span>(timepoint, y, <span class="at" style="color: #657422;">col =</span> <span class="fu" style="color: #4758AB;">factor</span>(patient_id))) <span class="sc" style="color: #5E5E5E;">+</span></span>
+<span id="cb3-4">    <span class="fu" style="color: #4758AB;">geom_jitter</span>(<span class="at" style="color: #657422;">width =</span> <span class="fl" style="color: #AD0000;">0.1</span>, <span class="at" style="color: #657422;">height =</span> <span class="dv" style="color: #AD0000;">0</span>) <span class="sc" style="color: #5E5E5E;">+</span> <span class="fu" style="color: #4758AB;">labs</span>(<span class="at" style="color: #657422;">color =</span> <span class="st" style="color: #20794D;">'Patient ID'</span>)</span>
+<span id="cb3-5">}</span></code></pre></div>
+<div class="cell-output-display">
+<p><img src="https://sbloggel.netlify.app/posts/2023-06-08-specifying-mixed-effects-models/index_files/figure-html/visualize-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="fit-model" class="level3">
+<h3 class="anchored" data-anchor-id="fit-model">Fit model</h3>
+<section id="linear-model" class="level4">
+<h4 class="anchored" data-anchor-id="linear-model">Linear model</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><span class="co" style="color: #5E5E5E;"># linear model to get beta_1 and beta_2 </span></span>
+<span id="cb4-2">(fm_lm <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">lm</span>(y <span class="sc" style="color: #5E5E5E;">~</span> timepoint, <span class="at" style="color: #657422;">data =</span> dat)) <span class="sc" style="color: #5E5E5E;">|&gt;</span> <span class="fu" style="color: #4758AB;">summary</span>()</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = y ~ timepoint, data = dat)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-10.4127  -1.5931   0.0072   2.0727  10.4653 
+
+Coefficients:
+              Estimate Std. Error t value Pr(&gt;|t|)  
+(Intercept)     0.1868     0.3489   0.535   0.5930  
+timepointpost   1.0063     0.4934   2.039   0.0427 *
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 3.489 on 198 degrees of freedom
+Multiple R-squared:  0.02057,   Adjusted R-squared:  0.01563 
+F-statistic: 4.159 on 1 and 198 DF,  p-value: 0.04274</code></pre>
+</div>
+</div>
+</section>
+<section id="mixed-effects-model-with-correlation-between-intercept-and-timepointpost" class="level4">
+<h4 class="anchored" data-anchor-id="mixed-effects-model-with-correlation-between-intercept-and-timepointpost">Mixed effects model <strong>with</strong> correlation between <code>(Intercept)</code> and <code>timepointpost</code></h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1">(fm_lmer <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">lmer</span>(y <span class="sc" style="color: #5E5E5E;">~</span> timepoint <span class="sc" style="color: #5E5E5E;">+</span> (timepoint <span class="sc" style="color: #5E5E5E;">|</span> patient_id), <span class="at" style="color: #657422;">data =</span> dat))</span></code></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>boundary (singular) fit: see help('isSingular')</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Linear mixed model fit by REML ['lmerMod']
+Formula: y ~ timepoint + (timepoint | patient_id)
+   Data: dat
+REML criterion at convergence: 888.5308
+Random effects:
+ Groups     Name          Std.Dev. Corr 
+ patient_id (Intercept)   0.3268        
+            timepointpost 4.5307   -1.00
+ Residual                 1.9086        
+Number of obs: 200, groups:  patient_id, 20
+Fixed Effects:
+  (Intercept)  timepointpost  
+       0.1868         1.0063  
+optimizer (nloptwrap) convergence code: 0 (OK) ; 0 optimizer warnings; 1 lme4 warnings </code></pre>
+</div>
+</div>
+</section>
+<section id="mixed-effects-model-without-correlation-between-intercept-and-timepointpost" class="level4">
+<h4 class="anchored" data-anchor-id="mixed-effects-model-without-correlation-between-intercept-and-timepointpost">Mixed effects model <strong>without</strong> correlation between <code>(Intercept)</code> and <code>timepointpost</code></h4>
+<ul>
+<li>The specifications I tried seem almost right, but not quite:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1">(fm_lmer <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">lmer</span>(y <span class="sc" style="color: #5E5E5E;">~</span> timepoint <span class="sc" style="color: #5E5E5E;">+</span> (timepoint <span class="sc" style="color: #5E5E5E;">-</span> <span class="dv" style="color: #AD0000;">1</span> <span class="sc" style="color: #5E5E5E;">||</span> patient_id), <span class="at" style="color: #657422;">data =</span> dat))</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Linear mixed model fit by REML ['lmerMod']
+Formula: y ~ timepoint + ((0 + timepoint | patient_id))
+   Data: dat
+REML criterion at convergence: 888.5308
+Random effects:
+ Groups     Name          Std.Dev. Corr 
+ patient_id timepointpre  0.3268        
+            timepointpost 4.2038   -1.00
+ Residual                 1.9086        
+Number of obs: 200, groups:  patient_id, 20
+Fixed Effects:
+  (Intercept)  timepointpost  
+       0.1868         1.0063  </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1">(fm_lmer <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">lmer</span>(y <span class="sc" style="color: #5E5E5E;">~</span> timepoint <span class="sc" style="color: #5E5E5E;">+</span> (timepoint <span class="sc" style="color: #5E5E5E;">-</span> <span class="dv" style="color: #AD0000;">1</span> <span class="sc" style="color: #5E5E5E;">|</span> patient_id), <span class="at" style="color: #657422;">data =</span> dat))</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Linear mixed model fit by REML ['lmerMod']
+Formula: y ~ timepoint + (timepoint - 1 | patient_id)
+   Data: dat
+REML criterion at convergence: 888.5308
+Random effects:
+ Groups     Name          Std.Dev. Corr 
+ patient_id timepointpre  0.3268        
+            timepointpost 4.2038   -1.00
+ Residual                 1.9086        
+Number of obs: 200, groups:  patient_id, 20
+Fixed Effects:
+  (Intercept)  timepointpost  
+       0.1868         1.0063  </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1">(fm_lmer <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">lmer</span>(y <span class="sc" style="color: #5E5E5E;">~</span> timepoint <span class="sc" style="color: #5E5E5E;">+</span> (<span class="dv" style="color: #AD0000;">1</span> <span class="sc" style="color: #5E5E5E;">|</span> patient_id) <span class="sc" style="color: #5E5E5E;">+</span> (timepoint <span class="sc" style="color: #5E5E5E;">-</span> <span class="dv" style="color: #AD0000;">1</span> <span class="sc" style="color: #5E5E5E;">|</span> patient_id), <span class="at" style="color: #657422;">data =</span> dat))</span></code></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>boundary (singular) fit: see help('isSingular')</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Linear mixed model fit by REML ['lmerMod']
+Formula: y ~ timepoint + (1 | patient_id) + (timepoint - 1 | patient_id)
+   Data: dat
+REML criterion at convergence: 888.5308
+Random effects:
+ Groups       Name          Std.Dev. Corr 
+ patient_id   (Intercept)   0.0000        
+ patient_id.1 timepointpre  0.3268        
+              timepointpost 4.2039   -1.00
+ Residual                   1.9086        
+Number of obs: 200, groups:  patient_id, 20
+Fixed Effects:
+  (Intercept)  timepointpost  
+       0.1868         1.0063  
+optimizer (nloptwrap) convergence code: 0 (OK) ; 0 optimizer warnings; 1 lme4 warnings </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1">(fm_lmer <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">lmer</span>(y <span class="sc" style="color: #5E5E5E;">~</span> timepoint <span class="sc" style="color: #5E5E5E;">+</span> (<span class="dv" style="color: #AD0000;">1</span> <span class="sc" style="color: #5E5E5E;">|</span> patient_id) <span class="sc" style="color: #5E5E5E;">+</span> (timepoint <span class="sc" style="color: #5E5E5E;">+</span> <span class="dv" style="color: #AD0000;">0</span> <span class="sc" style="color: #5E5E5E;">|</span> patient_id), <span class="at" style="color: #657422;">data =</span> dat))</span></code></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>boundary (singular) fit: see help('isSingular')</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Linear mixed model fit by REML ['lmerMod']
+Formula: y ~ timepoint + (1 | patient_id) + (timepoint + 0 | patient_id)
+   Data: dat
+REML criterion at convergence: 888.5308
+Random effects:
+ Groups       Name          Std.Dev. Corr 
+ patient_id   (Intercept)   0.0000        
+ patient_id.1 timepointpre  0.3268        
+              timepointpost 4.2039   -1.00
+ Residual                   1.9086        
+Number of obs: 200, groups:  patient_id, 20
+Fixed Effects:
+  (Intercept)  timepointpost  
+       0.1868         1.0063  
+optimizer (nloptwrap) convergence code: 0 (OK) ; 0 optimizer warnings; 1 lme4 warnings </code></pre>
+</div>
+</div>
+
+
+</section>
+</section>
+</section>
+
+ ]]></description>
+  <category>R</category>
+  <guid>https://sbloggel.netlify.app/posts/2023-06-08-specifying-mixed-effects-models/index.html</guid>
+  <pubDate>Wed, 07 Jun 2023 22:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Minimal traffic jam model</title>
   <dc:creator>Sebastian Gerdes</dc:creator>
@@ -207,45 +468,68 @@ Attaching package: 'Ryacas'</code></pre>
 <p>This section contains my study notes on the official <a href="https://docs.python.org/3/tutorial/index.html">python tutorial</a>.</p>
 <p><a href="https://peps.python.org/pep-0008/#introduction">Here</a> is a link to the PEP 8 style guide.</p>
 <p>Also it might be worthwile to look at the <a href="https://docs.python.org/3/reference/index.html#reference-index">official language definition</a>.</p>
-</section>
-<section id="using-the-python-interpreter" class="level2">
-<h2 class="anchored" data-anchor-id="using-the-python-interpreter">2. Using the <a href="https://docs.python.org/3/tutorial/interpreter.html">Python Interpreter</a></h2>
+<section id="using-the-python-interpreter" class="level3">
+<h3 class="anchored" data-anchor-id="using-the-python-interpreter">2. Using the <a href="https://docs.python.org/3/tutorial/interpreter.html">Python Interpreter</a></h3>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1">the_world_is_flat <span class="op" style="color: #5E5E5E;">=</span> <span class="va" style="color: #111111;">True</span></span>
+<span id="cb1-2"><span class="cf" style="color: #003B4F;">if</span> the_world_is_flat:</span>
+<span id="cb1-3">  <span class="bu" style="color: null;">print</span>(<span class="st" style="color: #20794D;">"Be careful not to fall off!"</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Be careful not to fall off!</code></pre>
 </div>
 </div>
 </section>
-<section id="an-informal-introduction-to-python" class="level2">
-<h2 class="anchored" data-anchor-id="an-informal-introduction-to-python">3. An Informal Introduction to Python</h2>
+<section id="an-informal-introduction-to-python" class="level3">
+<h3 class="anchored" data-anchor-id="an-informal-introduction-to-python">3. An Informal Introduction to Python</h3>
 <p><a href="https://docs.python.org/3/tutorial/introduction.html">Source</a></p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">spam <span class="op" style="color: #5E5E5E;">=</span> <span class="dv" style="color: #AD0000;">1</span> </span>
+<span id="cb3-2">text <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"# This is not a comment because it's inside quotes."</span></span>
+<span id="cb3-3">squares <span class="op" style="color: #5E5E5E;">=</span> [<span class="dv" style="color: #AD0000;">1</span>, <span class="dv" style="color: #AD0000;">4</span>, <span class="dv" style="color: #AD0000;">9</span>, <span class="dv" style="color: #AD0000;">16</span>, <span class="dv" style="color: #AD0000;">25</span>]</span>
+<span id="cb3-4">squares[<span class="dv" style="color: #AD0000;">0</span>]</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>1</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">squares[<span class="op" style="color: #5E5E5E;">-</span><span class="dv" style="color: #AD0000;">1</span>]</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>25</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1">squares[<span class="op" style="color: #5E5E5E;">-</span><span class="dv" style="color: #AD0000;">3</span>:]</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[9, 16, 25]</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1">squares[:]</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1, 4, 9, 16, 25]</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1">squares <span class="op" style="color: #5E5E5E;">+</span> [<span class="dv" style="color: #AD0000;">36</span>, <span class="dv" style="color: #AD0000;">49</span>, <span class="dv" style="color: #AD0000;">64</span>, <span class="dv" style="color: #AD0000;">81</span>, <span class="dv" style="color: #AD0000;">100</span>]</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1, 4, 9, 16, 25, 36, 49, 64, 81, 100]</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1">cubes <span class="op" style="color: #5E5E5E;">=</span> [<span class="dv" style="color: #AD0000;">1</span>, <span class="dv" style="color: #AD0000;">8</span>, <span class="dv" style="color: #AD0000;">27</span>, <span class="dv" style="color: #AD0000;">65</span>, <span class="dv" style="color: #AD0000;">125</span>]  <span class="co" style="color: #5E5E5E;"># something's wrong here</span></span>
+<span id="cb13-2"><span class="dv" style="color: #AD0000;">4</span> <span class="op" style="color: #5E5E5E;">**</span> <span class="dv" style="color: #AD0000;">3</span>  <span class="co" style="color: #5E5E5E;"># the cube of 4 is 64, not 65!</span></span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>64</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1">cubes[<span class="dv" style="color: #AD0000;">3</span>] <span class="op" style="color: #5E5E5E;">=</span> <span class="dv" style="color: #AD0000;">64</span>  <span class="co" style="color: #5E5E5E;"># replace the wrong value</span></span>
+<span id="cb15-2">cubes</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1, 8, 27, 64, 125]</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb17" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1">cubes.append(<span class="dv" style="color: #AD0000;">216</span>)  <span class="co" style="color: #5E5E5E;"># add the cube of 6</span></span>
+<span id="cb17-2">cubes.append(<span class="dv" style="color: #AD0000;">7</span> <span class="op" style="color: #5E5E5E;">**</span> <span class="dv" style="color: #AD0000;">3</span>)  <span class="co" style="color: #5E5E5E;"># and the cube of 7</span></span>
+<span id="cb17-3">cubes</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1, 8, 27, 64, 125, 216, 343]</code></pre>
 </div>
 </div>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb19" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><span class="co" style="color: #5E5E5E;"># Fibonacci series:</span></span>
+<span id="cb19-2"><span class="co" style="color: #5E5E5E;"># the sum of two elements defines the next</span></span>
+<span id="cb19-3">a, b <span class="op" style="color: #5E5E5E;">=</span> <span class="dv" style="color: #AD0000;">0</span>, <span class="dv" style="color: #AD0000;">1</span></span>
+<span id="cb19-4"><span class="cf" style="color: #003B4F;">while</span> a <span class="op" style="color: #5E5E5E;">&lt;</span> <span class="dv" style="color: #AD0000;">10</span>:</span>
+<span id="cb19-5">    <span class="bu" style="color: null;">print</span>(a)</span>
+<span id="cb19-6">    a, b <span class="op" style="color: #5E5E5E;">=</span> b, a<span class="op" style="color: #5E5E5E;">+</span>b</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>0
 1
@@ -257,20 +541,247 @@ Attaching package: 'Ryacas'</code></pre>
 </div>
 </div>
 </section>
+<section id="data-structures" class="level3">
+<h3 class="anchored" data-anchor-id="data-structures">6 Data structures</h3>
+<p>4 builtin data structures: * Lists - <code>x = [1, 2, 3]</code> * Tuples - <code>x = 1, 2, 3</code> * Sets - <code>x = {1, 2, 3}</code> * Dictionaries <code>x = {'a': 1, 'b': 2, 'c': 3}</code></p>
+<section id="lists" class="level4">
+<h4 class="anchored" data-anchor-id="lists">Lists</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1">fruits <span class="op" style="color: #5E5E5E;">=</span> [<span class="st" style="color: #20794D;">'apple'</span>, <span class="st" style="color: #20794D;">'banana'</span>, <span class="st" style="color: #20794D;">'orange'</span>]</span>
+<span id="cb21-2">fruits.reverse()</span>
+<span id="cb21-3">fruits</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>['orange', 'banana', 'apple']</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb23" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1">fruits[<span class="dv" style="color: #AD0000;">1</span>:]</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>['banana', 'apple']</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb25" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1">fruits[:<span class="dv" style="color: #AD0000;">1</span>]</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>['orange']</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb27" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1">fruits.append(<span class="st" style="color: #20794D;">'kiwi'</span>)</span>
+<span id="cb27-2">fruits</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>['orange', 'banana', 'apple', 'kiwi']</code></pre>
+</div>
+</div>
+</section>
+<section id="tuples" class="level4">
+<h4 class="anchored" data-anchor-id="tuples">Tuples</h4>
+<ul>
+<li>“immutable lists”</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1">a <span class="op" style="color: #5E5E5E;">=</span> <span class="dv" style="color: #AD0000;">1</span>, <span class="dv" style="color: #AD0000;">2</span>, <span class="dv" style="color: #AD0000;">3</span>, (<span class="dv" style="color: #AD0000;">2</span>, <span class="dv" style="color: #AD0000;">3</span>, <span class="dv" style="color: #AD0000;">4</span>), <span class="st" style="color: #20794D;">'a'</span>, (<span class="st" style="color: #20794D;">'Hello'</span>, <span class="st" style="color: #20794D;">'This'</span>)</span>
+<span id="cb29-2">a[<span class="dv" style="color: #AD0000;">3</span>]</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(2, 3, 4)</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb31" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><span class="dv" style="color: #AD0000;">1</span> <span class="op" style="color: #5E5E5E;">&lt;</span> <span class="dv" style="color: #AD0000;">3</span> <span class="op" style="color: #5E5E5E;">&gt;</span> <span class="dv" style="color: #AD0000;">1</span> <span class="op" style="color: #5E5E5E;">&lt;</span> <span class="dv" style="color: #AD0000;">27</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>True</code></pre>
+</div>
+</div>
+</section>
+<section id="sets" class="level4">
+<h4 class="anchored" data-anchor-id="sets">Sets</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1">x <span class="op" style="color: #5E5E5E;">=</span> {<span class="dv" style="color: #AD0000;">1</span>, <span class="dv" style="color: #AD0000;">2</span>, <span class="dv" style="color: #AD0000;">3</span>}</span>
+<span id="cb33-2">x</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>{1, 2, 3}</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb35" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1">y <span class="op" style="color: #5E5E5E;">=</span> {<span class="st" style="color: #20794D;">'a'</span>, <span class="dv" style="color: #AD0000;">1</span>, <span class="dv" style="color: #AD0000;">3</span>}</span>
+<span id="cb35-2">y</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>{1, 3, 'a'}</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb37" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1">x <span class="op" style="color: #5E5E5E;">&amp;</span> y</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>{1, 3}</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb39" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1">x <span class="op" style="color: #5E5E5E;">|</span> y</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>{1, 2, 3, 'a'}</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb41" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1">x.add(<span class="dv" style="color: #AD0000;">4</span>)</span>
+<span id="cb41-2">x</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>{1, 2, 3, 4}</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb43" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1">x.update([<span class="dv" style="color: #AD0000;">7</span>, <span class="dv" style="color: #AD0000;">0</span>])</span>
+<span id="cb43-2">x</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>{0, 1, 2, 3, 4, 7}</code></pre>
+</div>
+</div>
+</section>
+<section id="dictionaries" class="level4">
+<h4 class="anchored" data-anchor-id="dictionaries">Dictionaries</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1">tel <span class="op" style="color: #5E5E5E;">=</span> {<span class="st" style="color: #20794D;">'jack'</span>: <span class="dv" style="color: #AD0000;">4098</span>, <span class="st" style="color: #20794D;">'sape'</span>: <span class="dv" style="color: #AD0000;">4139</span>}</span>
+<span id="cb45-2">tel[<span class="st" style="color: #20794D;">'jan-eggerik'</span>] <span class="op" style="color: #5E5E5E;">=</span> <span class="dv" style="color: #AD0000;">4898</span></span>
+<span id="cb45-3">tel[<span class="st" style="color: #20794D;">'jan-eggerik'</span>] <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">'a'</span></span>
+<span id="cb45-4"><span class="co" style="color: #5E5E5E;">'jack'</span> <span class="kw" style="color: #003B4F;">in</span> tel</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>True</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb47" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><span class="co" style="color: #5E5E5E;">'seb'</span> <span class="kw" style="color: #003B4F;">in</span> tel</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>False</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb49" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><span class="kw" style="color: #003B4F;">del</span> tel[<span class="st" style="color: #20794D;">'sape'</span>]</span>
+<span id="cb49-2"><span class="bu" style="color: null;">list</span>(tel)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>['jack', 'jan-eggerik']</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb51" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><span class="bu" style="color: null;">list</span>(tel) <span class="op" style="color: #5E5E5E;">&lt;=</span> [<span class="st" style="color: #20794D;">'jack'</span>, <span class="st" style="color: #20794D;">'jan-eggerik'</span>]</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>True</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb53" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb53-1"><span class="bu" style="color: null;">dict</span>([(<span class="st" style="color: #20794D;">'a'</span>, <span class="dv" style="color: #AD0000;">1</span>), (<span class="st" style="color: #20794D;">'b'</span>, <span class="dv" style="color: #AD0000;">2</span>)])</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>{'a': 1, 'b': 2}</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb55" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb55-1">x <span class="op" style="color: #5E5E5E;">=</span> <span class="bu" style="color: null;">dict</span>([(<span class="dv" style="color: #AD0000;">1</span>, <span class="st" style="color: #20794D;">'a'</span>), (<span class="dv" style="color: #AD0000;">2</span>, <span class="st" style="color: #20794D;">'b'</span>)])</span>
+<span id="cb55-2">x[<span class="dv" style="color: #AD0000;">2</span>]</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'b'</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb57" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb57-1">x[<span class="st" style="color: #20794D;">'a'</span>] <span class="op" style="color: #5E5E5E;">=</span> <span class="dv" style="color: #AD0000;">3</span></span>
+<span id="cb57-2">x</span>
+<span id="cb57-3"><span class="co" style="color: #5E5E5E;"># sorted(x) - this will throw an error because of mixing of str and int</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>{1: 'a', 2: 'b', 'a': 3}</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb59" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb59-1"><span class="bu" style="color: null;">sorted</span>(tel)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>['jack', 'jan-eggerik']</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb61" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb61-1">x <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">'string'</span></span>
+<span id="cb61-2"><span class="bu" style="color: null;">bool</span>(x)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>True</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb63" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb63-1">x <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">''</span></span>
+<span id="cb63-2"><span class="bu" style="color: null;">bool</span>(x)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>False</code></pre>
+</div>
+</div>
+</section>
+</section>
+</section>
 <section id="seaborn" class="level2">
 <h2 class="anchored" data-anchor-id="seaborn">Seaborn</h2>
 <ul>
 <li><a href="https://seaborn.pydata.org/examples/index.html">Gallery</a></li>
 </ul>
 <div class="cell" data-fig.heihgt="10">
+<div class="sourceCode cell-code" id="cb65" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb65-1"><span class="im" style="color: #00769E;">import</span> seaborn <span class="im" style="color: #00769E;">as</span> sns</span>
+<span id="cb65-2"><span class="im" style="color: #00769E;">import</span> matplotlib <span class="im" style="color: #00769E;">as</span> mp</span>
+<span id="cb65-3"><span class="im" style="color: #00769E;">import</span> matplotlib.pyplot <span class="im" style="color: #00769E;">as</span> plt</span>
+<span id="cb65-4"></span>
+<span id="cb65-5"><span class="co" style="color: #5E5E5E;"># Apply the default theme</span></span>
+<span id="cb65-6">sns.set_theme()</span>
+<span id="cb65-7"></span>
+<span id="cb65-8"><span class="co" style="color: #5E5E5E;"># Load an example dataset</span></span>
+<span id="cb65-9"></span>
+<span id="cb65-10"></span>
+<span id="cb65-11">dots <span class="op" style="color: #5E5E5E;">=</span> sns.load_dataset(<span class="st" style="color: #20794D;">"dots"</span>)</span>
+<span id="cb65-12"></span>
+<span id="cb65-13">sns.<span class="bu" style="color: null;">set</span>(rc<span class="op" style="color: #5E5E5E;">=</span>{<span class="st" style="color: #20794D;">'figure.figsize'</span>:(<span class="dv" style="color: #AD0000;">10</span>, <span class="dv" style="color: #AD0000;">3</span>)})</span>
+<span id="cb65-14"></span>
+<span id="cb65-15">sns.relplot(</span>
+<span id="cb65-16">  data<span class="op" style="color: #5E5E5E;">=</span>dots, kind<span class="op" style="color: #5E5E5E;">=</span><span class="st" style="color: #20794D;">"line"</span>,</span>
+<span id="cb65-17">  x<span class="op" style="color: #5E5E5E;">=</span><span class="st" style="color: #20794D;">"time"</span>, y<span class="op" style="color: #5E5E5E;">=</span><span class="st" style="color: #20794D;">"firing_rate"</span>, col<span class="op" style="color: #5E5E5E;">=</span><span class="st" style="color: #20794D;">"align"</span>, <span class="co" style="color: #5E5E5E;"># style = "choice",</span></span>
+<span id="cb65-18">  hue<span class="op" style="color: #5E5E5E;">=</span><span class="st" style="color: #20794D;">"choice"</span>, size<span class="op" style="color: #5E5E5E;">=</span><span class="st" style="color: #20794D;">"coherence"</span>, </span>
+<span id="cb65-19">  facet_kws<span class="op" style="color: #5E5E5E;">=</span><span class="bu" style="color: null;">dict</span>(sharex<span class="op" style="color: #5E5E5E;">=</span><span class="va" style="color: #111111;">False</span>)</span>
+<span id="cb65-20">  )</span>
+<span id="cb65-21"><span class="co" style="color: #5E5E5E;">#mp.pyplot.show()</span></span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2023-03-17-official-python-tutorial/index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="544"></p>
+<p><img src="https://sbloggel.netlify.app/posts/2023-03-17-official-python-tutorial/index_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="544"></p>
 </div>
 </div>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb66" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb66-1"><span class="co" style="color: #5E5E5E;"># sns.set_theme(style="whitegrid")</span></span>
+<span id="cb66-2"></span>
+<span id="cb66-3">x <span class="op" style="color: #5E5E5E;">=</span> (<span class="dv" style="color: #AD0000;">5</span>,<span class="dv" style="color: #AD0000;">5</span>)</span>
+<span id="cb66-4"></span>
+<span id="cb66-5">sns.<span class="bu" style="color: null;">set</span>(rc<span class="op" style="color: #5E5E5E;">=</span>{<span class="st" style="color: #20794D;">'figure.figsize'</span>: x})</span>
+<span id="cb66-6"></span>
+<span id="cb66-7"></span>
+<span id="cb66-8"><span class="co" style="color: #5E5E5E;"># Load the example diamonds dataset</span></span>
+<span id="cb66-9">diamonds <span class="op" style="color: #5E5E5E;">=</span> sns.load_dataset(<span class="st" style="color: #20794D;">"diamonds"</span>)</span>
+<span id="cb66-10"></span>
+<span id="cb66-11"><span class="co" style="color: #5E5E5E;"># Draw a scatter plot while assigning point colors and sizes to different</span></span>
+<span id="cb66-12"><span class="co" style="color: #5E5E5E;"># variables in the dataset</span></span>
+<span id="cb66-13">f, ax <span class="op" style="color: #5E5E5E;">=</span> plt.subplots(figsize<span class="op" style="color: #5E5E5E;">=</span>x)</span>
+<span id="cb66-14">sns.despine(f, left<span class="op" style="color: #5E5E5E;">=</span><span class="va" style="color: #111111;">True</span>, bottom<span class="op" style="color: #5E5E5E;">=</span><span class="va" style="color: #111111;">True</span>)</span>
+<span id="cb66-15">clarity_ranking <span class="op" style="color: #5E5E5E;">=</span> [<span class="st" style="color: #20794D;">"I1"</span>, <span class="st" style="color: #20794D;">"SI2"</span>, <span class="st" style="color: #20794D;">"SI1"</span>, <span class="st" style="color: #20794D;">"VS2"</span>, <span class="st" style="color: #20794D;">"VS1"</span>, <span class="st" style="color: #20794D;">"VVS2"</span>, <span class="st" style="color: #20794D;">"VVS1"</span>, <span class="st" style="color: #20794D;">"IF"</span>]</span>
+<span id="cb66-16">sns.scatterplot(x<span class="op" style="color: #5E5E5E;">=</span><span class="st" style="color: #20794D;">"carat"</span>, y<span class="op" style="color: #5E5E5E;">=</span><span class="st" style="color: #20794D;">"price"</span>,</span>
+<span id="cb66-17">                hue<span class="op" style="color: #5E5E5E;">=</span><span class="st" style="color: #20794D;">"clarity"</span>, size<span class="op" style="color: #5E5E5E;">=</span><span class="st" style="color: #20794D;">"depth"</span>,</span>
+<span id="cb66-18">                palette<span class="op" style="color: #5E5E5E;">=</span><span class="st" style="color: #20794D;">"ch:r=-.2,d=.3_r"</span>,</span>
+<span id="cb66-19">                hue_order<span class="op" style="color: #5E5E5E;">=</span>clarity_ranking,</span>
+<span id="cb66-20">                sizes<span class="op" style="color: #5E5E5E;">=</span>(<span class="dv" style="color: #AD0000;">1</span>, <span class="dv" style="color: #AD0000;">8</span>), linewidth<span class="op" style="color: #5E5E5E;">=</span><span class="dv" style="color: #AD0000;">0</span>,</span>
+<span id="cb66-21">                data<span class="op" style="color: #5E5E5E;">=</span>diamonds, ax<span class="op" style="color: #5E5E5E;">=</span>ax)</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2023-03-17-official-python-tutorial/index_files/figure-html/unnamed-chunk-5-3.png" class="img-fluid" width="480"></p>
+<p><img src="https://sbloggel.netlify.app/posts/2023-03-17-official-python-tutorial/index_files/figure-html/unnamed-chunk-10-3.png" class="img-fluid" width="480"></p>
 </div>
+</div>
+</section>
+<section id="python-libraries-i-want-to-look-at" class="level2">
+<h2 class="anchored" data-anchor-id="python-libraries-i-want-to-look-at">Python libraries I want to look at</h2>
+<ul>
+<li>Numpy - <a href="https://numpy.org/doc/stable/user/whatisnumpy.html">Documentation</a></li>
+<li>Matplotlib - <a href="https://matplotlib.org/stable/tutorials/index.html">Tutorials</a></li>
+<li>Seaborn - <a href="https://seaborn.pydata.org/tutorial.html">Tutorials</a></li>
+<li>SciPy - <a href="https://docs.scipy.org/doc/scipy/tutorial/index.html">User Guide</a> -</li>
+<li>SciKit-Learn - <a href="https://scikit-learn.org/stable/tutorial/index.html">Tutorials</a></li>
+<li>statsmodels - <a href="https://www.statsmodels.org/stable/gettingstarted.html">Getting started</a></li>
+<li>pandas - <a href="https://pandas.pydata.org/docs/getting_started/intro_tutorials/">Tutorials</a></li>
+<li>pytorch and co</li>
+<li>Django</li>
+<li>Plotly</li>
+</ul>
+</section>
+<section id="python-and-quarto-issues" class="level2">
+<h2 class="anchored" data-anchor-id="python-and-quarto-issues">Python and quarto issues</h2>
+<ul>
+<li>Figure size seems to be not adjustable by chunk options if engine is jupyter
+<ul>
+<li>–&gt; use knitr as engine</li>
+<li>Here fig-size seems to work at least with matplotlib, other packages not tested</li>
+</ul></li>
+<li>With knitr as engine, I think by default the following python executable is</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb67" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><span class="fu" style="color: #4758AB;">system</span>(<span class="st" style="color: #20794D;">'which python'</span>, <span class="at" style="color: #657422;">intern =</span> <span class="cn" style="color: #8f5902;">TRUE</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "/Users/seb/Library/r-miniconda-arm64/bin/python"</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb69" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb69-1"><span class="im" style="color: #00769E;">import</span> sys</span>
+<span id="cb69-2"><span class="bu" style="color: null;">print</span>(sys.executable)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>/Users/seb/Library/r-miniconda-arm64/bin/python3.10</code></pre>
+</div>
+</div>
+<ul>
+<li>In the default environment, I was able to install packages with the following command:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb71" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><span class="fu" style="color: #4758AB;">library</span>(<span class="st" style="color: #20794D;">'reticulate'</span>)</span>
+<span id="cb71-2"><span class="co" style="color: #5E5E5E;"># conda_install('r-reticulate', 'matplotlib')</span></span>
+<span id="cb71-3"> </span>
+<span id="cb71-4"></span>
+<span id="cb71-5"><span class="co" style="color: #5E5E5E;"># This did not work:</span></span>
+<span id="cb71-6"><span class="co" style="color: #5E5E5E;"># py_install("pandas")</span></span></code></pre></div>
 </div>
 
 
@@ -2218,129 +2729,6 @@ Attaching package: 'brms'</code></pre>
   <category>R</category>
   <guid>https://sbloggel.netlify.app/posts/2022-10-16-leo-s-project/index.html</guid>
   <pubDate>Sat, 15 Oct 2022 22:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>SIR-like model with deSolve in deterministic and stochastic version</title>
-  <dc:creator>Sebastian Gerdes</dc:creator>
-  <link>https://sbloggel.netlify.app/posts/2022-10-04-sir-like-model-with-desolve-in-deterministic-and-stochastic-version/index.html</link>
-  <description><![CDATA[ 
-
-
-
-<section id="summary" class="level2">
-<h2 class="anchored" data-anchor-id="summary">Summary</h2>
-<p>Here, an model based on the <a href="https://en.wikipedia.org/wiki/Compartmental_models_in_epidemiology#The_SIR_model">SIR model</a> is presented in a deterministic version and in a non-deterministic version. For solving the ODEs (deterministic version) and the stochastic difference equations (stochastic version), the R package <code>deSolve</code> is used.</p>
-</section>
-<section id="defining-and-solving-a-simple-ode-model" class="level2">
-<h2 class="anchored" data-anchor-id="defining-and-solving-a-simple-ode-model">Defining and solving a simple ODE model</h2>
-<p>A simplified SIR model: <img src="https://latex.codecogs.com/png.latex?%20%5Cfrac%7BdS%7D%7Bdt%7D%20=%20-%5Cfrac%7B%5Cbeta%20I%20S%7D%7BN%7D%20"></p>
-<p><img src="https://latex.codecogs.com/png.latex?%20%5Cfrac%7BdI%7D%7Bdt%7D%20=%20%5Cfrac%7B%5Cbeta%20I%20S%7D%7BN%7D%20-%20%5Cgamma%20I%20"></p>
-<p><img src="https://latex.codecogs.com/png.latex?%20%5Cfrac%7BdR%7D%7Bdt%7D%20=%20%5Cgamma%20I%20"></p>
-</section>
-<section id="loading-the-required-libraries-and-defining-utility-functions" class="level2">
-<h2 class="anchored" data-anchor-id="loading-the-required-libraries-and-defining-utility-functions">Loading the required libraries and defining utility functions</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;">library</span>(<span class="st" style="color: #20794D;">'ggplot2'</span>)</span>
-<span id="cb1-2"><span class="fu" style="color: #4758AB;">library</span>(<span class="st" style="color: #20794D;">'tidyverse'</span>)</span>
-<span id="cb1-3"><span class="fu" style="color: #4758AB;">library</span>(<span class="st" style="color: #20794D;">'deSolve'</span>)</span>
-<span id="cb1-4"><span class="fu" style="color: #4758AB;">theme_set</span>(<span class="fu" style="color: #4758AB;">theme_bw</span>())</span></code></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1">plot_deSolve_result <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="cf" style="color: #003B4F;">function</span>(result) {</span>
-<span id="cb2-2">  tib <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">as_tibble</span>(<span class="fu" style="color: #4758AB;">unclass</span>(result))  </span>
-<span id="cb2-3">  vars <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">colnames</span>(result)[<span class="sc" style="color: #5E5E5E;">-</span><span class="dv" style="color: #AD0000;">1</span>]</span>
-<span id="cb2-4">  long <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">pivot_longer</span>(tib, <span class="at" style="color: #657422;">cols =</span> <span class="fu" style="color: #4758AB;">all_of</span>(vars))</span>
-<span id="cb2-5">  long<span class="sc" style="color: #5E5E5E;">$</span>name <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">factor</span>(long<span class="sc" style="color: #5E5E5E;">$</span>name, <span class="at" style="color: #657422;">levels =</span> <span class="fu" style="color: #4758AB;">c</span>(<span class="st" style="color: #20794D;">'S'</span>, <span class="st" style="color: #20794D;">'I'</span>, <span class="st" style="color: #20794D;">'R'</span>))</span>
-<span id="cb2-6">  <span class="fu" style="color: #4758AB;">ggplot</span>(long, <span class="fu" style="color: #4758AB;">aes</span>(time, value, <span class="at" style="color: #657422;">colour =</span> name)) <span class="sc" style="color: #5E5E5E;">+</span> </span>
-<span id="cb2-7">    <span class="fu" style="color: #4758AB;">geom_line</span>() <span class="sc" style="color: #5E5E5E;">+</span> </span>
-<span id="cb2-8">    <span class="fu" style="color: #4758AB;">labs</span>(<span class="at" style="color: #657422;">colour =</span> <span class="st" style="color: #20794D;">'Compartment'</span>, </span>
-<span id="cb2-9">         <span class="at" style="color: #657422;">x =</span> <span class="st" style="color: #20794D;">'Time'</span>,</span>
-<span id="cb2-10">         <span class="at" style="color: #657422;">y =</span> <span class="st" style="color: #20794D;">'Fraction'</span>)</span>
-<span id="cb2-11">}</span></code></pre></div>
-</div>
-</section>
-<section id="definition-of-the-parameters" class="level2">
-<h2 class="anchored" data-anchor-id="definition-of-the-parameters">Definition of the parameters</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1">parameters <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">list</span>(<span class="at" style="color: #657422;">beta =</span> <span class="fl" style="color: #AD0000;">0.2</span>, </span>
-<span id="cb3-2">                   <span class="at" style="color: #657422;">gamma =</span> .<span class="dv" style="color: #AD0000;">01</span>,</span>
-<span id="cb3-3">                   <span class="at" style="color: #657422;">lambda =</span> <span class="dv" style="color: #AD0000;">0</span>)</span>
-<span id="cb3-4"></span>
-<span id="cb3-5">infected_initial <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fl" style="color: #AD0000;">0.01</span></span>
-<span id="cb3-6">initial_condition <span class="ot" style="color: #003B4F;">&lt;-</span> </span>
-<span id="cb3-7">  <span class="fu" style="color: #4758AB;">c</span>(<span class="at" style="color: #657422;">S =</span> <span class="dv" style="color: #AD0000;">1</span> <span class="sc" style="color: #5E5E5E;">-</span> infected_initial,</span>
-<span id="cb3-8">    <span class="at" style="color: #657422;">I =</span> infected_initial,</span>
-<span id="cb3-9">    <span class="at" style="color: #657422;">R =</span> <span class="dv" style="color: #AD0000;">0</span>)</span>
-<span id="cb3-10"></span>
-<span id="cb3-11">t_max <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="dv" style="color: #AD0000;">100</span></span>
-<span id="cb3-12">step_length <span class="ot" style="color: #003B4F;">&lt;-</span> t_max <span class="sc" style="color: #5E5E5E;">/</span> <span class="dv" style="color: #AD0000;">100</span></span>
-<span id="cb3-13">timepoints <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">seq</span>(<span class="dv" style="color: #AD0000;">0</span>, <span class="dv" style="color: #AD0000;">150</span>, <span class="at" style="color: #657422;">length.out =</span> <span class="dv" style="color: #AD0000;">100</span>)</span></code></pre></div>
-</div>
-</section>
-<section id="deterministic-model" class="level2">
-<h2 class="anchored" data-anchor-id="deterministic-model">Deterministic model</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1">sir_ode_deterministic <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="cf" style="color: #003B4F;">function</span>(t, state, pars) {</span>
-<span id="cb4-2">  <span class="fu" style="color: #4758AB;">with</span>(<span class="fu" style="color: #4758AB;">as.list</span>(<span class="fu" style="color: #4758AB;">c</span>(state, pars)), {</span>
-<span id="cb4-3">    dS <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="sc" style="color: #5E5E5E;">-</span> beta <span class="sc" style="color: #5E5E5E;">*</span> I <span class="sc" style="color: #5E5E5E;">*</span> S <span class="sc" style="color: #5E5E5E;">+</span> lambda <span class="sc" style="color: #5E5E5E;">*</span> R</span>
-<span id="cb4-4">    dI <span class="ot" style="color: #003B4F;">&lt;-</span> beta <span class="sc" style="color: #5E5E5E;">*</span> I <span class="sc" style="color: #5E5E5E;">*</span> S <span class="sc" style="color: #5E5E5E;">-</span> gamma <span class="sc" style="color: #5E5E5E;">*</span> I</span>
-<span id="cb4-5">    dR <span class="ot" style="color: #003B4F;">&lt;-</span> gamma <span class="sc" style="color: #5E5E5E;">*</span> I <span class="sc" style="color: #5E5E5E;">-</span> lambda <span class="sc" style="color: #5E5E5E;">*</span> R</span>
-<span id="cb4-6">    <span class="fu" style="color: #4758AB;">return</span>(<span class="fu" style="color: #4758AB;">list</span>(<span class="fu" style="color: #4758AB;">c</span>(<span class="at" style="color: #657422;">dS =</span> dS, <span class="at" style="color: #657422;">dI =</span> dI, <span class="at" style="color: #657422;">dR =</span> dR)))</span>
-<span id="cb4-7">  }) </span>
-<span id="cb4-8">}</span>
-<span id="cb4-9"></span>
-<span id="cb4-10"></span>
-<span id="cb4-11">sir_solution_deterministic <span class="ot" style="color: #003B4F;">&lt;-</span> </span>
-<span id="cb4-12">  <span class="fu" style="color: #4758AB;">ode</span>(<span class="at" style="color: #657422;">y =</span> initial_condition, </span>
-<span id="cb4-13">      <span class="at" style="color: #657422;">times =</span> timepoints,</span>
-<span id="cb4-14">      <span class="at" style="color: #657422;">func =</span> sir_ode_deterministic,</span>
-<span id="cb4-15">      <span class="at" style="color: #657422;">parms =</span> parameters)</span>
-<span id="cb4-16"><span class="fu" style="color: #4758AB;">plot_deSolve_result</span>(sir_solution_deterministic)</span></code></pre></div>
-<div class="cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2022-10-04-sir-like-model-with-desolve-in-deterministic-and-stochastic-version/index_files/figure-html/deterministic_model-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-</section>
-<section id="stochastic-model" class="level2">
-<h2 class="anchored" data-anchor-id="stochastic-model">Stochastic model</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1">sir_ode_stochastic <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="cf" style="color: #003B4F;">function</span>(t, state, pars) {</span>
-<span id="cb5-2">  <span class="fu" style="color: #4758AB;">with</span>(<span class="fu" style="color: #4758AB;">as.list</span>(<span class="fu" style="color: #4758AB;">c</span>(state, pars)), {</span>
-<span id="cb5-3">    S_new <span class="ot" style="color: #003B4F;">&lt;-</span> S <span class="sc" style="color: #5E5E5E;">-</span> beta <span class="sc" style="color: #5E5E5E;">*</span> I <span class="sc" style="color: #5E5E5E;">*</span> S <span class="sc" style="color: #5E5E5E;">*</span> step_length</span>
-<span id="cb5-4">    I_new <span class="ot" style="color: #003B4F;">&lt;-</span> I <span class="sc" style="color: #5E5E5E;">+</span> (beta <span class="sc" style="color: #5E5E5E;">*</span> I <span class="sc" style="color: #5E5E5E;">*</span> S <span class="sc" style="color: #5E5E5E;">-</span> gamma <span class="sc" style="color: #5E5E5E;">*</span> I) <span class="sc" style="color: #5E5E5E;">*</span> step_length</span>
-<span id="cb5-5">    R_new <span class="ot" style="color: #003B4F;">&lt;-</span> R <span class="sc" style="color: #5E5E5E;">+</span> gamma <span class="sc" style="color: #5E5E5E;">*</span> I <span class="sc" style="color: #5E5E5E;">*</span> step_length</span>
-<span id="cb5-6">    </span>
-<span id="cb5-7">    new_values <span class="ot" style="color: #003B4F;">&lt;-</span><span class="fu" style="color: #4758AB;">c</span>(<span class="at" style="color: #657422;">S =</span> S_new, <span class="at" style="color: #657422;">I =</span> I_new, <span class="at" style="color: #657422;">R =</span> R_new)</span>
-<span id="cb5-8">    new_values <span class="ot" style="color: #003B4F;">&lt;-</span> new_values <span class="sc" style="color: #5E5E5E;">*</span> <span class="fu" style="color: #4758AB;">rlnorm</span>(<span class="dv" style="color: #AD0000;">3</span>, <span class="at" style="color: #657422;">meanlog =</span> <span class="dv" style="color: #AD0000;">0</span>, <span class="at" style="color: #657422;">sdlog =</span> <span class="fl" style="color: #AD0000;">0.05</span>)</span>
-<span id="cb5-9">    new_values <span class="ot" style="color: #003B4F;">&lt;-</span> new_values <span class="sc" style="color: #5E5E5E;">/</span> <span class="fu" style="color: #4758AB;">sum</span>(new_values)</span>
-<span id="cb5-10">    <span class="fu" style="color: #4758AB;">return</span>(<span class="fu" style="color: #4758AB;">list</span>(new_values))</span>
-<span id="cb5-11">  })</span>
-<span id="cb5-12">}</span>
-<span id="cb5-13"></span>
-<span id="cb5-14">sir_solution_stochastic <span class="ot" style="color: #003B4F;">&lt;-</span> </span>
-<span id="cb5-15">  <span class="fu" style="color: #4758AB;">ode</span>(<span class="at" style="color: #657422;">y =</span> initial_condition, </span>
-<span id="cb5-16">      <span class="at" style="color: #657422;">times =</span> timepoints,</span>
-<span id="cb5-17">      <span class="at" style="color: #657422;">func =</span> sir_ode_stochastic,</span>
-<span id="cb5-18">      <span class="at" style="color: #657422;">parms =</span> parameters, </span>
-<span id="cb5-19">      <span class="at" style="color: #657422;">method =</span> <span class="st" style="color: #20794D;">'iteration'</span>)</span>
-<span id="cb5-20"></span>
-<span id="cb5-21"><span class="fu" style="color: #4758AB;">plot_deSolve_result</span>(sir_solution_stochastic)</span></code></pre></div>
-<div class="cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2022-10-04-sir-like-model-with-desolve-in-deterministic-and-stochastic-version/index_files/figure-html/stochastic_model-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-</section>
-<section id="conclusion" class="level2">
-<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
-<p>The R package <code>deSolve</code> can be used to solve deterministic ODEs and stochastic difference equations.</p>
-
-
-</section>
-
- ]]></description>
-  <category>R</category>
-  <guid>https://sbloggel.netlify.app/posts/2022-10-04-sir-like-model-with-desolve-in-deterministic-and-stochastic-version/index.html</guid>
-  <pubDate>Mon, 03 Oct 2022 22:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>

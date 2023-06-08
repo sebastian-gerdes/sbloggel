@@ -4,9 +4,6 @@ author: Sebastian Gerdes
 date: '2023-03-17'
 categories:
   - Self-study
-execute: 
-  echo: false
-  cache: false
 engine: knitr
 ---
 
@@ -18,14 +15,14 @@ This section contains my study notes on the official [python tutorial](https://d
 Also it might be worthwile to look at the [official language definition]( https://docs.python.org/3/reference/index.html#reference-index).
 
 
-##  2. Using the [Python Interpreter](https://docs.python.org/3/tutorial/interpreter.html)
+###  2. Using the [Python Interpreter](https://docs.python.org/3/tutorial/interpreter.html)
 ```{python}
 the_world_is_flat = True
 if the_world_is_flat:
   print("Be careful not to fall off!")
 ```
 
-## 3. An Informal Introduction to Python
+### 3. An Informal Introduction to Python
 [Source](https://docs.python.org/3/tutorial/introduction.html)
 
 ```{python}
@@ -49,7 +46,6 @@ cubes
 ```
 
 ```{python}
-
 # Fibonacci series:
 # the sum of two elements defines the next
 a, b = 0, 1
@@ -58,13 +54,79 @@ while a < 10:
     a, b = b, a+b
 ```
 
+### 6 Data structures
+4 builtin data structures:
+* Lists - `x = [1, 2, 3]`
+* Tuples - `x = 1, 2, 3`
+* Sets - `x = {1, 2, 3}`
+* Dictionaries `x = {'a': 1, 'b': 2, 'c': 3}`
+
+#### Lists
+```{python}
+#| echo: true
+fruits = ['apple', 'banana', 'orange']
+fruits.reverse()
+fruits
+fruits[1:]
+fruits[:1]
+fruits.append('kiwi')
+fruits
+```
+#### Tuples
+* "immutable lists"
+```{python}
+a = 1, 2, 3, (2, 3, 4), 'a', ('Hello', 'This')
+a[3]
+1 < 3 > 1 < 27
+```
+#### Sets
+```{python}
+x = {1, 2, 3}
+x
+y = {'a', 1, 3}
+y
+x & y
+x | y
+x.add(4)
+x
+x.update([7, 0])
+x
+```
+
+#### Dictionaries
+```{python}
+tel = {'jack': 4098, 'sape': 4139}
+tel['jan-eggerik'] = 4898
+tel['jan-eggerik'] = 'a'
+'jack' in tel
+'seb' in tel
+del tel['sape']
+list(tel)
+list(tel) <= ['jack', 'jan-eggerik']
+dict([('a', 1), ('b', 2)])
+x = dict([(1, 'a'), (2, 'b')])
+x[2]
+x['a'] = 3
+x
+# sorted(x) - this will throw an error because of mixing of str and int
+sorted(tel)
+```
+
+
+```{python}
+x = 'string'
+bool(x)
+x = ''
+bool(x)
+```
+
+
+
 ## Seaborn
 * [Gallery](https://seaborn.pydata.org/examples/index.html)
 ```{python}
 #| fig-width: 5
 #| fig-heihgt: 10
-
-
 import seaborn as sns
 import matplotlib as mp
 import matplotlib.pyplot as plt
@@ -115,3 +177,42 @@ sns.scatterplot(x="carat", y="price",
                 sizes=(1, 8), linewidth=0,
                 data=diamonds, ax=ax)
 ```
+
+
+## Python libraries I want to look at
+* Numpy - [Documentation](https://numpy.org/doc/stable/user/whatisnumpy.html)
+* Matplotlib - [Tutorials](https://matplotlib.org/stable/tutorials/index.html)
+* Seaborn - [Tutorials](https://seaborn.pydata.org/tutorial.html)
+* SciPy - [User Guide](https://docs.scipy.org/doc/scipy/tutorial/index.html) - 
+* SciKit-Learn - [Tutorials](https://scikit-learn.org/stable/tutorial/index.html)
+* statsmodels - [Getting started](https://www.statsmodels.org/stable/gettingstarted.html)
+* pandas - [Tutorials](https://pandas.pydata.org/docs/getting_started/intro_tutorials/)
+* pytorch and co
+* Django
+* Plotly
+
+## Python and quarto issues
+* Figure size seems to be not adjustable by chunk options if engine is jupyter 
+  * --> use knitr as engine
+  * Here fig-size seems to work at least with matplotlib, other packages not tested
+* With knitr as engine, I think by default the following python executable is
+
+```{r}
+system('which python', intern = TRUE)
+```
+
+```{python}
+import sys
+print(sys.executable)
+```
+* In the default environment, I was able to install packages with the following command:
+```{r}
+library('reticulate')
+# conda_install('r-reticulate', 'matplotlib')
+ 
+
+# This did not work:
+# py_install("pandas")
+```
+
+

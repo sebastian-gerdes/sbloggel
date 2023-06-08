@@ -1,0 +1,119 @@
+---
+title: Specifying mixed effects in lme4
+author: Sebastian Gerdes
+date: 2023-06-08
+categories:
+  - R
+toc: true
+toc-depth: 4
+draft: false
+---
+
+## Description of trial
+* $n$ individuals ($i = 1, 2, .., n$) are measured $m$ times ($j = 1, 2, ..., m$) pre-intervention (denoted $y_{ij}^{pre}$) and post-intervention (denoted $y_{ij}^{post}$)
+
+## Underlying probability model
+### Notation
+* $\beta_0$ fixed effect intercept
+* $\beta_1$ fixed effect of intervention
+* $\epsilon \sim \mathcal{N}(\mu = 0, sd = \sigma_0)$, for reasons of better legibility sub- and superscript are omitted here
+* $b_{1,i}$ random effect baseline, $b_{1,i} \sim \mathcal{N}(\mu = 0, sd = \sigma_1)$
+* $b_{2,i}$ random effect of intervention, $b_{2,i} \sim \mathcal{N}(\mu = 0, sd = \sigma_2)$
+
+### Parameters of the model to be estimated
+* $\beta_0$, $\beta_1$, $\sigma_0$, $\sigma_1$ and $\sigma_2$
+
+### Model equations
+* Measurement pre intervention:
+\begin{align}
+y_{ij}^{pre} = \beta_0 + b_i + \epsilon_{ij}^{pre}
+\end{align}
+* Measurement post-intervention:
+\begin{align}
+y_{ij}^{post} = \beta_0 + \beta_1 + b_{1,i} + b_{2,i} + \epsilon_{ij}^{post}
+\end{align}
+
+### Simulate data
+```{r}
+#| label: init
+#| include: false
+library(tidyverse)
+library(lme4)
+library(knitr)
+set.seed(1)
+```
+
+
+```{r}
+# size of sample:
+n <- 20
+m <- 5
+
+# model parameters:
+beta_0 <- 0
+beta_1 <- 1
+sigma_0 <- 2
+sigma_1 <- 1
+sigma_2 <- 5
+
+# construct data:
+patients <- tibble(patient_id = 1:n, 
+                   patient_re = rnorm(n, 0, sigma_1),
+                   treatment_re = rnorm(n, 0, sigma_2))
+
+dat <- expand_grid(patients,
+                   replicate = 1:m,
+                   timepoint = c('pre', 'post'))
+
+dat <- dat |> 
+  mutate(y = beta_0 + 
+           patient_re + 
+           ifelse(timepoint == 'post', treatment_re + beta_1, 0) + 
+           rnorm(n * m * 2, 0, sigma_0))
+
+# make timepoint a factor to get order in plots right:
+dat <- dat |> 
+  mutate(timepoint = factor(timepoint, levels = c('pre', 'post')))
+         
+```
+
+### Tabular characteristics
+```{r}
+dat |> 
+  group_by(timepoint) |> 
+  summarize(mean = mean(y)) |> 
+  kable()
+```
+
+
+
+### Visualize data
+```{r}
+#| label: visualize
+if(n < 1e2) {
+  dat |>
+    ggplot(aes(timepoint, y, col = factor(patient_id))) +
+    geom_jitter(width = 0.1, height = 0) + labs(color = 'Patient ID')
+}
+```
+
+### Fit model
+#### Linear model
+```{r}
+# linear model to get beta_1 and beta_2 
+(fm_lm <- lm(y ~ timepoint, data = dat)) |> summary()
+```
+#### Mixed effects model **with** correlation between `(Intercept)` and `timepointpost`
+```{r}
+(fm_lmer <- lmer(y ~ timepoint + (timepoint | patient_id), data = dat))
+```
+
+#### Mixed effects model **without** correlation between `(Intercept)` and `timepointpost`
+* The specifications I tried seem almost right, but not quite:
+```{r}
+(fm_lmer <- lmer(y ~ timepoint + (timepoint - 1 || patient_id), data = dat))
+(fm_lmer <- lmer(y ~ timepoint + (timepoint - 1 | patient_id), data = dat))
+(fm_lmer <- lmer(y ~ timepoint + (1 | patient_id) + (timepoint - 1 | patient_id), data = dat))
+(fm_lmer <- lmer(y ~ timepoint + (1 | patient_id) + (timepoint + 0 | patient_id), data = dat))
+```
+
