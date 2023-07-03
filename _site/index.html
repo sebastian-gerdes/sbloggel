@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.475">
+<meta name="generator" content="quarto-1.3.433">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -17,7 +17,7 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
 </style>
@@ -58,7 +58,8 @@ ul.task-list li input[type="checkbox"] {
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 <script>
@@ -71,10 +72,10 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
       page: 25,
     pagination: { item: "<li class='page-item'><a class='page page-link' href='#'></a></li>" },
-      searchColumns: ["listing-date","listing-title","listing-author","listing-description","listing-categories"],
+      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -92,6 +93,7 @@ ul.task-list li input[type="checkbox"] {
   })
   </script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="styles.css">
@@ -110,28 +112,30 @@ ul.task-list li input[type="checkbox"] {
     <span class="navbar-title">Seb’s blog</span>
     </a>
   </div>
+            <div id="quarto-search" class="" title="Search"></div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./about.html">
+    <a class="nav-link" href="./about.html" rel="" target="">
  <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page">
+    <a class="nav-link active" href="./index.html" rel="" target="" aria-current="page">
  <span class="menu-text">Posts</span></a>
   </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item compact">
-    <a class="nav-link" href="./index.xml"><i class="bi bi-rss" role="img">
+    <a class="nav-link" href="./index.xml" rel="" target=""><i class="bi bi-rss" role="img">
 </i> 
  <span class="menu-text"></span></a>
   </li>  
 </ul>
-              <div id="quarto-search" class="" title="Search"></div>
+            <div class="quarto-navbar-tools">
+</div>
           </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
@@ -194,7 +198,10 @@ ul.task-list li input[type="checkbox"] {
     </div>
 </div>
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="R" data-listing-date-sort="1686175200000" data-listing-file-modified-sort="1686229932785" data-listing-reading-time-sort="2.505">
+<div class="quarto-post image-right" data-index="0" data-categories="R" data-listing-date-sort="1686175200000" data-listing-file-modified-sort="1686829685875" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3">
+<div class="thumbnail">
+<p><a href="./posts/2023-06-08-specifying-mixed-effects-models/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
+</div>
 <div class="body">
 <a href="./posts/2023-06-08-specifying-mixed-effects-models/index.html">
 <h3 class="no-anchor listing-title">
@@ -226,7 +233,10 @@ Sebastian Gerdes
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="1" data-categories="R" data-listing-date-sort="1683324000000" data-listing-file-modified-sort="1683364170977" data-listing-reading-time-sort="0.28">
+<div class="quarto-post image-right" data-index="1" data-categories="R" data-listing-date-sort="1683324000000" data-listing-file-modified-sort="1686829685875" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1">
+<div class="thumbnail">
+<p><a href="./posts/2023-05-06-minimal-traffic-jam-model/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
+</div>
 <div class="body">
 <a href="./posts/2023-05-06-minimal-traffic-jam-model/index.html">
 <h3 class="no-anchor listing-title">
@@ -258,7 +268,10 @@ Sebastian Gerdes
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="2" data-categories="R" data-listing-date-sort="1683324000000" data-listing-file-modified-sort="1683631529140" data-listing-reading-time-sort="0.105">
+<div class="quarto-post image-right" data-index="2" data-categories="R" data-listing-date-sort="1683324000000" data-listing-file-modified-sort="1686829685874" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1">
+<div class="thumbnail">
+<p><a href="./posts/2023-05-06-longtermism/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
+</div>
 <div class="body">
 <a href="./posts/2023-05-06-longtermism/index.html">
 <h3 class="no-anchor listing-title">
@@ -275,7 +288,7 @@ R
 </div>
 <a href="./posts/2023-05-06-longtermism/index.html">
 <div class="listing-description">
-Idea: create a model in which proximity and number of people are balanced
+
 </div>
 </a>
 </div>
@@ -290,7 +303,10 @@ Sebastian Gerdes
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="3" data-categories="R" data-listing-date-sort="1679007600000" data-listing-file-modified-sort="1685609113741" data-listing-reading-time-sort="4.695">
+<div class="quarto-post image-right" data-index="3" data-categories="R" data-listing-date-sort="1679007600000" data-listing-file-modified-sort="1686829685873" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5">
+<div class="thumbnail">
+<p><a href="./posts/2023-03-17-interesting-r-packages/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
+</div>
 <div class="body">
 <a href="./posts/2023-03-17-interesting-r-packages/index.html">
 <h3 class="no-anchor listing-title">
@@ -307,7 +323,7 @@ R
 </div>
 <a href="./posts/2023-03-17-interesting-r-packages/index.html">
 <div class="listing-description">
-Link
+
 </div>
 </a>
 </div>
@@ -322,7 +338,10 @@ Sebastian Gerdes
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="4" data-categories="Self-study" data-listing-date-sort="1679007600000" data-listing-file-modified-sort="1685871916114" data-listing-reading-time-sort="2.855">
+<div class="quarto-post image-right" data-index="4" data-categories="Self-study" data-listing-date-sort="1679007600000" data-listing-file-modified-sort="1686829685874" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3">
+<div class="thumbnail">
+<p><a href="./posts/2023-03-17-official-python-tutorial/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
+</div>
 <div class="body">
 <a href="./posts/2023-03-17-official-python-tutorial/index.html">
 <h3 class="no-anchor listing-title">
@@ -339,7 +358,7 @@ Self-study
 </div>
 <a href="./posts/2023-03-17-official-python-tutorial/index.html">
 <div class="listing-description">
-This section contains my study notes on the official python tutorial.
+
 </div>
 </a>
 </div>
@@ -354,7 +373,10 @@ Sebastian Gerdes
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="5" data-categories="Self-study" data-listing-date-sort="1679007600000" data-listing-file-modified-sort="1679087073047" data-listing-reading-time-sort="3.31">
+<div class="quarto-post image-right" data-index="5" data-categories="Self-study" data-listing-date-sort="1679007600000" data-listing-file-modified-sort="1686829685872" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4">
+<div class="thumbnail">
+<p><a href="./posts/2023-03-17-coursera-deep-learning/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
+</div>
 <div class="body">
 <a href="./posts/2023-03-17-coursera-deep-learning/index.html">
 <h3 class="no-anchor listing-title">
@@ -371,7 +393,7 @@ Self-study
 </div>
 <a href="./posts/2023-03-17-coursera-deep-learning/index.html">
 <div class="listing-description">
-<span class="math display">\[V_t = \beta V_{t-1} + (1 - \beta) \theta_t\]</span> * this corresponds approximately to averaging over <span class="math inline">\(\frac{1}{1-\beta}\)</span> entries
+
 </div>
 </a>
 </div>
@@ -386,7 +408,10 @@ Sebastian Gerdes
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="6" data-categories="Self-study" data-listing-date-sort="1679007600000" data-listing-file-modified-sort="1681388750892" data-listing-reading-time-sort="0.705">
+<div class="quarto-post image-right" data-index="6" data-categories="Self-study" data-listing-date-sort="1679007600000" data-listing-file-modified-sort="1686829685873" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1">
+<div class="thumbnail">
+<p><a href="./posts/2023-03-17-goodfellow-deep-learning/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
+</div>
 <div class="body">
 <a href="./posts/2023-03-17-goodfellow-deep-learning/index.html">
 <h3 class="no-anchor listing-title">
@@ -403,9 +428,7 @@ Self-study
 </div>
 <a href="./posts/2023-03-17-goodfellow-deep-learning/index.html">
 <div class="listing-description">
-<span class="math inline">\(B_n\)</span>: partition of entire sample space <span class="math inline">\(\rightarrow \sum p(B_n) = 1\)</span> <span class="math display">\[
-P(A) = \sum_n P(A \cap B_n)
-\]</span>
+
 </div>
 </a>
 </div>
@@ -420,7 +443,10 @@ Sebastian Gerdes
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="7" data-categories="Self-study" data-listing-date-sort="1679007600000" data-listing-file-modified-sort="1679087073048" data-listing-reading-time-sort="1.18">
+<div class="quarto-post image-right" data-index="7" data-categories="Self-study" data-listing-date-sort="1679007600000" data-listing-file-modified-sort="1686829685874" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2">
+<div class="thumbnail">
+<p><a href="./posts/2023-03-17-mcelreath-statistical-rethinking/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
+</div>
 <div class="body">
 <a href="./posts/2023-03-17-mcelreath-statistical-rethinking/index.html">
 <h3 class="no-anchor listing-title">
@@ -452,7 +478,10 @@ Sebastian Gerdes
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="8" data-categories="Sustainibility" data-listing-date-sort="1677452400000" data-listing-file-modified-sort="1679088026265" data-listing-reading-time-sort="1.615">
+<div class="quarto-post image-right" data-index="8" data-categories="Sustainibility" data-listing-date-sort="1677452400000" data-listing-file-modified-sort="1686829685871" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2">
+<div class="thumbnail">
+<p><a href="./posts/2023-02-27-how-bad-are-bananas/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
+</div>
 <div class="body">
 <a href="./posts/2023-02-27-how-bad-are-bananas/index.html">
 <h3 class="no-anchor listing-title">
@@ -469,7 +498,7 @@ Sustainibility
 </div>
 <a href="./posts/2023-02-27-how-bad-are-bananas/index.html">
 <div class="listing-description">
-Recently, I have come a across a book that I find really wonderful: “How bad are bananas” by Mike Berners-Lee <span class="citation" data-cites="berners-lee_how_2020">Berners-Lee (2020)</span>.
+
 </div>
 </a>
 </div>
@@ -484,9 +513,12 @@ Sebastian Gerdes
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="9" data-categories="R" data-listing-date-sort="1676934000000" data-listing-file-modified-sort="1679087073051" data-listing-reading-time-sort="0.4">
+<div class="quarto-post image-right" data-index="9" data-categories="R" data-listing-date-sort="1676934000000" data-listing-file-modified-sort="1686829685875" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1">
+<div class="thumbnail">
+<p><a href="./posts/2023-02_21-manual-colors-in-ggplot2/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
+</div>
 <div class="body">
-<a href="./posts/2023_02_21-manual-colors-in-ggplot2/index.html">
+<a href="./posts/2023-02_21-manual-colors-in-ggplot2/index.html">
 <h3 class="no-anchor listing-title">
 Manual colors in ggplot2
 </h3>
@@ -499,14 +531,14 @@ Manual colors in ggplot2
 R
 </div>
 </div>
-<a href="./posts/2023_02_21-manual-colors-in-ggplot2/index.html">
+<a href="./posts/2023-02_21-manual-colors-in-ggplot2/index.html">
 <div class="listing-description">
-After several instances of “relearning” how to use custom colour palettes in <code>R</code>, I…
+
 </div>
 </a>
 </div>
 <div class="metadata">
-<a href="./posts/2023_02_21-manual-colors-in-ggplot2/index.html">
+<a href="./posts/2023-02_21-manual-colors-in-ggplot2/index.html">
 <div class="listing-date">
 Feb 21, 2023
 </div>
@@ -516,7 +548,10 @@ Sebastian Gerdes
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="10" data-categories="R" data-listing-date-sort="1675292400000" data-listing-file-modified-sort="1679087073046" data-listing-reading-time-sort="6.645">
+<div class="quarto-post image-right" data-index="10" data-categories="R" data-listing-date-sort="1675292400000" data-listing-file-modified-sort="1686829685871" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7">
+<div class="thumbnail">
+<p><a href="./posts/2023-02-02-strange-behavior-of-geom_area/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
+</div>
 <div class="body">
 <a href="./posts/2023-02-02-strange-behavior-of-geom_area/index.html">
 <h3 class="no-anchor listing-title">
@@ -533,7 +568,7 @@ R
 </div>
 <a href="./posts/2023-02-02-strange-behavior-of-geom_area/index.html">
 <div class="listing-description">
-I have asked a question related to this issue on stackoverflow and I am providing the plots on this page. Here is the question on stackoverflow:
+
 </div>
 </a>
 </div>
@@ -548,7 +583,10 @@ Sebastian Gerdes
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="11" data-categories="R" data-listing-date-sort="1674082800000" data-listing-file-modified-sort="1679087073045" data-listing-reading-time-sort="3.94">
+<div class="quarto-post image-right" data-index="11" data-categories="R" data-listing-date-sort="1674082800000" data-listing-file-modified-sort="1688409986667" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4">
+<div class="thumbnail">
+<p><a href="./posts/2023-01-20-sirs-model-dynamics/index.html"> <p class="card-img-top"><img src="posts/2023-01-20-sirs-model-dynamics/index_files/figure-html/explore_model_dynamics-1.png"  class="thumbnail-image card-img"/></p> </a></p>
+</div>
 <div class="body">
 <a href="./posts/2023-01-20-sirs-model-dynamics/index.html">
 <h3 class="no-anchor listing-title">
@@ -580,7 +618,10 @@ Sebastian Gerdes
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="12" data-categories="Sustainibility" data-listing-date-sort="1673305200000" data-listing-file-modified-sort="1680769164569" data-listing-reading-time-sort="1.04">
+<div class="quarto-post image-right" data-index="12" data-categories="Sustainibility" data-listing-date-sort="1673305200000" data-listing-file-modified-sort="1686829685843" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2">
+<div class="thumbnail">
+<p><a href="./posts/2023-01-10-sustainibility-data/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
+</div>
 <div class="body">
 <a href="./posts/2023-01-10-sustainibility-data/index.html">
 <h3 class="no-anchor listing-title">
@@ -597,7 +638,7 @@ Sustainibility
 </div>
 <a href="./posts/2023-01-10-sustainibility-data/index.html">
 <div class="listing-description">
-Die Welt liefert also ca. 3.76e+04 mal so viel Energie wie von den Menschen verbraucht wird.
+
 </div>
 </a>
 </div>
@@ -612,7 +653,10 @@ Sebastian Gerdes
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="13" data-categories="R" data-listing-date-sort="1672873200000" data-listing-file-modified-sort="1685612057216" data-listing-reading-time-sort="0.55">
+<div class="quarto-post image-right" data-index="13" data-categories="R" data-listing-date-sort="1672873200000" data-listing-file-modified-sort="1686829821957" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1">
+<div class="thumbnail">
+<p><a href="./posts/2023-01-05-contribution-plots/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
+</div>
 <div class="body">
 <a href="./posts/2023-01-05-contribution-plots/index.html">
 <h3 class="no-anchor listing-title">
@@ -644,7 +688,10 @@ Sebastian Gerdes
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="14" data-categories="R" data-listing-date-sort="1666648800000" data-listing-file-modified-sort="1679087073044" data-listing-reading-time-sort="0.35">
+<div class="quarto-post image-right" data-index="14" data-categories="R" data-listing-date-sort="1666648800000" data-listing-file-modified-sort="1686829788262" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1">
+<div class="thumbnail">
+<p><a href="./posts/2022-11-24-r-interfaces-to-trial-registries/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
+</div>
 <div class="body">
 <a href="./posts/2022-11-24-r-interfaces-to-trial-registries/index.html">
 <h3 class="no-anchor listing-title">
@@ -676,7 +723,10 @@ Sebastian Gerdes
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="15" data-categories="R" data-listing-date-sort="1666648800000" data-listing-file-modified-sort="1684527404358" data-listing-reading-time-sort="2.915">
+<div class="quarto-post image-right" data-index="15" data-categories="R" data-listing-date-sort="1666648800000" data-listing-file-modified-sort="1686829685842" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3">
+<div class="thumbnail">
+<p><a href="./posts/2022-10-25-simulate-time-to-event-data/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
+</div>
 <div class="body">
 <a href="./posts/2022-10-25-simulate-time-to-event-data/index.html">
 <h3 class="no-anchor listing-title">
@@ -693,7 +743,7 @@ R
 </div>
 <a href="./posts/2022-10-25-simulate-time-to-event-data/index.html">
 <div class="listing-description">
-In this post, two methods to draw from a survival time distribution defined by an arbitrary hazard function are demonstrated. First…
+
 </div>
 </a>
 </div>
@@ -708,7 +758,10 @@ Sebastian Gerdes
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="16" data-categories="Sustainibility" data-listing-date-sort="1666130400000" data-listing-file-modified-sort="1679087073043" data-listing-reading-time-sort="0.525">
+<div class="quarto-post image-right" data-index="16" data-categories="Sustainibility" data-listing-date-sort="1666130400000" data-listing-file-modified-sort="1686829685842" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1">
+<div class="thumbnail">
+<p><a href="./posts/2022-10-19-kids-per-person-and-carbonc-footprint/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
+</div>
 <div class="body">
 <a href="./posts/2022-10-19-kids-per-person-and-carbonc-footprint/index.html">
 <h3 class="no-anchor listing-title">
@@ -725,7 +778,7 @@ Sustainibility
 </div>
 <a href="./posts/2022-10-19-kids-per-person-and-carbonc-footprint/index.html">
 <div class="listing-description">
-Here I want collect a few resources on how much the number of kids you get affects your carbone footprint.
+
 </div>
 </a>
 </div>
@@ -740,7 +793,10 @@ Sebastian Gerdes
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="17" data-categories="R" data-listing-date-sort="1666130400000" data-listing-file-modified-sort="1679087073043" data-listing-reading-time-sort="1.8">
+<div class="quarto-post image-right" data-index="17" data-categories="R" data-listing-date-sort="1666130400000" data-listing-file-modified-sort="1686829685842" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2">
+<div class="thumbnail">
+<p><a href="./posts/2022-10-19-model-meadow/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
+</div>
 <div class="body">
 <a href="./posts/2022-10-19-model-meadow/index.html">
 <h3 class="no-anchor listing-title">
@@ -772,7 +828,10 @@ Sebastian Gerdes
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="18" data-categories="R" data-listing-date-sort="1665871200000" data-listing-file-modified-sort="1679087073043" data-listing-reading-time-sort="0.5">
+<div class="quarto-post image-right" data-index="18" data-categories="R" data-listing-date-sort="1665871200000" data-listing-file-modified-sort="1686829685837" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1">
+<div class="thumbnail">
+<p><a href="./posts/2022-10-16-retrieving-and-plotting-covid-19-data/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
+</div>
 <div class="body">
 <a href="./posts/2022-10-16-retrieving-and-plotting-covid-19-data/index.html">
 <h3 class="no-anchor listing-title">
@@ -789,7 +848,7 @@ R
 </div>
 <a href="./posts/2022-10-16-retrieving-and-plotting-covid-19-data/index.html">
 <div class="listing-description">
-…
+
 </div>
 </a>
 </div>
@@ -804,7 +863,10 @@ Sebastian Gerdes
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="19" data-categories="R" data-listing-date-sort="1665871200000" data-listing-file-modified-sort="1679087073042" data-listing-reading-time-sort="2.49">
+<div class="quarto-post image-right" data-index="19" data-categories="R" data-listing-date-sort="1665871200000" data-listing-file-modified-sort="1686829685837" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3">
+<div class="thumbnail">
+<p><a href="./posts/2022-10-16-leo-s-project/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
+</div>
 <div class="body">
 <a href="./posts/2022-10-16-leo-s-project/index.html">
 <h3 class="no-anchor listing-title">
@@ -821,7 +883,7 @@ R
 </div>
 <a href="./posts/2022-10-16-leo-s-project/index.html">
 <div class="listing-description">
-In hematological…
+
 </div>
 </a>
 </div>
@@ -836,7 +898,10 @@ Sebastian Gerdes
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="20" data-categories="R" data-listing-date-sort="1664834400000" data-listing-file-modified-sort="1679087073042" data-listing-reading-time-sort="2.475">
+<div class="quarto-post image-right" data-index="20" data-categories="R" data-listing-date-sort="1664834400000" data-listing-file-modified-sort="1686829685837" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3">
+<div class="thumbnail">
+<p><a href="./posts/2022-10-04-sir-like-model-with-desolve-in-deterministic-and-stochastic-version/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
+</div>
 <div class="body">
 <a href="./posts/2022-10-04-sir-like-model-with-desolve-in-deterministic-and-stochastic-version/index.html">
 <h3 class="no-anchor listing-title">
@@ -853,7 +918,7 @@ R
 </div>
 <a href="./posts/2022-10-04-sir-like-model-with-desolve-in-deterministic-and-stochastic-version/index.html">
 <div class="listing-description">
-Here, an model based on the SIR model is presented in a deterministic version and in a…<code></code>
+
 </div>
 </a>
 </div>
@@ -868,7 +933,10 @@ Sebastian Gerdes
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="21" data-categories="Psychiatry" data-listing-date-sort="1662588000000" data-listing-file-modified-sort="1679087073041" data-listing-reading-time-sort="1.505">
+<div class="quarto-post image-right" data-index="21" data-categories="Psychiatry" data-listing-date-sort="1662588000000" data-listing-file-modified-sort="1686829685835" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2">
+<div class="thumbnail">
+<p><a href="./posts/2022-09-08-antipsychotics/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
+</div>
 <div class="body">
 <a href="./posts/2022-09-08-antipsychotics/index.html">
 <h3 class="no-anchor listing-title">
@@ -900,7 +968,10 @@ Sebastian Gerdes
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="22" data-categories="R" data-listing-date-sort="1662588000000" data-listing-file-modified-sort="1679087073042" data-listing-reading-time-sort="3.305">
+<div class="quarto-post image-right" data-index="22" data-categories="R" data-listing-date-sort="1662588000000" data-listing-file-modified-sort="1686829685837" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4">
+<div class="thumbnail">
+<p><a href="./posts/2022-09-08-timeline/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
+</div>
 <div class="body">
 <a href="./posts/2022-09-08-timeline/index.html">
 <h3 class="no-anchor listing-title">
@@ -932,7 +1003,10 @@ Sebastian Gerdes
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="23" data-categories="Psychiatry" data-listing-date-sort="1662588000000" data-listing-file-modified-sort="1679087073041" data-listing-reading-time-sort="1.105">
+<div class="quarto-post image-right" data-index="23" data-categories="Psychiatry" data-listing-date-sort="1662588000000" data-listing-file-modified-sort="1686829685836" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2">
+<div class="thumbnail">
+<p><a href="./posts/2022-09-08-psychopharmaca-and-time/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
+</div>
 <div class="body">
 <a href="./posts/2022-09-08-psychopharmaca-and-time/index.html">
 <h3 class="no-anchor listing-title">
@@ -964,7 +1038,10 @@ Sebastian Gerdes
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="24" data-categories="Mishmash" data-listing-date-sort="1662588000000" data-listing-file-modified-sort="1679087073041" data-listing-reading-time-sort="0.09">
+<div class="quarto-post image-right" data-index="24" data-categories="Mishmash" data-listing-date-sort="1662588000000" data-listing-file-modified-sort="1688409772369" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1">
+<div class="thumbnail">
+<p><a href="./posts/2022-09-08-chess-ressources/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
+</div>
 <div class="body">
 <a href="./posts/2022-09-08-chess-ressources/index.html">
 <h3 class="no-anchor listing-title">
@@ -981,7 +1058,7 @@ Mishmash
 </div>
 <a href="./posts/2022-09-08-chess-ressources/index.html">
 <div class="listing-description">
-https://search.r…
+
 </div>
 </a>
 </div>
@@ -996,7 +1073,10 @@ Sebastian Gerdes
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="25" data-categories="Sustainibility" data-listing-date-sort="1662588000000" data-listing-file-modified-sort="1679087073041" data-listing-reading-time-sort="2.62">
+<div class="quarto-post image-right" data-index="25" data-categories="Sustainibility" data-listing-date-sort="1662588000000" data-listing-file-modified-sort="1686829685836" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3">
+<div class="thumbnail">
+<p><a href="./posts/2022-09-08-humidity/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
+</div>
 <div class="body">
 <a href="./posts/2022-09-08-humidity/index.html">
 <h3 class="no-anchor listing-title">
@@ -1013,7 +1093,7 @@ Sustainibility
 </div>
 <a href="./posts/2022-09-08-humidity/index.html">
 <div class="listing-description">
-Conclusion: Airing once with an indoor temperature of 20 degress Celsius with a relative humidity…<span class="math inline"></span>
+
 </div>
 </a>
 </div>
@@ -1028,7 +1108,10 @@ Sebastian Gerdes
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="26" data-categories="R" data-listing-date-sort="1658181600000" data-listing-file-modified-sort="1679087073040" data-listing-reading-time-sort="3.595">
+<div class="quarto-post image-right" data-index="26" data-categories="R" data-listing-date-sort="1658181600000" data-listing-file-modified-sort="1686829685835" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4">
+<div class="thumbnail">
+<p><a href="./posts/2022-07-19-sir-model/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
+</div>
 <div class="body">
 <a href="./posts/2022-07-19-sir-model/index.html">
 <h3 class="no-anchor listing-title">
@@ -1045,7 +1128,7 @@ R
 </div>
 <a href="./posts/2022-07-19-sir-model/index.html">
 <div class="listing-description">
-Her…
+
 </div>
 </a>
 </div>
@@ -1095,9 +1178,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -1162,6 +1259,92 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {
@@ -1205,4 +1388,4 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-</body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/sebastian-gerdes/sbloggel/blob/main/index.qmd" class="toc-action">View source</a></p></div></div></div></div></footer></body></html>

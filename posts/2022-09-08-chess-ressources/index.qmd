@@ -7,7 +7,7 @@ categories:
 ---
 
 ## chess related packages on cran:
-https://search.r-project.org/?P=chess&SORT=&HITSPERPAGE=10&DB=cran-info&DEFAULTOP=and&%5B=1&TOPDOC=10&FMT=query&xP=ZBchess%09ZFchess%09ZSchess%09Zchess&xDB=cran-info&xFILTERS=.%7E%7E4294967295
+[Link](https://search.r-project.org/?P=chess&SORT=&HITSPERPAGE=10&DB=cran-info&DEFAULTOP=and&%5B=1&TOPDOC=10&FMT=query&xP=ZBchess%09ZFchess%09ZSchess%09Zchess&xDB=cran-info&xFILTERS=.%7E%7E4294967295)
 
 ## nice little chess engine:
 https://www.codertime.org/minimax-chess-engine-programming-r/

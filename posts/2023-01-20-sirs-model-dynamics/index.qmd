@@ -2,9 +2,6 @@
 title: 'SIRS model dynamics'
 author: Sebastian Gerdes
 date: '2023-01-19'
-embed-resources: true
-execute:
-  cache: false
 categories:
   - R
 ---

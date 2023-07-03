@@ -31,12 +31,12 @@ my_cols <- brewer.pal(nr_of_clones, 'Spectral')
   geom_area(alpha = 0.65) + 
   scale_fill_manual(name = 'State', values = my_cols) +
   xlab('Time') + ylab('Relative contibution'))
-ggplotly(g)
+# ggplotly(g)
 ```
 
 ## Another plotly plot
 
 ```{r another_plotly_plot}
 (g <- ggplot(cars, aes(dist, speed)) + geom_point())
-ggplotly(g)
+# ggplotly(g)
 ```

@@ -9,6 +9,7 @@ categories:
 ## Package 'clinicaltrialr'
 
 ```{r clinicaltrialr}
+#| eval: false
 library('tidyverse')
 
 library('ggVennDiagram')
@@ -30,6 +31,7 @@ ggVennDiagram(x) + theme(legend.position = 'none')
 ## Package 'rclinicaltrials'
 
 ```{r rclinicaltrials}
+#| eval: false
 library(rclinicaltrials)
 # z <- clinicaltrials_search(query = 'lime+disease') 
 # str(z)
