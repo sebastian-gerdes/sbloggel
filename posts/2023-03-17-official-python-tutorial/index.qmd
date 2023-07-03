@@ -216,3 +216,5 @@ library('reticulate')
 ```
 
 
+## Pandas
+* [Tutorials](https://pandas.pydata.org/docs/getting_started/intro_tutorials/)
