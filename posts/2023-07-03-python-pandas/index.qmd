@@ -1,0 +1,66 @@
+---
+title: Python pandas
+author: Sebastian Gerdes
+date: 2023-07-03
+categories:
+  - Python
+toc: true
+toc-depth: 4
+draft: false
+engine: jupytr
+---
+
+* pandas - [Tutorials](https://pandas.pydata.org/docs/getting_started/intro_tutorials/)
+
+```{python}
+import pandas as pd
+iris = pd.read_csv('iris.csv')
+iris['Sepal.Length'].describe()
+iris['Sepal.Width'].describe()
+iris['total_length'] = iris['Sepal.Length'] + iris['Sepal.Width']
+iris['total_length'].describe()
+# two identical results:
+iris.loc[iris['total_length'] > 10, 'total_length']
+iris[iris['total_length'] > 10]['total_length']
+
+iris.loc[iris['total_length'] > 10, 'total_length'] = 100
+
+
+```
+
+```{python}
+import statsmodels.api as sm
+import pandas
+df = sm.datasets.get_rdataset("Guerry", "HistData").data
+
+fm = sm.formula.ols('Lottery ~ Literacy + Wealth + C(Region)', data = df).fit()
+print(fm.summary())
+
+fig = sm.graphics.influence_plot(fm, criterion="cooks")
+fig.show()
+```
+
+
+```{python}
+import seaborn as sns
+import matplotlib as mp
+import matplotlib.pyplot as plt
+
+# Apply the default theme
+sns.set_theme()
+
+# Load an example dataset
+
+
+dots = sns.load_dataset("dots")
+
+sns.set(rc={'figure.figsize':(10, 3)})
+
+sns.relplot(
+  data=dots, kind="line",
+  x="time", y="firing_rate", col="align", # style = "choice",
+  hue="choice", size="coherence", 
+  facet_kws=dict(sharex=False)
+  )
+```
+
