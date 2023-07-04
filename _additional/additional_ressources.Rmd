@@ -10,7 +10,7 @@ embed-resources: true
 #| include: false
 library('tidyverse')
 library('usethis')
-
+library('fs')
 set.seed(1)
 ```
 
@@ -18,10 +18,9 @@ set.seed(1)
 ```{r}
 #| label: new_post
 #| execute: false
-library('fs')
 ll <- readLines('sample_post.qmd')
 post_date <- format(Sys.Date(), "%Y-%m-%d")
-post_title <- 'Minimal traffic jam model'
+post_title <- 'AI and radiologist - evolution of a team'
 post_dir <- gsub(" ", "-", tolower(paste0('../posts/', post_date, '-', post_title)))
 
 ll[2] <- paste0('title: ', post_title)

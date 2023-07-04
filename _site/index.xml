@@ -10,7 +10,262 @@
 <atom:link href="https://sbloggel.netlify.app/index.xml" rel="self" type="application/rss+xml"/>
 <description>Seb&#39;s private blog about statistics and other topics</description>
 <generator>quarto-1.3.433</generator>
-<lastBuildDate>Wed, 07 Jun 2023 22:00:00 GMT</lastBuildDate>
+<lastBuildDate>Sun, 02 Jul 2023 22:00:00 GMT</lastBuildDate>
+<item>
+  <title>Python pandas</title>
+  <dc:creator>Sebastian Gerdes</dc:creator>
+  <link>https://sbloggel.netlify.app/posts/2023-07-03-python-pandas/index.html</link>
+  <description><![CDATA[ 
+
+
+
+<ul>
+<li>pandas - <a href="https://pandas.pydata.org/docs/getting_started/intro_tutorials/">Tutorials</a></li>
+</ul>
+<div class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> pandas <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> pd</span>
+<span id="cb1-2">iris <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> pd.read_csv(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'iris.csv'</span>)</span>
+<span id="cb1-3">iris[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Sepal.Length'</span>].describe()</span>
+<span id="cb1-4">iris[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Sepal.Width'</span>].describe()</span>
+<span id="cb1-5">iris[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'total_length'</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> iris[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Sepal.Length'</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> iris[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Sepal.Width'</span>]</span>
+<span id="cb1-6">iris[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'total_length'</span>].describe()</span>
+<span id="cb1-7"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># two identical results:</span></span>
+<span id="cb1-8">iris.loc[iris[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'total_length'</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'total_length'</span>]</span>
+<span id="cb1-9">iris[iris[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'total_length'</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10</span>][<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'total_length'</span>]</span>
+<span id="cb1-10"></span>
+<span id="cb1-11">iris.loc[iris[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'total_length'</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'total_length'</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">100</span></span></code></pre></div>
+</div>
+<div class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> statsmodels.api <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> sm</span>
+<span id="cb2-2"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> pandas</span>
+<span id="cb2-3">df <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> sm.datasets.get_rdataset(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Guerry"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"HistData"</span>).data</span>
+<span id="cb2-4"></span>
+<span id="cb2-5">fm <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> sm.formula.ols(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Lottery ~ Literacy + Wealth + C(Region)'</span>, data <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> df).fit()</span>
+<span id="cb2-6"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(fm.summary())</span>
+<span id="cb2-7"></span>
+<span id="cb2-8">fig <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> sm.graphics.influence_plot(fm, criterion<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"cooks"</span>)</span>
+<span id="cb2-9">fig.show()</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                Lottery   R-squared:                       0.338
+Model:                            OLS   Adj. R-squared:                  0.287
+Method:                 Least Squares   F-statistic:                     6.636
+Date:                Tue, 04 Jul 2023   Prob (F-statistic):           1.07e-05
+Time:                        13:13:31   Log-Likelihood:                -375.30
+No. Observations:                  85   AIC:                             764.6
+Df Residuals:                      78   BIC:                             781.7
+Df Model:                           6                                         
+Covariance Type:            nonrobust                                         
+==================================================================================
+                     coef    std err          t      P&gt;|t|      [0.025      0.975]
+----------------------------------------------------------------------------------
+Intercept         38.6517      9.456      4.087      0.000      19.826      57.478
+C(Region)[T.E]   -15.4278      9.727     -1.586      0.117     -34.793       3.938
+C(Region)[T.N]   -10.0170      9.260     -1.082      0.283     -28.453       8.419
+C(Region)[T.S]    -4.5483      7.279     -0.625      0.534     -19.039       9.943
+C(Region)[T.W]   -10.0913      7.196     -1.402      0.165     -24.418       4.235
+Literacy          -0.1858      0.210     -0.886      0.378      -0.603       0.232
+Wealth             0.4515      0.103      4.390      0.000       0.247       0.656
+==============================================================================
+Omnibus:                        3.049   Durbin-Watson:                   1.785
+Prob(Omnibus):                  0.218   Jarque-Bera (JB):                2.694
+Skew:                          -0.340   Prob(JB):                        0.260
+Kurtosis:                       2.454   Cond. No.                         371.
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/var/folders/jl/yt17k74x37l_mv93mfg5h7n00000gn/T/ipykernel_20516/2972633954.py:9: UserWarning:
+
+Matplotlib is currently using module://matplotlib_inline.backend_inline, which is a non-GUI backend, so cannot show the figure.
+</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="https://sbloggel.netlify.app/posts/2023-07-03-python-pandas/index_files/figure-html/cell-3-output-3.png" width="595" height="462"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> seaborn <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> sns</span>
+<span id="cb5-2"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> matplotlib <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> mp</span>
+<span id="cb5-3"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> matplotlib.pyplot <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> plt</span>
+<span id="cb5-4"></span>
+<span id="cb5-5"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Apply the default theme</span></span>
+<span id="cb5-6">sns.set_theme()</span>
+<span id="cb5-7"></span>
+<span id="cb5-8"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Load an example dataset</span></span>
+<span id="cb5-9"></span>
+<span id="cb5-10"></span>
+<span id="cb5-11">dots <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> sns.load_dataset(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"dots"</span>)</span>
+<span id="cb5-12"></span>
+<span id="cb5-13">sns.<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">set</span>(rc<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>{<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'figure.figsize'</span>:(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>)})</span>
+<span id="cb5-14"></span>
+<span id="cb5-15">sns.relplot(</span>
+<span id="cb5-16">  data<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>dots, kind<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"line"</span>,</span>
+<span id="cb5-17">  x<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"time"</span>, y<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"firing_rate"</span>, col<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"align"</span>, <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># style = "choice",</span></span>
+<span id="cb5-18">  hue<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"choice"</span>, size<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"coherence"</span>, </span>
+<span id="cb5-19">  facet_kws<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">dict</span>(sharex<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">False</span>)</span>
+<span id="cb5-20">  )</span></code></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="https://sbloggel.netlify.app/posts/2023-07-03-python-pandas/index_files/figure-html/cell-4-output-1.png" width="1046" height="464"></p>
+</div>
+</div>
+
+
+
+ ]]></description>
+  <category>Python</category>
+  <guid>https://sbloggel.netlify.app/posts/2023-07-03-python-pandas/index.html</guid>
+  <pubDate>Sun, 02 Jul 2023 22:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Specifying mixed effects in lme4</title>
   <dc:creator>Sebastian Gerdes</dc:creator>
@@ -5762,416 +6017,6 @@ font-style: inherit;">scale_y_log10</span>()</span></code></pre></div>
  ]]></description>
   <category>R</category>
   <guid>https://sbloggel.netlify.app/posts/2022-10-16-retrieving-and-plotting-covid-19-data/index.html</guid>
-  <pubDate>Sat, 15 Oct 2022 22:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Leo’s project</title>
-  <dc:creator>Sebastian Gerdes</dc:creator>
-  <link>https://sbloggel.netlify.app/posts/2022-10-16-leo-s-project/index.html</link>
-  <description><![CDATA[ 
-
-
-
-<section id="part-1-simulating-data" class="level1">
-<h1>Part 1: Simulating data</h1>
-<section id="background" class="level2">
-<h2 class="anchored" data-anchor-id="background">Background</h2>
-<p>In hematological cancers, blood stem cells can be transferred to a patient after chemothery. The blood stem cells may proliferate in the patient and populate the patient’s peripheral blood afterwards.</p>
-<p>Chimerism is defined as the ratio of the number of blood cells originating from the transplanted cells and the total number of blood cells in the patient’s blood.</p>
-<p>Here, a sigmoidal model for the temporal development of chimerism after transplantion is introduced and in silico data are simulated.</p>
-<p>Leo also posted a question about this model on the <code>STAN</code> forum: https://discourse.mc-stan.org/t/bad-diagnostics-with-multilevel-models/29091?u=leonhardschwager</p>
-</section>
-<section id="initialization" class="level2">
-<h2 class="anchored" data-anchor-id="initialization">Initialization</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'tidyverse'</span>)</span>
-<span id="cb1-2"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">set.seed</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>)</span></code></pre></div>
-</div>
-</section>
-<section id="definition-of-model-function-to-predict-chimerism" class="level2">
-<h2 class="anchored" data-anchor-id="definition-of-model-function-to-predict-chimerism">Definition of model function to predict chimerism</h2>
-<ul>
-<li>Source: https://en.wikipedia.org/wiki/Logistic_function</li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1">calc_chimerism <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">function</span>(day, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">d =</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">b =</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">e =</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">5</span>) {</span>
-<span id="cb2-2"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># day: for which day the chimerism shall be calculated</span></span>
-<span id="cb2-3"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># d: maximum value of the curve</span></span>
-<span id="cb2-4"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># b: the logistic growth rate or steepness of the curve</span></span>
-<span id="cb2-5"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># e:  location of the midpoint of the sigmoid function</span></span>
-<span id="cb2-6">  d <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span> (<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">exp</span>(<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span>b <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> (day <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span> e)))</span>
-<span id="cb2-7">}</span>
-<span id="cb2-8"></span>
-<span id="cb2-9"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># plot the function with default values:</span></span>
-<span id="cb2-10"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">ggplot</span>() <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">stat_function</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">fun =</span> calc_chimerism) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> </span>
-<span id="cb2-11">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">xlim</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">10</span>) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">labs</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">x =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'Time'</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">y =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'Chimerism'</span>)</span></code></pre></div>
-<div class="cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2022-10-16-leo-s-project/index_files/figure-html/define_chimerism_function-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-</section>
-<section id="set-parameters" class="level2">
-<h2 class="anchored" data-anchor-id="set-parameters">Set parameters</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1">nr_of_patients <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">10</span></span>
-<span id="cb3-2">nr_of_measurements <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">10</span> <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># per patient</span></span>
-<span id="cb3-3">d <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">runif</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">n =</span> nr_of_patients, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">min =</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.6</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">max =</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>)</span>
-<span id="cb3-4">b <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">rnorm</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">n =</span> nr_of_patients, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">mean =</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">sd =</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.1</span>)</span>
-<span id="cb3-5">e <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">runif</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">n =</span> nr_of_patients, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">min =</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">5</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">max =</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">15</span>)</span></code></pre></div>
-</div>
-</section>
-<section id="construct-independent-values" class="level2">
-<h2 class="anchored" data-anchor-id="construct-independent-values">Construct independent values</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1">dat <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">tibble</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">patient_id =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">factor</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">:</span>nr_of_patients), </span>
-<span id="cb4-2">              <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">d =</span> d, </span>
-<span id="cb4-3">              <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">b =</span> b, </span>
-<span id="cb4-4">              <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">e =</span> e) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">%&gt;%</span></span>
-<span id="cb4-5">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">expand_grid</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">measurement =</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">:</span>nr_of_measurements)</span>
-<span id="cb4-6"></span>
-<span id="cb4-7"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># compute timepoints symetrical equidistant </span></span>
-<span id="cb4-8"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># in both directions of the sigmoid midpoint </span></span>
-<span id="cb4-9"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># of the curve:</span></span>
-<span id="cb4-10">dat<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span>day <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> dat<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span>e <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> dat<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span>measurement <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span> nr_of_measurements</span></code></pre></div>
-</div>
-</section>
-<section id="apply-model-function-to-calculate-dependendant-values" class="level2">
-<h2 class="anchored" data-anchor-id="apply-model-function-to-calculate-dependendant-values">Apply model function to calculate dependendant values</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1">dat<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span>chimerism <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">calc_chimerism</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">day =</span> dat<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span>day, </span>
-<span id="cb5-2">                                <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">d =</span> dat<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span>d, </span>
-<span id="cb5-3">                                <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">b =</span> dat<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span>b, </span>
-<span id="cb5-4">                                <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">e =</span> dat<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span>e)</span></code></pre></div>
-</div>
-</section>
-<section id="plot-the-simulated-data" class="level2">
-<h2 class="anchored" data-anchor-id="plot-the-simulated-data">Plot the simulated data</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">ggplot</span>(dat, <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">aes</span>(day, chimerism)) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> </span>
-<span id="cb6-2">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">geom_point</span>() <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">geom_line</span>() <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> </span>
-<span id="cb6-3">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">facet_wrap</span>(<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">~</span> patient_id, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">ncol =</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">scales =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'free_x'</span>) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> </span>
-<span id="cb6-4">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">xlim</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>, <span class="cn" style="color: #8f5902;
-background-color: null;
-font-style: inherit;">NA</span>) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">ylim</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>)</span></code></pre></div>
-<div class="cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2022-10-16-leo-s-project/index_files/figure-html/plot_data-1.png" class="img-fluid" width="672"></p>
-</div>
-<div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">ggplot</span>(dat, <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">aes</span>(day, chimerism, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">color =</span> patient_id)) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> </span>
-<span id="cb7-2">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">geom_point</span>() <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">geom_line</span>() <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> </span>
-<span id="cb7-3">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">ylim</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>)</span></code></pre></div>
-<div class="cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2022-10-16-leo-s-project/index_files/figure-html/plot_data-2.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-</section>
-<section id="conclusion" class="level2">
-<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
-</section>
-</section>
-<section id="part-2-fitting-models" class="level1">
-<h1>Part 2: Fitting models</h1>
-<section id="fitting-a-simple-model" class="level2">
-<h2 class="anchored" data-anchor-id="fitting-a-simple-model">Fitting a simple model</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'brms'</span>)</span></code></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: Rcpp</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading 'brms' package (version 2.19.0). Useful instructions
-can be found by typing help('brms'). A more detailed introduction
-to the package is available through vignette('brms_overview').</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>
-Attaching package: 'brms'</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following object is masked from 'package:stats':
-
-    ar</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># help(package = 'brms')</span></span>
-<span id="cb13-2"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># prior1 &lt;- prior(normal(1, 0.1), nlpar = ')</span></span></code></pre></div>
-</div>
-
-
-</section>
-</section>
-
- ]]></description>
-  <category>R</category>
-  <guid>https://sbloggel.netlify.app/posts/2022-10-16-leo-s-project/index.html</guid>
   <pubDate>Sat, 15 Oct 2022 22:00:00 GMT</pubDate>
 </item>
 </channel>
