@@ -2,122 +2,126 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://sbloggel.netlify.app/about.html</loc>
-    <lastmod>2023-07-04T11:31:59.704Z</lastmod>
+    <lastmod>2023-07-04T18:23:47.689Z</lastmod>
   </url>
   <url>
     <loc>https://sbloggel.netlify.app/posts/2022-09-08-humidity/index.html</loc>
-    <lastmod>2023-07-04T11:31:58.028Z</lastmod>
+    <lastmod>2023-07-04T18:23:45.885Z</lastmod>
   </url>
   <url>
     <loc>https://sbloggel.netlify.app/posts/2022-10-19-model-meadow/index.html</loc>
-    <lastmod>2023-07-04T11:31:57.021Z</lastmod>
+    <lastmod>2023-07-04T18:23:44.870Z</lastmod>
   </url>
   <url>
     <loc>https://sbloggel.netlify.app/posts/2022-09-08-chess-ressources/index.html</loc>
-    <lastmod>2023-07-04T11:31:56.276Z</lastmod>
+    <lastmod>2023-07-04T18:23:44.123Z</lastmod>
   </url>
   <url>
     <loc>https://sbloggel.netlify.app/posts/2023-03-17-goodfellow-deep-learning/index.html</loc>
-    <lastmod>2023-07-04T11:31:55.545Z</lastmod>
+    <lastmod>2023-07-04T18:23:43.395Z</lastmod>
   </url>
   <url>
     <loc>https://sbloggel.netlify.app/posts/2022-10-25-simulate-time-to-event-data/index.html</loc>
-    <lastmod>2023-07-04T11:31:54.574Z</lastmod>
+    <lastmod>2023-07-04T18:23:42.393Z</lastmod>
   </url>
   <url>
     <loc>https://sbloggel.netlify.app/posts/2022-09-08-psychopharmaca-and-time/index.html</loc>
-    <lastmod>2023-07-04T11:31:53.621Z</lastmod>
+    <lastmod>2023-07-04T18:23:41.388Z</lastmod>
   </url>
   <url>
     <loc>https://sbloggel.netlify.app/posts/2023-06-08-specifying-mixed-effects-models/index.html</loc>
-    <lastmod>2023-07-04T11:31:52.768Z</lastmod>
+    <lastmod>2023-07-04T18:23:40.510Z</lastmod>
   </url>
   <url>
     <loc>https://sbloggel.netlify.app/posts/2023-03-17-official-python-tutorial/index.html</loc>
-    <lastmod>2023-07-04T11:31:51.740Z</lastmod>
+    <lastmod>2023-07-04T18:23:39.498Z</lastmod>
   </url>
   <url>
     <loc>https://sbloggel.netlify.app/posts/2022-07-19-sir-model/index.html</loc>
-    <lastmod>2023-07-04T11:31:50.893Z</lastmod>
+    <lastmod>2023-07-04T18:23:38.580Z</lastmod>
   </url>
   <url>
     <loc>https://sbloggel.netlify.app/posts/2022-10-04-sir-like-model-with-desolve-in-deterministic-and-stochastic-version/index.html</loc>
-    <lastmod>2023-07-04T11:31:49.903Z</lastmod>
+    <lastmod>2023-07-04T18:23:37.596Z</lastmod>
   </url>
   <url>
     <loc>https://sbloggel.netlify.app/posts/2023-01-20-sirs-model-dynamics/index.html</loc>
-    <lastmod>2023-07-04T11:31:48.937Z</lastmod>
+    <lastmod>2023-07-04T18:23:36.679Z</lastmod>
   </url>
   <url>
     <loc>https://sbloggel.netlify.app/posts/2022-09-08-antipsychotics/index.html</loc>
-    <lastmod>2023-07-04T11:31:48.027Z</lastmod>
+    <lastmod>2023-07-04T18:23:35.729Z</lastmod>
   </url>
   <url>
     <loc>https://sbloggel.netlify.app/posts/2023-02-02-strange-behavior-of-geom_area/index.html</loc>
-    <lastmod>2023-07-04T11:31:46.718Z</lastmod>
+    <lastmod>2023-07-04T18:23:34.416Z</lastmod>
   </url>
   <url>
     <loc>https://sbloggel.netlify.app/posts/2023-03-17-interesting-r-packages/index.html</loc>
-    <lastmod>2023-07-04T11:31:45.705Z</lastmod>
-  </url>
-  <url>
-    <loc>https://sbloggel.netlify.app/posts/2022-10-19-kids-per-person-and-carbonc-footprint/index.html</loc>
-    <lastmod>2023-07-04T11:31:44.933Z</lastmod>
+    <lastmod>2023-07-04T18:23:33.391Z</lastmod>
   </url>
   <url>
     <loc>https://sbloggel.netlify.app/posts/2022-10-16-retrieving-and-plotting-covid-19-data/index.html</loc>
-    <lastmod>2023-07-04T11:31:45.380Z</lastmod>
+    <lastmod>2023-07-04T18:23:32.694Z</lastmod>
+  </url>
+  <url>
+    <loc>https://sbloggel.netlify.app/posts/2022-10-19-kids-per-person-and-carbonc-footprint/index.html</loc>
+    <lastmod>2023-07-04T18:23:32.217Z</lastmod>
+  </url>
+  <url>
+    <loc>https://sbloggel.netlify.app/posts/2023-07-04-python-statsmodels/python-statsmodels.html</loc>
+    <lastmod>2023-07-04T18:23:33.020Z</lastmod>
   </url>
   <url>
     <loc>https://sbloggel.netlify.app/posts/2022-11-24-r-interfaces-to-trial-registries/index.html</loc>
-    <lastmod>2023-07-04T11:31:46.199Z</lastmod>
+    <lastmod>2023-07-04T18:23:33.888Z</lastmod>
   </url>
   <url>
     <loc>https://sbloggel.netlify.app/posts/2023-01-05-contribution-plots/index.html</loc>
-    <lastmod>2023-07-04T11:31:47.193Z</lastmod>
+    <lastmod>2023-07-04T18:23:34.895Z</lastmod>
   </url>
   <url>
     <loc>https://sbloggel.netlify.app/posts/2022-09-08-timeline/index.html</loc>
-    <lastmod>2023-07-04T11:31:48.460Z</lastmod>
+    <lastmod>2023-07-04T18:23:36.226Z</lastmod>
   </url>
   <url>
     <loc>https://sbloggel.netlify.app/posts/2023-05-06-minimal-traffic-jam-model/index.html</loc>
-    <lastmod>2023-07-04T11:31:49.371Z</lastmod>
+    <lastmod>2023-07-04T18:23:37.132Z</lastmod>
   </url>
   <url>
     <loc>https://sbloggel.netlify.app/posts/2022-10-16-leo-s-project/index.html</loc>
-    <lastmod>2023-07-04T11:31:50.377Z</lastmod>
+    <lastmod>2023-07-04T18:23:38.069Z</lastmod>
   </url>
   <url>
     <loc>https://sbloggel.netlify.app/posts/2023-01-10-sustainibility-data/index.html</loc>
-    <lastmod>2023-07-04T11:31:52.216Z</lastmod>
+    <lastmod>2023-07-04T18:23:39.980Z</lastmod>
   </url>
   <url>
     <loc>https://sbloggel.netlify.app/posts/2023-03-17-coursera-deep-learning/index.html</loc>
-    <lastmod>2023-07-04T11:31:53.172Z</lastmod>
+    <lastmod>2023-07-04T18:23:40.921Z</lastmod>
   </url>
   <url>
     <loc>https://sbloggel.netlify.app/posts/2023-02-27-how-bad-are-bananas/index.html</loc>
-    <lastmod>2023-07-04T11:31:54.088Z</lastmod>
+    <lastmod>2023-07-04T18:23:41.853Z</lastmod>
   </url>
   <url>
     <loc>https://sbloggel.netlify.app/posts/2023-07-03-python-pandas/index.html</loc>
-    <lastmod>2023-07-04T11:31:55.262Z</lastmod>
+    <lastmod>2023-07-04T18:23:43.094Z</lastmod>
   </url>
   <url>
     <loc>https://sbloggel.netlify.app/posts/2023-02_21-manual-colors-in-ggplot2/index.html</loc>
-    <lastmod>2023-07-04T11:31:56.017Z</lastmod>
+    <lastmod>2023-07-04T18:23:43.849Z</lastmod>
   </url>
   <url>
     <loc>https://sbloggel.netlify.app/posts/2023-05-06-longtermism/index.html</loc>
-    <lastmod>2023-07-04T11:31:56.534Z</lastmod>
+    <lastmod>2023-07-04T18:23:44.403Z</lastmod>
   </url>
   <url>
     <loc>https://sbloggel.netlify.app/posts/2023-03-17-mcelreath-statistical-rethinking/index.html</loc>
-    <lastmod>2023-07-04T11:31:57.297Z</lastmod>
+    <lastmod>2023-07-04T18:23:45.179Z</lastmod>
   </url>
   <url>
     <loc>https://sbloggel.netlify.app/index.html</loc>
-    <lastmod>2023-07-04T11:31:59.452Z</lastmod>
+    <lastmod>2023-07-04T18:23:47.445Z</lastmod>
   </url>
 </urlset>

@@ -10,7 +10,260 @@
 <atom:link href="https://sbloggel.netlify.app/index.xml" rel="self" type="application/rss+xml"/>
 <description>Seb&#39;s private blog about statistics and other topics</description>
 <generator>quarto-1.3.433</generator>
-<lastBuildDate>Sun, 02 Jul 2023 22:00:00 GMT</lastBuildDate>
+<lastBuildDate>Mon, 03 Jul 2023 22:00:00 GMT</lastBuildDate>
+<item>
+  <title>Exploring the Python library statsmodels</title>
+  <dc:creator>Sebastian Gerdes</dc:creator>
+  <link>https://sbloggel.netlify.app/posts/2023-07-04-python-statsmodels/python-statsmodels.html</link>
+  <description><![CDATA[ 
+
+
+
+<section id="plot_fit" class="level2">
+<h2 class="anchored" data-anchor-id="plot_fit">plot_fit</h2>
+<ul>
+<li><a href="https://www.statsmodels.org/dev/generated/statsmodels.graphics.regressionplots.plot_fit.html">Link</a></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> matplotlib.pyplot <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> plt</span>
+<span id="cb1-2"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> np</span>
+<span id="cb1-3"></span>
+<span id="cb1-4"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> statsmodels.api <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> sm</span>
+<span id="cb1-5"></span>
+<span id="cb1-6">data <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> sm.datasets.statecrime.load_pandas().data</span>
+<span id="cb1-7">murder <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> data[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'murder'</span>]</span>
+<span id="cb1-8">X <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> data[[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'poverty'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'hs_grad'</span>]].copy()</span>
+<span id="cb1-9">X[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'constant'</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span></span>
+<span id="cb1-10"></span>
+<span id="cb1-11">y <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> murder</span>
+<span id="cb1-12">model <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> sm.OLS(y, X)</span>
+<span id="cb1-13">results <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> model.fit()</span>
+<span id="cb1-14"></span>
+<span id="cb1-15"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Create a plot just for the variable 'Poverty':</span></span>
+<span id="cb1-16"></span>
+<span id="cb1-17">fig, ax <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> plt.subplots()</span>
+<span id="cb1-18">fig <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> sm.graphics.plot_fit(results, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, ax<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>ax)</span>
+<span id="cb1-19">ax.set_ylabel(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Murder Rate"</span>)</span>
+<span id="cb1-20">ax.set_xlabel(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Poverty Level"</span>)</span>
+<span id="cb1-21">ax.set_title(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Linear Regression"</span>)</span>
+<span id="cb1-22"></span>
+<span id="cb1-23">plt.show()</span></code></pre></div>
+<div class="cell-output-display">
+<p><img src="https://sbloggel.netlify.app/posts/2023-07-04-python-statsmodels/python-statsmodels_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="plot_regress_exog" class="level2">
+<h2 class="anchored" data-anchor-id="plot_regress_exog">plot_regress_exog</h2>
+<ul>
+<li><a href="https://www.statsmodels.org/dev/generated/statsmodels.graphics.regressionplots.plot_regress_exog.html#">Link</a></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> statsmodels.api <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> sm</span>
+<span id="cb2-2"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> matplotlib.pyplot <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> plt</span>
+<span id="cb2-3"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> statsmodels.formula.api <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> smf</span>
+<span id="cb2-4"></span>
+<span id="cb2-5"></span>
+<span id="cb2-6">fig <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> plt.figure(figsize<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">8</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">6</span>))</span>
+<span id="cb2-7">crime_data <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> sm.datasets.statecrime.load_pandas()</span>
+<span id="cb2-8">results <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> smf.ols(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'murder ~ hs_grad + urban + poverty + single'</span>,</span>
+<span id="cb2-9">                   data<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>crime_data.data).fit()</span>
+<span id="cb2-10">sm.graphics.plot_regress_exog(results, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'poverty'</span>, fig<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>fig)</span>
+<span id="cb2-11">plt.show()</span></code></pre></div>
+<div class="cell-output-display">
+<p><img src="https://sbloggel.netlify.app/posts/2023-07-04-python-statsmodels/python-statsmodels_files/figure-html/unnamed-chunk-2-3.png" class="img-fluid" width="768"></p>
+</div>
+</div>
+</section>
+<section id="plot_partregress" class="level2">
+<h2 class="anchored" data-anchor-id="plot_partregress">plot_partregress</h2>
+<ul>
+<li><a href="https://www.statsmodels.org/dev/generated/statsmodels.graphics.regressionplots.plot_partregress.html">Link</a></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">crime_data <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> sm.datasets.statecrime.load_pandas()</span>
+<span id="cb3-2">sm.graphics.plot_partregress(endog<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'murder'</span>, exog_i<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'hs_grad'</span>,</span>
+<span id="cb3-3">                              exog_others<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'urban'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'poverty'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'single'</span>],</span>
+<span id="cb3-4">                              data<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>crime_data.data, obs_labels<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">False</span>)</span>
+<span id="cb3-5">plt.show()</span></code></pre></div>
+<div class="cell-output-display">
+<p><img src="https://sbloggel.netlify.app/posts/2023-07-04-python-statsmodels/python-statsmodels_files/figure-html/unnamed-chunk-3-5.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="plot_partregress_grid" class="level2">
+<h2 class="anchored" data-anchor-id="plot_partregress_grid">plot_partregress_grid</h2>
+<ul>
+<li><a href="https://www.statsmodels.org/dev/generated/statsmodels.graphics.regressionplots.plot_partregress_grid.html">Link</a></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> matplotlib.pyplot <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> plt</span>
+<span id="cb4-2"></span>
+<span id="cb4-3"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> statsmodels.api <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> sm</span>
+<span id="cb4-4"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> statsmodels.formula.api <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> smf</span>
+<span id="cb4-5"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">from</span> statsmodels.graphics.regressionplots <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> plot_partregress_grid</span>
+<span id="cb4-6"></span>
+<span id="cb4-7">fig <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> plt.figure(figsize<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">8</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">6</span>))</span>
+<span id="cb4-8">crime_data <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> sm.datasets.statecrime.load_pandas()</span>
+<span id="cb4-9">results <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> smf.ols(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'murder ~ hs_grad + urban + poverty + single'</span>,</span>
+<span id="cb4-10">                  data<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>crime_data.data).fit()</span>
+<span id="cb4-11">plot_partregress_grid(results, fig<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>fig)</span>
+<span id="cb4-12">plt.show()</span></code></pre></div>
+<div class="cell-output-display">
+<p><img src="https://sbloggel.netlify.app/posts/2023-07-04-python-statsmodels/python-statsmodels_files/figure-html/unnamed-chunk-4-7.png" class="img-fluid" width="768"></p>
+</div>
+</div>
+
+
+</section>
+
+ ]]></description>
+  <category>Python</category>
+  <guid>https://sbloggel.netlify.app/posts/2023-07-04-python-statsmodels/python-statsmodels.html</guid>
+  <pubDate>Mon, 03 Jul 2023 22:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Python pandas</title>
   <dc:creator>Sebastian Gerdes</dc:creator>
@@ -5847,177 +6100,6 @@ font-style: inherit;">'log'</span>)</span></code></pre></div>
   <category>R</category>
   <guid>https://sbloggel.netlify.app/posts/2022-10-19-model-meadow/index.html</guid>
   <pubDate>Tue, 18 Oct 2022 22:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Retrieving and plotting COVID-19 data</title>
-  <dc:creator>Sebastian Gerdes</dc:creator>
-  <link>https://sbloggel.netlify.app/posts/2022-10-16-retrieving-and-plotting-covid-19-data/index.html</link>
-  <description><![CDATA[ 
-
-
-
-<section id="background" class="level2">
-<h2 class="anchored" data-anchor-id="background">Background</h2>
-<p>The COVID19 package allows to conveniently retrieve statistical data about the COVID-19 pandemy. Here, the data for Germany are retrieved and two exploratory plots are created.</p>
-</section>
-<section id="loading-libraries" class="level2">
-<h2 class="anchored" data-anchor-id="loading-libraries">Loading libraries</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'ggplot2'</span>)</span>
-<span id="cb1-2"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'COVID19'</span>)</span></code></pre></div>
-</div>
-</section>
-<section id="retrieving-the-data" class="level2">
-<h2 class="anchored" data-anchor-id="retrieving-the-data">Retrieving the data</h2>
-<div class="cell" data-hash="index_cache/html/data_retrieval_70c9100d15bd9b074e25663966460e74">
-<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1">deu <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">covid19</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'Germany'</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">level =</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>) </span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>We have invested a lot of time and effort in creating COVID-19 Data Hub, please cite the following when using it:
-
-To cite package 'COVID19' in publications use:
-
-  Guidotti, E., Ardia, D., (2020), "COVID-19 Data Hub", Journal of Open
-  Source Software 5(51):2376, doi: 10.21105/joss.02376.
-
-A BibTeX entry for LaTeX users is
-
-  @Article{,
-    title = {COVID-19 Data Hub},
-    year = {2020},
-    doi = {10.21105/joss.02376},
-    author = {Emanuele Guidotti and David Ardia},
-    journal = {Journal of Open Source Software},
-    volume = {5},
-    number = {51},
-    pages = {2376},
-  }
-
-To hide this message use 'verbose = FALSE'.</code></pre>
-</div>
-</div>
-</section>
-<section id="plotting-total-number-of-confirmed-cases" class="level2">
-<h2 class="anchored" data-anchor-id="plotting-total-number-of-confirmed-cases">Plotting total number of confirmed cases</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">ggplot</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">data =</span> deu, <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">aes</span>(date, confirmed)) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">geom_point</span>() <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> </span>
-<span id="cb4-2">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">geom_smooth</span>()  <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">scale_y_log10</span>()</span></code></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>`geom_smooth()` using method = 'gam' and formula = 'y ~ s(x, bs = "cs")'</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: Removed 11 rows containing non-finite values (`stat_smooth()`).</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: Removed 11 rows containing missing values (`geom_point()`).</code></pre>
-</div>
-<div class="cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2022-10-16-retrieving-and-plotting-covid-19-data/index_files/figure-html/plot_confirmed_cases_total-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-</section>
-<section id="plotting-new-cases" class="level2">
-<h2 class="anchored" data-anchor-id="plotting-new-cases">Plotting new cases</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1">dat <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">data.frame</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">date =</span> deu<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span>date[<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>], <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">new_cases =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">diff</span>(deu<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span>confirmed))</span>
-<span id="cb8-2"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">ggplot</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">data =</span> dat, <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">aes</span>(date, new_cases)) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">geom_point</span>() <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> </span>
-<span id="cb8-3">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">geom_smooth</span>()  <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">scale_y_log10</span>()</span></code></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>`geom_smooth()` using method = 'gam' and formula = 'y ~ s(x, bs = "cs")'</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: Removed 18 rows containing non-finite values (`stat_smooth()`).</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: Removed 18 rows containing missing values (`geom_point()`).</code></pre>
-</div>
-<div class="cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2022-10-16-retrieving-and-plotting-covid-19-data/index_files/figure-html/plot_new_confirmed_cases-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-</section>
-<section id="conclusion" class="level2">
-<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
-<p>This package allows convenient retrieval of a lot of data about the COVID-19 pandemy.</p>
-
-
-</section>
-
- ]]></description>
-  <category>R</category>
-  <guid>https://sbloggel.netlify.app/posts/2022-10-16-retrieving-and-plotting-covid-19-data/index.html</guid>
-  <pubDate>Sat, 15 Oct 2022 22:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>

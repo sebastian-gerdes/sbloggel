@@ -1,0 +1,83 @@
+---
+title: Exploring the Python library statsmodels
+author: Sebastian Gerdes
+date: 2023-07-04
+categories:
+  - Python
+toc: true
+engine: knitr
+---
+
+## plot_fit
+* [Link](https://www.statsmodels.org/dev/generated/statsmodels.graphics.regressionplots.plot_fit.html)
+```{python}
+import matplotlib.pyplot as plt
+import numpy as np
+
+import statsmodels.api as sm
+
+data = sm.datasets.statecrime.load_pandas().data
+murder = data['murder']
+X = data[['poverty', 'hs_grad']].copy()
+X['constant'] = 1
+
+y = murder
+model = sm.OLS(y, X)
+results = model.fit()
+
+# Create a plot just for the variable 'Poverty':
+
+fig, ax = plt.subplots()
+fig = sm.graphics.plot_fit(results, 0, ax=ax)
+ax.set_ylabel("Murder Rate")
+ax.set_xlabel("Poverty Level")
+ax.set_title("Linear Regression")
+
+plt.show()
+
+```
+
+## plot_regress_exog
+* [Link](https://www.statsmodels.org/dev/generated/statsmodels.graphics.regressionplots.plot_regress_exog.html#)
+```{python}
+import statsmodels.api as sm
+import matplotlib.pyplot as plt
+import statsmodels.formula.api as smf
+
+
+fig = plt.figure(figsize=(8, 6))
+crime_data = sm.datasets.statecrime.load_pandas()
+results = smf.ols('murder ~ hs_grad + urban + poverty + single',
+                   data=crime_data.data).fit()
+sm.graphics.plot_regress_exog(results, 'poverty', fig=fig)
+plt.show()
+```
+
+## plot_partregress
+* [Link](https://www.statsmodels.org/dev/generated/statsmodels.graphics.regressionplots.plot_partregress.html)
+```{python}
+crime_data = sm.datasets.statecrime.load_pandas()
+sm.graphics.plot_partregress(endog='murder', exog_i='hs_grad',
+                              exog_others=['urban', 'poverty', 'single'],
+                              data=crime_data.data, obs_labels=False)
+plt.show()
+
+```
+
+## plot_partregress_grid
+* [Link](https://www.statsmodels.org/dev/generated/statsmodels.graphics.regressionplots.plot_partregress_grid.html)
+```{python}
+
+import matplotlib.pyplot as plt
+
+import statsmodels.api as sm
+import statsmodels.formula.api as smf
+from statsmodels.graphics.regressionplots import plot_partregress_grid
+
+fig = plt.figure(figsize=(8, 6))
+crime_data = sm.datasets.statecrime.load_pandas()
+results = smf.ols('murder ~ hs_grad + urban + poverty + single',
+                  data=crime_data.data).fit()
+plot_partregress_grid(results, fig=fig)
+plt.show()
+```

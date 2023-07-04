@@ -364,34 +364,6 @@
     "text": "Flowcharts\nSource: https://cran.r-project.org/web/packages/Gmisc/vignettes/Grid-based_flowcharts.html"
   },
   {
-    "objectID": "posts/2022-10-19-kids-per-person-and-carbonc-footprint/index.html",
-    "href": "posts/2022-10-19-kids-per-person-and-carbonc-footprint/index.html",
-    "title": "Kids per person and carbon footprint",
-    "section": "",
-    "text": "Here I want collect a few resources on how much the number of kids you get affects your carbone footprint."
-  },
-  {
-    "objectID": "posts/2022-10-19-kids-per-person-and-carbonc-footprint/index.html#background",
-    "href": "posts/2022-10-19-kids-per-person-and-carbonc-footprint/index.html#background",
-    "title": "Kids per person and carbon footprint",
-    "section": "",
-    "text": "Here I want collect a few resources on how much the number of kids you get affects your carbone footprint."
-  },
-  {
-    "objectID": "posts/2022-10-19-kids-per-person-and-carbonc-footprint/index.html#interesting-links",
-    "href": "posts/2022-10-19-kids-per-person-and-carbonc-footprint/index.html#interesting-links",
-    "title": "Kids per person and carbon footprint",
-    "section": "Interesting links",
-    "text": "Interesting links\n\nhttps://iopscience.iop.org/article/10.1088/1748-9326/aa7541/meta\nhttps://www.lunduniversity.lu.se/article/four-lifestyle-choices-most-reduce-your-carbon-footprint\nhttps://www.arte.tv/de/videos/086893-003-A/re-kinderlos-dem-klima-zuliebe/"
-  },
-  {
-    "objectID": "posts/2022-10-19-kids-per-person-and-carbonc-footprint/index.html#calculations",
-    "href": "posts/2022-10-19-kids-per-person-and-carbonc-footprint/index.html#calculations",
-    "title": "Kids per person and carbon footprint",
-    "section": "Calculations",
-    "text": "Calculations\n\nnr_of_generations_considered &lt;-10\nnr_of_kids_per_person &lt;- 1.7\n\nnr_of_persons &lt;- function(nr_of_generations_considered, nr_of_kids_per_person = 1.7) {\n  responsibility_per_kid &lt;-(1/2)^(1:nr_of_generations_considered)\n  kids_per_generations &lt;- nr_of_kids_per_person^(1:nr_of_generations_considered)\n  total &lt;- sum(responsibility_per_kid * kids_per_generations)\n  return(total)\n}\n\nnr_of_persons_v &lt;- Vectorize(nr_of_persons)\n\nplot(nr_of_persons_v, 1, 100, log = 'x', xlab = 'Number of generations considered on log scale',\n     ylab = 'For how many descendents a person is responsible')\n\n\n\n\nDo calcuation with geometric series:\n\nfoo &lt;- function(nr_of_kids_per_person) {\n  1 / (1 - (nr_of_kids_per_person / 2))\n}  \nplot(foo, 0, 1.9)"
-  },
-  {
     "objectID": "posts/2022-10-16-retrieving-and-plotting-covid-19-data/index.html",
     "href": "posts/2022-10-16-retrieving-and-plotting-covid-19-data/index.html",
     "title": "Retrieving and plotting COVID-19 data",
@@ -439,6 +411,69 @@
     "title": "Retrieving and plotting COVID-19 data",
     "section": "Conclusion",
     "text": "Conclusion\nThis package allows convenient retrieval of a lot of data about the COVID-19 pandemy."
+  },
+  {
+    "objectID": "posts/2022-10-19-kids-per-person-and-carbonc-footprint/index.html",
+    "href": "posts/2022-10-19-kids-per-person-and-carbonc-footprint/index.html",
+    "title": "Kids per person and carbon footprint",
+    "section": "",
+    "text": "Here I want collect a few resources on how much the number of kids you get affects your carbone footprint."
+  },
+  {
+    "objectID": "posts/2022-10-19-kids-per-person-and-carbonc-footprint/index.html#background",
+    "href": "posts/2022-10-19-kids-per-person-and-carbonc-footprint/index.html#background",
+    "title": "Kids per person and carbon footprint",
+    "section": "",
+    "text": "Here I want collect a few resources on how much the number of kids you get affects your carbone footprint."
+  },
+  {
+    "objectID": "posts/2022-10-19-kids-per-person-and-carbonc-footprint/index.html#interesting-links",
+    "href": "posts/2022-10-19-kids-per-person-and-carbonc-footprint/index.html#interesting-links",
+    "title": "Kids per person and carbon footprint",
+    "section": "Interesting links",
+    "text": "Interesting links\n\nhttps://iopscience.iop.org/article/10.1088/1748-9326/aa7541/meta\nhttps://www.lunduniversity.lu.se/article/four-lifestyle-choices-most-reduce-your-carbon-footprint\nhttps://www.arte.tv/de/videos/086893-003-A/re-kinderlos-dem-klima-zuliebe/"
+  },
+  {
+    "objectID": "posts/2022-10-19-kids-per-person-and-carbonc-footprint/index.html#calculations",
+    "href": "posts/2022-10-19-kids-per-person-and-carbonc-footprint/index.html#calculations",
+    "title": "Kids per person and carbon footprint",
+    "section": "Calculations",
+    "text": "Calculations\n\nnr_of_generations_considered &lt;-10\nnr_of_kids_per_person &lt;- 1.7\n\nnr_of_persons &lt;- function(nr_of_generations_considered, nr_of_kids_per_person = 1.7) {\n  responsibility_per_kid &lt;-(1/2)^(1:nr_of_generations_considered)\n  kids_per_generations &lt;- nr_of_kids_per_person^(1:nr_of_generations_considered)\n  total &lt;- sum(responsibility_per_kid * kids_per_generations)\n  return(total)\n}\n\nnr_of_persons_v &lt;- Vectorize(nr_of_persons)\n\nplot(nr_of_persons_v, 1, 100, log = 'x', xlab = 'Number of generations considered on log scale',\n     ylab = 'For how many descendents a person is responsible')\n\n\n\n\nDo calcuation with geometric series:\n\nfoo &lt;- function(nr_of_kids_per_person) {\n  1 / (1 - (nr_of_kids_per_person / 2))\n}  \nplot(foo, 0, 1.9)"
+  },
+  {
+    "objectID": "posts/2023-07-04-python-statsmodels/python-statsmodels.html",
+    "href": "posts/2023-07-04-python-statsmodels/python-statsmodels.html",
+    "title": "Exploring the Python library statsmodels",
+    "section": "",
+    "text": "Link\n\n\nimport matplotlib.pyplot as plt\nimport numpy as np\n\nimport statsmodels.api as sm\n\ndata = sm.datasets.statecrime.load_pandas().data\nmurder = data['murder']\nX = data[['poverty', 'hs_grad']].copy()\nX['constant'] = 1\n\ny = murder\nmodel = sm.OLS(y, X)\nresults = model.fit()\n\n# Create a plot just for the variable 'Poverty':\n\nfig, ax = plt.subplots()\nfig = sm.graphics.plot_fit(results, 0, ax=ax)\nax.set_ylabel(\"Murder Rate\")\nax.set_xlabel(\"Poverty Level\")\nax.set_title(\"Linear Regression\")\n\nplt.show()"
+  },
+  {
+    "objectID": "posts/2023-07-04-python-statsmodels/python-statsmodels.html#plot_fit",
+    "href": "posts/2023-07-04-python-statsmodels/python-statsmodels.html#plot_fit",
+    "title": "Exploring the Python library statsmodels",
+    "section": "",
+    "text": "Link\n\n\nimport matplotlib.pyplot as plt\nimport numpy as np\n\nimport statsmodels.api as sm\n\ndata = sm.datasets.statecrime.load_pandas().data\nmurder = data['murder']\nX = data[['poverty', 'hs_grad']].copy()\nX['constant'] = 1\n\ny = murder\nmodel = sm.OLS(y, X)\nresults = model.fit()\n\n# Create a plot just for the variable 'Poverty':\n\nfig, ax = plt.subplots()\nfig = sm.graphics.plot_fit(results, 0, ax=ax)\nax.set_ylabel(\"Murder Rate\")\nax.set_xlabel(\"Poverty Level\")\nax.set_title(\"Linear Regression\")\n\nplt.show()"
+  },
+  {
+    "objectID": "posts/2023-07-04-python-statsmodels/python-statsmodels.html#plot_regress_exog",
+    "href": "posts/2023-07-04-python-statsmodels/python-statsmodels.html#plot_regress_exog",
+    "title": "Exploring the Python library statsmodels",
+    "section": "plot_regress_exog",
+    "text": "plot_regress_exog\n\nLink\n\n\nimport statsmodels.api as sm\nimport matplotlib.pyplot as plt\nimport statsmodels.formula.api as smf\n\n\nfig = plt.figure(figsize=(8, 6))\ncrime_data = sm.datasets.statecrime.load_pandas()\nresults = smf.ols('murder ~ hs_grad + urban + poverty + single',\n                   data=crime_data.data).fit()\nsm.graphics.plot_regress_exog(results, 'poverty', fig=fig)\nplt.show()"
+  },
+  {
+    "objectID": "posts/2023-07-04-python-statsmodels/python-statsmodels.html#plot_partregress",
+    "href": "posts/2023-07-04-python-statsmodels/python-statsmodels.html#plot_partregress",
+    "title": "Exploring the Python library statsmodels",
+    "section": "plot_partregress",
+    "text": "plot_partregress\n\nLink\n\n\ncrime_data = sm.datasets.statecrime.load_pandas()\nsm.graphics.plot_partregress(endog='murder', exog_i='hs_grad',\n                              exog_others=['urban', 'poverty', 'single'],\n                              data=crime_data.data, obs_labels=False)\nplt.show()"
+  },
+  {
+    "objectID": "posts/2023-07-04-python-statsmodels/python-statsmodels.html#plot_partregress_grid",
+    "href": "posts/2023-07-04-python-statsmodels/python-statsmodels.html#plot_partregress_grid",
+    "title": "Exploring the Python library statsmodels",
+    "section": "plot_partregress_grid",
+    "text": "plot_partregress_grid\n\nLink\n\n\nimport matplotlib.pyplot as plt\n\nimport statsmodels.api as sm\nimport statsmodels.formula.api as smf\nfrom statsmodels.graphics.regressionplots import plot_partregress_grid\n\nfig = plt.figure(figsize=(8, 6))\ncrime_data = sm.datasets.statecrime.load_pandas()\nresults = smf.ols('murder ~ hs_grad + urban + poverty + single',\n                  data=crime_data.data).fit()\nplot_partregress_grid(results, fig=fig)\nplt.show()"
   },
   {
     "objectID": "posts/2022-11-24-r-interfaces-to-trial-registries/index.html",
@@ -739,6 +774,6 @@
     "href": "index.html",
     "title": "Blog posts",
     "section": "",
-    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n  \n\n\n\n\nPython pandas\n\n\n\n\n\n\n\nPython\n\n\n\n\n\n\n\n\n\n\n\nJul 3, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n  \n\n\n\n\nSpecifying mixed effects in lme4\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nJun 8, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n  \n\n\n\n\nMinimal traffic jam model\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nMay 6, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n  \n\n\n\n\nLongtermism\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nMay 6, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n  \n\n\n\n\nInteresting R packages\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nMar 17, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n  \n\n\n\n\nPython study notes\n\n\n\n\n\n\n\nSelf-study\n\n\n\n\n\n\n\n\n\n\n\nMar 17, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n  \n\n\n\n\nCoursera Deep Learning Specialization\n\n\n\n\n\n\n\nSelf-study\n\n\n\n\n\n\n\n\n\n\n\nMar 17, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n  \n\n\n\n\nSelf-study: Deep Learning by Goodfellow et al.\n\n\n\n\n\n\n\nSelf-study\n\n\n\n\n\n\n\n\n\n\n\nMar 17, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n  \n\n\n\n\nSelf-study: McElreath - Statistical Rethinking\n\n\n\n\n\n\n\nSelf-study\n\n\n\n\n\n\n\n\n\n\n\nMar 17, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n  \n\n\n\n\nHow bad are bananas\n\n\n\n\n\n\n\nSustainibility\n\n\n\n\n\n\n\n\n\n\n\nFeb 27, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n  \n\n\n\n\nManual colors in ggplot2\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nFeb 21, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n  \n\n\n\n\nStrange behavior in ggplot2\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nFeb 2, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n  \n\n\n\n\nSIRS model dynamics\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nJan 19, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n  \n\n\n\n\nSustainibility data\n\n\n\n\n\n\n\nSustainibility\n\n\n\n\n\n\n\n\n\n\n\nJan 10, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n  \n\n\n\n\nContribution plots\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nJan 5, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n  \n\n\n\n\nR interfaces to trial registries\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nOct 25, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n  \n\n\n\n\nSimulate time to-event-data\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nOct 25, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n  \n\n\n\n\nKids per person and carbon footprint\n\n\n\n\n\n\n\nSustainibility\n\n\n\n\n\n\n\n\n\n\n\nOct 19, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n  \n\n\n\n\nModel meadow\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nOct 19, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n  \n\n\n\n\nRetrieving and plotting COVID-19 data\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nOct 16, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n  \n\n\n\n\nLeo’s project\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nOct 16, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n  \n\n\n\n\nSIR-like model with deSolve in deterministic and stochastic version\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nOct 4, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n  \n\n\n\n\nAntipsychotics\n\n\n\n\n\n\n\nPsychiatry\n\n\n\n\n\n\n\n\n\n\n\nSep 8, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n  \n\n\n\n\nTimeline\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nSep 8, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n  \n\n\n\n\nPsychopharmaca and time\n\n\n\n\n\n\n\nPsychiatry\n\n\n\n\n\n\n\n\n\n\n\nSep 8, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n  \n\n\n\n\nChess ressources\n\n\n\n\n\n\n\nMishmash\n\n\n\n\n\n\n\n\n\n\n\nSep 8, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n  \n\n\n\n\nHumidity\n\n\n\n\n\n\n\nSustainibility\n\n\n\n\n\n\n\n\n\n\n\nSep 8, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n  \n\n\n\n\nSIR model\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nJul 19, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\nNo matching items"
+    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n  \n\n\n\n\nExploring the Python library statsmodels\n\n\n\n\n\n\n\nPython\n\n\n\n\n\n\n\n\n\n\n\nJul 4, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n  \n\n\n\n\nPython pandas\n\n\n\n\n\n\n\nPython\n\n\n\n\n\n\n\n\n\n\n\nJul 3, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n  \n\n\n\n\nSpecifying mixed effects in lme4\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nJun 8, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n  \n\n\n\n\nMinimal traffic jam model\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nMay 6, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n  \n\n\n\n\nLongtermism\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nMay 6, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n  \n\n\n\n\nInteresting R packages\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nMar 17, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n  \n\n\n\n\nPython study notes\n\n\n\n\n\n\n\nSelf-study\n\n\n\n\n\n\n\n\n\n\n\nMar 17, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n  \n\n\n\n\nCoursera Deep Learning Specialization\n\n\n\n\n\n\n\nSelf-study\n\n\n\n\n\n\n\n\n\n\n\nMar 17, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n  \n\n\n\n\nSelf-study: Deep Learning by Goodfellow et al.\n\n\n\n\n\n\n\nSelf-study\n\n\n\n\n\n\n\n\n\n\n\nMar 17, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n  \n\n\n\n\nSelf-study: McElreath - Statistical Rethinking\n\n\n\n\n\n\n\nSelf-study\n\n\n\n\n\n\n\n\n\n\n\nMar 17, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n  \n\n\n\n\nHow bad are bananas\n\n\n\n\n\n\n\nSustainibility\n\n\n\n\n\n\n\n\n\n\n\nFeb 27, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n  \n\n\n\n\nManual colors in ggplot2\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nFeb 21, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n  \n\n\n\n\nStrange behavior in ggplot2\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nFeb 2, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n  \n\n\n\n\nSIRS model dynamics\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nJan 19, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n  \n\n\n\n\nSustainibility data\n\n\n\n\n\n\n\nSustainibility\n\n\n\n\n\n\n\n\n\n\n\nJan 10, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n  \n\n\n\n\nContribution plots\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nJan 5, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n  \n\n\n\n\nR interfaces to trial registries\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nOct 25, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n  \n\n\n\n\nSimulate time to-event-data\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nOct 25, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n  \n\n\n\n\nKids per person and carbon footprint\n\n\n\n\n\n\n\nSustainibility\n\n\n\n\n\n\n\n\n\n\n\nOct 19, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n  \n\n\n\n\nModel meadow\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nOct 19, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n  \n\n\n\n\nRetrieving and plotting COVID-19 data\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nOct 16, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n  \n\n\n\n\nLeo’s project\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nOct 16, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n  \n\n\n\n\nSIR-like model with deSolve in deterministic and stochastic version\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nOct 4, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n  \n\n\n\n\nAntipsychotics\n\n\n\n\n\n\n\nPsychiatry\n\n\n\n\n\n\n\n\n\n\n\nSep 8, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n  \n\n\n\n\nTimeline\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nSep 8, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n  \n\n\n\n\nPsychopharmaca and time\n\n\n\n\n\n\n\nPsychiatry\n\n\n\n\n\n\n\n\n\n\n\nSep 8, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n  \n\n\n\n\nChess ressources\n\n\n\n\n\n\n\nMishmash\n\n\n\n\n\n\n\n\n\n\n\nSep 8, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n  \n\n\n\n\nHumidity\n\n\n\n\n\n\n\nSustainibility\n\n\n\n\n\n\n\n\n\n\n\nSep 8, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n  \n\n\n\n\nSIR model\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nJul 19, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\nNo matching items"
   }
 ]
