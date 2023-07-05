@@ -1,0 +1,40 @@
+---
+title: Python graphics
+author: Sebastian Gerdes
+date: 2023-07-05
+categories:
+  - Python
+toc: true
+toc-depth: 4
+draft: false
+engine: knitr
+---
+# Init
+```{python}
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+iris = pd.read_csv('iris.csv')
+```
+
+
+# Setting figure sizes
+## Matplotlib
+```{python}
+plt.rcParams['figure.figsize'] = [12, 5]
+fig, ax = plt.subplots()
+ax.set_xlabel('Sepal length')
+ax.set_ylabel('Sepal width')
+ax.set_title('Iris dataset')
+ax.scatter(iris['Sepal.Length'], iris['Sepal.Width'])
+plt.show()
+```
+
+## Seaborn
+```{python}
+#| fig-align: center
+g = sns.FacetGrid(iris, col = 'Species', col_wrap = 1, height = 2, aspect = 2)
+g = g.map(plt.scatter, 'Sepal.Length', 'Sepal.Width')
+plt.show()
+```
+

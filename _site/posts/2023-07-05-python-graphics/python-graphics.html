@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Sebastian Gerdes">
-<meta name="dcterms.date" content="2023-07-03">
+<meta name="dcterms.date" content="2023-07-05">
 
-<title>Seb’s blog - Python pandas</title>
+<title>Seb’s blog - Python graphics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -99,8 +99,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <link rel="stylesheet" href="../../styles.css">
-<meta property="og:title" content="Seb’s blog - Python pandas">
+<meta property="og:title" content="Seb’s blog - Python graphics">
+<meta property="og:image" content="https://sbloggel.netlify.app/posts/2023-07-05-python-graphics/python-graphics_files/figure-html/unnamed-chunk-2-1.png">
 <meta property="og:site-name" content="Seb's blog">
+<meta property="og:image:height" content="960">
+<meta property="og:image:width" content="2304">
 </head>
 
 <body class="nav-fixed">
@@ -147,14 +150,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#init" id="toc-init" class="nav-link active" data-scroll-target="#init">Init</a></li>
+  <li><a href="#setting-figure-sizes" id="toc-setting-figure-sizes" class="nav-link" data-scroll-target="#setting-figure-sizes">Setting figure sizes</a>
+  <ul>
+  <li><a href="#matplotlib" id="toc-matplotlib" class="nav-link" data-scroll-target="#matplotlib">Matplotlib</a></li>
+  <li><a href="#seaborn" id="toc-seaborn" class="nav-link" data-scroll-target="#seaborn">Seaborn</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/sebastian-gerdes/sbloggel/blob/main/posts/2023-07-05-python-graphics/python-graphics.qmd" class="toc-action">View source</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Python pandas</h1>
+<h1 class="title">Python graphics</h1>
   </div>
 
 
@@ -171,7 +185,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">July 3, 2023</p>
+      <p class="date">July 5, 2023</p>
     </div>
   </div>
   
@@ -181,150 +195,50 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<ul>
-<li>pandas - <a href="https://pandas.pydata.org/docs/getting_started/intro_tutorials/">Tutorials</a></li>
-<li>Access R in Python chunk:</li>
-</ul>
+<section id="init" class="level1">
+<h1>Init</h1>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>r[<span class="st">"mtcars"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>                      mpg  cyl   disp     hp  drat  ...   qsec   vs   am  gear  carb
-Mazda RX4            21.0  6.0  160.0  110.0  3.90  ...  16.46  0.0  1.0   4.0   4.0
-Mazda RX4 Wag        21.0  6.0  160.0  110.0  3.90  ...  17.02  0.0  1.0   4.0   4.0
-Datsun 710           22.8  4.0  108.0   93.0  3.85  ...  18.61  1.0  1.0   4.0   1.0
-Hornet 4 Drive       21.4  6.0  258.0  110.0  3.08  ...  19.44  1.0  0.0   3.0   1.0
-Hornet Sportabout    18.7  8.0  360.0  175.0  3.15  ...  17.02  0.0  0.0   3.0   2.0
-Valiant              18.1  6.0  225.0  105.0  2.76  ...  20.22  1.0  0.0   3.0   1.0
-Duster 360           14.3  8.0  360.0  245.0  3.21  ...  15.84  0.0  0.0   3.0   4.0
-Merc 240D            24.4  4.0  146.7   62.0  3.69  ...  20.00  1.0  0.0   4.0   2.0
-Merc 230             22.8  4.0  140.8   95.0  3.92  ...  22.90  1.0  0.0   4.0   2.0
-Merc 280             19.2  6.0  167.6  123.0  3.92  ...  18.30  1.0  0.0   4.0   4.0
-Merc 280C            17.8  6.0  167.6  123.0  3.92  ...  18.90  1.0  0.0   4.0   4.0
-Merc 450SE           16.4  8.0  275.8  180.0  3.07  ...  17.40  0.0  0.0   3.0   3.0
-Merc 450SL           17.3  8.0  275.8  180.0  3.07  ...  17.60  0.0  0.0   3.0   3.0
-Merc 450SLC          15.2  8.0  275.8  180.0  3.07  ...  18.00  0.0  0.0   3.0   3.0
-Cadillac Fleetwood   10.4  8.0  472.0  205.0  2.93  ...  17.98  0.0  0.0   3.0   4.0
-Lincoln Continental  10.4  8.0  460.0  215.0  3.00  ...  17.82  0.0  0.0   3.0   4.0
-Chrysler Imperial    14.7  8.0  440.0  230.0  3.23  ...  17.42  0.0  0.0   3.0   4.0
-Fiat 128             32.4  4.0   78.7   66.0  4.08  ...  19.47  1.0  1.0   4.0   1.0
-Honda Civic          30.4  4.0   75.7   52.0  4.93  ...  18.52  1.0  1.0   4.0   2.0
-Toyota Corolla       33.9  4.0   71.1   65.0  4.22  ...  19.90  1.0  1.0   4.0   1.0
-Toyota Corona        21.5  4.0  120.1   97.0  3.70  ...  20.01  1.0  0.0   3.0   1.0
-Dodge Challenger     15.5  8.0  318.0  150.0  2.76  ...  16.87  0.0  0.0   3.0   2.0
-AMC Javelin          15.2  8.0  304.0  150.0  3.15  ...  17.30  0.0  0.0   3.0   2.0
-Camaro Z28           13.3  8.0  350.0  245.0  3.73  ...  15.41  0.0  0.0   3.0   4.0
-Pontiac Firebird     19.2  8.0  400.0  175.0  3.08  ...  17.05  0.0  0.0   3.0   2.0
-Fiat X1-9            27.3  4.0   79.0   66.0  4.08  ...  18.90  1.0  1.0   4.0   1.0
-Porsche 914-2        26.0  4.0  120.3   91.0  4.43  ...  16.70  0.0  1.0   5.0   2.0
-Lotus Europa         30.4  4.0   95.1  113.0  3.77  ...  16.90  1.0  1.0   5.0   2.0
-Ford Pantera L       15.8  8.0  351.0  264.0  4.22  ...  14.50  0.0  1.0   5.0   4.0
-Ferrari Dino         19.7  6.0  145.0  175.0  3.62  ...  15.50  0.0  1.0   5.0   6.0
-Maserati Bora        15.0  8.0  301.0  335.0  3.54  ...  14.60  0.0  1.0   5.0   8.0
-Volvo 142E           21.4  4.0  121.0  109.0  4.11  ...  18.60  1.0  1.0   4.0   2.0
-
-[32 rows x 11 columns]</code></pre>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>iris <span class="op">=</span> pd.read_csv(<span class="st">'iris.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-<ul>
-<li>Access Python object in R chunk</li>
-</ul>
+</section>
+<section id="setting-figure-sizes" class="level1">
+<h1>Setting figure sizes</h1>
+<section id="matplotlib" class="level2">
+<h2 class="anchored" data-anchor-id="matplotlib">Matplotlib</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>xyz <span class="op">=</span> <span class="dv">10</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>plt.rcParams[<span class="st">'figure.figsize'</span>] <span class="op">=</span> [<span class="dv">12</span>, <span class="dv">5</span>]</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">'Sepal length'</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">'Sepal width'</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">'Iris dataset'</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>ax.scatter(iris[<span class="st">'Sepal.Length'</span>], iris[<span class="st">'Sepal.Width'</span>])</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="python-graphics_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="1152"></p>
 </div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(reticulate)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>py<span class="sc">$</span>xyz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 10</code></pre>
+</div>
+</section>
+<section id="seaborn" class="level2">
+<h2 class="anchored" data-anchor-id="seaborn">Seaborn</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>g <span class="op">=</span> sns.FacetGrid(iris, col <span class="op">=</span> <span class="st">'Species'</span>, col_wrap <span class="op">=</span> <span class="dv">1</span>, height <span class="op">=</span> <span class="dv">2</span>, aspect <span class="op">=</span> <span class="dv">2</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>g <span class="op">=</span> g.<span class="bu">map</span>(plt.scatter, <span class="st">'Sepal.Length'</span>, <span class="st">'Sepal.Width'</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="python-graphics_files/figure-html/unnamed-chunk-3-3.png" class="img-fluid figure-img" width="384"></p>
+</figure>
 </div>
 </div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>iris <span class="op">=</span> pd.read_csv(<span class="st">'iris.csv'</span>)</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>iris[<span class="st">'Sepal.Length'</span>].describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>count    150.000000
-mean       5.843333
-std        0.828066
-min        4.300000
-25%        5.100000
-50%        5.800000
-75%        6.400000
-max        7.900000
-Name: Sepal.Length, dtype: float64</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>iris[<span class="st">'Sepal.Width'</span>].describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>count    150.000000
-mean       3.057333
-std        0.435866
-min        2.000000
-25%        2.800000
-50%        3.000000
-75%        3.300000
-max        4.400000
-Name: Sepal.Width, dtype: float64</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>iris[<span class="st">'total_length'</span>] <span class="op">=</span> iris[<span class="st">'Sepal.Length'</span>] <span class="op">+</span> iris[<span class="st">'Sepal.Width'</span>]</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>iris[<span class="st">'total_length'</span>].describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>count    150.000000
-mean       8.900667
-std        0.889272
-min        6.800000
-25%        8.300000
-50%        8.850000
-75%        9.575000
-max       11.700000
-Name: total_length, dtype: float64</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># two identical results:</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>iris.loc[iris[<span class="st">'total_length'</span>] <span class="op">&gt;</span> <span class="dv">10</span>, <span class="st">'total_length'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>15     10.1
-50     10.2
-102    10.1
-105    10.6
-107    10.2
-109    10.8
-117    11.5
-118    10.3
-120    10.1
-122    10.5
-125    10.4
-129    10.2
-130    10.2
-131    11.7
-135    10.7
-Name: total_length, dtype: float64</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>iris[iris[<span class="st">'total_length'</span>] <span class="op">&gt;</span> <span class="dv">10</span>][<span class="st">'total_length'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>15     10.1
-50     10.2
-102    10.1
-105    10.6
-107    10.2
-109    10.8
-117    11.5
-118    10.3
-120    10.1
-122    10.5
-125    10.4
-129    10.2
-130    10.2
-131    11.7
-135    10.7
-Name: total_length, dtype: float64</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>iris.loc[iris[<span class="st">'total_length'</span>] <span class="op">&gt;</span> <span class="dv">10</span>, <span class="st">'total_length'</span>] <span class="op">=</span> <span class="dv">100</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -564,4 +478,4 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/sebastian-gerdes/sbloggel/blob/main/posts/2023-07-03-python-pandas/index.qmd" class="toc-action">View source</a></p></div></div></div></div></footer></body></html>
+</body></html>
