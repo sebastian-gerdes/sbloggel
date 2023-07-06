@@ -529,7 +529,7 @@
     "href": "posts/2023-07-06-python-versions-environments/python-versions-environments.html",
     "title": "Managing python versions in RStudia",
     "section": "",
-    "text": "Ressources\n\nBest ressources are found in the reticulate vignettes: Link, in particular this"
+    "text": "Ressources\n\nBest ressources are found in the reticulate vignettes: Link, in particular this\n\n\n\nManaging python installation\n\nlibrary('reticulate')\npy_discover_config()\npy_config()\nconda_list()\nconda_version()\nconfigure_environment()\nconda_create('sbloggel')\nconda_install('sbloggel', 'pandas')\n\nminiconda_update()\nuse_condaenv('sbloggel')\nconda_install('sbloggel', 'seaborn')\nuse_condaenv('base')"
   },
   {
     "objectID": "posts/2022-09-08-antipsychotics/index.html",

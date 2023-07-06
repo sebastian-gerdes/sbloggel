@@ -25,8 +25,63 @@
 <li>Best ressources are found in the reticulate vignettes: <a href="https://cran.r-project.org/web/packages/reticulate/index.html">Link</a>, in particular <a href="https://cran.r-project.org/web/packages/reticulate/vignettes/versions.html">this</a></li>
 </ul>
 </section>
-<section id="section" class="level1">
-<h1></h1>
+<section id="managing-python-installation" class="level1">
+<h1>Managing python installation</h1>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'reticulate'</span>)</span>
+<span id="cb1-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">py_discover_config</span>()</span>
+<span id="cb1-3"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">py_config</span>()</span>
+<span id="cb1-4"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">conda_list</span>()</span>
+<span id="cb1-5"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">conda_version</span>()</span>
+<span id="cb1-6"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">configure_environment</span>()</span>
+<span id="cb1-7"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">conda_create</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'sbloggel'</span>)</span>
+<span id="cb1-8"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">conda_install</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'sbloggel'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'pandas'</span>)</span>
+<span id="cb1-9"></span>
+<span id="cb1-10"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">miniconda_update</span>()</span>
+<span id="cb1-11"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">use_condaenv</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'sbloggel'</span>)</span>
+<span id="cb1-12"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">conda_install</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'sbloggel'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'seaborn'</span>)</span>
+<span id="cb1-13"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">use_condaenv</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'base'</span>)</span></code></pre></div>
+</div>
 
 
 </section>

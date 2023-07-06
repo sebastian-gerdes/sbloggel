@@ -13,4 +13,20 @@ engine: knitr
 # Ressources
 * Best ressources are found in the reticulate vignettes: [Link](https://cran.r-project.org/web/packages/reticulate/index.html), in particular [this](https://cran.r-project.org/web/packages/reticulate/vignettes/versions.html)
 
-# 
+# Managing python installation
+```{r}
+#| eval: false
+library('reticulate')
+py_discover_config()
+py_config()
+conda_list()
+conda_version()
+configure_environment()
+conda_create('sbloggel')
+conda_install('sbloggel', 'pandas')
+
+miniconda_update()
+use_condaenv('sbloggel')
+conda_install('sbloggel', 'seaborn')
+use_condaenv('base')
+```
