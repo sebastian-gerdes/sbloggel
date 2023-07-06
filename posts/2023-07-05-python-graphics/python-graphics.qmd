@@ -9,12 +9,24 @@ toc-depth: 4
 draft: false
 engine: knitr
 ---
+
+```{r}
+#| include: false
+library('reticulate')
+use_condaenv('sbloggel')
+```
+
+
+
 # Init
 ```{python}
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-iris = pd.read_csv('iris.csv')
+
+sns.get_dataset_names()
+iris = sns.load_dataset('iris')
+
 ```
 
 
@@ -26,15 +38,28 @@ fig, ax = plt.subplots()
 ax.set_xlabel('Sepal length')
 ax.set_ylabel('Sepal width')
 ax.set_title('Iris dataset')
-ax.scatter(iris['Sepal.Length'], iris['Sepal.Width'])
+ax.scatter(iris['sepal_length'], iris['sepal_width'])
 plt.show()
 ```
 
 ## Seaborn
 ```{python}
 #| fig-align: center
-g = sns.FacetGrid(iris, col = 'Species', col_wrap = 1, height = 2, aspect = 2)
-g = g.map(plt.scatter, 'Sepal.Length', 'Sepal.Width')
+g = sns.FacetGrid(iris, col = 'species', col_wrap = 1, height = 2, aspect = 2)
+g = g.map(plt.scatter, 'sepal_length', 'sepal_width')
 plt.show()
+plt.close()
+```
+
+# Seaborn examples
+```{python}
+#| fig-align: center
+plt.figure(figsize=(6,6))
+g = sns.scatterplot(data = iris, 
+                    x = 'sepal_length', 
+                    y = 'petal_width', 
+                    hue = 'species')
+plt.show()
+plt.close()
 ```
 

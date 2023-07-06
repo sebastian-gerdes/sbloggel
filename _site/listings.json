@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/2023-07-06-python-versions-environments/python-versions-environments.html",
       "/posts/2023-07-05-python-graphics/python-graphics.html",
       "/posts/2023-07-04-python-statsmodels/python-statsmodels.html",
       "/posts/2023-07-03-python-pandas/index.html",
