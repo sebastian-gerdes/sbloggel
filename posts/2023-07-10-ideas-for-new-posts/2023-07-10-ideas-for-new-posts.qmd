@@ -27,3 +27,18 @@ use_condaenv('sbloggel')
 ## Longtermism
 * Idea: create a model in which proximity and number of people are balanced
 * "Love thy neighbor as thyself."
+
+## Track changes in quarto
+* Scenario: A has written something, B suggests changes and provides comments
+* File is given from A to B
+* B just edits as he / she wishes
+  * Comments can be made
+  * possibility to render with changes tracked on a per-word basis
+* B returns the file to A
+* A can look at the rendered changes with the comments
+  * comments and changes are numbered
+* A is provided with a file, in which for each change / comment it can be indicated:
+  * accept
+  * decline
+  * edit manually (a hint is included in the quarto file) -> or the whole line could be given in a new version
+* How can feedback be given from A to B which changes are accepted etc. for a discussion?

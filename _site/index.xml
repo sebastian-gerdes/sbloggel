@@ -1720,7 +1720,7 @@ Attaching package: 'Ryacas'</code></pre>
 <item>
   <title>Python study notes</title>
   <dc:creator>Sebastian Gerdes</dc:creator>
-  <link>https://sbloggel.netlify.app/posts/2023-03-17-official-python-tutorial/2023-03-17-official-python-tutorial.html</link>
+  <link>https://sbloggel.netlify.app/posts/2023-03-17-python-study-notes/2023-03-17-python-study-notes.html</link>
   <description><![CDATA[ 
 
 
@@ -2313,7 +2313,7 @@ background-color: null;
 font-style: inherit;">False</span>)</span>
 <span id="cb65-20">  )</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2023-03-17-official-python-tutorial/2023-03-17-official-python-tutorial_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="544"></p>
+<p><img src="https://sbloggel.netlify.app/posts/2023-03-17-python-study-notes/2023-03-17-python-study-notes_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="544"></p>
 </div>
 <div class="sourceCode cell-code" id="cb66" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb66-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
@@ -2432,7 +2432,7 @@ font-style: inherit;">=</span>diamonds, ax<span class="op" style="color: #5E5E5E
 background-color: null;
 font-style: inherit;">=</span>ax)</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2023-03-17-official-python-tutorial/2023-03-17-official-python-tutorial_files/figure-html/unnamed-chunk-11-3.png" class="img-fluid" width="480"></p>
+<p><img src="https://sbloggel.netlify.app/posts/2023-03-17-python-study-notes/2023-03-17-python-study-notes_files/figure-html/unnamed-chunk-11-3.png" class="img-fluid" width="480"></p>
 </div>
 </div>
 </section>
@@ -2519,7 +2519,8 @@ font-style: inherit;"># py_install("pandas")</span></span></code></pre></div>
 
  ]]></description>
   <category>Self-study</category>
-  <guid>https://sbloggel.netlify.app/posts/2023-03-17-official-python-tutorial/2023-03-17-official-python-tutorial.html</guid>
+  <category>Python</category>
+  <guid>https://sbloggel.netlify.app/posts/2023-03-17-python-study-notes/2023-03-17-python-study-notes.html</guid>
   <pubDate>Thu, 16 Mar 2023 23:00:00 GMT</pubDate>
 </item>
 <item>
