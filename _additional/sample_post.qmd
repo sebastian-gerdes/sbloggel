@@ -17,4 +17,7 @@ execute:
 #| include: false
 library('tidyverse')
 set.seed(1)
+
+library('reticulate')
+use_condaenv('sbloggel')
 ```
