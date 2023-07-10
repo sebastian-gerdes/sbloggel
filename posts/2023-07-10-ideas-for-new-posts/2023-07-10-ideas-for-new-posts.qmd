@@ -21,3 +21,9 @@ set.seed(1)
 library('reticulate')
 use_condaenv('sbloggel')
 ```
+
+## AI and radiologist - evolution of a team
+
+## Longtermism
+* Idea: create a model in which proximity and number of people are balanced
+* "Love thy neighbor as thyself."
