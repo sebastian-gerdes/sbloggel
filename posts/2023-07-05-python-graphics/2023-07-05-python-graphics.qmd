@@ -1,0 +1,76 @@
+---
+title: Python graphics
+author: Sebastian Gerdes
+date: 2023-07-05
+categories:
+  - Python
+toc: true
+toc-depth: 4
+draft: false
+engine: knitr
+---
+
+```{r}
+#| label: init_python
+#| include: false
+library('reticulate')
+use_condaenv('sbloggel')
+```
+
+
+
+# Init
+```{python}
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+sns.get_dataset_names()
+iris = sns.load_dataset('iris')
+
+```
+
+
+# Setting figure sizes
+## Matplotlib
+```{python}
+plt.rcParams['figure.figsize'] = [12, 5]
+fig, ax = plt.subplots()
+ax.set_xlabel('Sepal length')
+ax.set_ylabel('Sepal width')
+ax.set_title('Iris dataset')
+ax.scatter(iris['sepal_length'], iris['sepal_width'])
+plt.show()
+```
+
+## Seaborn
+```{python}
+#| fig-align: center
+g = sns.FacetGrid(iris, col = 'species', col_wrap = 1, height = 2, aspect = 2)
+g = g.map(plt.scatter, 'sepal_length', 'sepal_width')
+plt.show()
+plt.close()
+```
+
+# Seaborn examples
+```{python}
+#| fig-align: center
+plt.figure(figsize=(6,6))
+g = sns.scatterplot(data = iris, 
+                    x = 'sepal_length', 
+                    y = 'petal_width', 
+                    hue = 'species')
+plt.show()
+plt.close()
+```
+
+# Plotly examples
+```{python}
+#| fig-width: 3
+#| fig-align: center
+# x and y given as array_like objects
+import plotly.express as px
+fig = px.scatter(x=[0, 1, 2, 3, 4], y=[0, 1, 4, 9, 25], width = 800, height = 800)
+fig.show()
+```
+

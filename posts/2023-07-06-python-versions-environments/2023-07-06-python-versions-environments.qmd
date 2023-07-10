@@ -1,0 +1,43 @@
+---
+title: Managing python versions in RStudia
+author: Sebastian Gerdes
+date: 2023-07-05
+categories:
+  - Python
+toc: true
+toc-depth: 4
+draft: false
+engine: knitr
+---
+
+# Ressources
+* Good resources are found in the {reticulate} vignettes: [Link](https://cran.r-project.org/web/packages/reticulate/index.html), in particular [this](https://cran.r-project.org/web/packages/reticulate/vignettes/versions.html)
+
+
+```{r}
+#| label: init_python
+#| include: false
+library('reticulate')
+use_condaenv('sbloggel')
+```
+
+
+# Managing python installation
+```{r}
+#| eval: false
+library('reticulate')
+py_discover_config()
+py_config()
+conda_list()
+
+conda_version()
+configure_environment()
+conda_create('sbloggel')
+
+
+conda_install('sbloggel', 'pandas')
+miniconda_update()
+use_condaenv('sbloggel')
+conda_install('sbloggel', 'plotly')
+use_condaenv('base')
+```

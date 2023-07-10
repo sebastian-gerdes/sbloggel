@@ -14,7 +14,7 @@
 <item>
   <title>Managing python versions in RStudia</title>
   <dc:creator>Sebastian Gerdes</dc:creator>
-  <link>https://sbloggel.netlify.app/posts/2023-07-06-python-versions-environments/python-versions-environments.html</link>
+  <link>https://sbloggel.netlify.app/posts/2023-07-06-python-versions-environments/2023-07-06-python-versions-environments.html</link>
   <description><![CDATA[ 
 
 
@@ -22,7 +22,7 @@
 <section id="ressources" class="level1">
 <h1>Ressources</h1>
 <ul>
-<li>Best ressources are found in the reticulate vignettes: <a href="https://cran.r-project.org/web/packages/reticulate/index.html">Link</a>, in particular <a href="https://cran.r-project.org/web/packages/reticulate/vignettes/versions.html">this</a></li>
+<li>Good resources are found in the {reticulate} vignettes: <a href="https://cran.r-project.org/web/packages/reticulate/index.html">Link</a>, in particular <a href="https://cran.r-project.org/web/packages/reticulate/vignettes/versions.html">this</a></li>
 </ul>
 </section>
 <section id="managing-python-installation" class="level1">
@@ -42,41 +42,43 @@ font-style: inherit;">py_config</span>()</span>
 <span id="cb1-4"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">conda_list</span>()</span>
-<span id="cb1-5"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">conda_version</span>()</span>
+<span id="cb1-5"></span>
 <span id="cb1-6"><span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">configure_environment</span>()</span>
+font-style: inherit;">conda_version</span>()</span>
 <span id="cb1-7"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">configure_environment</span>()</span>
+<span id="cb1-8"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">conda_create</span>(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'sbloggel'</span>)</span>
-<span id="cb1-8"><span class="fu" style="color: #4758AB;
+<span id="cb1-9"></span>
+<span id="cb1-10"></span>
+<span id="cb1-11"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">conda_install</span>(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'sbloggel'</span>, <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'pandas'</span>)</span>
-<span id="cb1-9"></span>
-<span id="cb1-10"><span class="fu" style="color: #4758AB;
+<span id="cb1-12"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">miniconda_update</span>()</span>
-<span id="cb1-11"><span class="fu" style="color: #4758AB;
+<span id="cb1-13"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">use_condaenv</span>(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'sbloggel'</span>)</span>
-<span id="cb1-12"><span class="fu" style="color: #4758AB;
+<span id="cb1-14"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">conda_install</span>(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'sbloggel'</span>, <span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">'seaborn'</span>)</span>
-<span id="cb1-13"><span class="fu" style="color: #4758AB;
+font-style: inherit;">'plotly'</span>)</span>
+<span id="cb1-15"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">use_condaenv</span>(<span class="st" style="color: #20794D;
 background-color: null;
@@ -88,13 +90,13 @@ font-style: inherit;">'base'</span>)</span></code></pre></div>
 
  ]]></description>
   <category>Python</category>
-  <guid>https://sbloggel.netlify.app/posts/2023-07-06-python-versions-environments/python-versions-environments.html</guid>
+  <guid>https://sbloggel.netlify.app/posts/2023-07-06-python-versions-environments/2023-07-06-python-versions-environments.html</guid>
   <pubDate>Tue, 04 Jul 2023 22:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Python graphics</title>
   <dc:creator>Sebastian Gerdes</dc:creator>
-  <link>https://sbloggel.netlify.app/posts/2023-07-05-python-graphics/python-graphics.html</link>
+  <link>https://sbloggel.netlify.app/posts/2023-07-05-python-graphics/2023-07-05-python-graphics.html</link>
   <description><![CDATA[ 
 
 
@@ -162,7 +164,7 @@ background-color: null;
 font-style: inherit;">'sepal_width'</span>])</span>
 <span id="cb4-7">plt.show()</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2023-07-05-python-graphics/python-graphics_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="1152"></p>
+<p><img src="https://sbloggel.netlify.app/posts/2023-07-05-python-graphics/2023-07-05-python-graphics_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="1152"></p>
 </div>
 </div>
 </section>
@@ -201,7 +203,7 @@ font-style: inherit;">'sepal_width'</span>)</span>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://sbloggel.netlify.app/posts/2023-07-05-python-graphics/python-graphics_files/figure-html/unnamed-chunk-4-3.png" class="img-fluid figure-img" width="384"></p>
+<p><img src="https://sbloggel.netlify.app/posts/2023-07-05-python-graphics/2023-07-05-python-graphics_files/figure-html/unnamed-chunk-4-3.png" class="img-fluid figure-img" width="384"></p>
 </figure>
 </div>
 </div>
@@ -243,11 +245,65 @@ font-style: inherit;">'species'</span>)</span>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://sbloggel.netlify.app/posts/2023-07-05-python-graphics/python-graphics_files/figure-html/unnamed-chunk-5-5.png" class="img-fluid figure-img" width="576"></p>
+<p><img src="https://sbloggel.netlify.app/posts/2023-07-05-python-graphics/2023-07-05-python-graphics_files/figure-html/unnamed-chunk-5-5.png" class="img-fluid figure-img" width="576"></p>
 </figure>
 </div>
 </div>
 <div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1">plt.close()</span></code></pre></div>
+</div>
+</section>
+<section id="plotly-examples" class="level1">
+<h1>Plotly examples</h1>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># x and y given as array_like objects</span></span>
+<span id="cb9-2"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> plotly.express <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> px</span>
+<span id="cb9-3">fig <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> px.scatter(x<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span>], y<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">9</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">25</span>], width <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">800</span>, height <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">800</span>)</span>
+<span id="cb9-4">fig.show()</span></code></pre></div>
+<div class="cell-output-display">
+
+<div>                        <script type="text/javascript">window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script charset="utf-8" src="https://cdn.plot.ly/plotly-2.24.1.min.js"></script>                <div id="1f0ab6ed-1a98-4c1a-b172-3c7ed3bae678" class="plotly-graph-div" style="height:800px; width:800px;"></div>            <script type="text/javascript">                                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("1f0ab6ed-1a98-4c1a-b172-3c7ed3bae678")) {                    Plotly.newPlot(                        "1f0ab6ed-1a98-4c1a-b172-3c7ed3bae678",                        [{"hovertemplate":"x=%{x}\u003cbr\u003ey=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"","marker":{"color":"#636efa","symbol":"circle"},"mode":"markers","name":"","orientation":"v","showlegend":false,"x":[0,1,2,3,4],"xaxis":"x","y":[0,1,4,9,25],"yaxis":"y","type":"scatter"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmapgl":[{"type":"heatmapgl","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"x"}},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"y"}},"legend":{"tracegroupgap":0},"margin":{"t":60},"height":800,"width":800},                        {"responsive": true}                    )                };                            </script>        </div>
+</div>
 </div>
 
 
@@ -255,13 +311,13 @@ font-style: inherit;">'species'</span>)</span>
 
  ]]></description>
   <category>Python</category>
-  <guid>https://sbloggel.netlify.app/posts/2023-07-05-python-graphics/python-graphics.html</guid>
+  <guid>https://sbloggel.netlify.app/posts/2023-07-05-python-graphics/2023-07-05-python-graphics.html</guid>
   <pubDate>Tue, 04 Jul 2023 22:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Exploring the Python library statsmodels</title>
   <dc:creator>Sebastian Gerdes</dc:creator>
-  <link>https://sbloggel.netlify.app/posts/2023-07-04-python-statsmodels/python-statsmodels.html</link>
+  <link>https://sbloggel.netlify.app/posts/2023-07-04-python-statsmodels/2023-07-04-python-statsmodels.html</link>
   <description><![CDATA[ 
 
 
@@ -348,7 +404,7 @@ font-style: inherit;">"Linear Regression"</span>)</span>
 <span id="cb1-22"></span>
 <span id="cb1-23">plt.show()</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2023-07-04-python-statsmodels/python-statsmodels_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="672"></p>
+<p><img src="https://sbloggel.netlify.app/posts/2023-07-04-python-statsmodels/2023-07-04-python-statsmodels_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -402,7 +458,7 @@ background-color: null;
 font-style: inherit;">=</span>fig)</span>
 <span id="cb2-11">plt.show()</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2023-07-04-python-statsmodels/python-statsmodels_files/figure-html/unnamed-chunk-2-3.png" class="img-fluid" width="768"></p>
+<p><img src="https://sbloggel.netlify.app/posts/2023-07-04-python-statsmodels/2023-07-04-python-statsmodels_files/figure-html/unnamed-chunk-3-3.png" class="img-fluid" width="768"></p>
 </div>
 </div>
 </section>
@@ -442,7 +498,7 @@ background-color: null;
 font-style: inherit;">False</span>)</span>
 <span id="cb3-5">plt.show()</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2023-07-04-python-statsmodels/python-statsmodels_files/figure-html/unnamed-chunk-3-5.png" class="img-fluid" width="672"></p>
+<p><img src="https://sbloggel.netlify.app/posts/2023-07-04-python-statsmodels/2023-07-04-python-statsmodels_files/figure-html/unnamed-chunk-4-5.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -499,7 +555,7 @@ background-color: null;
 font-style: inherit;">=</span>fig)</span>
 <span id="cb4-12">plt.show()</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2023-07-04-python-statsmodels/python-statsmodels_files/figure-html/unnamed-chunk-4-7.png" class="img-fluid" width="768"></p>
+<p><img src="https://sbloggel.netlify.app/posts/2023-07-04-python-statsmodels/2023-07-04-python-statsmodels_files/figure-html/unnamed-chunk-5-7.png" class="img-fluid" width="768"></p>
 </div>
 </div>
 <div class="cell">
@@ -535,8 +591,8 @@ font-style: inherit;">print</span>(fm.summary())</span></code></pre></div>
 Dep. Variable:                Lottery   R-squared:                       0.338
 Model:                            OLS   Adj. R-squared:                  0.287
 Method:                 Least Squares   F-statistic:                     6.636
-Date:                Wed, 05 Jul 2023   Prob (F-statistic):           1.07e-05
-Time:                        21:28:52   Log-Likelihood:                -375.30
+Date:                Mon, 10 Jul 2023   Prob (F-statistic):           1.07e-05
+Time:                        10:37:19   Log-Likelihood:                -375.30
 No. Observations:                  85   AIC:                             764.6
 Df Residuals:                      78   BIC:                             781.7
 Df Model:                           6                                         
@@ -683,7 +739,7 @@ font-style: inherit;">=</span>diamonds, ax<span class="op" style="color: #5E5E5E
 background-color: null;
 font-style: inherit;">=</span>ax)</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2023-07-04-python-statsmodels/python-statsmodels_files/figure-html/unnamed-chunk-6-9.png" class="img-fluid" width="624"></p>
+<p><img src="https://sbloggel.netlify.app/posts/2023-07-04-python-statsmodels/2023-07-04-python-statsmodels_files/figure-html/unnamed-chunk-7-9.png" class="img-fluid" width="624"></p>
 </div>
 </div>
 
@@ -692,13 +748,13 @@ font-style: inherit;">=</span>ax)</span></code></pre></div>
 
  ]]></description>
   <category>Python</category>
-  <guid>https://sbloggel.netlify.app/posts/2023-07-04-python-statsmodels/python-statsmodels.html</guid>
+  <guid>https://sbloggel.netlify.app/posts/2023-07-04-python-statsmodels/2023-07-04-python-statsmodels.html</guid>
   <pubDate>Mon, 03 Jul 2023 22:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Python pandas</title>
   <dc:creator>Sebastian Gerdes</dc:creator>
-  <link>https://sbloggel.netlify.app/posts/2023-07-03-python-pandas/index.html</link>
+  <link>https://sbloggel.netlify.app/posts/2023-07-03-python-pandas/2023-07-03-python-pandas.html</link>
   <description><![CDATA[ 
 
 
@@ -922,13 +978,13 @@ font-style: inherit;">100</span></span></code></pre></div>
 
  ]]></description>
   <category>Python</category>
-  <guid>https://sbloggel.netlify.app/posts/2023-07-03-python-pandas/index.html</guid>
+  <guid>https://sbloggel.netlify.app/posts/2023-07-03-python-pandas/2023-07-03-python-pandas.html</guid>
   <pubDate>Sun, 02 Jul 2023 22:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Specifying mixed effects in lme4</title>
   <dc:creator>Sebastian Gerdes</dc:creator>
-  <link>https://sbloggel.netlify.app/posts/2023-06-08-specifying-mixed-effects-models/index.html</link>
+  <link>https://sbloggel.netlify.app/posts/2023-06-08-specifying-mixed-effects-models/2023-06-08-specifying-mixed-effects-models.html</link>
   <description><![CDATA[ 
 
 
@@ -1216,7 +1272,7 @@ background-color: null;
 font-style: inherit;">'Patient ID'</span>)</span>
 <span id="cb3-5">}</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2023-06-08-specifying-mixed-effects-models/index_files/figure-html/visualize-1.png" class="img-fluid" width="672"></p>
+<p><img src="https://sbloggel.netlify.app/posts/2023-06-08-specifying-mixed-effects-models/2023-06-08-specifying-mixed-effects-models_files/figure-html/visualize-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -1465,78 +1521,13 @@ optimizer (nloptwrap) convergence code: 0 (OK) ; 0 optimizer warnings; 1 lme4 wa
 
  ]]></description>
   <category>R</category>
-  <guid>https://sbloggel.netlify.app/posts/2023-06-08-specifying-mixed-effects-models/index.html</guid>
+  <guid>https://sbloggel.netlify.app/posts/2023-06-08-specifying-mixed-effects-models/2023-06-08-specifying-mixed-effects-models.html</guid>
   <pubDate>Wed, 07 Jun 2023 22:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Minimal traffic jam model</title>
-  <dc:creator>Sebastian Gerdes</dc:creator>
-  <link>https://sbloggel.netlify.app/posts/2023-05-06-minimal-traffic-jam-model/index.html</link>
-  <description><![CDATA[ 
-
-
-
-<section id="resources" class="level2">
-<h2 class="anchored" data-anchor-id="resources">Resources</h2>
-<ul>
-<li><a href="https://www.javatpoint.com/traffic-flow-simulation-in-python">In Python</a> - also locally in folder <code>additional</code></li>
-</ul>
-</section>
-<section id="first-try" class="level2">
-<h2 class="anchored" data-anchor-id="first-try">First try</h2>
-<div class="cell" data-hash="index_cache/html/first_try_f8ae7cbb01903964407910bdffc99611">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1">get_acceleration <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">function</span>(s, s_n, d_n) {</span>
-<span id="cb1-2">  </span>
-<span id="cb1-3">}</span>
-<span id="cb1-4"></span>
-<span id="cb1-5">n <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">100</span></span>
-<span id="cb1-6">l <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">100</span></span>
-<span id="cb1-7">cars <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">tibble</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">cars =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">runif</span>(n, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>, l),</span>
-<span id="cb1-8">               <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">speed =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">runif</span>(n, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>))</span></code></pre></div>
-</div>
-
-
-</section>
-
- ]]></description>
-  <category>R</category>
-  <guid>https://sbloggel.netlify.app/posts/2023-05-06-minimal-traffic-jam-model/index.html</guid>
-  <pubDate>Fri, 05 May 2023 22:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Longtermism</title>
   <dc:creator>Sebastian Gerdes</dc:creator>
-  <link>https://sbloggel.netlify.app/posts/2023-05-06-longtermism/index.html</link>
+  <link>https://sbloggel.netlify.app/posts/2023-05-06-longtermism/2023-05-06-longtermism.html</link>
   <description><![CDATA[ 
 
 
@@ -1548,13 +1539,13 @@ font-style: inherit;">1</span>))</span></code></pre></div>
 
  ]]></description>
   <category>R</category>
-  <guid>https://sbloggel.netlify.app/posts/2023-05-06-longtermism/index.html</guid>
+  <guid>https://sbloggel.netlify.app/posts/2023-05-06-longtermism/2023-05-06-longtermism.html</guid>
   <pubDate>Fri, 05 May 2023 22:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Interesting R packages</title>
   <dc:creator>Sebastian Gerdes</dc:creator>
-  <link>https://sbloggel.netlify.app/posts/2023-03-17-interesting-r-packages/index.html</link>
+  <link>https://sbloggel.netlify.app/posts/2023-03-17-interesting-r-packages/2023-03-17-interesting-r-packages.html</link>
   <description><![CDATA[ 
 
 
@@ -1732,7 +1723,7 @@ Attaching package: 'Ryacas'</code></pre>
 <p>Source: https://cran.r-project.org/web/packages/Gmisc/vignettes/Grid-based_flowcharts.html</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2023-03-17-interesting-r-packages/index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+<p><img src="https://sbloggel.netlify.app/posts/2023-03-17-interesting-r-packages/2023-03-17-interesting-r-packages_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 
@@ -1741,13 +1732,13 @@ Attaching package: 'Ryacas'</code></pre>
 
  ]]></description>
   <category>R</category>
-  <guid>https://sbloggel.netlify.app/posts/2023-03-17-interesting-r-packages/index.html</guid>
+  <guid>https://sbloggel.netlify.app/posts/2023-03-17-interesting-r-packages/2023-03-17-interesting-r-packages.html</guid>
   <pubDate>Thu, 16 Mar 2023 23:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Python study notes</title>
   <dc:creator>Sebastian Gerdes</dc:creator>
-  <link>https://sbloggel.netlify.app/posts/2023-03-17-official-python-tutorial/index.html</link>
+  <link>https://sbloggel.netlify.app/posts/2023-03-17-official-python-tutorial/2023-03-17-official-python-tutorial.html</link>
   <description><![CDATA[ 
 
 
@@ -2340,7 +2331,7 @@ background-color: null;
 font-style: inherit;">False</span>)</span>
 <span id="cb65-20">  )</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2023-03-17-official-python-tutorial/index_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="544"></p>
+<p><img src="https://sbloggel.netlify.app/posts/2023-03-17-official-python-tutorial/2023-03-17-official-python-tutorial_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="544"></p>
 </div>
 <div class="sourceCode cell-code" id="cb66" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb66-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
@@ -2459,7 +2450,7 @@ font-style: inherit;">=</span>diamonds, ax<span class="op" style="color: #5E5E5E
 background-color: null;
 font-style: inherit;">=</span>ax)</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2023-03-17-official-python-tutorial/index_files/figure-html/unnamed-chunk-10-3.png" class="img-fluid" width="480"></p>
+<p><img src="https://sbloggel.netlify.app/posts/2023-03-17-official-python-tutorial/2023-03-17-official-python-tutorial_files/figure-html/unnamed-chunk-11-3.png" class="img-fluid" width="480"></p>
 </div>
 </div>
 </section>
@@ -2474,7 +2465,7 @@ font-style: inherit;">=</span>ax)</span></code></pre></div>
 <li>statsmodels - <a href="https://www.statsmodels.org/stable/gettingstarted.html">Getting started</a></li>
 <li>pandas - <a href="https://pandas.pydata.org/docs/getting_started/intro_tutorials/">Tutorials</a></li>
 <li>pytorch and co</li>
-<li>Django</li>
+<li>Django - <a href="https://code.visualstudio.com/docs/python/tutorial-django">Tutorial using VS Code</a></li>
 <li>Plotly</li>
 </ul>
 </section>
@@ -2499,7 +2490,7 @@ font-style: inherit;">intern =</span> <span class="cn" style="color: #8f5902;
 background-color: null;
 font-style: inherit;">TRUE</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "/Users/seb/Library/r-miniconda-arm64/bin/python"</code></pre>
+<pre><code>[1] "/Users/seb/Library/r-miniconda-arm64/envs/sbloggel/bin/python"</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -2510,7 +2501,7 @@ font-style: inherit;">import</span> sys</span>
 background-color: null;
 font-style: inherit;">print</span>(sys.executable)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>/Users/seb/Library/r-miniconda-arm64/bin/python3.10</code></pre>
+<pre><code>/Users/seb/Library/r-miniconda-arm64/envs/sbloggel/bin/python</code></pre>
 </div>
 </div>
 <ul>
@@ -2546,13 +2537,13 @@ font-style: inherit;"># py_install("pandas")</span></span></code></pre></div>
 
  ]]></description>
   <category>Self-study</category>
-  <guid>https://sbloggel.netlify.app/posts/2023-03-17-official-python-tutorial/index.html</guid>
+  <guid>https://sbloggel.netlify.app/posts/2023-03-17-official-python-tutorial/2023-03-17-official-python-tutorial.html</guid>
   <pubDate>Thu, 16 Mar 2023 23:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Coursera Deep Learning Specialization</title>
   <dc:creator>Sebastian Gerdes</dc:creator>
-  <link>https://sbloggel.netlify.app/posts/2023-03-17-coursera-deep-learning/index.html</link>
+  <link>https://sbloggel.netlify.app/posts/2023-03-17-coursera-deep-learning/2023-03-17-coursera-deep-learning.html</link>
   <description><![CDATA[ 
 
 
@@ -2670,13 +2661,13 @@ font-style: inherit;"># py_install("pandas")</span></span></code></pre></div>
 
  ]]></description>
   <category>Self-study</category>
-  <guid>https://sbloggel.netlify.app/posts/2023-03-17-coursera-deep-learning/index.html</guid>
+  <guid>https://sbloggel.netlify.app/posts/2023-03-17-coursera-deep-learning/2023-03-17-coursera-deep-learning.html</guid>
   <pubDate>Thu, 16 Mar 2023 23:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Self-study: Deep Learning by Goodfellow et al.</title>
   <dc:creator>Sebastian Gerdes</dc:creator>
-  <link>https://sbloggel.netlify.app/posts/2023-03-17-goodfellow-deep-learning/index.html</link>
+  <link>https://sbloggel.netlify.app/posts/2023-03-17-goodfellow-deep-learning/2023-03-17-goodfellow-deep-learning.html</link>
   <description><![CDATA[ 
 
 
@@ -2732,20 +2723,23 @@ font-style: inherit;"># py_install("pandas")</span></span></code></pre></div>
 <section id="bayes-theorem" class="level3">
 <h3 class="anchored" data-anchor-id="bayes-theorem">Bayes` theorem</h3>
 <p><img src="https://latex.codecogs.com/png.latex?%0A%5Cbegin%7Balign%7D%0A%5Cfrac%7BP(A%7CB)%7D%7BP(B%7CA)%7D%20&amp;=%20%5Cfrac%7BP(A)%7D%7BP(B)%7D%20%5C%5C%0AP(A%7CB)%20%5Ccdot%20P(B)%20&amp;=%20P(B%7CA)%20%5Ccdot%20P(A)%0A%5Cend%7Balign%7D%0A"></p>
-
-
 </section>
+</section>
+<section id="look-at-file-_notation.tex-in-the-corresponding-folder" class="level2">
+<h2 class="anchored" data-anchor-id="look-at-file-_notation.tex-in-the-corresponding-folder">Look at file “_notation.tex” in the corresponding folder!</h2>
+
+
 </section>
 
  ]]></description>
   <category>Self-study</category>
-  <guid>https://sbloggel.netlify.app/posts/2023-03-17-goodfellow-deep-learning/index.html</guid>
+  <guid>https://sbloggel.netlify.app/posts/2023-03-17-goodfellow-deep-learning/2023-03-17-goodfellow-deep-learning.html</guid>
   <pubDate>Thu, 16 Mar 2023 23:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Self-study: McElreath - Statistical Rethinking</title>
   <dc:creator>Sebastian Gerdes</dc:creator>
-  <link>https://sbloggel.netlify.app/posts/2023-03-17-mcelreath-statistical-rethinking/index.html</link>
+  <link>https://sbloggel.netlify.app/posts/2023-03-17-mcelreath-statistical-rethinking/2023-03-17-mcelreath-statistical-rethinking.html</link>
   <description><![CDATA[ 
 
 
@@ -2761,19 +2755,19 @@ font-style: inherit;"># py_install("pandas")</span></span></code></pre></div>
 <h2 class="anchored" data-anchor-id="lecture-1">Lecture 1</h2>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2023-03-17-mcelreath-statistical-rethinking/index_files/figure-html/lecture_1-1.png" class="img-fluid" width="672"></p>
+<p><img src="https://sbloggel.netlify.app/posts/2023-03-17-mcelreath-statistical-rethinking/2023-03-17-mcelreath-statistical-rethinking_files/figure-html/lecture_1-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2023-03-17-mcelreath-statistical-rethinking/index_files/figure-html/lecture_1-2.png" class="img-fluid" width="672"></p>
+<p><img src="https://sbloggel.netlify.app/posts/2023-03-17-mcelreath-statistical-rethinking/2023-03-17-mcelreath-statistical-rethinking_files/figure-html/lecture_1-2.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2023-03-17-mcelreath-statistical-rethinking/index_files/figure-html/lecture_1-3.png" class="img-fluid" width="672"></p>
+<p><img src="https://sbloggel.netlify.app/posts/2023-03-17-mcelreath-statistical-rethinking/2023-03-17-mcelreath-statistical-rethinking_files/figure-html/lecture_1-3.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2023-03-17-mcelreath-statistical-rethinking/index_files/figure-html/lecture_1-4.png" class="img-fluid" width="672"></p>
+<p><img src="https://sbloggel.netlify.app/posts/2023-03-17-mcelreath-statistical-rethinking/2023-03-17-mcelreath-statistical-rethinking_files/figure-html/lecture_1-4.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2023-03-17-mcelreath-statistical-rethinking/index_files/figure-html/lecture_1-5.png" class="img-fluid" width="672"></p>
+<p><img src="https://sbloggel.netlify.app/posts/2023-03-17-mcelreath-statistical-rethinking/2023-03-17-mcelreath-statistical-rethinking_files/figure-html/lecture_1-5.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       posterior_2  posterior_3
@@ -2845,13 +2839,13 @@ font-style: inherit;"># py_install("pandas")</span></span></code></pre></div>
 
  ]]></description>
   <category>Self-study</category>
-  <guid>https://sbloggel.netlify.app/posts/2023-03-17-mcelreath-statistical-rethinking/index.html</guid>
+  <guid>https://sbloggel.netlify.app/posts/2023-03-17-mcelreath-statistical-rethinking/2023-03-17-mcelreath-statistical-rethinking.html</guid>
   <pubDate>Thu, 16 Mar 2023 23:00:00 GMT</pubDate>
 </item>
 <item>
   <title>How bad are bananas</title>
   <dc:creator>Sebastian Gerdes</dc:creator>
-  <link>https://sbloggel.netlify.app/posts/2023-02-27-how-bad-are-bananas/index.html</link>
+  <link>https://sbloggel.netlify.app/posts/2023-02-27-how-bad-are-bananas/2023-02-27-how-bad-are-bananas.html</link>
   <description><![CDATA[ 
 
 
@@ -3034,7 +3028,7 @@ font-style: inherit;"># py_install("pandas")</span></span></code></pre></div>
 <h2 class="anchored" data-anchor-id="plots">Plots</h2>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2023-02-27-how-bad-are-bananas/index_files/figure-html/co2e_overview-1.png" class="img-fluid" width="672"></p>
+<p><img src="https://sbloggel.netlify.app/posts/2023-02-27-how-bad-are-bananas/2023-02-27-how-bad-are-bananas_files/figure-html/co2e_overview-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -3051,13 +3045,13 @@ Berners-Lee, Mike. 2020. <em>How <span>Bad</span> <span>Are</span> <span>Bananas
 </div>
 </div></section></div> ]]></description>
   <category>Sustainibility</category>
-  <guid>https://sbloggel.netlify.app/posts/2023-02-27-how-bad-are-bananas/index.html</guid>
+  <guid>https://sbloggel.netlify.app/posts/2023-02-27-how-bad-are-bananas/2023-02-27-how-bad-are-bananas.html</guid>
   <pubDate>Sun, 26 Feb 2023 23:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Manual colors in ggplot2</title>
   <dc:creator>Sebastian Gerdes</dc:creator>
-  <link>https://sbloggel.netlify.app/posts/2023-02_21-manual-colors-in-ggplot2/index.html</link>
+  <link>https://sbloggel.netlify.app/posts/2023-02_21-manual-colors-in-ggplot2/2023-02_21-manual-colors-in-ggplot2.html</link>
   <description><![CDATA[ 
 
 
@@ -3110,7 +3104,7 @@ font-style: inherit;">'colour'</span>, <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'fill'</span>))</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2023-02_21-manual-colors-in-ggplot2/index_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="672"></p>
+<p><img src="https://sbloggel.netlify.app/posts/2023-02_21-manual-colors-in-ggplot2/2023-02_21-manual-colors-in-ggplot2_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 
@@ -3118,13 +3112,13 @@ font-style: inherit;">'fill'</span>))</span></code></pre></div>
 
  ]]></description>
   <category>R</category>
-  <guid>https://sbloggel.netlify.app/posts/2023-02_21-manual-colors-in-ggplot2/index.html</guid>
+  <guid>https://sbloggel.netlify.app/posts/2023-02_21-manual-colors-in-ggplot2/2023-02_21-manual-colors-in-ggplot2.html</guid>
   <pubDate>Mon, 20 Feb 2023 23:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Strange behavior in ggplot2</title>
   <dc:creator>Sebastian Gerdes</dc:creator>
-  <link>https://sbloggel.netlify.app/posts/2023-02-02-strange-behavior-of-geom_area/index.html</link>
+  <link>https://sbloggel.netlify.app/posts/2023-02-02-strange-behavior-of-geom_area/2023-02-02-strange-behavior-of-geom_area.html</link>
   <description><![CDATA[ 
 
 
@@ -3775,7 +3769,7 @@ font-style: inherit;">trans =</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'log10'</span>)</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2023-02-02-strange-behavior-of-geom_area/index_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="672"></p>
+<p><img src="https://sbloggel.netlify.app/posts/2023-02-02-strange-behavior-of-geom_area/2023-02-02-strange-behavior-of-geom_area_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
@@ -3815,7 +3809,7 @@ font-style: inherit;">trans =</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'log10'</span>)</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2023-02-02-strange-behavior-of-geom_area/index_files/figure-html/unnamed-chunk-1-2.png" class="img-fluid" width="672"></p>
+<p><img src="https://sbloggel.netlify.app/posts/2023-02-02-strange-behavior-of-geom_area/2023-02-02-strange-behavior-of-geom_area_files/figure-html/unnamed-chunk-1-2.png" class="img-fluid" width="672"></p>
 </div>
 <div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
@@ -3847,7 +3841,7 @@ font-style: inherit;">cols =</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">vars</span>(lambda))</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2023-02-02-strange-behavior-of-geom_area/index_files/figure-html/unnamed-chunk-1-3.png" class="img-fluid" width="672"></p>
+<p><img src="https://sbloggel.netlify.app/posts/2023-02-02-strange-behavior-of-geom_area/2023-02-02-strange-behavior-of-geom_area_files/figure-html/unnamed-chunk-1-3.png" class="img-fluid" width="672"></p>
 </div>
 <div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
@@ -3895,7 +3889,7 @@ font-style: inherit;">trans =</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'log10'</span>)</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2023-02-02-strange-behavior-of-geom_area/index_files/figure-html/unnamed-chunk-1-4.png" class="img-fluid" width="672"></p>
+<p><img src="https://sbloggel.netlify.app/posts/2023-02-02-strange-behavior-of-geom_area/2023-02-02-strange-behavior-of-geom_area_files/figure-html/unnamed-chunk-1-4.png" class="img-fluid" width="672"></p>
 </div>
 <div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
@@ -3959,7 +3953,7 @@ font-style: inherit;">trans =</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'log10'</span>)</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2023-02-02-strange-behavior-of-geom_area/index_files/figure-html/unnamed-chunk-1-5.png" class="img-fluid" width="672"></p>
+<p><img src="https://sbloggel.netlify.app/posts/2023-02-02-strange-behavior-of-geom_area/2023-02-02-strange-behavior-of-geom_area_files/figure-html/unnamed-chunk-1-5.png" class="img-fluid" width="672"></p>
 </div>
 <div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -4003,13 +3997,13 @@ loaded via a namespace (and not attached):
 
  ]]></description>
   <category>R</category>
-  <guid>https://sbloggel.netlify.app/posts/2023-02-02-strange-behavior-of-geom_area/index.html</guid>
+  <guid>https://sbloggel.netlify.app/posts/2023-02-02-strange-behavior-of-geom_area/2023-02-02-strange-behavior-of-geom_area.html</guid>
   <pubDate>Wed, 01 Feb 2023 23:00:00 GMT</pubDate>
 </item>
 <item>
   <title>SIRS model dynamics</title>
   <dc:creator>Sebastian Gerdes</dc:creator>
-  <link>https://sbloggel.netlify.app/posts/2023-01-20-sirs-model-dynamics/index.html</link>
+  <link>https://sbloggel.netlify.app/posts/2023-01-20-sirs-model-dynamics/2023-01-20-sirs-model-dynamics.html</link>
   <description><![CDATA[ 
 
 
@@ -4382,7 +4376,7 @@ font-style: inherit;">trans=</span><span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'log10'</span>)</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2023-01-20-sirs-model-dynamics/index_files/figure-html/explore_model_dynamics-1.png" class="img-fluid" width="960"></p>
+<p><img src="https://sbloggel.netlify.app/posts/2023-01-20-sirs-model-dynamics/2023-01-20-sirs-model-dynamics_files/figure-html/explore_model_dynamics-1.png" class="img-fluid" width="960"></p>
 </div>
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1">last <span class="sc" style="color: #5E5E5E;
 background-color: null;
@@ -4447,7 +4441,7 @@ font-style: inherit;">trans=</span><span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'log10'</span>)</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2023-01-20-sirs-model-dynamics/index_files/figure-html/explore_model_dynamics-2.png" class="img-fluid" width="960"></p>
+<p><img src="https://sbloggel.netlify.app/posts/2023-01-20-sirs-model-dynamics/2023-01-20-sirs-model-dynamics_files/figure-html/explore_model_dynamics-2.png" class="img-fluid" width="960"></p>
 </div>
 <div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1">ss <span class="ot" style="color: #003B4F;
 background-color: null;
@@ -4668,7 +4662,7 @@ font-style: inherit;">trans=</span><span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'log10'</span>)</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2023-01-20-sirs-model-dynamics/index_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+<p><img src="https://sbloggel.netlify.app/posts/2023-01-20-sirs-model-dynamics/2023-01-20-sirs-model-dynamics_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 
@@ -4678,13 +4672,13 @@ font-style: inherit;">'log10'</span>)</span></code></pre></div>
 
  ]]></description>
   <category>R</category>
-  <guid>https://sbloggel.netlify.app/posts/2023-01-20-sirs-model-dynamics/index.html</guid>
+  <guid>https://sbloggel.netlify.app/posts/2023-01-20-sirs-model-dynamics/2023-01-20-sirs-model-dynamics.html</guid>
   <pubDate>Wed, 18 Jan 2023 23:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Sustainibility data</title>
   <dc:creator>Sebastian Gerdes</dc:creator>
-  <link>https://sbloggel.netlify.app/posts/2023-01-10-sustainibility-data/index.html</link>
+  <link>https://sbloggel.netlify.app/posts/2023-01-10-sustainibility-data/2023-01-10-sustainibility-data.html</link>
   <description><![CDATA[ 
 
 
@@ -4900,13 +4894,13 @@ font-style: inherit;">*</span> assumed_efficiency)</span></code></pre></div>
 
  ]]></description>
   <category>Sustainibility</category>
-  <guid>https://sbloggel.netlify.app/posts/2023-01-10-sustainibility-data/index.html</guid>
+  <guid>https://sbloggel.netlify.app/posts/2023-01-10-sustainibility-data/2023-01-10-sustainibility-data.html</guid>
   <pubDate>Mon, 09 Jan 2023 23:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Contribution plots</title>
   <dc:creator>Sebastian Gerdes</dc:creator>
-  <link>https://sbloggel.netlify.app/posts/2023-01-05-contribution-plots/index.html</link>
+  <link>https://sbloggel.netlify.app/posts/2023-01-05-contribution-plots/2023-01-05-contribution-plots.html</link>
   <description><![CDATA[ 
 
 
@@ -5090,7 +5084,7 @@ font-style: inherit;">ylab</span>(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'Relative contibution'</span>))</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2023-01-05-contribution-plots/index_files/figure-html/contribution_plot-1.png" class="img-fluid" width="672"></p>
+<p><img src="https://sbloggel.netlify.app/posts/2023-01-05-contribution-plots/2023-01-05-contribution-plots_files/figure-html/contribution_plot-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
@@ -5112,7 +5106,7 @@ font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">geom_point</span>())</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2023-01-05-contribution-plots/index_files/figure-html/another_plotly_plot-1.png" class="img-fluid" width="672"></p>
+<p><img src="https://sbloggel.netlify.app/posts/2023-01-05-contribution-plots/2023-01-05-contribution-plots_files/figure-html/another_plotly_plot-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
@@ -5124,13 +5118,13 @@ font-style: inherit;"># ggplotly(g)</span></span></code></pre></div>
 
  ]]></description>
   <category>R</category>
-  <guid>https://sbloggel.netlify.app/posts/2023-01-05-contribution-plots/index.html</guid>
+  <guid>https://sbloggel.netlify.app/posts/2023-01-05-contribution-plots/2023-01-05-contribution-plots.html</guid>
   <pubDate>Wed, 04 Jan 2023 23:00:00 GMT</pubDate>
 </item>
 <item>
   <title>R interfaces to trial registries</title>
   <dc:creator>Sebastian Gerdes</dc:creator>
-  <link>https://sbloggel.netlify.app/posts/2022-11-24-r-interfaces-to-trial-registries/index.html</link>
+  <link>https://sbloggel.netlify.app/posts/2022-11-24-r-interfaces-to-trial-registries/2022-11-24-r-interfaces-to-trial-registries.html</link>
   <description><![CDATA[ 
 
 
@@ -5307,13 +5301,13 @@ font-style: inherit;">library</span>(lubridate)</span></code></pre></div>
 
  ]]></description>
   <category>R</category>
-  <guid>https://sbloggel.netlify.app/posts/2022-11-24-r-interfaces-to-trial-registries/index.html</guid>
+  <guid>https://sbloggel.netlify.app/posts/2022-11-24-r-interfaces-to-trial-registries/2022-11-24-r-interfaces-to-trial-registries.html</guid>
   <pubDate>Mon, 24 Oct 2022 22:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Simulate time to-event-data</title>
   <dc:creator>Sebastian Gerdes</dc:creator>
-  <link>https://sbloggel.netlify.app/posts/2022-10-25-simulate-time-to-event-data/index.html</link>
+  <link>https://sbloggel.netlify.app/posts/2022-10-25-simulate-time-to-event-data/2022-10-25-simulate-time-to-event-data.html</link>
   <description><![CDATA[ 
 
 
@@ -5400,7 +5394,7 @@ font-style: inherit;">ylab =</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">expression</span>(lambda))</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2022-10-25-simulate-time-to-event-data/index_files/figure-html/ad_hoc_method-1.png" class="img-fluid" width="672"></p>
+<p><img src="https://sbloggel.netlify.app/posts/2022-10-25-simulate-time-to-event-data/2022-10-25-simulate-time-to-event-data_files/figure-html/ad_hoc_method-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
@@ -5467,7 +5461,7 @@ font-style: inherit;">ylab =</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">expression</span>(Lambda))</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2022-10-25-simulate-time-to-event-data/index_files/figure-html/ad_hoc_method-2.png" class="img-fluid" width="672"></p>
+<p><img src="https://sbloggel.netlify.app/posts/2022-10-25-simulate-time-to-event-data/2022-10-25-simulate-time-to-event-data_files/figure-html/ad_hoc_method-2.png" class="img-fluid" width="672"></p>
 </div>
 <div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
@@ -5511,7 +5505,7 @@ font-style: inherit;">xlab =</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'t'</span>)</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2022-10-25-simulate-time-to-event-data/index_files/figure-html/ad_hoc_method-3.png" class="img-fluid" width="672"></p>
+<p><img src="https://sbloggel.netlify.app/posts/2022-10-25-simulate-time-to-event-data/2022-10-25-simulate-time-to-event-data_files/figure-html/ad_hoc_method-3.png" class="img-fluid" width="672"></p>
 </div>
 <div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
@@ -5631,8 +5625,8 @@ accurate nanosecond times to avoid potential integer overflows</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Unit: milliseconds
-                    expr      min       lq    mean   median       uq      max
- quantile_function(1:10) 10.13918 10.80358 11.8516 11.19034 13.37305 15.88283
+                    expr     min      lq     mean   median       uq      max
+ quantile_function(1:10) 9.98391 10.4377 11.33159 10.77966 12.46623 15.01235
  neval
    100</code></pre>
 </div>
@@ -5678,7 +5672,7 @@ font-style: inherit;">ylab =</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'S'</span>)</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2022-10-25-simulate-time-to-event-data/index_files/figure-html/ad_hoc_method-4.png" class="img-fluid" width="672"></p>
+<p><img src="https://sbloggel.netlify.app/posts/2022-10-25-simulate-time-to-event-data/2022-10-25-simulate-time-to-event-data_files/figure-html/ad_hoc_method-4.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -5755,7 +5749,7 @@ font-style: inherit;">ylab =</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'S'</span>)</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2022-10-25-simulate-time-to-event-data/index_files/figure-html/coxed_method-1.png" class="img-fluid" width="672"></p>
+<p><img src="https://sbloggel.netlify.app/posts/2022-10-25-simulate-time-to-event-data/2022-10-25-simulate-time-to-event-data_files/figure-html/coxed_method-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -5769,8 +5763,158 @@ font-style: inherit;">'S'</span>)</span></code></pre></div>
 
  ]]></description>
   <category>R</category>
-  <guid>https://sbloggel.netlify.app/posts/2022-10-25-simulate-time-to-event-data/index.html</guid>
+  <guid>https://sbloggel.netlify.app/posts/2022-10-25-simulate-time-to-event-data/2022-10-25-simulate-time-to-event-data.html</guid>
   <pubDate>Mon, 24 Oct 2022 22:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Kids per person and carbon footprint</title>
+  <dc:creator>Sebastian Gerdes</dc:creator>
+  <link>https://sbloggel.netlify.app/posts/2022-10-19-kids-per-person-and-carbon-footprint/2022-10-19-kids-per-person-and-carbon-footprint.html</link>
+  <description><![CDATA[ 
+
+
+
+<section id="background" class="level2">
+<h2 class="anchored" data-anchor-id="background">Background</h2>
+<p>Here I want collect a few resources on how much the number of kids you get affects your carbone footprint.</p>
+</section>
+<section id="interesting-links" class="level2">
+<h2 class="anchored" data-anchor-id="interesting-links">Interesting links</h2>
+<ul>
+<li>https://iopscience.iop.org/article/10.1088/1748-9326/aa7541/meta</li>
+<li>https://www.lunduniversity.lu.se/article/four-lifestyle-choices-most-reduce-your-carbon-footprint</li>
+<li>https://www.arte.tv/de/videos/086893-003-A/re-kinderlos-dem-klima-zuliebe/</li>
+</ul>
+</section>
+<section id="calculations" class="level2">
+<h2 class="anchored" data-anchor-id="calculations">Calculations</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1">nr_of_generations_considered <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10</span></span>
+<span id="cb1-2">nr_of_kids_per_person <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.7</span></span>
+<span id="cb1-3"></span>
+<span id="cb1-4">nr_of_persons <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">function</span>(nr_of_generations_considered, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">nr_of_kids_per_person =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.7</span>) {</span>
+<span id="cb1-5">  responsibility_per_kid <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>)<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">^</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span>nr_of_generations_considered)</span>
+<span id="cb1-6">  kids_per_generations <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> nr_of_kids_per_person<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">^</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span>nr_of_generations_considered)</span>
+<span id="cb1-7">  total <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sum</span>(responsibility_per_kid <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> kids_per_generations)</span>
+<span id="cb1-8">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">return</span>(total)</span>
+<span id="cb1-9">}</span>
+<span id="cb1-10"></span>
+<span id="cb1-11">nr_of_persons_v <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">Vectorize</span>(nr_of_persons)</span>
+<span id="cb1-12"></span>
+<span id="cb1-13"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">plot</span>(nr_of_persons_v, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">100</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">log =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'x'</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">xlab =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Number of generations considered on log scale'</span>,</span>
+<span id="cb1-14">     <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">ylab =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'For how many descendents a person is responsible'</span>)</span></code></pre></div>
+<div class="cell-output-display">
+<p><img src="https://sbloggel.netlify.app/posts/2022-10-19-kids-per-person-and-carbon-footprint/2022-10-19-kids-per-person-and-carbon-footprint_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Do calcuation with geometric series:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1">foo <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">function</span>(nr_of_kids_per_person) {</span>
+<span id="cb2-2">  <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span> (<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> (nr_of_kids_per_person <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>))</span>
+<span id="cb2-3">}  </span>
+<span id="cb2-4"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">plot</span>(foo, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.9</span>)</span></code></pre></div>
+<div class="cell-output-display">
+<p><img src="https://sbloggel.netlify.app/posts/2022-10-19-kids-per-person-and-carbon-footprint/2022-10-19-kids-per-person-and-carbon-footprint_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+
+
+</section>
+
+ ]]></description>
+  <category>Sustainibility</category>
+  <guid>https://sbloggel.netlify.app/posts/2022-10-19-kids-per-person-and-carbon-footprint/2022-10-19-kids-per-person-and-carbon-footprint.html</guid>
+  <pubDate>Tue, 18 Oct 2022 22:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>

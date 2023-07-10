@@ -1,0 +1,71 @@
+---
+title: 'How bad are bananas'
+author: Sebastian Gerdes
+date: '2023-02-27'
+bibliography: "how_bad_are_bananas.bib"
+categories:
+  - Sustainibility
+execute: 
+  echo: false
+---
+
+```{r}
+#| label: init
+#| message: false
+library('readODS')
+library('tidyverse')
+library('knitr')
+dat <- read_ods('raw_data.ods')
+dat$short_item <- substr(dat$Item, 1, 40)
+```
+
+
+Recently, I have come a across a book that I find really wonderful: "How bad are bananas" by Mike Berners-Lee @berners-lee_how_2020.
+
+I would really like to use some of the data for a school project (of course citing the source in an adequate manner). It would be nice to use the data to develop a simple footprint calculator that is available online. Explicite permission from the author to use the data from his book with appropriate inidication of the data source is pending, however, with proper citation it should be okay to use the data I figure.
+
+
+## Reading notes
+* Carbon dioxide equivalent (CO~2~e):
+  - amount of CO~2~ that would have the same impact over a time of 100 years
+  - Total impact in the UK
+    + carbon dioxide 81%
+    + methane 11%
+    + nitrous oxide 5%
+    + refrigerant and other gases 3%
+* Direct and indirect emissions
+* fold-width of confidence interval-like interval: approx: 10-fold
+* average footprint of a UK person: 13 tonnes per year
+* global average: 7 tonnes per year
+* A large cheeseburger (3.2 kg CO~2~e) corresponds to approx. 6 hours of a 5 tonne year
+
+## My own thoughts
+* Carbon responsibility should work like this:
+  - The total CO~2~e emitted in the entire world should be estimated
+  - The responsibilities should be attributed (algorithmically)
+
+## Issues
+* Is there a German translation?
+* I should buy paper copies!
+* Maybe initiate a school-project
+* Ask for permission about the book: info@howbadarebananas.com
+* Is there a good webpage belonging to the book?
+* Shiny app for "how much time of a 5 tonne year does this correspond to?"
+
+
+## Table
+Here, I started to collect some of the data in the book and put them in a table:
+```{r}
+dat[, c(1:2)] %>% kable()
+```
+
+## Plots
+```{r}
+#| label: co2e_overview
+#| fig.height: 10
+dat %>% ggplot(aes(CO2e, short_item)) + 
+  geom_point(size = 2) +
+  scale_x_continuous(trans = 'log10')
+```
+
+## References
