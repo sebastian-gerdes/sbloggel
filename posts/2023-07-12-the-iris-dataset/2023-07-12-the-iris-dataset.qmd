@@ -5,9 +5,6 @@ date: 2023-07-12
 categories:
   - R
 toc: true
-draft: true
-execute: 
-  cache: true
 ---
 
 ```{r}

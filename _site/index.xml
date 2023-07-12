@@ -10,7 +10,205 @@
 <atom:link href="https://sbloggel.netlify.app/index.xml" rel="self" type="application/rss+xml"/>
 <description>Seb&#39;s private blog about statistics and other topics</description>
 <generator>quarto-1.3.433</generator>
-<lastBuildDate>Tue, 04 Jul 2023 22:00:00 GMT</lastBuildDate>
+<lastBuildDate>Tue, 11 Jul 2023 22:00:00 GMT</lastBuildDate>
+<item>
+  <title>The iris dataset</title>
+  <dc:creator>Sebastian Gerdes</dc:creator>
+  <link>https://sbloggel.netlify.app/posts/2023-07-12-the-iris-dataset/2023-07-12-the-iris-dataset.html</link>
+  <description><![CDATA[ 
+
+
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'tidyverse'</span>)</span></code></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1">iris_long <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> iris <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> </span>
+<span id="cb2-2">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">pivot_longer</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">cols =</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span>Species, </span>
+<span id="cb2-3">               <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">names_to =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Variable'</span>, </span>
+<span id="cb2-4">               <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">values_to =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Value'</span>)</span>
+<span id="cb2-5"></span>
+<span id="cb2-6">iris_long <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> </span>
+<span id="cb2-7">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ggplot</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(Variable, Value, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">color =</span> Species)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> </span>
+<span id="cb2-8">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_boxplot</span>()</span></code></pre></div>
+<div class="cell-output-display">
+<p><img src="https://sbloggel.netlify.app/posts/2023-07-12-the-iris-dataset/2023-07-12-the-iris-dataset_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">last_plot</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">scale_y_log10</span>() </span></code></pre></div>
+<div class="cell-output-display">
+<p><img src="https://sbloggel.netlify.app/posts/2023-07-12-the-iris-dataset/2023-07-12-the-iris-dataset_files/figure-html/unnamed-chunk-2-2.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1">iris_long <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> </span>
+<span id="cb4-2">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ggplot</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(Variable, Value, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">color =</span> Species)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> </span>
+<span id="cb4-3">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_jitter</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">height =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>)</span></code></pre></div>
+<div class="cell-output-display">
+<p><img src="https://sbloggel.netlify.app/posts/2023-07-12-the-iris-dataset/2023-07-12-the-iris-dataset_files/figure-html/unnamed-chunk-2-3.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">last_plot</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">scale_y_log10</span>() </span></code></pre></div>
+<div class="cell-output-display">
+<p><img src="https://sbloggel.netlify.app/posts/2023-07-12-the-iris-dataset/2023-07-12-the-iris-dataset_files/figure-html/unnamed-chunk-2-4.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1">fitted_model <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> </span>
+<span id="cb6-2">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">lm</span>(Value <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> Species <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> Variable, </span>
+<span id="cb6-3">     <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">data =</span> iris_long)</span>
+<span id="cb6-4"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">anova</span>(fitted_model)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Variance Table
+
+Response: Value
+                  Df  Sum Sq Mean Sq F value    Pr(&gt;F)    
+Species            2  309.61  154.80 1019.34 &lt; 2.2e-16 ***
+Variable           3 1656.26  552.09 3635.35 &lt; 2.2e-16 ***
+Species:Variable   6  282.47   47.08  309.99 &lt; 2.2e-16 ***
+Residuals        588   89.30    0.15                      
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">plot</span>(fitted_model)</span></code></pre></div>
+<div class="cell-output-display">
+<p><img src="https://sbloggel.netlify.app/posts/2023-07-12-the-iris-dataset/2023-07-12-the-iris-dataset_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output-display">
+<p><img src="https://sbloggel.netlify.app/posts/2023-07-12-the-iris-dataset/2023-07-12-the-iris-dataset_files/figure-html/unnamed-chunk-3-2.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output-display">
+<p><img src="https://sbloggel.netlify.app/posts/2023-07-12-the-iris-dataset/2023-07-12-the-iris-dataset_files/figure-html/unnamed-chunk-3-3.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output-display">
+<p><img src="https://sbloggel.netlify.app/posts/2023-07-12-the-iris-dataset/2023-07-12-the-iris-dataset_files/figure-html/unnamed-chunk-3-4.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1">fitted_model <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> </span>
+<span id="cb9-2">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">lm</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">log</span>(Value) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> Species <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> Variable, </span>
+<span id="cb9-3">     <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">data =</span> iris_long)</span>
+<span id="cb9-4"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">anova</span>(fitted_model)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Variance Table
+
+Response: log(Value)
+                  Df  Sum Sq Mean Sq F value    Pr(&gt;F)    
+Species            2  90.843  45.421 1772.90 &lt; 2.2e-16 ***
+Variable           3 297.393  99.131 3869.31 &lt; 2.2e-16 ***
+Species:Variable   6  95.977  15.996  624.37 &lt; 2.2e-16 ***
+Residuals        588  15.064   0.026                      
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">plot</span>(fitted_model)</span></code></pre></div>
+<div class="cell-output-display">
+<p><img src="https://sbloggel.netlify.app/posts/2023-07-12-the-iris-dataset/2023-07-12-the-iris-dataset_files/figure-html/unnamed-chunk-3-5.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output-display">
+<p><img src="https://sbloggel.netlify.app/posts/2023-07-12-the-iris-dataset/2023-07-12-the-iris-dataset_files/figure-html/unnamed-chunk-3-6.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output-display">
+<p><img src="https://sbloggel.netlify.app/posts/2023-07-12-the-iris-dataset/2023-07-12-the-iris-dataset_files/figure-html/unnamed-chunk-3-7.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output-display">
+<p><img src="https://sbloggel.netlify.app/posts/2023-07-12-the-iris-dataset/2023-07-12-the-iris-dataset_files/figure-html/unnamed-chunk-3-8.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+
+
+
+ ]]></description>
+  <category>R</category>
+  <guid>https://sbloggel.netlify.app/posts/2023-07-12-the-iris-dataset/2023-07-12-the-iris-dataset.html</guid>
+  <pubDate>Tue, 11 Jul 2023 22:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Managing python versions in RStudio</title>
   <dc:creator>Sebastian Gerdes</dc:creator>
@@ -6052,591 +6250,6 @@ font-style: inherit;">1.9</span>)</span></code></pre></div>
  ]]></description>
   <category>Sustainibility</category>
   <guid>https://sbloggel.netlify.app/posts/2022-10-19-kids-per-person-and-carbon-footprint/2022-10-19-kids-per-person-and-carbon-footprint.html</guid>
-  <pubDate>Tue, 18 Oct 2022 22:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Model meadow</title>
-  <dc:creator>Sebastian Gerdes</dc:creator>
-  <link>https://sbloggel.netlify.app/posts/2022-10-19-model-meadow/2022-10-19-model-meadow.html</link>
-  <description><![CDATA[ 
-
-
-
-<section id="general-linear-model" class="level2">
-<h2 class="anchored" data-anchor-id="general-linear-model">General linear model</h2>
-</section>
-<section id="generalized-linear-model" class="level2">
-<h2 class="anchored" data-anchor-id="generalized-linear-model">Generalized linear model</h2>
-<section id="binary-data" class="level3">
-<h3 class="anchored" data-anchor-id="binary-data">Binary data</h3>
-</section>
-<section id="count-data" class="level3">
-<h3 class="anchored" data-anchor-id="count-data">Count data</h3>
-</section>
-</section>
-<section id="mixed-effect-models" class="level2">
-<h2 class="anchored" data-anchor-id="mixed-effect-models">Mixed effect models</h2>
-</section>
-<section id="models-for-survival-data" class="level2">
-<h2 class="anchored" data-anchor-id="models-for-survival-data">Models for survival data</h2>
-<section id="kaplan-meier" class="level3">
-<h3 class="anchored" data-anchor-id="kaplan-meier">Kaplan-Meier</h3>
-</section>
-<section id="cox-ph" class="level3">
-<h3 class="anchored" data-anchor-id="cox-ph">Cox-PH</h3>
-</section>
-<section id="competing-risks" class="level3">
-<h3 class="anchored" data-anchor-id="competing-risks">Competing risks</h3>
-</section>
-<section id="multistate-models" class="level3">
-<h3 class="anchored" data-anchor-id="multistate-models">Multistate models</h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(survival)</span>
-<span id="cb1-2"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(mstate)</span>
-<span id="cb1-3">tmat <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">transMat</span>(<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">list</span>(<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>,<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span>,<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">4</span>), <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span>,<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">4</span>), <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">4</span>), <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">c</span>()), <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'tox'</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'twist'</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'rel'</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'death'</span>))</span>
-<span id="cb1-4"></span>
-<span id="cb1-5">data <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">data.frame</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">id =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">4</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">4</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">4</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">5</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">5</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">5</span>),</span>
-<span id="cb1-6">                   <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">from =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>), </span>
-<span id="cb1-7">                   <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">to =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">4</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">4</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">4</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">4</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">4</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">4</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">4</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">4</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">4</span>),</span>
-<span id="cb1-8">                   <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">start_time =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">5</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">5</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">4</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">4</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">8</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">9</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span> , <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span> , <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>),</span>
-<span id="cb1-9">                   <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">stop_time =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">5</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">5</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">5</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">8</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">8</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">4</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">4</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">4</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">9</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">9</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">12</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">13</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">7</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">7</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">7</span>),</span>
-<span id="cb1-10">                   <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">status =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span> , <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span> , <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span> , <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span> , <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span> , <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span> , <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>), </span>
-<span id="cb1-11">                   <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">group =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'a'</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'a'</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'a'</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'a'</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'a'</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'b'</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'b'</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'b'</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'b'</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'b'</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'a'</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'b'</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'a'</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'a'</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'a'</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'b'</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'b'</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'b'</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'b'</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'b'</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'b'</span>))</span>
-<span id="cb1-12">data<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span>trans <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> data<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span>to <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span></span>
-<span id="cb1-13"></span>
-<span id="cb1-14">fm <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">coxph</span>(<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">Surv</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">time =</span> start_time, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">time2 =</span> stop_time, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">event =</span> status) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">~</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">strata</span>(trans), <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">data =</span> data)</span>
-<span id="cb1-15"></span>
-<span id="cb1-16">fm_msfit <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">msfit</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">object =</span> fm, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">trans =</span> tmat)</span>
-<span id="cb1-17"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">plot</span>(fm_msfit)</span></code></pre></div>
-<div class="cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2022-10-19-model-meadow/2022-10-19-model-meadow_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
-</div>
-<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1">p_model <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">probtrans</span>(fm_msfit, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">predt =</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>)</span>
-<span id="cb2-2">p_model</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[[1]]
-  time pstate1 pstate2 pstate3 pstate4        se1       se2       se3       se4
-1    0    1.00     0.0     0.0    0.00 0.00000000 0.0000000 0.0000000 0.0000000
-2    2    0.80     0.0     0.0    0.20 0.16000000 0.0000000 0.0000000 0.1600000
-3    3    0.60     0.0     0.2    0.20 0.19209373 0.0000000 0.1552417 0.1600000
-4    4    0.40     0.2     0.2    0.20 0.18487233 0.1479114 0.1552417 0.1600000
-5    5    0.20     0.4     0.2    0.20 0.13617799 0.1756259 0.1552417 0.1600000
-6    8    0.10     0.4     0.2    0.30 0.08447551 0.1756259 0.1552417 0.1622840
-7    9    0.05     0.4     0.2    0.35 0.04908185 0.1756259 0.1552417 0.1663768
-8   13    0.05     0.4     0.2    0.35 0.04908185 0.1756259 0.1552417 0.1663768
-
-[[2]]
-  time pstate1 pstate2 pstate3 pstate4 se1 se2 se3 se4
-1    0       0       1       0       0   0   0   0   0
-2    2       0       1       0       0   0   0   0   0
-3    3       0       1       0       0   0   0   0   0
-4    4       0       1       0       0   0   0   0   0
-5    5       0       1       0       0   0   0   0   0
-6    8       0       1       0       0   0   0   0   0
-7    9       0       1       0       0   0   0   0   0
-8   13       0       1       0       0   0   0   0   0
-
-[[3]]
-  time pstate1 pstate2 pstate3 pstate4 se1 se2 se3 se4
-1    0       0       0       1       0   0   0   0   0
-2    2       0       0       1       0   0   0   0   0
-3    3       0       0       1       0   0   0   0   0
-4    4       0       0       1       0   0   0   0   0
-5    5       0       0       1       0   0   0   0   0
-6    8       0       0       1       0   0   0   0   0
-7    9       0       0       1       0   0   0   0   0
-8   13       0       0       1       0   0   0   0   0
-
-[[4]]
-  time pstate1 pstate2 pstate3 pstate4 se1 se2 se3 se4
-1    0       0       0       0       1   0   0   0   0
-2    2       0       0       0       1   0   0   0   0
-3    3       0       0       0       1   0   0   0   0
-4    4       0       0       0       1   0   0   0   0
-5    5       0       0       0       1   0   0   0   0
-6    8       0       0       0       1   0   0   0   0
-7    9       0       0       0       1   0   0   0   0
-8   13       0       0       0       1   0   0   0   0
-
-$trans
-       to
-from    tox twist rel death
-  tox    NA     1   2     3
-  twist  NA    NA   4     5
-  rel    NA    NA  NA     6
-  death  NA    NA  NA    NA
-
-$method
-[1] "aalen"
-
-$predt
-[1] 0
-
-$direction
-[1] "forward"
-
-attr(,"class")
-[1] "probtrans"</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">plot</span>(p_model, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">use.ggplot =</span> <span class="cn" style="color: #8f5902;
-background-color: null;
-font-style: inherit;">TRUE</span>)</span></code></pre></div>
-<div class="cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2022-10-19-model-meadow/2022-10-19-model-meadow_files/figure-html/unnamed-chunk-2-2.png" class="img-fluid" width="672"></p>
-</div>
-<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">plot</span>(p_model, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">use.ggplot =</span> <span class="cn" style="color: #8f5902;
-background-color: null;
-font-style: inherit;">TRUE</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">type =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'separate'</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">conf.int =</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.95</span>,<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">conf.type =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'log'</span>)</span></code></pre></div>
-<div class="cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2022-10-19-model-meadow/2022-10-19-model-meadow_files/figure-html/unnamed-chunk-2-3.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-</section>
-</section>
-<section id="machine-learning-models" class="level2">
-<h2 class="anchored" data-anchor-id="machine-learning-models">Machine learning models</h2>
-<section id="neural-nets" class="level3">
-<h3 class="anchored" data-anchor-id="neural-nets">Neural nets</h3>
-
-
-</section>
-</section>
-
- ]]></description>
-  <category>R</category>
-  <guid>https://sbloggel.netlify.app/posts/2022-10-19-model-meadow/2022-10-19-model-meadow.html</guid>
   <pubDate>Tue, 18 Oct 2022 22:00:00 GMT</pubDate>
 </item>
 </channel>
