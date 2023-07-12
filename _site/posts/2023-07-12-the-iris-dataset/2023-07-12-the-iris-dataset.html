@@ -197,16 +197,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="init" class="level2">
 <h2 class="anchored" data-anchor-id="init">Init</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">'tidyverse'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">'tidyverse'</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">'lme4'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="data-preparation" class="level2">
 <h2 class="anchored" data-anchor-id="data-preparation">Data preparation</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>iris_long <span class="ot">&lt;-</span> iris <span class="sc">|&gt;</span> </span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">-</span>Species, </span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">'Variable'</span>, </span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">'Value'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(iris)) <span class="sc">|&gt;</span> </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">-</span><span class="fu">c</span>(Species, id), </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">'Variable'</span>, </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">'Value'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="plots" class="level2">
@@ -295,14 +297,43 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <div class="cell-output-display">
 <p><img src="2023-07-12-the-iris-dataset_files/figure-html/iris_models-8.png" class="img-fluid" width="672"></p>
 </div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>fitted_model <span class="ot">&lt;-</span> </span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lmer</span>(<span class="fu">log</span>(Value) <span class="sc">~</span> Species <span class="sc">*</span> Variable <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> id),</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">data =</span> iris_long)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>fitted_model</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Linear mixed model fit by REML ['lmerMod']
+Formula: log(Value) ~ Species * Variable + (1 | id)
+   Data: iris_long
+REML criterion at convergence: -496.6563
+Random effects:
+ Groups   Name        Std.Dev.
+ id       (Intercept) 0.08565 
+ Residual             0.13522 
+Number of obs: 600, groups:  id, 150
+Fixed Effects:
+                           (Intercept)                       Speciesversicolor  
+                                0.3728                                  1.0702  
+                      Speciesvirginica                     VariablePetal.Width  
+                                1.3367                                 -1.8574  
+                  VariableSepal.Length                     VariableSepal.Width  
+                                1.2354                                  0.8531  
+ Speciesversicolor:VariablePetal.Width    Speciesvirginica:VariablePetal.Width  
+                                0.6854                                  0.8447  
+Speciesversicolor:VariableSepal.Length   Speciesvirginica:VariableSepal.Length  
+                               -0.9011                                 -1.0642  
+ Speciesversicolor:VariableSepal.Width    Speciesvirginica:VariableSepal.Width  
+                               -1.2837                                 -1.4783  </code></pre>
+</div>
 </div>
 </section>
 <section id="conclusion" class="level2">
 <h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
 <ul>
-<li>In general, I like the log scale modeling - however there is a problem with the model on log scale:
+<li>In general, I like the log scale modeling - however there is a problem with the model on log scale
 <ul>
-<li>Species setosa is not fit adequately - probably measurement error is not adequately modeled on log scale</li>
+<li>Effects can be given as fold-changes - this seems to make sense to me</li>
+<li>Species “setosa” is not fit adequately on log scale - probably measurement error is not adequately modeled on log scale - higher variance of error on log scale</li>
 </ul></li>
 </ul>
 

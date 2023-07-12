@@ -326,21 +326,21 @@
     "href": "posts/2023-07-12-the-iris-dataset/2023-07-12-the-iris-dataset.html",
     "title": "The iris dataset",
     "section": "",
-    "text": "library('tidyverse')"
+    "text": "library('tidyverse')\nlibrary('lme4')"
   },
   {
     "objectID": "posts/2023-07-12-the-iris-dataset/2023-07-12-the-iris-dataset.html#init",
     "href": "posts/2023-07-12-the-iris-dataset/2023-07-12-the-iris-dataset.html#init",
     "title": "The iris dataset",
     "section": "",
-    "text": "library('tidyverse')"
+    "text": "library('tidyverse')\nlibrary('lme4')"
   },
   {
     "objectID": "posts/2023-07-12-the-iris-dataset/2023-07-12-the-iris-dataset.html#data-preparation",
     "href": "posts/2023-07-12-the-iris-dataset/2023-07-12-the-iris-dataset.html#data-preparation",
     "title": "The iris dataset",
     "section": "Data preparation",
-    "text": "Data preparation\n\niris_long &lt;- iris |&gt; \n  pivot_longer(cols = -Species, \n               names_to = 'Variable', \n               values_to = 'Value')"
+    "text": "Data preparation\n\niris_long &lt;- iris |&gt; \n  mutate(id = 1:nrow(iris)) |&gt; \n  pivot_longer(cols = -c(Species, id), \n               names_to = 'Variable', \n               values_to = 'Value')"
   },
   {
     "objectID": "posts/2023-07-12-the-iris-dataset/2023-07-12-the-iris-dataset.html#plots",
@@ -354,14 +354,14 @@
     "href": "posts/2023-07-12-the-iris-dataset/2023-07-12-the-iris-dataset.html#models",
     "title": "The iris dataset",
     "section": "Models",
-    "text": "Models\n\nfitted_model &lt;- \n  lm(Value ~ Species * Variable, \n     data = iris_long)\nanova(fitted_model)\n\nAnalysis of Variance Table\n\nResponse: Value\n                  Df  Sum Sq Mean Sq F value    Pr(&gt;F)    \nSpecies            2  309.61  154.80 1019.34 &lt; 2.2e-16 ***\nVariable           3 1656.26  552.09 3635.35 &lt; 2.2e-16 ***\nSpecies:Variable   6  282.47   47.08  309.99 &lt; 2.2e-16 ***\nResiduals        588   89.30    0.15                      \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nplot(fitted_model)\n\n\n\n\n\n\n\n\n\n\n\n\nfitted_model &lt;- \n  lm(log(Value) ~ Species * Variable, \n     data = iris_long)\nanova(fitted_model)\n\nAnalysis of Variance Table\n\nResponse: log(Value)\n                  Df  Sum Sq Mean Sq F value    Pr(&gt;F)    \nSpecies            2  90.843  45.421 1772.90 &lt; 2.2e-16 ***\nVariable           3 297.393  99.131 3869.31 &lt; 2.2e-16 ***\nSpecies:Variable   6  95.977  15.996  624.37 &lt; 2.2e-16 ***\nResiduals        588  15.064   0.026                      \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nplot(fitted_model)"
+    "text": "Models\n\nfitted_model &lt;- \n  lm(Value ~ Species * Variable, \n     data = iris_long)\nanova(fitted_model)\n\nAnalysis of Variance Table\n\nResponse: Value\n                  Df  Sum Sq Mean Sq F value    Pr(&gt;F)    \nSpecies            2  309.61  154.80 1019.34 &lt; 2.2e-16 ***\nVariable           3 1656.26  552.09 3635.35 &lt; 2.2e-16 ***\nSpecies:Variable   6  282.47   47.08  309.99 &lt; 2.2e-16 ***\nResiduals        588   89.30    0.15                      \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nplot(fitted_model)\n\n\n\n\n\n\n\n\n\n\n\n\nfitted_model &lt;- \n  lm(log(Value) ~ Species * Variable, \n     data = iris_long)\nanova(fitted_model)\n\nAnalysis of Variance Table\n\nResponse: log(Value)\n                  Df  Sum Sq Mean Sq F value    Pr(&gt;F)    \nSpecies            2  90.843  45.421 1772.90 &lt; 2.2e-16 ***\nVariable           3 297.393  99.131 3869.31 &lt; 2.2e-16 ***\nSpecies:Variable   6  95.977  15.996  624.37 &lt; 2.2e-16 ***\nResiduals        588  15.064   0.026                      \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nplot(fitted_model)\n\n\n\n\n\n\n\n\n\n\n\n\nfitted_model &lt;- \n  lmer(log(Value) ~ Species * Variable + (1 | id),\n     data = iris_long)\nfitted_model\n\nLinear mixed model fit by REML ['lmerMod']\nFormula: log(Value) ~ Species * Variable + (1 | id)\n   Data: iris_long\nREML criterion at convergence: -496.6563\nRandom effects:\n Groups   Name        Std.Dev.\n id       (Intercept) 0.08565 \n Residual             0.13522 \nNumber of obs: 600, groups:  id, 150\nFixed Effects:\n                           (Intercept)                       Speciesversicolor  \n                                0.3728                                  1.0702  \n                      Speciesvirginica                     VariablePetal.Width  \n                                1.3367                                 -1.8574  \n                  VariableSepal.Length                     VariableSepal.Width  \n                                1.2354                                  0.8531  \n Speciesversicolor:VariablePetal.Width    Speciesvirginica:VariablePetal.Width  \n                                0.6854                                  0.8447  \nSpeciesversicolor:VariableSepal.Length   Speciesvirginica:VariableSepal.Length  \n                               -0.9011                                 -1.0642  \n Speciesversicolor:VariableSepal.Width    Speciesvirginica:VariableSepal.Width  \n                               -1.2837                                 -1.4783"
   },
   {
     "objectID": "posts/2023-07-12-the-iris-dataset/2023-07-12-the-iris-dataset.html#conclusion",
     "href": "posts/2023-07-12-the-iris-dataset/2023-07-12-the-iris-dataset.html#conclusion",
     "title": "The iris dataset",
     "section": "Conclusion",
-    "text": "Conclusion\n\nIn general, I like the log scale modeling - however there is a problem with the model on log scale:\n\nSpecies setosa is not fit adequately - probably measurement error is not adequately modeled on log scale"
+    "text": "Conclusion\n\nIn general, I like the log scale modeling - however there is a problem with the model on log scale\n\nEffects can be given as fold-changes - this seems to make sense to me\nSpecies “setosa” is not fit adequately on log scale - probably measurement error is not adequately modeled on log scale - higher variance of error on log scale"
   },
   {
     "objectID": "posts/2023-07-04-python-statsmodels/2023-07-04-python-statsmodels.html",

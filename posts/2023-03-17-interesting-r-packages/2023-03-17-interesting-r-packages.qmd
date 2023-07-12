@@ -146,3 +146,6 @@ vert
 grps
 excluded
 ```
+
+## Leaflet for maps
+* [Link](https://cran.r-project.org/package=leaflet)

@@ -26,7 +26,12 @@
 background-color: null;
 font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">'tidyverse'</span>)</span></code></pre></div>
+font-style: inherit;">'tidyverse'</span>)</span>
+<span id="cb1-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'lme4'</span>)</span></code></pre></div>
 </div>
 </section>
 <section id="data-preparation" class="level2">
@@ -39,17 +44,32 @@ background-color: null;
 font-style: inherit;">|&gt;</span> </span>
 <span id="cb2-2">  <span class="fu" style="color: #4758AB;
 background-color: null;
+font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">id =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">nrow</span>(iris)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> </span>
+<span id="cb2-3">  <span class="fu" style="color: #4758AB;
+background-color: null;
 font-style: inherit;">pivot_longer</span>(<span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">cols =</span> <span class="sc" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">-</span>Species, </span>
-<span id="cb2-3">               <span class="at" style="color: #657422;
+font-style: inherit;">-</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(Species, id), </span>
+<span id="cb2-4">               <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">names_to =</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'Variable'</span>, </span>
-<span id="cb2-4">               <span class="at" style="color: #657422;
+<span id="cb2-5">               <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">values_to =</span> <span class="st" style="color: #20794D;
 background-color: null;
@@ -212,14 +232,61 @@ font-style: inherit;">plot</span>(fitted_model)</span></code></pre></div>
 <div class="cell-output-display">
 <p><img src="https://sbloggel.netlify.app/posts/2023-07-12-the-iris-dataset/2023-07-12-the-iris-dataset_files/figure-html/iris_models-8.png" class="img-fluid" width="672"></p>
 </div>
+<div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1">fitted_model <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> </span>
+<span id="cb13-2">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">lmer</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">log</span>(Value) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> Species <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> Variable <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> (<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|</span> id),</span>
+<span id="cb13-3">     <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">data =</span> iris_long)</span>
+<span id="cb13-4">fitted_model</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Linear mixed model fit by REML ['lmerMod']
+Formula: log(Value) ~ Species * Variable + (1 | id)
+   Data: iris_long
+REML criterion at convergence: -496.6563
+Random effects:
+ Groups   Name        Std.Dev.
+ id       (Intercept) 0.08565 
+ Residual             0.13522 
+Number of obs: 600, groups:  id, 150
+Fixed Effects:
+                           (Intercept)                       Speciesversicolor  
+                                0.3728                                  1.0702  
+                      Speciesvirginica                     VariablePetal.Width  
+                                1.3367                                 -1.8574  
+                  VariableSepal.Length                     VariableSepal.Width  
+                                1.2354                                  0.8531  
+ Speciesversicolor:VariablePetal.Width    Speciesvirginica:VariablePetal.Width  
+                                0.6854                                  0.8447  
+Speciesversicolor:VariableSepal.Length   Speciesvirginica:VariableSepal.Length  
+                               -0.9011                                 -1.0642  
+ Speciesversicolor:VariableSepal.Width    Speciesvirginica:VariableSepal.Width  
+                               -1.2837                                 -1.4783  </code></pre>
+</div>
 </div>
 </section>
 <section id="conclusion" class="level2">
 <h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
 <ul>
-<li>In general, I like the log scale modeling - however there is a problem with the model on log scale:
+<li>In general, I like the log scale modeling - however there is a problem with the model on log scale
 <ul>
-<li>Species setosa is not fit adequately - probably measurement error is not adequately modeled on log scale</li>
+<li>Effects can be given as fold-changes - this seems to make sense to me</li>
+<li>Species “setosa” is not fit adequately on log scale - probably measurement error is not adequately modeled on log scale - higher variance of error on log scale</li>
 </ul></li>
 </ul>
 

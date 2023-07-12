@@ -12,13 +12,15 @@ toc: true
 #| label: init
 #| message: false
 library('tidyverse')
+library('lme4')
 ```
 
 ## Data preparation
 ```{r}
 #| label: data_preparation
 iris_long <- iris |> 
-  pivot_longer(cols = -Species, 
+  mutate(id = 1:nrow(iris)) |> 
+  pivot_longer(cols = -c(Species, id), 
                names_to = 'Variable', 
                values_to = 'Value')
 ```
@@ -53,8 +55,14 @@ fitted_model <-
      data = iris_long)
 anova(fitted_model)
 plot(fitted_model)
+
+fitted_model <- 
+  lmer(log(Value) ~ Species * Variable + (1 | id),
+     data = iris_long)
+fitted_model
 ```
 
 ## Conclusion
-* In general, I like the log scale modeling - however there is a problem with the model on log scale:
-  * Species setosa is not fit adequately - probably measurement error is not adequately modeled on log scale
+* In general, I like the log scale modeling - however there is a problem with the model on log scale
+  * Effects can be given as fold-changes - this seems to make sense to me
+  * Species "setosa" is not fit adequately on log scale - probably measurement error is not adequately modeled on log scale - higher variance of error on log scale
