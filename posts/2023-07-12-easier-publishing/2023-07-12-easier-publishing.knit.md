@@ -43,16 +43,16 @@ git push'
 [39m3/3                  
 [31moutput file: 2023-07-12-easier-publishing.knit.md
 
-[39m[31mError in readLines(con, warn = FALSE) : cannot open the connection
+Error in readLines(con, warn = FALSE) : cannot open the connection
 Calls: .main ... partition_yaml_front_matter -> grep -> is.factor -> read_utf8 -> readLines
 In addition: Warning message:
-In readLines(con, warn = FALSE) :[39m[31m
+In readLines(con, warn = FALSE) :
   cannot open file '2023-07-12-easier-publishing.qmd': No such file or directory
 Execution halted
-[39m[main 1aae5e8] some changes
- 1 file changed, 5 insertions(+), 6 deletions(-)
+[39m[main 45ec834] some changes
+ 1 file changed, 5 insertions(+), 5 deletions(-)
 To github.com:sebastian-gerdes/sbloggel.git
-   dc816bd..1aae5e8  main -> main
+   1aae5e8..45ec834  main -> main
 ```
 :::
 :::
