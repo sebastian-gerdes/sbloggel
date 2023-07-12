@@ -326,7 +326,42 @@
     "href": "posts/2023-07-12-the-iris-dataset/2023-07-12-the-iris-dataset.html",
     "title": "The iris dataset",
     "section": "",
-    "text": "library('tidyverse')\niris_long &lt;- iris |&gt; \n  pivot_longer(cols = -Species, \n               names_to = 'Variable', \n               values_to = 'Value')\n\niris_long |&gt; \n  ggplot(aes(Variable, Value, color = Species)) + \n  geom_boxplot()\n\n\n\nlast_plot() + scale_y_log10() \n\n\n\niris_long |&gt; \n  ggplot(aes(Variable, Value, color = Species)) + \n  geom_jitter(height = 0)\n\n\n\nlast_plot() + scale_y_log10()\nfitted_model &lt;- \n  lm(Value ~ Species * Variable, \n     data = iris_long)\nanova(fitted_model)\n\nAnalysis of Variance Table\n\nResponse: Value\n                  Df  Sum Sq Mean Sq F value    Pr(&gt;F)    \nSpecies            2  309.61  154.80 1019.34 &lt; 2.2e-16 ***\nVariable           3 1656.26  552.09 3635.35 &lt; 2.2e-16 ***\nSpecies:Variable   6  282.47   47.08  309.99 &lt; 2.2e-16 ***\nResiduals        588   89.30    0.15                      \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nplot(fitted_model)\n\n\n\n\n\n\n\n\n\n\n\n\nfitted_model &lt;- \n  lm(log(Value) ~ Species * Variable, \n     data = iris_long)\nanova(fitted_model)\n\nAnalysis of Variance Table\n\nResponse: log(Value)\n                  Df  Sum Sq Mean Sq F value    Pr(&gt;F)    \nSpecies            2  90.843  45.421 1772.90 &lt; 2.2e-16 ***\nVariable           3 297.393  99.131 3869.31 &lt; 2.2e-16 ***\nSpecies:Variable   6  95.977  15.996  624.37 &lt; 2.2e-16 ***\nResiduals        588  15.064   0.026                      \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nplot(fitted_model)"
+    "text": "library('tidyverse')"
+  },
+  {
+    "objectID": "posts/2023-07-12-the-iris-dataset/2023-07-12-the-iris-dataset.html#init",
+    "href": "posts/2023-07-12-the-iris-dataset/2023-07-12-the-iris-dataset.html#init",
+    "title": "The iris dataset",
+    "section": "",
+    "text": "library('tidyverse')"
+  },
+  {
+    "objectID": "posts/2023-07-12-the-iris-dataset/2023-07-12-the-iris-dataset.html#data-preparation",
+    "href": "posts/2023-07-12-the-iris-dataset/2023-07-12-the-iris-dataset.html#data-preparation",
+    "title": "The iris dataset",
+    "section": "Data preparation",
+    "text": "Data preparation\n\niris_long &lt;- iris |&gt; \n  pivot_longer(cols = -Species, \n               names_to = 'Variable', \n               values_to = 'Value')"
+  },
+  {
+    "objectID": "posts/2023-07-12-the-iris-dataset/2023-07-12-the-iris-dataset.html#plots",
+    "href": "posts/2023-07-12-the-iris-dataset/2023-07-12-the-iris-dataset.html#plots",
+    "title": "The iris dataset",
+    "section": "Plots",
+    "text": "Plots\n\niris_long |&gt; \n  ggplot(aes(Variable, Value, color = Species)) + \n  geom_boxplot()\n\n\n\nlast_plot() + scale_y_log10() \n\n\n\niris_long |&gt; \n  ggplot(aes(Variable, Value, color = Species)) + \n  geom_jitter(height = 0)\n\n\n\nlast_plot() + scale_y_log10()"
+  },
+  {
+    "objectID": "posts/2023-07-12-the-iris-dataset/2023-07-12-the-iris-dataset.html#models",
+    "href": "posts/2023-07-12-the-iris-dataset/2023-07-12-the-iris-dataset.html#models",
+    "title": "The iris dataset",
+    "section": "Models",
+    "text": "Models\n\nfitted_model &lt;- \n  lm(Value ~ Species * Variable, \n     data = iris_long)\nanova(fitted_model)\n\nAnalysis of Variance Table\n\nResponse: Value\n                  Df  Sum Sq Mean Sq F value    Pr(&gt;F)    \nSpecies            2  309.61  154.80 1019.34 &lt; 2.2e-16 ***\nVariable           3 1656.26  552.09 3635.35 &lt; 2.2e-16 ***\nSpecies:Variable   6  282.47   47.08  309.99 &lt; 2.2e-16 ***\nResiduals        588   89.30    0.15                      \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nplot(fitted_model)\n\n\n\n\n\n\n\n\n\n\n\n\nfitted_model &lt;- \n  lm(log(Value) ~ Species * Variable, \n     data = iris_long)\nanova(fitted_model)\n\nAnalysis of Variance Table\n\nResponse: log(Value)\n                  Df  Sum Sq Mean Sq F value    Pr(&gt;F)    \nSpecies            2  90.843  45.421 1772.90 &lt; 2.2e-16 ***\nVariable           3 297.393  99.131 3869.31 &lt; 2.2e-16 ***\nSpecies:Variable   6  95.977  15.996  624.37 &lt; 2.2e-16 ***\nResiduals        588  15.064   0.026                      \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nplot(fitted_model)"
+  },
+  {
+    "objectID": "posts/2023-07-12-the-iris-dataset/2023-07-12-the-iris-dataset.html#conclusion",
+    "href": "posts/2023-07-12-the-iris-dataset/2023-07-12-the-iris-dataset.html#conclusion",
+    "title": "The iris dataset",
+    "section": "Conclusion",
+    "text": "Conclusion\n\nIn general, I like the log scale modeling - however there is a problem with the model on log scale:\n\nSpecies setosa is not fit adequately - probably measurement error is not adequately modeled on log scale"
   },
   {
     "objectID": "posts/2023-07-04-python-statsmodels/2023-07-04-python-statsmodels.html",
@@ -796,12 +831,5 @@
     "title": "Blog posts",
     "section": "",
     "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n  \n\n\n\n\nThe iris dataset\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nJul 12, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n  \n\n\n\n\nManaging python versions in RStudio\n\n\n\n\n\n\n\nPython\n\n\n\n\n\n\n\n\n\n\n\nJul 5, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n  \n\n\n\n\nPython graphics\n\n\n\n\n\n\n\nPython\n\n\n\n\n\n\n\n\n\n\n\nJul 5, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n  \n\n\n\n\nExploring the Python library statsmodels\n\n\n\n\n\n\n\nPython\n\n\n\n\n\n\n\n\n\n\n\nJul 4, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n  \n\n\n\n\nPython pandas\n\n\n\n\n\n\n\nPython\n\n\n\n\n\n\n\n\n\n\n\nJul 3, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n  \n\n\n\n\nSpecifying mixed effects in lme4\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nJun 8, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n  \n\n\n\n\nInteresting R packages\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nMar 17, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n  \n\n\n\n\nPython study notes\n\n\n\n\n\n\n\nSelf-study\n\n\nPython\n\n\n\n\n\n\n\n\n\n\n\nMar 17, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n  \n\n\n\n\nCoursera Deep Learning Specialization\n\n\n\n\n\n\n\nSelf-study\n\n\n\n\n\n\n\n\n\n\n\nMar 17, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n  \n\n\n\n\nSelf-study: Deep Learning by Goodfellow et al.\n\n\n\n\n\n\n\nSelf-study\n\n\n\n\n\n\n\n\n\n\n\nMar 17, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n  \n\n\n\n\nSelf-study: McElreath - Statistical Rethinking\n\n\n\n\n\n\n\nSelf-study\n\n\n\n\n\n\n\n\n\n\n\nMar 17, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n  \n\n\n\n\nHow bad are bananas\n\n\n\n\n\n\n\nSustainibility\n\n\n\n\n\n\n\n\n\n\n\nFeb 27, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n  \n\n\n\n\nManual colors in ggplot2\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nFeb 21, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n  \n\n\n\n\nStrange behavior in ggplot2\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nFeb 2, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n  \n\n\n\n\nSIRS model dynamics\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nJan 19, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n  \n\n\n\n\nSustainibility data\n\n\n\n\n\n\n\nSustainibility\n\n\n\n\n\n\n\n\n\n\n\nJan 10, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n  \n\n\n\n\nContribution plots\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nJan 5, 2023\n\n\nSebastian Gerdes\n\n\n\n\n\n\n  \n\n\n\n\nR interfaces to trial registries\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nOct 25, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n  \n\n\n\n\nSimulate time to-event-data\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nOct 25, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n  \n\n\n\n\nKids per person and carbon footprint\n\n\n\n\n\n\n\nSustainibility\n\n\n\n\n\n\n\n\n\n\n\nOct 19, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n  \n\n\n\n\nModel meadow\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nOct 19, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n  \n\n\n\n\nRetrieving and plotting COVID-19 data\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nOct 16, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n  \n\n\n\n\nLeo’s project\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nOct 16, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n  \n\n\n\n\nSIR-like model with deSolve in deterministic and stochastic version\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nOct 4, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n  \n\n\n\n\nAntipsychotics\n\n\n\n\n\n\n\nPsychiatry\n\n\n\n\n\n\n\n\n\n\n\nSep 8, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n  \n\n\n\n\nTimeline\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nSep 8, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n  \n\n\n\n\nPsychopharmaca and time\n\n\n\n\n\n\n\nPsychiatry\n\n\n\n\n\n\n\n\n\n\n\nSep 8, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n  \n\n\n\n\nChess ressources\n\n\n\n\n\n\n\nMishmash\n\n\n\n\n\n\n\n\n\n\n\nSep 8, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n  \n\n\n\n\nHumidity\n\n\n\n\n\n\n\nSustainibility\n\n\n\n\n\n\n\n\n\n\n\nSep 8, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\n  \n\n\n\n\nSIR model\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nJul 19, 2022\n\n\nSebastian Gerdes\n\n\n\n\n\n\nNo matching items"
-  },
-  {
-    "objectID": "posts/2023-07-12-the-iris-dataset/2023-07-12-the-iris-dataset.html#conclusion",
-    "href": "posts/2023-07-12-the-iris-dataset/2023-07-12-the-iris-dataset.html#conclusion",
-    "title": "The iris dataset",
-    "section": "Conclusion",
-    "text": "Conclusion\n\nIn general, I like the log scale modeling - however there is a problem with the model on log scale:\n\nSpecies setosa is not fit adequately - probably measurement error is not adequately modeled on log scale"
   }
 ]

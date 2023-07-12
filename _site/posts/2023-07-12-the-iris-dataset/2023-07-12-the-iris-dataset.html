@@ -100,7 +100,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <link rel="stylesheet" href="../../styles.css">
 <meta property="og:title" content="Seb’s blog - The iris dataset">
-<meta property="og:image" content="https://sbloggel.netlify.app/posts/2023-07-12-the-iris-dataset/2023-07-12-the-iris-dataset_files/figure-html/unnamed-chunk-2-1.png">
+<meta property="og:image" content="https://sbloggel.netlify.app/posts/2023-07-12-the-iris-dataset/2023-07-12-the-iris-dataset_files/figure-html/iris_plots-1.png">
 <meta property="og:site-name" content="Seb's blog">
 <meta property="og:image:height" content="960">
 <meta property="og:image:width" content="1344">
@@ -154,7 +154,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link active" data-scroll-target="#conclusion">Conclusion</a></li>
+  <li><a href="#init" id="toc-init" class="nav-link active" data-scroll-target="#init">Init</a></li>
+  <li><a href="#data-preparation" id="toc-data-preparation" class="nav-link" data-scroll-target="#data-preparation">Data preparation</a></li>
+  <li><a href="#plots" id="toc-plots" class="nav-link" data-scroll-target="#plots">Plots</a></li>
+  <li><a href="#models" id="toc-models" class="nav-link" data-scroll-target="#models">Models</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/sebastian-gerdes/sbloggel/blob/main/posts/2023-07-12-the-iris-dataset/2023-07-12-the-iris-dataset.qmd" class="toc-action">View source</a></p></div></div></nav>
     </div>
@@ -190,41 +194,53 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
+<section id="init" class="level2">
+<h2 class="anchored" data-anchor-id="init">Init</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">'tidyverse'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section>
+<section id="data-preparation" class="level2">
+<h2 class="anchored" data-anchor-id="data-preparation">Data preparation</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>iris_long <span class="ot">&lt;-</span> iris <span class="sc">|&gt;</span> </span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">-</span>Species, </span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">'Variable'</span>, </span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">'Value'</span>)</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>iris_long <span class="sc">|&gt;</span> </span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(Variable, Value, <span class="at">color =</span> Species)) <span class="sc">+</span> </span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="2023-07-12-the-iris-dataset_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">'Value'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span> <span class="fu">scale_y_log10</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="2023-07-12-the-iris-dataset_files/figure-html/unnamed-chunk-2-2.png" class="img-fluid" width="672"></p>
-</div>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>iris_long <span class="sc">|&gt;</span> </span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(Variable, Value, <span class="at">color =</span> Species)) <span class="sc">+</span> </span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">height =</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="2023-07-12-the-iris-dataset_files/figure-html/unnamed-chunk-2-3.png" class="img-fluid" width="672"></p>
-</div>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span> <span class="fu">scale_y_log10</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="2023-07-12-the-iris-dataset_files/figure-html/unnamed-chunk-2-4.png" class="img-fluid" width="672"></p>
-</div>
-</div>
+</section>
+<section id="plots" class="level2">
+<h2 class="anchored" data-anchor-id="plots">Plots</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>fitted_model <span class="ot">&lt;-</span> </span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lm</span>(Value <span class="sc">~</span> Species <span class="sc">*</span> Variable, </span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">data =</span> iris_long)</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(fitted_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>iris_long <span class="sc">|&gt;</span> </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(Variable, Value, <span class="at">color =</span> Species)) <span class="sc">+</span> </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="2023-07-12-the-iris-dataset_files/figure-html/iris_plots-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span> <span class="fu">scale_y_log10</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="2023-07-12-the-iris-dataset_files/figure-html/iris_plots-2.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>iris_long <span class="sc">|&gt;</span> </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(Variable, Value, <span class="at">color =</span> Species)) <span class="sc">+</span> </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">height =</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="2023-07-12-the-iris-dataset_files/figure-html/iris_plots-3.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span> <span class="fu">scale_y_log10</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="2023-07-12-the-iris-dataset_files/figure-html/iris_plots-4.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="models" class="level2">
+<h2 class="anchored" data-anchor-id="models">Models</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>fitted_model <span class="ot">&lt;-</span> </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lm</span>(Value <span class="sc">~</span> Species <span class="sc">*</span> Variable, </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">data =</span> iris_long)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(fitted_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Analysis of Variance Table
 
@@ -237,23 +253,23 @@ Residuals        588   89.30    0.15
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fitted_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fitted_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="2023-07-12-the-iris-dataset_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+<p><img src="2023-07-12-the-iris-dataset_files/figure-html/iris_models-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output-display">
-<p><img src="2023-07-12-the-iris-dataset_files/figure-html/unnamed-chunk-3-2.png" class="img-fluid" width="672"></p>
+<p><img src="2023-07-12-the-iris-dataset_files/figure-html/iris_models-2.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output-display">
-<p><img src="2023-07-12-the-iris-dataset_files/figure-html/unnamed-chunk-3-3.png" class="img-fluid" width="672"></p>
+<p><img src="2023-07-12-the-iris-dataset_files/figure-html/iris_models-3.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output-display">
-<p><img src="2023-07-12-the-iris-dataset_files/figure-html/unnamed-chunk-3-4.png" class="img-fluid" width="672"></p>
+<p><img src="2023-07-12-the-iris-dataset_files/figure-html/iris_models-4.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>fitted_model <span class="ot">&lt;-</span> </span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lm</span>(<span class="fu">log</span>(Value) <span class="sc">~</span> Species <span class="sc">*</span> Variable, </span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">data =</span> iris_long)</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(fitted_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>fitted_model <span class="ot">&lt;-</span> </span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lm</span>(<span class="fu">log</span>(Value) <span class="sc">~</span> Species <span class="sc">*</span> Variable, </span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">data =</span> iris_long)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(fitted_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Analysis of Variance Table
 
@@ -266,20 +282,21 @@ Residuals        588  15.064   0.026
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fitted_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fitted_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="2023-07-12-the-iris-dataset_files/figure-html/unnamed-chunk-3-5.png" class="img-fluid" width="672"></p>
-</div>
-<div class="cell-output-display">
-<p><img src="2023-07-12-the-iris-dataset_files/figure-html/unnamed-chunk-3-6.png" class="img-fluid" width="672"></p>
+<p><img src="2023-07-12-the-iris-dataset_files/figure-html/iris_models-5.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output-display">
-<p><img src="2023-07-12-the-iris-dataset_files/figure-html/unnamed-chunk-3-7.png" class="img-fluid" width="672"></p>
+<p><img src="2023-07-12-the-iris-dataset_files/figure-html/iris_models-6.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output-display">
-<p><img src="2023-07-12-the-iris-dataset_files/figure-html/unnamed-chunk-3-8.png" class="img-fluid" width="672"></p>
+<p><img src="2023-07-12-the-iris-dataset_files/figure-html/iris_models-7.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output-display">
+<p><img src="2023-07-12-the-iris-dataset_files/figure-html/iris_models-8.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+</section>
 <section id="conclusion" class="level2">
 <h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
 <ul>

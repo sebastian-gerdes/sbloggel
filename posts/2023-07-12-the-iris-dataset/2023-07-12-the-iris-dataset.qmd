@@ -7,19 +7,25 @@ categories:
 toc: true
 ---
 
+## Init
 ```{r}
 #| label: init
 #| message: false
 library('tidyverse')
 ```
 
-
+## Data preparation
 ```{r}
+#| label: data_preparation
 iris_long <- iris |> 
   pivot_longer(cols = -Species, 
                names_to = 'Variable', 
                values_to = 'Value')
+```
 
+## Plots
+```{r}
+#| label: iris_plots
 iris_long |> 
   ggplot(aes(Variable, Value, color = Species)) + 
   geom_boxplot()
@@ -33,7 +39,9 @@ iris_long |>
 last_plot() + scale_y_log10() 
 ```
 
+## Models
 ```{r}
+#| label: iris_models
 fitted_model <- 
   lm(Value ~ Species * Variable, 
      data = iris_long)
