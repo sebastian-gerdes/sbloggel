@@ -5,6 +5,7 @@ date: 2023-07-12
 categories:
   - R
 toc: true
+engine: knitr
 # draft: true
 # execute: 
 #   echo: false
@@ -13,6 +14,7 @@ toc: true
 
 * File "/usr/local/bin/pq":
 ```{bash}
+#| eval: false
 #!   /bin/bash -e
 quarto render
 git add .
