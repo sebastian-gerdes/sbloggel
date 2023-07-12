@@ -11,13 +11,10 @@ toc: true
 #  cache: true
 ---
 
-```{r}
-#| label: init
-#| cache: false
-#| include: false
-library('tidyverse')
-set.seed(1)
-
-library('reticulate')
-use_condaenv('sbloggel')
+In file "publish.sh
+```{bash}
+#!   /bin/bash -e
+system('git add .')
+system('git commit -m "some changes"')
+system('git push')
 ```

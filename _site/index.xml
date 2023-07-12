@@ -299,6 +299,27 @@ Speciesversicolor:VariableSepal.Length   Speciesvirginica:VariableSepal.Length
   <pubDate>Tue, 11 Jul 2023 22:00:00 GMT</pubDate>
 </item>
 <item>
+  <title>Easier publishing</title>
+  <dc:creator>Sebastian Gerdes</dc:creator>
+  <link>https://sbloggel.netlify.app/posts/2023-07-12-easier-publishing/2023-07-12-easier-publishing.html</link>
+  <description><![CDATA[ 
+
+
+
+<p>In file “publish.sh</p>
+<pre class="{bash}"><code>#!   /bin/bash -e
+system('git add .')
+system('git commit -m "some changes"')
+system('git push')</code></pre>
+
+
+
+ ]]></description>
+  <category>R</category>
+  <guid>https://sbloggel.netlify.app/posts/2023-07-12-easier-publishing/2023-07-12-easier-publishing.html</guid>
+  <pubDate>Tue, 11 Jul 2023 22:00:00 GMT</pubDate>
+</item>
+<item>
   <title>Managing python versions in RStudio</title>
   <dc:creator>Sebastian Gerdes</dc:creator>
   <link>https://sbloggel.netlify.app/posts/2023-07-06-python-versions-environments/2023-07-06-python-versions-environments.html</link>
@@ -6190,156 +6211,6 @@ font-style: inherit;">'S'</span>)</span></code></pre></div>
   <category>R</category>
   <guid>https://sbloggel.netlify.app/posts/2022-10-25-simulate-time-to-event-data/2022-10-25-simulate-time-to-event-data.html</guid>
   <pubDate>Mon, 24 Oct 2022 22:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Kids per person and carbon footprint</title>
-  <dc:creator>Sebastian Gerdes</dc:creator>
-  <link>https://sbloggel.netlify.app/posts/2022-10-19-kids-per-person-and-carbon-footprint/2022-10-19-kids-per-person-and-carbon-footprint.html</link>
-  <description><![CDATA[ 
-
-
-
-<section id="background" class="level2">
-<h2 class="anchored" data-anchor-id="background">Background</h2>
-<p>Here I want collect a few resources on how much the number of kids you get affects your carbone footprint.</p>
-</section>
-<section id="interesting-links" class="level2">
-<h2 class="anchored" data-anchor-id="interesting-links">Interesting links</h2>
-<ul>
-<li>https://iopscience.iop.org/article/10.1088/1748-9326/aa7541/meta</li>
-<li>https://www.lunduniversity.lu.se/article/four-lifestyle-choices-most-reduce-your-carbon-footprint</li>
-<li>https://www.arte.tv/de/videos/086893-003-A/re-kinderlos-dem-klima-zuliebe/</li>
-</ul>
-</section>
-<section id="calculations" class="level2">
-<h2 class="anchored" data-anchor-id="calculations">Calculations</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1">nr_of_generations_considered <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">10</span></span>
-<span id="cb1-2">nr_of_kids_per_person <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1.7</span></span>
-<span id="cb1-3"></span>
-<span id="cb1-4">nr_of_persons <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">function</span>(nr_of_generations_considered, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">nr_of_kids_per_person =</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1.7</span>) {</span>
-<span id="cb1-5">  responsibility_per_kid <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>)<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">^</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">:</span>nr_of_generations_considered)</span>
-<span id="cb1-6">  kids_per_generations <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> nr_of_kids_per_person<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">^</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">:</span>nr_of_generations_considered)</span>
-<span id="cb1-7">  total <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">sum</span>(responsibility_per_kid <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> kids_per_generations)</span>
-<span id="cb1-8">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">return</span>(total)</span>
-<span id="cb1-9">}</span>
-<span id="cb1-10"></span>
-<span id="cb1-11">nr_of_persons_v <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">Vectorize</span>(nr_of_persons)</span>
-<span id="cb1-12"></span>
-<span id="cb1-13"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">plot</span>(nr_of_persons_v, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">100</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">log =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'x'</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">xlab =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'Number of generations considered on log scale'</span>,</span>
-<span id="cb1-14">     <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">ylab =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'For how many descendents a person is responsible'</span>)</span></code></pre></div>
-<div class="cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2022-10-19-kids-per-person-and-carbon-footprint/2022-10-19-kids-per-person-and-carbon-footprint_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<p>Do calcuation with geometric series:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1">foo <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">function</span>(nr_of_kids_per_person) {</span>
-<span id="cb2-2">  <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span> (<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span> (nr_of_kids_per_person <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>))</span>
-<span id="cb2-3">}  </span>
-<span id="cb2-4"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">plot</span>(foo, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>, <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1.9</span>)</span></code></pre></div>
-<div class="cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2022-10-19-kids-per-person-and-carbon-footprint/2022-10-19-kids-per-person-and-carbon-footprint_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-
-
-</section>
-
- ]]></description>
-  <category>Sustainibility</category>
-  <guid>https://sbloggel.netlify.app/posts/2022-10-19-kids-per-person-and-carbon-footprint/2022-10-19-kids-per-person-and-carbon-footprint.html</guid>
-  <pubDate>Tue, 18 Oct 2022 22:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
