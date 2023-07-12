@@ -47,3 +47,6 @@ anova(fitted_model)
 plot(fitted_model)
 ```
 
+## Conclusion
+* In general, I like the log scale modeling - however there is a problem with the model on log scale:
+  * Species setosa is not fit adequately - probably measurement error is not adequately modeled on log scale

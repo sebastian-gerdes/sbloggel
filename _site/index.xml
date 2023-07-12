@@ -201,8 +201,17 @@ font-style: inherit;">plot</span>(fitted_model)</span></code></pre></div>
 <p><img src="https://sbloggel.netlify.app/posts/2023-07-12-the-iris-dataset/2023-07-12-the-iris-dataset_files/figure-html/unnamed-chunk-3-8.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<ul>
+<li>In general, I like the log scale modeling - however there is a problem with the model on log scale:
+<ul>
+<li>Species setosa is not fit adequately - probably measurement error is not adequately modeled on log scale</li>
+</ul></li>
+</ul>
 
 
+</section>
 
  ]]></description>
   <category>R</category>
