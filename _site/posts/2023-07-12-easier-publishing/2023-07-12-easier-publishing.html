@@ -150,9 +150,10 @@ ul.task-list li input[type="checkbox"] {
 
 <p>In file “publish.sh</p>
 <pre class="{bash}"><code>#!   /bin/bash -e
-system('git add .')
-system('git commit -m "some changes"')
-system('git push')</code></pre>
+quarto render
+git add .
+git commit -m "some changes"
+git push</code></pre>
 
 
 

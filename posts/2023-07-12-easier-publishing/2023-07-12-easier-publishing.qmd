@@ -14,7 +14,8 @@ toc: true
 In file "publish.sh
 ```{bash}
 #!   /bin/bash -e
-system('git add .')
-system('git commit -m "some changes"')
-system('git push')
+quarto render
+git add .
+git commit -m "some changes"
+git push
 ```
