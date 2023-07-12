@@ -306,12 +306,17 @@ Speciesversicolor:VariableSepal.Length   Speciesvirginica:VariableSepal.Length
 
 
 
-<p>In file “publish.sh</p>
-<pre class="{bash}"><code>#!   /bin/bash -e
+<ul>
+<li>File “/usr/local/bin/pq”:</li>
+</ul>
+<pre><code>#!   /bin/bash -e
 quarto render
 git add .
 git commit -m "some changes"
 git push</code></pre>
+<ul>
+<li>chmod +x /usr/local/bin/pq</li>
+</ul>
 
 
 

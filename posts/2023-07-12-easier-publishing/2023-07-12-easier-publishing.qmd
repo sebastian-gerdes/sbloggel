@@ -13,8 +13,7 @@ engine: knitr
 ---
 
 * File "/usr/local/bin/pq":
-```{bash}
-#| eval: false
+```
 #!   /bin/bash -e
 quarto render
 git add .

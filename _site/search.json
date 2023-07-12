@@ -368,7 +368,7 @@
     "href": "posts/2023-07-12-easier-publishing/2023-07-12-easier-publishing.html",
     "title": "Easier publishing",
     "section": "",
-    "text": "In file “publish.sh\n#!   /bin/bash -e\nquarto render\ngit add .\ngit commit -m \"some changes\"\ngit push"
+    "text": "File “/usr/local/bin/pq”:\n\n#!   /bin/bash -e\nquarto render\ngit add .\ngit commit -m \"some changes\"\ngit push\n\nchmod +x /usr/local/bin/pq"
   },
   {
     "objectID": "posts/2023-03-17-interesting-r-packages/2023-03-17-interesting-r-packages.html",
