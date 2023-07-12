@@ -1,0 +1,48 @@
+---
+title: Model diagnostics for logistic regression
+author: Sebastian Gerdes
+date: 2023-07-12
+categories:
+  - R
+toc: true
+# draft: true
+# execute: 
+#   echo: false
+#  cache: true
+---
+
+```{r}
+#| label: init
+#| message: false
+library('tidyverse')
+library('faraway')
+set.seed(1)
+```
+
+```{r}
+
+n <- 100
+dat <- tibble(x1 = rnorm(n), 
+              x2 = rnorm(n),
+              x3 = rnorm(n),)
+
+X <- model.matrix(~ ., data = dat)
+beta <- rnorm(ncol(X))
+
+
+
+dat <- dat |> 
+  mutate(mu = X %*% beta,
+         p = plogis(mu),
+         result = rbinom(n, 1, p))
+
+fitted_model <- glm(result ~ x1 + x2 + x3, data = dat, family = binomial())
+
+plot(fitted_model)
+
+prplot(fitted_model, 1)
+prplot(fitted_model, 2)
+prplot(fitted_model, 3)
+
+```
+
