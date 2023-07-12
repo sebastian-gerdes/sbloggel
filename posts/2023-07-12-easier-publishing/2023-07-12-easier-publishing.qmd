@@ -11,7 +11,7 @@ toc: true
 #  cache: true
 ---
 
-In file "publish.sh
+* File "/usr/local/bin/pq":
 ```{bash}
 #!   /bin/bash -e
 quarto render
@@ -19,3 +19,4 @@ git add .
 git commit -m "some changes"
 git push
 ```
+* chmod +x /usr/local/bin/pq
