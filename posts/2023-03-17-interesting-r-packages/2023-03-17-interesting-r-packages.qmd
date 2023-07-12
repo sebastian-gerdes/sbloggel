@@ -149,3 +149,6 @@ excluded
 
 ## Leaflet for maps
 * [Link](https://cran.r-project.org/package=leaflet)
+
+## Here for finding the path to the project directory
+* [Link](https://github.com/r-lib/here)
