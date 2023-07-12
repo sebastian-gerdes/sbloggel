@@ -49,10 +49,10 @@ In addition: Warning message:
 In readLines(con, warn = FALSE) :
   cannot open file '2023-07-12-easier-publishing.qmd': No such file or directory
 Execution halted
-[39m[main 6def2e2] some changes
- 1 file changed, 3 insertions(+), 3 deletions(-)
+[39m[main 3150b95] some changes
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 To github.com:sebastian-gerdes/sbloggel.git
-   9c193bb..6def2e2  main -> main
+   6def2e2..3150b95  main -> main
 ```
 :::
 :::
