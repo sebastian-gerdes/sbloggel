@@ -1,0 +1,52 @@
+---
+title: The iris dataset
+author: Sebastian Gerdes
+date: 2023-07-12
+categories:
+  - R
+toc: true
+draft: true
+execute: 
+  cache: true
+---
+
+```{r}
+#| label: init
+#| message: false
+library('tidyverse')
+```
+
+
+```{r}
+iris_long <- iris |> 
+  pivot_longer(cols = -Species, 
+               names_to = 'Variable', 
+               values_to = 'Value')
+
+iris_long |> 
+  ggplot(aes(Variable, Value, color = Species)) + 
+  geom_boxplot()
+
+last_plot() + scale_y_log10() 
+
+iris_long |> 
+  ggplot(aes(Variable, Value, color = Species)) + 
+  geom_jitter(height = 0)
+
+last_plot() + scale_y_log10() 
+```
+
+```{r}
+fitted_model <- 
+  lm(Value ~ Species * Variable, 
+     data = iris_long)
+anova(fitted_model)
+plot(fitted_model)
+
+fitted_model <- 
+  lm(log(Value) ~ Species * Variable, 
+     data = iris_long)
+anova(fitted_model)
+plot(fitted_model)
+```
+

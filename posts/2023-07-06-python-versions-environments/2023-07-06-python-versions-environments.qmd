@@ -18,7 +18,12 @@ engine: knitr
 #| label: init_python
 #| include: false
 library('reticulate')
-use_condaenv('sbloggel')
+use_miniconda(condaenv = 'sbloggel')
+py_run_string('x = 10 + 10')
+py_run_string('print(x)')
+py_version()
+py_exe()
+py_list_packages(envname = py_exe())
 ```
 
 
@@ -41,3 +46,30 @@ use_condaenv('sbloggel')
 conda_install('sbloggel', 'plotly')
 use_condaenv('base')
 ```
+
+
+# Install virtual environments to jupyter
+* [Link](https://janakiev.com/blog/jupyter-virtual-envs/)
+
+
+```{bash}
+#| eval: false
+
+# Prepare python to enable installation of virtual environments in Jupyter:
+pip install --user ipykernel
+
+# Show conda environments and activate:
+conda info --envs  
+conda activate sbloggel
+
+# Install virtual environment into jupyter:
+python -m ipykernel install --user --name=sbloggel
+conda activate /Users/seb/Library/r-miniconda-arm64/envs/sbloggel  
+```
+
+Start Jupyter from terminal:
+```{bash}
+#| eval: false
+jupyter notebook
+```
+

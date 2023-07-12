@@ -84,6 +84,58 @@ font-style: inherit;">use_condaenv</span>(<span class="st" style="color: #20794D
 background-color: null;
 font-style: inherit;">'base'</span>)</span></code></pre></div>
 </div>
+</section>
+<section id="install-virtual-environments-to-jupyter" class="level1">
+<h1>Install virtual environments to jupyter</h1>
+<ul>
+<li><a href="https://janakiev.com/blog/jupyter-virtual-envs/">Link</a></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Prepare python to enable installation of virtual environments in Jupyter:</span></span>
+<span id="cb2-2"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">pip</span> install <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--user</span> ipykernel</span>
+<span id="cb2-3"></span>
+<span id="cb2-4"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Show conda environments and activate:</span></span>
+<span id="cb2-5"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">conda</span> info <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--envs</span>  </span>
+<span id="cb2-6"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">conda</span> activate sbloggel</span>
+<span id="cb2-7"></span>
+<span id="cb2-8"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Install virtual environment into jupyter:</span></span>
+<span id="cb2-9"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">python</span> <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-m</span> ipykernel install <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--user</span> <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--name</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>sbloggel</span>
+<span id="cb2-10"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">conda</span> activate /Users/seb/Library/r-miniconda-arm64/envs/sbloggel  </span></code></pre></div>
+</div>
+<p>Start Jupyter from terminal:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">jupyter</span> notebook</span></code></pre></div>
+</div>
 
 
 </section>
@@ -1540,6 +1592,109 @@ optimizer (nloptwrap) convergence code: 0 (OK) ; 0 optimizer warnings; 1 lme4 wa
 <li>Spatial data / maps: <a href="https://nrennie.rbind.io/blog/2022-12-17-r-packages-for-visualising-spatial-data/">Recommendations from Nicola Rennie’s blog</a></li>
 </ul>
 </section>
+<section id="check-package-names" class="level2">
+<h2 class="anchored" data-anchor-id="check-package-names">Check package names</h2>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>── merge ───────────────────────────────────────────────────────────────────────
+Name valid: ✔
+Available on CRAN: ✔ 
+Available on Bioconductor: ✔
+Available on GitHub:  ✔ 
+Abbreviations: http://www.abbreviations.com/merge
+Wikipedia: https://en.wikipedia.org/wiki/merge
+Wiktionary: https://en.wiktionary.org/wiki/merge
+Sentiment:???</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>── track ───────────────────────────────────────────────────────────────────────
+Name valid: ✔
+Available on CRAN: ✖ 
+Available on Bioconductor: ✔
+Available on GitHub:  ✔ 
+Abbreviations: http://www.abbreviations.com/track
+Wikipedia: https://en.wikipedia.org/wiki/track
+Wiktionary: https://en.wiktionary.org/wiki/track
+Sentiment:???</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>── trackChanges ────────────────────────────────────────────────────────────────
+Name valid: ✔
+Available on CRAN: ✔ 
+Available on Bioconductor: ✔
+Available on GitHub:  ✔ 
+Abbreviations: http://www.abbreviations.com/track
+Wikipedia: https://en.wikipedia.org/wiki/track
+Wiktionary: https://en.wiktionary.org/wiki/track
+Sentiment:???
+Abbreviations: http://www.abbreviations.com/Changes
+Wikipedia: https://en.wikipedia.org/wiki/Changes
+Wiktionary: https://en.wiktionary.org/wiki/Changes
+Sentiment:???
+Abbreviations: http://www.abbreviations.com/trackC
+Wikipedia: https://en.wikipedia.org/wiki/trackC
+Wiktionary: https://en.wiktionary.org/wiki/trackC
+Sentiment:???
+Abbreviations: http://www.abbreviations.com/hanges
+Wikipedia: https://en.wikipedia.org/wiki/hanges
+Wiktionary: https://en.wiktionary.org/wiki/hanges
+Sentiment:???
+Abbreviations: http://www.abbreviations.com/trackChanges
+Wikipedia: https://en.wikipedia.org/wiki/trackChanges
+Wiktionary: https://en.wiktionary.org/wiki/trackChanges
+Sentiment:???</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>── trackR ──────────────────────────────────────────────────────────────────────
+Name valid: ✔
+Available on CRAN: ✖ 
+Available on Bioconductor: ✔
+Available on GitHub:  ✖ 
+Abbreviations: http://www.abbreviations.com/track
+Wikipedia: https://en.wikipedia.org/wiki/track
+Wiktionary: https://en.wiktionary.org/wiki/track
+Sentiment:???</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>── collab ──────────────────────────────────────────────────────────────────────
+Name valid: ✔
+Available on CRAN: ✔ 
+Available on Bioconductor: ✔
+Available on GitHub:  ✔ 
+Abbreviations: http://www.abbreviations.com/collab
+Wikipedia: https://en.wikipedia.org/wiki/collab
+Wiktionary: https://en.wiktionary.org/wiki/collab
+Sentiment:???</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>── writeTogether ───────────────────────────────────────────────────────────────
+Name valid: ✔
+Available on CRAN: ✔ 
+Available on Bioconductor: ✔
+Available on GitHub:  ✔ 
+Abbreviations: http://www.abbreviations.com/write
+Wikipedia: https://en.wikipedia.org/wiki/write
+Wiktionary: https://en.wiktionary.org/wiki/write
+Sentiment:???
+Abbreviations: http://www.abbreviations.com/Together
+Wikipedia: https://en.wikipedia.org/wiki/Together
+Wiktionary: https://en.wiktionary.org/wiki/Together
+Sentiment:???
+Abbreviations: http://www.abbreviations.com/writeT
+Wikipedia: https://en.wikipedia.org/wiki/writeT
+Wiktionary: https://en.wiktionary.org/wiki/writeT
+Sentiment:???
+Abbreviations: http://www.abbreviations.com/ogether
+Wikipedia: https://en.wikipedia.org/wiki/ogether
+Wiktionary: https://en.wiktionary.org/wiki/ogether
+Sentiment:???
+Abbreviations: http://www.abbreviations.com/writeTogether
+Wikipedia: https://en.wikipedia.org/wiki/writeTogether
+Wiktionary: https://en.wiktionary.org/wiki/writeTogether
+Sentiment:???</code></pre>
+</div>
+</div>
+</section>
 <section id="r-packages-built-from-a-single-.rmd-file" class="level2">
 <h2 class="anchored" data-anchor-id="r-packages-built-from-a-single-.rmd-file">R packages built from a single *.RMD file</h2>
 <p><a href="https://github.com/ThinkR-open/fusen">Link</a></p>
@@ -1577,7 +1732,7 @@ optimizer (nloptwrap) convergence code: 0 (OK) ; 0 optimizer warnings; 1 lme4 wa
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode maxima code-with-copy"><code class="sourceCode maxima"><span id="cb4-1">(%<span class="cn" style="color: #8f5902;
+<div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode maxima code-with-copy"><code class="sourceCode maxima"><span id="cb10-1">(%<span class="cn" style="color: #8f5902;
 background-color: null;
 font-style: inherit;">i1</span>) <span class="cn" style="color: #8f5902;
 background-color: null;
@@ -1589,7 +1744,7 @@ font-style: inherit;">psi</span>;</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>(%o1) beta*psi</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode maxima code-with-copy"><code class="sourceCode maxima"><span id="cb6-1">(%<span class="cn" style="color: #8f5902;
+<div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode maxima code-with-copy"><code class="sourceCode maxima"><span id="cb12-1">(%<span class="cn" style="color: #8f5902;
 background-color: null;
 font-style: inherit;">i2</span>) <span class="cn" style="color: #8f5902;
 background-color: null;
@@ -1603,7 +1758,7 @@ font-style: inherit;">t</span>);</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>(%o2) beta*psi*t</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode maxima code-with-copy"><code class="sourceCode maxima"><span id="cb8-1">(%<span class="cn" style="color: #8f5902;
+<div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode maxima code-with-copy"><code class="sourceCode maxima"><span id="cb14-1">(%<span class="cn" style="color: #8f5902;
 background-color: null;
 font-style: inherit;">i3</span>) <span class="cn" style="color: #8f5902;
 background-color: null;
@@ -1615,7 +1770,7 @@ font-style: inherit;">Lambda_S</span>);</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>(%o3) %e^-(beta*psi*t)</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode maxima code-with-copy"><code class="sourceCode maxima"><span id="cb10-1">(%<span class="cn" style="color: #8f5902;
+<div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode maxima code-with-copy"><code class="sourceCode maxima"><span id="cb16-1">(%<span class="cn" style="color: #8f5902;
 background-color: null;
 font-style: inherit;">i4</span>) <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -1627,7 +1782,7 @@ font-style: inherit;">0</span>);</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>(%o4) [beta &gt; 0]</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode maxima code-with-copy"><code class="sourceCode maxima"><span id="cb12-1">(%<span class="cn" style="color: #8f5902;
+<div class="sourceCode cell-code" id="cb18" style="background: #f1f3f5;"><pre class="sourceCode maxima code-with-copy"><code class="sourceCode maxima"><span id="cb18-1">(%<span class="cn" style="color: #8f5902;
 background-color: null;
 font-style: inherit;">i5</span>) <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -1639,7 +1794,7 @@ font-style: inherit;">0</span>);</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>(%o5) [psi &gt; 0]</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode maxima code-with-copy"><code class="sourceCode maxima"><span id="cb14-1">(%<span class="cn" style="color: #8f5902;
+<div class="sourceCode cell-code" id="cb20" style="background: #f1f3f5;"><pre class="sourceCode maxima code-with-copy"><code class="sourceCode maxima"><span id="cb20-1">(%<span class="cn" style="color: #8f5902;
 background-color: null;
 font-style: inherit;">i6</span>) <span class="cn" style="color: #8f5902;
 background-color: null;
@@ -1657,7 +1812,7 @@ font-style: inherit;">inf</span>);</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>(%o6) 1/(beta*psi)</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode maxima code-with-copy"><code class="sourceCode maxima"><span id="cb16-1">(%<span class="cn" style="color: #8f5902;
+<div class="sourceCode cell-code" id="cb22" style="background: #f1f3f5;"><pre class="sourceCode maxima code-with-copy"><code class="sourceCode maxima"><span id="cb22-1">(%<span class="cn" style="color: #8f5902;
 background-color: null;
 font-style: inherit;">i7</span>) <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -1705,7 +1860,7 @@ Attaching package: 'Ryacas'</code></pre>
 <p>Source: https://cran.r-project.org/web/packages/Gmisc/vignettes/Grid-based_flowcharts.html</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2023-03-17-interesting-r-packages/2023-03-17-interesting-r-packages_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+<p><img src="https://sbloggel.netlify.app/posts/2023-03-17-interesting-r-packages/2023-03-17-interesting-r-packages_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 
