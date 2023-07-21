@@ -10,7 +10,769 @@
 <atom:link href="https://sbloggel.netlify.app/index.xml" rel="self" type="application/rss+xml"/>
 <description>Seb&#39;s private blog about statistics and other topics</description>
 <generator>quarto-1.3.433</generator>
-<lastBuildDate>Tue, 11 Jul 2023 22:00:00 GMT</lastBuildDate>
+<lastBuildDate>Thu, 20 Jul 2023 22:00:00 GMT</lastBuildDate>
+<item>
+  <title>First pytorch tutorial</title>
+  <dc:creator>Sebastian Gerdes</dc:creator>
+  <link>https://sbloggel.netlify.app/posts/2023-07-21-first-pytorch-tutorial/2023-07-21-first-pytorch-tutorial.html</link>
+  <description><![CDATA[ 
+
+
+
+<ul>
+<li><a href="https://pytorch.org/tutorials/beginner/basics/quickstart_tutorial.html">Link to tutorial</a></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'tidyverse'</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.2     ✔ readr     2.1.4
+✔ forcats   1.0.0     ✔ stringr   1.5.0
+✔ ggplot2   3.4.2     ✔ tibble    3.2.1
+✔ lubridate 1.9.2     ✔ tidyr     1.3.0
+✔ purrr     1.0.1     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">set.seed</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)</span>
+<span id="cb3-2"></span>
+<span id="cb3-3"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'reticulate'</span>)</span>
+<span id="cb3-4"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">use_condaenv</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'machine_learning'</span>)</span></code></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> torch</span>
+<span id="cb4-2"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">from</span> torch <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> nn</span>
+<span id="cb4-3"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">from</span> torch.utils.data <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> DataLoader</span>
+<span id="cb4-4"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">from</span> torchvision <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> datasets</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>/Users/seb/Library/r-miniconda-arm64/envs/machine_learning/lib/python3.9/site-packages/torchvision/io/image.py:13: UserWarning: Failed to load image Python extension: 'dlopen(/Users/seb/Library/r-miniconda-arm64/envs/machine_learning/lib/python3.9/site-packages/torchvision/image.so, 0x0006): Symbol not found: (__ZN3c106detail19maybe_wrap_dim_slowIxEET_S2_S2_b)
+  Referenced from: '/Users/seb/Library/r-miniconda-arm64/envs/machine_learning/lib/python3.9/site-packages/torchvision/image.so'
+  Expected in: '/Users/seb/Library/r-miniconda-arm64/envs/machine_learning/lib/python3.9/site-packages/torch/lib/libc10.dylib''If you don't plan on using image functionality from `torchvision.io`, you can ignore this warning. Otherwise, there might be something wrong with your environment. Did you have `libjpeg` or `libpng` installed before building `torchvision` from source?
+  warn(</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">from</span> torchvision.transforms <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> ToTensor</span>
+<span id="cb6-2"></span>
+<span id="cb6-3"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Download training data from open datasets.</span></span>
+<span id="cb6-4">training_data <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> datasets.FashionMNIST(</span>
+<span id="cb6-5">    root<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"data"</span>,</span>
+<span id="cb6-6">    train<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">True</span>,</span>
+<span id="cb6-7">    download<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">True</span>,</span>
+<span id="cb6-8">    transform<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>ToTensor(),</span>
+<span id="cb6-9">)</span>
+<span id="cb6-10"></span>
+<span id="cb6-11"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Download test data from open datasets.</span></span>
+<span id="cb6-12">test_data <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> datasets.FashionMNIST(</span>
+<span id="cb6-13">    root<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"data"</span>,</span>
+<span id="cb6-14">    train<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">False</span>,</span>
+<span id="cb6-15">    download<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">True</span>,</span>
+<span id="cb6-16">    transform<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>ToTensor(),</span>
+<span id="cb6-17">)</span></code></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1">batch_size <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">64</span></span>
+<span id="cb7-2"></span>
+<span id="cb7-3"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Create data loaders.</span></span>
+<span id="cb7-4">train_dataloader <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> DataLoader(training_data, batch_size<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>batch_size)</span>
+<span id="cb7-5">test_dataloader <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> DataLoader(test_data, batch_size<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>batch_size)</span>
+<span id="cb7-6"></span>
+<span id="cb7-7"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span> X, y <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> test_dataloader:</span>
+<span id="cb7-8">    <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"Shape of X [N, C, H, W]: </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>X<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span>shape<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span>)</span>
+<span id="cb7-9">    <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"Shape of y: </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>y<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span>shape<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;"> </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>y<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span>dtype<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span>)</span>
+<span id="cb7-10">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">break</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Shape of X [N, C, H, W]: torch.Size([64, 1, 28, 28])
+Shape of y: torch.Size([64]) torch.int64</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Get cpu, gpu or mps device for training.</span></span>
+<span id="cb9-2">device <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> (</span>
+<span id="cb9-3">    <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"cuda"</span></span>
+<span id="cb9-4">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> torch.cuda.is_available()</span>
+<span id="cb9-5">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">else</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"mps"</span></span>
+<span id="cb9-6">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> torch.backends.mps.is_available()</span>
+<span id="cb9-7">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">else</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"cpu"</span></span>
+<span id="cb9-8">)</span>
+<span id="cb9-9"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"Using </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>device<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;"> device"</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Using mps device</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Define model</span></span>
+<span id="cb11-2"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">class</span> NeuralNetwork(nn.Module):</span>
+<span id="cb11-3">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">def</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">__init__</span>(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>):</span>
+<span id="cb11-4">        <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">super</span>().<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">__init__</span>()</span>
+<span id="cb11-5">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.flatten <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> nn.Flatten()</span>
+<span id="cb11-6">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.linear_relu_stack <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> nn.Sequential(</span>
+<span id="cb11-7">            nn.Linear(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">28</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">28</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">512</span>),</span>
+<span id="cb11-8">            nn.ReLU(),</span>
+<span id="cb11-9">            nn.Linear(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">512</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">512</span>),</span>
+<span id="cb11-10">            nn.ReLU(),</span>
+<span id="cb11-11">            nn.Linear(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">512</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10</span>)</span>
+<span id="cb11-12">        )</span>
+<span id="cb11-13"></span>
+<span id="cb11-14">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">def</span> forward(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>, x):</span>
+<span id="cb11-15">        x <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.flatten(x)</span>
+<span id="cb11-16">        logits <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.linear_relu_stack(x)</span>
+<span id="cb11-17">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">return</span> logits</span>
+<span id="cb11-18"></span>
+<span id="cb11-19">model <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> NeuralNetwork().to(device)</span>
+<span id="cb11-20"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(model)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>NeuralNetwork(
+  (flatten): Flatten(start_dim=1, end_dim=-1)
+  (linear_relu_stack): Sequential(
+    (0): Linear(in_features=784, out_features=512, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=512, out_features=512, bias=True)
+    (3): ReLU()
+    (4): Linear(in_features=512, out_features=10, bias=True)
+  )
+)</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1">loss_fn <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> nn.CrossEntropyLoss()</span>
+<span id="cb13-2">optimizer <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> torch.optim.SGD(model.parameters(), lr<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1e-3</span>)</span></code></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">def</span> train(dataloader, model, loss_fn, optimizer):</span>
+<span id="cb14-2">    size <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">len</span>(dataloader.dataset)</span>
+<span id="cb14-3">    model.train()</span>
+<span id="cb14-4">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span> batch, (X, y) <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">enumerate</span>(dataloader):</span>
+<span id="cb14-5">        X, y <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> X.to(device), y.to(device)</span>
+<span id="cb14-6"></span>
+<span id="cb14-7">        <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Compute prediction error</span></span>
+<span id="cb14-8">        pred <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> model(X)</span>
+<span id="cb14-9">        loss <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> loss_fn(pred, y)</span>
+<span id="cb14-10"></span>
+<span id="cb14-11">        <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Backpropagation</span></span>
+<span id="cb14-12">        loss.backward()</span>
+<span id="cb14-13">        optimizer.step()</span>
+<span id="cb14-14">        optimizer.zero_grad()</span>
+<span id="cb14-15"></span>
+<span id="cb14-16">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> batch <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">100</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>:</span>
+<span id="cb14-17">            loss, current <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> loss.item(), (batch <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">len</span>(X)</span>
+<span id="cb14-18">            <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"loss: </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>loss<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:&gt;7f}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">  [</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>current<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:&gt;5d}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">/</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>size<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:&gt;5d}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">]"</span>)</span>
+<span id="cb14-19">            </span></code></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">def</span> test(dataloader, model, loss_fn):</span>
+<span id="cb15-2">    size <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">len</span>(dataloader.dataset)</span>
+<span id="cb15-3">    num_batches <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">len</span>(dataloader)</span>
+<span id="cb15-4">    model.<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">eval</span>()</span>
+<span id="cb15-5">    test_loss, correct <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span></span>
+<span id="cb15-6">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">with</span> torch.no_grad():</span>
+<span id="cb15-7">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span> X, y <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> dataloader:</span>
+<span id="cb15-8">            X, y <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> X.to(device), y.to(device)</span>
+<span id="cb15-9">            pred <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> model(X)</span>
+<span id="cb15-10">            test_loss <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+=</span> loss_fn(pred, y).item()</span>
+<span id="cb15-11">            correct <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+=</span> (pred.argmax(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> y).<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">type</span>(torch.<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">float</span>).<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">sum</span>().item()</span>
+<span id="cb15-12">    test_loss <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/=</span> num_batches</span>
+<span id="cb15-13">    correct <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/=</span> size</span>
+<span id="cb15-14">    <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"Test Error: </span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">\n</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;"> Accuracy: </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">100</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span>correct)<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:&gt;0.1f}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">%, Avg loss: </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>test_loss<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:&gt;8f}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;"> </span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">\n</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span>)</span></code></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1">epochs <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5</span></span>
+<span id="cb16-2"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span> t <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">range</span>(epochs):</span>
+<span id="cb16-3">    <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"Epoch </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>t<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">\n</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">-------------------------------"</span>)</span>
+<span id="cb16-4">    train(train_dataloader, model, loss_fn, optimizer)</span>
+<span id="cb16-5">    test(test_dataloader, model, loss_fn)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Epoch 1
+-------------------------------
+loss: 2.308205  [   64/60000]
+loss: 2.283738  [ 6464/60000]
+loss: 2.261702  [12864/60000]
+loss: 2.252563  [19264/60000]
+loss: 2.249376  [25664/60000]
+loss: 2.210333  [32064/60000]
+loss: 2.217109  [38464/60000]
+loss: 2.180478  [44864/60000]
+loss: 2.179589  [51264/60000]
+loss: 2.139898  [57664/60000]
+Test Error: 
+ Accuracy: 50.5%, Avg loss: 2.134260 
+
+Epoch 2
+-------------------------------
+loss: 2.156211  [   64/60000]
+loss: 2.132974  [ 6464/60000]
+loss: 2.071078  [12864/60000]
+loss: 2.087127  [19264/60000]
+loss: 2.043065  [25664/60000]
+loss: 1.974420  [32064/60000]
+loss: 1.997149  [38464/60000]
+loss: 1.912473  [44864/60000]
+loss: 1.922325  [51264/60000]
+loss: 1.838712  [57664/60000]
+Test Error: 
+ Accuracy: 60.7%, Avg loss: 1.840169 
+
+Epoch 3
+-------------------------------
+loss: 1.887052  [   64/60000]
+loss: 1.843817  [ 6464/60000]
+loss: 1.719472  [12864/60000]
+loss: 1.763426  [19264/60000]
+loss: 1.660399  [25664/60000]
+loss: 1.607601  [32064/60000]
+loss: 1.624323  [38464/60000]
+loss: 1.527172  [44864/60000]
+loss: 1.557720  [51264/60000]
+loss: 1.444237  [57664/60000]
+Test Error: 
+ Accuracy: 62.4%, Avg loss: 1.468370 
+
+Epoch 4
+-------------------------------
+loss: 1.548547  [   64/60000]
+loss: 1.505987  [ 6464/60000]
+loss: 1.352224  [12864/60000]
+loss: 1.429383  [19264/60000]
+loss: 1.318747  [25664/60000]
+loss: 1.314728  [32064/60000]
+loss: 1.324468  [38464/60000]
+loss: 1.253771  [44864/60000]
+loss: 1.290762  [51264/60000]
+loss: 1.186225  [57664/60000]
+Test Error: 
+ Accuracy: 63.9%, Avg loss: 1.215516 
+
+Epoch 5
+-------------------------------
+loss: 1.305762  [   64/60000]
+loss: 1.279496  [ 6464/60000]
+loss: 1.110269  [12864/60000]
+loss: 1.219743  [19264/60000]
+loss: 1.104771  [25664/60000]
+loss: 1.128811  [32064/60000]
+loss: 1.145972  [38464/60000]
+loss: 1.088114  [44864/60000]
+loss: 1.127616  [51264/60000]
+loss: 1.038242  [57664/60000]
+Test Error: 
+ Accuracy: 65.0%, Avg loss: 1.061769 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb18" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Done!"</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Done!</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1">torch.save(model.state_dict(), <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"model.pth"</span>)</span>
+<span id="cb20-2"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Saved PyTorch Model State to model.pth"</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Saved PyTorch Model State to model.pth</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1">model <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> NeuralNetwork().to(device)</span>
+<span id="cb22-2">model.load_state_dict(torch.load(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"model.pth"</span>))</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;All keys matched successfully&gt;</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1">classes <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> [</span>
+<span id="cb24-2">    <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"T-shirt/top"</span>,</span>
+<span id="cb24-3">    <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Trouser"</span>,</span>
+<span id="cb24-4">    <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Pullover"</span>,</span>
+<span id="cb24-5">    <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Dress"</span>,</span>
+<span id="cb24-6">    <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Coat"</span>,</span>
+<span id="cb24-7">    <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Sandal"</span>,</span>
+<span id="cb24-8">    <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Shirt"</span>,</span>
+<span id="cb24-9">    <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Sneaker"</span>,</span>
+<span id="cb24-10">    <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Bag"</span>,</span>
+<span id="cb24-11">    <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Ankle boot"</span>,</span>
+<span id="cb24-12">]</span>
+<span id="cb24-13"></span>
+<span id="cb24-14">model.<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">eval</span>()</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>NeuralNetwork(
+  (flatten): Flatten(start_dim=1, end_dim=-1)
+  (linear_relu_stack): Sequential(
+    (0): Linear(in_features=784, out_features=512, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=512, out_features=512, bias=True)
+    (3): ReLU()
+    (4): Linear(in_features=512, out_features=10, bias=True)
+  )
+)</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb26" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1">x, y <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> test_data[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>][<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>], test_data[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>][<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>]</span>
+<span id="cb26-2"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">with</span> torch.no_grad():</span>
+<span id="cb26-3">    x <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> x.to(device)</span>
+<span id="cb26-4">    pred <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> model(x)</span>
+<span id="cb26-5">    predicted, actual <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> classes[pred[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>].argmax(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>)], classes[y]</span>
+<span id="cb26-6">    <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f'Predicted: "</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>predicted<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">", Actual: "</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>actual<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"'</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Predicted: "Ankle boot", Actual: "Ankle boot"</code></pre>
+</div>
+</div>
+
+
+
+ ]]></description>
+  <category>R</category>
+  <guid>https://sbloggel.netlify.app/posts/2023-07-21-first-pytorch-tutorial/2023-07-21-first-pytorch-tutorial.html</guid>
+  <pubDate>Thu, 20 Jul 2023 22:00:00 GMT</pubDate>
+</item>
 <item>
   <title>The iris dataset</title>
   <dc:creator>Sebastian Gerdes</dc:creator>
@@ -5647,230 +6409,6 @@ font-style: inherit;">*</span> assumed_efficiency)</span></code></pre></div>
   <category>Sustainibility</category>
   <guid>https://sbloggel.netlify.app/posts/2023-01-10-sustainibility-data/2023-01-10-sustainibility-data.html</guid>
   <pubDate>Mon, 09 Jan 2023 23:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Contribution plots</title>
-  <dc:creator>Sebastian Gerdes</dc:creator>
-  <link>https://sbloggel.netlify.app/posts/2023-01-05-contribution-plots/2023-01-05-contribution-plots.html</link>
-  <description><![CDATA[ 
-
-
-
-<section id="contribution-plot-using-ggplot2-and-plotly" class="level2">
-<h2 class="anchored" data-anchor-id="contribution-plot-using-ggplot2-and-plotly">Contribution plot using ggplot2 and plotly</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'tibble'</span>)</span>
-<span id="cb1-2"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'ggplot2'</span>)</span>
-<span id="cb1-3"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'RColorBrewer'</span>)</span>
-<span id="cb1-4"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'plotly'</span>)</span></code></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>
-Attaching package: 'plotly'</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following object is masked from 'package:ggplot2':
-
-    last_plot</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following object is masked from 'package:stats':
-
-    filter</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following object is masked from 'package:graphics':
-
-    layout</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">theme_set</span>(<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">theme_minimal</span>())</span>
-<span id="cb6-2"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">#help(package = 'RColorBrewer')</span></span>
-<span id="cb6-3">nr_of_clones <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">11</span></span>
-<span id="cb6-4">nr_of_timepoins <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">20</span></span>
-<span id="cb6-5"></span>
-<span id="cb6-6">dat <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">tibble</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">t =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">rep</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">:</span>nr_of_timepoins, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">each =</span> nr_of_clones),</span>
-<span id="cb6-7">              <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">p =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">abs</span>(<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">rnorm</span>(nr_of_clones <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> nr_of_timepoins)),</span>
-<span id="cb6-8">              <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">s =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">rep</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">:</span>nr_of_clones, nr_of_timepoins))</span>
-<span id="cb6-9"></span>
-<span id="cb6-10">dat<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span>p <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> dat<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span>p <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">rep</span>(<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">tapply</span>(dat<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span>p, dat<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span>t, sum), <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">each =</span> nr_of_clones)</span>
-<span id="cb6-11"></span>
-<span id="cb6-12"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># my_cols &lt;- rainbow(nr_of_clones)</span></span>
-<span id="cb6-13">my_cols <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">brewer.pal</span>(nr_of_clones, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'Spectral'</span>)</span>
-<span id="cb6-14"></span>
-<span id="cb6-15">(g <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">ggplot</span>(dat, <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">aes</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">x =</span> t, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">y =</span> p, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">group =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">factor</span>(s), <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">fill =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">factor</span>(s))) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> </span>
-<span id="cb6-16">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">geom_area</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">alpha =</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.65</span>) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> </span>
-<span id="cb6-17">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">scale_fill_manual</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">name =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'State'</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">values =</span> my_cols) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span></span>
-<span id="cb6-18">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">xlab</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'Time'</span>) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">ylab</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'Relative contibution'</span>))</span></code></pre></div>
-<div class="cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2023-01-05-contribution-plots/2023-01-05-contribution-plots_files/figure-html/contribution_plot-1.png" class="img-fluid" width="672"></p>
-</div>
-<div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># ggplotly(g)</span></span></code></pre></div>
-</div>
-</section>
-<section id="another-plotly-plot" class="level2">
-<h2 class="anchored" data-anchor-id="another-plotly-plot">Another plotly plot</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1">(g <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">ggplot</span>(cars, <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">aes</span>(dist, speed)) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">geom_point</span>())</span></code></pre></div>
-<div class="cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2023-01-05-contribution-plots/2023-01-05-contribution-plots_files/figure-html/another_plotly_plot-1.png" class="img-fluid" width="672"></p>
-</div>
-<div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># ggplotly(g)</span></span></code></pre></div>
-</div>
-
-
-</section>
-
- ]]></description>
-  <category>R</category>
-  <guid>https://sbloggel.netlify.app/posts/2023-01-05-contribution-plots/2023-01-05-contribution-plots.html</guid>
-  <pubDate>Wed, 04 Jan 2023 23:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
