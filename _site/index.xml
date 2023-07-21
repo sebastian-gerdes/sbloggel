@@ -774,6 +774,671 @@ font-style: inherit;">"'</span>)</span></code></pre></div>
   <pubDate>Thu, 20 Jul 2023 22:00:00 GMT</pubDate>
 </item>
 <item>
+  <title>Starting with fastai</title>
+  <dc:creator>Sebastian Gerdes</dc:creator>
+  <link>https://sbloggel.netlify.app/posts/2023-07-20-starting-with-fastai/2023-07-20-starting-with-fastai.html</link>
+  <description><![CDATA[ 
+
+
+
+<ul>
+<li><a href="https://course.fast.ai/Resources/book.html">Link to the book</a></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'tidyverse'</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.2     ✔ readr     2.1.4
+✔ forcats   1.0.0     ✔ stringr   1.5.0
+✔ ggplot2   3.4.2     ✔ tibble    3.2.1
+✔ lubridate 1.9.2     ✔ tidyr     1.3.0
+✔ purrr     1.0.1     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">set.seed</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)</span>
+<span id="cb3-2"></span>
+<span id="cb3-3"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'reticulate'</span>)</span>
+<span id="cb3-4"></span>
+<span id="cb3-5"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># conda_create('machine_learning')</span></span>
+<span id="cb3-6"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">use_condaenv</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'machine_learning'</span>)</span>
+<span id="cb3-7"></span>
+<span id="cb3-8"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># conda_install('machine_learning', 'fastai')</span></span>
+<span id="cb3-9"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># conda_install('machine_learning', 'torchvision')</span></span>
+<span id="cb3-10"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># conda_install('machine_learning', 'pytorch')</span></span></code></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#id first_training</span></span>
+<span id="cb4-2"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#caption Results from the first training</span></span>
+<span id="cb4-3"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># CLICK ME</span></span>
+<span id="cb4-4"></span>
+<span id="cb4-5"></span>
+<span id="cb4-6"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> torch</span>
+<span id="cb4-7">x <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> torch.rand(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>)</span>
+<span id="cb4-8"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(x)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>tensor([[0.6049, 0.7627, 0.0083],
+        [0.5420, 0.0231, 0.7970],
+        [0.9335, 0.4393, 0.2625],
+        [0.7199, 0.0066, 0.1776],
+        [0.9718, 0.5141, 0.1373]])</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">from</span> fastai.vision.<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">all</span> <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>/Users/seb/Library/r-miniconda-arm64/envs/machine_learning/lib/python3.9/site-packages/torchvision/io/image.py:13: UserWarning: Failed to load image Python extension: 'dlopen(/Users/seb/Library/r-miniconda-arm64/envs/machine_learning/lib/python3.9/site-packages/torchvision/image.so, 0x0006): Symbol not found: (__ZN3c106detail19maybe_wrap_dim_slowIxEET_S2_S2_b)
+  Referenced from: '/Users/seb/Library/r-miniconda-arm64/envs/machine_learning/lib/python3.9/site-packages/torchvision/image.so'
+  Expected in: '/Users/seb/Library/r-miniconda-arm64/envs/machine_learning/lib/python3.9/site-packages/torch/lib/libc10.dylib''If you don't plan on using image functionality from `torchvision.io`, you can ignore this warning. Otherwise, there might be something wrong with your environment. Did you have `libjpeg` or `libpng` installed before building `torchvision` from source?
+  warn(</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1">path <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> untar_data(URLs.PETS)<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'images'</span></span>
+<span id="cb8-2"></span>
+<span id="cb8-3"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">def</span> is_cat(x): <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">return</span> x[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>].isupper()</span>
+<span id="cb8-4">dls <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> ImageDataLoaders.from_name_func(</span>
+<span id="cb8-5">    path, get_image_files(path), valid_pct<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.2</span>, seed<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">42</span>,</span>
+<span id="cb8-6">    label_func<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>is_cat, item_tfms<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>Resize(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">224</span>))</span>
+<span id="cb8-7"></span>
+<span id="cb8-8">learn <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> vision_learner(dls, resnet34, metrics<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>error_rate)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>/Users/seb/Library/r-miniconda-arm64/envs/machine_learning/lib/python3.9/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/Users/seb/Library/r-miniconda-arm64/envs/machine_learning/lib/python3.9/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=ResNet34_Weights.IMAGENET1K_V1`. You can also use `weights=ResNet34_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1">learn.fine_tune(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>█
+epoch     train_loss  valid_loss  error_rate  time    
+█
+
+Epoch 1/1 : |----------------------------------------| 0.00% [0/92 00:00&lt;?]
+
+Epoch 1/1 : |----------------------------------------| 1.09% [1/92 00:00&lt;01:11]
+
+Epoch 1/1 : |----------------------------------------| 2.17% [2/92 00:01&lt;01:03 1.8910]
+
+Epoch 1/1 : |█---------------------------------------| 3.26% [3/92 00:02&lt;01:00 1.9657]
+
+Epoch 1/1 : |█---------------------------------------| 4.35% [4/92 00:02&lt;00:58 1.7734]
+
+Epoch 1/1 : |██--------------------------------------| 5.43% [5/92 00:03&lt;00:56 1.6578]
+
+Epoch 1/1 : |██--------------------------------------| 6.52% [6/92 00:03&lt;00:55 1.6069]
+
+Epoch 1/1 : |███-------------------------------------| 7.61% [7/92 00:04&lt;00:54 1.5560]
+
+Epoch 1/1 : |███-------------------------------------| 8.70% [8/92 00:05&lt;00:54 1.5045]
+
+Epoch 1/1 : |███-------------------------------------| 9.78% [9/92 00:05&lt;00:53 1.4761]
+
+Epoch 1/1 : |████------------------------------------| 10.87% [10/92 00:06&lt;00:53 1.4145]
+
+Epoch 1/1 : |████------------------------------------| 11.96% [11/92 00:07&lt;00:52 1.3537]
+
+Epoch 1/1 : |█████-----------------------------------| 13.04% [12/92 00:07&lt;00:51 1.3306]
+
+Epoch 1/1 : |█████-----------------------------------| 14.13% [13/92 00:08&lt;00:51 1.2733]
+
+Epoch 1/1 : |██████----------------------------------| 15.22% [14/92 00:09&lt;00:50 1.2394]
+
+Epoch 1/1 : |██████----------------------------------| 16.30% [15/92 00:09&lt;00:49 1.2001]
+
+Epoch 1/1 : |██████----------------------------------| 17.39% [16/92 00:10&lt;00:48 1.1647]
+
+Epoch 1/1 : |███████---------------------------------| 18.48% [17/92 00:10&lt;00:48 1.1171]
+
+Epoch 1/1 : |███████---------------------------------| 19.57% [18/92 00:11&lt;00:47 1.0695]
+
+Epoch 1/1 : |████████--------------------------------| 20.65% [19/92 00:12&lt;00:47 1.0127]
+
+Epoch 1/1 : |████████--------------------------------| 21.74% [20/92 00:12&lt;00:46 0.9695]
+
+Epoch 1/1 : |█████████-------------------------------| 22.83% [21/92 00:13&lt;00:45 0.9318]
+
+Epoch 1/1 : |█████████-------------------------------| 23.91% [22/92 00:14&lt;00:45 0.8980]
+
+Epoch 1/1 : |██████████------------------------------| 25.00% [23/92 00:14&lt;00:44 0.8586]
+
+Epoch 1/1 : |██████████------------------------------| 26.09% [24/92 00:15&lt;00:44 0.8289]
+
+Epoch 1/1 : |██████████------------------------------| 27.17% [25/92 00:16&lt;00:43 0.8003]
+
+Epoch 1/1 : |███████████-----------------------------| 28.26% [26/92 00:16&lt;00:42 0.7684]
+
+Epoch 1/1 : |███████████-----------------------------| 29.35% [27/92 00:17&lt;00:41 0.7496]
+
+Epoch 1/1 : |████████████----------------------------| 30.43% [28/92 00:18&lt;00:41 0.7307]
+
+Epoch 1/1 : |████████████----------------------------| 31.52% [29/92 00:18&lt;00:40 0.7151]
+
+Epoch 1/1 : |█████████████---------------------------| 32.61% [30/92 00:19&lt;00:39 0.7171]
+
+Epoch 1/1 : |█████████████---------------------------| 33.70% [31/92 00:19&lt;00:39 0.6873]
+
+Epoch 1/1 : |█████████████---------------------------| 34.78% [32/92 00:20&lt;00:38 0.6628]
+
+Epoch 1/1 : |██████████████--------------------------| 35.87% [33/92 00:21&lt;00:37 0.6490]
+
+Epoch 1/1 : |██████████████--------------------------| 36.96% [34/92 00:21&lt;00:37 0.6238]
+
+Epoch 1/1 : |███████████████-------------------------| 38.04% [35/92 00:22&lt;00:36 0.6011]
+
+Epoch 1/1 : |███████████████-------------------------| 39.13% [36/92 00:22&lt;00:35 0.5817]
+
+Epoch 1/1 : |████████████████------------------------| 40.22% [37/92 00:23&lt;00:35 0.5627]
+
+Epoch 1/1 : |████████████████------------------------| 41.30% [38/92 00:24&lt;00:34 0.5436]
+
+Epoch 1/1 : |████████████████------------------------| 42.39% [39/92 00:24&lt;00:33 0.5236]
+
+Epoch 1/1 : |█████████████████-----------------------| 43.48% [40/92 00:25&lt;00:33 0.5079]
+
+Epoch 1/1 : |█████████████████-----------------------| 44.57% [41/92 00:26&lt;00:32 0.4935]
+
+Epoch 1/1 : |██████████████████----------------------| 45.65% [42/92 00:26&lt;00:31 0.4778]
+
+Epoch 1/1 : |██████████████████----------------------| 46.74% [43/92 00:27&lt;00:31 0.4650]
+
+Epoch 1/1 : |███████████████████---------------------| 47.83% [44/92 00:28&lt;00:30 0.4598]
+
+Epoch 1/1 : |███████████████████---------------------| 48.91% [45/92 00:28&lt;00:29 0.4534]
+
+Epoch 1/1 : |████████████████████--------------------| 50.00% [46/92 00:29&lt;00:29 0.4393]
+
+Epoch 1/1 : |████████████████████--------------------| 51.09% [47/92 00:29&lt;00:28 0.4275]
+
+Epoch 1/1 : |████████████████████--------------------| 52.17% [48/92 00:30&lt;00:27 0.4147]
+
+Epoch 1/1 : |█████████████████████-------------------| 53.26% [49/92 00:31&lt;00:27 0.4136]
+
+Epoch 1/1 : |█████████████████████-------------------| 54.35% [50/92 00:31&lt;00:26 0.4013]
+
+Epoch 1/1 : |██████████████████████------------------| 55.43% [51/92 00:32&lt;00:26 0.3913]
+
+Epoch 1/1 : |██████████████████████------------------| 56.52% [52/92 00:33&lt;00:25 0.3847]
+
+Epoch 1/1 : |███████████████████████-----------------| 57.61% [53/92 00:33&lt;00:24 0.3770]
+
+Epoch 1/1 : |███████████████████████-----------------| 58.70% [54/92 00:34&lt;00:24 0.3667]
+
+Epoch 1/1 : |███████████████████████-----------------| 59.78% [55/92 00:34&lt;00:23 0.3560]
+
+Epoch 1/1 : |████████████████████████----------------| 60.87% [56/92 00:35&lt;00:22 0.3456]
+
+Epoch 1/1 : |████████████████████████----------------| 61.96% [57/92 00:36&lt;00:22 0.3383]
+
+Epoch 1/1 : |█████████████████████████---------------| 63.04% [58/92 00:36&lt;00:21 0.3351]
+
+Epoch 1/1 : |█████████████████████████---------------| 64.13% [59/92 00:37&lt;00:21 0.3261]
+
+Epoch 1/1 : |██████████████████████████--------------| 65.22% [60/92 00:38&lt;00:20 0.3226]
+
+Epoch 1/1 : |██████████████████████████--------------| 66.30% [61/92 00:38&lt;00:19 0.3138]
+
+Epoch 1/1 : |██████████████████████████--------------| 67.39% [62/92 00:39&lt;00:19 0.3054]
+
+Epoch 1/1 : |███████████████████████████-------------| 68.48% [63/92 00:40&lt;00:18 0.3015]
+
+Epoch 1/1 : |███████████████████████████-------------| 69.57% [64/92 00:40&lt;00:17 0.2947]
+
+Epoch 1/1 : |████████████████████████████------------| 70.65% [65/92 00:41&lt;00:17 0.2881]
+
+Epoch 1/1 : |████████████████████████████------------| 71.74% [66/92 00:42&lt;00:16 0.2826]
+
+Epoch 1/1 : |█████████████████████████████-----------| 72.83% [67/92 00:42&lt;00:15 0.2753]
+
+Epoch 1/1 : |█████████████████████████████-----------| 73.91% [68/92 00:43&lt;00:15 0.2681]
+
+Epoch 1/1 : |██████████████████████████████----------| 75.00% [69/92 00:43&lt;00:14 0.2675]
+
+Epoch 1/1 : |██████████████████████████████----------| 76.09% [70/92 00:44&lt;00:14 0.2628]
+
+Epoch 1/1 : |██████████████████████████████----------| 77.17% [71/92 00:45&lt;00:13 0.2567]
+
+Epoch 1/1 : |███████████████████████████████---------| 78.26% [72/92 00:45&lt;00:12 0.2502]
+
+Epoch 1/1 : |███████████████████████████████---------| 79.35% [73/92 00:46&lt;00:12 0.2438]
+
+Epoch 1/1 : |████████████████████████████████--------| 80.43% [74/92 00:47&lt;00:11 0.2404]
+
+Epoch 1/1 : |████████████████████████████████--------| 81.52% [75/92 00:47&lt;00:10 0.2346]
+
+Epoch 1/1 : |█████████████████████████████████-------| 82.61% [76/92 00:48&lt;00:10 0.2311]
+
+Epoch 1/1 : |█████████████████████████████████-------| 83.70% [77/92 00:49&lt;00:09 0.2401]
+
+Epoch 1/1 : |█████████████████████████████████-------| 84.78% [78/92 00:49&lt;00:08 0.2367]
+
+Epoch 1/1 : |██████████████████████████████████------| 85.87% [79/92 00:50&lt;00:08 0.2309]
+
+Epoch 1/1 : |██████████████████████████████████------| 86.96% [80/92 00:50&lt;00:07 0.2287]
+
+Epoch 1/1 : |███████████████████████████████████-----| 88.04% [81/92 00:51&lt;00:07 0.2279]
+
+Epoch 1/1 : |███████████████████████████████████-----| 89.13% [82/92 00:52&lt;00:06 0.2228]
+
+Epoch 1/1 : |████████████████████████████████████----| 90.22% [83/92 00:52&lt;00:05 0.2185]
+
+Epoch 1/1 : |████████████████████████████████████----| 91.30% [84/92 00:53&lt;00:05 0.2132]
+
+Epoch 1/1 : |████████████████████████████████████----| 92.39% [85/92 00:54&lt;00:04 0.2105]
+
+Epoch 1/1 : |█████████████████████████████████████---| 93.48% [86/92 00:54&lt;00:03 0.2075]
+
+Epoch 1/1 : |█████████████████████████████████████---| 94.57% [87/92 00:55&lt;00:03 0.2025]
+
+Epoch 1/1 : |██████████████████████████████████████--| 95.65% [88/92 00:55&lt;00:02 0.1978]
+
+Epoch 1/1 : |██████████████████████████████████████--| 96.74% [89/92 00:56&lt;00:01 0.1954]
+
+Epoch 1/1 : |███████████████████████████████████████-| 97.83% [90/92 00:57&lt;00:01 0.1915]
+
+Epoch 1/1 : |███████████████████████████████████████-| 98.91% [91/92 00:57&lt;00:00 0.1897]
+
+Epoch 1/1 : |████████████████████████████████████████| 100.00% [92/92 00:58&lt;00:00 0.1865]
+
+Epoch 1/1 :                                                                              
+
+Epoch 1/1 :                                                                              
+█
+
+Epoch 1/1 : |----------------------------------------| 0.00% [0/24 00:00&lt;?]
+
+Epoch 1/1 : |█---------------------------------------| 4.17% [1/24 00:00&lt;00:08]
+
+Epoch 1/1 : |███-------------------------------------| 8.33% [2/24 00:00&lt;00:07 0.1867]
+
+Epoch 1/1 : |█████-----------------------------------| 12.50% [3/24 00:01&lt;00:07 0.1867]
+
+Epoch 1/1 : |██████----------------------------------| 16.67% [4/24 00:01&lt;00:07 0.1867]
+
+Epoch 1/1 : |████████--------------------------------| 20.83% [5/24 00:01&lt;00:06 0.1867]
+
+Epoch 1/1 : |██████████------------------------------| 25.00% [6/24 00:02&lt;00:06 0.1867]
+
+Epoch 1/1 : |███████████-----------------------------| 29.17% [7/24 00:02&lt;00:05 0.1867]
+
+Epoch 1/1 : |█████████████---------------------------| 33.33% [8/24 00:02&lt;00:05 0.1867]
+
+Epoch 1/1 : |███████████████-------------------------| 37.50% [9/24 00:03&lt;00:05 0.1867]
+
+Epoch 1/1 : |████████████████------------------------| 41.67% [10/24 00:03&lt;00:04 0.1867]
+
+Epoch 1/1 : |██████████████████----------------------| 45.83% [11/24 00:03&lt;00:04 0.1867]
+
+Epoch 1/1 : |████████████████████--------------------| 50.00% [12/24 00:04&lt;00:04 0.1867]
+
+Epoch 1/1 : |█████████████████████-------------------| 54.17% [13/24 00:04&lt;00:03 0.1867]
+
+Epoch 1/1 : |███████████████████████-----------------| 58.33% [14/24 00:04&lt;00:03 0.1867]
+
+Epoch 1/1 : |█████████████████████████---------------| 62.50% [15/24 00:05&lt;00:03 0.1867]
+
+Epoch 1/1 : |██████████████████████████--------------| 66.67% [16/24 00:05&lt;00:02 0.1867]
+
+Epoch 1/1 : |████████████████████████████------------| 70.83% [17/24 00:05&lt;00:02 0.1867]
+
+Epoch 1/1 : |██████████████████████████████----------| 75.00% [18/24 00:06&lt;00:02 0.1867]
+
+Epoch 1/1 : |███████████████████████████████---------| 79.17% [19/24 00:06&lt;00:01 0.1867]
+
+Epoch 1/1 : |█████████████████████████████████-------| 83.33% [20/24 00:07&lt;00:01 0.1867]
+
+Epoch 1/1 : |███████████████████████████████████-----| 87.50% [21/24 00:07&lt;00:01 0.1867]
+
+Epoch 1/1 : |████████████████████████████████████----| 91.67% [22/24 00:07&lt;00:00 0.1867]
+
+Epoch 1/1 : |██████████████████████████████████████--| 95.83% [23/24 00:08&lt;00:00 0.1867]
+
+Epoch 1/1 : |████████████████████████████████████████| 100.00% [24/24 00:08&lt;00:00 0.1867]
+
+Epoch 1/1 :                                                                              
+
+Epoch 1/1 :                                                                              
+0         0.186726    0.036176    0.012855    01:06     
+█
+epoch     train_loss  valid_loss  error_rate  time    
+█
+
+Epoch 1/1 : |----------------------------------------| 0.00% [0/92 00:00&lt;?]
+
+Epoch 1/1 : |----------------------------------------| 1.09% [1/92 00:00&lt;01:27]
+
+Epoch 1/1 : |----------------------------------------| 2.17% [2/92 00:01&lt;01:28 0.0047]
+
+Epoch 1/1 : |█---------------------------------------| 3.26% [3/92 00:02&lt;01:23 0.0539]
+
+Epoch 1/1 : |█---------------------------------------| 4.35% [4/92 00:03&lt;01:21 0.0895]
+
+Epoch 1/1 : |██--------------------------------------| 5.43% [5/92 00:04&lt;01:19 0.0868]
+
+Epoch 1/1 : |██--------------------------------------| 6.52% [6/92 00:05&lt;01:17 0.0715]
+
+Epoch 1/1 : |███-------------------------------------| 7.61% [7/92 00:06&lt;01:16 0.0628]
+
+Epoch 1/1 : |███-------------------------------------| 8.70% [8/92 00:07&lt;01:14 0.0534]
+
+Epoch 1/1 : |███-------------------------------------| 9.78% [9/92 00:07&lt;01:13 0.0703]
+
+Epoch 1/1 : |████------------------------------------| 10.87% [10/92 00:08&lt;01:12 0.0871]
+
+Epoch 1/1 : |████------------------------------------| 11.96% [11/92 00:09&lt;01:11 0.0879]
+
+Epoch 1/1 : |█████-----------------------------------| 13.04% [12/92 00:10&lt;01:10 0.0861]
+
+Epoch 1/1 : |█████-----------------------------------| 14.13% [13/92 00:11&lt;01:09 0.0784]
+
+Epoch 1/1 : |██████----------------------------------| 15.22% [14/92 00:12&lt;01:08 0.0719]
+
+Epoch 1/1 : |██████----------------------------------| 16.30% [15/92 00:13&lt;01:07 0.0676]
+
+Epoch 1/1 : |██████----------------------------------| 17.39% [16/92 00:13&lt;01:06 0.0661]
+
+Epoch 1/1 : |███████---------------------------------| 18.48% [17/92 00:14&lt;01:05 0.0617]
+
+Epoch 1/1 : |███████---------------------------------| 19.57% [18/92 00:15&lt;01:04 0.0673]
+
+Epoch 1/1 : |████████--------------------------------| 20.65% [19/92 00:16&lt;01:03 0.0693]
+
+Epoch 1/1 : |████████--------------------------------| 21.74% [20/92 00:17&lt;01:03 0.0792]
+
+Epoch 1/1 : |█████████-------------------------------| 22.83% [21/92 00:18&lt;01:02 0.0770]
+
+Epoch 1/1 : |█████████-------------------------------| 23.91% [22/92 00:19&lt;01:01 0.0729]
+
+Epoch 1/1 : |██████████------------------------------| 25.00% [23/92 00:20&lt;01:00 0.0710]
+
+Epoch 1/1 : |██████████------------------------------| 26.09% [24/92 00:20&lt;00:59 0.0779]
+
+Epoch 1/1 : |██████████------------------------------| 27.17% [25/92 00:21&lt;00:58 0.0787]
+
+Epoch 1/1 : |███████████-----------------------------| 28.26% [26/92 00:22&lt;00:57 0.0870]
+
+Epoch 1/1 : |███████████-----------------------------| 29.35% [27/92 00:23&lt;00:56 0.0936]
+
+Epoch 1/1 : |████████████----------------------------| 30.43% [28/92 00:24&lt;00:55 0.0901]
+
+Epoch 1/1 : |████████████----------------------------| 31.52% [29/92 00:25&lt;00:55 0.0877]
+
+Epoch 1/1 : |█████████████---------------------------| 32.61% [30/92 00:26&lt;00:54 0.0858]
+
+Epoch 1/1 : |█████████████---------------------------| 33.70% [31/92 00:27&lt;00:53 0.0862]
+
+Epoch 1/1 : |█████████████---------------------------| 34.78% [32/92 00:27&lt;00:52 0.0846]
+
+Epoch 1/1 : |██████████████--------------------------| 35.87% [33/92 00:28&lt;00:51 0.0834]
+
+Epoch 1/1 : |██████████████--------------------------| 36.96% [34/92 00:29&lt;00:50 0.0800]
+
+Epoch 1/1 : |███████████████-------------------------| 38.04% [35/92 00:30&lt;00:49 0.0775]
+
+Epoch 1/1 : |███████████████-------------------------| 39.13% [36/92 00:31&lt;00:49 0.0776]
+
+Epoch 1/1 : |████████████████------------------------| 40.22% [37/92 00:32&lt;00:48 0.0774]
+
+Epoch 1/1 : |████████████████------------------------| 41.30% [38/92 00:33&lt;00:47 0.0746]
+
+Epoch 1/1 : |████████████████------------------------| 42.39% [39/92 00:34&lt;00:46 0.0730]
+
+Epoch 1/1 : |█████████████████-----------------------| 43.48% [40/92 00:34&lt;00:45 0.0724]
+
+Epoch 1/1 : |█████████████████-----------------------| 44.57% [41/92 00:35&lt;00:44 0.0707]
+
+Epoch 1/1 : |██████████████████----------------------| 45.65% [42/92 00:36&lt;00:43 0.0715]
+
+Epoch 1/1 : |██████████████████----------------------| 46.74% [43/92 00:37&lt;00:42 0.0758]
+
+Epoch 1/1 : |███████████████████---------------------| 47.83% [44/92 00:38&lt;00:41 0.0735]
+
+Epoch 1/1 : |███████████████████---------------------| 48.91% [45/92 00:39&lt;00:41 0.0711]
+
+Epoch 1/1 : |████████████████████--------------------| 50.00% [46/92 00:40&lt;00:40 0.0746]
+
+Epoch 1/1 : |████████████████████--------------------| 51.09% [47/92 00:41&lt;00:39 0.0724]
+
+Epoch 1/1 : |████████████████████--------------------| 52.17% [48/92 00:41&lt;00:38 0.0704]
+
+Epoch 1/1 : |█████████████████████-------------------| 53.26% [49/92 00:42&lt;00:37 0.0706]
+
+Epoch 1/1 : |█████████████████████-------------------| 54.35% [50/92 00:43&lt;00:36 0.0730]
+
+Epoch 1/1 : |██████████████████████------------------| 55.43% [51/92 00:44&lt;00:35 0.0755]
+
+Epoch 1/1 : |██████████████████████------------------| 56.52% [52/92 00:45&lt;00:34 0.0802]
+
+Epoch 1/1 : |███████████████████████-----------------| 57.61% [53/92 00:46&lt;00:34 0.0778]
+
+Epoch 1/1 : |███████████████████████-----------------| 58.70% [54/92 00:47&lt;00:33 0.0767]
+
+Epoch 1/1 : |███████████████████████-----------------| 59.78% [55/92 00:47&lt;00:32 0.0770]
+
+Epoch 1/1 : |████████████████████████----------------| 60.87% [56/92 00:48&lt;00:31 0.0766]
+
+Epoch 1/1 : |████████████████████████----------------| 61.96% [57/92 00:49&lt;00:30 0.0767]
+
+Epoch 1/1 : |█████████████████████████---------------| 63.04% [58/92 00:50&lt;00:29 0.0755]
+
+Epoch 1/1 : |█████████████████████████---------------| 64.13% [59/92 00:51&lt;00:28 0.0766]
+
+Epoch 1/1 : |██████████████████████████--------------| 65.22% [60/92 00:52&lt;00:27 0.0758]
+
+Epoch 1/1 : |██████████████████████████--------------| 66.30% [61/92 00:53&lt;00:27 0.0740]
+
+Epoch 1/1 : |██████████████████████████--------------| 67.39% [62/92 00:54&lt;00:26 0.0789]
+
+Epoch 1/1 : |███████████████████████████-------------| 68.48% [63/92 00:54&lt;00:25 0.0845]
+
+Epoch 1/1 : |███████████████████████████-------------| 69.57% [64/92 00:55&lt;00:24 0.0822]
+
+Epoch 1/1 : |████████████████████████████------------| 70.65% [65/92 00:56&lt;00:23 0.0806]
+
+Epoch 1/1 : |████████████████████████████------------| 71.74% [66/92 00:57&lt;00:22 0.0784]
+
+Epoch 1/1 : |█████████████████████████████-----------| 72.83% [67/92 00:58&lt;00:21 0.0771]
+
+Epoch 1/1 : |█████████████████████████████-----------| 73.91% [68/92 00:59&lt;00:20 0.0766]
+
+Epoch 1/1 : |██████████████████████████████----------| 75.00% [69/92 01:00&lt;00:20 0.0803]
+
+Epoch 1/1 : |██████████████████████████████----------| 76.09% [70/92 01:01&lt;00:19 0.0800]
+
+Epoch 1/1 : |██████████████████████████████----------| 77.17% [71/92 01:01&lt;00:18 0.0779]
+
+Epoch 1/1 : |███████████████████████████████---------| 78.26% [72/92 01:02&lt;00:17 0.0839]
+
+Epoch 1/1 : |███████████████████████████████---------| 79.35% [73/92 01:03&lt;00:16 0.0837]
+
+Epoch 1/1 : |████████████████████████████████--------| 80.43% [74/92 01:04&lt;00:15 0.0815]
+
+Epoch 1/1 : |████████████████████████████████--------| 81.52% [75/92 01:05&lt;00:14 0.0805]
+
+Epoch 1/1 : |█████████████████████████████████-------| 82.61% [76/92 01:06&lt;00:13 0.0793]
+
+Epoch 1/1 : |█████████████████████████████████-------| 83.70% [77/92 01:07&lt;00:13 0.0773]
+
+Epoch 1/1 : |█████████████████████████████████-------| 84.78% [78/92 01:08&lt;00:12 0.0775]
+
+Epoch 1/1 : |██████████████████████████████████------| 85.87% [79/92 01:09&lt;00:11 0.0756]
+
+Epoch 1/1 : |██████████████████████████████████------| 86.96% [80/92 01:09&lt;00:10 0.0740]
+
+Epoch 1/1 : |███████████████████████████████████-----| 88.04% [81/92 01:10&lt;00:09 0.0726]
+
+Epoch 1/1 : |███████████████████████████████████-----| 89.13% [82/92 01:11&lt;00:08 0.0709]
+
+Epoch 1/1 : |████████████████████████████████████----| 90.22% [83/92 01:12&lt;00:07 0.0699]
+
+Epoch 1/1 : |████████████████████████████████████----| 91.30% [84/92 01:13&lt;00:06 0.0703]
+
+Epoch 1/1 : |████████████████████████████████████----| 92.39% [85/92 01:14&lt;00:06 0.0687]
+
+Epoch 1/1 : |█████████████████████████████████████---| 93.48% [86/92 01:15&lt;00:05 0.0732]
+
+Epoch 1/1 : |█████████████████████████████████████---| 94.57% [87/92 01:16&lt;00:04 0.0714]
+
+Epoch 1/1 : |██████████████████████████████████████--| 95.65% [88/92 01:16&lt;00:03 0.0697]
+
+Epoch 1/1 : |██████████████████████████████████████--| 96.74% [89/92 01:17&lt;00:02 0.0682]
+
+Epoch 1/1 : |███████████████████████████████████████-| 97.83% [90/92 01:18&lt;00:01 0.0682]
+
+Epoch 1/1 : |███████████████████████████████████████-| 98.91% [91/92 01:19&lt;00:00 0.0782]
+
+Epoch 1/1 : |████████████████████████████████████████| 100.00% [92/92 01:20&lt;00:00 0.0786]
+
+Epoch 1/1 :                                                                              
+
+Epoch 1/1 :                                                                              
+█
+
+Epoch 1/1 : |----------------------------------------| 0.00% [0/24 00:00&lt;?]
+
+Epoch 1/1 : |█---------------------------------------| 4.17% [1/24 00:00&lt;00:08]
+
+Epoch 1/1 : |███-------------------------------------| 8.33% [2/24 00:00&lt;00:07 0.0767]
+
+Epoch 1/1 : |█████-----------------------------------| 12.50% [3/24 00:01&lt;00:07 0.0767]
+
+Epoch 1/1 : |██████----------------------------------| 16.67% [4/24 00:01&lt;00:07 0.0767]
+
+Epoch 1/1 : |████████--------------------------------| 20.83% [5/24 00:01&lt;00:06 0.0767]
+
+Epoch 1/1 : |██████████------------------------------| 25.00% [6/24 00:02&lt;00:06 0.0767]
+
+Epoch 1/1 : |███████████-----------------------------| 29.17% [7/24 00:02&lt;00:05 0.0767]
+
+Epoch 1/1 : |█████████████---------------------------| 33.33% [8/24 00:02&lt;00:05 0.0767]
+
+Epoch 1/1 : |███████████████-------------------------| 37.50% [9/24 00:03&lt;00:05 0.0767]
+
+Epoch 1/1 : |████████████████------------------------| 41.67% [10/24 00:03&lt;00:04 0.0767]
+
+Epoch 1/1 : |██████████████████----------------------| 45.83% [11/24 00:03&lt;00:04 0.0767]
+
+Epoch 1/1 : |████████████████████--------------------| 50.00% [12/24 00:04&lt;00:04 0.0767]
+
+Epoch 1/1 : |█████████████████████-------------------| 54.17% [13/24 00:04&lt;00:03 0.0767]
+
+Epoch 1/1 : |███████████████████████-----------------| 58.33% [14/24 00:04&lt;00:03 0.0767]
+
+Epoch 1/1 : |█████████████████████████---------------| 62.50% [15/24 00:05&lt;00:03 0.0767]
+
+Epoch 1/1 : |██████████████████████████--------------| 66.67% [16/24 00:05&lt;00:02 0.0767]
+
+Epoch 1/1 : |████████████████████████████------------| 70.83% [17/24 00:06&lt;00:02 0.0767]
+
+Epoch 1/1 : |██████████████████████████████----------| 75.00% [18/24 00:06&lt;00:02 0.0767]
+
+Epoch 1/1 : |███████████████████████████████---------| 79.17% [19/24 00:06&lt;00:01 0.0767]
+
+Epoch 1/1 : |█████████████████████████████████-------| 83.33% [20/24 00:07&lt;00:01 0.0767]
+
+Epoch 1/1 : |███████████████████████████████████-----| 87.50% [21/24 00:07&lt;00:01 0.0767]
+
+Epoch 1/1 : |████████████████████████████████████----| 91.67% [22/24 00:07&lt;00:00 0.0767]
+
+Epoch 1/1 : |██████████████████████████████████████--| 95.83% [23/24 00:08&lt;00:00 0.0767]
+
+Epoch 1/1 : |████████████████████████████████████████| 100.00% [24/24 00:08&lt;00:00 0.0767]
+
+Epoch 1/1 :                                                                              
+
+Epoch 1/1 :                                                                              
+0         0.076747    0.034090    0.011502    01:28     </code></pre>
+</div>
+</div>
+
+
+
+ ]]></description>
+  <category>R</category>
+  <guid>https://sbloggel.netlify.app/posts/2023-07-20-starting-with-fastai/2023-07-20-starting-with-fastai.html</guid>
+  <pubDate>Wed, 19 Jul 2023 22:00:00 GMT</pubDate>
+</item>
+<item>
   <title>The iris dataset</title>
   <dc:creator>Sebastian Gerdes</dc:creator>
   <link>https://sbloggel.netlify.app/posts/2023-07-12-the-iris-dataset/2023-07-12-the-iris-dataset.html</link>
@@ -6187,228 +6852,6 @@ font-style: inherit;">'log10'</span>)</span></code></pre></div>
   <category>R</category>
   <guid>https://sbloggel.netlify.app/posts/2023-01-20-sirs-model-dynamics/2023-01-20-sirs-model-dynamics.html</guid>
   <pubDate>Wed, 18 Jan 2023 23:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Sustainibility data</title>
-  <dc:creator>Sebastian Gerdes</dc:creator>
-  <link>https://sbloggel.netlify.app/posts/2023-01-10-sustainibility-data/2023-01-10-sustainibility-data.html</link>
-  <description><![CDATA[ 
-
-
-
-<section id="wie-viel-energie-liefert-die-sonne" class="level2">
-<h2 class="anchored" data-anchor-id="wie-viel-energie-liefert-die-sonne">Wie viel Energie liefert die Sonne?</h2>
-<ul>
-<li>Quelle: <a href="https://www.dlr.de/blogs/home/energie/frage-der-woche-wie-viel-energie-schickt-uns-die-sonne-jeden-tag.aspx">Blog</a></li>
-<li>Energie pro Jahr:</li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Wie viele Watt pro qm Erdoberfläche liefert die Sonne im Mittel:</span></span>
-<span id="cb1-2">watt_per_sqm <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1340</span></span>
-<span id="cb1-3"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Wie groß ist die Oberfläche der Erde:</span></span>
-<span id="cb1-4">surface_earth_sqm <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">5.1e14</span></span>
-<span id="cb1-5"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Wie viel Sonnenenergie erreicht die Erde pro Jahr:</span></span>
-<span id="cb1-6">energy_sun_per_year_joule <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> watt_per_sqm <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> surface_earth_sqm <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">60</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">60</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">24</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">365.25</span></span>
-<span id="cb1-7">(energy_per_year_kwh <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> energy_sun_per_year_joule <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3.6e6</span>)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 5.990684e+18</code></pre>
-</div>
-</div>
-</section>
-<section id="weltenergiebedarf" class="level2">
-<h2 class="anchored" data-anchor-id="weltenergiebedarf">Weltenergiebedarf</h2>
-<ul>
-<li><a href="https://de.wikipedia.org/wiki/Weltenergiebedarf">Wikipedia</a>: Weltenergiebedarf 574 Exajoule = 5.74e20</li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Weltenergiebedarf:</span></span>
-<span id="cb3-2">world_energy_consumption_joule <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">5.74e20</span></span>
-<span id="cb3-3">(world_energy_consumption_kwh <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> world_energy_consumption_joule <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3.6e6</span>)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 1.594444e+14</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Wie viel mal so viel Energie liefert die Sonne:</span></span>
-<span id="cb5-2">fac <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> energy_sun_per_year_joule <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span> world_energy_consumption_joule</span></code></pre></div>
-</div>
-<p>Die Welt liefert also ca. 3.76e+04 mal so viel Energie wie von den Menschen verbraucht wird.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># angenommene Effizienz von Photovoltaikanlagen:</span></span>
-<span id="cb6-2">assumed_efficiency <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.1</span></span>
-<span id="cb6-3"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Welcher Anteil der Erde müsste mit 'mittleren' PV-Anlagen bedeckt sein, um den Weltenergiebedarf mit PV-Anlagen abdecken zu können:</span></span>
-<span id="cb6-4">fraction_earth <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span> (assumed_efficiency <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> fac)</span>
-<span id="cb6-5"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Weltbevölkerung:</span></span>
-<span id="cb6-6">population_earth <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">8e9</span></span>
-<span id="cb6-7"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Wie viel </span></span>
-<span id="cb6-8">(pv_per_person <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> surface_earth_sqm <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> fraction_earth <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span> population_earth)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 16.96732</code></pre>
-</div>
-</div>
-</section>
-<section id="deutschland" class="level2">
-<h2 class="anchored" data-anchor-id="deutschland">Deutschland</h2>
-<ul>
-<li><a href="https://de.wikipedia.org/wiki/Weltenergiebedarf">Wikipedia</a>: Weltenergiebedarf 574 Exajoule = 5.74e20</li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1">(energy_consumption_germany_joule <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3.3</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1e3</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1e9</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3.6e6</span>)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 1.188e+19</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1">surface_germany_sqm <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3e5</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1e6</span></span>
-<span id="cb10-2">energy_sun_germany_year_joule <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> watt_per_sqm <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> surface_germany_sqm <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">60</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">60</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">24</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">365.24</span></span>
-<span id="cb10-3"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Anteil der Fläche in Deutschland, der mit PV-Anlagen ausgestatted sein müsste:</span></span>
-<span id="cb10-4">energy_consumption_germany_joule <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span> (energy_sun_germany_year_joule <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> assumed_efficiency)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.009364796</code></pre>
-</div>
-</div>
-
-
-</section>
-
- ]]></description>
-  <category>Sustainibility</category>
-  <guid>https://sbloggel.netlify.app/posts/2023-01-10-sustainibility-data/2023-01-10-sustainibility-data.html</guid>
-  <pubDate>Mon, 09 Jan 2023 23:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>

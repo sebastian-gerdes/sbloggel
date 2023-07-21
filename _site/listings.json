@@ -3,6 +3,7 @@
     "listing": "/index.html",
     "items": [
       "/posts/2023-07-21-first-pytorch-tutorial/2023-07-21-first-pytorch-tutorial.html",
+      "/posts/2023-07-20-starting-with-fastai/2023-07-20-starting-with-fastai.html",
       "/posts/2023-07-12-the-iris-dataset/2023-07-12-the-iris-dataset.html",
       "/posts/2023-07-12-easier-publishing/2023-07-12-easier-publishing.html",
       "/posts/2023-07-12-model-diagnostics-for-logistic-regression/2023-07-12-model-diagnostics-for-logistic-regression.html",
