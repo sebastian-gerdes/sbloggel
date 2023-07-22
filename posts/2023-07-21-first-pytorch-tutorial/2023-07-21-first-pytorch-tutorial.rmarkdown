@@ -7,7 +7,9 @@ categories:
 toc: true
 ---
 
+
 * [Link to tutorial](https://pytorch.org/tutorials/beginner/basics/quickstart_tutorial.html)
+
 
 ```{r}
 #| label: init
@@ -18,8 +20,6 @@ library('reticulate')
 use_condaenv('machine_learning')
 
 ```
-
-
 
 ```{python}
 import torch
@@ -48,7 +48,6 @@ test_data = datasets.FashionMNIST(
 training_data.data.shape
 test_data.data.shape
 ```
-
 
 ```{python}
 batch_size = 64
@@ -102,7 +101,6 @@ print(model)
 loss_fn = nn.CrossEntropyLoss()
 optimizer = torch.optim.SGD(model.parameters(), lr=1e-3)
 ```
-
 
 ```{python}
 def train(dataloader, model, loss_fn, optimizer):
@@ -161,7 +159,6 @@ print("Saved PyTorch Model State to model.pth")
 
 ```
 
-
 ```{python}
 model = NeuralNetwork().to(device)
 model.load_state_dict(torch.load("model.pth"))
@@ -193,5 +190,4 @@ with torch.no_grad():
 
 
 ```
-
 

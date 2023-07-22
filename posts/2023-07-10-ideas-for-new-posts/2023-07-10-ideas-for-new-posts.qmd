@@ -25,6 +25,7 @@ use_condaenv('sbloggel')
 ## AI and radiologist - evolution of a team
 
 ## Longtermism
+* Despite my scepticisms about the notion of longtermism I want to think about it a little
 * Idea: create a model in which proximity and number of people are balanced
 * "Love thy neighbor as thyself."
 
