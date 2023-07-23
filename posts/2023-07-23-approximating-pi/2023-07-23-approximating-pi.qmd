@@ -38,7 +38,7 @@ for(denominator in 1:1e7) {
     cat(paste(c('numerator:', numerator, 
                   ', denominator:', denominator, 
                   ', pi_approx: ', numerator / denominator, 
-                  ', absolutte error', pi_error, '\n')))
+                  ', absolute error', pi_error, '\n')))
   }
 }
 ```
