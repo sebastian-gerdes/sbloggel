@@ -3,7 +3,7 @@ title: Starting with fastai
 author: Sebastian Gerdes
 date: 2023-07-20
 categories:
-  - R
+  - Python
 toc: true
 ---
 

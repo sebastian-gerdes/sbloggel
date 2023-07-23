@@ -3,7 +3,7 @@ title: First pytorch tutorial
 author: Sebastian Gerdes
 date: 2023-07-21
 categories:
-  - R
+  - Python
 toc: true
 ---
 
