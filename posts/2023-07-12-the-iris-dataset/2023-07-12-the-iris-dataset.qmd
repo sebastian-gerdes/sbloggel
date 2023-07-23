@@ -48,13 +48,13 @@ fitted_model <-
   lm(Value ~ Species * Variable, 
      data = iris_long)
 anova(fitted_model)
-plot(fitted_model)
+plot(fitted_model, col = iris_long$Species)
 
 fitted_model <- 
   lm(log(Value) ~ Species * Variable, 
      data = iris_long)
 anova(fitted_model)
-plot(fitted_model)
+plot(fitted_model, col = iris_long$Species)
 
 fitted_model <- 
   lmer(log(Value) ~ Species * Variable + (1 | id),
@@ -65,4 +65,6 @@ fitted_model
 ## Conclusion
 * In general, I like the log scale modeling - however there is a problem with the model on log scale
   * Effects can be given as fold-changes - this seems to make sense to me
-  * Species "setosa" is not fit adequately on log scale - probably measurement error is not adequately modeled on log scale - higher variance of error on log scale
+  * Species "setosa" is not fitted adequately on log scale - probably measurement error is not adequately modeled on log scale - higher variance of error on log scale
+* Dependence on individual level is not considered in the plain linear model
+  * Linear mixed model should be considered!!!

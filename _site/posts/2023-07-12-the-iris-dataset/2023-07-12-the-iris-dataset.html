@@ -255,7 +255,7 @@ Residuals        588   89.30    0.15
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fitted_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fitted_model, <span class="at">col =</span> iris_long<span class="sc">$</span>Species)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="2023-07-12-the-iris-dataset_files/figure-html/iris_models-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -284,7 +284,7 @@ Residuals        588  15.064   0.026
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fitted_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fitted_model, <span class="at">col =</span> iris_long<span class="sc">$</span>Species)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="2023-07-12-the-iris-dataset_files/figure-html/iris_models-5.png" class="img-fluid" width="672"></p>
 </div>
@@ -333,7 +333,11 @@ Speciesversicolor:VariableSepal.Length   Speciesvirginica:VariableSepal.Length
 <li>In general, I like the log scale modeling - however there is a problem with the model on log scale
 <ul>
 <li>Effects can be given as fold-changes - this seems to make sense to me</li>
-<li>Species “setosa” is not fit adequately on log scale - probably measurement error is not adequately modeled on log scale - higher variance of error on log scale</li>
+<li>Species “setosa” is not fitted adequately on log scale - probably measurement error is not adequately modeled on log scale - higher variance of error on log scale</li>
+</ul></li>
+<li>Dependence on individual level is not considered in the plain linear model
+<ul>
+<li>Linear mixed model should be considered!!!</li>
 </ul></li>
 </ul>
 

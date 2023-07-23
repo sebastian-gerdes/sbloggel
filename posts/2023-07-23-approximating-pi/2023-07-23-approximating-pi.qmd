@@ -1,0 +1,45 @@
+---
+title: Approximating Pi
+author: Sebastian Gerdes
+date: 2023-07-23
+categories:
+  - R
+toc: true
+# draft: true
+# execute: 
+#   echo: false
+#  cache: true
+---
+
+This is a really pointless post about approximating $\pi$, inspired by [this](https://www.r-bloggers.com/2023/07/happy-pi-approximation-day/) post.
+
+```{r}
+#| label: init
+#| cache: false
+#| include: false
+library('tidyverse')
+set.seed(1)
+```
+
+
+```{r}
+current_min_error <- abs(pi - 22 / 7)
+current_best_numerator <- 22
+current_best_denominator <- 7
+
+for(denominator in 1:1e7) {
+  numerator <- round(denominator * pi)
+  pi_approx <- numerator / denominator
+  pi_error <- abs(pi - pi_approx)
+  if(pi_error < current_min_error) {
+    current_min_error <- pi_error
+    current_best_numerator <- numerator
+    current_best_denominator <- denominator
+    cat(paste(c('numerator:', numerator, 
+                  ', denominator:', denominator, 
+                  ', pi_approx: ', numerator / denominator, 
+                  ', absolutte error', pi_error, '\n')))
+  }
+}
+```
+
