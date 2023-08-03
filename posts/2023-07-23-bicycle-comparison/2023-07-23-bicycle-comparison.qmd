@@ -1,0 +1,97 @@
+---
+title: Bicycle comparison
+author: Sebastian Gerdes
+date: 2023-07-23
+categories:
+  - R
+toc: true
+# draft: true
+# execute: 
+#   echo: false
+#  cache: true
+---
+
+```{r}
+#| label: init
+#| cache: false
+#| include: false
+library('tidyverse')
+set.seed(1)
+```
+
+## The three bikes
+![](koga_old.jpeg){width='32%' fig-align='center'}
+![](koga_new.jpeg){width='32%' fig-align='center'}
+![](hammerbacher.jpeg){width='32%' fig-align='center'}
+
+## Points to be represented
+* front axis
+* back axis
+* front beginning of tire
+* back beginning of tire
+* handlebar low
+* handlebar high
+* saddle front
+* saddle back
+* pedals
+
+Coordinate system: Point 1 is front axis, point 2 is back of saddle.
+
+```{r}
+
+loc_names <- c('front_axis',
+               'back_axis',
+               'front_beginning_of_tire',
+               'back_beginning_of_tire',
+               'handlebar_low',
+               'handlebar_high',
+               'saddle_front',
+               'saddle_back',
+               'pedals')
+
+library('digitize')
+load('not_yet_formatted.Rdata')
+# save(list = c('koga_new', 'koga_old', 'hammerbacher'), file = 'not_yet_formatted.Rdata')
+help(package = 'digitize')
+# koga_old <- digitize('koga_old.jpeg')
+# koga_new <- digitize('koga_new.jpeg')
+# hammerbacher <- digitize('hammerbacher.jpeg')
+# 
+
+
+library(tidyverse)
+tidy_digit <- function(dat) {
+  var_name <-deparse(substitute(dat))
+  dat |> 
+    as_tibble() |> 
+    mutate(var_name = var_name,
+           loc = loc_names)
+}
+
+
+tidy_digit(koga_new)
+tidy_digit(koga_old)
+tidy_digit(hammerbacher)
+
+hammerbacher
+
+
+dd <- bind_rows(tidy_digit(koga_old), 
+          tidy_digit(koga_new),
+          tidy_digit(hammerbacher))
+
+dd |> 
+  ggplot(aes(x, y, color = var_name)) +
+  geom_point()
+
+
+bikes <- tibble(koga_old = pivot_longer(koga_old, cols = everything()),
+                koga_new = pivot_longer(koga_new, cols = everything()),
+                hammerbacher = pivot_longer(hammerbacher, cols = everything()))
+write_csv(bikes, 'bikes.csv')
+```
+
+
+## Todo:
+* measure distance between axes
+* measure distance between 
