@@ -4,7 +4,7 @@ author: Sebastian Gerdes
 date: 2023-08-03
 categories:
   - R
-  - mishmash
+  - Mishmash
 toc: true
 # draft: true
 # execute: 
