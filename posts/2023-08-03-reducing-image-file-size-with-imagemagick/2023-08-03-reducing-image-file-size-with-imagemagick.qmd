@@ -4,6 +4,7 @@ author: Sebastian Gerdes
 date: 2023-08-03
 categories:
   - R
+  - mishmash
 toc: true
 # draft: true
 # execute: 
@@ -11,9 +12,12 @@ toc: true
 #  cache: true
 ---
 
+## Links
+* [stackoverflow post recommandations for compressing](https://stackoverflow.com/questions/7261855/recommendation-for-compressing-jpg-files-with-imagemagick)
+* [stackoverflow maximum file size](https://stackoverflow.com/questions/6917219/imagemagick-scale-jpeg-image-with-a-maximum-file-size)
+* [Extensive analysis of imagemagick options](https://www.smashingmagazine.com/2015/06/efficient-image-resizing-with-imagemagick/)
 
-* [stackoverflow post](https://stackoverflow.com/questions/7261855/recommendation-for-compressing-jpg-files-with-imagemagick)
-
+## Initial analysis
 ```{r}
 #| label: init
 #| cache: false
@@ -45,5 +49,17 @@ system('convert koga_original.jpg -define jpeg:extend=200kb -resize 1024 low_qua
 ## Currently best version
 ```{r}
 system('convert koga_original.jpg -quality 50 -resize 2048 low_quality_3.jpg')
+```
+
+![Currently best version](low_quality_3.jpg)
+
+## File sizes
+```{r}
+library('fs')
+library('knitr')
+files <- dir_ls()
+tibble(filenames = files, 
+       filesizes = file_size(files)) |> 
+  kable(align = 'c')
 ```
 

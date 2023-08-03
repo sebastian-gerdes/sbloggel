@@ -153,7 +153,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#currently-best-version" id="toc-currently-best-version" class="nav-link active" data-scroll-target="#currently-best-version">Currently best version</a></li>
+  <li><a href="#links" id="toc-links" class="nav-link active" data-scroll-target="#links">Links</a></li>
+  <li><a href="#initial-analysis" id="toc-initial-analysis" class="nav-link" data-scroll-target="#initial-analysis">Initial analysis</a></li>
+  <li><a href="#currently-best-version" id="toc-currently-best-version" class="nav-link" data-scroll-target="#currently-best-version">Currently best version</a></li>
+  <li><a href="#file-sizes" id="toc-file-sizes" class="nav-link" data-scroll-target="#file-sizes">File sizes</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/sebastian-gerdes/sbloggel/blob/main/posts/2023-08-03-reducing-image-file-size-with-imagemagick/2023-08-03-reducing-image-file-size-with-imagemagick.qmd" class="toc-action">View source</a></p></div></div></nav>
     </div>
@@ -189,15 +192,88 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
+<section id="links" class="level2">
+<h2 class="anchored" data-anchor-id="links">Links</h2>
 <ul>
-<li><a href="https://stackoverflow.com/questions/7261855/recommendation-for-compressing-jpg-files-with-imagemagick">stackoverflow post</a></li>
+<li><a href="https://stackoverflow.com/questions/7261855/recommendation-for-compressing-jpg-files-with-imagemagick">stackoverflow post recommandations for compressing</a></li>
+<li><a href="https://stackoverflow.com/questions/6917219/imagemagick-scale-jpeg-image-with-a-maximum-file-size">stackoverflow maximum file size</a></li>
+<li><a href="https://www.smashingmagazine.com/2015/06/efficient-image-resizing-with-imagemagick/">Extensive analysis of imagemagick options</a></li>
 </ul>
+</section>
+<section id="initial-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="initial-analysis">Initial analysis</h2>
 <p><img src="koga_original.jpg" class="img-fluid" style="width:32.0%" data-fig-align="center" alt="Koga Original"> <img src="koga_signal.jpeg" class="img-fluid" style="width:32.0%" data-fig-align="center" alt="Koga Signal version"> <img src="koga_edited.jpg" class="img-fluid" style="width:32.0%" data-fig-align="center" alt="Koga ImageMagick"></p>
 <p><img src="koga_original.jpg" class="img-fluid" style="width:99.0%" data-fig-align="center" alt="Koga Original"> <img src="koga_signal.jpeg" class="img-fluid" style="width:99.0%" data-fig-align="center" alt="Koga Signal version"> <img src="koga_edited.jpg" class="img-fluid" style="width:99.0%" data-fig-align="center" alt="Koga ImageMagick"></p>
+</section>
 <section id="currently-best-version" class="level2">
 <h2 class="anchored" data-anchor-id="currently-best-version">Currently best version</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">system</span>(<span class="st">'convert koga_original.jpg -quality 50 -resize 2048 low_quality_3.jpg'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="low_quality_3.jpg" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Currently best version</figcaption>
+</figure>
+</div>
+</section>
+<section id="file-sizes" class="level2">
+<h2 class="anchored" data-anchor-id="file-sizes">File sizes</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">'fs'</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">'knitr'</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>files <span class="ot">&lt;-</span> <span class="fu">dir_ls</span>()</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">filenames =</span> files, </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">filesizes =</span> <span class="fu">file_size</span>(files)) <span class="sc">|&gt;</span> </span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">align =</span> <span class="st">'c'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 85%">
+<col style="width: 14%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">filenames</th>
+<th style="text-align: center;">filesizes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">2023-08-03-reducing-image-file-size-with-imagemagick.qmd</td>
+<td style="text-align: center;">1.92K</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2023-08-03-reducing-image-file-size-with-imagemagick.rmarkdown</td>
+<td style="text-align: center;">1.93K</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">koga_edited.jpg</td>
+<td style="text-align: center;">193.93K</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">koga_original.jpg</td>
+<td style="text-align: center;">2.5M</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">koga_signal.jpeg</td>
+<td style="text-align: center;">505.13K</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">low_quality_1.jpg</td>
+<td style="text-align: center;">206.18K</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">low_quality_2.jpg</td>
+<td style="text-align: center;">516.7K</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">low_quality_3.jpg</td>
+<td style="text-align: center;">387.38K</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 
 
