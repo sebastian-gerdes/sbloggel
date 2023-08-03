@@ -46,10 +46,63 @@ colon |>
 
 
 ## With survminer
+### Do faceting with survminer
 ```{r}
 library('survminer')
-fit <- survfit( Surv(time, status) ~ sex, data = colon )
+fit <- survfit( Surv(time, status) ~ sex + rx, data = colon )
 ggsurvplot_facet(fit, colon, facet.by = c('rx', 'perfor'), 
                  pval = TRUE, ggtheme = theme_grey())
+```
+
+### Extract plot object so it can be modified in a more usual ggplot2 style
+```{r}
+fit <- survfit( Surv(time, status) ~ sex + rx + perfor, data = colon )
+gg <- ggsurvplot(fit, data = colon, color = 'perfor')
+gg$plot + theme_grey() + labs(color = 'perfor', x = 'Time [days]') + facet_wrap(~ sex + rx, labeller = label_both)
+```
+
+
+```{r}
+fit <- survfit( Surv(time, status) ~ sex + perfor, data = colon )
+gg <- ggsurvplot(fit, data = colon, color = 'perfor', pval = TRUE, facet.by = 'sex')
+```
+
+### Show possible problem in survminer
+* After facetting, the p-values seem not be correct anymore
+```{r}
+fit <- survfit(Surv(time, status) ~ sex + rx, data = colon)
+gg <- ggsurvplot(fit, pval = TRUE)
+gg
+gg$plot + facet_wrap(vars(rx))
+gg$plot + facet_wrap(vars(rx, sex))
+```
+
+### Try to help someone
+* [Link](https://github.com/kassambara/survminer/issues/617)
+```{r}
+library('survival')
+library('tidyverse')
+library('survminer')
+
+text_to_add <- 
+  tribble(~ sex, ~ text, ~ x, ~ y, 
+          0, 'Some text', 1000, 0.1,
+          1, 'Some other text', 1000, 0.1)
+
+fit <- survfit(Surv(time, status) ~ sex, data = colon)
+gg <- ggsurvplot(fit)
+gg$plot + facet_wrap(vars(sex)) + theme_gray() + 
+  geom_label(aes(x = x, y = y, label = text),
+             text_to_add, inherit.aes = FALSE)
+```
+
+
+```{r}
+gg <- ggsurvplot(fit, palette = c('black', 'black'))
+gg$plot + facet_wrap(vars(sex)) + theme_gray() + 
+  geom_label(aes(x = x, y = y, label = text),
+             text_to_add, inherit.aes = FALSE) +
+  theme(legend.position = "none")
+
 ```
 
