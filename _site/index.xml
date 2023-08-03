@@ -12,6 +12,301 @@
 <generator>quarto-1.3.433</generator>
 <lastBuildDate>Wed, 02 Aug 2023 22:00:00 GMT</lastBuildDate>
 <item>
+  <title>Kaplan Meier plots</title>
+  <dc:creator>Sebastian Gerdes</dc:creator>
+  <link>https://sbloggel.netlify.app/posts/2023-08-03-kaplan-meier-plots/2023-08-03-kaplan-meier-plots.html</link>
+  <description><![CDATA[ 
+
+
+
+<p>Goal: draw facetted Kaplan-Meier-plots with p-value</p>
+<section id="with-ggquickeda" class="level2">
+<h2 class="anchored" data-anchor-id="with-ggquickeda">With ggquickeda</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'tidyverse'</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.2     ✔ readr     2.1.4
+✔ forcats   1.0.0     ✔ stringr   1.5.0
+✔ ggplot2   3.4.2     ✔ tibble    3.2.1
+✔ lubridate 1.9.2     ✔ tidyr     1.3.0
+✔ purrr     1.0.1     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'survival'</span>)</span>
+<span id="cb3-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'ggquickeda'</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'ggquickeda'
+
+The following object is masked from 'package:base':
+
+    +</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1">text_to_add <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> </span>
+<span id="cb5-2">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">tribble</span>(<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> sex, <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> text, <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> x, <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> y, </span>
+<span id="cb5-3">          <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Male'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'p = 0.1'</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3000</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.95</span>,</span>
+<span id="cb5-4">          <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Female'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'p = 0.03'</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3000</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.95</span>)</span>
+<span id="cb5-5"></span>
+<span id="cb5-6"></span>
+<span id="cb5-7"></span>
+<span id="cb5-8">colon <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> </span>
+<span id="cb5-9">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">sex =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">case_when</span>(</span>
+<span id="cb5-10">    sex <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Male'</span>,</span>
+<span id="cb5-11">    sex <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Female'</span>)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> </span>
+<span id="cb5-12">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">perfor =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">factor</span>(perfor)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> </span>
+<span id="cb5-13">  </span>
+<span id="cb5-14">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ggplot</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">time =</span> time, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">status =</span> status, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">colour =</span> perfor)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> </span>
+<span id="cb5-15">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">facet_wrap</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">vars</span>(sex)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb5-16">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_km</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_kmticks</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> </span>
+<span id="cb5-17">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_label</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">mapping =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">label =</span> text, </span>
+<span id="cb5-18">                           <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> x, </span>
+<span id="cb5-19">                           <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> y), </span>
+<span id="cb5-20">             <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">data =</span> text_to_add, </span>
+<span id="cb5-21">             <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">inherit.aes =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">FALSE</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb5-22">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">labs</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Time'</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Estimated survival'</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: The following aesthetics were dropped during statistical transformation: status
+ℹ This can happen when ggplot fails to infer the correct grouping structure in
+  the data.
+ℹ Did you forget to specify a `group` aesthetic or to convert a numerical
+  variable into a factor?
+The following aesthetics were dropped during statistical transformation: status
+ℹ This can happen when ggplot fails to infer the correct grouping structure in
+  the data.
+ℹ Did you forget to specify a `group` aesthetic or to convert a numerical
+  variable into a factor?
+The following aesthetics were dropped during statistical transformation: status
+ℹ This can happen when ggplot fails to infer the correct grouping structure in
+  the data.
+ℹ Did you forget to specify a `group` aesthetic or to convert a numerical
+  variable into a factor?
+The following aesthetics were dropped during statistical transformation: status
+ℹ This can happen when ggplot fails to infer the correct grouping structure in
+  the data.
+ℹ Did you forget to specify a `group` aesthetic or to convert a numerical
+  variable into a factor?</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Using the `size` aesthetic with geom_path was deprecated in ggplot2 3.4.0.
+ℹ Please use the `linewidth` aesthetic instead.</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="https://sbloggel.netlify.app/posts/2023-08-03-kaplan-meier-plots/2023-08-03-kaplan-meier-plots_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="with-survminer" class="level2">
+<h2 class="anchored" data-anchor-id="with-survminer">With survminer</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'survminer'</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: ggpubr</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'survminer'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:survival':
+
+    myeloma</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1">fit <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">survfit</span>( <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">Surv</span>(time, status) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> sex, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">data =</span> colon )</span>
+<span id="cb12-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ggsurvplot_facet</span>(fit, colon, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">facet.by =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'rx'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'perfor'</span>), </span>
+<span id="cb12-3">                 <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">pval =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">ggtheme =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">theme_grey</span>())</span></code></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: `as.tibble()` was deprecated in tibble 2.0.0.
+ℹ Please use `as_tibble()` instead.
+ℹ The signature and semantics have changed, see `?as_tibble`.
+ℹ The deprecated feature was likely used in the survminer package.
+  Please report the issue at &lt;https://github.com/kassambara/survminer/issues&gt;.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: `select_()` was deprecated in dplyr 0.7.0.
+ℹ Please use `select()` instead.
+ℹ The deprecated feature was likely used in the survminer package.
+  Please report the issue at &lt;https://github.com/kassambara/survminer/issues&gt;.</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="https://sbloggel.netlify.app/posts/2023-08-03-kaplan-meier-plots/2023-08-03-kaplan-meier-plots_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+
+
+</section>
+
+ ]]></description>
+  <category>R</category>
+  <guid>https://sbloggel.netlify.app/posts/2023-08-03-kaplan-meier-plots/2023-08-03-kaplan-meier-plots.html</guid>
+  <pubDate>Wed, 02 Aug 2023 22:00:00 GMT</pubDate>
+</item>
+<item>
   <title>Reducing image file size with ImageMagick</title>
   <dc:creator>Sebastian Gerdes</dc:creator>
   <link>https://sbloggel.netlify.app/posts/2023-08-03-reducing-image-file-size-with-imagemagick/2023-08-03-reducing-image-file-size-with-imagemagick.html</link>
@@ -48,35 +343,51 @@ font-style: inherit;">'convert koga_original.jpg -quality 50 -resize 2048 low_qu
 </figure>
 </div>
 </section>
+<section id="even-a-lot-smaller" class="level2">
+<h2 class="anchored" data-anchor-id="even-a-lot-smaller">Even a lot smaller</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">system</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'convert koga_original.jpg -quality 50 -resize 1024 low_quality_4.jpg'</span>)</span>
+<span id="cb2-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">system</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'convert koga_original.jpg -quality 50 -resize 512 low_quality_5.jpg'</span>)</span></code></pre></div>
+</div>
+<p><img src="https://sbloggel.netlify.app/posts/2023-08-03-reducing-image-file-size-with-imagemagick/low_quality_4.jpg" class="img-fluid" alt="Even a lot smaller"> <img src="https://sbloggel.netlify.app/posts/2023-08-03-reducing-image-file-size-with-imagemagick/low_quality_5.jpg" class="img-fluid" alt="Even a lot smaller"></p>
+</section>
 <section id="file-sizes" class="level2">
 <h2 class="anchored" data-anchor-id="file-sizes">File sizes</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><span class="fu" style="color: #4758AB;
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'fs'</span>)</span>
-<span id="cb2-2"><span class="fu" style="color: #4758AB;
+<span id="cb3-2"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'knitr'</span>)</span>
-<span id="cb2-3"></span>
-<span id="cb2-4"><span class="fu" style="color: #4758AB;
+<span id="cb3-3"></span>
+<span id="cb3-4"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">tibble</span>(<span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">filenames =</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">dir_ls</span>(), </span>
-<span id="cb2-5">       <span class="at" style="color: #657422;
+<span id="cb3-5">       <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">filesizes =</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">file_size</span>(filenames)) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">|&gt;</span> </span>
-<span id="cb2-6">  <span class="fu" style="color: #4758AB;
+<span id="cb3-6">  <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">kable</span>(<span class="at" style="color: #657422;
 background-color: null;
@@ -98,11 +409,11 @@ font-style: inherit;">'c'</span>)</span></code></pre></div>
 <tbody>
 <tr class="odd">
 <td style="text-align: center;">2023-08-03-reducing-image-file-size-with-imagemagick.qmd</td>
-<td style="text-align: center;">1.91K</td>
+<td style="text-align: center;">2.18K</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">2023-08-03-reducing-image-file-size-with-imagemagick.rmarkdown</td>
-<td style="text-align: center;">1.92K</td>
+<td style="text-align: center;">2.19K</td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;">koga_edited.jpg</td>
@@ -127,6 +438,14 @@ font-style: inherit;">'c'</span>)</span></code></pre></div>
 <tr class="even">
 <td style="text-align: center;">low_quality_3.jpg</td>
 <td style="text-align: center;">387.38K</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">low_quality_4.jpg</td>
+<td style="text-align: center;">206.18K</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">low_quality_5.jpg</td>
+<td style="text-align: center;">146.79K</td>
 </tr>
 </tbody>
 </table>
@@ -5470,212 +5789,6 @@ font-style: inherit;"># py_install("pandas")</span></span></code></pre></div>
   <category>Self-study</category>
   <guid>https://sbloggel.netlify.app/posts/2023-03-17-mcelreath-statistical-rethinking/2023-03-17-mcelreath-statistical-rethinking.html</guid>
   <pubDate>Thu, 16 Mar 2023 23:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>How bad are bananas</title>
-  <dc:creator>Sebastian Gerdes</dc:creator>
-  <link>https://sbloggel.netlify.app/posts/2023-02-27-how-bad-are-bananas/2023-02-27-how-bad-are-bananas.html</link>
-  <description><![CDATA[ 
-
-
-
-<p>Recently, I have come a across a book that I find really wonderful: “How bad are bananas” by Mike Berners-Lee <span class="citation" data-cites="berners-lee_how_2020">Berners-Lee (2020)</span>.</p>
-<p>I would really like to use some of the data for a school project (of course citing the source in an adequate manner). It would be nice to use the data to develop a simple footprint calculator that is available online. Explicite permission from the author to use the data from his book with appropriate inidication of the data source is pending, however, with proper citation it should be okay to use the data I figure.</p>
-<section id="reading-notes" class="level2">
-<h2 class="anchored" data-anchor-id="reading-notes">Reading notes</h2>
-<ul>
-<li>Carbon dioxide equivalent (CO<sub>2</sub>e):
-<ul>
-<li>amount of CO<sub>2</sub> that would have the same impact over a time of 100 years</li>
-<li>Total impact in the UK
-<ul>
-<li>carbon dioxide 81%</li>
-<li>methane 11%</li>
-<li>nitrous oxide 5%</li>
-<li>refrigerant and other gases 3%</li>
-</ul></li>
-</ul></li>
-<li>Direct and indirect emissions</li>
-<li>fold-width of confidence interval-like interval: approx: 10-fold</li>
-<li>average footprint of a UK person: 13 tonnes per year</li>
-<li>global average: 7 tonnes per year</li>
-<li>A large cheeseburger (3.2 kg CO<sub>2</sub>e) corresponds to approx. 6 hours of a 5 tonne year</li>
-</ul>
-</section>
-<section id="my-own-thoughts" class="level2">
-<h2 class="anchored" data-anchor-id="my-own-thoughts">My own thoughts</h2>
-<ul>
-<li>Carbon responsibility should work like this:
-<ul>
-<li>The total CO<sub>2</sub>e emitted in the entire world should be estimated</li>
-<li>The responsibilities should be attributed (algorithmically)</li>
-</ul></li>
-</ul>
-</section>
-<section id="issues" class="level2">
-<h2 class="anchored" data-anchor-id="issues">Issues</h2>
-<ul>
-<li>Is there a German translation?</li>
-<li>I should buy paper copies!</li>
-<li>Maybe initiate a school-project</li>
-<li>Ask for permission about the book: info@howbadarebananas.com</li>
-<li>Is there a good webpage belonging to the book?</li>
-<li>Shiny app for “how much time of a 5 tonne year does this correspond to?”</li>
-</ul>
-</section>
-<section id="table" class="level2">
-<h2 class="anchored" data-anchor-id="table">Table</h2>
-<p>Here, I started to collect some of the data in the book and put them in a table:</p>
-<div class="cell">
-<div class="cell-output-display">
-<table class="table table-sm table-striped small">
-<colgroup>
-<col style="width: 3%">
-<col style="width: 96%">
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: right;">CO2e</th>
-<th style="text-align: left;">Item</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: right;">0.20</td>
-<td style="text-align: left;">Pint of tap water</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">0.03</td>
-<td style="text-align: left;">spam mail picked up by filter</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">0.20</td>
-<td style="text-align: left;">short e-mail from phone to phone</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">0.30</td>
-<td style="text-align: left;">short e-mail from laptop to laptop</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">17.00</td>
-<td style="text-align: left;">long email that takes 10 minutes to write and 3 minutes to read, sent from laptop to laptop</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">26.00</td>
-<td style="text-align: left;">an email that takes you 10 minutes to write, sent to 100 people, 99 of whom take 3 seconds to realise they should ignore it and on the whom reads it</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">0.50</td>
-<td style="text-align: left;">one simple google search</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">5.60</td>
-<td style="text-align: left;">5 minutes web browsing from a smartphone</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">8.20</td>
-<td style="text-align: left;">5 minutes web browsing from a laptop</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">0.80</td>
-<td style="text-align: left;">single text message</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">3.00</td>
-<td style="text-align: left;">very lightweight plastic carrier bag</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">10.00</td>
-<td style="text-align: left;">heavier supermarket bag</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">50.00</td>
-<td style="text-align: left;">heavweight ‘bag for life’</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">2.00</td>
-<td style="text-align: left;">Dyson Airblade</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">10.00</td>
-<td style="text-align: left;">one paper towel</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">11.00</td>
-<td style="text-align: left;">standard electric dryer</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">12.00</td>
-<td style="text-align: left;">recycled and lightweight paper carrier bag</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">80.00</td>
-<td style="text-align: left;">a fashion paper bag from mainly virgin paper</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">8.00</td>
-<td style="text-align: left;">quick expert ironing of a shirt</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">14.00</td>
-<td style="text-align: left;">average ironing</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">40.00</td>
-<td style="text-align: left;">ironing of a thorougly crumped shirt</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">2.00</td>
-<td style="text-align: left;">one hour zoom call on 13-inch Mac-Book Pro</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">10.00</td>
-<td style="text-align: left;">one hour zoom call on an averagely efficient laptop</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">50.00</td>
-<td style="text-align: left;">one hour zoom call on desktop computer</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">28.00</td>
-<td style="text-align: left;">100g portion of carrots – local, in season, full-size varieties</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">83.00</td>
-<td style="text-align: left;">100g portion of carrots – local, in season, baby carrots</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">90.00</td>
-<td style="text-align: left;">100g portion of carrots – full-size varieties, shipped within Europe</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</section>
-<section id="plots" class="level2">
-<h2 class="anchored" data-anchor-id="plots">Plots</h2>
-<div class="cell">
-<div class="cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2023-02-27-how-bad-are-bananas/2023-02-27-how-bad-are-bananas_files/figure-html/co2e_overview-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-</section>
-<section id="references" class="level2">
-
-
-
-
-</section>
-
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent">
-<div id="ref-berners-lee_how_2020" class="csl-entry">
-Berners-Lee, Mike. 2020. <em>How <span>Bad</span> <span>Are</span> <span>Bananas</span>?: <span>The</span> Carbon Footprint of Everything - 2020 New Edition</em>. New ed. updat. and expand. Profile Books.
-</div>
-</div></section></div> ]]></description>
-  <category>Sustainibility</category>
-  <guid>https://sbloggel.netlify.app/posts/2023-02-27-how-bad-are-bananas/2023-02-27-how-bad-are-bananas.html</guid>
-  <pubDate>Sun, 26 Feb 2023 23:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>

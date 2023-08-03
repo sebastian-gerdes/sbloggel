@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/2023-08-03-kaplan-meier-plots/2023-08-03-kaplan-meier-plots.html",
       "/posts/2023-08-03-reducing-image-file-size-with-imagemagick/2023-08-03-reducing-image-file-size-with-imagemagick.html",
       "/posts/2023-07-23-approximating-pi/2023-07-23-approximating-pi.html",
       "/posts/2023-07-23-bicycle-comparison/2023-07-23-bicycle-comparison.html",

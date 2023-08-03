@@ -9,7 +9,7 @@
 <meta name="author" content="Sebastian Gerdes">
 <meta name="dcterms.date" content="2023-08-03">
 
-<title>Seb’s blog - Reducing image file size with ImageMagick</title>
+<title>Seb’s blog - Kaplan Meier plots</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -99,10 +99,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <link rel="stylesheet" href="../../styles.css">
-<meta property="og:title" content="Seb’s blog - Reducing image file size with ImageMagick">
+<meta property="og:title" content="Seb’s blog - Kaplan Meier plots">
 <meta property="og:description" content="">
-<meta property="og:image" content="https://sbloggel.netlify.app/posts/2023-08-03-reducing-image-file-size-with-imagemagick/koga_original.jpg">
+<meta property="og:image" content="https://sbloggel.netlify.app/posts/2023-08-03-kaplan-meier-plots/2023-08-03-kaplan-meier-plots_files/figure-html/unnamed-chunk-1-1.png">
 <meta property="og:site-name" content="Seb's blog">
+<meta property="og:image:height" content="960">
+<meta property="og:image:width" content="1344">
 </head>
 
 <body class="nav-fixed">
@@ -153,20 +155,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#links" id="toc-links" class="nav-link active" data-scroll-target="#links">Links</a></li>
-  <li><a href="#initial-analysis" id="toc-initial-analysis" class="nav-link" data-scroll-target="#initial-analysis">Initial analysis</a></li>
-  <li><a href="#currently-best-version" id="toc-currently-best-version" class="nav-link" data-scroll-target="#currently-best-version">Currently best version</a></li>
-  <li><a href="#even-a-lot-smaller" id="toc-even-a-lot-smaller" class="nav-link" data-scroll-target="#even-a-lot-smaller">Even a lot smaller</a></li>
-  <li><a href="#file-sizes" id="toc-file-sizes" class="nav-link" data-scroll-target="#file-sizes">File sizes</a></li>
+  <li><a href="#with-ggquickeda" id="toc-with-ggquickeda" class="nav-link active" data-scroll-target="#with-ggquickeda">With ggquickeda</a></li>
+  <li><a href="#with-survminer" id="toc-with-survminer" class="nav-link" data-scroll-target="#with-survminer">With survminer</a></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/sebastian-gerdes/sbloggel/blob/main/posts/2023-08-03-reducing-image-file-size-with-imagemagick/2023-08-03-reducing-image-file-size-with-imagemagick.qmd" class="toc-action">View source</a></p></div></div></nav>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/sebastian-gerdes/sbloggel/blob/main/posts/2023-08-03-kaplan-meier-plots/2023-08-03-kaplan-meier-plots.qmd" class="toc-action">View source</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Reducing image file size with ImageMagick</h1>
+<h1 class="title">Kaplan Meier plots</h1>
   </div>
 
 
@@ -193,103 +192,120 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<section id="links" class="level2">
-<h2 class="anchored" data-anchor-id="links">Links</h2>
-<ul>
-<li><a href="https://stackoverflow.com/questions/7261855/recommendation-for-compressing-jpg-files-with-imagemagick">stackoverflow post recommandations for compressing</a></li>
-<li><a href="https://stackoverflow.com/questions/6917219/imagemagick-scale-jpeg-image-with-a-maximum-file-size">stackoverflow maximum file size</a></li>
-<li><a href="https://www.smashingmagazine.com/2015/06/efficient-image-resizing-with-imagemagick/">Extensive analysis of imagemagick options</a></li>
-</ul>
-</section>
-<section id="initial-analysis" class="level2">
-<h2 class="anchored" data-anchor-id="initial-analysis">Initial analysis</h2>
-<p><img src="koga_original.jpg" class="img-fluid" style="width:32.0%" data-fig-align="center" alt="Koga Original"> <img src="koga_signal.jpeg" class="img-fluid" style="width:32.0%" data-fig-align="center" alt="Koga Signal version"> <img src="koga_edited.jpg" class="img-fluid" style="width:32.0%" data-fig-align="center" alt="Koga ImageMagick"></p>
-<p><img src="koga_original.jpg" class="img-fluid" style="width:99.0%" data-fig-align="center" alt="Koga Original"> <img src="koga_signal.jpeg" class="img-fluid" style="width:99.0%" data-fig-align="center" alt="Koga Signal version"> <img src="koga_edited.jpg" class="img-fluid" style="width:99.0%" data-fig-align="center" alt="Koga ImageMagick"></p>
-</section>
-<section id="currently-best-version" class="level2">
-<h2 class="anchored" data-anchor-id="currently-best-version">Currently best version</h2>
+<p>Goal: draw facetted Kaplan-Meier-plots with p-value</p>
+<section id="with-ggquickeda" class="level2">
+<h2 class="anchored" data-anchor-id="with-ggquickeda">With ggquickeda</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">system</span>(<span class="st">'convert koga_original.jpg -quality 50 -resize 2048 low_quality_3.jpg'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">'tidyverse'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.2     ✔ readr     2.1.4
+✔ forcats   1.0.0     ✔ stringr   1.5.0
+✔ ggplot2   3.4.2     ✔ tibble    3.2.1
+✔ lubridate 1.9.2     ✔ tidyr     1.3.0
+✔ purrr     1.0.1     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
 </div>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="low_quality_3.jpg" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Currently best version</figcaption>
-</figure>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">'survival'</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">'ggquickeda'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'ggquickeda'
+
+The following object is masked from 'package:base':
+
+    +</code></pre>
 </div>
-</section>
-<section id="even-a-lot-smaller" class="level2">
-<h2 class="anchored" data-anchor-id="even-a-lot-smaller">Even a lot smaller</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">system</span>(<span class="st">'convert koga_original.jpg -quality 50 -resize 1024 low_quality_4.jpg'</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">system</span>(<span class="st">'convert koga_original.jpg -quality 50 -resize 512 low_quality_5.jpg'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>text_to_add <span class="ot">&lt;-</span> </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tribble</span>(<span class="sc">~</span> sex, <span class="sc">~</span> text, <span class="sc">~</span> x, <span class="sc">~</span> y, </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>          <span class="st">'Male'</span>, <span class="st">'p = 0.1'</span>, <span class="dv">3000</span>, <span class="fl">0.95</span>,</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>          <span class="st">'Female'</span>, <span class="st">'p = 0.03'</span>, <span class="dv">3000</span>, <span class="fl">0.95</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>colon <span class="sc">|&gt;</span> </span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sex =</span> <span class="fu">case_when</span>(</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    sex <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">'Male'</span>,</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    sex <span class="sc">==</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">'Female'</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">perfor =</span> <span class="fu">factor</span>(perfor)) <span class="sc">|&gt;</span> </span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">time =</span> time, <span class="at">status =</span> status, <span class="at">colour =</span> perfor)) <span class="sc">+</span> </span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(sex)) <span class="sc">+</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_km</span>() <span class="sc">+</span> <span class="fu">geom_kmticks</span>() <span class="sc">+</span> </span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_label</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">label =</span> text, </span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>                           <span class="at">x =</span> x, </span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>                           <span class="at">y =</span> y), </span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>             <span class="at">data =</span> text_to_add, </span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>             <span class="at">inherit.aes =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">'Time'</span>, <span class="at">y =</span> <span class="st">'Estimated survival'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: The following aesthetics were dropped during statistical transformation: status
+ℹ This can happen when ggplot fails to infer the correct grouping structure in
+  the data.
+ℹ Did you forget to specify a `group` aesthetic or to convert a numerical
+  variable into a factor?
+The following aesthetics were dropped during statistical transformation: status
+ℹ This can happen when ggplot fails to infer the correct grouping structure in
+  the data.
+ℹ Did you forget to specify a `group` aesthetic or to convert a numerical
+  variable into a factor?
+The following aesthetics were dropped during statistical transformation: status
+ℹ This can happen when ggplot fails to infer the correct grouping structure in
+  the data.
+ℹ Did you forget to specify a `group` aesthetic or to convert a numerical
+  variable into a factor?
+The following aesthetics were dropped during statistical transformation: status
+ℹ This can happen when ggplot fails to infer the correct grouping structure in
+  the data.
+ℹ Did you forget to specify a `group` aesthetic or to convert a numerical
+  variable into a factor?</code></pre>
 </div>
-<p><img src="low_quality_4.jpg" class="img-fluid" alt="Even a lot smaller"> <img src="low_quality_5.jpg" class="img-fluid" alt="Even a lot smaller"></p>
-</section>
-<section id="file-sizes" class="level2">
-<h2 class="anchored" data-anchor-id="file-sizes">File sizes</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">'fs'</span>)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">'knitr'</span>)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">filenames =</span> <span class="fu">dir_ls</span>(), </span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">filesizes =</span> <span class="fu">file_size</span>(filenames)) <span class="sc">|&gt;</span> </span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">align =</span> <span class="st">'c'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Using the `size` aesthetic with geom_path was deprecated in ggplot2 3.4.0.
+ℹ Please use the `linewidth` aesthetic instead.</code></pre>
+</div>
 <div class="cell-output-display">
-<table class="table table-sm table-striped small">
-<colgroup>
-<col style="width: 85%">
-<col style="width: 14%">
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: center;">filenames</th>
-<th style="text-align: center;">filesizes</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: center;">2023-08-03-reducing-image-file-size-with-imagemagick.qmd</td>
-<td style="text-align: center;">2.18K</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">2023-08-03-reducing-image-file-size-with-imagemagick.rmarkdown</td>
-<td style="text-align: center;">2.19K</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">koga_edited.jpg</td>
-<td style="text-align: center;">193.93K</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">koga_original.jpg</td>
-<td style="text-align: center;">2.5M</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">koga_signal.jpeg</td>
-<td style="text-align: center;">505.13K</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">low_quality_1.jpg</td>
-<td style="text-align: center;">206.18K</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">low_quality_2.jpg</td>
-<td style="text-align: center;">516.7K</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">low_quality_3.jpg</td>
-<td style="text-align: center;">387.38K</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">low_quality_4.jpg</td>
-<td style="text-align: center;">206.18K</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">low_quality_5.jpg</td>
-<td style="text-align: center;">146.79K</td>
-</tr>
-</tbody>
-</table>
+<p><img src="2023-08-03-kaplan-meier-plots_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="with-survminer" class="level2">
+<h2 class="anchored" data-anchor-id="with-survminer">With survminer</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">'survminer'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: ggpubr</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'survminer'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:survival':
+
+    myeloma</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">survfit</span>( <span class="fu">Surv</span>(time, status) <span class="sc">~</span> sex, <span class="at">data =</span> colon )</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsurvplot_facet</span>(fit, colon, <span class="at">facet.by =</span> <span class="fu">c</span>(<span class="st">'rx'</span>, <span class="st">'perfor'</span>), </span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">pval =</span> <span class="cn">TRUE</span>, <span class="at">ggtheme =</span> <span class="fu">theme_grey</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: `as.tibble()` was deprecated in tibble 2.0.0.
+ℹ Please use `as_tibble()` instead.
+ℹ The signature and semantics have changed, see `?as_tibble`.
+ℹ The deprecated feature was likely used in the survminer package.
+  Please report the issue at &lt;https://github.com/kassambara/survminer/issues&gt;.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: `select_()` was deprecated in dplyr 0.7.0.
+ℹ Please use `select()` instead.
+ℹ The deprecated feature was likely used in the survminer package.
+  Please report the issue at &lt;https://github.com/kassambara/survminer/issues&gt;.</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="2023-08-03-kaplan-meier-plots_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 

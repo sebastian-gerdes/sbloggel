@@ -53,6 +53,17 @@ system('convert koga_original.jpg -quality 50 -resize 2048 low_quality_3.jpg')
 
 ![Currently best version](low_quality_3.jpg)
 
+## Even a lot smaller
+```{r}
+system('convert koga_original.jpg -quality 50 -resize 1024 low_quality_4.jpg')
+system('convert koga_original.jpg -quality 50 -resize 512 low_quality_5.jpg')
+```
+
+![Even a lot smaller](low_quality_4.jpg)
+![Even a lot smaller](low_quality_5.jpg)
+
+
+
 ## File sizes
 ```{r}
 library('fs')
