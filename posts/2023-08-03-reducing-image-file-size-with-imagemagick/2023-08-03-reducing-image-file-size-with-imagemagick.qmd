@@ -57,9 +57,9 @@ system('convert koga_original.jpg -quality 50 -resize 2048 low_quality_3.jpg')
 ```{r}
 library('fs')
 library('knitr')
-files <- dir_ls()
-tibble(filenames = files, 
-       filesizes = file_size(files)) |> 
+
+tibble(filenames = dir_ls(), 
+       filesizes = file_size(filenames)) |> 
   kable(align = 'c')
 ```
 

@@ -872,7 +872,7 @@
     "href": "posts/2023-08-03-reducing-image-file-size-with-imagemagick/2023-08-03-reducing-image-file-size-with-imagemagick.html#file-sizes",
     "title": "Reducing image file size with ImageMagick",
     "section": "File sizes",
-    "text": "File sizes\n\nlibrary('fs')\nlibrary('knitr')\nfiles &lt;- dir_ls()\ntibble(filenames = files, \n       filesizes = file_size(files)) |&gt; \n  kable(align = 'c')\n\n\n\n\n\n\n\n\nfilenames\nfilesizes\n\n\n\n\n2023-08-03-reducing-image-file-size-with-imagemagick.qmd\n1.92K\n\n\n2023-08-03-reducing-image-file-size-with-imagemagick.rmarkdown\n1.93K\n\n\nkoga_edited.jpg\n193.93K\n\n\nkoga_original.jpg\n2.5M\n\n\nkoga_signal.jpeg\n505.13K\n\n\nlow_quality_1.jpg\n206.18K\n\n\nlow_quality_2.jpg\n516.7K\n\n\nlow_quality_3.jpg\n387.38K"
+    "text": "File sizes\n\nlibrary('fs')\nlibrary('knitr')\n\ntibble(filenames = dir_ls(), \n       filesizes = file_size(filenames)) |&gt; \n  kable(align = 'c')\n\n\n\n\n\n\n\n\nfilenames\nfilesizes\n\n\n\n\n2023-08-03-reducing-image-file-size-with-imagemagick.qmd\n1.91K\n\n\n2023-08-03-reducing-image-file-size-with-imagemagick.rmarkdown\n1.92K\n\n\nkoga_edited.jpg\n193.93K\n\n\nkoga_original.jpg\n2.5M\n\n\nkoga_signal.jpeg\n505.13K\n\n\nlow_quality_1.jpg\n206.18K\n\n\nlow_quality_2.jpg\n516.7K\n\n\nlow_quality_3.jpg\n387.38K"
   },
   {
     "objectID": "index.html",
