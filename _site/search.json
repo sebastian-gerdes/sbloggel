@@ -340,7 +340,14 @@
     "href": "posts/2023-07-06-python-versions-environments/2023-07-06-python-versions-environments.html",
     "title": "Managing python versions in RStudio",
     "section": "",
-    "text": "Ressources\n\nGood resources are found in the {reticulate} vignettes: Link, in particular this\n\n\n\nManaging python installation\n\nlibrary('reticulate')\npy_discover_config()\npy_config()\nconda_list()\n\nconda_version()\nconfigure_environment()\nconda_create('sbloggel')\n\n\nconda_install('sbloggel', 'pandas')\nminiconda_update()\nuse_condaenv('sbloggel')\nconda_install('sbloggel', 'plotly')\nuse_condaenv('base')\n\n\n\nInstall virtual environments to jupyter\n\nLink\n\n\n# Prepare python to enable installation of virtual environments in Jupyter:\npip install --user ipykernel\n\n# Show conda environments and activate:\nconda info --envs  \nconda activate sbloggel\n\n# Install virtual environment into jupyter:\npython -m ipykernel install --user --name=sbloggel\nconda activate /Users/seb/Library/r-miniconda-arm64/envs/sbloggel  \n\nStart Jupyter from terminal:\n\njupyter notebook"
+    "text": "Good resources are found in the {reticulate} vignettes: Link, in particular this\nLink to question on stackoverflow - Link"
+  },
+  {
+    "objectID": "posts/2023-07-06-python-versions-environments/2023-07-06-python-versions-environments.html#ressources",
+    "href": "posts/2023-07-06-python-versions-environments/2023-07-06-python-versions-environments.html#ressources",
+    "title": "Managing python versions in RStudio",
+    "section": "",
+    "text": "Good resources are found in the {reticulate} vignettes: Link, in particular this\nLink to question on stackoverflow - Link"
   },
   {
     "objectID": "posts/2022-11-24-r-interfaces-to-trial-registries/2022-11-24-r-interfaces-to-trial-registries.html",
