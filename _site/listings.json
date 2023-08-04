@@ -2,6 +2,8 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/2023-08-04-getting-to-know-mlr3/2023-08-04-getting-to-know-mlr3.html",
+      "/posts/2023-08-04-getting-to-know-tidymodels/2023-08-04-getting-to-know-tidymodels.html",
       "/posts/2023-08-03-kaplan-meier-plots/2023-08-03-kaplan-meier-plots.html",
       "/posts/2023-08-03-reducing-image-file-size-with-imagemagick/2023-08-03-reducing-image-file-size-with-imagemagick.html",
       "/posts/2023-07-23-approximating-pi/2023-07-23-approximating-pi.html",
