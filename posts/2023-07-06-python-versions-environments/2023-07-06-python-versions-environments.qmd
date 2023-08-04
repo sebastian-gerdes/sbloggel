@@ -10,9 +10,9 @@ draft: false
 engine: knitr
 ---
 
-# Ressources
+## Ressources
 * Good resources are found in the {reticulate} vignettes: [Link](https://cran.r-project.org/web/packages/reticulate/index.html), in particular [this](https://cran.r-project.org/web/packages/reticulate/vignettes/versions.html)
-
+* Link to question on stackoverflow - [Link](https://stackoverflow.com/questions/76745347/how-to-make-quarto-use-the-same-python-environment-that-was-specified-in-rstudio)
 
 ```{r}
 #| label: init_python
