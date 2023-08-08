@@ -1,5 +1,5 @@
 ---
-title: Leave-on-out cross-validation in R
+title: Leave-one-out cross-validation in R
 author: Sebastian Gerdes
 date: 2023-08-08
 categories:
@@ -11,19 +11,21 @@ toc: true
 #  cache: true
 ---
 
+## Strategy
+* Fit "straight" models: linear model, neural net with 2 layers with 3 perceptrons each
+* Perform "Leave-one-out-cross-validation"
+* Calculate mean absolute prediction error of the different methods
+  * In cross-validation case for the left-out data point
+
+## Implementation
 ```{r}
 #| label: init
+#| message: false
 set.seed(123)
 library('tidyverse')
 library('knitr')
 library('neuralnet')
 ```
-
-* Strategy: 
-  * Fit "straight" models: linear model, neural net with 2 layers with 3 perceptrons each
-  * Perform "Leave-one-out-cross-validation"
-  * Calculate mean absolute prediction error of the different methods
-    * In cross-validation case for the left-out data point
 
 ```{r}
 leave_one_out <- Vectorize(
@@ -84,3 +86,6 @@ data_long |>
             'Mean squarred error' = mean(squarred_error)) |> 
   kable(align = 'c')
 ```
+
+## Conclusion
+* The neural net seems to overfit!
