@@ -12,6 +12,14 @@ toc: true
 ---
 
 * Tutorials by Julia Silge: [Link](https://www.youtube.com/@JuliaSilge/search)
+* Blog post criticising tidymodels: [Link](https://staffblogs.le.ac.uk/teachingr/2020/10/05/on-not-using-tidymodels/), written by [this person](https://github.com/thompson575)
+
+## Which packages belong to the metapackage tidymodels
+```{r}
+tidymodels_packages(include_self = TRUE)
+```
+
+
 
 ## Tutorial 1 - palmerpenguins dataset
 * [Link](https://juliasilge.com/blog/palmer-penguins/)
@@ -23,7 +31,6 @@ library('palmerpenguins')
 penguins_df <- penguins %>%
   filter(!is.na(sex)) %>%
   select(-year, -island)
-
 ```
 
 ```{r}
@@ -130,5 +137,37 @@ glm_rs %>%
   geom_abline(lty = 2, color = "gray80", linewidth = 1.5) +
   geom_path(show.legend = FALSE, alpha = 0.6, linewidth = 1.2) +
   coord_equal()
+```
+
+```{r}
+penguin_final <- penguin_wf %>%
+  add_model(glm_spec) %>%
+  last_fit(penguin_split)
+
+penguin_final
+```
+
+
+```{r}
+collect_metrics(penguin_final)
+```
+
+```{r}
+collect_predictions(penguin_final) %>%
+  conf_mat(sex, .pred_class)
+```
+
+```{r}
+penguin_final$.workflow[[1]] %>%
+  tidy(exponentiate = TRUE)
+```
+
+
+```{r}
+penguins %>%
+  filter(!is.na(sex)) %>%
+  ggplot(aes(bill_depth_mm, bill_length_mm, color = sex, size = body_mass_g)) +
+  geom_point(alpha = 0.5) +
+  facet_wrap(~species)
 ```
 

@@ -152,3 +152,10 @@ excluded
 
 ## Here for finding the path to the project directory
 * [Link](https://github.com/r-lib/here)
+
+## Package for formatting labels in ggplot
+* [Link](https://cran.r-project.org/package=ggtext)
+* [Video demonstrating the package](https://posit.co/resources/videos/spruce-up-your-ggplot2-visualizations-with-formatted-text/)
+
+## Concattenating text
+* [Package glue](https://cran.r-project.org/package=glue)

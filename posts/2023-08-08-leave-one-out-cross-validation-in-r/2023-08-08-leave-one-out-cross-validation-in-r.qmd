@@ -1,0 +1,86 @@
+---
+title: Leave-on-out cross-validation in R
+author: Sebastian Gerdes
+date: 2023-08-08
+categories:
+  - R
+toc: true
+# draft: true
+# execute: 
+#   echo: false
+#  cache: true
+---
+
+```{r}
+#| label: init
+set.seed(123)
+library('tidyverse')
+library('knitr')
+library('neuralnet')
+```
+
+* Strategy: 
+  * Fit "straight" models: linear model, neural net with 2 layers with 3 perceptrons each
+  * Perform "Leave-one-out-cross-validation"
+  * Calculate mean absolute prediction error of the different methods
+    * In cross-validation case for the left-out data point
+
+```{r}
+leave_one_out <- Vectorize(
+  function(i, type) {
+    training <- cars[-i, ]
+    test <- cars[i, ]
+    if(type == 'lm') {
+      fm <- lm(speed ~ dist, data = training)
+      pp <- predict(fm, newdata = test)
+    } else {
+      fm <- neuralnet(speed ~ dist, 
+                      linear.output = TRUE, data = training, 
+                      hidden = c(3, 3), 
+                      stepmax = 1e+7, threshold = .5)
+      pp <- predict(fm, newdata = test)[, 1]
+    }
+    return(pp)
+  }, vectorize.args = 'i')
+```
+
+
+```{r}
+fm_lm <- lm(speed ~ dist, data = cars)
+fm_nn <- neuralnet(speed ~ dist, 
+                   linear.output = TRUE, data = cars, 
+                   hidden = c(3, 3), 
+                   stepmax = 1e+7, threshold = .5)
+data <- tibble(
+  cars,
+  p_lm_straight = predict(fm_lm),
+  p_nn_straight= predict(fm_nn, newdata = cars)[, 1],
+  p_lm_looc = leave_one_out(1:nrow(cars), type = 'lm'),
+  p_nn_looc = leave_one_out(1:nrow(cars), type = 'nn')
+)
+```
+
+
+```{r}
+data |> 
+  pivot_longer(cols = -dist) |> 
+  ggplot(aes(dist, value, colour = name)) +
+  geom_point() +
+  labs(y = 'speed', colour = '')
+
+data_long <- data |> 
+  pivot_longer(cols = -c(dist, speed)) 
+
+data_long |> 
+  ggplot(aes(dist, speed - value)) + geom_point() + facet_wrap(vars(name)) +
+  labs(y = 'Prediction error')
+
+data_long |> 
+  mutate(error = value - speed,
+         squarred_error = error^2) |> 
+  rename(Method = 'name') |> 
+  group_by(Method) |> 
+  summarize('Mean absolute error' = mean(abs(error)),
+            'Mean squarred error' = mean(squarred_error)) |> 
+  kable(align = 'c')
+```

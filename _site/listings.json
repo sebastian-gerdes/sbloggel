@@ -2,6 +2,8 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/2023-08-08-leave-one-out-cross-validation-in-r/2023-08-08-leave-one-out-cross-validation-in-r.html",
+      "/posts/2023-08-05-regularization-in-r/2023-08-05-regularization-in-r.html",
       "/posts/2023-08-04-getting-to-know-mlr3/2023-08-04-getting-to-know-mlr3.html",
       "/posts/2023-08-04-getting-to-know-tidymodels/2023-08-04-getting-to-know-tidymodels.html",
       "/posts/2023-08-03-kaplan-meier-plots/2023-08-03-kaplan-meier-plots.html",
