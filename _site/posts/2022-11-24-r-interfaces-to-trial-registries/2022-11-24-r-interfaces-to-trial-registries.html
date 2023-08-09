@@ -99,7 +99,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <link rel="stylesheet" href="../../styles.css">
 <meta property="og:title" content="Seb’s blog - R interfaces to trial registries">
+<meta property="og:image" content="https://sbloggel.netlify.app/posts/2022-11-24-r-interfaces-to-trial-registries/2022-11-24-r-interfaces-to-trial-registries_files/figure-html/clinicaltrialr-1.png">
 <meta property="og:site-name" content="Seb's blog">
+<meta property="og:image:height" content="960">
+<meta property="og:image:width" content="1344">
 </head>
 
 <body class="nav-fixed">
@@ -151,7 +154,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#package-clinicaltrialr" id="toc-package-clinicaltrialr" class="nav-link active" data-scroll-target="#package-clinicaltrialr">Package ‘clinicaltrialr’</a></li>
-  <li><a href="#package-rclinicaltrials" id="toc-package-rclinicaltrials" class="nav-link" data-scroll-target="#package-rclinicaltrials">Package ‘rclinicaltrials’</a></li>
   <li><a href="#package-cthist" id="toc-package-cthist" class="nav-link" data-scroll-target="#package-cthist">Package ‘cthist’</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/sebastian-gerdes/sbloggel/blob/main/posts/2022-11-24-r-interfaces-to-trial-registries/2022-11-24-r-interfaces-to-trial-registries.qmd" class="toc-action">View source</a></p></div></div></nav>
@@ -185,44 +187,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="package-clinicaltrialr" class="level2">
 <h2 class="anchored" data-anchor-id="package-clinicaltrialr">Package ‘clinicaltrialr’</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">'tidyverse'</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">'ggVennDiagram'</span>)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">'clinicaltrialr'</span>) </span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>results_q_twist <span class="ot">&lt;-</span> <span class="fu">ct_read_results</span>(<span class="st">'https://www.clinicaltrials.gov/ct2/results?cond=&amp;term=Q-TWiST&amp;type=&amp;rslt=&amp;age_v=&amp;gndr=&amp;intr=&amp;titles=&amp;outc=&amp;spons=&amp;lead=&amp;id=&amp;cntry=&amp;state=&amp;city=&amp;dist=&amp;locn=&amp;rsub=&amp;strd_s=&amp;strd_e=&amp;prcd_s=&amp;prcd_e=&amp;sfpd_s=&amp;sfpd_e=&amp;rfpd_s=&amp;rfpd_e=&amp;lupd_s=&amp;lupd_e=&amp;sort='</span>)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>results_qas <span class="ot">&lt;-</span> <span class="fu">ct_read_results</span>(<span class="st">'https://www.clinicaltrials.gov/ct2/results?cond=&amp;term=%22quality+adjusted+survival%22&amp;type=&amp;rslt=&amp;age_v=&amp;gndr=&amp;intr=&amp;titles=&amp;outc=&amp;spons=&amp;lead=&amp;id=&amp;cntry=&amp;state=&amp;city=&amp;dist=&amp;locn=&amp;rsub=&amp;strd_s=&amp;strd_e=&amp;prcd_s=&amp;prcd_e=&amp;sfpd_s=&amp;sfpd_e=&amp;rfpd_s=&amp;rfpd_e=&amp;lupd_s=&amp;lupd_e=&amp;sort='</span>)</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(results_qas)</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co"># List of items</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="st">'Keyword "Quality-adjusted survival"'</span> <span class="ot">=</span> results_qas<span class="sc">$</span><span class="st">`</span><span class="at">NCT Number</span><span class="st">`</span>, </span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>          <span class="st">'Keyword "Q-TWiST"'</span> <span class="ot">=</span> results_q_twist<span class="sc">$</span><span class="st">`</span><span class="at">NCT Number</span><span class="st">`</span>)</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co"># 2D Venn diagram</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="fu">ggVennDiagram</span>(x) <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">'none'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="package-rclinicaltrials" class="level2">
-<h2 class="anchored" data-anchor-id="package-rclinicaltrials">Package ‘rclinicaltrials’</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rclinicaltrials)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># z &lt;- clinicaltrials_search(query = 'lime+disease') </span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># str(z)</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">clinicaltrials_count</span>(<span class="at">query =</span> <span class="st">"myeloma"</span>) </span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">clinicaltrials_count</span>(<span class="at">query =</span> <span class="st">"29485tksrw@"</span>)</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">clinicaltrials_download</span>(<span class="at">query =</span> <span class="st">'myeloma'</span>, <span class="at">count =</span> <span class="dv">10</span>, <span class="at">include_results =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="package-cthist" class="level2">
-<h2 class="anchored" data-anchor-id="package-cthist">Package ‘cthist’</h2>
-<ul>
-<li>https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9249399/</li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">'tidyverse'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
 ✔ dplyr     1.1.2     ✔ readr     2.1.4
@@ -235,8 +200,113 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 ✖ dplyr::lag()    masks stats::lag()
 ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(cthist)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">'ggVennDiagram'</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">'clinicaltrialr'</span>) </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>results_q_twist <span class="ot">&lt;-</span> <span class="fu">ct_read_results</span>(<span class="st">'https://www.clinicaltrials.gov/ct2/results?cond=&amp;term=Q-TWiST&amp;type=&amp;rslt=&amp;age_v=&amp;gndr=&amp;intr=&amp;titles=&amp;outc=&amp;spons=&amp;lead=&amp;id=&amp;cntry=&amp;state=&amp;city=&amp;dist=&amp;locn=&amp;rsub=&amp;strd_s=&amp;strd_e=&amp;prcd_s=&amp;prcd_e=&amp;sfpd_s=&amp;sfpd_e=&amp;rfpd_s=&amp;rfpd_e=&amp;lupd_s=&amp;lupd_e=&amp;sort='</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 26 Columns: 27
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (25): NCT Number, Title, Acronym, Status, Study Results, Conditions, Int...
+dbl  (2): Rank, Enrollment
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>results_qas <span class="ot">&lt;-</span> <span class="fu">ct_read_results</span>(<span class="st">'https://www.clinicaltrials.gov/ct2/results?cond=&amp;term=%22quality+adjusted+survival%22&amp;type=&amp;rslt=&amp;age_v=&amp;gndr=&amp;intr=&amp;titles=&amp;outc=&amp;spons=&amp;lead=&amp;id=&amp;cntry=&amp;state=&amp;city=&amp;dist=&amp;locn=&amp;rsub=&amp;strd_s=&amp;strd_e=&amp;prcd_s=&amp;prcd_e=&amp;sfpd_s=&amp;sfpd_e=&amp;rfpd_s=&amp;rfpd_e=&amp;lupd_s=&amp;lupd_e=&amp;sort='</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 41 Columns: 27
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (25): NCT Number, Title, Acronym, Status, Study Results, Conditions, Int...
+dbl  (2): Rank, Enrollment
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(results_qas)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>spc_tbl_ [41 × 27] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+ $ Rank                   : num [1:41] 1 2 3 4 5 6 7 8 9 10 ...
+ $ NCT Number             : chr [1:41] "NCT01117740" "NCT02284308" "NCT03326570" "NCT00591526" ...
+ $ Title                  : chr [1:41] "Pleural Catheters Versus Thoracoscopic Pleurodesis" "Elderly With Locally Advanced Lung Cancer: Deciding Through Geriatric Assessment on the Optimal Treatment Strategy" "Effectiveness of Bronchoscopic Interventions for Malignant Airway Obstruction" "A Randomized Trial Assessing the Roles of AraC in Newly Diagnosed APL Promyelocytic Leukemia (APL)" ...
+ $ Acronym                : chr [1:41] NA "ELDAPT" NA NA ...
+ $ Status                 : chr [1:41] "Completed" "Recruiting" "Completed" "Completed" ...
+ $ Study Results          : chr [1:41] "No Results Available" "No Results Available" "No Results Available" "No Results Available" ...
+ $ Conditions             : chr [1:41] "Lung Cancer" "NSCLC" "Lung Cancer" "Leukemia, Promyelocytic, Acute" ...
+ $ Interventions          : chr [1:41] "Behavioral: MDASI Questionnaire" NA "Behavioral: Medical Data Collection" "Drug: Arac" ...
+ $ Outcome Measures       : chr [1:41] "Quality-Adjusted Survival Times|Patient Responses to MDASI" "Correlation GA with QAS (quality adjusted survival)|Geriatric assessment|Medical comparison between treatments|"| __truncated__ "Time to Any Complication Requiring Treatment|Quality-Adjusted Survival" "for patients with initial WBC counts &gt; 10000/mm3 - the main end point for this second randomization is relapse "| __truncated__ ...
+ $ Sponsor/Collaborators  : chr [1:41] "M.D. Anderson Cancer Center" "Maastricht Radiation Oncology|Dutch Society of Physicians for Pulmonology and Tuberculosis|Erasmus Medical Cent"| __truncated__ "M.D. Anderson Cancer Center" "Groupe d'etude et de travail sur les leucemies aigues promyelocytaires|University Hospital, Lille" ...
+ $ Gender                 : chr [1:41] "All" "All" "All" "All" ...
+ $ Age                    : chr [1:41] "18 Years and older &nbsp; (Adult, Older Adult)" "75 Years and older &nbsp; (Older Adult)" "18 Years and older &nbsp; (Adult, Older Adult)" "Child, Adult, Older Adult" ...
+ $ Phases                 : chr [1:41] NA NA NA "Phase 3" ...
+ $ Enrollment             : num [1:41] 445 288 110 250 241 ...
+ $ Funded Bys             : chr [1:41] "Other" "Other|Industry" "Other" "Other" ...
+ $ Study Type             : chr [1:41] "Observational" "Observational" "Observational" "Interventional" ...
+ $ Study Designs          : chr [1:41] "Observational Model: Case-Only|Time Perspective: Prospective" "Observational Model: Cohort|Time Perspective: Prospective" "Observational Model: Cohort|Time Perspective: Prospective" "Allocation: Randomized|Intervention Model: Parallel Assignment|Masking: None (Open Label)|Primary Purpose: Treatment" ...
+ $ Other IDs              : chr [1:41] "2010-0103" "ELDAPT" "2011-0563|NCI-2018-01276" "APL2000" ...
+ $ Start Date             : chr [1:41] "April 2010" "July 2016" "August 25, 2011" "June 2000" ...
+ $ Primary Completion Date: chr [1:41] "April 2016" "July 2024" "April 1, 2019" "June 2004" ...
+ $ Completion Date        : chr [1:41] "April 2016" "July 2025" "April 1, 2019" "June 2004" ...
+ $ First Posted           : chr [1:41] "May 5, 2010" "November 6, 2014" "October 31, 2017" "January 11, 2008" ...
+ $ Results First Posted   : chr [1:41] NA NA NA NA ...
+ $ Last Update Posted     : chr [1:41] "April 11, 2016" "March 27, 2023" "April 16, 2019" "January 14, 2008" ...
+ $ Locations              : chr [1:41] "University of Texas MD Anderson Cancer Center, Houston, Texas, United States" "Ziekenhuisgroep Twente, Almelo, Netherlands|Gelre ziekenhuis, Apeldoorn, Netherlands|Radiotherapiegroep Arnhem,"| __truncated__ "University of Texas MD Anderson Cancer Center, Houston, Texas, United States" NA ...
+ $ Study Documents        : chr [1:41] NA NA NA NA ...
+ $ URL                    : chr [1:41] "https://ClinicalTrials.gov/show/NCT01117740" "https://ClinicalTrials.gov/show/NCT02284308" "https://ClinicalTrials.gov/show/NCT03326570" "https://ClinicalTrials.gov/show/NCT00591526" ...
+ - attr(*, "spec")=
+  .. cols(
+  ..   Rank = col_double(),
+  ..   `NCT Number` = col_character(),
+  ..   Title = col_character(),
+  ..   Acronym = col_character(),
+  ..   Status = col_character(),
+  ..   `Study Results` = col_character(),
+  ..   Conditions = col_character(),
+  ..   Interventions = col_character(),
+  ..   `Outcome Measures` = col_character(),
+  ..   `Sponsor/Collaborators` = col_character(),
+  ..   Gender = col_character(),
+  ..   Age = col_character(),
+  ..   Phases = col_character(),
+  ..   Enrollment = col_double(),
+  ..   `Funded Bys` = col_character(),
+  ..   `Study Type` = col_character(),
+  ..   `Study Designs` = col_character(),
+  ..   `Other IDs` = col_character(),
+  ..   `Start Date` = col_character(),
+  ..   `Primary Completion Date` = col_character(),
+  ..   `Completion Date` = col_character(),
+  ..   `First Posted` = col_character(),
+  ..   `Results First Posted` = col_character(),
+  ..   `Last Update Posted` = col_character(),
+  ..   Locations = col_character(),
+  ..   `Study Documents` = col_character(),
+  ..   URL = col_character()
+  .. )
+ - attr(*, "problems")=&lt;externalptr&gt; </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># List of items</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="st">'Keyword "Quality-adjusted survival"'</span> <span class="ot">=</span> results_qas<span class="sc">$</span><span class="st">`</span><span class="at">NCT Number</span><span class="st">`</span>, </span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>          <span class="st">'Keyword "Q-TWiST"'</span> <span class="ot">=</span> results_q_twist<span class="sc">$</span><span class="st">`</span><span class="at">NCT Number</span><span class="st">`</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 2D Venn diagram</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggVennDiagram</span>(x) <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">'none'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="2022-11-24-r-interfaces-to-trial-registries_files/figure-html/clinicaltrialr-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="package-cthist" class="level2">
+<h2 class="anchored" data-anchor-id="package-cthist">Package ‘cthist’</h2>
+<ul>
+<li>https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9249399/</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(cthist)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 

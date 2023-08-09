@@ -8,7 +8,6 @@ categories:
 ## Package 'clinicaltrialr'
 
 ```{r clinicaltrialr}
-#| eval: false
 library('tidyverse')
 
 library('ggVennDiagram')
@@ -25,21 +24,6 @@ x <- list('Keyword "Quality-adjusted survival"' = results_qas$`NCT Number`,
 
 # 2D Venn diagram
 ggVennDiagram(x) + theme(legend.position = 'none')
-```
-
-## Package 'rclinicaltrials'
-
-```{r rclinicaltrials}
-#| eval: false
-library(rclinicaltrials)
-# z <- clinicaltrials_search(query = 'lime+disease') 
-# str(z)
-clinicaltrials_count(query = "myeloma") 
-clinicaltrials_count(query = "29485tksrw@")
-
-y <- clinicaltrials_download(query = 'myeloma', count = 10, include_results = TRUE)
-str(y)
-
 ```
 
 ## Package 'cthist'

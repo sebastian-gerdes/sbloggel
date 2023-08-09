@@ -3,8 +3,6 @@ title: 'Interesting R packages'
 date: '2023-03-17'
 categories:
   - R
-execute: 
-  eval: false
 ---
 
 ## Short notes about R packages
@@ -14,6 +12,7 @@ execute:
 
 ## Check package names
 ```{r}
+#| eval: false
 library('available')
 # help(package = 'available')
 
@@ -46,10 +45,14 @@ Herre, I have collected a few resources in the field of computer algebra systems
   * added shell script /usr/bin/maxima
 
 ```{r}
+#| eval: false
 system('export PATH=${PATH}:/Applications/Maxima.app/Contents/Resources/opt/bin')
 system('echo $PATH')
-library(rim)
 help(package='rim')
+```
+
+```{r}
+library(rim)
 rim::maxima.isInstalled()
 rim::maxima.get("1+1;")
 ```

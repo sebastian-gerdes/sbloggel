@@ -21,8 +21,6 @@ theme_set(theme_bw())
 #| label: explore_model_dynamics
 #| fig.width: 10
 #| fig.height: 10
-#| eval: true
-#| cache: false
 sir_ode_deterministic <- function(t, state, pars) {
   with(as.list(c(state, pars)), {
     dS <- - beta * I * S + lambda * R
