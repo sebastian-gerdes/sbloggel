@@ -12,6 +12,7 @@ categories:
   * In cross-validation case for the left-out data point
 
 ## Implementation
+### Init
 ```{r}
 #| label: init
 #| message: false
@@ -22,26 +23,37 @@ library('neuralnet')
 library('plotly')
 ```
 
+### Define function for performing leave-one-out-crossvalidation
 ```{r}
+# A function that removes one data point from the cars data set, 
+# fits either a linear model or a neural net to the remaining data 
+# and returns the model prediction for the data point 
+# that had been removed in the first place
+# 
+# Parameters:
+#   * i: which data points to remove - the function is vectorized for this parameter
+#   * model_type: which type of model is to be fit - either "lm" or if not "lm", a neural 
 leave_one_out <- Vectorize(
-  function(i, type) {
+  function(i, model_type) {
     training <- cars[-i, ]
     test <- cars[i, ]
-    if(type == 'lm') {
+    if(model_type == 'lm') {
       fm <- lm(speed ~ dist, data = training)
       pp <- predict(fm, newdata = test)
-    } else {
+    } else if(model_type == 'nn'){
       fm <- neuralnet(speed ~ dist, 
                       linear.output = TRUE, data = training, 
                       hidden = c(3, 3), 
                       stepmax = 1e+7, threshold = .5)
       pp <- predict(fm, newdata = test)[, 1]
+    } else {
+      stop('Invalid model type')
     }
     return(pp)
   }, vectorize.args = 'i')
 ```
 
-
+### Fit models
 ```{r}
 fm_lm <- lm(speed ~ dist, data = cars)
 fm_nn <- neuralnet(speed ~ dist, 
@@ -52,12 +64,12 @@ data <- tibble(
   cars,
   prediction_lm_straight = predict(fm_lm),
   prediction_nn_straight = predict(fm_nn, newdata = cars)[, 1],
-  prediction_lm_looc = leave_one_out(1:nrow(cars), type = 'lm'),
-  prediction_nn_looc = leave_one_out(1:nrow(cars), type = 'nn')) |> 
+  prediction_lm_looc = leave_one_out(1:nrow(cars), model_type = 'lm'),
+  prediction_nn_looc = leave_one_out(1:nrow(cars), model_type = 'nn')) |> 
   rename(measured_speed = 'speed')
 ```
 
-
+### Show and analyze results
 ```{r}
 data |> 
   pivot_longer(cols = -dist, names_to = 'Method', values_to = 'speed') |> 
