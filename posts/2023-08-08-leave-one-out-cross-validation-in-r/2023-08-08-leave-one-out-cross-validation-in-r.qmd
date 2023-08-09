@@ -19,6 +19,7 @@ set.seed(123)
 library('tidyverse')
 library('knitr')
 library('neuralnet')
+library('plotly')
 ```
 
 ```{r}
@@ -59,10 +60,13 @@ data <- tibble(
 
 ```{r}
 data |> 
-  pivot_longer(cols = -dist) |> 
-  ggplot(aes(dist, value, colour = name)) +
+  pivot_longer(cols = -dist, names_to = 'Method', values_to = 'speed') |> 
+  mutate(Method = str_replace(Method, 'speed', 'Original data')) |> 
+  ggplot(aes(dist, speed, colour = Method)) +
   geom_point() +
-  labs(y = 'speed', colour = '')
+  labs(y = 'speed')
+
+ggplot2::last_plot() |> ggplotly()
 
 data_long <- data |> 
   pivot_longer(cols = -c(dist, speed)) 
