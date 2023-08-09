@@ -1,6 +1,5 @@
 ---
 title: Regularization in R
-author: Sebastian Gerdes
 date: 2023-08-05
 categories:
   - R

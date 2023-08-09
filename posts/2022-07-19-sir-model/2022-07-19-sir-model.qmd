@@ -1,6 +1,5 @@
 ---
 title: 'SIR model'
-author: 'Sebastian Gerdes'
 date: '2022-07-19'
 categories:
   - R

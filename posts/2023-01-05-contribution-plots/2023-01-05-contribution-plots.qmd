@@ -1,6 +1,5 @@
 ---
 title: 'Contribution plots'
-author: 'Sebastian Gerdes'
 date: '2023-01-05'
 categories:
   - R

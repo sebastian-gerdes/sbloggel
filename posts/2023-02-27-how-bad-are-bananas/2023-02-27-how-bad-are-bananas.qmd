@@ -1,6 +1,5 @@
 ---
 title: 'How bad are bananas'
-author: Sebastian Gerdes
 date: '2023-02-27'
 bibliography: "how_bad_are_bananas.bib"
 categories:

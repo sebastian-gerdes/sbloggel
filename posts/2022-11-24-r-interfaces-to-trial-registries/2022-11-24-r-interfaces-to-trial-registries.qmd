@@ -1,7 +1,6 @@
 ---
 title: 'R interfaces to trial registries'
 date: '2022-10-25'
-author: 'Sebastian Gerdes'
 categories:
   - R
 ---

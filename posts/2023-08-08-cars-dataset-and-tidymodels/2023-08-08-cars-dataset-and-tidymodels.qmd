@@ -1,6 +1,5 @@
 ---
 title: Cars dataset and tidymodels
-author: Sebastian Gerdes
 date: 2023-08-08
 categories:
   - R

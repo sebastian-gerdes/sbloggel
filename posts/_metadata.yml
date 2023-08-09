@@ -8,7 +8,7 @@ freeze: true
 # title-block-banner: false
 
 # Author name of all blog posts
-author: 'Sebastian Gerdes'
+# author: 'Sebastian Gerdes'
 
 # Table of content settings
 toc: true
@@ -22,3 +22,4 @@ page-layout: article
 
 
 title-block-categories: false
+engine: knitr

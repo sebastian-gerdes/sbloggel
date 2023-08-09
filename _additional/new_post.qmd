@@ -28,7 +28,7 @@ post_full_filename <- paste0(post_dir, '/', post_filename, '.qmd')
 
 ll <- readLines('sample_post.qmd')
 ll[2] <- paste0('title: ', post_title)
-ll[4] <- paste0('date: ', post_date)
+ll[3] <- paste0('date: ', post_date)
 
 dir_create(post_dir)
 writeLines(ll, post_full_filename)

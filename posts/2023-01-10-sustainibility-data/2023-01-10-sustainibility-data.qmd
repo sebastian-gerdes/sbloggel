@@ -1,6 +1,5 @@
 ---
 title: 'Sustainibility data'
-author: 'Sebastian Gerdes'
 date: '2023-01-10'
 categories:
   - Sustainibility

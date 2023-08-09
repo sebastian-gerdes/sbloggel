@@ -1,10 +1,8 @@
 ---
 title: The iris dataset
-author: Sebastian Gerdes
 date: 2023-07-12
 categories:
   - R
-toc: true
 ---
 
 ## Init

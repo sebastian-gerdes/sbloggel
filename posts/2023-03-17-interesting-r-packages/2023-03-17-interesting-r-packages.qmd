@@ -1,6 +1,5 @@
 ---
 title: 'Interesting R packages'
-author: Sebastian Gerdes
 date: '2023-03-17'
 categories:
   - R

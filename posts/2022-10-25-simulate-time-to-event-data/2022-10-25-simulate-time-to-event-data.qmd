@@ -1,6 +1,5 @@
 ---
 title: 'Simulate time to-event-data'
-author: 'Sebastian Gerdes'
 date: '2022-10-25'
 categories:
   - R

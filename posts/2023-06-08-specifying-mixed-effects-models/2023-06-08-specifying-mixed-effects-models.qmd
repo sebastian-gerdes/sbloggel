@@ -1,12 +1,8 @@
 ---
 title: Specifying mixed effects in lme4
-author: Sebastian Gerdes
 date: 2023-06-08
 categories:
   - R
-toc: true
-toc-depth: 4
-draft: false
 ---
 
 ## Description of trial

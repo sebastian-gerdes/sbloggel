@@ -1,11 +1,9 @@
 ---
 title: 'Python study notes'
-author: Sebastian Gerdes
 date: '2023-03-17'
 categories:
   - Self-study
   - Python
-engine: knitr
 ---
 
 ```{r}

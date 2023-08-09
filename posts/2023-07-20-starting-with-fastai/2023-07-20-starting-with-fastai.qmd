@@ -1,10 +1,8 @@
 ---
 title: Starting with fastai
-author: Sebastian Gerdes
 date: 2023-07-20
 categories:
   - Python
-toc: true
 ---
 
 * [Link to the book](https://course.fast.ai/Resources/book.html)

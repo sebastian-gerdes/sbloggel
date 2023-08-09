@@ -1,6 +1,5 @@
 ---
 title: 'SIR-like model with deSolve in deterministic and stochastic version'
-author: 'Sebastian Gerdes'
 date: '2022-10-04'
 categories:
   - R

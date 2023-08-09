@@ -1,6 +1,5 @@
 ---
 title: 'Coursera Deep Learning Specialization'
-author: Sebastian Gerdes
 date: '2023-03-17'
 categories:
   - Self-study

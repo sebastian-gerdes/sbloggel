@@ -1,6 +1,5 @@
 ---
 title: 'Self-study: Deep Learning by Goodfellow et al.'
-author: Sebastian Gerdes
 date: '2023-03-17'
 categories:
   - Self-study

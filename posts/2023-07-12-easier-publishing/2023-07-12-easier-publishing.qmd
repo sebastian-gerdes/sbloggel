@@ -1,15 +1,8 @@
 ---
 title: Easier publishing
-author: Sebastian Gerdes
 date: 2023-07-12
 categories:
-  - R
-toc: true
-engine: knitr
-# draft: true
-# execute: 
-#   echo: false
-#  cache: true
+  - Quarto
 ---
 
 * File "/usr/local/bin/pq":

@@ -1,11 +1,8 @@
 ---
 title: Exploring the Python library statsmodels
-author: Sebastian Gerdes
 date: 2023-07-04
 categories:
   - Python
-toc: true
-engine: knitr
 ---
 
 ```{r}

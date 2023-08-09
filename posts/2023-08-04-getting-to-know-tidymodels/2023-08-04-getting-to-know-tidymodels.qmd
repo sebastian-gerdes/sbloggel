@@ -1,14 +1,8 @@
 ---
 title: Getting to know tidymodels
-author: Sebastian Gerdes
 date: 2023-08-04
 categories:
   - R
-toc: true
-# draft: true
-# execute: 
-#   echo: false
-#  cache: true
 ---
 
 * Tutorials by Julia Silge: [Link](https://www.youtube.com/@JuliaSilge/search)

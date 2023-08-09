@@ -1,13 +1,8 @@
 ---
 title: Python graphics
-author: Sebastian Gerdes
 date: 2023-07-05
 categories:
   - Python
-toc: true
-toc-depth: 4
-draft: false
-engine: knitr
 ---
 
 ```{r}

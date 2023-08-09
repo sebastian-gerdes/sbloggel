@@ -1,6 +1,5 @@
 ---
 title: 'Model meadow'
-author: 'Sebastian Gerdes'
 date: '2022-10-19'
 categories:
   - R

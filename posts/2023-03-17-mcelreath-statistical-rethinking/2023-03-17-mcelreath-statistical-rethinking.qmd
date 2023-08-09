@@ -1,6 +1,5 @@
 ---
 title: 'Self-study: McElreath - Statistical Rethinking'
-author: Sebastian Gerdes
 date: '2023-03-17'
 categories:
   - Self-study

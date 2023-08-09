@@ -13,7 +13,6 @@
 <lastBuildDate>Mon, 07 Aug 2023 22:00:00 GMT</lastBuildDate>
 <item>
   <title>Cars dataset and tidymodels</title>
-  <dc:creator>Sebastian Gerdes</dc:creator>
   <link>https://sbloggel.netlify.app/posts/2023-08-08-cars-dataset-and-tidymodels/2023-08-08-cars-dataset-and-tidymodels.html</link>
   <description><![CDATA[ 
 
@@ -51,7 +50,7 @@ font-style: inherit;">'tidymodels'</span>)</span></code></pre></div>
 ✖ dplyr::filter()  masks stats::filter()
 ✖ dplyr::lag()     masks stats::lag()
 ✖ recipes::step()  masks stats::step()
-• Search for functions across packages at https://www.tidymodels.org/find/</code></pre>
+• Learn how to get started at https://www.tidymodels.org/start/</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -342,7 +341,6 @@ font-style: inherit;">'Model'</span>)</span></code></pre></div>
 </item>
 <item>
   <title>Leave-one-out cross-validation in R</title>
-  <dc:creator>Sebastian Gerdes</dc:creator>
   <link>https://sbloggel.netlify.app/posts/2023-08-08-leave-one-out-cross-validation-in-r/2023-08-08-leave-one-out-cross-validation-in-r.html</link>
   <description><![CDATA[ 
 
@@ -770,7 +768,6 @@ font-style: inherit;">'c'</span>)</span></code></pre></div>
 </item>
 <item>
   <title>Regularization in R</title>
-  <dc:creator>Sebastian Gerdes</dc:creator>
   <link>https://sbloggel.netlify.app/posts/2023-08-05-regularization-in-r/2023-08-05-regularization-in-r.html</link>
   <description><![CDATA[ 
 
@@ -815,7 +812,6 @@ font-style: inherit;">1</span>)</span></code></pre></div>
 </item>
 <item>
   <title>Getting to know mlr3</title>
-  <dc:creator>Sebastian Gerdes</dc:creator>
   <link>https://sbloggel.netlify.app/posts/2023-08-04-getting-to-know-mlr3/2023-08-04-getting-to-know-mlr3.html</link>
   <description><![CDATA[ 
 
@@ -844,7 +840,6 @@ font-style: inherit;">'mlr3'</span>)</span></code></pre></div>
 </item>
 <item>
   <title>Getting to know tidymodels</title>
-  <dc:creator>Sebastian Gerdes</dc:creator>
   <link>https://sbloggel.netlify.app/posts/2023-08-04-getting-to-know-tidymodels/2023-08-04-getting-to-know-tidymodels.html</link>
   <description><![CDATA[ 
 
@@ -1552,7 +1547,6 @@ font-style: inherit;">~</span>species)</span></code></pre></div>
 </item>
 <item>
   <title>Kaplan Meier plots</title>
-  <dc:creator>Sebastian Gerdes</dc:creator>
   <link>https://sbloggel.netlify.app/posts/2023-08-03-kaplan-meier-plots/2023-08-03-kaplan-meier-plots.html</link>
   <description><![CDATA[ 
 
@@ -2172,7 +2166,6 @@ font-style: inherit;">"none"</span>)</span></code></pre></div>
 </item>
 <item>
   <title>Reducing image file size with ImageMagick</title>
-  <dc:creator>Sebastian Gerdes</dc:creator>
   <link>https://sbloggel.netlify.app/posts/2023-08-03-reducing-image-file-size-with-imagemagick/2023-08-03-reducing-image-file-size-with-imagemagick.html</link>
   <description><![CDATA[ 
 
@@ -2327,7 +2320,6 @@ font-style: inherit;">'c'</span>)</span></code></pre></div>
 </item>
 <item>
   <title>Approximating Pi</title>
-  <dc:creator>Sebastian Gerdes</dc:creator>
   <link>https://sbloggel.netlify.app/posts/2023-07-23-approximating-pi/2023-07-23-approximating-pi.html</link>
   <description><![CDATA[ 
 
@@ -2608,7 +2600,6 @@ numerator: 5419351 , denominator: 1725033 , pi_approx:  3.14159265358982 , absol
 </item>
 <item>
   <title>Bicycle comparison</title>
-  <dc:creator>Sebastian Gerdes</dc:creator>
   <link>https://sbloggel.netlify.app/posts/2023-07-23-bicycle-comparison/2023-07-23-bicycle-comparison.html</link>
   <description><![CDATA[ 
 
@@ -2625,7 +2616,6 @@ numerator: 5419351 , denominator: 1725033 , pi_approx:  3.14159265358982 , absol
 </item>
 <item>
   <title>First pytorch tutorial</title>
-  <dc:creator>Sebastian Gerdes</dc:creator>
   <link>https://sbloggel.netlify.app/posts/2023-07-21-first-pytorch-tutorial/2023-07-21-first-pytorch-tutorial.html</link>
   <description><![CDATA[ 
 
@@ -3397,7 +3387,6 @@ font-style: inherit;">"'</span>)</span></code></pre></div>
 </item>
 <item>
   <title>Starting with fastai</title>
-  <dc:creator>Sebastian Gerdes</dc:creator>
   <link>https://sbloggel.netlify.app/posts/2023-07-20-starting-with-fastai/2023-07-20-starting-with-fastai.html</link>
   <description><![CDATA[ 
 
@@ -4062,7 +4051,6 @@ Epoch 1/1 :
 </item>
 <item>
   <title>The iris dataset</title>
-  <dc:creator>Sebastian Gerdes</dc:creator>
   <link>https://sbloggel.netlify.app/posts/2023-07-12-the-iris-dataset/2023-07-12-the-iris-dataset.html</link>
   <description><![CDATA[ 
 
@@ -4361,7 +4349,6 @@ Speciesversicolor:VariableSepal.Length   Speciesvirginica:VariableSepal.Length
 </item>
 <item>
   <title>Easier publishing</title>
-  <dc:creator>Sebastian Gerdes</dc:creator>
   <link>https://sbloggel.netlify.app/posts/2023-07-12-easier-publishing/2023-07-12-easier-publishing.html</link>
   <description><![CDATA[ 
 
@@ -4382,13 +4369,12 @@ git push</code></pre>
 
 
  ]]></description>
-  <category>R</category>
+  <category>Quarto</category>
   <guid>https://sbloggel.netlify.app/posts/2023-07-12-easier-publishing/2023-07-12-easier-publishing.html</guid>
   <pubDate>Tue, 11 Jul 2023 22:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Model diagnostics for logistic regression</title>
-  <dc:creator>Sebastian Gerdes</dc:creator>
   <link>https://sbloggel.netlify.app/posts/2023-07-12-model-diagnostics-for-logistic-regression/2023-07-12-model-diagnostics-for-logistic-regression.html</link>
   <description><![CDATA[ 
 
@@ -4549,7 +4535,6 @@ font-style: inherit;">3</span>)</span></code></pre></div>
 </item>
 <item>
   <title>Pie chart</title>
-  <dc:creator>Sebastian Gerdes</dc:creator>
   <link>https://sbloggel.netlify.app/posts/2023-07-12-pie-chart/2023-07-12-pie-chart.html</link>
   <description><![CDATA[ 
 
@@ -4686,8 +4671,57 @@ font-style: inherit;">element_blank</span>())</span></code></pre></div>
   <pubDate>Tue, 11 Jul 2023 22:00:00 GMT</pubDate>
 </item>
 <item>
+  <title>Ideas for new posts</title>
+  <link>https://sbloggel.netlify.app/posts/2023-07-10-ideas-for-new-posts/2023-07-10-ideas-for-new-posts.html</link>
+  <description><![CDATA[ 
+
+
+
+<section id="ai-and-radiologist---evolution-of-a-team" class="level2">
+<h2 class="anchored" data-anchor-id="ai-and-radiologist---evolution-of-a-team">AI and radiologist - evolution of a team</h2>
+</section>
+<section id="longtermism" class="level2">
+<h2 class="anchored" data-anchor-id="longtermism">Longtermism</h2>
+<ul>
+<li>Despite my scepticisms about the notion of longtermism I want to think about it a little</li>
+<li>Idea: create a model in which proximity and number of people are balanced</li>
+<li>“Love thy neighbor as thyself.”</li>
+</ul>
+</section>
+<section id="track-changes-in-quarto" class="level2">
+<h2 class="anchored" data-anchor-id="track-changes-in-quarto">Track changes in quarto</h2>
+<ul>
+<li>Scenario: A has written something, B suggests changes and provides comments</li>
+<li>File is given from A to B</li>
+<li>B just edits as he / she wishes
+<ul>
+<li>Comments can be made</li>
+<li>possibility to render with changes tracked on a per-word basis</li>
+</ul></li>
+<li>B returns the file to A</li>
+<li>A can look at the rendered changes with the comments
+<ul>
+<li>comments and changes are numbered</li>
+</ul></li>
+<li>A is provided with a file, in which for each change / comment it can be indicated:
+<ul>
+<li>accept</li>
+<li>decline</li>
+<li>edit manually (a hint is included in the quarto file) -&gt; or the whole line could be given in a new version</li>
+</ul></li>
+<li>How can feedback be given from A to B which changes are accepted etc. for a discussion?</li>
+</ul>
+
+
+</section>
+
+ ]]></description>
+  <category>Mishmash</category>
+  <guid>https://sbloggel.netlify.app/posts/2023-07-10-ideas-for-new-posts/2023-07-10-ideas-for-new-posts.html</guid>
+  <pubDate>Sun, 09 Jul 2023 22:00:00 GMT</pubDate>
+</item>
+<item>
   <title>Managing python versions in RStudio</title>
-  <dc:creator>Sebastian Gerdes</dc:creator>
   <link>https://sbloggel.netlify.app/posts/2023-07-06-python-versions-environments/2023-07-06-python-versions-environments.html</link>
   <description><![CDATA[ 
 
@@ -4822,7 +4856,6 @@ font-style: inherit;">jupyter</span> notebook</span></code></pre></div>
 </item>
 <item>
   <title>Python graphics</title>
-  <dc:creator>Sebastian Gerdes</dc:creator>
   <link>https://sbloggel.netlify.app/posts/2023-07-05-python-graphics/2023-07-05-python-graphics.html</link>
   <description><![CDATA[ 
 
@@ -5043,7 +5076,6 @@ font-style: inherit;">800</span>)</span>
 </item>
 <item>
   <title>Exploring the Python library statsmodels</title>
-  <dc:creator>Sebastian Gerdes</dc:creator>
   <link>https://sbloggel.netlify.app/posts/2023-07-04-python-statsmodels/2023-07-04-python-statsmodels.html</link>
   <description><![CDATA[ 
 
@@ -5480,7 +5512,6 @@ font-style: inherit;">=</span>ax)</span></code></pre></div>
 </item>
 <item>
   <title>Python pandas</title>
-  <dc:creator>Sebastian Gerdes</dc:creator>
   <link>https://sbloggel.netlify.app/posts/2023-07-03-python-pandas/2023-07-03-python-pandas.html</link>
   <description><![CDATA[ 
 
@@ -5707,549 +5738,6 @@ font-style: inherit;">100</span></span></code></pre></div>
   <category>Python</category>
   <guid>https://sbloggel.netlify.app/posts/2023-07-03-python-pandas/2023-07-03-python-pandas.html</guid>
   <pubDate>Sun, 02 Jul 2023 22:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Specifying mixed effects in lme4</title>
-  <dc:creator>Sebastian Gerdes</dc:creator>
-  <link>https://sbloggel.netlify.app/posts/2023-06-08-specifying-mixed-effects-models/2023-06-08-specifying-mixed-effects-models.html</link>
-  <description><![CDATA[ 
-
-
-
-<section id="description-of-trial" class="level2">
-<h2 class="anchored" data-anchor-id="description-of-trial">Description of trial</h2>
-<ul>
-<li><img src="https://latex.codecogs.com/png.latex?n"> individuals (<img src="https://latex.codecogs.com/png.latex?i%20=%201,%202,%20..,%20n">) are measured <img src="https://latex.codecogs.com/png.latex?m"> times (<img src="https://latex.codecogs.com/png.latex?j%20=%201,%202,%20...,%20m">) pre-intervention (denoted <img src="https://latex.codecogs.com/png.latex?y_%7Bij%7D%5E%7Bpre%7D">) and post-intervention (denoted <img src="https://latex.codecogs.com/png.latex?y_%7Bij%7D%5E%7Bpost%7D">)</li>
-</ul>
-</section>
-<section id="underlying-probability-model" class="level2">
-<h2 class="anchored" data-anchor-id="underlying-probability-model">Underlying probability model</h2>
-<section id="notation" class="level3">
-<h3 class="anchored" data-anchor-id="notation">Notation</h3>
-<ul>
-<li><img src="https://latex.codecogs.com/png.latex?%5Cbeta_0"> fixed effect intercept</li>
-<li><img src="https://latex.codecogs.com/png.latex?%5Cbeta_1"> fixed effect of intervention</li>
-<li><img src="https://latex.codecogs.com/png.latex?%5Cepsilon%20%5Csim%20%5Cmathcal%7BN%7D(%5Cmu%20=%200,%20sd%20=%20%5Csigma_0)">, for reasons of better legibility sub- and superscript are omitted here</li>
-<li><img src="https://latex.codecogs.com/png.latex?b_%7B1,i%7D"> random effect baseline, <img src="https://latex.codecogs.com/png.latex?b_%7B1,i%7D%20%5Csim%20%5Cmathcal%7BN%7D(%5Cmu%20=%200,%20sd%20=%20%5Csigma_1)"></li>
-<li><img src="https://latex.codecogs.com/png.latex?b_%7B2,i%7D"> random effect of intervention, <img src="https://latex.codecogs.com/png.latex?b_%7B2,i%7D%20%5Csim%20%5Cmathcal%7BN%7D(%5Cmu%20=%200,%20sd%20=%20%5Csigma_2)"></li>
-</ul>
-</section>
-<section id="parameters-of-the-model-to-be-estimated" class="level3">
-<h3 class="anchored" data-anchor-id="parameters-of-the-model-to-be-estimated">Parameters of the model to be estimated</h3>
-<ul>
-<li><img src="https://latex.codecogs.com/png.latex?%5Cbeta_0">, <img src="https://latex.codecogs.com/png.latex?%5Cbeta_1">, <img src="https://latex.codecogs.com/png.latex?%5Csigma_0">, <img src="https://latex.codecogs.com/png.latex?%5Csigma_1"> and <img src="https://latex.codecogs.com/png.latex?%5Csigma_2"></li>
-</ul>
-</section>
-<section id="model-equations" class="level3">
-<h3 class="anchored" data-anchor-id="model-equations">Model equations</h3>
-<ul>
-<li>Measurement pre intervention: <img src="https://latex.codecogs.com/png.latex?%5Cbegin%7Balign%7D%0Ay_%7Bij%7D%5E%7Bpre%7D%20=%20%5Cbeta_0%20+%20b_i%20+%20%5Cepsilon_%7Bij%7D%5E%7Bpre%7D%0A%5Cend%7Balign%7D"></li>
-<li>Measurement post-intervention: <img src="https://latex.codecogs.com/png.latex?%5Cbegin%7Balign%7D%0Ay_%7Bij%7D%5E%7Bpost%7D%20=%20%5Cbeta_0%20+%20%5Cbeta_1%20+%20b_%7B1,i%7D%20+%20b_%7B2,i%7D%20+%20%5Cepsilon_%7Bij%7D%5E%7Bpost%7D%0A%5Cend%7Balign%7D"></li>
-</ul>
-</section>
-<section id="simulate-data" class="level3">
-<h3 class="anchored" data-anchor-id="simulate-data">Simulate data</h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># size of sample:</span></span>
-<span id="cb1-2">n <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">20</span></span>
-<span id="cb1-3">m <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">5</span></span>
-<span id="cb1-4"></span>
-<span id="cb1-5"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># model parameters:</span></span>
-<span id="cb1-6">beta_0 <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span></span>
-<span id="cb1-7">beta_1 <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span></span>
-<span id="cb1-8">sigma_0 <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span></span>
-<span id="cb1-9">sigma_1 <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span></span>
-<span id="cb1-10">sigma_2 <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">5</span></span>
-<span id="cb1-11"></span>
-<span id="cb1-12"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># construct data:</span></span>
-<span id="cb1-13">patients <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">tibble</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">patient_id =</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">:</span>n, </span>
-<span id="cb1-14">                   <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">patient_re =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">rnorm</span>(n, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>, sigma_1),</span>
-<span id="cb1-15">                   <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">treatment_re =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">rnorm</span>(n, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>, sigma_2))</span>
-<span id="cb1-16"></span>
-<span id="cb1-17">dat <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">expand_grid</span>(patients,</span>
-<span id="cb1-18">                   <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">replicate =</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">:</span>m,</span>
-<span id="cb1-19">                   <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">timepoint =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'pre'</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'post'</span>))</span>
-<span id="cb1-20"></span>
-<span id="cb1-21">dat <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> dat <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span> </span>
-<span id="cb1-22">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">y =</span> beta_0 <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> </span>
-<span id="cb1-23">           patient_re <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> </span>
-<span id="cb1-24">           <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">ifelse</span>(timepoint <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">==</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'post'</span>, treatment_re <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> beta_1, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> </span>
-<span id="cb1-25">           <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">rnorm</span>(n <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> m <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>, sigma_0))</span>
-<span id="cb1-26"></span>
-<span id="cb1-27"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># make timepoint a factor to get order in plots right:</span></span>
-<span id="cb1-28">dat <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> dat <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span> </span>
-<span id="cb1-29">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">timepoint =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">factor</span>(timepoint, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">levels =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'pre'</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'post'</span>)))</span></code></pre></div>
-</div>
-</section>
-<section id="tabular-characteristics" class="level3">
-<h3 class="anchored" data-anchor-id="tabular-characteristics">Tabular characteristics</h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1">dat <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span> </span>
-<span id="cb2-2">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">group_by</span>(timepoint) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span> </span>
-<span id="cb2-3">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">summarize</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">mean =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">mean</span>(y)) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span> </span>
-<span id="cb2-4">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">kable</span>()</span></code></pre></div>
-<div class="cell-output-display">
-<table class="table table-sm table-striped small">
-<thead>
-<tr class="header">
-<th style="text-align: left;">timepoint</th>
-<th style="text-align: right;">mean</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">pre</td>
-<td style="text-align: right;">0.1868025</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">post</td>
-<td style="text-align: right;">1.1930561</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</section>
-<section id="visualize-data" class="level3">
-<h3 class="anchored" data-anchor-id="visualize-data">Visualize data</h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="cf" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">if</span>(n <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">&lt;</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1e2</span>) {</span>
-<span id="cb3-2">  dat <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span></span>
-<span id="cb3-3">    <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">ggplot</span>(<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">aes</span>(timepoint, y, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">col =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">factor</span>(patient_id))) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span></span>
-<span id="cb3-4">    <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">geom_jitter</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">width =</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.1</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">height =</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">labs</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">color =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'Patient ID'</span>)</span>
-<span id="cb3-5">}</span></code></pre></div>
-<div class="cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2023-06-08-specifying-mixed-effects-models/2023-06-08-specifying-mixed-effects-models_files/figure-html/visualize-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-</section>
-<section id="fit-model" class="level3">
-<h3 class="anchored" data-anchor-id="fit-model">Fit model</h3>
-<section id="linear-model" class="level4">
-<h4 class="anchored" data-anchor-id="linear-model">Linear model</h4>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># linear model to get beta_1 and beta_2 </span></span>
-<span id="cb4-2">(fm_lm <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">lm</span>(y <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">~</span> timepoint, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">data =</span> dat)) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">summary</span>()</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Call:
-lm(formula = y ~ timepoint, data = dat)
-
-Residuals:
-     Min       1Q   Median       3Q      Max 
--10.4127  -1.5931   0.0072   2.0727  10.4653 
-
-Coefficients:
-              Estimate Std. Error t value Pr(&gt;|t|)  
-(Intercept)     0.1868     0.3489   0.535   0.5930  
-timepointpost   1.0063     0.4934   2.039   0.0427 *
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-Residual standard error: 3.489 on 198 degrees of freedom
-Multiple R-squared:  0.02057,   Adjusted R-squared:  0.01563 
-F-statistic: 4.159 on 1 and 198 DF,  p-value: 0.04274</code></pre>
-</div>
-</div>
-</section>
-<section id="mixed-effects-model-with-correlation-between-intercept-and-timepointpost" class="level4">
-<h4 class="anchored" data-anchor-id="mixed-effects-model-with-correlation-between-intercept-and-timepointpost">Mixed effects model <strong>with</strong> correlation between <code>(Intercept)</code> and <code>timepointpost</code></h4>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1">(fm_lmer <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">lmer</span>(y <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">~</span> timepoint <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> (timepoint <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|</span> patient_id), <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">data =</span> dat))</span></code></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>boundary (singular) fit: see help('isSingular')</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Linear mixed model fit by REML ['lmerMod']
-Formula: y ~ timepoint + (timepoint | patient_id)
-   Data: dat
-REML criterion at convergence: 888.5308
-Random effects:
- Groups     Name          Std.Dev. Corr 
- patient_id (Intercept)   0.3268        
-            timepointpost 4.5307   -1.00
- Residual                 1.9086        
-Number of obs: 200, groups:  patient_id, 20
-Fixed Effects:
-  (Intercept)  timepointpost  
-       0.1868         1.0063  
-optimizer (nloptwrap) convergence code: 0 (OK) ; 0 optimizer warnings; 1 lme4 warnings </code></pre>
-</div>
-</div>
-</section>
-<section id="mixed-effects-model-without-correlation-between-intercept-and-timepointpost" class="level4">
-<h4 class="anchored" data-anchor-id="mixed-effects-model-without-correlation-between-intercept-and-timepointpost">Mixed effects model <strong>without</strong> correlation between <code>(Intercept)</code> and <code>timepointpost</code></h4>
-<ul>
-<li>The specifications I tried seem almost right, but not quite:</li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1">(fm_lmer <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">lmer</span>(y <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">~</span> timepoint <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> (timepoint <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">||</span> patient_id), <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">data =</span> dat))</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Linear mixed model fit by REML ['lmerMod']
-Formula: y ~ timepoint + ((0 + timepoint | patient_id))
-   Data: dat
-REML criterion at convergence: 888.5308
-Random effects:
- Groups     Name          Std.Dev. Corr 
- patient_id timepointpre  0.3268        
-            timepointpost 4.2038   -1.00
- Residual                 1.9086        
-Number of obs: 200, groups:  patient_id, 20
-Fixed Effects:
-  (Intercept)  timepointpost  
-       0.1868         1.0063  </code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1">(fm_lmer <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">lmer</span>(y <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">~</span> timepoint <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> (timepoint <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|</span> patient_id), <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">data =</span> dat))</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Linear mixed model fit by REML ['lmerMod']
-Formula: y ~ timepoint + (timepoint - 1 | patient_id)
-   Data: dat
-REML criterion at convergence: 888.5308
-Random effects:
- Groups     Name          Std.Dev. Corr 
- patient_id timepointpre  0.3268        
-            timepointpost 4.2038   -1.00
- Residual                 1.9086        
-Number of obs: 200, groups:  patient_id, 20
-Fixed Effects:
-  (Intercept)  timepointpost  
-       0.1868         1.0063  </code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1">(fm_lmer <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">lmer</span>(y <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">~</span> timepoint <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> (<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|</span> patient_id) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> (timepoint <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|</span> patient_id), <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">data =</span> dat))</span></code></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>boundary (singular) fit: see help('isSingular')</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Linear mixed model fit by REML ['lmerMod']
-Formula: y ~ timepoint + (1 | patient_id) + (timepoint - 1 | patient_id)
-   Data: dat
-REML criterion at convergence: 888.5308
-Random effects:
- Groups       Name          Std.Dev. Corr 
- patient_id   (Intercept)   0.0000        
- patient_id.1 timepointpre  0.3268        
-              timepointpost 4.2039   -1.00
- Residual                   1.9086        
-Number of obs: 200, groups:  patient_id, 20
-Fixed Effects:
-  (Intercept)  timepointpost  
-       0.1868         1.0063  
-optimizer (nloptwrap) convergence code: 0 (OK) ; 0 optimizer warnings; 1 lme4 warnings </code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1">(fm_lmer <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">lmer</span>(y <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">~</span> timepoint <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> (<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|</span> patient_id) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> (timepoint <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|</span> patient_id), <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">data =</span> dat))</span></code></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>boundary (singular) fit: see help('isSingular')</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Linear mixed model fit by REML ['lmerMod']
-Formula: y ~ timepoint + (1 | patient_id) + (timepoint + 0 | patient_id)
-   Data: dat
-REML criterion at convergence: 888.5308
-Random effects:
- Groups       Name          Std.Dev. Corr 
- patient_id   (Intercept)   0.0000        
- patient_id.1 timepointpre  0.3268        
-              timepointpost 4.2039   -1.00
- Residual                   1.9086        
-Number of obs: 200, groups:  patient_id, 20
-Fixed Effects:
-  (Intercept)  timepointpost  
-       0.1868         1.0063  
-optimizer (nloptwrap) convergence code: 0 (OK) ; 0 optimizer warnings; 1 lme4 warnings </code></pre>
-</div>
-</div>
-
-
-</section>
-</section>
-</section>
-
- ]]></description>
-  <category>R</category>
-  <guid>https://sbloggel.netlify.app/posts/2023-06-08-specifying-mixed-effects-models/2023-06-08-specifying-mixed-effects-models.html</guid>
-  <pubDate>Wed, 07 Jun 2023 22:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>

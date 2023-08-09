@@ -1,6 +1,5 @@
 ---
 title: 'Kids per person and carbon footprint'
-author: 'Sebastian Gerdes'
 date: '2022-10-19'
 categories:
   - Sustainibility
