@@ -50,18 +50,17 @@ fm_nn <- neuralnet(speed ~ dist,
                    stepmax = 1e+7, threshold = .5)
 data <- tibble(
   cars,
-  p_lm_straight = predict(fm_lm),
-  p_nn_straight= predict(fm_nn, newdata = cars)[, 1],
-  p_lm_looc = leave_one_out(1:nrow(cars), type = 'lm'),
-  p_nn_looc = leave_one_out(1:nrow(cars), type = 'nn')
-)
+  prediction_lm_straight = predict(fm_lm),
+  prediction_nn_straight = predict(fm_nn, newdata = cars)[, 1],
+  prediction_lm_looc = leave_one_out(1:nrow(cars), type = 'lm'),
+  prediction_nn_looc = leave_one_out(1:nrow(cars), type = 'nn')) |> 
+  rename(measured_speed = 'speed')
 ```
 
 
 ```{r}
 data |> 
   pivot_longer(cols = -dist, names_to = 'Method', values_to = 'speed') |> 
-  mutate(Method = str_replace(Method, 'speed', 'Original data')) |> 
   ggplot(aes(dist, speed, colour = Method)) +
   geom_point() +
   labs(y = 'speed')
@@ -69,16 +68,17 @@ data |>
 ggplot2::last_plot() |> ggplotly()
 
 data_long <- data |> 
-  pivot_longer(cols = -c(dist, speed)) 
+  pivot_longer(cols = -c(dist, measured_speed), names_to = 'Method',
+               values_to = 'prediction') |>
+  mutate(error = prediction - measured_speed,
+         squarred_error = error^2)
 
 data_long |> 
-  ggplot(aes(dist, speed - value)) + geom_point() + facet_wrap(vars(name)) +
+  ggplot(aes(dist, error)) + geom_point() + 
+  facet_wrap(vars(Method), labeller = label_both) +
   labs(y = 'Prediction error')
 
 data_long |> 
-  mutate(error = value - speed,
-         squarred_error = error^2) |> 
-  rename(Method = 'name') |> 
   group_by(Method) |> 
   summarize('Mean absolute error' = mean(abs(error)),
             'Mean squarred error' = mean(squarred_error)) |> 
