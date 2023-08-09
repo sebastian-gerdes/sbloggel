@@ -7,38 +7,57 @@ categories:
 toc: true
 ---
 
+## Init
 ```{r}
 #| label: init
-#| cache: false
-#| include: false
 set.seed(1)
 library('tidymodels')
+library('knitr')
 ```
 
+## Do vfold cross-validation on the cars dataset using a linear model, a random forest model and a neural net
 ```{r}
+# Create data for resampling:
 cars_folds <- vfold_cv(cars, v = 10, repeats = 10)
 
+# Create model specifications:
 lm_spec <- linear_reg()
 rf_spec <- rand_forest() |> set_mode('regression')
 nn_spec <- mlp(epochs = 500, hidden_units = 3, penalty = 0.01) |> 
   set_mode('regression')
 
+# Create workflows:
 all_workflows <- 
   workflow_set(
     preproc = list("formula" = speed ~ dist),
-  
     models = list(lm = lm_spec, 
                   rf = rf_spec,
                   nn = nn_spec)
   )
 
+# Run the workflows:
+result <- all_workflows |> 
+  workflow_map(resamples = cars_folds,
+               control = control_resamples(save_pred = TRUE))
 
-result <- all_workflows |> workflow_map(resamples = cars_folds,
-                                        control = control_resamples(save_pred = TRUE))
-collect_metrics(result)
+# Display summary statistics for all model types:
+(metrics <- collect_metrics(result))
+metrics |> pivot_wider(names_from = .metric, 
+                       values_from = c(mean, std_err), 
+                       id_cols = wflow_id) |> 
+  kable(align = 'c')
 
+
+# Plot predictions against actual values for all predictions:
 collect_predictions(result) |> 
   pivot_longer(cols = model) |> 
-  ggplot(aes(speed, .pred, colour = value)) + geom_point() + geom_abline(slope = 1, intercept = 0)
+  ggplot(aes(speed, .pred, colour = value)) + 
+  geom_point() + 
+  geom_abline(slope = 1, intercept = 0) +
+  labs(x = 'Real value of speed', y = 'Prediction', colour = 'Model')
 ```
 
+## Open Questions
+* How to collect other metrics, e.g. mean absolute error?
+* How to conventiently join the predictors to the prediction tibble?
+* How do I extract honest coefficients from the linear model?
