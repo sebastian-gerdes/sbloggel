@@ -75,7 +75,7 @@ x[[1]]$data
 glm_spec <- logistic_reg() %>%
   set_engine("glm")
 
-glm_spec
+glm_specresa
 ```
 
 ```{r}

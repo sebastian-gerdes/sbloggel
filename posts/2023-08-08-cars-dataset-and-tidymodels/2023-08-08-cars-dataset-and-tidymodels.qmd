@@ -1,0 +1,44 @@
+---
+title: Cars dataset and tidymodels
+author: Sebastian Gerdes
+date: 2023-08-08
+categories:
+  - R
+toc: true
+---
+
+```{r}
+#| label: init
+#| cache: false
+#| include: false
+set.seed(1)
+library('tidymodels')
+```
+
+```{r}
+cars_folds <- vfold_cv(cars, v = 10, repeats = 10)
+
+lm_spec <- linear_reg()
+rf_spec <- rand_forest() |> set_mode('regression')
+nn_spec <- mlp(epochs = 500, hidden_units = 3, penalty = 0.01) |> 
+  set_mode('regression')
+
+all_workflows <- 
+  workflow_set(
+    preproc = list("formula" = speed ~ dist),
+  
+    models = list(lm = lm_spec, 
+                  rf = rf_spec,
+                  nn = nn_spec)
+  )
+
+
+result <- all_workflows |> workflow_map(resamples = cars_folds,
+                                        control = control_resamples(save_pred = TRUE))
+collect_metrics(result)
+
+collect_predictions(result) |> 
+  pivot_longer(cols = model) |> 
+  ggplot(aes(speed, .pred, colour = value)) + geom_point() + geom_abline(slope = 1, intercept = 0)
+```
+
