@@ -51,7 +51,7 @@ font-style: inherit;">'tidymodels'</span>)</span></code></pre></div>
 ✖ dplyr::filter()  masks stats::filter()
 ✖ dplyr::lag()     masks stats::lag()
 ✖ recipes::step()  masks stats::step()
-• Learn how to get started at https://www.tidymodels.org/start/</code></pre>
+• Search for functions across packages at https://www.tidymodels.org/find/</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -78,7 +78,7 @@ font-style: inherit;">10</span>, <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">repeats =</span> <span class="dv" style="color: #AD0000;
 background-color: null;
-font-style: inherit;">10</span>)</span>
+font-style: inherit;">1</span>)</span>
 <span id="cb6-3"></span>
 <span id="cb6-4"><span class="co" style="color: #5E5E5E;
 background-color: null;
@@ -194,12 +194,12 @@ font-style: inherit;">collect_metrics</span>(result))</span></code></pre></div>
 <pre><code># A tibble: 6 × 9
   wflow_id   .config        preproc model .metric .estimator  mean     n std_err
   &lt;chr&gt;      &lt;chr&gt;          &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;      &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt;
-1 formula_lm Preprocessor1… formula line… rmse    standard   3.12    100  0.0900
-2 formula_lm Preprocessor1… formula line… rsq     standard   0.691   100  0.0269
-3 formula_rf Preprocessor1… formula rand… rmse    standard   3.15    100  0.0997
-4 formula_rf Preprocessor1… formula rand… rsq     standard   0.654   100  0.0265
-5 formula_nn Preprocessor1… formula mlp   rmse    standard   3.05    100  0.0846
-6 formula_nn Preprocessor1… formula mlp   rsq     standard   0.692   100  0.0263</code></pre>
+1 formula_lm Preprocessor1… formula line… rmse    standard   3.18     10  0.288 
+2 formula_lm Preprocessor1… formula line… rsq     standard   0.656    10  0.0885
+3 formula_rf Preprocessor1… formula rand… rmse    standard   3.14     10  0.340 
+4 formula_rf Preprocessor1… formula rand… rsq     standard   0.621    10  0.0901
+5 formula_nn Preprocessor1… formula mlp   rmse    standard   2.99     10  0.253 
+6 formula_nn Preprocessor1… formula mlp   rsq     standard   0.643    10  0.0834</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1">metrics <span class="sc" style="color: #5E5E5E;
 background-color: null;
@@ -239,24 +239,24 @@ font-style: inherit;">'c'</span>)</span></code></pre></div>
 <tbody>
 <tr class="odd">
 <td style="text-align: center;">formula_lm</td>
-<td style="text-align: center;">3.119199</td>
-<td style="text-align: center;">0.6905043</td>
-<td style="text-align: center;">0.0900192</td>
-<td style="text-align: center;">0.0268579</td>
+<td style="text-align: center;">3.180583</td>
+<td style="text-align: center;">0.6561715</td>
+<td style="text-align: center;">0.2883717</td>
+<td style="text-align: center;">0.0885333</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">formula_rf</td>
-<td style="text-align: center;">3.151297</td>
-<td style="text-align: center;">0.6538858</td>
-<td style="text-align: center;">0.0997091</td>
-<td style="text-align: center;">0.0264878</td>
+<td style="text-align: center;">3.142965</td>
+<td style="text-align: center;">0.6212505</td>
+<td style="text-align: center;">0.3399041</td>
+<td style="text-align: center;">0.0901077</td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;">formula_nn</td>
-<td style="text-align: center;">3.049062</td>
-<td style="text-align: center;">0.6915509</td>
-<td style="text-align: center;">0.0845888</td>
-<td style="text-align: center;">0.0262512</td>
+<td style="text-align: center;">2.994578</td>
+<td style="text-align: center;">0.6426283</td>
+<td style="text-align: center;">0.2528375</td>
+<td style="text-align: center;">0.0833891</td>
 </tr>
 </tbody>
 </table>
@@ -326,6 +326,7 @@ font-style: inherit;">'Model'</span>)</span></code></pre></div>
 <section id="open-questions" class="level2">
 <h2 class="anchored" data-anchor-id="open-questions">Open Questions</h2>
 <ul>
+<li>I don’t exactly understand how tidymodels performs cross-validation, how the metrics are calculated etc. Documentation of the tidymodels package has not been informative to me so far (probably I have to read more into it).</li>
 <li>How to collect other metrics, e.g.&nbsp;mean absolute error?</li>
 <li>How to conventiently join the predictors to the prediction tibble?</li>
 <li>How do I extract honest coefficients from the linear model?</li>

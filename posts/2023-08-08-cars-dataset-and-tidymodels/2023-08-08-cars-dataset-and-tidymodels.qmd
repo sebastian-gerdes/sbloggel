@@ -18,7 +18,7 @@ library('knitr')
 ## Do vfold cross-validation on the cars dataset using a linear model, a random forest model and a neural net
 ```{r}
 # Create data for resampling:
-cars_folds <- vfold_cv(cars, v = 10, repeats = 10)
+cars_folds <- vfold_cv(cars, v = 10, repeats = 1)
 
 # Create model specifications:
 lm_spec <- linear_reg()
@@ -58,6 +58,7 @@ collect_predictions(result) |>
 ```
 
 ## Open Questions
+* I don't exactly understand how tidymodels performs cross-validation, how the metrics are calculated etc. Documentation of the tidymodels package has not been informative to me so far (probably I have to read more into it).
 * How to collect other metrics, e.g. mean absolute error?
 * How to conventiently join the predictors to the prediction tibble?
 * How do I extract honest coefficients from the linear model?
