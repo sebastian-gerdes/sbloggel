@@ -50,7 +50,7 @@ font-style: inherit;">'tidymodels'</span>)</span></code></pre></div>
 ✖ dplyr::filter()  masks stats::filter()
 ✖ dplyr::lag()     masks stats::lag()
 ✖ recipes::step()  masks stats::step()
-• Learn how to get started at https://www.tidymodels.org/start/</code></pre>
+• Use tidymodels_prefer() to resolve common conflicts.</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -687,7 +687,7 @@ background-color: null;
 font-style: inherit;">ggplotly</span>()</span></code></pre></div>
 <div class="cell-output-display">
 <div class="plotly html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-253fa4f1c619d0aee424" style="width:100%;height:464px;"></div>
-<script type="application/json" data-for="htmlwidget-253fa4f1c619d0aee424">{"x":{"data":[{"x":[2,10,4,22,16,10,18,26,34,17,28,14,20,24,28,26,34,34,46,26,36,60,80,20,26,54,32,40,32,40,50,42,56,76,84,36,46,68,32,48,52,56,64,66,54,70,92,93,120,85],"y":[4,4,7,7,8,9,10,10,10,11,11,12,12,12,12,13,13,13,13,14,14,14,14,15,15,15,16,16,17,17,17,18,18,18,18,19,19,19,20,20,20,20,20,22,23,24,24,24,24,25],"text":["dist:   2<br />speed:  4.000000<br />Method: measured_speed","dist:  10<br />speed:  4.000000<br />Method: measured_speed","dist:   4<br />speed:  7.000000<br />Method: measured_speed","dist:  22<br />speed:  7.000000<br />Method: measured_speed","dist:  16<br />speed:  8.000000<br />Method: measured_speed","dist:  10<br />speed:  9.000000<br />Method: measured_speed","dist:  18<br />speed: 10.000000<br />Method: measured_speed","dist:  26<br />speed: 10.000000<br />Method: measured_speed","dist:  34<br />speed: 10.000000<br />Method: measured_speed","dist:  17<br />speed: 11.000000<br />Method: measured_speed","dist:  28<br />speed: 11.000000<br />Method: measured_speed","dist:  14<br />speed: 12.000000<br />Method: measured_speed","dist:  20<br />speed: 12.000000<br />Method: measured_speed","dist:  24<br />speed: 12.000000<br />Method: measured_speed","dist:  28<br />speed: 12.000000<br />Method: measured_speed","dist:  26<br />speed: 13.000000<br />Method: measured_speed","dist:  34<br />speed: 13.000000<br />Method: measured_speed","dist:  34<br />speed: 13.000000<br />Method: measured_speed","dist:  46<br />speed: 13.000000<br />Method: measured_speed","dist:  26<br />speed: 14.000000<br />Method: measured_speed","dist:  36<br />speed: 14.000000<br />Method: measured_speed","dist:  60<br />speed: 14.000000<br />Method: measured_speed","dist:  80<br />speed: 14.000000<br />Method: measured_speed","dist:  20<br />speed: 15.000000<br />Method: measured_speed","dist:  26<br />speed: 15.000000<br />Method: measured_speed","dist:  54<br />speed: 15.000000<br />Method: measured_speed","dist:  32<br />speed: 16.000000<br />Method: measured_speed","dist:  40<br />speed: 16.000000<br />Method: measured_speed","dist:  32<br />speed: 17.000000<br />Method: measured_speed","dist:  40<br />speed: 17.000000<br />Method: measured_speed","dist:  50<br />speed: 17.000000<br />Method: measured_speed","dist:  42<br />speed: 18.000000<br />Method: measured_speed","dist:  56<br />speed: 18.000000<br />Method: measured_speed","dist:  76<br />speed: 18.000000<br />Method: measured_speed","dist:  84<br />speed: 18.000000<br />Method: measured_speed","dist:  36<br />speed: 19.000000<br />Method: measured_speed","dist:  46<br />speed: 19.000000<br />Method: measured_speed","dist:  68<br />speed: 19.000000<br />Method: measured_speed","dist:  32<br />speed: 20.000000<br />Method: measured_speed","dist:  48<br />speed: 20.000000<br />Method: measured_speed","dist:  52<br />speed: 20.000000<br />Method: measured_speed","dist:  56<br />speed: 20.000000<br />Method: measured_speed","dist:  64<br />speed: 20.000000<br />Method: measured_speed","dist:  66<br />speed: 22.000000<br />Method: measured_speed","dist:  54<br />speed: 23.000000<br />Method: measured_speed","dist:  70<br />speed: 24.000000<br />Method: measured_speed","dist:  92<br />speed: 24.000000<br />Method: measured_speed","dist:  93<br />speed: 24.000000<br />Method: measured_speed","dist: 120<br />speed: 24.000000<br />Method: measured_speed","dist:  85<br />speed: 25.000000<br />Method: measured_speed"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","opacity":1,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(248,118,109,1)"}},"hoveron":"points","name":"measured_speed","legendgroup":"measured_speed","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2,10,4,22,16,10,18,26,34,17,28,14,20,24,28,26,34,34,46,26,36,60,80,20,26,54,32,40,32,40,50,42,56,76,84,36,46,68,32,48,52,56,64,66,54,70,92,93,120,85],"y":[8.971019079183451,10.274826528902761,9.0852540571297649,12.097290005990839,11.062758101018353,9.9926137610663712,11.315665841441652,12.665593666811397,14.003187921362095,11.102740375558579,12.972860490528618,10.534727116021589,11.580042423307056,12.265785670877534,12.945220725244605,12.576438264955438,13.934202434892839,13.934202434892839,15.960044643697373,12.546719797670121,14.249706339425144,18.343498366379183,22.027995538329861,11.467269257898252,12.517001330384804,17.278631500348165,13.523358990469548,14.883983723617696,13.499078307359316,14.863291312361747,16.552660077665951,15.181286307626502,17.544199191139104,21.029124082566721,22.515387233343798,14.139858439899152,15.835844070782475,19.56465699790802,13.426236258028613,16.151192292000129,16.821911261854371,17.492475727237075,18.841323447292471,19.106368078861472,17.084159039196948,19.690764397851989,23.466008077261712,23.64753932117797,29.205027561900625,22.145137259432481],"text":["dist:   2<br />speed:  8.971019<br />Method: prediction_lm_looc","dist:  10<br />speed: 10.274827<br />Method: prediction_lm_looc","dist:   4<br />speed:  9.085254<br />Method: prediction_lm_looc","dist:  22<br />speed: 12.097290<br />Method: prediction_lm_looc","dist:  16<br />speed: 11.062758<br />Method: prediction_lm_looc","dist:  10<br />speed:  9.992614<br />Method: prediction_lm_looc","dist:  18<br />speed: 11.315666<br />Method: prediction_lm_looc","dist:  26<br />speed: 12.665594<br />Method: prediction_lm_looc","dist:  34<br />speed: 14.003188<br />Method: prediction_lm_looc","dist:  17<br />speed: 11.102740<br />Method: prediction_lm_looc","dist:  28<br />speed: 12.972860<br />Method: prediction_lm_looc","dist:  14<br />speed: 10.534727<br />Method: prediction_lm_looc","dist:  20<br />speed: 11.580042<br />Method: prediction_lm_looc","dist:  24<br />speed: 12.265786<br />Method: prediction_lm_looc","dist:  28<br />speed: 12.945221<br />Method: prediction_lm_looc","dist:  26<br />speed: 12.576438<br />Method: prediction_lm_looc","dist:  34<br />speed: 13.934202<br />Method: prediction_lm_looc","dist:  34<br />speed: 13.934202<br />Method: prediction_lm_looc","dist:  46<br />speed: 15.960045<br />Method: prediction_lm_looc","dist:  26<br />speed: 12.546720<br />Method: prediction_lm_looc","dist:  36<br />speed: 14.249706<br />Method: prediction_lm_looc","dist:  60<br />speed: 18.343498<br />Method: prediction_lm_looc","dist:  80<br />speed: 22.027996<br />Method: prediction_lm_looc","dist:  20<br />speed: 11.467269<br />Method: prediction_lm_looc","dist:  26<br />speed: 12.517001<br />Method: prediction_lm_looc","dist:  54<br />speed: 17.278632<br />Method: prediction_lm_looc","dist:  32<br />speed: 13.523359<br />Method: prediction_lm_looc","dist:  40<br />speed: 14.883984<br />Method: prediction_lm_looc","dist:  32<br />speed: 13.499078<br />Method: prediction_lm_looc","dist:  40<br />speed: 14.863291<br />Method: prediction_lm_looc","dist:  50<br />speed: 16.552660<br />Method: prediction_lm_looc","dist:  42<br />speed: 15.181286<br />Method: prediction_lm_looc","dist:  56<br />speed: 17.544199<br />Method: prediction_lm_looc","dist:  76<br />speed: 21.029124<br />Method: prediction_lm_looc","dist:  84<br />speed: 22.515387<br />Method: prediction_lm_looc","dist:  36<br />speed: 14.139858<br />Method: prediction_lm_looc","dist:  46<br />speed: 15.835844<br />Method: prediction_lm_looc","dist:  68<br />speed: 19.564657<br />Method: prediction_lm_looc","dist:  32<br />speed: 13.426236<br />Method: prediction_lm_looc","dist:  48<br />speed: 16.151192<br />Method: prediction_lm_looc","dist:  52<br />speed: 16.821911<br />Method: prediction_lm_looc","dist:  56<br />speed: 17.492476<br />Method: prediction_lm_looc","dist:  64<br />speed: 18.841323<br />Method: prediction_lm_looc","dist:  66<br />speed: 19.106368<br />Method: prediction_lm_looc","dist:  54<br />speed: 17.084159<br />Method: prediction_lm_looc","dist:  70<br />speed: 19.690764<br />Method: prediction_lm_looc","dist:  92<br />speed: 23.466008<br />Method: prediction_lm_looc","dist:  93<br />speed: 23.647539<br />Method: prediction_lm_looc","dist: 120<br />speed: 29.205028<br />Method: prediction_lm_looc","dist:  85<br />speed: 22.145137<br />Method: prediction_lm_looc"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(163,165,0,1)","opacity":1,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(163,165,0,1)"}},"hoveron":"points","name":"prediction_lm_looc","legendgroup":"prediction_lm_looc","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2,10,4,22,16,10,18,26,34,17,28,14,20,24,28,26,34,34,46,26,36,60,80,20,26,54,32,40,32,40,50,42,56,76,84,36,46,68,32,48,52,56,64,66,54,70,92,93,120,85],"y":[8.6150407910758062,9.9395813882303568,8.9461759403644443,11.926392283962183,10.932986836096271,9.9395813882303568,11.264121985384909,12.58866258253946,13.91320317969401,11.09855441074059,12.919797731828098,10.601851686807633,11.595257134673545,12.257527433250822,12.919797731828098,12.58866258253946,13.91320317969401,13.91320317969401,15.900014075425837,12.58866258253946,14.244338328982648,18.217960120446303,21.529311613332681,11.595257134673545,12.58866258253946,17.224554672580389,13.582068030405374,14.906608627559924,13.582068030405374,14.906608627559924,16.562284374003113,15.237743776848562,17.555689821869027,20.867041314755404,22.191581911909957,14.244338328982648,15.900014075425837,19.542500717600852,13.582068030405374,16.231149224714475,16.893419523291751,17.555689821869027,18.880230419023576,19.211365568312214,17.224554672580389,19.87363586688949,23.516122509064505,23.681690083708826,28.152014599105435,22.357149486554274],"text":["dist:   2<br />speed:  8.615041<br />Method: prediction_lm_straight","dist:  10<br />speed:  9.939581<br />Method: prediction_lm_straight","dist:   4<br />speed:  8.946176<br />Method: prediction_lm_straight","dist:  22<br />speed: 11.926392<br />Method: prediction_lm_straight","dist:  16<br />speed: 10.932987<br />Method: prediction_lm_straight","dist:  10<br />speed:  9.939581<br />Method: prediction_lm_straight","dist:  18<br />speed: 11.264122<br />Method: prediction_lm_straight","dist:  26<br />speed: 12.588663<br />Method: prediction_lm_straight","dist:  34<br />speed: 13.913203<br />Method: prediction_lm_straight","dist:  17<br />speed: 11.098554<br />Method: prediction_lm_straight","dist:  28<br />speed: 12.919798<br />Method: prediction_lm_straight","dist:  14<br />speed: 10.601852<br />Method: prediction_lm_straight","dist:  20<br />speed: 11.595257<br />Method: prediction_lm_straight","dist:  24<br />speed: 12.257527<br />Method: prediction_lm_straight","dist:  28<br />speed: 12.919798<br />Method: prediction_lm_straight","dist:  26<br />speed: 12.588663<br />Method: prediction_lm_straight","dist:  34<br />speed: 13.913203<br />Method: prediction_lm_straight","dist:  34<br />speed: 13.913203<br />Method: prediction_lm_straight","dist:  46<br />speed: 15.900014<br />Method: prediction_lm_straight","dist:  26<br />speed: 12.588663<br />Method: prediction_lm_straight","dist:  36<br />speed: 14.244338<br />Method: prediction_lm_straight","dist:  60<br />speed: 18.217960<br />Method: prediction_lm_straight","dist:  80<br />speed: 21.529312<br />Method: prediction_lm_straight","dist:  20<br />speed: 11.595257<br />Method: prediction_lm_straight","dist:  26<br />speed: 12.588663<br />Method: prediction_lm_straight","dist:  54<br />speed: 17.224555<br />Method: prediction_lm_straight","dist:  32<br />speed: 13.582068<br />Method: prediction_lm_straight","dist:  40<br />speed: 14.906609<br />Method: prediction_lm_straight","dist:  32<br />speed: 13.582068<br />Method: prediction_lm_straight","dist:  40<br />speed: 14.906609<br />Method: prediction_lm_straight","dist:  50<br />speed: 16.562284<br />Method: prediction_lm_straight","dist:  42<br />speed: 15.237744<br />Method: prediction_lm_straight","dist:  56<br />speed: 17.555690<br />Method: prediction_lm_straight","dist:  76<br />speed: 20.867041<br />Method: prediction_lm_straight","dist:  84<br />speed: 22.191582<br />Method: prediction_lm_straight","dist:  36<br />speed: 14.244338<br />Method: prediction_lm_straight","dist:  46<br />speed: 15.900014<br />Method: prediction_lm_straight","dist:  68<br />speed: 19.542501<br />Method: prediction_lm_straight","dist:  32<br />speed: 13.582068<br />Method: prediction_lm_straight","dist:  48<br />speed: 16.231149<br />Method: prediction_lm_straight","dist:  52<br />speed: 16.893420<br />Method: prediction_lm_straight","dist:  56<br />speed: 17.555690<br />Method: prediction_lm_straight","dist:  64<br />speed: 18.880230<br />Method: prediction_lm_straight","dist:  66<br />speed: 19.211366<br />Method: prediction_lm_straight","dist:  54<br />speed: 17.224555<br />Method: prediction_lm_straight","dist:  70<br />speed: 19.873636<br />Method: prediction_lm_straight","dist:  92<br />speed: 23.516123<br />Method: prediction_lm_straight","dist:  93<br />speed: 23.681690<br />Method: prediction_lm_straight","dist: 120<br />speed: 28.152015<br />Method: prediction_lm_straight","dist:  85<br />speed: 22.357149<br />Method: prediction_lm_straight"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,191,125,1)","opacity":1,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(0,191,125,1)"}},"hoveron":"points","name":"prediction_lm_straight","legendgroup":"prediction_lm_straight","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2,10,4,22,16,10,18,26,34,17,28,14,20,24,28,26,34,34,46,26,36,60,80,20,26,54,32,40,32,40,50,42,56,76,84,36,46,68,32,48,52,56,64,66,54,70,92,93,120,85],"y":[9.8005125063842531,9.825876143784372,4.2968198510601185,12.096958457661096,11.613059742720782,4.9991043427980397,10.946511244062011,12.902808232569473,15.866941282579422,9.8291875331697653,13.891982750041736,8.5555125206695717,10.57087998600309,11.96550569785575,13.707056090128241,12.754936943154584,15.102095858777556,15.201173763821625,18.331856358384947,12.403319499972305,15.94023279473334,19.416713963110396,21.564423525887026,12.013951974251984,12.217632119521229,19.291566122789877,14.531702792798239,16.606689184820414,14.221371039874922,16.114983618498446,17.982817670966206,16.775837536518644,18.652738769074855,20.232863335758381,23.89727736831237,15.31078585475248,17.387435357956555,18.803806695512073,13.949659469292312,17.615868909391608,17.914055041630323,18.458132395072155,18.736466209474059,17.042020719506894,18.122189322575576,18.343908922459626,21.414437418879626,24.210097861485192,26.323728118033525,20.63140891885762],"text":["dist:   2<br />speed:  9.800513<br />Method: prediction_nn_looc","dist:  10<br />speed:  9.825876<br />Method: prediction_nn_looc","dist:   4<br />speed:  4.296820<br />Method: prediction_nn_looc","dist:  22<br />speed: 12.096958<br />Method: prediction_nn_looc","dist:  16<br />speed: 11.613060<br />Method: prediction_nn_looc","dist:  10<br />speed:  4.999104<br />Method: prediction_nn_looc","dist:  18<br />speed: 10.946511<br />Method: prediction_nn_looc","dist:  26<br />speed: 12.902808<br />Method: prediction_nn_looc","dist:  34<br />speed: 15.866941<br />Method: prediction_nn_looc","dist:  17<br />speed:  9.829188<br />Method: prediction_nn_looc","dist:  28<br />speed: 13.891983<br />Method: prediction_nn_looc","dist:  14<br />speed:  8.555513<br />Method: prediction_nn_looc","dist:  20<br />speed: 10.570880<br />Method: prediction_nn_looc","dist:  24<br />speed: 11.965506<br />Method: prediction_nn_looc","dist:  28<br />speed: 13.707056<br />Method: prediction_nn_looc","dist:  26<br />speed: 12.754937<br />Method: prediction_nn_looc","dist:  34<br />speed: 15.102096<br />Method: prediction_nn_looc","dist:  34<br />speed: 15.201174<br />Method: prediction_nn_looc","dist:  46<br />speed: 18.331856<br />Method: prediction_nn_looc","dist:  26<br />speed: 12.403319<br />Method: prediction_nn_looc","dist:  36<br />speed: 15.940233<br />Method: prediction_nn_looc","dist:  60<br />speed: 19.416714<br />Method: prediction_nn_looc","dist:  80<br />speed: 21.564424<br />Method: prediction_nn_looc","dist:  20<br />speed: 12.013952<br />Method: prediction_nn_looc","dist:  26<br />speed: 12.217632<br />Method: prediction_nn_looc","dist:  54<br />speed: 19.291566<br />Method: prediction_nn_looc","dist:  32<br />speed: 14.531703<br />Method: prediction_nn_looc","dist:  40<br />speed: 16.606689<br />Method: prediction_nn_looc","dist:  32<br />speed: 14.221371<br />Method: prediction_nn_looc","dist:  40<br />speed: 16.114984<br />Method: prediction_nn_looc","dist:  50<br />speed: 17.982818<br />Method: prediction_nn_looc","dist:  42<br />speed: 16.775838<br />Method: prediction_nn_looc","dist:  56<br />speed: 18.652739<br />Method: prediction_nn_looc","dist:  76<br />speed: 20.232863<br />Method: prediction_nn_looc","dist:  84<br />speed: 23.897277<br />Method: prediction_nn_looc","dist:  36<br />speed: 15.310786<br />Method: prediction_nn_looc","dist:  46<br />speed: 17.387435<br />Method: prediction_nn_looc","dist:  68<br />speed: 18.803807<br />Method: prediction_nn_looc","dist:  32<br />speed: 13.949659<br />Method: prediction_nn_looc","dist:  48<br />speed: 17.615869<br />Method: prediction_nn_looc","dist:  52<br />speed: 17.914055<br />Method: prediction_nn_looc","dist:  56<br />speed: 18.458132<br />Method: prediction_nn_looc","dist:  64<br />speed: 18.736466<br />Method: prediction_nn_looc","dist:  66<br />speed: 17.042021<br />Method: prediction_nn_looc","dist:  54<br />speed: 18.122189<br />Method: prediction_nn_looc","dist:  70<br />speed: 18.343909<br />Method: prediction_nn_looc","dist:  92<br />speed: 21.414437<br />Method: prediction_nn_looc","dist:  93<br />speed: 24.210098<br />Method: prediction_nn_looc","dist: 120<br />speed: 26.323728<br />Method: prediction_nn_looc","dist:  85<br />speed: 20.631409<br />Method: prediction_nn_looc"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,176,246,1)","opacity":1,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(0,176,246,1)"}},"hoveron":"points","name":"prediction_nn_looc","legendgroup":"prediction_nn_looc","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2,10,4,22,16,10,18,26,34,17,28,14,20,24,28,26,34,34,46,26,36,60,80,20,26,54,32,40,32,40,50,42,56,76,84,36,46,68,32,48,52,56,64,66,54,70,92,93,120,85],"y":[5.4936664229539911,6.4978101830413921,5.4857919047491679,11.583114856826908,10.565332879912331,6.4978101830413921,10.85470873710797,12.538186141210259,14.991219435271423,10.704438646845219,13.100380252406012,10.310828083542084,11.192145866816986,12.031405415137536,13.100380252406012,12.538186141210259,14.991219435271423,14.991219435271423,17.601012650470309,12.538186141210259,15.611686384023365,18.920190213817701,13.818755410544757,11.192145866816986,12.538186141210259,18.177658327517708,14.347164176749564,16.667498849537289,14.347164176749564,16.667498849537289,17.908873798140426,17.065271447449039,18.356616802931374,18.060849699869902,20.570298243665871,15.611686384023365,17.601012650470309,21.243457299902293,14.347164176749564,17.771914237323223,18.036215094199406,18.356616802931374,19.883453584151962,20.525538629317587,18.177658327517708,21.970483794993054,24.421141164995852,24.449043513759513,23.9086436370333,21.871250185163849],"text":["dist:   2<br />speed:  5.493666<br />Method: prediction_nn_straight","dist:  10<br />speed:  6.497810<br />Method: prediction_nn_straight","dist:   4<br />speed:  5.485792<br />Method: prediction_nn_straight","dist:  22<br />speed: 11.583115<br />Method: prediction_nn_straight","dist:  16<br />speed: 10.565333<br />Method: prediction_nn_straight","dist:  10<br />speed:  6.497810<br />Method: prediction_nn_straight","dist:  18<br />speed: 10.854709<br />Method: prediction_nn_straight","dist:  26<br />speed: 12.538186<br />Method: prediction_nn_straight","dist:  34<br />speed: 14.991219<br />Method: prediction_nn_straight","dist:  17<br />speed: 10.704439<br />Method: prediction_nn_straight","dist:  28<br />speed: 13.100380<br />Method: prediction_nn_straight","dist:  14<br />speed: 10.310828<br />Method: prediction_nn_straight","dist:  20<br />speed: 11.192146<br />Method: prediction_nn_straight","dist:  24<br />speed: 12.031405<br />Method: prediction_nn_straight","dist:  28<br />speed: 13.100380<br />Method: prediction_nn_straight","dist:  26<br />speed: 12.538186<br />Method: prediction_nn_straight","dist:  34<br />speed: 14.991219<br />Method: prediction_nn_straight","dist:  34<br />speed: 14.991219<br />Method: prediction_nn_straight","dist:  46<br />speed: 17.601013<br />Method: prediction_nn_straight","dist:  26<br />speed: 12.538186<br />Method: prediction_nn_straight","dist:  36<br />speed: 15.611686<br />Method: prediction_nn_straight","dist:  60<br />speed: 18.920190<br />Method: prediction_nn_straight","dist:  80<br />speed: 13.818755<br />Method: prediction_nn_straight","dist:  20<br />speed: 11.192146<br />Method: prediction_nn_straight","dist:  26<br />speed: 12.538186<br />Method: prediction_nn_straight","dist:  54<br />speed: 18.177658<br />Method: prediction_nn_straight","dist:  32<br />speed: 14.347164<br />Method: prediction_nn_straight","dist:  40<br />speed: 16.667499<br />Method: prediction_nn_straight","dist:  32<br />speed: 14.347164<br />Method: prediction_nn_straight","dist:  40<br />speed: 16.667499<br />Method: prediction_nn_straight","dist:  50<br />speed: 17.908874<br />Method: prediction_nn_straight","dist:  42<br />speed: 17.065271<br />Method: prediction_nn_straight","dist:  56<br />speed: 18.356617<br />Method: prediction_nn_straight","dist:  76<br />speed: 18.060850<br />Method: prediction_nn_straight","dist:  84<br />speed: 20.570298<br />Method: prediction_nn_straight","dist:  36<br />speed: 15.611686<br />Method: prediction_nn_straight","dist:  46<br />speed: 17.601013<br />Method: prediction_nn_straight","dist:  68<br />speed: 21.243457<br />Method: prediction_nn_straight","dist:  32<br />speed: 14.347164<br />Method: prediction_nn_straight","dist:  48<br />speed: 17.771914<br />Method: prediction_nn_straight","dist:  52<br />speed: 18.036215<br />Method: prediction_nn_straight","dist:  56<br />speed: 18.356617<br />Method: prediction_nn_straight","dist:  64<br />speed: 19.883454<br />Method: prediction_nn_straight","dist:  66<br />speed: 20.525539<br />Method: prediction_nn_straight","dist:  54<br />speed: 18.177658<br />Method: prediction_nn_straight","dist:  70<br />speed: 21.970484<br />Method: prediction_nn_straight","dist:  92<br />speed: 24.421141<br />Method: prediction_nn_straight","dist:  93<br />speed: 24.449044<br />Method: prediction_nn_straight","dist: 120<br />speed: 23.908644<br />Method: prediction_nn_straight","dist:  85<br />speed: 21.871250<br />Method: prediction_nn_straight"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(231,107,243,1)","opacity":1,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(231,107,243,1)"}},"hoveron":"points","name":"prediction_nn_straight","legendgroup":"prediction_nn_straight","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":26.228310502283108,"r":7.3059360730593621,"b":40.182648401826498,"l":37.260273972602747},"plot_bgcolor":"rgba(235,235,235,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-3.9000000000000004,125.90000000000001],"tickmode":"array","ticktext":["0","25","50","75","100","125"],"tickvals":[0,25,50,75,100,125],"categoryorder":"array","categoryarray":["0","25","50","75","100","125"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.6529680365296811,"tickwidth":0.66417600664176002,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"y","title":{"text":"dist","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[2.7397486219049689,30.465278939995656],"tickmode":"array","ticktext":["10","20","30"],"tickvals":[10,20,30],"categoryorder":"array","categoryarray":["10","20","30"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.6529680365296811,"tickwidth":0.66417600664176002,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"x","title":{"text":"speed","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":1.8897637795275593,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.68949771689498},"title":{"text":"Method","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"3d60574183d4":{"x":{},"y":{},"colour":{},"type":"scatter"}},"cur_data":"3d60574183d4","visdat":{"3d60574183d4":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-253fa4f1c619d0aee424">{"x":{"data":[{"x":[2,10,4,22,16,10,18,26,34,17,28,14,20,24,28,26,34,34,46,26,36,60,80,20,26,54,32,40,32,40,50,42,56,76,84,36,46,68,32,48,52,56,64,66,54,70,92,93,120,85],"y":[4,4,7,7,8,9,10,10,10,11,11,12,12,12,12,13,13,13,13,14,14,14,14,15,15,15,16,16,17,17,17,18,18,18,18,19,19,19,20,20,20,20,20,22,23,24,24,24,24,25],"text":["dist:   2<br />speed:  4.000000<br />Method: measured_speed","dist:  10<br />speed:  4.000000<br />Method: measured_speed","dist:   4<br />speed:  7.000000<br />Method: measured_speed","dist:  22<br />speed:  7.000000<br />Method: measured_speed","dist:  16<br />speed:  8.000000<br />Method: measured_speed","dist:  10<br />speed:  9.000000<br />Method: measured_speed","dist:  18<br />speed: 10.000000<br />Method: measured_speed","dist:  26<br />speed: 10.000000<br />Method: measured_speed","dist:  34<br />speed: 10.000000<br />Method: measured_speed","dist:  17<br />speed: 11.000000<br />Method: measured_speed","dist:  28<br />speed: 11.000000<br />Method: measured_speed","dist:  14<br />speed: 12.000000<br />Method: measured_speed","dist:  20<br />speed: 12.000000<br />Method: measured_speed","dist:  24<br />speed: 12.000000<br />Method: measured_speed","dist:  28<br />speed: 12.000000<br />Method: measured_speed","dist:  26<br />speed: 13.000000<br />Method: measured_speed","dist:  34<br />speed: 13.000000<br />Method: measured_speed","dist:  34<br />speed: 13.000000<br />Method: measured_speed","dist:  46<br />speed: 13.000000<br />Method: measured_speed","dist:  26<br />speed: 14.000000<br />Method: measured_speed","dist:  36<br />speed: 14.000000<br />Method: measured_speed","dist:  60<br />speed: 14.000000<br />Method: measured_speed","dist:  80<br />speed: 14.000000<br />Method: measured_speed","dist:  20<br />speed: 15.000000<br />Method: measured_speed","dist:  26<br />speed: 15.000000<br />Method: measured_speed","dist:  54<br />speed: 15.000000<br />Method: measured_speed","dist:  32<br />speed: 16.000000<br />Method: measured_speed","dist:  40<br />speed: 16.000000<br />Method: measured_speed","dist:  32<br />speed: 17.000000<br />Method: measured_speed","dist:  40<br />speed: 17.000000<br />Method: measured_speed","dist:  50<br />speed: 17.000000<br />Method: measured_speed","dist:  42<br />speed: 18.000000<br />Method: measured_speed","dist:  56<br />speed: 18.000000<br />Method: measured_speed","dist:  76<br />speed: 18.000000<br />Method: measured_speed","dist:  84<br />speed: 18.000000<br />Method: measured_speed","dist:  36<br />speed: 19.000000<br />Method: measured_speed","dist:  46<br />speed: 19.000000<br />Method: measured_speed","dist:  68<br />speed: 19.000000<br />Method: measured_speed","dist:  32<br />speed: 20.000000<br />Method: measured_speed","dist:  48<br />speed: 20.000000<br />Method: measured_speed","dist:  52<br />speed: 20.000000<br />Method: measured_speed","dist:  56<br />speed: 20.000000<br />Method: measured_speed","dist:  64<br />speed: 20.000000<br />Method: measured_speed","dist:  66<br />speed: 22.000000<br />Method: measured_speed","dist:  54<br />speed: 23.000000<br />Method: measured_speed","dist:  70<br />speed: 24.000000<br />Method: measured_speed","dist:  92<br />speed: 24.000000<br />Method: measured_speed","dist:  93<br />speed: 24.000000<br />Method: measured_speed","dist: 120<br />speed: 24.000000<br />Method: measured_speed","dist:  85<br />speed: 25.000000<br />Method: measured_speed"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","opacity":1,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(248,118,109,1)"}},"hoveron":"points","name":"measured_speed","legendgroup":"measured_speed","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2,10,4,22,16,10,18,26,34,17,28,14,20,24,28,26,34,34,46,26,36,60,80,20,26,54,32,40,32,40,50,42,56,76,84,36,46,68,32,48,52,56,64,66,54,70,92,93,120,85],"y":[8.971019079183451,10.274826528902761,9.0852540571297649,12.097290005990839,11.062758101018353,9.9926137610663712,11.315665841441652,12.665593666811397,14.003187921362095,11.102740375558579,12.972860490528618,10.534727116021589,11.580042423307056,12.265785670877534,12.945220725244605,12.576438264955438,13.934202434892839,13.934202434892839,15.960044643697373,12.546719797670121,14.249706339425144,18.343498366379183,22.027995538329861,11.467269257898252,12.517001330384804,17.278631500348165,13.523358990469548,14.883983723617696,13.499078307359316,14.863291312361747,16.552660077665951,15.181286307626502,17.544199191139104,21.029124082566721,22.515387233343798,14.139858439899152,15.835844070782475,19.56465699790802,13.426236258028613,16.151192292000129,16.821911261854371,17.492475727237075,18.841323447292471,19.106368078861472,17.084159039196948,19.690764397851989,23.466008077261712,23.64753932117797,29.205027561900625,22.145137259432481],"text":["dist:   2<br />speed:  8.971019<br />Method: prediction_lm_looc","dist:  10<br />speed: 10.274827<br />Method: prediction_lm_looc","dist:   4<br />speed:  9.085254<br />Method: prediction_lm_looc","dist:  22<br />speed: 12.097290<br />Method: prediction_lm_looc","dist:  16<br />speed: 11.062758<br />Method: prediction_lm_looc","dist:  10<br />speed:  9.992614<br />Method: prediction_lm_looc","dist:  18<br />speed: 11.315666<br />Method: prediction_lm_looc","dist:  26<br />speed: 12.665594<br />Method: prediction_lm_looc","dist:  34<br />speed: 14.003188<br />Method: prediction_lm_looc","dist:  17<br />speed: 11.102740<br />Method: prediction_lm_looc","dist:  28<br />speed: 12.972860<br />Method: prediction_lm_looc","dist:  14<br />speed: 10.534727<br />Method: prediction_lm_looc","dist:  20<br />speed: 11.580042<br />Method: prediction_lm_looc","dist:  24<br />speed: 12.265786<br />Method: prediction_lm_looc","dist:  28<br />speed: 12.945221<br />Method: prediction_lm_looc","dist:  26<br />speed: 12.576438<br />Method: prediction_lm_looc","dist:  34<br />speed: 13.934202<br />Method: prediction_lm_looc","dist:  34<br />speed: 13.934202<br />Method: prediction_lm_looc","dist:  46<br />speed: 15.960045<br />Method: prediction_lm_looc","dist:  26<br />speed: 12.546720<br />Method: prediction_lm_looc","dist:  36<br />speed: 14.249706<br />Method: prediction_lm_looc","dist:  60<br />speed: 18.343498<br />Method: prediction_lm_looc","dist:  80<br />speed: 22.027996<br />Method: prediction_lm_looc","dist:  20<br />speed: 11.467269<br />Method: prediction_lm_looc","dist:  26<br />speed: 12.517001<br />Method: prediction_lm_looc","dist:  54<br />speed: 17.278632<br />Method: prediction_lm_looc","dist:  32<br />speed: 13.523359<br />Method: prediction_lm_looc","dist:  40<br />speed: 14.883984<br />Method: prediction_lm_looc","dist:  32<br />speed: 13.499078<br />Method: prediction_lm_looc","dist:  40<br />speed: 14.863291<br />Method: prediction_lm_looc","dist:  50<br />speed: 16.552660<br />Method: prediction_lm_looc","dist:  42<br />speed: 15.181286<br />Method: prediction_lm_looc","dist:  56<br />speed: 17.544199<br />Method: prediction_lm_looc","dist:  76<br />speed: 21.029124<br />Method: prediction_lm_looc","dist:  84<br />speed: 22.515387<br />Method: prediction_lm_looc","dist:  36<br />speed: 14.139858<br />Method: prediction_lm_looc","dist:  46<br />speed: 15.835844<br />Method: prediction_lm_looc","dist:  68<br />speed: 19.564657<br />Method: prediction_lm_looc","dist:  32<br />speed: 13.426236<br />Method: prediction_lm_looc","dist:  48<br />speed: 16.151192<br />Method: prediction_lm_looc","dist:  52<br />speed: 16.821911<br />Method: prediction_lm_looc","dist:  56<br />speed: 17.492476<br />Method: prediction_lm_looc","dist:  64<br />speed: 18.841323<br />Method: prediction_lm_looc","dist:  66<br />speed: 19.106368<br />Method: prediction_lm_looc","dist:  54<br />speed: 17.084159<br />Method: prediction_lm_looc","dist:  70<br />speed: 19.690764<br />Method: prediction_lm_looc","dist:  92<br />speed: 23.466008<br />Method: prediction_lm_looc","dist:  93<br />speed: 23.647539<br />Method: prediction_lm_looc","dist: 120<br />speed: 29.205028<br />Method: prediction_lm_looc","dist:  85<br />speed: 22.145137<br />Method: prediction_lm_looc"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(163,165,0,1)","opacity":1,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(163,165,0,1)"}},"hoveron":"points","name":"prediction_lm_looc","legendgroup":"prediction_lm_looc","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2,10,4,22,16,10,18,26,34,17,28,14,20,24,28,26,34,34,46,26,36,60,80,20,26,54,32,40,32,40,50,42,56,76,84,36,46,68,32,48,52,56,64,66,54,70,92,93,120,85],"y":[8.6150407910758062,9.9395813882303568,8.9461759403644443,11.926392283962183,10.932986836096271,9.9395813882303568,11.264121985384909,12.58866258253946,13.91320317969401,11.09855441074059,12.919797731828098,10.601851686807633,11.595257134673545,12.257527433250822,12.919797731828098,12.58866258253946,13.91320317969401,13.91320317969401,15.900014075425837,12.58866258253946,14.244338328982648,18.217960120446303,21.529311613332681,11.595257134673545,12.58866258253946,17.224554672580389,13.582068030405374,14.906608627559924,13.582068030405374,14.906608627559924,16.562284374003113,15.237743776848562,17.555689821869027,20.867041314755404,22.191581911909957,14.244338328982648,15.900014075425837,19.542500717600852,13.582068030405374,16.231149224714475,16.893419523291751,17.555689821869027,18.880230419023576,19.211365568312214,17.224554672580389,19.87363586688949,23.516122509064505,23.681690083708826,28.152014599105435,22.357149486554274],"text":["dist:   2<br />speed:  8.615041<br />Method: prediction_lm_straight","dist:  10<br />speed:  9.939581<br />Method: prediction_lm_straight","dist:   4<br />speed:  8.946176<br />Method: prediction_lm_straight","dist:  22<br />speed: 11.926392<br />Method: prediction_lm_straight","dist:  16<br />speed: 10.932987<br />Method: prediction_lm_straight","dist:  10<br />speed:  9.939581<br />Method: prediction_lm_straight","dist:  18<br />speed: 11.264122<br />Method: prediction_lm_straight","dist:  26<br />speed: 12.588663<br />Method: prediction_lm_straight","dist:  34<br />speed: 13.913203<br />Method: prediction_lm_straight","dist:  17<br />speed: 11.098554<br />Method: prediction_lm_straight","dist:  28<br />speed: 12.919798<br />Method: prediction_lm_straight","dist:  14<br />speed: 10.601852<br />Method: prediction_lm_straight","dist:  20<br />speed: 11.595257<br />Method: prediction_lm_straight","dist:  24<br />speed: 12.257527<br />Method: prediction_lm_straight","dist:  28<br />speed: 12.919798<br />Method: prediction_lm_straight","dist:  26<br />speed: 12.588663<br />Method: prediction_lm_straight","dist:  34<br />speed: 13.913203<br />Method: prediction_lm_straight","dist:  34<br />speed: 13.913203<br />Method: prediction_lm_straight","dist:  46<br />speed: 15.900014<br />Method: prediction_lm_straight","dist:  26<br />speed: 12.588663<br />Method: prediction_lm_straight","dist:  36<br />speed: 14.244338<br />Method: prediction_lm_straight","dist:  60<br />speed: 18.217960<br />Method: prediction_lm_straight","dist:  80<br />speed: 21.529312<br />Method: prediction_lm_straight","dist:  20<br />speed: 11.595257<br />Method: prediction_lm_straight","dist:  26<br />speed: 12.588663<br />Method: prediction_lm_straight","dist:  54<br />speed: 17.224555<br />Method: prediction_lm_straight","dist:  32<br />speed: 13.582068<br />Method: prediction_lm_straight","dist:  40<br />speed: 14.906609<br />Method: prediction_lm_straight","dist:  32<br />speed: 13.582068<br />Method: prediction_lm_straight","dist:  40<br />speed: 14.906609<br />Method: prediction_lm_straight","dist:  50<br />speed: 16.562284<br />Method: prediction_lm_straight","dist:  42<br />speed: 15.237744<br />Method: prediction_lm_straight","dist:  56<br />speed: 17.555690<br />Method: prediction_lm_straight","dist:  76<br />speed: 20.867041<br />Method: prediction_lm_straight","dist:  84<br />speed: 22.191582<br />Method: prediction_lm_straight","dist:  36<br />speed: 14.244338<br />Method: prediction_lm_straight","dist:  46<br />speed: 15.900014<br />Method: prediction_lm_straight","dist:  68<br />speed: 19.542501<br />Method: prediction_lm_straight","dist:  32<br />speed: 13.582068<br />Method: prediction_lm_straight","dist:  48<br />speed: 16.231149<br />Method: prediction_lm_straight","dist:  52<br />speed: 16.893420<br />Method: prediction_lm_straight","dist:  56<br />speed: 17.555690<br />Method: prediction_lm_straight","dist:  64<br />speed: 18.880230<br />Method: prediction_lm_straight","dist:  66<br />speed: 19.211366<br />Method: prediction_lm_straight","dist:  54<br />speed: 17.224555<br />Method: prediction_lm_straight","dist:  70<br />speed: 19.873636<br />Method: prediction_lm_straight","dist:  92<br />speed: 23.516123<br />Method: prediction_lm_straight","dist:  93<br />speed: 23.681690<br />Method: prediction_lm_straight","dist: 120<br />speed: 28.152015<br />Method: prediction_lm_straight","dist:  85<br />speed: 22.357149<br />Method: prediction_lm_straight"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,191,125,1)","opacity":1,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(0,191,125,1)"}},"hoveron":"points","name":"prediction_lm_straight","legendgroup":"prediction_lm_straight","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2,10,4,22,16,10,18,26,34,17,28,14,20,24,28,26,34,34,46,26,36,60,80,20,26,54,32,40,32,40,50,42,56,76,84,36,46,68,32,48,52,56,64,66,54,70,92,93,120,85],"y":[9.8005125063842531,9.825876143784372,4.2968198510601185,12.096958457661096,11.613059742720782,4.9991043427980397,10.946511244062011,12.902808232569473,15.866941282579422,9.8291875331697653,13.891982750041736,8.5555125206695717,10.57087998600309,11.96550569785575,13.707056090128241,12.754936943154584,15.102095858777556,15.201173763821625,18.331856358384947,12.403319499972305,15.94023279473334,19.416713963110396,21.564423525887026,12.013951974251984,12.217632119521229,19.291566122789877,14.531702792798239,16.606689184820414,14.221371039874922,16.114983618498446,17.982817670966206,16.775837536518644,18.652738769074855,20.232863335758381,23.89727736831237,15.31078585475248,17.387435357956555,18.803806695512073,13.949659469292312,17.615868909391608,17.914055041630323,18.458132395072155,18.736466209474059,17.042020719506894,18.122189322575576,18.343908922459626,21.414437418879626,24.210097861485192,26.323728118033525,20.63140891885762],"text":["dist:   2<br />speed:  9.800513<br />Method: prediction_nn_looc","dist:  10<br />speed:  9.825876<br />Method: prediction_nn_looc","dist:   4<br />speed:  4.296820<br />Method: prediction_nn_looc","dist:  22<br />speed: 12.096958<br />Method: prediction_nn_looc","dist:  16<br />speed: 11.613060<br />Method: prediction_nn_looc","dist:  10<br />speed:  4.999104<br />Method: prediction_nn_looc","dist:  18<br />speed: 10.946511<br />Method: prediction_nn_looc","dist:  26<br />speed: 12.902808<br />Method: prediction_nn_looc","dist:  34<br />speed: 15.866941<br />Method: prediction_nn_looc","dist:  17<br />speed:  9.829188<br />Method: prediction_nn_looc","dist:  28<br />speed: 13.891983<br />Method: prediction_nn_looc","dist:  14<br />speed:  8.555513<br />Method: prediction_nn_looc","dist:  20<br />speed: 10.570880<br />Method: prediction_nn_looc","dist:  24<br />speed: 11.965506<br />Method: prediction_nn_looc","dist:  28<br />speed: 13.707056<br />Method: prediction_nn_looc","dist:  26<br />speed: 12.754937<br />Method: prediction_nn_looc","dist:  34<br />speed: 15.102096<br />Method: prediction_nn_looc","dist:  34<br />speed: 15.201174<br />Method: prediction_nn_looc","dist:  46<br />speed: 18.331856<br />Method: prediction_nn_looc","dist:  26<br />speed: 12.403319<br />Method: prediction_nn_looc","dist:  36<br />speed: 15.940233<br />Method: prediction_nn_looc","dist:  60<br />speed: 19.416714<br />Method: prediction_nn_looc","dist:  80<br />speed: 21.564424<br />Method: prediction_nn_looc","dist:  20<br />speed: 12.013952<br />Method: prediction_nn_looc","dist:  26<br />speed: 12.217632<br />Method: prediction_nn_looc","dist:  54<br />speed: 19.291566<br />Method: prediction_nn_looc","dist:  32<br />speed: 14.531703<br />Method: prediction_nn_looc","dist:  40<br />speed: 16.606689<br />Method: prediction_nn_looc","dist:  32<br />speed: 14.221371<br />Method: prediction_nn_looc","dist:  40<br />speed: 16.114984<br />Method: prediction_nn_looc","dist:  50<br />speed: 17.982818<br />Method: prediction_nn_looc","dist:  42<br />speed: 16.775838<br />Method: prediction_nn_looc","dist:  56<br />speed: 18.652739<br />Method: prediction_nn_looc","dist:  76<br />speed: 20.232863<br />Method: prediction_nn_looc","dist:  84<br />speed: 23.897277<br />Method: prediction_nn_looc","dist:  36<br />speed: 15.310786<br />Method: prediction_nn_looc","dist:  46<br />speed: 17.387435<br />Method: prediction_nn_looc","dist:  68<br />speed: 18.803807<br />Method: prediction_nn_looc","dist:  32<br />speed: 13.949659<br />Method: prediction_nn_looc","dist:  48<br />speed: 17.615869<br />Method: prediction_nn_looc","dist:  52<br />speed: 17.914055<br />Method: prediction_nn_looc","dist:  56<br />speed: 18.458132<br />Method: prediction_nn_looc","dist:  64<br />speed: 18.736466<br />Method: prediction_nn_looc","dist:  66<br />speed: 17.042021<br />Method: prediction_nn_looc","dist:  54<br />speed: 18.122189<br />Method: prediction_nn_looc","dist:  70<br />speed: 18.343909<br />Method: prediction_nn_looc","dist:  92<br />speed: 21.414437<br />Method: prediction_nn_looc","dist:  93<br />speed: 24.210098<br />Method: prediction_nn_looc","dist: 120<br />speed: 26.323728<br />Method: prediction_nn_looc","dist:  85<br />speed: 20.631409<br />Method: prediction_nn_looc"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,176,246,1)","opacity":1,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(0,176,246,1)"}},"hoveron":"points","name":"prediction_nn_looc","legendgroup":"prediction_nn_looc","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2,10,4,22,16,10,18,26,34,17,28,14,20,24,28,26,34,34,46,26,36,60,80,20,26,54,32,40,32,40,50,42,56,76,84,36,46,68,32,48,52,56,64,66,54,70,92,93,120,85],"y":[5.4936664229539911,6.4978101830413921,5.4857919047491679,11.583114856826908,10.565332879912331,6.4978101830413921,10.85470873710797,12.538186141210259,14.991219435271423,10.704438646845219,13.100380252406012,10.310828083542084,11.192145866816986,12.031405415137536,13.100380252406012,12.538186141210259,14.991219435271423,14.991219435271423,17.601012650470309,12.538186141210259,15.611686384023365,18.920190213817701,13.818755410544757,11.192145866816986,12.538186141210259,18.177658327517708,14.347164176749564,16.667498849537289,14.347164176749564,16.667498849537289,17.908873798140426,17.065271447449039,18.356616802931374,18.060849699869902,20.570298243665871,15.611686384023365,17.601012650470309,21.243457299902293,14.347164176749564,17.771914237323223,18.036215094199406,18.356616802931374,19.883453584151962,20.525538629317587,18.177658327517708,21.970483794993054,24.421141164995852,24.449043513759513,23.9086436370333,21.871250185163849],"text":["dist:   2<br />speed:  5.493666<br />Method: prediction_nn_straight","dist:  10<br />speed:  6.497810<br />Method: prediction_nn_straight","dist:   4<br />speed:  5.485792<br />Method: prediction_nn_straight","dist:  22<br />speed: 11.583115<br />Method: prediction_nn_straight","dist:  16<br />speed: 10.565333<br />Method: prediction_nn_straight","dist:  10<br />speed:  6.497810<br />Method: prediction_nn_straight","dist:  18<br />speed: 10.854709<br />Method: prediction_nn_straight","dist:  26<br />speed: 12.538186<br />Method: prediction_nn_straight","dist:  34<br />speed: 14.991219<br />Method: prediction_nn_straight","dist:  17<br />speed: 10.704439<br />Method: prediction_nn_straight","dist:  28<br />speed: 13.100380<br />Method: prediction_nn_straight","dist:  14<br />speed: 10.310828<br />Method: prediction_nn_straight","dist:  20<br />speed: 11.192146<br />Method: prediction_nn_straight","dist:  24<br />speed: 12.031405<br />Method: prediction_nn_straight","dist:  28<br />speed: 13.100380<br />Method: prediction_nn_straight","dist:  26<br />speed: 12.538186<br />Method: prediction_nn_straight","dist:  34<br />speed: 14.991219<br />Method: prediction_nn_straight","dist:  34<br />speed: 14.991219<br />Method: prediction_nn_straight","dist:  46<br />speed: 17.601013<br />Method: prediction_nn_straight","dist:  26<br />speed: 12.538186<br />Method: prediction_nn_straight","dist:  36<br />speed: 15.611686<br />Method: prediction_nn_straight","dist:  60<br />speed: 18.920190<br />Method: prediction_nn_straight","dist:  80<br />speed: 13.818755<br />Method: prediction_nn_straight","dist:  20<br />speed: 11.192146<br />Method: prediction_nn_straight","dist:  26<br />speed: 12.538186<br />Method: prediction_nn_straight","dist:  54<br />speed: 18.177658<br />Method: prediction_nn_straight","dist:  32<br />speed: 14.347164<br />Method: prediction_nn_straight","dist:  40<br />speed: 16.667499<br />Method: prediction_nn_straight","dist:  32<br />speed: 14.347164<br />Method: prediction_nn_straight","dist:  40<br />speed: 16.667499<br />Method: prediction_nn_straight","dist:  50<br />speed: 17.908874<br />Method: prediction_nn_straight","dist:  42<br />speed: 17.065271<br />Method: prediction_nn_straight","dist:  56<br />speed: 18.356617<br />Method: prediction_nn_straight","dist:  76<br />speed: 18.060850<br />Method: prediction_nn_straight","dist:  84<br />speed: 20.570298<br />Method: prediction_nn_straight","dist:  36<br />speed: 15.611686<br />Method: prediction_nn_straight","dist:  46<br />speed: 17.601013<br />Method: prediction_nn_straight","dist:  68<br />speed: 21.243457<br />Method: prediction_nn_straight","dist:  32<br />speed: 14.347164<br />Method: prediction_nn_straight","dist:  48<br />speed: 17.771914<br />Method: prediction_nn_straight","dist:  52<br />speed: 18.036215<br />Method: prediction_nn_straight","dist:  56<br />speed: 18.356617<br />Method: prediction_nn_straight","dist:  64<br />speed: 19.883454<br />Method: prediction_nn_straight","dist:  66<br />speed: 20.525539<br />Method: prediction_nn_straight","dist:  54<br />speed: 18.177658<br />Method: prediction_nn_straight","dist:  70<br />speed: 21.970484<br />Method: prediction_nn_straight","dist:  92<br />speed: 24.421141<br />Method: prediction_nn_straight","dist:  93<br />speed: 24.449044<br />Method: prediction_nn_straight","dist: 120<br />speed: 23.908644<br />Method: prediction_nn_straight","dist:  85<br />speed: 21.871250<br />Method: prediction_nn_straight"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(231,107,243,1)","opacity":1,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(231,107,243,1)"}},"hoveron":"points","name":"prediction_nn_straight","legendgroup":"prediction_nn_straight","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":26.228310502283108,"r":7.3059360730593621,"b":40.182648401826498,"l":37.260273972602747},"plot_bgcolor":"rgba(235,235,235,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-3.9000000000000004,125.90000000000001],"tickmode":"array","ticktext":["0","25","50","75","100","125"],"tickvals":[0,25,50,75,100,125],"categoryorder":"array","categoryarray":["0","25","50","75","100","125"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.6529680365296811,"tickwidth":0.66417600664176002,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"y","title":{"text":"dist","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[2.7397486219049689,30.465278939995656],"tickmode":"array","ticktext":["10","20","30"],"tickvals":[10,20,30],"categoryorder":"array","categoryarray":["10","20","30"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.6529680365296811,"tickwidth":0.66417600664176002,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"x","title":{"text":"speed","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":1.8897637795275593,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.68949771689498},"title":{"text":"Method","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"4f746f56f8fc":{"x":{},"y":{},"colour":{},"type":"scatter"}},"cur_data":"4f746f56f8fc","visdat":{"4f746f56f8fc":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 </div>
 <div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1">data_long <span class="ot" style="color: #003B4F;
 background-color: null;
@@ -930,18 +930,39 @@ font-style: inherit;">'mlr3'</span>)</span></code></pre></div>
 <li>Tutorials by Julia Silge: <a href="https://www.youtube.com/@JuliaSilge/search">Link</a></li>
 <li>Blog post criticising tidymodels: <a href="https://staffblogs.le.ac.uk/teachingr/2020/10/05/on-not-using-tidymodels/">Link</a>, written by <a href="https://github.com/thompson575">this person</a></li>
 </ul>
+<section id="which-packages-belong-to-the-metapackage-tidymodels" class="level2">
+<h2 class="anchored" data-anchor-id="which-packages-belong-to-the-metapackage-tidymodels">Which packages belong to the metapackage tidymodels</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1">tidymodels<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">tidymodels_packages</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">include_self =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "broom"        "cli"          "conflicted"   "dials"        "dplyr"       
+ [6] "ggplot2"      "hardhat"      "infer"        "modeldata"    "parsnip"     
+[11] "purrr"        "recipes"      "rlang"        "rsample"      "rstudioapi"  
+[16] "tibble"       "tidyr"        "tune"         "workflows"    "workflowsets"
+[21] "yardstick"    "tidymodels"  </code></pre>
+</div>
+</div>
+</section>
 <section id="tutorial-1---palmerpenguins-dataset" class="level2">
 <h2 class="anchored" data-anchor-id="tutorial-1---palmerpenguins-dataset">Tutorial 1 - palmerpenguins dataset</h2>
 <ul>
 <li><a href="https://juliasilge.com/blog/palmer-penguins/">Link</a></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">set.seed</span>(<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>)</span>
-<span id="cb1-2"><span class="fu" style="color: #4758AB;
+<span id="cb3-2"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
 background-color: null;
@@ -958,18 +979,18 @@ font-style: inherit;">'tidyverse'</span>)</span></code></pre></div>
 ✖ dplyr::lag()    masks stats::lag()
 ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="fu" style="color: #4758AB;
+<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'palmerpenguins'</span>)</span>
-<span id="cb3-2"></span>
-<span id="cb3-3">penguins_df <span class="ot" style="color: #003B4F;
+<span id="cb5-2"></span>
+<span id="cb5-3">penguins_df <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> penguins <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%&gt;%</span></span>
-<span id="cb3-4">  <span class="fu" style="color: #4758AB;
+<span id="cb5-4">  <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">filter</span>(<span class="sc" style="color: #5E5E5E;
 background-color: null;
@@ -978,7 +999,7 @@ background-color: null;
 font-style: inherit;">is.na</span>(sex)) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%&gt;%</span></span>
-<span id="cb3-5">  <span class="fu" style="color: #4758AB;
+<span id="cb5-5">  <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">select</span>(<span class="sc" style="color: #5E5E5E;
 background-color: null;
@@ -987,7 +1008,7 @@ background-color: null;
 font-style: inherit;">-</span>island)</span></code></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><span class="fu" style="color: #4758AB;
+<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">library</span>(tidymodels)</span></code></pre></div>
 <div class="cell-output cell-output-stderr">
@@ -1009,9 +1030,9 @@ font-style: inherit;">library</span>(tidymodels)</span></code></pre></div>
 ✖ dplyr::lag()      masks stats::lag()
 ✖ yardstick::spec() masks readr::spec()
 ✖ recipes::step()   masks stats::step()
-• Use tidymodels_prefer() to resolve common conflicts.</code></pre>
+• Search for functions across packages at https://www.tidymodels.org/find/</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><span class="fu" style="color: #4758AB;
+<div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">glimpse</span>(penguins_df)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1024,14 +1045,14 @@ $ flipper_length_mm &lt;int&gt; 181, 186, 195, 193, 190, 181, 195, 182, 191, 198
 $ body_mass_g       &lt;int&gt; 3750, 3800, 3250, 3450, 3650, 3625, 4675, 3200, 3800…
 $ sex               &lt;fct&gt; male, female, female, female, male, female, male, fe…</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1">penguin_split <span class="ot" style="color: #003B4F;
+<div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1">penguin_split <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">initial_split</span>(penguins_df, <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">strata =</span> sex)</span>
-<span id="cb10-2"><span class="fu" style="color: #4758AB;
+<span id="cb12-2"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">str</span>(penguin_split)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1049,12 +1070,12 @@ font-style: inherit;">str</span>(penguin_split)</span></code></pre></div>
   ..$ id: chr "Resample1"
  - attr(*, "class")= chr [1:3] "initial_split" "mc_split" "rsplit"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1">penguin_train <span class="ot" style="color: #003B4F;
+<div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1">penguin_train <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">training</span>(penguin_split)</span>
-<span id="cb12-2"><span class="fu" style="color: #4758AB;
+<span id="cb14-2"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">str</span>(penguin_train)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1066,24 +1087,24 @@ font-style: inherit;">str</span>(penguin_train)</span></code></pre></div>
  $ body_mass_g      : int [1:249] 3800 3250 3450 3700 3450 3800 3150 3250 3300 3550 ...
  $ sex              : Factor w/ 2 levels "female","male": 1 1 1 1 1 1 1 1 1 1 ...</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1">penguin_test <span class="ot" style="color: #003B4F;
+<div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1">penguin_test <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">testing</span>(penguin_split)</span></code></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><span class="fu" style="color: #4758AB;
+<div class="sourceCode cell-code" id="cb17" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">set.seed</span>(<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">123</span>)</span>
-<span id="cb15-2">penguin_boot <span class="ot" style="color: #003B4F;
+<span id="cb17-2">penguin_boot <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">bootstraps</span>(penguin_train)</span>
-<span id="cb15-3">penguin_boot</span></code></pre></div>
+<span id="cb17-3">penguin_boot</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># Bootstrap sampling 
 # A tibble: 25 × 2
@@ -1105,63 +1126,12 @@ font-style: inherit;">bootstraps</span>(penguin_train)</span>
 <section id="question" class="level3">
 <h3 class="anchored" data-anchor-id="question">Question:</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><span class="co" style="color: #5E5E5E;
+<div class="sourceCode cell-code" id="cb19" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># how can I extract a single bootstrap sample?</span></span>
-<span id="cb17-2">x <span class="ot" style="color: #003B4F;
+<span id="cb19-2">x <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> penguin_boot <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span> </span>
-<span id="cb17-3">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">select</span>(splits) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span> </span>
-<span id="cb17-4">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">slice</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span></span>
-<span id="cb17-5">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">pull</span>()</span>
-<span id="cb17-6"></span>
-<span id="cb17-7">x[[<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>]]<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span>data</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 249 × 6
-   species bill_length_mm bill_depth_mm flipper_length_mm body_mass_g sex   
-   &lt;fct&gt;            &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;       &lt;int&gt; &lt;fct&gt; 
- 1 Adelie            39.5          17.4               186        3800 female
- 2 Adelie            40.3          18                 195        3250 female
- 3 Adelie            36.7          19.3               193        3450 female
- 4 Adelie            36.6          17.8               185        3700 female
- 5 Adelie            38.7          19                 195        3450 female
- 6 Adelie            35.9          19.2               189        3800 female
- 7 Adelie            37.9          18.6               172        3150 female
- 8 Adelie            39.5          16.7               178        3250 female
- 9 Adelie            39.5          17.8               188        3300 female
-10 Adelie            42.2          18.5               180        3550 female
-# ℹ 239 more rows</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb19" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1">x <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> penguin_boot <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span> </span>
-<span id="cb19-2">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">filter</span>(id <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">==</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'Bootstrap01'</span>) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">|&gt;</span> </span>
 <span id="cb19-3">  <span class="fu" style="color: #4758AB;
@@ -1171,9 +1141,60 @@ background-color: null;
 font-style: inherit;">|&gt;</span> </span>
 <span id="cb19-4">  <span class="fu" style="color: #4758AB;
 background-color: null;
+font-style: inherit;">slice</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb19-5">  <span class="fu" style="color: #4758AB;
+background-color: null;
 font-style: inherit;">pull</span>()</span>
-<span id="cb19-5"></span>
-<span id="cb19-6">x[[<span class="dv" style="color: #AD0000;
+<span id="cb19-6"></span>
+<span id="cb19-7">x[[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>]]<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>data</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 249 × 6
+   species bill_length_mm bill_depth_mm flipper_length_mm body_mass_g sex   
+   &lt;fct&gt;            &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;       &lt;int&gt; &lt;fct&gt; 
+ 1 Adelie            39.5          17.4               186        3800 female
+ 2 Adelie            40.3          18                 195        3250 female
+ 3 Adelie            36.7          19.3               193        3450 female
+ 4 Adelie            36.6          17.8               185        3700 female
+ 5 Adelie            38.7          19                 195        3450 female
+ 6 Adelie            35.9          19.2               189        3800 female
+ 7 Adelie            37.9          18.6               172        3150 female
+ 8 Adelie            39.5          16.7               178        3250 female
+ 9 Adelie            39.5          17.8               188        3300 female
+10 Adelie            42.2          18.5               180        3550 female
+# ℹ 239 more rows</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb21" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1">x <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> penguin_boot <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> </span>
+<span id="cb21-2">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">filter</span>(id <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Bootstrap01'</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> </span>
+<span id="cb21-3">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">select</span>(splits) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> </span>
+<span id="cb21-4">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">pull</span>()</span>
+<span id="cb21-5"></span>
+<span id="cb21-6">x[[<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>]]<span class="sc" style="color: #5E5E5E;
 background-color: null;
@@ -1196,48 +1217,41 @@ font-style: inherit;">$</span>data</span></code></pre></div>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1">glm_spec <span class="ot" style="color: #003B4F;
+<div class="sourceCode cell-code" id="cb23" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1">glm_spec <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">logistic_reg</span>() <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%&gt;%</span></span>
-<span id="cb21-2">  <span class="fu" style="color: #4758AB;
+<span id="cb23-2">  <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">set_engine</span>(<span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">"glm"</span>)</span>
-<span id="cb21-3"></span>
-<span id="cb21-4">glm_spec</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Logistic Regression Model Specification (classification)
-
-Computational engine: glm </code></pre>
-</div>
+font-style: inherit;">"glm"</span>)</span></code></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1">rf_spec <span class="ot" style="color: #003B4F;
+<div class="sourceCode cell-code" id="cb24" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1">rf_spec <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">rand_forest</span>() <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%&gt;%</span></span>
-<span id="cb23-2">  <span class="fu" style="color: #4758AB;
+<span id="cb24-2">  <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">set_mode</span>(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"classification"</span>) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%&gt;%</span></span>
-<span id="cb23-3">  <span class="fu" style="color: #4758AB;
+<span id="cb24-3">  <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">set_engine</span>(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"ranger"</span>)</span>
-<span id="cb23-4"></span>
-<span id="cb23-5">rf_spec</span></code></pre></div>
+<span id="cb24-4"></span>
+<span id="cb24-5">rf_spec</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Random Forest Model Specification (classification)
 
@@ -1245,20 +1259,20 @@ Computational engine: ranger </code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1">penguin_wf <span class="ot" style="color: #003B4F;
+<div class="sourceCode cell-code" id="cb26" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1">penguin_wf <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">workflow</span>() <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%&gt;%</span></span>
-<span id="cb25-2">  <span class="fu" style="color: #4758AB;
+<span id="cb26-2">  <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">add_formula</span>(sex <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">~</span> .)</span>
-<span id="cb25-3"></span>
-<span id="cb25-4">penguin_wf</span></code></pre></div>
+<span id="cb26-3"></span>
+<span id="cb26-4">penguin_wf</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>══ Workflow ════════════════════════════════════════════════════════════════════
 Preprocessor: Formula
@@ -1269,23 +1283,23 @@ sex ~ .</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1">glm_rs <span class="ot" style="color: #003B4F;
+<div class="sourceCode cell-code" id="cb28" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1">glm_rs <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> penguin_wf <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%&gt;%</span></span>
-<span id="cb27-2">  <span class="fu" style="color: #4758AB;
+<span id="cb28-2">  <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">add_model</span>(glm_spec) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%&gt;%</span></span>
-<span id="cb27-3">  <span class="fu" style="color: #4758AB;
+<span id="cb28-3">  <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">fit_resamples</span>(</span>
-<span id="cb27-4">    <span class="at" style="color: #657422;
+<span id="cb28-4">    <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">resamples =</span> penguin_boot,</span>
-<span id="cb27-5">    <span class="at" style="color: #657422;
+<span id="cb28-5">    <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">control =</span> <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -1294,7 +1308,7 @@ background-color: null;
 font-style: inherit;">save_pred =</span> <span class="cn" style="color: #8f5902;
 background-color: null;
 font-style: inherit;">TRUE</span>)</span>
-<span id="cb27-6">  )</span></code></pre></div>
+<span id="cb28-6">  )</span></code></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>→ A | warning: glm.fit: fitted probabilities numerically 0 or 1 occurred</code></pre>
 </div>
@@ -1307,7 +1321,7 @@ font-style: inherit;">TRUE</span>)</span>
 <div class="cell-output cell-output-stderr">
 <pre><code></code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb32" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1">glm_rs</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb33" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1">glm_rs</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># Resampling results
 # Bootstrap sampling 
@@ -1334,23 +1348,23 @@ Run `show_notes(.Last.tune.result)` for more information.</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1">rf_rs <span class="ot" style="color: #003B4F;
+<div class="sourceCode cell-code" id="cb35" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1">rf_rs <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> penguin_wf <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%&gt;%</span></span>
-<span id="cb34-2">  <span class="fu" style="color: #4758AB;
+<span id="cb35-2">  <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">add_model</span>(rf_spec) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%&gt;%</span></span>
-<span id="cb34-3">  <span class="fu" style="color: #4758AB;
+<span id="cb35-3">  <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">fit_resamples</span>(</span>
-<span id="cb34-4">    <span class="at" style="color: #657422;
+<span id="cb35-4">    <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">resamples =</span> penguin_boot,</span>
-<span id="cb34-5">    <span class="at" style="color: #657422;
+<span id="cb35-5">    <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">control =</span> <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -1359,9 +1373,9 @@ background-color: null;
 font-style: inherit;">save_pred =</span> <span class="cn" style="color: #8f5902;
 background-color: null;
 font-style: inherit;">TRUE</span>)</span>
-<span id="cb34-6">  )</span>
-<span id="cb34-7"></span>
-<span id="cb34-8">rf_rs</span></code></pre></div>
+<span id="cb35-6">  )</span>
+<span id="cb35-7"></span>
+<span id="cb35-8">rf_rs</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># Resampling results
 # Bootstrap sampling 
@@ -1382,7 +1396,7 @@ font-style: inherit;">TRUE</span>)</span>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb36" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><span class="fu" style="color: #4758AB;
+<div class="sourceCode cell-code" id="cb37" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">collect_metrics</span>(rf_rs)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1392,7 +1406,7 @@ font-style: inherit;">collect_metrics</span>(rf_rs)</span></code></pre></div>
 1 accuracy binary     0.899    25 0.00704 Preprocessor1_Model1
 2 roc_auc  binary     0.971    25 0.00307 Preprocessor1_Model1</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb38" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><span class="fu" style="color: #4758AB;
+<div class="sourceCode cell-code" id="cb39" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">collect_metrics</span>(glm_rs)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1404,10 +1418,10 @@ font-style: inherit;">collect_metrics</span>(glm_rs)</span></code></pre></div>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb40" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1">glm_rs <span class="sc" style="color: #5E5E5E;
+<div class="sourceCode cell-code" id="cb41" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1">glm_rs <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%&gt;%</span></span>
-<span id="cb40-2">  <span class="fu" style="color: #4758AB;
+<span id="cb41-2">  <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">conf_mat_resampled</span>()</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1421,25 +1435,25 @@ font-style: inherit;">conf_mat_resampled</span>()</span></code></pre></div>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb42" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1">glm_rs <span class="sc" style="color: #5E5E5E;
+<div class="sourceCode cell-code" id="cb43" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1">glm_rs <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%&gt;%</span></span>
-<span id="cb42-2">  <span class="fu" style="color: #4758AB;
+<span id="cb43-2">  <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">collect_predictions</span>() <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%&gt;%</span></span>
-<span id="cb42-3">  <span class="fu" style="color: #4758AB;
+<span id="cb43-3">  <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">group_by</span>(id) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%&gt;%</span></span>
-<span id="cb42-4">  <span class="fu" style="color: #4758AB;
+<span id="cb43-4">  <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">roc_curve</span>(sex, .pred_female) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%&gt;%</span></span>
-<span id="cb42-5">  <span class="fu" style="color: #4758AB;
+<span id="cb43-5">  <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">ggplot</span>(<span class="fu" style="color: #4758AB;
 background-color: null;
@@ -1452,7 +1466,7 @@ background-color: null;
 font-style: inherit;">color =</span> id)) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">+</span></span>
-<span id="cb42-6">  <span class="fu" style="color: #4758AB;
+<span id="cb43-6">  <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">geom_abline</span>(<span class="at" style="color: #657422;
 background-color: null;
@@ -1469,7 +1483,7 @@ background-color: null;
 font-style: inherit;">1.5</span>) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">+</span></span>
-<span id="cb42-7">  <span class="fu" style="color: #4758AB;
+<span id="cb43-7">  <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">geom_path</span>(<span class="at" style="color: #657422;
 background-color: null;
@@ -1486,29 +1500,29 @@ background-color: null;
 font-style: inherit;">1.2</span>) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">+</span></span>
-<span id="cb42-8">  <span class="fu" style="color: #4758AB;
+<span id="cb43-8">  <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">coord_equal</span>()</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2023-08-04-getting-to-know-tidymodels/2023-08-04-getting-to-know-tidymodels_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+<p><img src="https://sbloggel.netlify.app/posts/2023-08-04-getting-to-know-tidymodels/2023-08-04-getting-to-know-tidymodels_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb43" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1">penguin_final <span class="ot" style="color: #003B4F;
+<div class="sourceCode cell-code" id="cb44" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1">penguin_final <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> penguin_wf <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%&gt;%</span></span>
-<span id="cb43-2">  <span class="fu" style="color: #4758AB;
+<span id="cb44-2">  <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">add_model</span>(glm_spec) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%&gt;%</span></span>
-<span id="cb43-3">  <span class="fu" style="color: #4758AB;
+<span id="cb44-3">  <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">last_fit</span>(penguin_split)</span>
-<span id="cb43-4"></span>
-<span id="cb43-5">penguin_final</span></code></pre></div>
+<span id="cb44-4"></span>
+<span id="cb44-5">penguin_final</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># Resampling results
 # Manual resampling 
@@ -1519,7 +1533,7 @@ font-style: inherit;">last_fit</span>(penguin_split)</span>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb45" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><span class="fu" style="color: #4758AB;
+<div class="sourceCode cell-code" id="cb46" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">collect_metrics</span>(penguin_final)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1531,12 +1545,12 @@ font-style: inherit;">collect_metrics</span>(penguin_final)</span></code></pre><
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb47" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><span class="fu" style="color: #4758AB;
+<div class="sourceCode cell-code" id="cb48" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">collect_predictions</span>(penguin_final) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%&gt;%</span></span>
-<span id="cb47-2">  <span class="fu" style="color: #4758AB;
+<span id="cb48-2">  <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">conf_mat</span>(sex, .pred_class)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1547,14 +1561,14 @@ Prediction female male
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb49" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1">penguin_final<span class="sc" style="color: #5E5E5E;
+<div class="sourceCode cell-code" id="cb50" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1">penguin_final<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">$</span>.workflow[[<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>]] <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%&gt;%</span></span>
-<span id="cb49-2">  <span class="fu" style="color: #4758AB;
+<span id="cb50-2">  <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">tidy</span>(<span class="at" style="color: #657422;
 background-color: null;
@@ -1575,10 +1589,10 @@ font-style: inherit;">TRUE</span>)</span></code></pre></div>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb51" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1">penguins <span class="sc" style="color: #5E5E5E;
+<div class="sourceCode cell-code" id="cb52" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1">penguins <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%&gt;%</span></span>
-<span id="cb51-2">  <span class="fu" style="color: #4758AB;
+<span id="cb52-2">  <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">filter</span>(<span class="sc" style="color: #5E5E5E;
 background-color: null;
@@ -1587,7 +1601,7 @@ background-color: null;
 font-style: inherit;">is.na</span>(sex)) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%&gt;%</span></span>
-<span id="cb51-3">  <span class="fu" style="color: #4758AB;
+<span id="cb52-3">  <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">ggplot</span>(<span class="fu" style="color: #4758AB;
 background-color: null;
@@ -1598,7 +1612,7 @@ background-color: null;
 font-style: inherit;">size =</span> body_mass_g)) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">+</span></span>
-<span id="cb51-4">  <span class="fu" style="color: #4758AB;
+<span id="cb52-4">  <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">geom_point</span>(<span class="at" style="color: #657422;
 background-color: null;
@@ -1607,13 +1621,13 @@ background-color: null;
 font-style: inherit;">0.5</span>) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">+</span></span>
-<span id="cb51-5">  <span class="fu" style="color: #4758AB;
+<span id="cb52-5">  <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">facet_wrap</span>(<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">~</span>species)</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2023-08-04-getting-to-know-tidymodels/2023-08-04-getting-to-know-tidymodels_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
+<p><img src="https://sbloggel.netlify.app/posts/2023-08-04-getting-to-know-tidymodels/2023-08-04-getting-to-know-tidymodels_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 
@@ -2347,41 +2361,45 @@ font-style: inherit;">'c'</span>)</span></code></pre></div>
 <tbody>
 <tr class="odd">
 <td style="text-align: center;">2023-08-03-reducing-image-file-size-with-imagemagick.qmd</td>
-<td style="text-align: center;">2.18K</td>
+<td style="text-align: center;">2.09K</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">2023-08-03-reducing-image-file-size-with-imagemagick.rmarkdown</td>
-<td style="text-align: center;">2.19K</td>
+<td style="text-align: center;">2.1K</td>
 </tr>
 <tr class="odd">
+<td style="text-align: center;">2023-08-03-reducing-image-file-size-with-imagemagick_files</td>
+<td style="text-align: center;">96</td>
+</tr>
+<tr class="even">
 <td style="text-align: center;">koga_edited.jpg</td>
 <td style="text-align: center;">193.93K</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: center;">koga_original.jpg</td>
 <td style="text-align: center;">2.5M</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: center;">koga_signal.jpeg</td>
 <td style="text-align: center;">505.13K</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: center;">low_quality_1.jpg</td>
 <td style="text-align: center;">206.18K</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: center;">low_quality_2.jpg</td>
 <td style="text-align: center;">516.7K</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: center;">low_quality_3.jpg</td>
 <td style="text-align: center;">387.38K</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: center;">low_quality_4.jpg</td>
 <td style="text-align: center;">206.18K</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: center;">low_quality_5.jpg</td>
 <td style="text-align: center;">146.79K</td>
 </tr>
@@ -2686,9 +2704,217 @@ numerator: 5419351 , denominator: 1725033 , pi_approx:  3.14159265358982 , absol
 
 
 
+<section id="the-three-bikes" class="level2">
+<h2 class="anchored" data-anchor-id="the-three-bikes">The three bikes</h2>
 <p><img src="https://sbloggel.netlify.app/posts/2023-07-23-bicycle-comparison/koga_old.jpeg" class="img-fluid" style="width:32.0%" data-fig-align="center"> <img src="https://sbloggel.netlify.app/posts/2023-07-23-bicycle-comparison/koga_new.jpeg" class="img-fluid" style="width:32.0%" data-fig-align="center"> <img src="https://sbloggel.netlify.app/posts/2023-07-23-bicycle-comparison/hammerbacher.jpeg" class="img-fluid" style="width:32.0%" data-fig-align="center"></p>
+</section>
+<section id="points-to-be-represented" class="level2">
+<h2 class="anchored" data-anchor-id="points-to-be-represented">Points to be represented</h2>
+<ul>
+<li>front axis</li>
+<li>back axis</li>
+<li>front beginning of tire</li>
+<li>back beginning of tire</li>
+<li>handlebar low</li>
+<li>handlebar high</li>
+<li>saddle front</li>
+<li>saddle back</li>
+<li>pedals</li>
+</ul>
+<p>Coordinate system: Point 1 is front axis, point 2 is back of saddle.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1">loc_names <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'front_axis'</span>,</span>
+<span id="cb1-2">               <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'back_axis'</span>,</span>
+<span id="cb1-3">               <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'front_beginning_of_tire'</span>,</span>
+<span id="cb1-4">               <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'back_beginning_of_tire'</span>,</span>
+<span id="cb1-5">               <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'handlebar_low'</span>,</span>
+<span id="cb1-6">               <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'handlebar_high'</span>,</span>
+<span id="cb1-7">               <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'saddle_front'</span>,</span>
+<span id="cb1-8">               <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'saddle_back'</span>,</span>
+<span id="cb1-9">               <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'pedals'</span>)</span>
+<span id="cb1-10"></span>
+<span id="cb1-11"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'digitize'</span>)</span>
+<span id="cb1-12"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">load</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'not_yet_formatted.Rdata'</span>)</span>
+<span id="cb1-13"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># save(list = c('koga_new', 'koga_old', 'hammerbacher'), file = 'not_yet_formatted.Rdata')</span></span>
+<span id="cb1-14"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># help(package = 'digitize')</span></span>
+<span id="cb1-15"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># koga_old &lt;- digitize('koga_old.jpeg')</span></span>
+<span id="cb1-16"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># koga_new &lt;- digitize('koga_new.jpeg')</span></span>
+<span id="cb1-17"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># hammerbacher &lt;- digitize('hammerbacher.jpeg')</span></span>
+<span id="cb1-18"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># </span></span>
+<span id="cb1-19"></span>
+<span id="cb1-20"></span>
+<span id="cb1-21">tidy_digit <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">function</span>(dat) {</span>
+<span id="cb1-22">  var_name <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">deparse</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">substitute</span>(dat))</span>
+<span id="cb1-23">  dat <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> </span>
+<span id="cb1-24">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">as_tibble</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> </span>
+<span id="cb1-25">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">var_name =</span> var_name,</span>
+<span id="cb1-26">           <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">loc =</span> loc_names)</span>
+<span id="cb1-27">}</span>
+<span id="cb1-28"></span>
+<span id="cb1-29"></span>
+<span id="cb1-30"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">tidy_digit</span>(koga_new)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 9 × 4
+         x        y var_name loc                    
+     &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;                  
+1 -0.00334 -0.00309 koga_new front_axis             
+2  1.07     0.0401  koga_new back_axis              
+3 -0.321   -0.0679  koga_new front_beginning_of_tire
+4  1.08    -0.383   koga_new back_beginning_of_tire 
+5  0.207    1.02    koga_new handlebar_low          
+6  0.0870   1.12    koga_new handlebar_high         
+7  0.722    0.978   koga_new saddle_front           
+8  0.997    0.994   koga_new saddle_back            
+9  0.622   -0.0432  koga_new pedals                 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">tidy_digit</span>(koga_old)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 9 × 4
+          x        y var_name loc                    
+      &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;                  
+1  3.33e-16 -0.00317 koga_old front_axis             
+2  1.14e+ 0  0.0190  koga_old back_axis              
+3 -3.33e- 1  0.0254  koga_old front_beginning_of_tire
+4  1.15e+ 0 -0.410   koga_old back_beginning_of_tire 
+5  2.46e- 1  1.03    koga_old handlebar_low          
+6  1.01e- 1  1.19    koga_old handlebar_high         
+7  7.25e- 1  0.952   koga_old saddle_front           
+8  9.96e- 1  0.997   koga_old saddle_back            
+9  6.63e- 1 -0.0698  koga_old pedals                 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">tidy_digit</span>(hammerbacher)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 9 × 4
+         x        y var_name     loc                    
+     &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt;                  
+1  0.00376  0.00599 hammerbacher front_axis             
+2  1.20     0.0659  hammerbacher back_axis              
+3 -0.331   -0.150   hammerbacher front_beginning_of_tire
+4  0.932   -0.275   hammerbacher back_beginning_of_tire 
+5  0.256    1.32    hammerbacher handlebar_low          
+6  0.256    1.32    hammerbacher handlebar_high         
+7  0.737    0.946   hammerbacher saddle_front           
+8  0.996    0.994   hammerbacher saddle_back            
+9  0.695   -0.0419  hammerbacher pedals                 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1">dd <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">bind_rows</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">tidy_digit</span>(koga_old), </span>
+<span id="cb7-2">          <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">tidy_digit</span>(koga_new),</span>
+<span id="cb7-3">          <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">tidy_digit</span>(hammerbacher))</span>
+<span id="cb7-4"></span>
+<span id="cb7-5">dd <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> </span>
+<span id="cb7-6">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ggplot</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(x, y, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">color =</span> var_name)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb7-7">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_point</span>()</span></code></pre></div>
+<div class="cell-output-display">
+<p><img src="https://sbloggel.netlify.app/posts/2023-07-23-bicycle-comparison/2023-07-23-bicycle-comparison_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">write_csv</span>(dd, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'bikes.csv'</span>)</span></code></pre></div>
+</div>
+</section>
+<section id="todo" class="level2">
+<h2 class="anchored" data-anchor-id="todo">Todo:</h2>
+<ul>
+<li>measure distance between axes</li>
+<li>measure distance between</li>
+</ul>
 
 
+</section>
 
  ]]></description>
   <category>R</category>
@@ -2760,9 +2986,9 @@ font-style: inherit;">from</span> torchvision <span class="im" style="color: #00
 background-color: null;
 font-style: inherit;">import</span> datasets</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>/Users/seb/Library/r-miniconda-arm64/envs/machine_learning/lib/python3.9/site-packages/torchvision/io/image.py:13: UserWarning: Failed to load image Python extension: 'dlopen(/Users/seb/Library/r-miniconda-arm64/envs/machine_learning/lib/python3.9/site-packages/torchvision/image.so, 0x0006): Symbol not found: (__ZN3c106detail19maybe_wrap_dim_slowIxEET_S2_S2_b)
-  Referenced from: '/Users/seb/Library/r-miniconda-arm64/envs/machine_learning/lib/python3.9/site-packages/torchvision/image.so'
-  Expected in: '/Users/seb/Library/r-miniconda-arm64/envs/machine_learning/lib/python3.9/site-packages/torch/lib/libc10.dylib''If you don't plan on using image functionality from `torchvision.io`, you can ignore this warning. Otherwise, there might be something wrong with your environment. Did you have `libjpeg` or `libpng` installed before building `torchvision` from source?
+<pre><code>/Users/seb/Library/r-miniconda-arm64/envs/machine_learning/lib/python3.9/site-packages/torchvision/io/image.py:13: UserWarning: Failed to load image Python extension: 'dlopen(/Users/seb/Library/r-miniconda-arm64/envs/machine_learning/lib/python3.9/site-packages/torchvision/image.so, 0x0006): Symbol not found: __ZN3c106detail19maybe_wrap_dim_slowIxEET_S2_S2_b
+  Referenced from: &lt;8CBD0B78-6C7C-3C8B-8C76-ACA7B6112818&gt; /Users/seb/Library/r-miniconda-arm64/envs/machine_learning/lib/python3.9/site-packages/torchvision/image.so
+  Expected in:     &lt;07CB8E54-8386-3606-A01E-B92223F93B74&gt; /Users/seb/Library/r-miniconda-arm64/envs/machine_learning/lib/python3.9/site-packages/torch/lib/libc10.dylib'If you don't plan on using image functionality from `torchvision.io`, you can ignore this warning. Otherwise, there might be something wrong with your environment. Did you have `libjpeg` or `libpng` installed before building `torchvision` from source?
   warn(</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><span class="im" style="color: #00769E;
@@ -3253,78 +3479,78 @@ font-style: inherit;">-------------------------------"</span>)</span>
 <div class="cell-output cell-output-stdout">
 <pre><code>Epoch 1
 -------------------------------
-loss: 2.308264  [   64/60000]
-loss: 2.293125  [ 6464/60000]
-loss: 2.272566  [12864/60000]
-loss: 2.268989  [19264/60000]
-loss: 2.242235  [25664/60000]
-loss: 2.217603  [32064/60000]
-loss: 2.219540  [38464/60000]
-loss: 2.189466  [44864/60000]
-loss: 2.201402  [51264/60000]
-loss: 2.155387  [57664/60000]
+loss: 2.293884  [   64/60000]
+loss: 2.280516  [ 6464/60000]
+loss: 2.254215  [12864/60000]
+loss: 2.257743  [19264/60000]
+loss: 2.241249  [25664/60000]
+loss: 2.206033  [32064/60000]
+loss: 2.222995  [38464/60000]
+loss: 2.183638  [44864/60000]
+loss: 2.180845  [51264/60000]
+loss: 2.147983  [57664/60000]
 Test Error: 
- Accuracy: 55.3%, Avg loss: 2.152392 
+ Accuracy: 40.3%, Avg loss: 2.137891 
 
 Epoch 2
 -------------------------------
-loss: 2.166718  [   64/60000]
-loss: 2.151713  [ 6464/60000]
-loss: 2.091146  [12864/60000]
-loss: 2.113186  [19264/60000]
-loss: 2.042603  [25664/60000]
-loss: 1.990383  [32064/60000]
-loss: 2.011725  [38464/60000]
-loss: 1.935344  [44864/60000]
-loss: 1.955811  [51264/60000]
-loss: 1.868298  [57664/60000]
+loss: 2.147081  [   64/60000]
+loss: 2.142349  [ 6464/60000]
+loss: 2.073414  [12864/60000]
+loss: 2.100391  [19264/60000]
+loss: 2.053971  [25664/60000]
+loss: 1.983526  [32064/60000]
+loss: 2.020415  [38464/60000]
+loss: 1.931436  [44864/60000]
+loss: 1.939984  [51264/60000]
+loss: 1.877790  [57664/60000]
 Test Error: 
- Accuracy: 60.2%, Avg loss: 1.868228 
+ Accuracy: 56.7%, Avg loss: 1.862921 
 
 Epoch 3
 -------------------------------
-loss: 1.902832  [   64/60000]
-loss: 1.868233  [ 6464/60000]
-loss: 1.745899  [12864/60000]
-loss: 1.795774  [19264/60000]
-loss: 1.664541  [25664/60000]
-loss: 1.621758  [32064/60000]
-loss: 1.637972  [38464/60000]
-loss: 1.547655  [44864/60000]
-loss: 1.581732  [51264/60000]
-loss: 1.463945  [57664/60000]
+loss: 1.894928  [   64/60000]
+loss: 1.875024  [ 6464/60000]
+loss: 1.740222  [12864/60000]
+loss: 1.794675  [19264/60000]
+loss: 1.693364  [25664/60000]
+loss: 1.631936  [32064/60000]
+loss: 1.665979  [38464/60000]
+loss: 1.550617  [44864/60000]
+loss: 1.587191  [51264/60000]
+loss: 1.492842  [57664/60000]
 Test Error: 
- Accuracy: 62.1%, Avg loss: 1.486784 
+ Accuracy: 60.1%, Avg loss: 1.494139 
 
 Epoch 4
 -------------------------------
-loss: 1.553752  [   64/60000]
-loss: 1.521968  [ 6464/60000]
-loss: 1.363211  [12864/60000]
-loss: 1.443876  [19264/60000]
-loss: 1.313316  [25664/60000]
-loss: 1.310792  [32064/60000]
-loss: 1.326083  [38464/60000]
-loss: 1.257503  [44864/60000]
-loss: 1.302350  [51264/60000]
-loss: 1.196620  [57664/60000]
+loss: 1.558476  [   64/60000]
+loss: 1.533684  [ 6464/60000]
+loss: 1.366379  [12864/60000]
+loss: 1.457518  [19264/60000]
+loss: 1.342172  [25664/60000]
+loss: 1.323192  [32064/60000]
+loss: 1.354460  [38464/60000]
+loss: 1.258602  [44864/60000]
+loss: 1.304382  [51264/60000]
+loss: 1.218093  [57664/60000]
 Test Error: 
- Accuracy: 63.9%, Avg loss: 1.223636 
+ Accuracy: 63.1%, Avg loss: 1.229637 
 
 Epoch 5
 -------------------------------
-loss: 1.296221  [   64/60000]
-loss: 1.287105  [ 6464/60000]
-loss: 1.111054  [12864/60000]
-loss: 1.227450  [19264/60000]
-loss: 1.095856  [25664/60000]
-loss: 1.115949  [32064/60000]
-loss: 1.144591  [38464/60000]
-loss: 1.083400  [44864/60000]
-loss: 1.135926  [51264/60000]
-loss: 1.047703  [57664/60000]
+loss: 1.300160  [   64/60000]
+loss: 1.291894  [ 6464/60000]
+loss: 1.113367  [12864/60000]
+loss: 1.240308  [19264/60000]
+loss: 1.116215  [25664/60000]
+loss: 1.128032  [32064/60000]
+loss: 1.166063  [38464/60000]
+loss: 1.082035  [44864/60000]
+loss: 1.127863  [51264/60000]
+loss: 1.062129  [57664/60000]
 Test Error: 
- Accuracy: 65.0%, Avg loss: 1.067398 </code></pre>
+ Accuracy: 64.9%, Avg loss: 1.068099 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb21" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><span class="bu" style="color: null;
 background-color: null;
@@ -3551,11 +3777,11 @@ font-style: inherit;">3</span>)</span>
 background-color: null;
 font-style: inherit;">print</span>(x)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>tensor([[0.6049, 0.7627, 0.0083],
-        [0.5420, 0.0231, 0.7970],
-        [0.9335, 0.4393, 0.2625],
-        [0.7199, 0.0066, 0.1776],
-        [0.9718, 0.5141, 0.1373]])</code></pre>
+<pre><code>tensor([[0.7172, 0.8668, 0.7743],
+        [0.0462, 0.2161, 0.4469],
+        [0.2911, 0.3335, 0.2292],
+        [0.1917, 0.9395, 0.4347],
+        [0.9052, 0.2584, 0.6975]])</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><span class="im" style="color: #00769E;
 background-color: null;
@@ -3567,9 +3793,9 @@ font-style: inherit;">import</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">*</span></span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>/Users/seb/Library/r-miniconda-arm64/envs/machine_learning/lib/python3.9/site-packages/torchvision/io/image.py:13: UserWarning: Failed to load image Python extension: 'dlopen(/Users/seb/Library/r-miniconda-arm64/envs/machine_learning/lib/python3.9/site-packages/torchvision/image.so, 0x0006): Symbol not found: (__ZN3c106detail19maybe_wrap_dim_slowIxEET_S2_S2_b)
-  Referenced from: '/Users/seb/Library/r-miniconda-arm64/envs/machine_learning/lib/python3.9/site-packages/torchvision/image.so'
-  Expected in: '/Users/seb/Library/r-miniconda-arm64/envs/machine_learning/lib/python3.9/site-packages/torch/lib/libc10.dylib''If you don't plan on using image functionality from `torchvision.io`, you can ignore this warning. Otherwise, there might be something wrong with your environment. Did you have `libjpeg` or `libpng` installed before building `torchvision` from source?
+<pre><code>/Users/seb/Library/r-miniconda-arm64/envs/machine_learning/lib/python3.9/site-packages/torchvision/io/image.py:13: UserWarning: Failed to load image Python extension: 'dlopen(/Users/seb/Library/r-miniconda-arm64/envs/machine_learning/lib/python3.9/site-packages/torchvision/image.so, 0x0006): Symbol not found: __ZN3c106detail19maybe_wrap_dim_slowIxEET_S2_S2_b
+  Referenced from: &lt;8CBD0B78-6C7C-3C8B-8C76-ACA7B6112818&gt; /Users/seb/Library/r-miniconda-arm64/envs/machine_learning/lib/python3.9/site-packages/torchvision/image.so
+  Expected in:     &lt;07CB8E54-8386-3606-A01E-B92223F93B74&gt; /Users/seb/Library/r-miniconda-arm64/envs/machine_learning/lib/python3.9/site-packages/torch/lib/libc10.dylib'If you don't plan on using image functionality from `torchvision.io`, you can ignore this warning. Otherwise, there might be something wrong with your environment. Did you have `libjpeg` or `libpng` installed before building `torchvision` from source?
   warn(</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1">path <span class="op" style="color: #5E5E5E;
@@ -3628,189 +3854,189 @@ epoch     train_loss  valid_loss  error_rate  time
 
 Epoch 1/1 : |----------------------------------------| 0.00% [0/92 00:00&lt;?]
 
-Epoch 1/1 : |----------------------------------------| 1.09% [1/92 00:00&lt;01:11]
+Epoch 1/1 : |----------------------------------------| 1.09% [1/92 00:05&lt;07:54]
 
-Epoch 1/1 : |----------------------------------------| 2.17% [2/92 00:01&lt;01:03 1.8910]
+Epoch 1/1 : |----------------------------------------| 2.17% [2/92 00:05&lt;04:20 1.4611]
 
-Epoch 1/1 : |█---------------------------------------| 3.26% [3/92 00:02&lt;01:00 1.9657]
+Epoch 1/1 : |█---------------------------------------| 3.26% [3/92 00:06&lt;03:08 1.4571]
 
-Epoch 1/1 : |█---------------------------------------| 4.35% [4/92 00:02&lt;00:58 1.7734]
+Epoch 1/1 : |█---------------------------------------| 4.35% [4/92 00:06&lt;02:32 1.5097]
 
-Epoch 1/1 : |██--------------------------------------| 5.43% [5/92 00:03&lt;00:56 1.6578]
+Epoch 1/1 : |██--------------------------------------| 5.43% [5/92 00:07&lt;02:11 1.4588]
 
-Epoch 1/1 : |██--------------------------------------| 6.52% [6/92 00:03&lt;00:55 1.6069]
+Epoch 1/1 : |██--------------------------------------| 6.52% [6/92 00:08&lt;01:56 1.4491]
 
-Epoch 1/1 : |███-------------------------------------| 7.61% [7/92 00:04&lt;00:54 1.5560]
+Epoch 1/1 : |███-------------------------------------| 7.61% [7/92 00:08&lt;01:46 1.3571]
 
-Epoch 1/1 : |███-------------------------------------| 8.70% [8/92 00:05&lt;00:54 1.5045]
+Epoch 1/1 : |███-------------------------------------| 8.70% [8/92 00:09&lt;01:37 1.3298]
 
-Epoch 1/1 : |███-------------------------------------| 9.78% [9/92 00:05&lt;00:53 1.4761]
+Epoch 1/1 : |███-------------------------------------| 9.78% [9/92 00:09&lt;01:31 1.2889]
 
-Epoch 1/1 : |████------------------------------------| 10.87% [10/92 00:06&lt;00:53 1.4145]
+Epoch 1/1 : |████------------------------------------| 10.87% [10/92 00:10&lt;01:25 1.2722]
 
-Epoch 1/1 : |████------------------------------------| 11.96% [11/92 00:07&lt;00:52 1.3537]
+Epoch 1/1 : |████------------------------------------| 11.96% [11/92 00:11&lt;01:21 1.2364]
 
-Epoch 1/1 : |█████-----------------------------------| 13.04% [12/92 00:07&lt;00:51 1.3306]
+Epoch 1/1 : |█████-----------------------------------| 13.04% [12/92 00:11&lt;01:17 1.1908]
 
-Epoch 1/1 : |█████-----------------------------------| 14.13% [13/92 00:08&lt;00:51 1.2733]
+Epoch 1/1 : |█████-----------------------------------| 14.13% [13/92 00:12&lt;01:14 1.1453]
 
-Epoch 1/1 : |██████----------------------------------| 15.22% [14/92 00:09&lt;00:50 1.2394]
+Epoch 1/1 : |██████----------------------------------| 15.22% [14/92 00:12&lt;01:11 1.1057]
 
-Epoch 1/1 : |██████----------------------------------| 16.30% [15/92 00:09&lt;00:49 1.2001]
+Epoch 1/1 : |██████----------------------------------| 16.30% [15/92 00:13&lt;01:08 1.0928]
 
-Epoch 1/1 : |██████----------------------------------| 17.39% [16/92 00:10&lt;00:48 1.1647]
+Epoch 1/1 : |██████----------------------------------| 17.39% [16/92 00:13&lt;01:06 1.0707]
 
-Epoch 1/1 : |███████---------------------------------| 18.48% [17/92 00:10&lt;00:48 1.1171]
+Epoch 1/1 : |███████---------------------------------| 18.48% [17/92 00:14&lt;01:04 1.0227]
 
-Epoch 1/1 : |███████---------------------------------| 19.57% [18/92 00:11&lt;00:47 1.0695]
+Epoch 1/1 : |███████---------------------------------| 19.57% [18/92 00:15&lt;01:02 1.0178]
 
-Epoch 1/1 : |████████--------------------------------| 20.65% [19/92 00:12&lt;00:47 1.0127]
+Epoch 1/1 : |████████--------------------------------| 20.65% [19/92 00:15&lt;01:00 0.9841]
 
-Epoch 1/1 : |████████--------------------------------| 21.74% [20/92 00:12&lt;00:46 0.9695]
+Epoch 1/1 : |████████--------------------------------| 21.74% [20/92 00:16&lt;00:58 0.9457]
 
-Epoch 1/1 : |█████████-------------------------------| 22.83% [21/92 00:13&lt;00:45 0.9318]
+Epoch 1/1 : |█████████-------------------------------| 22.83% [21/92 00:16&lt;00:57 0.9079]
 
-Epoch 1/1 : |█████████-------------------------------| 23.91% [22/92 00:14&lt;00:45 0.8980]
+Epoch 1/1 : |█████████-------------------------------| 23.91% [22/92 00:17&lt;00:55 0.8819]
 
-Epoch 1/1 : |██████████------------------------------| 25.00% [23/92 00:14&lt;00:44 0.8586]
+Epoch 1/1 : |██████████------------------------------| 25.00% [23/92 00:18&lt;00:54 0.8478]
 
-Epoch 1/1 : |██████████------------------------------| 26.09% [24/92 00:15&lt;00:44 0.8289]
+Epoch 1/1 : |██████████------------------------------| 26.09% [24/92 00:18&lt;00:52 0.8204]
 
-Epoch 1/1 : |██████████------------------------------| 27.17% [25/92 00:16&lt;00:43 0.8003]
+Epoch 1/1 : |██████████------------------------------| 27.17% [25/92 00:19&lt;00:51 0.7875]
 
-Epoch 1/1 : |███████████-----------------------------| 28.26% [26/92 00:16&lt;00:42 0.7684]
+Epoch 1/1 : |███████████-----------------------------| 28.26% [26/92 00:19&lt;00:50 0.7594]
 
-Epoch 1/1 : |███████████-----------------------------| 29.35% [27/92 00:17&lt;00:41 0.7496]
+Epoch 1/1 : |███████████-----------------------------| 29.35% [27/92 00:20&lt;00:48 0.7458]
 
-Epoch 1/1 : |████████████----------------------------| 30.43% [28/92 00:18&lt;00:41 0.7307]
+Epoch 1/1 : |████████████----------------------------| 30.43% [28/92 00:20&lt;00:47 0.7307]
 
-Epoch 1/1 : |████████████----------------------------| 31.52% [29/92 00:18&lt;00:40 0.7151]
+Epoch 1/1 : |████████████----------------------------| 31.52% [29/92 00:21&lt;00:46 0.7085]
 
-Epoch 1/1 : |█████████████---------------------------| 32.61% [30/92 00:19&lt;00:39 0.7171]
+Epoch 1/1 : |█████████████---------------------------| 32.61% [30/92 00:22&lt;00:45 0.6856]
 
-Epoch 1/1 : |█████████████---------------------------| 33.70% [31/92 00:19&lt;00:39 0.6873]
+Epoch 1/1 : |█████████████---------------------------| 33.70% [31/92 00:22&lt;00:44 0.6655]
 
-Epoch 1/1 : |█████████████---------------------------| 34.78% [32/92 00:20&lt;00:38 0.6628]
+Epoch 1/1 : |█████████████---------------------------| 34.78% [32/92 00:23&lt;00:43 0.6427]
 
-Epoch 1/1 : |██████████████--------------------------| 35.87% [33/92 00:21&lt;00:37 0.6490]
+Epoch 1/1 : |██████████████--------------------------| 35.87% [33/92 00:23&lt;00:42 0.6247]
 
-Epoch 1/1 : |██████████████--------------------------| 36.96% [34/92 00:21&lt;00:37 0.6238]
+Epoch 1/1 : |██████████████--------------------------| 36.96% [34/92 00:24&lt;00:41 0.6038]
 
-Epoch 1/1 : |███████████████-------------------------| 38.04% [35/92 00:22&lt;00:36 0.6011]
+Epoch 1/1 : |███████████████-------------------------| 38.04% [35/92 00:24&lt;00:40 0.5811]
 
-Epoch 1/1 : |███████████████-------------------------| 39.13% [36/92 00:22&lt;00:35 0.5817]
+Epoch 1/1 : |███████████████-------------------------| 39.13% [36/92 00:25&lt;00:39 0.5666]
 
-Epoch 1/1 : |████████████████------------------------| 40.22% [37/92 00:23&lt;00:35 0.5627]
+Epoch 1/1 : |████████████████------------------------| 40.22% [37/92 00:25&lt;00:38 0.5499]
 
-Epoch 1/1 : |████████████████------------------------| 41.30% [38/92 00:24&lt;00:34 0.5436]
+Epoch 1/1 : |████████████████------------------------| 41.30% [38/92 00:26&lt;00:37 0.5333]
 
-Epoch 1/1 : |████████████████------------------------| 42.39% [39/92 00:24&lt;00:33 0.5236]
+Epoch 1/1 : |████████████████------------------------| 42.39% [39/92 00:27&lt;00:36 0.5166]
 
-Epoch 1/1 : |█████████████████-----------------------| 43.48% [40/92 00:25&lt;00:33 0.5079]
+Epoch 1/1 : |█████████████████-----------------------| 43.48% [40/92 00:27&lt;00:35 0.4998]
 
-Epoch 1/1 : |█████████████████-----------------------| 44.57% [41/92 00:26&lt;00:32 0.4935]
+Epoch 1/1 : |█████████████████-----------------------| 44.57% [41/92 00:28&lt;00:35 0.4840]
 
-Epoch 1/1 : |██████████████████----------------------| 45.65% [42/92 00:26&lt;00:31 0.4778]
+Epoch 1/1 : |██████████████████----------------------| 45.65% [42/92 00:28&lt;00:34 0.4746]
 
-Epoch 1/1 : |██████████████████----------------------| 46.74% [43/92 00:27&lt;00:31 0.4650]
+Epoch 1/1 : |██████████████████----------------------| 46.74% [43/92 00:29&lt;00:33 0.4632]
 
-Epoch 1/1 : |███████████████████---------------------| 47.83% [44/92 00:28&lt;00:30 0.4598]
+Epoch 1/1 : |███████████████████---------------------| 47.83% [44/92 00:29&lt;00:32 0.4558]
 
-Epoch 1/1 : |███████████████████---------------------| 48.91% [45/92 00:28&lt;00:29 0.4534]
+Epoch 1/1 : |███████████████████---------------------| 48.91% [45/92 00:30&lt;00:31 0.4430]
 
-Epoch 1/1 : |████████████████████--------------------| 50.00% [46/92 00:29&lt;00:29 0.4393]
+Epoch 1/1 : |████████████████████--------------------| 50.00% [46/92 00:30&lt;00:30 0.4459]
 
-Epoch 1/1 : |████████████████████--------------------| 51.09% [47/92 00:29&lt;00:28 0.4275]
+Epoch 1/1 : |████████████████████--------------------| 51.09% [47/92 00:31&lt;00:30 0.4323]
 
-Epoch 1/1 : |████████████████████--------------------| 52.17% [48/92 00:30&lt;00:27 0.4147]
+Epoch 1/1 : |████████████████████--------------------| 52.17% [48/92 00:32&lt;00:29 0.4198]
 
-Epoch 1/1 : |█████████████████████-------------------| 53.26% [49/92 00:31&lt;00:27 0.4136]
+Epoch 1/1 : |█████████████████████-------------------| 53.26% [49/92 00:32&lt;00:28 0.4096]
 
-Epoch 1/1 : |█████████████████████-------------------| 54.35% [50/92 00:31&lt;00:26 0.4013]
+Epoch 1/1 : |█████████████████████-------------------| 54.35% [50/92 00:33&lt;00:27 0.3991]
 
-Epoch 1/1 : |██████████████████████------------------| 55.43% [51/92 00:32&lt;00:26 0.3913]
+Epoch 1/1 : |██████████████████████------------------| 55.43% [51/92 00:33&lt;00:27 0.3871]
 
-Epoch 1/1 : |██████████████████████------------------| 56.52% [52/92 00:33&lt;00:25 0.3847]
+Epoch 1/1 : |██████████████████████------------------| 56.52% [52/92 00:34&lt;00:26 0.3804]
 
-Epoch 1/1 : |███████████████████████-----------------| 57.61% [53/92 00:33&lt;00:24 0.3770]
+Epoch 1/1 : |███████████████████████-----------------| 57.61% [53/92 00:34&lt;00:25 0.3694]
 
-Epoch 1/1 : |███████████████████████-----------------| 58.70% [54/92 00:34&lt;00:24 0.3667]
+Epoch 1/1 : |███████████████████████-----------------| 58.70% [54/92 00:35&lt;00:24 0.3596]
 
-Epoch 1/1 : |███████████████████████-----------------| 59.78% [55/92 00:34&lt;00:23 0.3560]
+Epoch 1/1 : |███████████████████████-----------------| 59.78% [55/92 00:35&lt;00:24 0.3558]
 
-Epoch 1/1 : |████████████████████████----------------| 60.87% [56/92 00:35&lt;00:22 0.3456]
+Epoch 1/1 : |████████████████████████----------------| 60.87% [56/92 00:36&lt;00:23 0.3468]
 
-Epoch 1/1 : |████████████████████████----------------| 61.96% [57/92 00:36&lt;00:22 0.3383]
+Epoch 1/1 : |████████████████████████----------------| 61.96% [57/92 00:37&lt;00:22 0.3376]
 
-Epoch 1/1 : |█████████████████████████---------------| 63.04% [58/92 00:36&lt;00:21 0.3351]
+Epoch 1/1 : |█████████████████████████---------------| 63.04% [58/92 00:37&lt;00:22 0.3308]
 
-Epoch 1/1 : |█████████████████████████---------------| 64.13% [59/92 00:37&lt;00:21 0.3261]
+Epoch 1/1 : |█████████████████████████---------------| 64.13% [59/92 00:38&lt;00:21 0.3219]
 
-Epoch 1/1 : |██████████████████████████--------------| 65.22% [60/92 00:38&lt;00:20 0.3226]
+Epoch 1/1 : |██████████████████████████--------------| 65.22% [60/92 00:38&lt;00:20 0.3154]
 
-Epoch 1/1 : |██████████████████████████--------------| 66.30% [61/92 00:38&lt;00:19 0.3138]
+Epoch 1/1 : |██████████████████████████--------------| 66.30% [61/92 00:39&lt;00:20 0.3070]
 
-Epoch 1/1 : |██████████████████████████--------------| 67.39% [62/92 00:39&lt;00:19 0.3054]
+Epoch 1/1 : |██████████████████████████--------------| 67.39% [62/92 00:39&lt;00:19 0.2997]
 
-Epoch 1/1 : |███████████████████████████-------------| 68.48% [63/92 00:40&lt;00:18 0.3015]
+Epoch 1/1 : |███████████████████████████-------------| 68.48% [63/92 00:40&lt;00:18 0.2921]
 
-Epoch 1/1 : |███████████████████████████-------------| 69.57% [64/92 00:40&lt;00:17 0.2947]
+Epoch 1/1 : |███████████████████████████-------------| 69.57% [64/92 00:41&lt;00:17 0.2911]
 
-Epoch 1/1 : |████████████████████████████------------| 70.65% [65/92 00:41&lt;00:17 0.2881]
+Epoch 1/1 : |████████████████████████████------------| 70.65% [65/92 00:41&lt;00:17 0.2831]
 
-Epoch 1/1 : |████████████████████████████------------| 71.74% [66/92 00:42&lt;00:16 0.2826]
+Epoch 1/1 : |████████████████████████████------------| 71.74% [66/92 00:42&lt;00:16 0.2813]
 
-Epoch 1/1 : |█████████████████████████████-----------| 72.83% [67/92 00:42&lt;00:15 0.2753]
+Epoch 1/1 : |█████████████████████████████-----------| 72.83% [67/92 00:42&lt;00:15 0.2766]
 
-Epoch 1/1 : |█████████████████████████████-----------| 73.91% [68/92 00:43&lt;00:15 0.2681]
+Epoch 1/1 : |█████████████████████████████-----------| 73.91% [68/92 00:43&lt;00:15 0.2695]
 
-Epoch 1/1 : |██████████████████████████████----------| 75.00% [69/92 00:43&lt;00:14 0.2675]
+Epoch 1/1 : |██████████████████████████████----------| 75.00% [69/92 00:43&lt;00:14 0.2640]
 
-Epoch 1/1 : |██████████████████████████████----------| 76.09% [70/92 00:44&lt;00:14 0.2628]
+Epoch 1/1 : |██████████████████████████████----------| 76.09% [70/92 00:44&lt;00:13 0.2586]
 
-Epoch 1/1 : |██████████████████████████████----------| 77.17% [71/92 00:45&lt;00:13 0.2567]
+Epoch 1/1 : |██████████████████████████████----------| 77.17% [71/92 00:44&lt;00:13 0.2522]
 
-Epoch 1/1 : |███████████████████████████████---------| 78.26% [72/92 00:45&lt;00:12 0.2502]
+Epoch 1/1 : |███████████████████████████████---------| 78.26% [72/92 00:45&lt;00:12 0.2456]
 
-Epoch 1/1 : |███████████████████████████████---------| 79.35% [73/92 00:46&lt;00:12 0.2438]
+Epoch 1/1 : |███████████████████████████████---------| 79.35% [73/92 00:46&lt;00:12 0.2398]
 
-Epoch 1/1 : |████████████████████████████████--------| 80.43% [74/92 00:47&lt;00:11 0.2404]
+Epoch 1/1 : |████████████████████████████████--------| 80.43% [74/92 00:46&lt;00:11 0.2364]
 
-Epoch 1/1 : |████████████████████████████████--------| 81.52% [75/92 00:47&lt;00:10 0.2346]
+Epoch 1/1 : |████████████████████████████████--------| 81.52% [75/92 00:47&lt;00:10 0.2304]
 
-Epoch 1/1 : |█████████████████████████████████-------| 82.61% [76/92 00:48&lt;00:10 0.2311]
+Epoch 1/1 : |█████████████████████████████████-------| 82.61% [76/92 00:47&lt;00:10 0.2249]
 
-Epoch 1/1 : |█████████████████████████████████-------| 83.70% [77/92 00:49&lt;00:09 0.2401]
+Epoch 1/1 : |█████████████████████████████████-------| 83.70% [77/92 00:48&lt;00:09 0.2200]
 
-Epoch 1/1 : |█████████████████████████████████-------| 84.78% [78/92 00:49&lt;00:08 0.2367]
+Epoch 1/1 : |█████████████████████████████████-------| 84.78% [78/92 00:48&lt;00:08 0.2168]
 
-Epoch 1/1 : |██████████████████████████████████------| 85.87% [79/92 00:50&lt;00:08 0.2309]
+Epoch 1/1 : |██████████████████████████████████------| 85.87% [79/92 00:49&lt;00:08 0.2143]
 
-Epoch 1/1 : |██████████████████████████████████------| 86.96% [80/92 00:50&lt;00:07 0.2287]
+Epoch 1/1 : |██████████████████████████████████------| 86.96% [80/92 00:50&lt;00:07 0.2101]
 
-Epoch 1/1 : |███████████████████████████████████-----| 88.04% [81/92 00:51&lt;00:07 0.2279]
+Epoch 1/1 : |███████████████████████████████████-----| 88.04% [81/92 00:50&lt;00:06 0.2057]
 
-Epoch 1/1 : |███████████████████████████████████-----| 89.13% [82/92 00:52&lt;00:06 0.2228]
+Epoch 1/1 : |███████████████████████████████████-----| 89.13% [82/92 00:51&lt;00:06 0.2008]
 
-Epoch 1/1 : |████████████████████████████████████----| 90.22% [83/92 00:52&lt;00:05 0.2185]
+Epoch 1/1 : |████████████████████████████████████----| 90.22% [83/92 00:51&lt;00:05 0.1978]
 
-Epoch 1/1 : |████████████████████████████████████----| 91.30% [84/92 00:53&lt;00:05 0.2132]
+Epoch 1/1 : |████████████████████████████████████----| 91.30% [84/92 00:52&lt;00:04 0.1937]
 
-Epoch 1/1 : |████████████████████████████████████----| 92.39% [85/92 00:54&lt;00:04 0.2105]
+Epoch 1/1 : |████████████████████████████████████----| 92.39% [85/92 00:52&lt;00:04 0.1925]
 
-Epoch 1/1 : |█████████████████████████████████████---| 93.48% [86/92 00:54&lt;00:03 0.2075]
+Epoch 1/1 : |█████████████████████████████████████---| 93.48% [86/92 00:53&lt;00:03 0.1879]
 
-Epoch 1/1 : |█████████████████████████████████████---| 94.57% [87/92 00:55&lt;00:03 0.2025]
+Epoch 1/1 : |█████████████████████████████████████---| 94.57% [87/92 00:54&lt;00:03 0.1834]
 
-Epoch 1/1 : |██████████████████████████████████████--| 95.65% [88/92 00:55&lt;00:02 0.1978]
+Epoch 1/1 : |██████████████████████████████████████--| 95.65% [88/92 00:54&lt;00:02 0.1834]
 
-Epoch 1/1 : |██████████████████████████████████████--| 96.74% [89/92 00:56&lt;00:01 0.1954]
+Epoch 1/1 : |██████████████████████████████████████--| 96.74% [89/92 00:55&lt;00:01 0.1855]
 
-Epoch 1/1 : |███████████████████████████████████████-| 97.83% [90/92 00:57&lt;00:01 0.1915]
+Epoch 1/1 : |███████████████████████████████████████-| 97.83% [90/92 00:55&lt;00:01 0.1848]
 
-Epoch 1/1 : |███████████████████████████████████████-| 98.91% [91/92 00:57&lt;00:00 0.1897]
+Epoch 1/1 : |███████████████████████████████████████-| 98.91% [91/92 00:56&lt;00:00 0.1809]
 
-Epoch 1/1 : |████████████████████████████████████████| 100.00% [92/92 00:58&lt;00:00 0.1865]
+Epoch 1/1 : |████████████████████████████████████████| 100.00% [92/92 00:56&lt;00:00 0.1839]
 
 Epoch 1/1 :                                                                              
 
@@ -3819,247 +4045,247 @@ Epoch 1/1 :
 
 Epoch 1/1 : |----------------------------------------| 0.00% [0/24 00:00&lt;?]
 
-Epoch 1/1 : |█---------------------------------------| 4.17% [1/24 00:00&lt;00:08]
+Epoch 1/1 : |█---------------------------------------| 4.17% [1/24 00:00&lt;00:10]
 
-Epoch 1/1 : |███-------------------------------------| 8.33% [2/24 00:00&lt;00:07 0.1867]
+Epoch 1/1 : |███-------------------------------------| 8.33% [2/24 00:00&lt;00:08 0.1796]
 
-Epoch 1/1 : |█████-----------------------------------| 12.50% [3/24 00:01&lt;00:07 0.1867]
+Epoch 1/1 : |█████-----------------------------------| 12.50% [3/24 00:01&lt;00:08 0.1796]
 
-Epoch 1/1 : |██████----------------------------------| 16.67% [4/24 00:01&lt;00:07 0.1867]
+Epoch 1/1 : |██████----------------------------------| 16.67% [4/24 00:01&lt;00:07 0.1796]
 
-Epoch 1/1 : |████████--------------------------------| 20.83% [5/24 00:01&lt;00:06 0.1867]
+Epoch 1/1 : |████████--------------------------------| 20.83% [5/24 00:01&lt;00:07 0.1796]
 
-Epoch 1/1 : |██████████------------------------------| 25.00% [6/24 00:02&lt;00:06 0.1867]
+Epoch 1/1 : |██████████------------------------------| 25.00% [6/24 00:02&lt;00:06 0.1796]
 
-Epoch 1/1 : |███████████-----------------------------| 29.17% [7/24 00:02&lt;00:05 0.1867]
+Epoch 1/1 : |███████████-----------------------------| 29.17% [7/24 00:02&lt;00:06 0.1796]
 
-Epoch 1/1 : |█████████████---------------------------| 33.33% [8/24 00:02&lt;00:05 0.1867]
+Epoch 1/1 : |█████████████---------------------------| 33.33% [8/24 00:02&lt;00:05 0.1796]
 
-Epoch 1/1 : |███████████████-------------------------| 37.50% [9/24 00:03&lt;00:05 0.1867]
+Epoch 1/1 : |███████████████-------------------------| 37.50% [9/24 00:03&lt;00:05 0.1796]
 
-Epoch 1/1 : |████████████████------------------------| 41.67% [10/24 00:03&lt;00:04 0.1867]
+Epoch 1/1 : |████████████████------------------------| 41.67% [10/24 00:03&lt;00:05 0.1796]
 
-Epoch 1/1 : |██████████████████----------------------| 45.83% [11/24 00:03&lt;00:04 0.1867]
+Epoch 1/1 : |██████████████████----------------------| 45.83% [11/24 00:03&lt;00:04 0.1796]
 
-Epoch 1/1 : |████████████████████--------------------| 50.00% [12/24 00:04&lt;00:04 0.1867]
+Epoch 1/1 : |████████████████████--------------------| 50.00% [12/24 00:04&lt;00:04 0.1796]
 
-Epoch 1/1 : |█████████████████████-------------------| 54.17% [13/24 00:04&lt;00:03 0.1867]
+Epoch 1/1 : |█████████████████████-------------------| 54.17% [13/24 00:04&lt;00:03 0.1796]
 
-Epoch 1/1 : |███████████████████████-----------------| 58.33% [14/24 00:04&lt;00:03 0.1867]
+Epoch 1/1 : |███████████████████████-----------------| 58.33% [14/24 00:05&lt;00:03 0.1796]
 
-Epoch 1/1 : |█████████████████████████---------------| 62.50% [15/24 00:05&lt;00:03 0.1867]
+Epoch 1/1 : |█████████████████████████---------------| 62.50% [15/24 00:05&lt;00:03 0.1796]
 
-Epoch 1/1 : |██████████████████████████--------------| 66.67% [16/24 00:05&lt;00:02 0.1867]
+Epoch 1/1 : |██████████████████████████--------------| 66.67% [16/24 00:05&lt;00:02 0.1796]
 
-Epoch 1/1 : |████████████████████████████------------| 70.83% [17/24 00:05&lt;00:02 0.1867]
+Epoch 1/1 : |████████████████████████████------------| 70.83% [17/24 00:06&lt;00:02 0.1796]
 
-Epoch 1/1 : |██████████████████████████████----------| 75.00% [18/24 00:06&lt;00:02 0.1867]
+Epoch 1/1 : |██████████████████████████████----------| 75.00% [18/24 00:06&lt;00:02 0.1796]
 
-Epoch 1/1 : |███████████████████████████████---------| 79.17% [19/24 00:06&lt;00:01 0.1867]
+Epoch 1/1 : |███████████████████████████████---------| 79.17% [19/24 00:06&lt;00:01 0.1796]
 
-Epoch 1/1 : |█████████████████████████████████-------| 83.33% [20/24 00:07&lt;00:01 0.1867]
+Epoch 1/1 : |█████████████████████████████████-------| 83.33% [20/24 00:07&lt;00:01 0.1796]
 
-Epoch 1/1 : |███████████████████████████████████-----| 87.50% [21/24 00:07&lt;00:01 0.1867]
+Epoch 1/1 : |███████████████████████████████████-----| 87.50% [21/24 00:07&lt;00:01 0.1796]
 
-Epoch 1/1 : |████████████████████████████████████----| 91.67% [22/24 00:07&lt;00:00 0.1867]
+Epoch 1/1 : |████████████████████████████████████----| 91.67% [22/24 00:08&lt;00:00 0.1796]
 
-Epoch 1/1 : |██████████████████████████████████████--| 95.83% [23/24 00:08&lt;00:00 0.1867]
+Epoch 1/1 : |██████████████████████████████████████--| 95.83% [23/24 00:08&lt;00:00 0.1796]
 
-Epoch 1/1 : |████████████████████████████████████████| 100.00% [24/24 00:08&lt;00:00 0.1867]
-
-Epoch 1/1 :                                                                              
+Epoch 1/1 : |████████████████████████████████████████| 100.00% [24/24 00:08&lt;00:00 0.1796]
 
 Epoch 1/1 :                                                                              
-0         0.186726    0.036176    0.012855    01:06     
+
+Epoch 1/1 :                                                                              
+0         0.179568    0.032552    0.012855    01:05     
 █
 epoch     train_loss  valid_loss  error_rate  time    
 █
 
 Epoch 1/1 : |----------------------------------------| 0.00% [0/92 00:00&lt;?]
 
-Epoch 1/1 : |----------------------------------------| 1.09% [1/92 00:00&lt;01:27]
+Epoch 1/1 : |----------------------------------------| 1.09% [1/92 00:01&lt;02:29]
 
-Epoch 1/1 : |----------------------------------------| 2.17% [2/92 00:01&lt;01:28 0.0047]
+Epoch 1/1 : |----------------------------------------| 2.17% [2/92 00:02&lt;01:51 0.1797]
 
-Epoch 1/1 : |█---------------------------------------| 3.26% [3/92 00:02&lt;01:23 0.0539]
+Epoch 1/1 : |█---------------------------------------| 3.26% [3/92 00:03&lt;01:38 0.1064]
 
-Epoch 1/1 : |█---------------------------------------| 4.35% [4/92 00:03&lt;01:21 0.0895]
+Epoch 1/1 : |█---------------------------------------| 4.35% [4/92 00:04&lt;01:30 0.0731]
 
-Epoch 1/1 : |██--------------------------------------| 5.43% [5/92 00:04&lt;01:19 0.0868]
+Epoch 1/1 : |██--------------------------------------| 5.43% [5/92 00:04&lt;01:26 0.0828]
 
-Epoch 1/1 : |██--------------------------------------| 6.52% [6/92 00:05&lt;01:17 0.0715]
+Epoch 1/1 : |██--------------------------------------| 6.52% [6/92 00:05&lt;01:22 0.0750]
 
-Epoch 1/1 : |███-------------------------------------| 7.61% [7/92 00:06&lt;01:16 0.0628]
+Epoch 1/1 : |███-------------------------------------| 7.61% [7/92 00:06&lt;01:20 0.0639]
 
-Epoch 1/1 : |███-------------------------------------| 8.70% [8/92 00:07&lt;01:14 0.0534]
+Epoch 1/1 : |███-------------------------------------| 8.70% [8/92 00:07&lt;01:17 0.0550]
 
-Epoch 1/1 : |███-------------------------------------| 9.78% [9/92 00:07&lt;01:13 0.0703]
+Epoch 1/1 : |███-------------------------------------| 9.78% [9/92 00:08&lt;01:16 0.0483]
 
-Epoch 1/1 : |████------------------------------------| 10.87% [10/92 00:08&lt;01:12 0.0871]
+Epoch 1/1 : |████------------------------------------| 10.87% [10/92 00:09&lt;01:14 0.0460]
 
-Epoch 1/1 : |████------------------------------------| 11.96% [11/92 00:09&lt;01:11 0.0879]
+Epoch 1/1 : |████------------------------------------| 11.96% [11/92 00:09&lt;01:13 0.0580]
 
-Epoch 1/1 : |█████-----------------------------------| 13.04% [12/92 00:10&lt;01:10 0.0861]
+Epoch 1/1 : |█████-----------------------------------| 13.04% [12/92 00:10&lt;01:11 0.0529]
 
-Epoch 1/1 : |█████-----------------------------------| 14.13% [13/92 00:11&lt;01:09 0.0784]
+Epoch 1/1 : |█████-----------------------------------| 14.13% [13/92 00:11&lt;01:10 0.0525]
 
-Epoch 1/1 : |██████----------------------------------| 15.22% [14/92 00:12&lt;01:08 0.0719]
+Epoch 1/1 : |██████----------------------------------| 15.22% [14/92 00:12&lt;01:09 0.0680]
 
-Epoch 1/1 : |██████----------------------------------| 16.30% [15/92 00:13&lt;01:07 0.0676]
+Epoch 1/1 : |██████----------------------------------| 16.30% [15/92 00:13&lt;01:07 0.0632]
 
-Epoch 1/1 : |██████----------------------------------| 17.39% [16/92 00:13&lt;01:06 0.0661]
+Epoch 1/1 : |██████----------------------------------| 17.39% [16/92 00:14&lt;01:06 0.0612]
 
-Epoch 1/1 : |███████---------------------------------| 18.48% [17/92 00:14&lt;01:05 0.0617]
+Epoch 1/1 : |███████---------------------------------| 18.48% [17/92 00:14&lt;01:05 0.0966]
 
-Epoch 1/1 : |███████---------------------------------| 19.57% [18/92 00:15&lt;01:04 0.0673]
+Epoch 1/1 : |███████---------------------------------| 19.57% [18/92 00:15&lt;01:04 0.0946]
 
-Epoch 1/1 : |████████--------------------------------| 20.65% [19/92 00:16&lt;01:03 0.0693]
+Epoch 1/1 : |████████--------------------------------| 20.65% [19/92 00:16&lt;01:03 0.0967]
 
-Epoch 1/1 : |████████--------------------------------| 21.74% [20/92 00:17&lt;01:03 0.0792]
+Epoch 1/1 : |████████--------------------------------| 21.74% [20/92 00:17&lt;01:02 0.1005]
 
-Epoch 1/1 : |█████████-------------------------------| 22.83% [21/92 00:18&lt;01:02 0.0770]
+Epoch 1/1 : |█████████-------------------------------| 22.83% [21/92 00:18&lt;01:01 0.0976]
 
-Epoch 1/1 : |█████████-------------------------------| 23.91% [22/92 00:19&lt;01:01 0.0729]
+Epoch 1/1 : |█████████-------------------------------| 23.91% [22/92 00:19&lt;01:00 0.0920]
 
-Epoch 1/1 : |██████████------------------------------| 25.00% [23/92 00:20&lt;01:00 0.0710]
+Epoch 1/1 : |██████████------------------------------| 25.00% [23/92 00:19&lt;00:59 0.0877]
 
-Epoch 1/1 : |██████████------------------------------| 26.09% [24/92 00:20&lt;00:59 0.0779]
+Epoch 1/1 : |██████████------------------------------| 26.09% [24/92 00:20&lt;00:58 0.0830]
 
-Epoch 1/1 : |██████████------------------------------| 27.17% [25/92 00:21&lt;00:58 0.0787]
+Epoch 1/1 : |██████████------------------------------| 27.17% [25/92 00:21&lt;00:57 0.0832]
 
-Epoch 1/1 : |███████████-----------------------------| 28.26% [26/92 00:22&lt;00:57 0.0870]
+Epoch 1/1 : |███████████-----------------------------| 28.26% [26/92 00:22&lt;00:56 0.0834]
 
-Epoch 1/1 : |███████████-----------------------------| 29.35% [27/92 00:23&lt;00:56 0.0936]
+Epoch 1/1 : |███████████-----------------------------| 29.35% [27/92 00:23&lt;00:56 0.0868]
 
-Epoch 1/1 : |████████████----------------------------| 30.43% [28/92 00:24&lt;00:55 0.0901]
+Epoch 1/1 : |████████████----------------------------| 30.43% [28/92 00:24&lt;00:55 0.0931]
 
-Epoch 1/1 : |████████████----------------------------| 31.52% [29/92 00:25&lt;00:55 0.0877]
+Epoch 1/1 : |████████████----------------------------| 31.52% [29/92 00:24&lt;00:54 0.0893]
 
-Epoch 1/1 : |█████████████---------------------------| 32.61% [30/92 00:26&lt;00:54 0.0858]
+Epoch 1/1 : |█████████████---------------------------| 32.61% [30/92 00:25&lt;00:53 0.0865]
 
-Epoch 1/1 : |█████████████---------------------------| 33.70% [31/92 00:27&lt;00:53 0.0862]
+Epoch 1/1 : |█████████████---------------------------| 33.70% [31/92 00:26&lt;00:52 0.0861]
 
-Epoch 1/1 : |█████████████---------------------------| 34.78% [32/92 00:27&lt;00:52 0.0846]
+Epoch 1/1 : |█████████████---------------------------| 34.78% [32/92 00:27&lt;00:51 0.0888]
 
-Epoch 1/1 : |██████████████--------------------------| 35.87% [33/92 00:28&lt;00:51 0.0834]
+Epoch 1/1 : |██████████████--------------------------| 35.87% [33/92 00:28&lt;00:50 0.0852]
 
-Epoch 1/1 : |██████████████--------------------------| 36.96% [34/92 00:29&lt;00:50 0.0800]
+Epoch 1/1 : |██████████████--------------------------| 36.96% [34/92 00:29&lt;00:49 0.0883]
 
-Epoch 1/1 : |███████████████-------------------------| 38.04% [35/92 00:30&lt;00:49 0.0775]
+Epoch 1/1 : |███████████████-------------------------| 38.04% [35/92 00:29&lt;00:48 0.0849]
 
-Epoch 1/1 : |███████████████-------------------------| 39.13% [36/92 00:31&lt;00:49 0.0776]
+Epoch 1/1 : |███████████████-------------------------| 39.13% [36/92 00:30&lt;00:47 0.0865]
 
-Epoch 1/1 : |████████████████------------------------| 40.22% [37/92 00:32&lt;00:48 0.0774]
+Epoch 1/1 : |████████████████------------------------| 40.22% [37/92 00:31&lt;00:47 0.0887]
 
-Epoch 1/1 : |████████████████------------------------| 41.30% [38/92 00:33&lt;00:47 0.0746]
+Epoch 1/1 : |████████████████------------------------| 41.30% [38/92 00:32&lt;00:46 0.0949]
 
-Epoch 1/1 : |████████████████------------------------| 42.39% [39/92 00:34&lt;00:46 0.0730]
+Epoch 1/1 : |████████████████------------------------| 42.39% [39/92 00:33&lt;00:45 0.0992]
 
-Epoch 1/1 : |█████████████████-----------------------| 43.48% [40/92 00:34&lt;00:45 0.0724]
+Epoch 1/1 : |█████████████████-----------------------| 43.48% [40/92 00:34&lt;00:44 0.0956]
 
-Epoch 1/1 : |█████████████████-----------------------| 44.57% [41/92 00:35&lt;00:44 0.0707]
+Epoch 1/1 : |█████████████████-----------------------| 44.57% [41/92 00:34&lt;00:43 0.0950]
 
-Epoch 1/1 : |██████████████████----------------------| 45.65% [42/92 00:36&lt;00:43 0.0715]
+Epoch 1/1 : |██████████████████----------------------| 45.65% [42/92 00:35&lt;00:42 0.0925]
 
-Epoch 1/1 : |██████████████████----------------------| 46.74% [43/92 00:37&lt;00:42 0.0758]
+Epoch 1/1 : |██████████████████----------------------| 46.74% [43/92 00:36&lt;00:41 0.0915]
 
-Epoch 1/1 : |███████████████████---------------------| 47.83% [44/92 00:38&lt;00:41 0.0735]
+Epoch 1/1 : |███████████████████---------------------| 47.83% [44/92 00:37&lt;00:40 0.0920]
 
-Epoch 1/1 : |███████████████████---------------------| 48.91% [45/92 00:39&lt;00:41 0.0711]
+Epoch 1/1 : |███████████████████---------------------| 48.91% [45/92 00:38&lt;00:39 0.0902]
 
-Epoch 1/1 : |████████████████████--------------------| 50.00% [46/92 00:40&lt;00:40 0.0746]
+Epoch 1/1 : |████████████████████--------------------| 50.00% [46/92 00:39&lt;00:39 0.0919]
 
-Epoch 1/1 : |████████████████████--------------------| 51.09% [47/92 00:41&lt;00:39 0.0724]
+Epoch 1/1 : |████████████████████--------------------| 51.09% [47/92 00:39&lt;00:38 0.1026]
 
-Epoch 1/1 : |████████████████████--------------------| 52.17% [48/92 00:41&lt;00:38 0.0704]
+Epoch 1/1 : |████████████████████--------------------| 52.17% [48/92 00:40&lt;00:37 0.1011]
 
-Epoch 1/1 : |█████████████████████-------------------| 53.26% [49/92 00:42&lt;00:37 0.0706]
+Epoch 1/1 : |█████████████████████-------------------| 53.26% [49/92 00:41&lt;00:36 0.0981]
 
-Epoch 1/1 : |█████████████████████-------------------| 54.35% [50/92 00:43&lt;00:36 0.0730]
+Epoch 1/1 : |█████████████████████-------------------| 54.35% [50/92 00:42&lt;00:35 0.1058]
 
-Epoch 1/1 : |██████████████████████------------------| 55.43% [51/92 00:44&lt;00:35 0.0755]
+Epoch 1/1 : |██████████████████████------------------| 55.43% [51/92 00:43&lt;00:34 0.1025]
 
-Epoch 1/1 : |██████████████████████------------------| 56.52% [52/92 00:45&lt;00:34 0.0802]
+Epoch 1/1 : |██████████████████████------------------| 56.52% [52/92 00:44&lt;00:33 0.1030]
 
-Epoch 1/1 : |███████████████████████-----------------| 57.61% [53/92 00:46&lt;00:34 0.0778]
+Epoch 1/1 : |███████████████████████-----------------| 57.61% [53/92 00:44&lt;00:33 0.1020]
 
-Epoch 1/1 : |███████████████████████-----------------| 58.70% [54/92 00:47&lt;00:33 0.0767]
+Epoch 1/1 : |███████████████████████-----------------| 58.70% [54/92 00:45&lt;00:32 0.1046]
 
-Epoch 1/1 : |███████████████████████-----------------| 59.78% [55/92 00:47&lt;00:32 0.0770]
+Epoch 1/1 : |███████████████████████-----------------| 59.78% [55/92 00:46&lt;00:31 0.1033]
 
-Epoch 1/1 : |████████████████████████----------------| 60.87% [56/92 00:48&lt;00:31 0.0766]
+Epoch 1/1 : |████████████████████████----------------| 60.87% [56/92 00:47&lt;00:30 0.1014]
 
-Epoch 1/1 : |████████████████████████----------------| 61.96% [57/92 00:49&lt;00:30 0.0767]
+Epoch 1/1 : |████████████████████████----------------| 61.96% [57/92 00:48&lt;00:29 0.0984]
 
-Epoch 1/1 : |█████████████████████████---------------| 63.04% [58/92 00:50&lt;00:29 0.0755]
+Epoch 1/1 : |█████████████████████████---------------| 63.04% [58/92 00:49&lt;00:28 0.0960]
 
-Epoch 1/1 : |█████████████████████████---------------| 64.13% [59/92 00:51&lt;00:28 0.0766]
+Epoch 1/1 : |█████████████████████████---------------| 64.13% [59/92 00:49&lt;00:27 0.0944]
 
-Epoch 1/1 : |██████████████████████████--------------| 65.22% [60/92 00:52&lt;00:27 0.0758]
+Epoch 1/1 : |██████████████████████████--------------| 65.22% [60/92 00:50&lt;00:27 0.0969]
 
-Epoch 1/1 : |██████████████████████████--------------| 66.30% [61/92 00:53&lt;00:27 0.0740]
+Epoch 1/1 : |██████████████████████████--------------| 66.30% [61/92 00:51&lt;00:26 0.0946]
 
-Epoch 1/1 : |██████████████████████████--------------| 67.39% [62/92 00:54&lt;00:26 0.0789]
+Epoch 1/1 : |██████████████████████████--------------| 67.39% [62/92 00:52&lt;00:25 0.0945]
 
-Epoch 1/1 : |███████████████████████████-------------| 68.48% [63/92 00:54&lt;00:25 0.0845]
+Epoch 1/1 : |███████████████████████████-------------| 68.48% [63/92 00:53&lt;00:24 0.0930]
 
-Epoch 1/1 : |███████████████████████████-------------| 69.57% [64/92 00:55&lt;00:24 0.0822]
+Epoch 1/1 : |███████████████████████████-------------| 69.57% [64/92 00:54&lt;00:23 0.0931]
 
-Epoch 1/1 : |████████████████████████████------------| 70.65% [65/92 00:56&lt;00:23 0.0806]
+Epoch 1/1 : |████████████████████████████------------| 70.65% [65/92 00:54&lt;00:22 0.0908]
 
-Epoch 1/1 : |████████████████████████████------------| 71.74% [66/92 00:57&lt;00:22 0.0784]
+Epoch 1/1 : |████████████████████████████------------| 71.74% [66/92 00:55&lt;00:21 0.0884]
 
-Epoch 1/1 : |█████████████████████████████-----------| 72.83% [67/92 00:58&lt;00:21 0.0771]
+Epoch 1/1 : |█████████████████████████████-----------| 72.83% [67/92 00:56&lt;00:21 0.0871]
 
-Epoch 1/1 : |█████████████████████████████-----------| 73.91% [68/92 00:59&lt;00:20 0.0766]
+Epoch 1/1 : |█████████████████████████████-----------| 73.91% [68/92 00:57&lt;00:20 0.0861]
 
-Epoch 1/1 : |██████████████████████████████----------| 75.00% [69/92 01:00&lt;00:20 0.0803]
+Epoch 1/1 : |██████████████████████████████----------| 75.00% [69/92 00:58&lt;00:19 0.0839]
 
-Epoch 1/1 : |██████████████████████████████----------| 76.09% [70/92 01:01&lt;00:19 0.0800]
+Epoch 1/1 : |██████████████████████████████----------| 76.09% [70/92 00:59&lt;00:18 0.0831]
 
-Epoch 1/1 : |██████████████████████████████----------| 77.17% [71/92 01:01&lt;00:18 0.0779]
+Epoch 1/1 : |██████████████████████████████----------| 77.17% [71/92 01:00&lt;00:17 0.0838]
 
-Epoch 1/1 : |███████████████████████████████---------| 78.26% [72/92 01:02&lt;00:17 0.0839]
+Epoch 1/1 : |███████████████████████████████---------| 78.26% [72/92 01:00&lt;00:16 0.0848]
 
-Epoch 1/1 : |███████████████████████████████---------| 79.35% [73/92 01:03&lt;00:16 0.0837]
+Epoch 1/1 : |███████████████████████████████---------| 79.35% [73/92 01:01&lt;00:16 0.0865]
 
-Epoch 1/1 : |████████████████████████████████--------| 80.43% [74/92 01:04&lt;00:15 0.0815]
+Epoch 1/1 : |████████████████████████████████--------| 80.43% [74/92 01:02&lt;00:15 0.0885]
 
-Epoch 1/1 : |████████████████████████████████--------| 81.52% [75/92 01:05&lt;00:14 0.0805]
+Epoch 1/1 : |████████████████████████████████--------| 81.52% [75/92 01:03&lt;00:14 0.0864]
 
-Epoch 1/1 : |█████████████████████████████████-------| 82.61% [76/92 01:06&lt;00:13 0.0793]
+Epoch 1/1 : |█████████████████████████████████-------| 82.61% [76/92 01:04&lt;00:13 0.0872]
 
-Epoch 1/1 : |█████████████████████████████████-------| 83.70% [77/92 01:07&lt;00:13 0.0773]
+Epoch 1/1 : |█████████████████████████████████-------| 83.70% [77/92 01:05&lt;00:12 0.0859]
 
-Epoch 1/1 : |█████████████████████████████████-------| 84.78% [78/92 01:08&lt;00:12 0.0775]
+Epoch 1/1 : |█████████████████████████████████-------| 84.78% [78/92 01:06&lt;00:11 0.0837]
 
-Epoch 1/1 : |██████████████████████████████████------| 85.87% [79/92 01:09&lt;00:11 0.0756]
+Epoch 1/1 : |██████████████████████████████████------| 85.87% [79/92 01:07&lt;00:11 0.0838]
 
-Epoch 1/1 : |██████████████████████████████████------| 86.96% [80/92 01:09&lt;00:10 0.0740]
+Epoch 1/1 : |██████████████████████████████████------| 86.96% [80/92 01:07&lt;00:10 0.0828]
 
-Epoch 1/1 : |███████████████████████████████████-----| 88.04% [81/92 01:10&lt;00:09 0.0726]
+Epoch 1/1 : |███████████████████████████████████-----| 88.04% [81/92 01:08&lt;00:09 0.0814]
 
-Epoch 1/1 : |███████████████████████████████████-----| 89.13% [82/92 01:11&lt;00:08 0.0709]
+Epoch 1/1 : |███████████████████████████████████-----| 89.13% [82/92 01:09&lt;00:08 0.0795]
 
-Epoch 1/1 : |████████████████████████████████████----| 90.22% [83/92 01:12&lt;00:07 0.0699]
+Epoch 1/1 : |████████████████████████████████████----| 90.22% [83/92 01:10&lt;00:07 0.0776]
 
-Epoch 1/1 : |████████████████████████████████████----| 91.30% [84/92 01:13&lt;00:06 0.0703]
+Epoch 1/1 : |████████████████████████████████████----| 91.30% [84/92 01:11&lt;00:06 0.0795]
 
-Epoch 1/1 : |████████████████████████████████████----| 92.39% [85/92 01:14&lt;00:06 0.0687]
+Epoch 1/1 : |████████████████████████████████████----| 92.39% [85/92 01:12&lt;00:05 0.0781]
 
-Epoch 1/1 : |█████████████████████████████████████---| 93.48% [86/92 01:15&lt;00:05 0.0732]
+Epoch 1/1 : |█████████████████████████████████████---| 93.48% [86/92 01:13&lt;00:05 0.0765]
 
-Epoch 1/1 : |█████████████████████████████████████---| 94.57% [87/92 01:16&lt;00:04 0.0714]
+Epoch 1/1 : |█████████████████████████████████████---| 94.57% [87/92 01:13&lt;00:04 0.0749]
 
-Epoch 1/1 : |██████████████████████████████████████--| 95.65% [88/92 01:16&lt;00:03 0.0697]
+Epoch 1/1 : |██████████████████████████████████████--| 95.65% [88/92 01:14&lt;00:03 0.0731]
 
-Epoch 1/1 : |██████████████████████████████████████--| 96.74% [89/92 01:17&lt;00:02 0.0682]
+Epoch 1/1 : |██████████████████████████████████████--| 96.74% [89/92 01:15&lt;00:02 0.0732]
 
-Epoch 1/1 : |███████████████████████████████████████-| 97.83% [90/92 01:18&lt;00:01 0.0682]
+Epoch 1/1 : |███████████████████████████████████████-| 97.83% [90/92 01:16&lt;00:01 0.0729]
 
-Epoch 1/1 : |███████████████████████████████████████-| 98.91% [91/92 01:19&lt;00:00 0.0782]
+Epoch 1/1 : |███████████████████████████████████████-| 98.91% [91/92 01:17&lt;00:00 0.0712]
 
-Epoch 1/1 : |████████████████████████████████████████| 100.00% [92/92 01:20&lt;00:00 0.0786]
+Epoch 1/1 : |████████████████████████████████████████| 100.00% [92/92 01:18&lt;00:00 0.0702]
 
 Epoch 1/1 :                                                                              
 
@@ -4070,56 +4296,56 @@ Epoch 1/1 : |----------------------------------------| 0.00% [0/24 00:00&lt;?]
 
 Epoch 1/1 : |█---------------------------------------| 4.17% [1/24 00:00&lt;00:08]
 
-Epoch 1/1 : |███-------------------------------------| 8.33% [2/24 00:00&lt;00:07 0.0767]
+Epoch 1/1 : |███-------------------------------------| 8.33% [2/24 00:00&lt;00:08 0.0691]
 
-Epoch 1/1 : |█████-----------------------------------| 12.50% [3/24 00:01&lt;00:07 0.0767]
+Epoch 1/1 : |█████-----------------------------------| 12.50% [3/24 00:01&lt;00:07 0.0691]
 
-Epoch 1/1 : |██████----------------------------------| 16.67% [4/24 00:01&lt;00:07 0.0767]
+Epoch 1/1 : |██████----------------------------------| 16.67% [4/24 00:01&lt;00:07 0.0691]
 
-Epoch 1/1 : |████████--------------------------------| 20.83% [5/24 00:01&lt;00:06 0.0767]
+Epoch 1/1 : |████████--------------------------------| 20.83% [5/24 00:01&lt;00:07 0.0691]
 
-Epoch 1/1 : |██████████------------------------------| 25.00% [6/24 00:02&lt;00:06 0.0767]
+Epoch 1/1 : |██████████------------------------------| 25.00% [6/24 00:02&lt;00:06 0.0691]
 
-Epoch 1/1 : |███████████-----------------------------| 29.17% [7/24 00:02&lt;00:05 0.0767]
+Epoch 1/1 : |███████████-----------------------------| 29.17% [7/24 00:02&lt;00:06 0.0691]
 
-Epoch 1/1 : |█████████████---------------------------| 33.33% [8/24 00:02&lt;00:05 0.0767]
+Epoch 1/1 : |█████████████---------------------------| 33.33% [8/24 00:02&lt;00:05 0.0691]
 
-Epoch 1/1 : |███████████████-------------------------| 37.50% [9/24 00:03&lt;00:05 0.0767]
+Epoch 1/1 : |███████████████-------------------------| 37.50% [9/24 00:03&lt;00:05 0.0691]
 
-Epoch 1/1 : |████████████████------------------------| 41.67% [10/24 00:03&lt;00:04 0.0767]
+Epoch 1/1 : |████████████████------------------------| 41.67% [10/24 00:03&lt;00:05 0.0691]
 
-Epoch 1/1 : |██████████████████----------------------| 45.83% [11/24 00:03&lt;00:04 0.0767]
+Epoch 1/1 : |██████████████████----------------------| 45.83% [11/24 00:03&lt;00:04 0.0691]
 
-Epoch 1/1 : |████████████████████--------------------| 50.00% [12/24 00:04&lt;00:04 0.0767]
+Epoch 1/1 : |████████████████████--------------------| 50.00% [12/24 00:04&lt;00:04 0.0691]
 
-Epoch 1/1 : |█████████████████████-------------------| 54.17% [13/24 00:04&lt;00:03 0.0767]
+Epoch 1/1 : |█████████████████████-------------------| 54.17% [13/24 00:04&lt;00:04 0.0691]
 
-Epoch 1/1 : |███████████████████████-----------------| 58.33% [14/24 00:04&lt;00:03 0.0767]
+Epoch 1/1 : |███████████████████████-----------------| 58.33% [14/24 00:05&lt;00:03 0.0691]
 
-Epoch 1/1 : |█████████████████████████---------------| 62.50% [15/24 00:05&lt;00:03 0.0767]
+Epoch 1/1 : |█████████████████████████---------------| 62.50% [15/24 00:05&lt;00:03 0.0691]
 
-Epoch 1/1 : |██████████████████████████--------------| 66.67% [16/24 00:05&lt;00:02 0.0767]
+Epoch 1/1 : |██████████████████████████--------------| 66.67% [16/24 00:05&lt;00:02 0.0691]
 
-Epoch 1/1 : |████████████████████████████------------| 70.83% [17/24 00:06&lt;00:02 0.0767]
+Epoch 1/1 : |████████████████████████████------------| 70.83% [17/24 00:06&lt;00:02 0.0691]
 
-Epoch 1/1 : |██████████████████████████████----------| 75.00% [18/24 00:06&lt;00:02 0.0767]
+Epoch 1/1 : |██████████████████████████████----------| 75.00% [18/24 00:06&lt;00:02 0.0691]
 
-Epoch 1/1 : |███████████████████████████████---------| 79.17% [19/24 00:06&lt;00:01 0.0767]
+Epoch 1/1 : |███████████████████████████████---------| 79.17% [19/24 00:07&lt;00:01 0.0691]
 
-Epoch 1/1 : |█████████████████████████████████-------| 83.33% [20/24 00:07&lt;00:01 0.0767]
+Epoch 1/1 : |█████████████████████████████████-------| 83.33% [20/24 00:07&lt;00:01 0.0691]
 
-Epoch 1/1 : |███████████████████████████████████-----| 87.50% [21/24 00:07&lt;00:01 0.0767]
+Epoch 1/1 : |███████████████████████████████████-----| 87.50% [21/24 00:07&lt;00:01 0.0691]
 
-Epoch 1/1 : |████████████████████████████████████----| 91.67% [22/24 00:07&lt;00:00 0.0767]
+Epoch 1/1 : |████████████████████████████████████----| 91.67% [22/24 00:08&lt;00:00 0.0691]
 
-Epoch 1/1 : |██████████████████████████████████████--| 95.83% [23/24 00:08&lt;00:00 0.0767]
+Epoch 1/1 : |██████████████████████████████████████--| 95.83% [23/24 00:08&lt;00:00 0.0691]
 
-Epoch 1/1 : |████████████████████████████████████████| 100.00% [24/24 00:08&lt;00:00 0.0767]
-
-Epoch 1/1 :                                                                              
+Epoch 1/1 : |████████████████████████████████████████| 100.00% [24/24 00:08&lt;00:00 0.0691]
 
 Epoch 1/1 :                                                                              
-0         0.076747    0.034090    0.011502    01:28     </code></pre>
+
+Epoch 1/1 :                                                                              
+0         0.069070    0.013186    0.004736    01:26     </code></pre>
 </div>
 </div>
 
@@ -5143,7 +5369,7 @@ font-style: inherit;">800</span>)</span>
 <div class="cell-output-display">
 
 <div>                        <script type="text/javascript">window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
-        <script charset="utf-8" src="https://cdn.plot.ly/plotly-2.24.1.min.js"></script>                <div id="1f0ab6ed-1a98-4c1a-b172-3c7ed3bae678" class="plotly-graph-div" style="height:800px; width:800px;"></div>            <script type="text/javascript">                                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("1f0ab6ed-1a98-4c1a-b172-3c7ed3bae678")) {                    Plotly.newPlot(                        "1f0ab6ed-1a98-4c1a-b172-3c7ed3bae678",                        [{"hovertemplate":"x=%{x}\u003cbr\u003ey=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"","marker":{"color":"#636efa","symbol":"circle"},"mode":"markers","name":"","orientation":"v","showlegend":false,"x":[0,1,2,3,4],"xaxis":"x","y":[0,1,4,9,25],"yaxis":"y","type":"scatter"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmapgl":[{"type":"heatmapgl","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"x"}},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"y"}},"legend":{"tracegroupgap":0},"margin":{"t":60},"height":800,"width":800},                        {"responsive": true}                    )                };                            </script>        </div>
+        <script charset="utf-8" src="https://cdn.plot.ly/plotly-2.24.1.min.js"></script>                <div id="06c5b2f5-ec3e-485a-988a-72aa42c27f61" class="plotly-graph-div" style="height:800px; width:800px;"></div>            <script type="text/javascript">                                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("06c5b2f5-ec3e-485a-988a-72aa42c27f61")) {                    Plotly.newPlot(                        "06c5b2f5-ec3e-485a-988a-72aa42c27f61",                        [{"hovertemplate":"x=%{x}\u003cbr\u003ey=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"","marker":{"color":"#636efa","symbol":"circle"},"mode":"markers","name":"","orientation":"v","showlegend":false,"x":[0,1,2,3,4],"xaxis":"x","y":[0,1,4,9,25],"yaxis":"y","type":"scatter"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmapgl":[{"type":"heatmapgl","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"x"}},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"y"}},"legend":{"tracegroupgap":0},"margin":{"t":60},"height":800,"width":800},                        {"responsive": true}                    )                };                            </script>        </div>
 </div>
 </div>
 
@@ -5431,8 +5657,8 @@ font-style: inherit;">print</span>(fm.summary())</span></code></pre></div>
 Dep. Variable:                Lottery   R-squared:                       0.338
 Model:                            OLS   Adj. R-squared:                  0.287
 Method:                 Least Squares   F-statistic:                     6.636
-Date:                Mon, 10 Jul 2023   Prob (F-statistic):           1.07e-05
-Time:                        10:37:19   Log-Likelihood:                -375.30
+Date:                Wed, 09 Aug 2023   Prob (F-statistic):           1.07e-05
+Time:                        13:39:12   Log-Likelihood:                -375.30
 No. Observations:                  85   AIC:                             764.6
 Df Residuals:                      78   BIC:                             781.7
 Df Model:                           6                                         

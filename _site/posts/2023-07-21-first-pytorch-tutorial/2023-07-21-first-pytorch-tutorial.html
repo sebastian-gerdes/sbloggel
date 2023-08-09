@@ -6,7 +6,6 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Sebastian Gerdes">
 <meta name="dcterms.date" content="2023-07-21">
 
 <title>Seb’s blog - First pytorch tutorial</title>
@@ -161,12 +160,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Sebastian Gerdes </p>
-          </div>
-  </div>
     
     <div>
     <div class="quarto-title-meta-heading">Published</div>
@@ -209,9 +202,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> torch.utils.data <span class="im">import</span> DataLoader</span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> torchvision <span class="im">import</span> datasets</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>/Users/seb/Library/r-miniconda-arm64/envs/machine_learning/lib/python3.9/site-packages/torchvision/io/image.py:13: UserWarning: Failed to load image Python extension: 'dlopen(/Users/seb/Library/r-miniconda-arm64/envs/machine_learning/lib/python3.9/site-packages/torchvision/image.so, 0x0006): Symbol not found: (__ZN3c106detail19maybe_wrap_dim_slowIxEET_S2_S2_b)
-  Referenced from: '/Users/seb/Library/r-miniconda-arm64/envs/machine_learning/lib/python3.9/site-packages/torchvision/image.so'
-  Expected in: '/Users/seb/Library/r-miniconda-arm64/envs/machine_learning/lib/python3.9/site-packages/torch/lib/libc10.dylib''If you don't plan on using image functionality from `torchvision.io`, you can ignore this warning. Otherwise, there might be something wrong with your environment. Did you have `libjpeg` or `libpng` installed before building `torchvision` from source?
+<pre><code>/Users/seb/Library/r-miniconda-arm64/envs/machine_learning/lib/python3.9/site-packages/torchvision/io/image.py:13: UserWarning: Failed to load image Python extension: 'dlopen(/Users/seb/Library/r-miniconda-arm64/envs/machine_learning/lib/python3.9/site-packages/torchvision/image.so, 0x0006): Symbol not found: __ZN3c106detail19maybe_wrap_dim_slowIxEET_S2_S2_b
+  Referenced from: &lt;8CBD0B78-6C7C-3C8B-8C76-ACA7B6112818&gt; /Users/seb/Library/r-miniconda-arm64/envs/machine_learning/lib/python3.9/site-packages/torchvision/image.so
+  Expected in:     &lt;07CB8E54-8386-3606-A01E-B92223F93B74&gt; /Users/seb/Library/r-miniconda-arm64/envs/machine_learning/lib/python3.9/site-packages/torch/lib/libc10.dylib'If you don't plan on using image functionality from `torchvision.io`, you can ignore this warning. Otherwise, there might be something wrong with your environment. Did you have `libjpeg` or `libpng` installed before building `torchvision` from source?
   warn(</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> torchvision.transforms <span class="im">import</span> ToTensor</span>
@@ -354,78 +347,78 @@ Shape of y: torch.Size([64]) torch.int64</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>Epoch 1
 -------------------------------
-loss: 2.308264  [   64/60000]
-loss: 2.293125  [ 6464/60000]
-loss: 2.272566  [12864/60000]
-loss: 2.268989  [19264/60000]
-loss: 2.242235  [25664/60000]
-loss: 2.217603  [32064/60000]
-loss: 2.219540  [38464/60000]
-loss: 2.189466  [44864/60000]
-loss: 2.201402  [51264/60000]
-loss: 2.155387  [57664/60000]
+loss: 2.293884  [   64/60000]
+loss: 2.280516  [ 6464/60000]
+loss: 2.254215  [12864/60000]
+loss: 2.257743  [19264/60000]
+loss: 2.241249  [25664/60000]
+loss: 2.206033  [32064/60000]
+loss: 2.222995  [38464/60000]
+loss: 2.183638  [44864/60000]
+loss: 2.180845  [51264/60000]
+loss: 2.147983  [57664/60000]
 Test Error: 
- Accuracy: 55.3%, Avg loss: 2.152392 
+ Accuracy: 40.3%, Avg loss: 2.137891 
 
 Epoch 2
 -------------------------------
-loss: 2.166718  [   64/60000]
-loss: 2.151713  [ 6464/60000]
-loss: 2.091146  [12864/60000]
-loss: 2.113186  [19264/60000]
-loss: 2.042603  [25664/60000]
-loss: 1.990383  [32064/60000]
-loss: 2.011725  [38464/60000]
-loss: 1.935344  [44864/60000]
-loss: 1.955811  [51264/60000]
-loss: 1.868298  [57664/60000]
+loss: 2.147081  [   64/60000]
+loss: 2.142349  [ 6464/60000]
+loss: 2.073414  [12864/60000]
+loss: 2.100391  [19264/60000]
+loss: 2.053971  [25664/60000]
+loss: 1.983526  [32064/60000]
+loss: 2.020415  [38464/60000]
+loss: 1.931436  [44864/60000]
+loss: 1.939984  [51264/60000]
+loss: 1.877790  [57664/60000]
 Test Error: 
- Accuracy: 60.2%, Avg loss: 1.868228 
+ Accuracy: 56.7%, Avg loss: 1.862921 
 
 Epoch 3
 -------------------------------
-loss: 1.902832  [   64/60000]
-loss: 1.868233  [ 6464/60000]
-loss: 1.745899  [12864/60000]
-loss: 1.795774  [19264/60000]
-loss: 1.664541  [25664/60000]
-loss: 1.621758  [32064/60000]
-loss: 1.637972  [38464/60000]
-loss: 1.547655  [44864/60000]
-loss: 1.581732  [51264/60000]
-loss: 1.463945  [57664/60000]
+loss: 1.894928  [   64/60000]
+loss: 1.875024  [ 6464/60000]
+loss: 1.740222  [12864/60000]
+loss: 1.794675  [19264/60000]
+loss: 1.693364  [25664/60000]
+loss: 1.631936  [32064/60000]
+loss: 1.665979  [38464/60000]
+loss: 1.550617  [44864/60000]
+loss: 1.587191  [51264/60000]
+loss: 1.492842  [57664/60000]
 Test Error: 
- Accuracy: 62.1%, Avg loss: 1.486784 
+ Accuracy: 60.1%, Avg loss: 1.494139 
 
 Epoch 4
 -------------------------------
-loss: 1.553752  [   64/60000]
-loss: 1.521968  [ 6464/60000]
-loss: 1.363211  [12864/60000]
-loss: 1.443876  [19264/60000]
-loss: 1.313316  [25664/60000]
-loss: 1.310792  [32064/60000]
-loss: 1.326083  [38464/60000]
-loss: 1.257503  [44864/60000]
-loss: 1.302350  [51264/60000]
-loss: 1.196620  [57664/60000]
+loss: 1.558476  [   64/60000]
+loss: 1.533684  [ 6464/60000]
+loss: 1.366379  [12864/60000]
+loss: 1.457518  [19264/60000]
+loss: 1.342172  [25664/60000]
+loss: 1.323192  [32064/60000]
+loss: 1.354460  [38464/60000]
+loss: 1.258602  [44864/60000]
+loss: 1.304382  [51264/60000]
+loss: 1.218093  [57664/60000]
 Test Error: 
- Accuracy: 63.9%, Avg loss: 1.223636 
+ Accuracy: 63.1%, Avg loss: 1.229637 
 
 Epoch 5
 -------------------------------
-loss: 1.296221  [   64/60000]
-loss: 1.287105  [ 6464/60000]
-loss: 1.111054  [12864/60000]
-loss: 1.227450  [19264/60000]
-loss: 1.095856  [25664/60000]
-loss: 1.115949  [32064/60000]
-loss: 1.144591  [38464/60000]
-loss: 1.083400  [44864/60000]
-loss: 1.135926  [51264/60000]
-loss: 1.047703  [57664/60000]
+loss: 1.300160  [   64/60000]
+loss: 1.291894  [ 6464/60000]
+loss: 1.113367  [12864/60000]
+loss: 1.240308  [19264/60000]
+loss: 1.116215  [25664/60000]
+loss: 1.128032  [32064/60000]
+loss: 1.166063  [38464/60000]
+loss: 1.082035  [44864/60000]
+loss: 1.127863  [51264/60000]
+loss: 1.062129  [57664/60000]
 Test Error: 
- Accuracy: 65.0%, Avg loss: 1.067398 </code></pre>
+ Accuracy: 64.9%, Avg loss: 1.068099 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Done!"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">

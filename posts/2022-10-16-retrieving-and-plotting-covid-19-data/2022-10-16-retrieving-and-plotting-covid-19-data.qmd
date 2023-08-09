@@ -3,6 +3,8 @@ title: 'Retrieving and plotting COVID-19 data'
 date: '2022-10-16'
 categories:
   - R
+execute: 
+  eval: false
 ---
 
 ## Background

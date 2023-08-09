@@ -10,10 +10,8 @@ categories:
 
 ## Which packages belong to the metapackage tidymodels
 ```{r}
-tidymodels_packages(include_self = TRUE)
+tidymodels::tidymodels_packages(include_self = TRUE)
 ```
-
-
 
 ## Tutorial 1 - palmerpenguins dataset
 * [Link](https://juliasilge.com/blog/palmer-penguins/)
@@ -68,8 +66,6 @@ x[[1]]$data
 ```{r}
 glm_spec <- logistic_reg() %>%
   set_engine("glm")
-
-glm_specresa
 ```
 
 ```{r}

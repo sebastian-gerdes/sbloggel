@@ -6,7 +6,6 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Sebastian Gerdes">
 <meta name="dcterms.date" content="2023-07-23">
 
 <title>Seb’s blog - Bicycle comparison</title>
@@ -21,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -115,7 +148,15 @@ ul.task-list li input[type="checkbox"] {
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#the-three-bikes" id="toc-the-three-bikes" class="nav-link active" data-scroll-target="#the-three-bikes">The three bikes</a></li>
+  <li><a href="#points-to-be-represented" id="toc-points-to-be-represented" class="nav-link" data-scroll-target="#points-to-be-represented">Points to be represented</a></li>
+  <li><a href="#todo" id="toc-todo" class="nav-link" data-scroll-target="#todo">Todo:</a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/sebastian-gerdes/sbloggel/blob/main/posts/2023-07-23-bicycle-comparison/2023-07-23-bicycle-comparison.qmd" class="toc-action">View source</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -129,12 +170,6 @@ ul.task-list li input[type="checkbox"] {
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Sebastian Gerdes </p>
-          </div>
-  </div>
     
     <div>
     <div class="quarto-title-meta-heading">Published</div>
@@ -149,9 +184,121 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
+<section id="the-three-bikes" class="level2">
+<h2 class="anchored" data-anchor-id="the-three-bikes">The three bikes</h2>
 <p><img src="koga_old.jpeg" class="img-fluid" style="width:32.0%" data-fig-align="center"> <img src="koga_new.jpeg" class="img-fluid" style="width:32.0%" data-fig-align="center"> <img src="hammerbacher.jpeg" class="img-fluid" style="width:32.0%" data-fig-align="center"></p>
+</section>
+<section id="points-to-be-represented" class="level2">
+<h2 class="anchored" data-anchor-id="points-to-be-represented">Points to be represented</h2>
+<ul>
+<li>front axis</li>
+<li>back axis</li>
+<li>front beginning of tire</li>
+<li>back beginning of tire</li>
+<li>handlebar low</li>
+<li>handlebar high</li>
+<li>saddle front</li>
+<li>saddle back</li>
+<li>pedals</li>
+</ul>
+<p>Coordinate system: Point 1 is front axis, point 2 is back of saddle.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>loc_names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">'front_axis'</span>,</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>               <span class="st">'back_axis'</span>,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>               <span class="st">'front_beginning_of_tire'</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>               <span class="st">'back_beginning_of_tire'</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>               <span class="st">'handlebar_low'</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>               <span class="st">'handlebar_high'</span>,</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>               <span class="st">'saddle_front'</span>,</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>               <span class="st">'saddle_back'</span>,</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>               <span class="st">'pedals'</span>)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">'digitize'</span>)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">'not_yet_formatted.Rdata'</span>)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co"># save(list = c('koga_new', 'koga_old', 'hammerbacher'), file = 'not_yet_formatted.Rdata')</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co"># help(package = 'digitize')</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co"># koga_old &lt;- digitize('koga_old.jpeg')</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co"># koga_new &lt;- digitize('koga_new.jpeg')</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co"># hammerbacher &lt;- digitize('hammerbacher.jpeg')</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>tidy_digit <span class="ot">&lt;-</span> <span class="cf">function</span>(dat) {</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>  var_name <span class="ot">&lt;-</span><span class="fu">deparse</span>(<span class="fu">substitute</span>(dat))</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>  dat <span class="sc">|&gt;</span> </span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as_tibble</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">var_name =</span> var_name,</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>           <span class="at">loc =</span> loc_names)</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy_digit</span>(koga_new)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 9 × 4
+         x        y var_name loc                    
+     &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;                  
+1 -0.00334 -0.00309 koga_new front_axis             
+2  1.07     0.0401  koga_new back_axis              
+3 -0.321   -0.0679  koga_new front_beginning_of_tire
+4  1.08    -0.383   koga_new back_beginning_of_tire 
+5  0.207    1.02    koga_new handlebar_low          
+6  0.0870   1.12    koga_new handlebar_high         
+7  0.722    0.978   koga_new saddle_front           
+8  0.997    0.994   koga_new saddle_back            
+9  0.622   -0.0432  koga_new pedals                 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy_digit</span>(koga_old)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 9 × 4
+          x        y var_name loc                    
+      &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;                  
+1  3.33e-16 -0.00317 koga_old front_axis             
+2  1.14e+ 0  0.0190  koga_old back_axis              
+3 -3.33e- 1  0.0254  koga_old front_beginning_of_tire
+4  1.15e+ 0 -0.410   koga_old back_beginning_of_tire 
+5  2.46e- 1  1.03    koga_old handlebar_low          
+6  1.01e- 1  1.19    koga_old handlebar_high         
+7  7.25e- 1  0.952   koga_old saddle_front           
+8  9.96e- 1  0.997   koga_old saddle_back            
+9  6.63e- 1 -0.0698  koga_old pedals                 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy_digit</span>(hammerbacher)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 9 × 4
+         x        y var_name     loc                    
+     &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt;                  
+1  0.00376  0.00599 hammerbacher front_axis             
+2  1.20     0.0659  hammerbacher back_axis              
+3 -0.331   -0.150   hammerbacher front_beginning_of_tire
+4  0.932   -0.275   hammerbacher back_beginning_of_tire 
+5  0.256    1.32    hammerbacher handlebar_low          
+6  0.256    1.32    hammerbacher handlebar_high         
+7  0.737    0.946   hammerbacher saddle_front           
+8  0.996    0.994   hammerbacher saddle_back            
+9  0.695   -0.0419  hammerbacher pedals                 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>dd <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(<span class="fu">tidy_digit</span>(koga_old), </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>          <span class="fu">tidy_digit</span>(koga_new),</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>          <span class="fu">tidy_digit</span>(hammerbacher))</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>dd <span class="sc">|&gt;</span> </span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(x, y, <span class="at">color =</span> var_name)) <span class="sc">+</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="2023-07-23-bicycle-comparison_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(dd, <span class="st">'bikes.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="todo" class="level2">
+<h2 class="anchored" data-anchor-id="todo">Todo:</h2>
+<ul>
+<li>measure distance between axes</li>
+<li>measure distance between</li>
+</ul>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -391,4 +538,4 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/sebastian-gerdes/sbloggel/blob/main/posts/2023-07-23-bicycle-comparison/2023-07-23-bicycle-comparison.qmd" class="toc-action">View source</a></p></div></div></div></div></footer></body></html>
+</body></html>

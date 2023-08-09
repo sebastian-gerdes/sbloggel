@@ -6,7 +6,6 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Sebastian Gerdes">
 <meta name="dcterms.date" content="2022-10-16">
 
 <title>Seb’s blog - Retrieving and plotting COVID-19 data</title>
@@ -101,10 +100,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link rel="stylesheet" href="../../styles.css">
 <meta property="og:title" content="Seb’s blog - Retrieving and plotting COVID-19 data">
 <meta property="og:description" content="">
-<meta property="og:image" content="https://sbloggel.netlify.app/posts/2022-10-16-retrieving-and-plotting-covid-19-data/2022-10-16-retrieving-and-plotting-covid-19-data_files/figure-html/plot_confirmed_cases_total-1.png">
 <meta property="og:site-name" content="Seb's blog">
-<meta property="og:image:height" content="960">
-<meta property="og:image:width" content="1344">
 </head>
 
 <body class="nav-fixed">
@@ -176,12 +172,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Sebastian Gerdes </p>
-          </div>
-  </div>
     
     <div>
     <div class="quarto-title-meta-heading">Published</div>
@@ -209,65 +199,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="retrieving-the-data" class="level2">
 <h2 class="anchored" data-anchor-id="retrieving-the-data">Retrieving the data</h2>
-<div class="cell" data-hash="2022-10-16-retrieving-and-plotting-covid-19-data_cache/html/data_retrieval_5cd877ff4424d133a23d9660c4f6d9b2">
+<div class="cell" data-hash="2022-10-16-retrieving-and-plotting-covid-19-data_cache/html/data_retrieval_e9968edc9828899583146a724c018d92">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>deu <span class="ot">&lt;-</span> <span class="fu">covid19</span>(<span class="st">'Germany'</span>, <span class="at">level =</span> <span class="dv">1</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>We have invested a lot of time and effort in creating COVID-19 Data
-Hub, please cite the following when using it:
-
-  Guidotti, E., Ardia, D., (2020), "COVID-19 Data Hub", Journal of Open
-  Source Software 5(51):2376, doi: 10.21105/joss.02376
-
-The implementation details and the latest version of the data are
-described in:
-
-  Guidotti, E., (2022), "A worldwide epidemiological database for
-  COVID-19 at fine-grained spatial resolution", Sci Data 9(1):112, doi:
-  10.1038/s41597-022-01245-1
-To print citations in BibTeX format use:
- &gt; print(citation('COVID19'), bibtex=TRUE)
-
-To hide this message use 'verbose = FALSE'.</code></pre>
-</div>
 </div>
 </section>
 <section id="plotting-total-number-of-confirmed-cases" class="level2">
 <h2 class="anchored" data-anchor-id="plotting-total-number-of-confirmed-cases">Plotting total number of confirmed cases</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> deu, <span class="fu">aes</span>(date, confirmed)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>()  <span class="sc">+</span> <span class="fu">scale_y_log10</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>`geom_smooth()` using method = 'gam' and formula = 'y ~ s(x, bs = "cs")'</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: Removed 12 rows containing non-finite values (`stat_smooth()`).</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: Removed 12 rows containing missing values (`geom_point()`).</code></pre>
-</div>
-<div class="cell-output-display">
-<p><img src="2022-10-16-retrieving-and-plotting-covid-19-data_files/figure-html/plot_confirmed_cases_total-1.png" class="img-fluid" width="672"></p>
-</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> deu, <span class="fu">aes</span>(date, confirmed)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>()  <span class="sc">+</span> <span class="fu">scale_y_log10</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="plotting-new-cases" class="level2">
 <h2 class="anchored" data-anchor-id="plotting-new-cases">Plotting new cases</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">date =</span> deu<span class="sc">$</span>date[<span class="sc">-</span><span class="dv">1</span>], <span class="at">new_cases =</span> <span class="fu">diff</span>(deu<span class="sc">$</span>confirmed))</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> dat, <span class="fu">aes</span>(date, new_cases)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>()  <span class="sc">+</span> <span class="fu">scale_y_log10</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>`geom_smooth()` using method = 'gam' and formula = 'y ~ s(x, bs = "cs")'</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: Removed 19 rows containing non-finite values (`stat_smooth()`).</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: Removed 19 rows containing missing values (`geom_point()`).</code></pre>
-</div>
-<div class="cell-output-display">
-<p><img src="2022-10-16-retrieving-and-plotting-covid-19-data_files/figure-html/plot_new_confirmed_cases-1.png" class="img-fluid" width="672"></p>
-</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">date =</span> deu<span class="sc">$</span>date[<span class="sc">-</span><span class="dv">1</span>], <span class="at">new_cases =</span> <span class="fu">diff</span>(deu<span class="sc">$</span>confirmed))</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> dat, <span class="fu">aes</span>(date, new_cases)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>()  <span class="sc">+</span> <span class="fu">scale_y_log10</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="conclusion" class="level2">
