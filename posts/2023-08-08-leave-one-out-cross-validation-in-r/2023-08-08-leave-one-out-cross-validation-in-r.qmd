@@ -6,10 +6,13 @@ categories:
 ---
 
 ## Strategy
-* Fit "straight" models: linear model, neural net with 2 layers with 3 perceptrons each
-* Perform "Leave-one-out-cross-validation"
-* Calculate mean absolute prediction error of the different methods
-  * In cross-validation case for the left-out data point
+* Fit "straight" models
+  * linear model - `fm_lm`
+  * neural net with 2 layers with 3 perceptrons each - `fm_nn`
+* Fit models with "Leave-one-out-cross-validation"
+  * linear model - `lm_looc`
+  * neural net - `nn_looc`
+  * Calculate mean absolute prediction error for both model types (predict each data point based on a model that is based on all but the current data point)
 
 ## Implementation
 ### Init
@@ -55,11 +58,13 @@ leave_one_out <- Vectorize(
 
 ### Fit models
 ```{r}
+#| cache: true
 fm_lm <- lm(speed ~ dist, data = cars)
 fm_nn <- neuralnet(speed ~ dist, 
                    linear.output = TRUE, data = cars, 
                    hidden = c(3, 3), 
                    stepmax = 1e+7, threshold = .5)
+
 data <- tibble(
   cars,
   prediction_lm_straight = predict(fm_lm),
