@@ -82,6 +82,7 @@ data |>
   geom_point() +
   labs(y = 'speed')
 
+# the previous plot with plotly library so it can be appreciated interactively:
 ggplot2::last_plot() |> ggplotly()
 
 data_long <- data |> 
