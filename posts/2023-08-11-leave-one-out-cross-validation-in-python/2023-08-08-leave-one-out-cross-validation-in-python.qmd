@@ -13,16 +13,18 @@ categories:
   * calculate mean absolute error and mean squared error
 
 ## Implementation
+
 ### Init
+#### Chunk in R to setup my Python environment (can be omitted for users with Python ready to use)
 ```{r}
 #| label: init
 library('reticulate')
 use_condaenv('sbloggel')
 ```
 
+#### Chunk to load Python libraries and set up the data
 ```{python}
 import pandas as pd
-import statsmodels.api as sm
 import statsmodels.formula.api as smf
 import numpy as np
 cars = pd.DataFrame(r['cars'])

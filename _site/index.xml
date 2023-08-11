@@ -34,6 +34,8 @@
 <h2 class="anchored" data-anchor-id="implementation">Implementation</h2>
 <section id="init" class="level3">
 <h3 class="anchored" data-anchor-id="init">Init</h3>
+<section id="chunk-in-r-to-setup-my-python-environment-can-be-omitted-for-users-with-python-ready-to-use" class="level4">
+<h4 class="anchored" data-anchor-id="chunk-in-r-to-setup-my-python-environment-can-be-omitted-for-users-with-python-ready-to-use">Chunk in R to setup my Python environment (can be omitted for users with Python ready to use)</h4>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -46,6 +48,9 @@ font-style: inherit;">use_condaenv</span>(<span class="st" style="color: #20794D
 background-color: null;
 font-style: inherit;">'sbloggel'</span>)</span></code></pre></div>
 </div>
+</section>
+<section id="chunk-to-load-python-libraries-and-set-up-the-data" class="level4">
+<h4 class="anchored" data-anchor-id="chunk-to-load-python-libraries-and-set-up-the-data">Chunk to load Python libraries and set up the data</h4>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="im" style="color: #00769E;
 background-color: null;
@@ -54,25 +59,21 @@ background-color: null;
 font-style: inherit;">as</span> pd</span>
 <span id="cb2-2"><span class="im" style="color: #00769E;
 background-color: null;
-font-style: inherit;">import</span> statsmodels.api <span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">as</span> sm</span>
-<span id="cb2-3"><span class="im" style="color: #00769E;
-background-color: null;
 font-style: inherit;">import</span> statsmodels.formula.api <span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">as</span> smf</span>
-<span id="cb2-4"><span class="im" style="color: #00769E;
+<span id="cb2-3"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">as</span> np</span>
-<span id="cb2-5">cars <span class="op" style="color: #5E5E5E;
+<span id="cb2-4">cars <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> pd.DataFrame(r[<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'cars'</span>])</span></code></pre></div>
 </div>
+</section>
 </section>
 <section id="show-that-fitting-in-r-and-python-yields-identical-results" class="level3">
 <h3 class="anchored" data-anchor-id="show-that-fitting-in-r-and-python-yields-identical-results">Show that fitting in R and Python yields identical results</h3>
@@ -117,7 +118,7 @@ font-style: inherit;">=</span> cars).fit()</span>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">Time:</td>
-<td>10:27:36</td>
+<td>10:32:05</td>
 <td data-quarto-table-cell-role="th">Log-Likelihood:</td>
 <td>-127.39</td>
 </tr>
