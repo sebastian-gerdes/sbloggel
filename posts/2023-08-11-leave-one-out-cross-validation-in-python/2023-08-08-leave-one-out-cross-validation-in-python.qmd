@@ -16,11 +16,8 @@ categories:
 ### Init
 ```{r}
 #| label: init
-set.seed(123)
 library('reticulate')
-library('tidyverse')
 use_condaenv('sbloggel')
-library('knitr')
 ```
 
 ```{python}
@@ -54,17 +51,17 @@ predict(fm, cars[1, ])
 
 ### Perform leave-one-out-cross-validation in Python
 ```{python}
-cars['prediction'] = 0
+# prepare column for predictions:
+cars['prediction'] = np.nan
 
-cars['prediction'].iloc[0] = fm_fit.predict(cars.iloc[0])
-
-
+# fit models:
 for i in range(50):
   train = cars.drop(index = i)
   test = cars.iloc[i]
   fm_fit = smf.ols(formula='speed ~ dist', data=train).fit()
   cars['prediction'].iloc[i] = fm_fit.predict(test)
 
+# calculate statistics:
 cars['error'] = cars['speed'] - cars['prediction']
 cars['abs_error'] = np.abs(cars['error'])
 cars['squared_error'] = np.square(cars['error'])
