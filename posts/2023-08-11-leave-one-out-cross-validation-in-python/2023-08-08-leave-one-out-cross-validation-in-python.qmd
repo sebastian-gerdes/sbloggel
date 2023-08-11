@@ -1,0 +1,81 @@
+---
+title: Leave-one-out cross-validation in Python
+date: 2023-08-11
+categories:
+  - Python
+---
+
+## Strategy
+* Look at the `cars` dataset that is shipped in `base` R
+* Fit models
+  * for each model, leave out one data point
+  * predict the response value for that data point based on the model that is not based on that data point
+  * calculate mean absolute error and mean squared error
+
+## Implementation
+### Init
+```{r}
+#| label: init
+set.seed(123)
+library('reticulate')
+library('tidyverse')
+use_condaenv('sbloggel')
+library('knitr')
+```
+
+```{python}
+import pandas as pd
+import statsmodels.api as sm
+import statsmodels.formula.api as smf
+import numpy as np
+cars = pd.DataFrame(r['cars'])
+```
+
+### Show that fitting in R and Python yields identical results
+```{python}
+fm_fit = smf.ols(formula = 'speed ~ dist', data = cars).fit()
+fm_fit.summary()
+```
+
+```{r}
+fm <- lm(speed ~ dist, data = cars)
+summary(fm)
+```
+
+### Show that prediction in R and Python yields identical results
+```{python}
+fm_fit.predict(cars.iloc[0])
+```
+
+```{r}
+predict(fm, cars[1, ])
+```
+
+
+### Perform leave-one-out-cross-validation in Python
+```{python}
+cars['prediction'] = 0
+
+cars['prediction'].iloc[0] = fm_fit.predict(cars.iloc[0])
+
+
+for i in range(50):
+  train = cars.drop(index = i)
+  test = cars.iloc[i]
+  fm_fit = smf.ols(formula='speed ~ dist', data=train).fit()
+  cars['prediction'].iloc[i] = fm_fit.predict(test)
+
+cars['error'] = cars['speed'] - cars['prediction']
+cars['abs_error'] = np.abs(cars['error'])
+cars['squared_error'] = np.square(cars['error'])
+
+# mean absolute error:
+np.mean(cars['abs_error'])
+
+# root mean squared error:
+np.sqrt(np.mean(cars['squared_error']))
+```
+
+## Conclusion
+* Results are identical to those produced in R: [Link](https://sbloggel.netlify.app/posts/2023-08-08-leave-one-out-cross-validation-in-r/2023-08-08-leave-one-out-cross-validation-in-r)
+* However, they are not identical to Friedemann's results - we still have to clarify why that is!

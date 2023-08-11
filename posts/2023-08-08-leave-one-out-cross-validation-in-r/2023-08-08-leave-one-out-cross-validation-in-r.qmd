@@ -89,7 +89,7 @@ data_long <- data |>
   pivot_longer(cols = -c(dist, measured_speed), names_to = 'Method',
                values_to = 'prediction') |>
   mutate(error = prediction - measured_speed,
-         squarred_error = error^2)
+         squared_error = error^2)
 
 data_long |> 
   ggplot(aes(dist, error)) + geom_point() + 
@@ -99,7 +99,7 @@ data_long |>
 data_long |> 
   group_by(Method) |> 
   summarize('Mean absolute error' = mean(abs(error)),
-            'Mean squarred error' = mean(squarred_error)) |> 
+            'Root mean squared error' = sqrt(mean(squared_error))) |> 
   kable(align = 'c')
 ```
 

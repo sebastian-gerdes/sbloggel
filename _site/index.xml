@@ -10,7 +10,412 @@
 <atom:link href="https://sbloggel.netlify.app/index.xml" rel="self" type="application/rss+xml"/>
 <description>Seb&#39;s private blog about statistics and other topics</description>
 <generator>quarto-1.3.433</generator>
-<lastBuildDate>Mon, 07 Aug 2023 22:00:00 GMT</lastBuildDate>
+<lastBuildDate>Thu, 10 Aug 2023 22:00:00 GMT</lastBuildDate>
+<item>
+  <title>Leave-one-out cross-validation in Python</title>
+  <link>https://sbloggel.netlify.app/posts/2023-08-11-leave-one-out-cross-validation-in-python/2023-08-08-leave-one-out-cross-validation-in-python.html</link>
+  <description><![CDATA[ 
+
+
+
+<section id="strategy" class="level2">
+<h2 class="anchored" data-anchor-id="strategy">Strategy</h2>
+<ul>
+<li>Look at the <code>cars</code> dataset that is shipped in <code>base</code> R</li>
+<li>Fit models
+<ul>
+<li>for each model, leave out one data point</li>
+<li>predict the response value for that data point based on the model that is not based on that data point</li>
+<li>calculate mean absolute error and mean squared error</li>
+</ul></li>
+</ul>
+</section>
+<section id="implementation" class="level2">
+<h2 class="anchored" data-anchor-id="implementation">Implementation</h2>
+<section id="init" class="level3">
+<h3 class="anchored" data-anchor-id="init">Init</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">set.seed</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">123</span>)</span>
+<span id="cb1-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'reticulate'</span>)</span>
+<span id="cb1-3"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'tidyverse'</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.2     ✔ readr     2.1.4
+✔ forcats   1.0.0     ✔ stringr   1.5.0
+✔ ggplot2   3.4.2     ✔ tibble    3.2.1
+✔ lubridate 1.9.2     ✔ tidyr     1.3.0
+✔ purrr     1.0.1     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">use_condaenv</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'sbloggel'</span>)</span>
+<span id="cb3-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'knitr'</span>)</span></code></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> pandas <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> pd</span>
+<span id="cb4-2"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> statsmodels.api <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> sm</span>
+<span id="cb4-3"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> statsmodels.formula.api <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> smf</span>
+<span id="cb4-4"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> np</span>
+<span id="cb4-5">cars <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> pd.DataFrame(r[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'cars'</span>])</span></code></pre></div>
+</div>
+</section>
+<section id="show-that-fitting-in-r-and-python-yields-identical-results" class="level3">
+<h3 class="anchored" data-anchor-id="show-that-fitting-in-r-and-python-yields-identical-results">Show that fitting in R and Python yields identical results</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">fm_fit <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> smf.ols(formula <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'speed ~ dist'</span>, data <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> cars).fit()</span>
+<span id="cb5-2">fm_fit.summary()</span></code></pre></div>
+<div class="cell-output-display">
+<table class="simpletable table table-sm table-striped small" data-quarto-postprocess="true">
+<caption>OLS Regression Results</caption>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Dep. Variable:</td>
+<td>speed</td>
+<td data-quarto-table-cell-role="th">R-squared:</td>
+<td>0.651</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">Model:</td>
+<td>OLS</td>
+<td data-quarto-table-cell-role="th">Adj. R-squared:</td>
+<td>0.644</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Method:</td>
+<td>Least Squares</td>
+<td data-quarto-table-cell-role="th">F-statistic:</td>
+<td>89.57</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">Date:</td>
+<td>Fri, 11 Aug 2023</td>
+<td data-quarto-table-cell-role="th">Prob (F-statistic):</td>
+<td>1.49e-12</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Time:</td>
+<td>10:18:51</td>
+<td data-quarto-table-cell-role="th">Log-Likelihood:</td>
+<td>-127.39</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">No. Observations:</td>
+<td>50</td>
+<td data-quarto-table-cell-role="th">AIC:</td>
+<td>258.8</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Df Residuals:</td>
+<td>48</td>
+<td data-quarto-table-cell-role="th">BIC:</td>
+<td>262.6</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">Df Model:</td>
+<td>1</td>
+<td data-quarto-table-cell-role="th"></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Covariance Type:</td>
+<td>nonrobust</td>
+<td data-quarto-table-cell-role="th"></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table class="simpletable table table-sm table-striped small" data-quarto-postprocess="true">
+<tbody>
+<tr class="odd">
+<td></td>
+<td data-quarto-table-cell-role="th">coef</td>
+<td data-quarto-table-cell-role="th">std err</td>
+<td data-quarto-table-cell-role="th">t</td>
+<td data-quarto-table-cell-role="th">P&gt;|t|</td>
+<td data-quarto-table-cell-role="th">[0.025</td>
+<td data-quarto-table-cell-role="th">0.975]</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">Intercept</td>
+<td>8.2839</td>
+<td>0.874</td>
+<td>9.474</td>
+<td>0.000</td>
+<td>6.526</td>
+<td>10.042</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">dist</td>
+<td>0.1656</td>
+<td>0.017</td>
+<td>9.464</td>
+<td>0.000</td>
+<td>0.130</td>
+<td>0.201</td>
+</tr>
+</tbody>
+</table>
+<table class="simpletable table table-sm table-striped small" data-quarto-postprocess="true">
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Omnibus:</td>
+<td>0.720</td>
+<td data-quarto-table-cell-role="th">Durbin-Watson:</td>
+<td>1.195</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">Prob(Omnibus):</td>
+<td>0.698</td>
+<td data-quarto-table-cell-role="th">Jarque-Bera (JB):</td>
+<td>0.827</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Skew:</td>
+<td>-0.207</td>
+<td data-quarto-table-cell-role="th">Prob(JB):</td>
+<td>0.661</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">Kurtosis:</td>
+<td>2.526</td>
+<td data-quarto-table-cell-role="th">Cond. No.</td>
+<td>98.0</td>
+</tr>
+</tbody>
+</table>
+<br><br>Notes:<br>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1">fm <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">lm</span>(speed <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> dist, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">data =</span> cars)</span>
+<span id="cb6-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">summary</span>(fm)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = speed ~ dist, data = cars)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-7.5293 -2.1550  0.3615  2.4377  6.4179 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  8.28391    0.87438   9.474 1.44e-12 ***
+dist         0.16557    0.01749   9.464 1.49e-12 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 3.156 on 48 degrees of freedom
+Multiple R-squared:  0.6511,    Adjusted R-squared:  0.6438 
+F-statistic: 89.57 on 1 and 48 DF,  p-value: 1.49e-12</code></pre>
+</div>
+</div>
+</section>
+<section id="show-that-prediction-in-r-and-python-yields-identical-results" class="level3">
+<h3 class="anchored" data-anchor-id="show-that-prediction-in-r-and-python-yields-identical-results">Show that prediction in R and Python yields identical results</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1">fm_fit.predict(cars.iloc[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>])</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>0    8.615041
+dtype: float64</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">predict</span>(fm, cars[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, ])</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       1 
+8.615041 </code></pre>
+</div>
+</div>
+</section>
+<section id="perform-leave-one-out-cross-validation-in-python" class="level3">
+<h3 class="anchored" data-anchor-id="perform-leave-one-out-cross-validation-in-python">Perform leave-one-out-cross-validation in Python</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1">cars[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'prediction'</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span></span>
+<span id="cb12-2"></span>
+<span id="cb12-3">cars[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'prediction'</span>].iloc[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> fm_fit.predict(cars.iloc[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>])</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;string&gt;:2: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span> i <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">range</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">50</span>):</span>
+<span id="cb14-2">  train <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> cars.drop(index <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> i)</span>
+<span id="cb14-3">  test <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> cars.iloc[i]</span>
+<span id="cb14-4">  fm_fit <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> smf.ols(formula<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'speed ~ dist'</span>, data<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>train).fit()</span>
+<span id="cb14-5">  cars[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'prediction'</span>].iloc[i] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> fm_fit.predict(test)</span>
+<span id="cb14-6"></span>
+<span id="cb14-7">cars[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'error'</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> cars[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'speed'</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> cars[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'prediction'</span>]</span>
+<span id="cb14-8">cars[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'abs_error'</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">abs</span>(cars[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'error'</span>])</span>
+<span id="cb14-9">cars[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'squared_error'</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.square(cars[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'error'</span>])</span>
+<span id="cb14-10"></span>
+<span id="cb14-11"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># mean absolute error:</span></span>
+<span id="cb14-12">np.mean(cars[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'abs_error'</span>])</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>2.6335683917489323</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># root mean squared error:</span></span>
+<span id="cb16-2">np.sqrt(np.mean(cars[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'squared_error'</span>]))</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>3.244276599631193</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<ul>
+<li>Results are identical to those produced in R: <a href="https://sbloggel.netlify.app/posts/2023-08-08-leave-one-out-cross-validation-in-r/2023-08-08-leave-one-out-cross-validation-in-r">Link</a></li>
+<li>However, they are not identical to Friedemann’s results - we still have to clarify why that is!</li>
+</ul>
+
+
+</section>
+
+ ]]></description>
+  <category>Python</category>
+  <guid>https://sbloggel.netlify.app/posts/2023-08-11-leave-one-out-cross-validation-in-python/2023-08-08-leave-one-out-cross-validation-in-python.html</guid>
+  <pubDate>Thu, 10 Aug 2023 22:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Cars dataset and tidymodels</title>
   <link>https://sbloggel.netlify.app/posts/2023-08-08-cars-dataset-and-tidymodels/2023-08-08-cars-dataset-and-tidymodels.html</link>
@@ -696,7 +1101,7 @@ background-color: null;
 font-style: inherit;">ggplotly</span>()</span></code></pre></div>
 <div class="cell-output-display">
 <div class="plotly html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-253fa4f1c619d0aee424" style="width:100%;height:464px;"></div>
-<script type="application/json" data-for="htmlwidget-253fa4f1c619d0aee424">{"x":{"data":[{"x":[2,10,4,22,16,10,18,26,34,17,28,14,20,24,28,26,34,34,46,26,36,60,80,20,26,54,32,40,32,40,50,42,56,76,84,36,46,68,32,48,52,56,64,66,54,70,92,93,120,85],"y":[4,4,7,7,8,9,10,10,10,11,11,12,12,12,12,13,13,13,13,14,14,14,14,15,15,15,16,16,17,17,17,18,18,18,18,19,19,19,20,20,20,20,20,22,23,24,24,24,24,25],"text":["dist:   2<br />speed:  4.000000<br />Method: measured_speed","dist:  10<br />speed:  4.000000<br />Method: measured_speed","dist:   4<br />speed:  7.000000<br />Method: measured_speed","dist:  22<br />speed:  7.000000<br />Method: measured_speed","dist:  16<br />speed:  8.000000<br />Method: measured_speed","dist:  10<br />speed:  9.000000<br />Method: measured_speed","dist:  18<br />speed: 10.000000<br />Method: measured_speed","dist:  26<br />speed: 10.000000<br />Method: measured_speed","dist:  34<br />speed: 10.000000<br />Method: measured_speed","dist:  17<br />speed: 11.000000<br />Method: measured_speed","dist:  28<br />speed: 11.000000<br />Method: measured_speed","dist:  14<br />speed: 12.000000<br />Method: measured_speed","dist:  20<br />speed: 12.000000<br />Method: measured_speed","dist:  24<br />speed: 12.000000<br />Method: measured_speed","dist:  28<br />speed: 12.000000<br />Method: measured_speed","dist:  26<br />speed: 13.000000<br />Method: measured_speed","dist:  34<br />speed: 13.000000<br />Method: measured_speed","dist:  34<br />speed: 13.000000<br />Method: measured_speed","dist:  46<br />speed: 13.000000<br />Method: measured_speed","dist:  26<br />speed: 14.000000<br />Method: measured_speed","dist:  36<br />speed: 14.000000<br />Method: measured_speed","dist:  60<br />speed: 14.000000<br />Method: measured_speed","dist:  80<br />speed: 14.000000<br />Method: measured_speed","dist:  20<br />speed: 15.000000<br />Method: measured_speed","dist:  26<br />speed: 15.000000<br />Method: measured_speed","dist:  54<br />speed: 15.000000<br />Method: measured_speed","dist:  32<br />speed: 16.000000<br />Method: measured_speed","dist:  40<br />speed: 16.000000<br />Method: measured_speed","dist:  32<br />speed: 17.000000<br />Method: measured_speed","dist:  40<br />speed: 17.000000<br />Method: measured_speed","dist:  50<br />speed: 17.000000<br />Method: measured_speed","dist:  42<br />speed: 18.000000<br />Method: measured_speed","dist:  56<br />speed: 18.000000<br />Method: measured_speed","dist:  76<br />speed: 18.000000<br />Method: measured_speed","dist:  84<br />speed: 18.000000<br />Method: measured_speed","dist:  36<br />speed: 19.000000<br />Method: measured_speed","dist:  46<br />speed: 19.000000<br />Method: measured_speed","dist:  68<br />speed: 19.000000<br />Method: measured_speed","dist:  32<br />speed: 20.000000<br />Method: measured_speed","dist:  48<br />speed: 20.000000<br />Method: measured_speed","dist:  52<br />speed: 20.000000<br />Method: measured_speed","dist:  56<br />speed: 20.000000<br />Method: measured_speed","dist:  64<br />speed: 20.000000<br />Method: measured_speed","dist:  66<br />speed: 22.000000<br />Method: measured_speed","dist:  54<br />speed: 23.000000<br />Method: measured_speed","dist:  70<br />speed: 24.000000<br />Method: measured_speed","dist:  92<br />speed: 24.000000<br />Method: measured_speed","dist:  93<br />speed: 24.000000<br />Method: measured_speed","dist: 120<br />speed: 24.000000<br />Method: measured_speed","dist:  85<br />speed: 25.000000<br />Method: measured_speed"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","opacity":1,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(248,118,109,1)"}},"hoveron":"points","name":"measured_speed","legendgroup":"measured_speed","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2,10,4,22,16,10,18,26,34,17,28,14,20,24,28,26,34,34,46,26,36,60,80,20,26,54,32,40,32,40,50,42,56,76,84,36,46,68,32,48,52,56,64,66,54,70,92,93,120,85],"y":[8.971019079183451,10.274826528902761,9.0852540571297649,12.097290005990839,11.062758101018353,9.9926137610663712,11.315665841441652,12.665593666811397,14.003187921362095,11.102740375558579,12.972860490528618,10.534727116021589,11.580042423307056,12.265785670877534,12.945220725244605,12.576438264955438,13.934202434892839,13.934202434892839,15.960044643697373,12.546719797670121,14.249706339425144,18.343498366379183,22.027995538329861,11.467269257898252,12.517001330384804,17.278631500348165,13.523358990469548,14.883983723617696,13.499078307359316,14.863291312361747,16.552660077665951,15.181286307626502,17.544199191139104,21.029124082566721,22.515387233343798,14.139858439899152,15.835844070782475,19.56465699790802,13.426236258028613,16.151192292000129,16.821911261854371,17.492475727237075,18.841323447292471,19.106368078861472,17.084159039196948,19.690764397851989,23.466008077261712,23.64753932117797,29.205027561900625,22.145137259432481],"text":["dist:   2<br />speed:  8.971019<br />Method: prediction_lm_looc","dist:  10<br />speed: 10.274827<br />Method: prediction_lm_looc","dist:   4<br />speed:  9.085254<br />Method: prediction_lm_looc","dist:  22<br />speed: 12.097290<br />Method: prediction_lm_looc","dist:  16<br />speed: 11.062758<br />Method: prediction_lm_looc","dist:  10<br />speed:  9.992614<br />Method: prediction_lm_looc","dist:  18<br />speed: 11.315666<br />Method: prediction_lm_looc","dist:  26<br />speed: 12.665594<br />Method: prediction_lm_looc","dist:  34<br />speed: 14.003188<br />Method: prediction_lm_looc","dist:  17<br />speed: 11.102740<br />Method: prediction_lm_looc","dist:  28<br />speed: 12.972860<br />Method: prediction_lm_looc","dist:  14<br />speed: 10.534727<br />Method: prediction_lm_looc","dist:  20<br />speed: 11.580042<br />Method: prediction_lm_looc","dist:  24<br />speed: 12.265786<br />Method: prediction_lm_looc","dist:  28<br />speed: 12.945221<br />Method: prediction_lm_looc","dist:  26<br />speed: 12.576438<br />Method: prediction_lm_looc","dist:  34<br />speed: 13.934202<br />Method: prediction_lm_looc","dist:  34<br />speed: 13.934202<br />Method: prediction_lm_looc","dist:  46<br />speed: 15.960045<br />Method: prediction_lm_looc","dist:  26<br />speed: 12.546720<br />Method: prediction_lm_looc","dist:  36<br />speed: 14.249706<br />Method: prediction_lm_looc","dist:  60<br />speed: 18.343498<br />Method: prediction_lm_looc","dist:  80<br />speed: 22.027996<br />Method: prediction_lm_looc","dist:  20<br />speed: 11.467269<br />Method: prediction_lm_looc","dist:  26<br />speed: 12.517001<br />Method: prediction_lm_looc","dist:  54<br />speed: 17.278632<br />Method: prediction_lm_looc","dist:  32<br />speed: 13.523359<br />Method: prediction_lm_looc","dist:  40<br />speed: 14.883984<br />Method: prediction_lm_looc","dist:  32<br />speed: 13.499078<br />Method: prediction_lm_looc","dist:  40<br />speed: 14.863291<br />Method: prediction_lm_looc","dist:  50<br />speed: 16.552660<br />Method: prediction_lm_looc","dist:  42<br />speed: 15.181286<br />Method: prediction_lm_looc","dist:  56<br />speed: 17.544199<br />Method: prediction_lm_looc","dist:  76<br />speed: 21.029124<br />Method: prediction_lm_looc","dist:  84<br />speed: 22.515387<br />Method: prediction_lm_looc","dist:  36<br />speed: 14.139858<br />Method: prediction_lm_looc","dist:  46<br />speed: 15.835844<br />Method: prediction_lm_looc","dist:  68<br />speed: 19.564657<br />Method: prediction_lm_looc","dist:  32<br />speed: 13.426236<br />Method: prediction_lm_looc","dist:  48<br />speed: 16.151192<br />Method: prediction_lm_looc","dist:  52<br />speed: 16.821911<br />Method: prediction_lm_looc","dist:  56<br />speed: 17.492476<br />Method: prediction_lm_looc","dist:  64<br />speed: 18.841323<br />Method: prediction_lm_looc","dist:  66<br />speed: 19.106368<br />Method: prediction_lm_looc","dist:  54<br />speed: 17.084159<br />Method: prediction_lm_looc","dist:  70<br />speed: 19.690764<br />Method: prediction_lm_looc","dist:  92<br />speed: 23.466008<br />Method: prediction_lm_looc","dist:  93<br />speed: 23.647539<br />Method: prediction_lm_looc","dist: 120<br />speed: 29.205028<br />Method: prediction_lm_looc","dist:  85<br />speed: 22.145137<br />Method: prediction_lm_looc"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(163,165,0,1)","opacity":1,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(163,165,0,1)"}},"hoveron":"points","name":"prediction_lm_looc","legendgroup":"prediction_lm_looc","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2,10,4,22,16,10,18,26,34,17,28,14,20,24,28,26,34,34,46,26,36,60,80,20,26,54,32,40,32,40,50,42,56,76,84,36,46,68,32,48,52,56,64,66,54,70,92,93,120,85],"y":[8.6150407910758062,9.9395813882303568,8.9461759403644443,11.926392283962183,10.932986836096271,9.9395813882303568,11.264121985384909,12.58866258253946,13.91320317969401,11.09855441074059,12.919797731828098,10.601851686807633,11.595257134673545,12.257527433250822,12.919797731828098,12.58866258253946,13.91320317969401,13.91320317969401,15.900014075425837,12.58866258253946,14.244338328982648,18.217960120446303,21.529311613332681,11.595257134673545,12.58866258253946,17.224554672580389,13.582068030405374,14.906608627559924,13.582068030405374,14.906608627559924,16.562284374003113,15.237743776848562,17.555689821869027,20.867041314755404,22.191581911909957,14.244338328982648,15.900014075425837,19.542500717600852,13.582068030405374,16.231149224714475,16.893419523291751,17.555689821869027,18.880230419023576,19.211365568312214,17.224554672580389,19.87363586688949,23.516122509064505,23.681690083708826,28.152014599105435,22.357149486554274],"text":["dist:   2<br />speed:  8.615041<br />Method: prediction_lm_straight","dist:  10<br />speed:  9.939581<br />Method: prediction_lm_straight","dist:   4<br />speed:  8.946176<br />Method: prediction_lm_straight","dist:  22<br />speed: 11.926392<br />Method: prediction_lm_straight","dist:  16<br />speed: 10.932987<br />Method: prediction_lm_straight","dist:  10<br />speed:  9.939581<br />Method: prediction_lm_straight","dist:  18<br />speed: 11.264122<br />Method: prediction_lm_straight","dist:  26<br />speed: 12.588663<br />Method: prediction_lm_straight","dist:  34<br />speed: 13.913203<br />Method: prediction_lm_straight","dist:  17<br />speed: 11.098554<br />Method: prediction_lm_straight","dist:  28<br />speed: 12.919798<br />Method: prediction_lm_straight","dist:  14<br />speed: 10.601852<br />Method: prediction_lm_straight","dist:  20<br />speed: 11.595257<br />Method: prediction_lm_straight","dist:  24<br />speed: 12.257527<br />Method: prediction_lm_straight","dist:  28<br />speed: 12.919798<br />Method: prediction_lm_straight","dist:  26<br />speed: 12.588663<br />Method: prediction_lm_straight","dist:  34<br />speed: 13.913203<br />Method: prediction_lm_straight","dist:  34<br />speed: 13.913203<br />Method: prediction_lm_straight","dist:  46<br />speed: 15.900014<br />Method: prediction_lm_straight","dist:  26<br />speed: 12.588663<br />Method: prediction_lm_straight","dist:  36<br />speed: 14.244338<br />Method: prediction_lm_straight","dist:  60<br />speed: 18.217960<br />Method: prediction_lm_straight","dist:  80<br />speed: 21.529312<br />Method: prediction_lm_straight","dist:  20<br />speed: 11.595257<br />Method: prediction_lm_straight","dist:  26<br />speed: 12.588663<br />Method: prediction_lm_straight","dist:  54<br />speed: 17.224555<br />Method: prediction_lm_straight","dist:  32<br />speed: 13.582068<br />Method: prediction_lm_straight","dist:  40<br />speed: 14.906609<br />Method: prediction_lm_straight","dist:  32<br />speed: 13.582068<br />Method: prediction_lm_straight","dist:  40<br />speed: 14.906609<br />Method: prediction_lm_straight","dist:  50<br />speed: 16.562284<br />Method: prediction_lm_straight","dist:  42<br />speed: 15.237744<br />Method: prediction_lm_straight","dist:  56<br />speed: 17.555690<br />Method: prediction_lm_straight","dist:  76<br />speed: 20.867041<br />Method: prediction_lm_straight","dist:  84<br />speed: 22.191582<br />Method: prediction_lm_straight","dist:  36<br />speed: 14.244338<br />Method: prediction_lm_straight","dist:  46<br />speed: 15.900014<br />Method: prediction_lm_straight","dist:  68<br />speed: 19.542501<br />Method: prediction_lm_straight","dist:  32<br />speed: 13.582068<br />Method: prediction_lm_straight","dist:  48<br />speed: 16.231149<br />Method: prediction_lm_straight","dist:  52<br />speed: 16.893420<br />Method: prediction_lm_straight","dist:  56<br />speed: 17.555690<br />Method: prediction_lm_straight","dist:  64<br />speed: 18.880230<br />Method: prediction_lm_straight","dist:  66<br />speed: 19.211366<br />Method: prediction_lm_straight","dist:  54<br />speed: 17.224555<br />Method: prediction_lm_straight","dist:  70<br />speed: 19.873636<br />Method: prediction_lm_straight","dist:  92<br />speed: 23.516123<br />Method: prediction_lm_straight","dist:  93<br />speed: 23.681690<br />Method: prediction_lm_straight","dist: 120<br />speed: 28.152015<br />Method: prediction_lm_straight","dist:  85<br />speed: 22.357149<br />Method: prediction_lm_straight"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,191,125,1)","opacity":1,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(0,191,125,1)"}},"hoveron":"points","name":"prediction_lm_straight","legendgroup":"prediction_lm_straight","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2,10,4,22,16,10,18,26,34,17,28,14,20,24,28,26,34,34,46,26,36,60,80,20,26,54,32,40,32,40,50,42,56,76,84,36,46,68,32,48,52,56,64,66,54,70,92,93,120,85],"y":[9.8005125063842531,9.825876143784372,4.2968198510601185,12.096958457661096,11.613059742720782,4.9991043427980397,10.946511244062011,12.902808232569473,15.866941282579422,9.8291875331697653,13.891982750041736,8.5555125206695717,10.57087998600309,11.96550569785575,13.707056090128241,12.754936943154584,15.102095858777556,15.201173763821625,18.331856358384947,12.403319499972305,15.94023279473334,19.416713963110396,21.564423525887026,12.013951974251984,12.217632119521229,19.291566122789877,14.531702792798239,16.606689184820414,14.221371039874922,16.114983618498446,17.982817670966206,16.775837536518644,18.652738769074855,20.232863335758381,23.89727736831237,15.31078585475248,17.387435357956555,18.803806695512073,13.949659469292312,17.615868909391608,17.914055041630323,18.458132395072155,18.736466209474059,17.042020719506894,18.122189322575576,18.343908922459626,21.414437418879626,24.210097861485192,26.323728118033525,20.63140891885762],"text":["dist:   2<br />speed:  9.800513<br />Method: prediction_nn_looc","dist:  10<br />speed:  9.825876<br />Method: prediction_nn_looc","dist:   4<br />speed:  4.296820<br />Method: prediction_nn_looc","dist:  22<br />speed: 12.096958<br />Method: prediction_nn_looc","dist:  16<br />speed: 11.613060<br />Method: prediction_nn_looc","dist:  10<br />speed:  4.999104<br />Method: prediction_nn_looc","dist:  18<br />speed: 10.946511<br />Method: prediction_nn_looc","dist:  26<br />speed: 12.902808<br />Method: prediction_nn_looc","dist:  34<br />speed: 15.866941<br />Method: prediction_nn_looc","dist:  17<br />speed:  9.829188<br />Method: prediction_nn_looc","dist:  28<br />speed: 13.891983<br />Method: prediction_nn_looc","dist:  14<br />speed:  8.555513<br />Method: prediction_nn_looc","dist:  20<br />speed: 10.570880<br />Method: prediction_nn_looc","dist:  24<br />speed: 11.965506<br />Method: prediction_nn_looc","dist:  28<br />speed: 13.707056<br />Method: prediction_nn_looc","dist:  26<br />speed: 12.754937<br />Method: prediction_nn_looc","dist:  34<br />speed: 15.102096<br />Method: prediction_nn_looc","dist:  34<br />speed: 15.201174<br />Method: prediction_nn_looc","dist:  46<br />speed: 18.331856<br />Method: prediction_nn_looc","dist:  26<br />speed: 12.403319<br />Method: prediction_nn_looc","dist:  36<br />speed: 15.940233<br />Method: prediction_nn_looc","dist:  60<br />speed: 19.416714<br />Method: prediction_nn_looc","dist:  80<br />speed: 21.564424<br />Method: prediction_nn_looc","dist:  20<br />speed: 12.013952<br />Method: prediction_nn_looc","dist:  26<br />speed: 12.217632<br />Method: prediction_nn_looc","dist:  54<br />speed: 19.291566<br />Method: prediction_nn_looc","dist:  32<br />speed: 14.531703<br />Method: prediction_nn_looc","dist:  40<br />speed: 16.606689<br />Method: prediction_nn_looc","dist:  32<br />speed: 14.221371<br />Method: prediction_nn_looc","dist:  40<br />speed: 16.114984<br />Method: prediction_nn_looc","dist:  50<br />speed: 17.982818<br />Method: prediction_nn_looc","dist:  42<br />speed: 16.775838<br />Method: prediction_nn_looc","dist:  56<br />speed: 18.652739<br />Method: prediction_nn_looc","dist:  76<br />speed: 20.232863<br />Method: prediction_nn_looc","dist:  84<br />speed: 23.897277<br />Method: prediction_nn_looc","dist:  36<br />speed: 15.310786<br />Method: prediction_nn_looc","dist:  46<br />speed: 17.387435<br />Method: prediction_nn_looc","dist:  68<br />speed: 18.803807<br />Method: prediction_nn_looc","dist:  32<br />speed: 13.949659<br />Method: prediction_nn_looc","dist:  48<br />speed: 17.615869<br />Method: prediction_nn_looc","dist:  52<br />speed: 17.914055<br />Method: prediction_nn_looc","dist:  56<br />speed: 18.458132<br />Method: prediction_nn_looc","dist:  64<br />speed: 18.736466<br />Method: prediction_nn_looc","dist:  66<br />speed: 17.042021<br />Method: prediction_nn_looc","dist:  54<br />speed: 18.122189<br />Method: prediction_nn_looc","dist:  70<br />speed: 18.343909<br />Method: prediction_nn_looc","dist:  92<br />speed: 21.414437<br />Method: prediction_nn_looc","dist:  93<br />speed: 24.210098<br />Method: prediction_nn_looc","dist: 120<br />speed: 26.323728<br />Method: prediction_nn_looc","dist:  85<br />speed: 20.631409<br />Method: prediction_nn_looc"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,176,246,1)","opacity":1,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(0,176,246,1)"}},"hoveron":"points","name":"prediction_nn_looc","legendgroup":"prediction_nn_looc","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2,10,4,22,16,10,18,26,34,17,28,14,20,24,28,26,34,34,46,26,36,60,80,20,26,54,32,40,32,40,50,42,56,76,84,36,46,68,32,48,52,56,64,66,54,70,92,93,120,85],"y":[5.4936664229539911,6.4978101830413921,5.4857919047491679,11.583114856826908,10.565332879912331,6.4978101830413921,10.85470873710797,12.538186141210259,14.991219435271423,10.704438646845219,13.100380252406012,10.310828083542084,11.192145866816986,12.031405415137536,13.100380252406012,12.538186141210259,14.991219435271423,14.991219435271423,17.601012650470309,12.538186141210259,15.611686384023365,18.920190213817701,13.818755410544757,11.192145866816986,12.538186141210259,18.177658327517708,14.347164176749564,16.667498849537289,14.347164176749564,16.667498849537289,17.908873798140426,17.065271447449039,18.356616802931374,18.060849699869902,20.570298243665871,15.611686384023365,17.601012650470309,21.243457299902293,14.347164176749564,17.771914237323223,18.036215094199406,18.356616802931374,19.883453584151962,20.525538629317587,18.177658327517708,21.970483794993054,24.421141164995852,24.449043513759513,23.9086436370333,21.871250185163849],"text":["dist:   2<br />speed:  5.493666<br />Method: prediction_nn_straight","dist:  10<br />speed:  6.497810<br />Method: prediction_nn_straight","dist:   4<br />speed:  5.485792<br />Method: prediction_nn_straight","dist:  22<br />speed: 11.583115<br />Method: prediction_nn_straight","dist:  16<br />speed: 10.565333<br />Method: prediction_nn_straight","dist:  10<br />speed:  6.497810<br />Method: prediction_nn_straight","dist:  18<br />speed: 10.854709<br />Method: prediction_nn_straight","dist:  26<br />speed: 12.538186<br />Method: prediction_nn_straight","dist:  34<br />speed: 14.991219<br />Method: prediction_nn_straight","dist:  17<br />speed: 10.704439<br />Method: prediction_nn_straight","dist:  28<br />speed: 13.100380<br />Method: prediction_nn_straight","dist:  14<br />speed: 10.310828<br />Method: prediction_nn_straight","dist:  20<br />speed: 11.192146<br />Method: prediction_nn_straight","dist:  24<br />speed: 12.031405<br />Method: prediction_nn_straight","dist:  28<br />speed: 13.100380<br />Method: prediction_nn_straight","dist:  26<br />speed: 12.538186<br />Method: prediction_nn_straight","dist:  34<br />speed: 14.991219<br />Method: prediction_nn_straight","dist:  34<br />speed: 14.991219<br />Method: prediction_nn_straight","dist:  46<br />speed: 17.601013<br />Method: prediction_nn_straight","dist:  26<br />speed: 12.538186<br />Method: prediction_nn_straight","dist:  36<br />speed: 15.611686<br />Method: prediction_nn_straight","dist:  60<br />speed: 18.920190<br />Method: prediction_nn_straight","dist:  80<br />speed: 13.818755<br />Method: prediction_nn_straight","dist:  20<br />speed: 11.192146<br />Method: prediction_nn_straight","dist:  26<br />speed: 12.538186<br />Method: prediction_nn_straight","dist:  54<br />speed: 18.177658<br />Method: prediction_nn_straight","dist:  32<br />speed: 14.347164<br />Method: prediction_nn_straight","dist:  40<br />speed: 16.667499<br />Method: prediction_nn_straight","dist:  32<br />speed: 14.347164<br />Method: prediction_nn_straight","dist:  40<br />speed: 16.667499<br />Method: prediction_nn_straight","dist:  50<br />speed: 17.908874<br />Method: prediction_nn_straight","dist:  42<br />speed: 17.065271<br />Method: prediction_nn_straight","dist:  56<br />speed: 18.356617<br />Method: prediction_nn_straight","dist:  76<br />speed: 18.060850<br />Method: prediction_nn_straight","dist:  84<br />speed: 20.570298<br />Method: prediction_nn_straight","dist:  36<br />speed: 15.611686<br />Method: prediction_nn_straight","dist:  46<br />speed: 17.601013<br />Method: prediction_nn_straight","dist:  68<br />speed: 21.243457<br />Method: prediction_nn_straight","dist:  32<br />speed: 14.347164<br />Method: prediction_nn_straight","dist:  48<br />speed: 17.771914<br />Method: prediction_nn_straight","dist:  52<br />speed: 18.036215<br />Method: prediction_nn_straight","dist:  56<br />speed: 18.356617<br />Method: prediction_nn_straight","dist:  64<br />speed: 19.883454<br />Method: prediction_nn_straight","dist:  66<br />speed: 20.525539<br />Method: prediction_nn_straight","dist:  54<br />speed: 18.177658<br />Method: prediction_nn_straight","dist:  70<br />speed: 21.970484<br />Method: prediction_nn_straight","dist:  92<br />speed: 24.421141<br />Method: prediction_nn_straight","dist:  93<br />speed: 24.449044<br />Method: prediction_nn_straight","dist: 120<br />speed: 23.908644<br />Method: prediction_nn_straight","dist:  85<br />speed: 21.871250<br />Method: prediction_nn_straight"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(231,107,243,1)","opacity":1,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(231,107,243,1)"}},"hoveron":"points","name":"prediction_nn_straight","legendgroup":"prediction_nn_straight","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":26.228310502283108,"r":7.3059360730593621,"b":40.182648401826498,"l":37.260273972602747},"plot_bgcolor":"rgba(235,235,235,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-3.9000000000000004,125.90000000000001],"tickmode":"array","ticktext":["0","25","50","75","100","125"],"tickvals":[0,25,50,75,100,125],"categoryorder":"array","categoryarray":["0","25","50","75","100","125"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.6529680365296811,"tickwidth":0.66417600664176002,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"y","title":{"text":"dist","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[2.7397486219049689,30.465278939995656],"tickmode":"array","ticktext":["10","20","30"],"tickvals":[10,20,30],"categoryorder":"array","categoryarray":["10","20","30"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.6529680365296811,"tickwidth":0.66417600664176002,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"x","title":{"text":"speed","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":1.8897637795275593,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.68949771689498},"title":{"text":"Method","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"987715ac3905":{"x":{},"y":{},"colour":{},"type":"scatter"}},"cur_data":"987715ac3905","visdat":{"987715ac3905":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-253fa4f1c619d0aee424">{"x":{"data":[{"x":[2,10,4,22,16,10,18,26,34,17,28,14,20,24,28,26,34,34,46,26,36,60,80,20,26,54,32,40,32,40,50,42,56,76,84,36,46,68,32,48,52,56,64,66,54,70,92,93,120,85],"y":[4,4,7,7,8,9,10,10,10,11,11,12,12,12,12,13,13,13,13,14,14,14,14,15,15,15,16,16,17,17,17,18,18,18,18,19,19,19,20,20,20,20,20,22,23,24,24,24,24,25],"text":["dist:   2<br />speed:  4.000000<br />Method: measured_speed","dist:  10<br />speed:  4.000000<br />Method: measured_speed","dist:   4<br />speed:  7.000000<br />Method: measured_speed","dist:  22<br />speed:  7.000000<br />Method: measured_speed","dist:  16<br />speed:  8.000000<br />Method: measured_speed","dist:  10<br />speed:  9.000000<br />Method: measured_speed","dist:  18<br />speed: 10.000000<br />Method: measured_speed","dist:  26<br />speed: 10.000000<br />Method: measured_speed","dist:  34<br />speed: 10.000000<br />Method: measured_speed","dist:  17<br />speed: 11.000000<br />Method: measured_speed","dist:  28<br />speed: 11.000000<br />Method: measured_speed","dist:  14<br />speed: 12.000000<br />Method: measured_speed","dist:  20<br />speed: 12.000000<br />Method: measured_speed","dist:  24<br />speed: 12.000000<br />Method: measured_speed","dist:  28<br />speed: 12.000000<br />Method: measured_speed","dist:  26<br />speed: 13.000000<br />Method: measured_speed","dist:  34<br />speed: 13.000000<br />Method: measured_speed","dist:  34<br />speed: 13.000000<br />Method: measured_speed","dist:  46<br />speed: 13.000000<br />Method: measured_speed","dist:  26<br />speed: 14.000000<br />Method: measured_speed","dist:  36<br />speed: 14.000000<br />Method: measured_speed","dist:  60<br />speed: 14.000000<br />Method: measured_speed","dist:  80<br />speed: 14.000000<br />Method: measured_speed","dist:  20<br />speed: 15.000000<br />Method: measured_speed","dist:  26<br />speed: 15.000000<br />Method: measured_speed","dist:  54<br />speed: 15.000000<br />Method: measured_speed","dist:  32<br />speed: 16.000000<br />Method: measured_speed","dist:  40<br />speed: 16.000000<br />Method: measured_speed","dist:  32<br />speed: 17.000000<br />Method: measured_speed","dist:  40<br />speed: 17.000000<br />Method: measured_speed","dist:  50<br />speed: 17.000000<br />Method: measured_speed","dist:  42<br />speed: 18.000000<br />Method: measured_speed","dist:  56<br />speed: 18.000000<br />Method: measured_speed","dist:  76<br />speed: 18.000000<br />Method: measured_speed","dist:  84<br />speed: 18.000000<br />Method: measured_speed","dist:  36<br />speed: 19.000000<br />Method: measured_speed","dist:  46<br />speed: 19.000000<br />Method: measured_speed","dist:  68<br />speed: 19.000000<br />Method: measured_speed","dist:  32<br />speed: 20.000000<br />Method: measured_speed","dist:  48<br />speed: 20.000000<br />Method: measured_speed","dist:  52<br />speed: 20.000000<br />Method: measured_speed","dist:  56<br />speed: 20.000000<br />Method: measured_speed","dist:  64<br />speed: 20.000000<br />Method: measured_speed","dist:  66<br />speed: 22.000000<br />Method: measured_speed","dist:  54<br />speed: 23.000000<br />Method: measured_speed","dist:  70<br />speed: 24.000000<br />Method: measured_speed","dist:  92<br />speed: 24.000000<br />Method: measured_speed","dist:  93<br />speed: 24.000000<br />Method: measured_speed","dist: 120<br />speed: 24.000000<br />Method: measured_speed","dist:  85<br />speed: 25.000000<br />Method: measured_speed"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","opacity":1,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(248,118,109,1)"}},"hoveron":"points","name":"measured_speed","legendgroup":"measured_speed","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2,10,4,22,16,10,18,26,34,17,28,14,20,24,28,26,34,34,46,26,36,60,80,20,26,54,32,40,32,40,50,42,56,76,84,36,46,68,32,48,52,56,64,66,54,70,92,93,120,85],"y":[8.971019079183451,10.274826528902761,9.0852540571297649,12.097290005990839,11.062758101018353,9.9926137610663712,11.315665841441652,12.665593666811397,14.003187921362095,11.102740375558579,12.972860490528618,10.534727116021589,11.580042423307056,12.265785670877534,12.945220725244605,12.576438264955438,13.934202434892839,13.934202434892839,15.960044643697373,12.546719797670121,14.249706339425144,18.343498366379183,22.027995538329861,11.467269257898252,12.517001330384804,17.278631500348165,13.523358990469548,14.883983723617696,13.499078307359316,14.863291312361747,16.552660077665951,15.181286307626502,17.544199191139104,21.029124082566721,22.515387233343798,14.139858439899152,15.835844070782475,19.56465699790802,13.426236258028613,16.151192292000129,16.821911261854371,17.492475727237075,18.841323447292471,19.106368078861472,17.084159039196948,19.690764397851989,23.466008077261712,23.64753932117797,29.205027561900625,22.145137259432481],"text":["dist:   2<br />speed:  8.971019<br />Method: prediction_lm_looc","dist:  10<br />speed: 10.274827<br />Method: prediction_lm_looc","dist:   4<br />speed:  9.085254<br />Method: prediction_lm_looc","dist:  22<br />speed: 12.097290<br />Method: prediction_lm_looc","dist:  16<br />speed: 11.062758<br />Method: prediction_lm_looc","dist:  10<br />speed:  9.992614<br />Method: prediction_lm_looc","dist:  18<br />speed: 11.315666<br />Method: prediction_lm_looc","dist:  26<br />speed: 12.665594<br />Method: prediction_lm_looc","dist:  34<br />speed: 14.003188<br />Method: prediction_lm_looc","dist:  17<br />speed: 11.102740<br />Method: prediction_lm_looc","dist:  28<br />speed: 12.972860<br />Method: prediction_lm_looc","dist:  14<br />speed: 10.534727<br />Method: prediction_lm_looc","dist:  20<br />speed: 11.580042<br />Method: prediction_lm_looc","dist:  24<br />speed: 12.265786<br />Method: prediction_lm_looc","dist:  28<br />speed: 12.945221<br />Method: prediction_lm_looc","dist:  26<br />speed: 12.576438<br />Method: prediction_lm_looc","dist:  34<br />speed: 13.934202<br />Method: prediction_lm_looc","dist:  34<br />speed: 13.934202<br />Method: prediction_lm_looc","dist:  46<br />speed: 15.960045<br />Method: prediction_lm_looc","dist:  26<br />speed: 12.546720<br />Method: prediction_lm_looc","dist:  36<br />speed: 14.249706<br />Method: prediction_lm_looc","dist:  60<br />speed: 18.343498<br />Method: prediction_lm_looc","dist:  80<br />speed: 22.027996<br />Method: prediction_lm_looc","dist:  20<br />speed: 11.467269<br />Method: prediction_lm_looc","dist:  26<br />speed: 12.517001<br />Method: prediction_lm_looc","dist:  54<br />speed: 17.278632<br />Method: prediction_lm_looc","dist:  32<br />speed: 13.523359<br />Method: prediction_lm_looc","dist:  40<br />speed: 14.883984<br />Method: prediction_lm_looc","dist:  32<br />speed: 13.499078<br />Method: prediction_lm_looc","dist:  40<br />speed: 14.863291<br />Method: prediction_lm_looc","dist:  50<br />speed: 16.552660<br />Method: prediction_lm_looc","dist:  42<br />speed: 15.181286<br />Method: prediction_lm_looc","dist:  56<br />speed: 17.544199<br />Method: prediction_lm_looc","dist:  76<br />speed: 21.029124<br />Method: prediction_lm_looc","dist:  84<br />speed: 22.515387<br />Method: prediction_lm_looc","dist:  36<br />speed: 14.139858<br />Method: prediction_lm_looc","dist:  46<br />speed: 15.835844<br />Method: prediction_lm_looc","dist:  68<br />speed: 19.564657<br />Method: prediction_lm_looc","dist:  32<br />speed: 13.426236<br />Method: prediction_lm_looc","dist:  48<br />speed: 16.151192<br />Method: prediction_lm_looc","dist:  52<br />speed: 16.821911<br />Method: prediction_lm_looc","dist:  56<br />speed: 17.492476<br />Method: prediction_lm_looc","dist:  64<br />speed: 18.841323<br />Method: prediction_lm_looc","dist:  66<br />speed: 19.106368<br />Method: prediction_lm_looc","dist:  54<br />speed: 17.084159<br />Method: prediction_lm_looc","dist:  70<br />speed: 19.690764<br />Method: prediction_lm_looc","dist:  92<br />speed: 23.466008<br />Method: prediction_lm_looc","dist:  93<br />speed: 23.647539<br />Method: prediction_lm_looc","dist: 120<br />speed: 29.205028<br />Method: prediction_lm_looc","dist:  85<br />speed: 22.145137<br />Method: prediction_lm_looc"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(163,165,0,1)","opacity":1,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(163,165,0,1)"}},"hoveron":"points","name":"prediction_lm_looc","legendgroup":"prediction_lm_looc","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2,10,4,22,16,10,18,26,34,17,28,14,20,24,28,26,34,34,46,26,36,60,80,20,26,54,32,40,32,40,50,42,56,76,84,36,46,68,32,48,52,56,64,66,54,70,92,93,120,85],"y":[8.6150407910758062,9.9395813882303568,8.9461759403644443,11.926392283962183,10.932986836096271,9.9395813882303568,11.264121985384909,12.58866258253946,13.91320317969401,11.09855441074059,12.919797731828098,10.601851686807633,11.595257134673545,12.257527433250822,12.919797731828098,12.58866258253946,13.91320317969401,13.91320317969401,15.900014075425837,12.58866258253946,14.244338328982648,18.217960120446303,21.529311613332681,11.595257134673545,12.58866258253946,17.224554672580389,13.582068030405374,14.906608627559924,13.582068030405374,14.906608627559924,16.562284374003113,15.237743776848562,17.555689821869027,20.867041314755404,22.191581911909957,14.244338328982648,15.900014075425837,19.542500717600852,13.582068030405374,16.231149224714475,16.893419523291751,17.555689821869027,18.880230419023576,19.211365568312214,17.224554672580389,19.87363586688949,23.516122509064505,23.681690083708826,28.152014599105435,22.357149486554274],"text":["dist:   2<br />speed:  8.615041<br />Method: prediction_lm_straight","dist:  10<br />speed:  9.939581<br />Method: prediction_lm_straight","dist:   4<br />speed:  8.946176<br />Method: prediction_lm_straight","dist:  22<br />speed: 11.926392<br />Method: prediction_lm_straight","dist:  16<br />speed: 10.932987<br />Method: prediction_lm_straight","dist:  10<br />speed:  9.939581<br />Method: prediction_lm_straight","dist:  18<br />speed: 11.264122<br />Method: prediction_lm_straight","dist:  26<br />speed: 12.588663<br />Method: prediction_lm_straight","dist:  34<br />speed: 13.913203<br />Method: prediction_lm_straight","dist:  17<br />speed: 11.098554<br />Method: prediction_lm_straight","dist:  28<br />speed: 12.919798<br />Method: prediction_lm_straight","dist:  14<br />speed: 10.601852<br />Method: prediction_lm_straight","dist:  20<br />speed: 11.595257<br />Method: prediction_lm_straight","dist:  24<br />speed: 12.257527<br />Method: prediction_lm_straight","dist:  28<br />speed: 12.919798<br />Method: prediction_lm_straight","dist:  26<br />speed: 12.588663<br />Method: prediction_lm_straight","dist:  34<br />speed: 13.913203<br />Method: prediction_lm_straight","dist:  34<br />speed: 13.913203<br />Method: prediction_lm_straight","dist:  46<br />speed: 15.900014<br />Method: prediction_lm_straight","dist:  26<br />speed: 12.588663<br />Method: prediction_lm_straight","dist:  36<br />speed: 14.244338<br />Method: prediction_lm_straight","dist:  60<br />speed: 18.217960<br />Method: prediction_lm_straight","dist:  80<br />speed: 21.529312<br />Method: prediction_lm_straight","dist:  20<br />speed: 11.595257<br />Method: prediction_lm_straight","dist:  26<br />speed: 12.588663<br />Method: prediction_lm_straight","dist:  54<br />speed: 17.224555<br />Method: prediction_lm_straight","dist:  32<br />speed: 13.582068<br />Method: prediction_lm_straight","dist:  40<br />speed: 14.906609<br />Method: prediction_lm_straight","dist:  32<br />speed: 13.582068<br />Method: prediction_lm_straight","dist:  40<br />speed: 14.906609<br />Method: prediction_lm_straight","dist:  50<br />speed: 16.562284<br />Method: prediction_lm_straight","dist:  42<br />speed: 15.237744<br />Method: prediction_lm_straight","dist:  56<br />speed: 17.555690<br />Method: prediction_lm_straight","dist:  76<br />speed: 20.867041<br />Method: prediction_lm_straight","dist:  84<br />speed: 22.191582<br />Method: prediction_lm_straight","dist:  36<br />speed: 14.244338<br />Method: prediction_lm_straight","dist:  46<br />speed: 15.900014<br />Method: prediction_lm_straight","dist:  68<br />speed: 19.542501<br />Method: prediction_lm_straight","dist:  32<br />speed: 13.582068<br />Method: prediction_lm_straight","dist:  48<br />speed: 16.231149<br />Method: prediction_lm_straight","dist:  52<br />speed: 16.893420<br />Method: prediction_lm_straight","dist:  56<br />speed: 17.555690<br />Method: prediction_lm_straight","dist:  64<br />speed: 18.880230<br />Method: prediction_lm_straight","dist:  66<br />speed: 19.211366<br />Method: prediction_lm_straight","dist:  54<br />speed: 17.224555<br />Method: prediction_lm_straight","dist:  70<br />speed: 19.873636<br />Method: prediction_lm_straight","dist:  92<br />speed: 23.516123<br />Method: prediction_lm_straight","dist:  93<br />speed: 23.681690<br />Method: prediction_lm_straight","dist: 120<br />speed: 28.152015<br />Method: prediction_lm_straight","dist:  85<br />speed: 22.357149<br />Method: prediction_lm_straight"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,191,125,1)","opacity":1,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(0,191,125,1)"}},"hoveron":"points","name":"prediction_lm_straight","legendgroup":"prediction_lm_straight","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2,10,4,22,16,10,18,26,34,17,28,14,20,24,28,26,34,34,46,26,36,60,80,20,26,54,32,40,32,40,50,42,56,76,84,36,46,68,32,48,52,56,64,66,54,70,92,93,120,85],"y":[9.8005125063842531,9.825876143784372,4.2968198510601185,12.096958457661096,11.613059742720782,4.9991043427980397,10.946511244062011,12.902808232569473,15.866941282579422,9.8291875331697653,13.891982750041736,8.5555125206695717,10.57087998600309,11.96550569785575,13.707056090128241,12.754936943154584,15.102095858777556,15.201173763821625,18.331856358384947,12.403319499972305,15.94023279473334,19.416713963110396,21.564423525887026,12.013951974251984,12.217632119521229,19.291566122789877,14.531702792798239,16.606689184820414,14.221371039874922,16.114983618498446,17.982817670966206,16.775837536518644,18.652738769074855,20.232863335758381,23.89727736831237,15.31078585475248,17.387435357956555,18.803806695512073,13.949659469292312,17.615868909391608,17.914055041630323,18.458132395072155,18.736466209474059,17.042020719506894,18.122189322575576,18.343908922459626,21.414437418879626,24.210097861485192,26.323728118033525,20.63140891885762],"text":["dist:   2<br />speed:  9.800513<br />Method: prediction_nn_looc","dist:  10<br />speed:  9.825876<br />Method: prediction_nn_looc","dist:   4<br />speed:  4.296820<br />Method: prediction_nn_looc","dist:  22<br />speed: 12.096958<br />Method: prediction_nn_looc","dist:  16<br />speed: 11.613060<br />Method: prediction_nn_looc","dist:  10<br />speed:  4.999104<br />Method: prediction_nn_looc","dist:  18<br />speed: 10.946511<br />Method: prediction_nn_looc","dist:  26<br />speed: 12.902808<br />Method: prediction_nn_looc","dist:  34<br />speed: 15.866941<br />Method: prediction_nn_looc","dist:  17<br />speed:  9.829188<br />Method: prediction_nn_looc","dist:  28<br />speed: 13.891983<br />Method: prediction_nn_looc","dist:  14<br />speed:  8.555513<br />Method: prediction_nn_looc","dist:  20<br />speed: 10.570880<br />Method: prediction_nn_looc","dist:  24<br />speed: 11.965506<br />Method: prediction_nn_looc","dist:  28<br />speed: 13.707056<br />Method: prediction_nn_looc","dist:  26<br />speed: 12.754937<br />Method: prediction_nn_looc","dist:  34<br />speed: 15.102096<br />Method: prediction_nn_looc","dist:  34<br />speed: 15.201174<br />Method: prediction_nn_looc","dist:  46<br />speed: 18.331856<br />Method: prediction_nn_looc","dist:  26<br />speed: 12.403319<br />Method: prediction_nn_looc","dist:  36<br />speed: 15.940233<br />Method: prediction_nn_looc","dist:  60<br />speed: 19.416714<br />Method: prediction_nn_looc","dist:  80<br />speed: 21.564424<br />Method: prediction_nn_looc","dist:  20<br />speed: 12.013952<br />Method: prediction_nn_looc","dist:  26<br />speed: 12.217632<br />Method: prediction_nn_looc","dist:  54<br />speed: 19.291566<br />Method: prediction_nn_looc","dist:  32<br />speed: 14.531703<br />Method: prediction_nn_looc","dist:  40<br />speed: 16.606689<br />Method: prediction_nn_looc","dist:  32<br />speed: 14.221371<br />Method: prediction_nn_looc","dist:  40<br />speed: 16.114984<br />Method: prediction_nn_looc","dist:  50<br />speed: 17.982818<br />Method: prediction_nn_looc","dist:  42<br />speed: 16.775838<br />Method: prediction_nn_looc","dist:  56<br />speed: 18.652739<br />Method: prediction_nn_looc","dist:  76<br />speed: 20.232863<br />Method: prediction_nn_looc","dist:  84<br />speed: 23.897277<br />Method: prediction_nn_looc","dist:  36<br />speed: 15.310786<br />Method: prediction_nn_looc","dist:  46<br />speed: 17.387435<br />Method: prediction_nn_looc","dist:  68<br />speed: 18.803807<br />Method: prediction_nn_looc","dist:  32<br />speed: 13.949659<br />Method: prediction_nn_looc","dist:  48<br />speed: 17.615869<br />Method: prediction_nn_looc","dist:  52<br />speed: 17.914055<br />Method: prediction_nn_looc","dist:  56<br />speed: 18.458132<br />Method: prediction_nn_looc","dist:  64<br />speed: 18.736466<br />Method: prediction_nn_looc","dist:  66<br />speed: 17.042021<br />Method: prediction_nn_looc","dist:  54<br />speed: 18.122189<br />Method: prediction_nn_looc","dist:  70<br />speed: 18.343909<br />Method: prediction_nn_looc","dist:  92<br />speed: 21.414437<br />Method: prediction_nn_looc","dist:  93<br />speed: 24.210098<br />Method: prediction_nn_looc","dist: 120<br />speed: 26.323728<br />Method: prediction_nn_looc","dist:  85<br />speed: 20.631409<br />Method: prediction_nn_looc"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,176,246,1)","opacity":1,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(0,176,246,1)"}},"hoveron":"points","name":"prediction_nn_looc","legendgroup":"prediction_nn_looc","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2,10,4,22,16,10,18,26,34,17,28,14,20,24,28,26,34,34,46,26,36,60,80,20,26,54,32,40,32,40,50,42,56,76,84,36,46,68,32,48,52,56,64,66,54,70,92,93,120,85],"y":[5.4936664229539911,6.4978101830413921,5.4857919047491679,11.583114856826908,10.565332879912331,6.4978101830413921,10.85470873710797,12.538186141210259,14.991219435271423,10.704438646845219,13.100380252406012,10.310828083542084,11.192145866816986,12.031405415137536,13.100380252406012,12.538186141210259,14.991219435271423,14.991219435271423,17.601012650470309,12.538186141210259,15.611686384023365,18.920190213817701,13.818755410544757,11.192145866816986,12.538186141210259,18.177658327517708,14.347164176749564,16.667498849537289,14.347164176749564,16.667498849537289,17.908873798140426,17.065271447449039,18.356616802931374,18.060849699869902,20.570298243665871,15.611686384023365,17.601012650470309,21.243457299902293,14.347164176749564,17.771914237323223,18.036215094199406,18.356616802931374,19.883453584151962,20.525538629317587,18.177658327517708,21.970483794993054,24.421141164995852,24.449043513759513,23.9086436370333,21.871250185163849],"text":["dist:   2<br />speed:  5.493666<br />Method: prediction_nn_straight","dist:  10<br />speed:  6.497810<br />Method: prediction_nn_straight","dist:   4<br />speed:  5.485792<br />Method: prediction_nn_straight","dist:  22<br />speed: 11.583115<br />Method: prediction_nn_straight","dist:  16<br />speed: 10.565333<br />Method: prediction_nn_straight","dist:  10<br />speed:  6.497810<br />Method: prediction_nn_straight","dist:  18<br />speed: 10.854709<br />Method: prediction_nn_straight","dist:  26<br />speed: 12.538186<br />Method: prediction_nn_straight","dist:  34<br />speed: 14.991219<br />Method: prediction_nn_straight","dist:  17<br />speed: 10.704439<br />Method: prediction_nn_straight","dist:  28<br />speed: 13.100380<br />Method: prediction_nn_straight","dist:  14<br />speed: 10.310828<br />Method: prediction_nn_straight","dist:  20<br />speed: 11.192146<br />Method: prediction_nn_straight","dist:  24<br />speed: 12.031405<br />Method: prediction_nn_straight","dist:  28<br />speed: 13.100380<br />Method: prediction_nn_straight","dist:  26<br />speed: 12.538186<br />Method: prediction_nn_straight","dist:  34<br />speed: 14.991219<br />Method: prediction_nn_straight","dist:  34<br />speed: 14.991219<br />Method: prediction_nn_straight","dist:  46<br />speed: 17.601013<br />Method: prediction_nn_straight","dist:  26<br />speed: 12.538186<br />Method: prediction_nn_straight","dist:  36<br />speed: 15.611686<br />Method: prediction_nn_straight","dist:  60<br />speed: 18.920190<br />Method: prediction_nn_straight","dist:  80<br />speed: 13.818755<br />Method: prediction_nn_straight","dist:  20<br />speed: 11.192146<br />Method: prediction_nn_straight","dist:  26<br />speed: 12.538186<br />Method: prediction_nn_straight","dist:  54<br />speed: 18.177658<br />Method: prediction_nn_straight","dist:  32<br />speed: 14.347164<br />Method: prediction_nn_straight","dist:  40<br />speed: 16.667499<br />Method: prediction_nn_straight","dist:  32<br />speed: 14.347164<br />Method: prediction_nn_straight","dist:  40<br />speed: 16.667499<br />Method: prediction_nn_straight","dist:  50<br />speed: 17.908874<br />Method: prediction_nn_straight","dist:  42<br />speed: 17.065271<br />Method: prediction_nn_straight","dist:  56<br />speed: 18.356617<br />Method: prediction_nn_straight","dist:  76<br />speed: 18.060850<br />Method: prediction_nn_straight","dist:  84<br />speed: 20.570298<br />Method: prediction_nn_straight","dist:  36<br />speed: 15.611686<br />Method: prediction_nn_straight","dist:  46<br />speed: 17.601013<br />Method: prediction_nn_straight","dist:  68<br />speed: 21.243457<br />Method: prediction_nn_straight","dist:  32<br />speed: 14.347164<br />Method: prediction_nn_straight","dist:  48<br />speed: 17.771914<br />Method: prediction_nn_straight","dist:  52<br />speed: 18.036215<br />Method: prediction_nn_straight","dist:  56<br />speed: 18.356617<br />Method: prediction_nn_straight","dist:  64<br />speed: 19.883454<br />Method: prediction_nn_straight","dist:  66<br />speed: 20.525539<br />Method: prediction_nn_straight","dist:  54<br />speed: 18.177658<br />Method: prediction_nn_straight","dist:  70<br />speed: 21.970484<br />Method: prediction_nn_straight","dist:  92<br />speed: 24.421141<br />Method: prediction_nn_straight","dist:  93<br />speed: 24.449044<br />Method: prediction_nn_straight","dist: 120<br />speed: 23.908644<br />Method: prediction_nn_straight","dist:  85<br />speed: 21.871250<br />Method: prediction_nn_straight"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(231,107,243,1)","opacity":1,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(231,107,243,1)"}},"hoveron":"points","name":"prediction_nn_straight","legendgroup":"prediction_nn_straight","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":26.228310502283108,"r":7.3059360730593621,"b":40.182648401826498,"l":37.260273972602747},"plot_bgcolor":"rgba(235,235,235,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-3.9000000000000004,125.90000000000001],"tickmode":"array","ticktext":["0","25","50","75","100","125"],"tickvals":[0,25,50,75,100,125],"categoryorder":"array","categoryarray":["0","25","50","75","100","125"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.6529680365296811,"tickwidth":0.66417600664176002,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"y","title":{"text":"dist","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[2.7397486219049689,30.465278939995656],"tickmode":"array","ticktext":["10","20","30"],"tickvals":[10,20,30],"categoryorder":"array","categoryarray":["10","20","30"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.6529680365296811,"tickwidth":0.66417600664176002,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"x","title":{"text":"speed","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":1.8897637795275593,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.68949771689498},"title":{"text":"Method","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"ee5e4abd4aef":{"x":{},"y":{},"colour":{},"type":"scatter"}},"cur_data":"ee5e4abd4aef","visdat":{"ee5e4abd4aef":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 </div>
 <div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1">data_long <span class="ot" style="color: #003B4F;
 background-color: null;
@@ -732,7 +1137,7 @@ background-color: null;
 font-style: inherit;">-</span> measured_speed,</span>
 <span id="cb6-5">         <span class="at" style="color: #657422;
 background-color: null;
-font-style: inherit;">squarred_error =</span> error<span class="sc" style="color: #5E5E5E;
+font-style: inherit;">squared_error =</span> error<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">^</span><span class="dv" style="color: #AD0000;
 background-color: null;
@@ -792,11 +1197,13 @@ background-color: null;
 font-style: inherit;">abs</span>(error)),</span>
 <span id="cb7-4">            <span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">'Mean squarred error'</span> <span class="ot" style="color: #003B4F;
+font-style: inherit;">'Root mean squared error'</span> <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">mean</span>(squarred_error)) <span class="sc" style="color: #5E5E5E;
+font-style: inherit;">sqrt</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mean</span>(squared_error))) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">|&gt;</span> </span>
 <span id="cb7-5">  <span class="fu" style="color: #4758AB;
@@ -808,33 +1215,38 @@ background-color: null;
 font-style: inherit;">'c'</span>)</span></code></pre></div>
 <div class="cell-output-display">
 <table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 34%">
+<col style="width: 30%">
+<col style="width: 35%">
+</colgroup>
 <thead>
 <tr class="header">
 <th style="text-align: center;">Method</th>
 <th style="text-align: center;">Mean absolute error</th>
-<th style="text-align: center;">Mean squarred error</th>
+<th style="text-align: center;">Root mean squared error</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: center;">prediction_lm_looc</td>
 <td style="text-align: center;">2.633568</td>
-<td style="text-align: center;">10.525331</td>
+<td style="text-align: center;">3.244277</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">prediction_lm_straight</td>
 <td style="text-align: center;">2.518286</td>
-<td style="text-align: center;">9.560425</td>
+<td style="text-align: center;">3.091994</td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;">prediction_nn_looc</td>
 <td style="text-align: center;">2.888501</td>
-<td style="text-align: center;">11.961281</td>
+<td style="text-align: center;">3.458509</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">prediction_nn_straight</td>
 <td style="text-align: center;">1.948435</td>
-<td style="text-align: center;">5.906101</td>
+<td style="text-align: center;">2.430247</td>
 </tr>
 </tbody>
 </table>
@@ -5825,235 +6237,6 @@ font-style: inherit;">=</span>ax)</span></code></pre></div>
   <category>Python</category>
   <guid>https://sbloggel.netlify.app/posts/2023-07-04-python-statsmodels/2023-07-04-python-statsmodels.html</guid>
   <pubDate>Mon, 03 Jul 2023 22:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Python pandas</title>
-  <link>https://sbloggel.netlify.app/posts/2023-07-03-python-pandas/2023-07-03-python-pandas.html</link>
-  <description><![CDATA[ 
-
-
-
-<ul>
-<li>pandas - <a href="https://pandas.pydata.org/docs/getting_started/intro_tutorials/">Tutorials</a></li>
-<li>Access R in Python chunk:</li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1">r[<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"mtcars"</span>]</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>                      mpg  cyl   disp     hp  drat  ...   qsec   vs   am  gear  carb
-Mazda RX4            21.0  6.0  160.0  110.0  3.90  ...  16.46  0.0  1.0   4.0   4.0
-Mazda RX4 Wag        21.0  6.0  160.0  110.0  3.90  ...  17.02  0.0  1.0   4.0   4.0
-Datsun 710           22.8  4.0  108.0   93.0  3.85  ...  18.61  1.0  1.0   4.0   1.0
-Hornet 4 Drive       21.4  6.0  258.0  110.0  3.08  ...  19.44  1.0  0.0   3.0   1.0
-Hornet Sportabout    18.7  8.0  360.0  175.0  3.15  ...  17.02  0.0  0.0   3.0   2.0
-Valiant              18.1  6.0  225.0  105.0  2.76  ...  20.22  1.0  0.0   3.0   1.0
-Duster 360           14.3  8.0  360.0  245.0  3.21  ...  15.84  0.0  0.0   3.0   4.0
-Merc 240D            24.4  4.0  146.7   62.0  3.69  ...  20.00  1.0  0.0   4.0   2.0
-Merc 230             22.8  4.0  140.8   95.0  3.92  ...  22.90  1.0  0.0   4.0   2.0
-Merc 280             19.2  6.0  167.6  123.0  3.92  ...  18.30  1.0  0.0   4.0   4.0
-Merc 280C            17.8  6.0  167.6  123.0  3.92  ...  18.90  1.0  0.0   4.0   4.0
-Merc 450SE           16.4  8.0  275.8  180.0  3.07  ...  17.40  0.0  0.0   3.0   3.0
-Merc 450SL           17.3  8.0  275.8  180.0  3.07  ...  17.60  0.0  0.0   3.0   3.0
-Merc 450SLC          15.2  8.0  275.8  180.0  3.07  ...  18.00  0.0  0.0   3.0   3.0
-Cadillac Fleetwood   10.4  8.0  472.0  205.0  2.93  ...  17.98  0.0  0.0   3.0   4.0
-Lincoln Continental  10.4  8.0  460.0  215.0  3.00  ...  17.82  0.0  0.0   3.0   4.0
-Chrysler Imperial    14.7  8.0  440.0  230.0  3.23  ...  17.42  0.0  0.0   3.0   4.0
-Fiat 128             32.4  4.0   78.7   66.0  4.08  ...  19.47  1.0  1.0   4.0   1.0
-Honda Civic          30.4  4.0   75.7   52.0  4.93  ...  18.52  1.0  1.0   4.0   2.0
-Toyota Corolla       33.9  4.0   71.1   65.0  4.22  ...  19.90  1.0  1.0   4.0   1.0
-Toyota Corona        21.5  4.0  120.1   97.0  3.70  ...  20.01  1.0  0.0   3.0   1.0
-Dodge Challenger     15.5  8.0  318.0  150.0  2.76  ...  16.87  0.0  0.0   3.0   2.0
-AMC Javelin          15.2  8.0  304.0  150.0  3.15  ...  17.30  0.0  0.0   3.0   2.0
-Camaro Z28           13.3  8.0  350.0  245.0  3.73  ...  15.41  0.0  0.0   3.0   4.0
-Pontiac Firebird     19.2  8.0  400.0  175.0  3.08  ...  17.05  0.0  0.0   3.0   2.0
-Fiat X1-9            27.3  4.0   79.0   66.0  4.08  ...  18.90  1.0  1.0   4.0   1.0
-Porsche 914-2        26.0  4.0  120.3   91.0  4.43  ...  16.70  0.0  1.0   5.0   2.0
-Lotus Europa         30.4  4.0   95.1  113.0  3.77  ...  16.90  1.0  1.0   5.0   2.0
-Ford Pantera L       15.8  8.0  351.0  264.0  4.22  ...  14.50  0.0  1.0   5.0   4.0
-Ferrari Dino         19.7  6.0  145.0  175.0  3.62  ...  15.50  0.0  1.0   5.0   6.0
-Maserati Bora        15.0  8.0  301.0  335.0  3.54  ...  14.60  0.0  1.0   5.0   8.0
-Volvo 142E           21.4  4.0  121.0  109.0  4.11  ...  18.60  1.0  1.0   4.0   2.0
-
-[32 rows x 11 columns]</code></pre>
-</div>
-</div>
-<ul>
-<li>Access Python object in R chunk</li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">xyz <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">10</span></span></code></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(reticulate)</span>
-<span id="cb4-2">py<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span>xyz</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 10</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">import</span> pandas <span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">as</span> pd</span>
-<span id="cb6-2"><span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">import</span> matplotlib.pyplot <span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">as</span> plt</span>
-<span id="cb6-3"><span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">import</span> seaborn <span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">as</span> sns</span>
-<span id="cb6-4"></span>
-<span id="cb6-5">iris <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> pd.read_csv(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'iris.csv'</span>)</span>
-<span id="cb6-6">iris[<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'Sepal.Length'</span>].describe()</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>count    150.000000
-mean       5.843333
-std        0.828066
-min        4.300000
-25%        5.100000
-50%        5.800000
-75%        6.400000
-max        7.900000
-Name: Sepal.Length, dtype: float64</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1">iris[<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'Sepal.Width'</span>].describe()</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>count    150.000000
-mean       3.057333
-std        0.435866
-min        2.000000
-25%        2.800000
-50%        3.000000
-75%        3.300000
-max        4.400000
-Name: Sepal.Width, dtype: float64</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1">iris[<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'total_length'</span>] <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> iris[<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'Sepal.Length'</span>] <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> iris[<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'Sepal.Width'</span>]</span>
-<span id="cb10-2">iris[<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'total_length'</span>].describe()</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>count    150.000000
-mean       8.900667
-std        0.889272
-min        6.800000
-25%        8.300000
-50%        8.850000
-75%        9.575000
-max       11.700000
-Name: total_length, dtype: float64</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># two identical results:</span></span>
-<span id="cb12-2">iris.loc[iris[<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'total_length'</span>] <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">&gt;</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">10</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'total_length'</span>]</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>15     10.1
-50     10.2
-102    10.1
-105    10.6
-107    10.2
-109    10.8
-117    11.5
-118    10.3
-120    10.1
-122    10.5
-125    10.4
-129    10.2
-130    10.2
-131    11.7
-135    10.7
-Name: total_length, dtype: float64</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1">iris[iris[<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'total_length'</span>] <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">&gt;</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">10</span>][<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'total_length'</span>]</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>15     10.1
-50     10.2
-102    10.1
-105    10.6
-107    10.2
-109    10.8
-117    11.5
-118    10.3
-120    10.1
-122    10.5
-125    10.4
-129    10.2
-130    10.2
-131    11.7
-135    10.7
-Name: total_length, dtype: float64</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"></span>
-<span id="cb16-2">iris.loc[iris[<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'total_length'</span>] <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">&gt;</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">10</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'total_length'</span>] <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">100</span></span></code></pre></div>
-</div>
-
-
-
- ]]></description>
-  <category>Python</category>
-  <guid>https://sbloggel.netlify.app/posts/2023-07-03-python-pandas/2023-07-03-python-pandas.html</guid>
-  <pubDate>Sun, 02 Jul 2023 22:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
