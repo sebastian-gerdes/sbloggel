@@ -32,8 +32,8 @@ cars = pd.DataFrame(r['cars'])
 
 ### Show that fitting in R and Python yields identical results
 ```{python}
-fm_fit = smf.ols(formula = 'speed ~ dist', data = cars).fit()
-fm_fit.summary()
+fm = smf.ols(formula = 'speed ~ dist', data = cars).fit()
+fm.summary()
 ```
 
 ```{r}
@@ -43,7 +43,7 @@ summary(fm)
 
 ### Show that prediction in R and Python yields identical results
 ```{python}
-fm_fit.predict(cars.iloc[0])
+fm.predict(cars.iloc[0])
 ```
 
 ```{r}
@@ -60,8 +60,8 @@ cars['prediction'] = np.nan
 for i in range(50):
   train = cars.drop(index = i)
   test = cars.iloc[i]
-  fm_fit = smf.ols(formula='speed ~ dist', data=train).fit()
-  cars['prediction'].iloc[i] = fm_fit.predict(test)
+  fm = smf.ols(formula='speed ~ dist', data=train).fit()
+  cars['prediction'].iloc[i] = fm.predict(test)
 
 # calculate statistics:
 cars['error'] = cars['speed'] - cars['prediction']
@@ -77,4 +77,4 @@ np.sqrt(np.mean(cars['squared_error']))
 
 ## Conclusion
 * Results are identical to those produced in R: [Link](https://sbloggel.netlify.app/posts/2023-08-08-leave-one-out-cross-validation-in-r/2023-08-08-leave-one-out-cross-validation-in-r)
-* However, they are not identical to Friedemann's results - we still have to clarify why that is!
+* Also, the discrepancy with Friedemann's results is now resolved

@@ -224,8 +224,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="show-that-fitting-in-r-and-python-yields-identical-results" class="level3">
 <h3 class="anchored" data-anchor-id="show-that-fitting-in-r-and-python-yields-identical-results">Show that fitting in R and Python yields identical results</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>fm_fit <span class="op">=</span> smf.ols(formula <span class="op">=</span> <span class="st">'speed ~ dist'</span>, data <span class="op">=</span> cars).fit()</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>fm_fit.summary()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>fm <span class="op">=</span> smf.ols(formula <span class="op">=</span> <span class="st">'speed ~ dist'</span>, data <span class="op">=</span> cars).fit()</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>fm.summary()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="simpletable table table-sm table-striped small" data-quarto-postprocess="true">
 <caption>OLS Regression Results</caption>
@@ -256,7 +256,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">Time:</td>
-<td>10:37:20</td>
+<td>11:17:50</td>
 <td data-quarto-table-cell-role="th">Log-Likelihood:</td>
 <td>-127.39</td>
 </tr>
@@ -376,7 +376,7 @@ F-statistic: 89.57 on 1 and 48 DF,  p-value: 1.49e-12</code></pre>
 <section id="show-that-prediction-in-r-and-python-yields-identical-results" class="level3">
 <h3 class="anchored" data-anchor-id="show-that-prediction-in-r-and-python-yields-identical-results">Show that prediction in R and Python yields identical results</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>fm_fit.predict(cars.iloc[<span class="dv">0</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>fm.predict(cars.iloc[<span class="dv">0</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>0    8.615041
 dtype: float64</code></pre>
@@ -400,8 +400,8 @@ dtype: float64</code></pre>
 <span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">50</span>):</span>
 <span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  train <span class="op">=</span> cars.drop(index <span class="op">=</span> i)</span>
 <span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  test <span class="op">=</span> cars.iloc[i]</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  fm_fit <span class="op">=</span> smf.ols(formula<span class="op">=</span><span class="st">'speed ~ dist'</span>, data<span class="op">=</span>train).fit()</span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  cars[<span class="st">'prediction'</span>].iloc[i] <span class="op">=</span> fm_fit.predict(test)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  fm <span class="op">=</span> smf.ols(formula<span class="op">=</span><span class="st">'speed ~ dist'</span>, data<span class="op">=</span>train).fit()</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  cars[<span class="st">'prediction'</span>].iloc[i] <span class="op">=</span> fm.predict(test)</span>
 <span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate statistics:</span></span>
 <span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>cars[<span class="st">'error'</span>] <span class="op">=</span> cars[<span class="st">'speed'</span>] <span class="op">-</span> cars[<span class="st">'prediction'</span>]</span>
@@ -425,7 +425,7 @@ dtype: float64</code></pre>
 <h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
 <ul>
 <li>Results are identical to those produced in R: <a href="https://sbloggel.netlify.app/posts/2023-08-08-leave-one-out-cross-validation-in-r/2023-08-08-leave-one-out-cross-validation-in-r">Link</a></li>
-<li>However, they are not identical to Friedemann’s results - we still have to clarify why that is!</li>
+<li>Also, the discrepancy with Friedemann’s results is now resolved</li>
 </ul>
 
 

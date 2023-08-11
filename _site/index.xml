@@ -78,7 +78,7 @@ font-style: inherit;">'cars'</span>])</span></code></pre></div>
 <section id="show-that-fitting-in-r-and-python-yields-identical-results" class="level3">
 <h3 class="anchored" data-anchor-id="show-that-fitting-in-r-and-python-yields-identical-results">Show that fitting in R and Python yields identical results</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">fm_fit <span class="op" style="color: #5E5E5E;
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">fm <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> smf.ols(formula <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -87,7 +87,7 @@ background-color: null;
 font-style: inherit;">'speed ~ dist'</span>, data <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> cars).fit()</span>
-<span id="cb3-2">fm_fit.summary()</span></code></pre></div>
+<span id="cb3-2">fm.summary()</span></code></pre></div>
 <div class="cell-output-display">
 <table class="simpletable table table-sm table-striped small" data-quarto-postprocess="true">
 <caption>OLS Regression Results</caption>
@@ -118,7 +118,7 @@ font-style: inherit;">=</span> cars).fit()</span>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">Time:</td>
-<td>10:37:20</td>
+<td>11:17:50</td>
 <td data-quarto-table-cell-role="th">Log-Likelihood:</td>
 <td>-127.39</td>
 </tr>
@@ -248,7 +248,7 @@ F-statistic: 89.57 on 1 and 48 DF,  p-value: 1.49e-12</code></pre>
 <section id="show-that-prediction-in-r-and-python-yields-identical-results" class="level3">
 <h3 class="anchored" data-anchor-id="show-that-prediction-in-r-and-python-yields-identical-results">Show that prediction in R and Python yields identical results</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1">fm_fit.predict(cars.iloc[<span class="dv" style="color: #AD0000;
+<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1">fm.predict(cars.iloc[<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span>])</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -300,7 +300,7 @@ font-style: inherit;">=</span> i)</span>
 <span id="cb10-7">  test <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> cars.iloc[i]</span>
-<span id="cb10-8">  fm_fit <span class="op" style="color: #5E5E5E;
+<span id="cb10-8">  fm <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> smf.ols(formula<span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -313,7 +313,7 @@ font-style: inherit;">=</span>train).fit()</span>
 background-color: null;
 font-style: inherit;">'prediction'</span>].iloc[i] <span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">=</span> fm_fit.predict(test)</span>
+font-style: inherit;">=</span> fm.predict(test)</span>
 <span id="cb10-10"></span>
 <span id="cb10-11"><span class="co" style="color: #5E5E5E;
 background-color: null;
@@ -371,7 +371,7 @@ font-style: inherit;">'squared_error'</span>]))</span></code></pre></div>
 <h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
 <ul>
 <li>Results are identical to those produced in R: <a href="https://sbloggel.netlify.app/posts/2023-08-08-leave-one-out-cross-validation-in-r/2023-08-08-leave-one-out-cross-validation-in-r">Link</a></li>
-<li>However, they are not identical to Friedemann’s results - we still have to clarify why that is!</li>
+<li>Also, the discrepancy with Friedemann’s results is now resolved</li>
 </ul>
 
 
