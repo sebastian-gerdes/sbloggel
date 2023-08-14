@@ -63,16 +63,14 @@ for i in range(50):
   fm = smf.ols(formula='speed ~ dist', data=train).fit()
   cars['prediction'].iloc[i] = fm.predict(test)
 
-# calculate statistics:
+# calculate prediction error:
 cars['error'] = cars['speed'] - cars['prediction']
-cars['abs_error'] = np.abs(cars['error'])
-cars['squared_error'] = np.square(cars['error'])
 
 # mean absolute error:
-np.mean(cars['abs_error'])
+np.mean(np.abs(cars['error']))
 
 # root mean squared error:
-np.sqrt(np.mean(cars['squared_error']))
+np.sqrt(np.mean(np.square(cars['error'])))
 ```
 
 ## Conclusion

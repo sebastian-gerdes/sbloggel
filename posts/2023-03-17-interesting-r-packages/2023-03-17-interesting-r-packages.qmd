@@ -159,3 +159,24 @@ excluded
 
 ## Concattenating text
 * [Package glue](https://cran.r-project.org/package=glue)
+
+## Handle missing data
+* [Package nania - getting started](https://naniar.njtierney.com/articles/getting-started-w-naniar.html)
+  * However, there seem to be no methods for categorical data... &rarr; [Opened issue](https://github.com/njtierney/naniar/issues/336)
+
+```{r}
+library('naniar')
+library('tidyverse')
+library('simputation')
+aq <- airquality |> 
+  mutate(Ozone = as.double(Ozone), 
+         fct = sample(c('a', 'b', NA), replace = TRUE, size = nrow(airquality)))
+colSums(is.na(aq))
+
+vis_miss(aq)
+
+aq_nabular <- nabular(aq)
+aq_nabular
+
+aq_nabular |> impute_lm(Ozone ~ Temp)
+```

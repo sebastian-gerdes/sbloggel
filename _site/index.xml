@@ -118,7 +118,7 @@ font-style: inherit;">=</span> cars).fit()</span>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">Time:</td>
-<td>11:17:50</td>
+<td>11:25:07</td>
 <td data-quarto-table-cell-role="th">Log-Likelihood:</td>
 <td>-127.39</td>
 </tr>
@@ -317,7 +317,7 @@ font-style: inherit;">=</span> fm.predict(test)</span>
 <span id="cb10-10"></span>
 <span id="cb10-11"><span class="co" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;"># calculate statistics:</span></span>
+font-style: inherit;"># calculate prediction error:</span></span>
 <span id="cb10-12">cars[<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'error'</span>] <span class="op" style="color: #5E5E5E;
@@ -329,38 +329,24 @@ background-color: null;
 font-style: inherit;">-</span> cars[<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'prediction'</span>]</span>
-<span id="cb10-13">cars[<span class="st" style="color: #20794D;
+<span id="cb10-13"></span>
+<span id="cb10-14"><span class="co" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">'abs_error'</span>] <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> np.<span class="bu" style="color: null;
+font-style: inherit;"># mean absolute error:</span></span>
+<span id="cb10-15">np.mean(np.<span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">abs</span>(cars[<span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">'error'</span>])</span>
-<span id="cb10-14">cars[<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'squared_error'</span>] <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> np.square(cars[<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'error'</span>])</span>
-<span id="cb10-15"></span>
-<span id="cb10-16"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># mean absolute error:</span></span>
-<span id="cb10-17">np.mean(cars[<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'abs_error'</span>])</span></code></pre></div>
+font-style: inherit;">'error'</span>]))</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>2.6335683917489323</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># root mean squared error:</span></span>
-<span id="cb12-2">np.sqrt(np.mean(cars[<span class="st" style="color: #20794D;
+<span id="cb12-2">np.sqrt(np.mean(np.square(cars[<span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">'squared_error'</span>]))</span></code></pre></div>
+font-style: inherit;">'error'</span>])))</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>3.244276599631193</code></pre>
 </div>

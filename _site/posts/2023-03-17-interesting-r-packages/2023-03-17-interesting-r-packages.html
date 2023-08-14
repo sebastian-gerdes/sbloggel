@@ -168,6 +168,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#here-for-finding-the-path-to-the-project-directory" id="toc-here-for-finding-the-path-to-the-project-directory" class="nav-link" data-scroll-target="#here-for-finding-the-path-to-the-project-directory">Here for finding the path to the project directory</a></li>
   <li><a href="#package-for-formatting-labels-in-ggplot" id="toc-package-for-formatting-labels-in-ggplot" class="nav-link" data-scroll-target="#package-for-formatting-labels-in-ggplot">Package for formatting labels in ggplot</a></li>
   <li><a href="#concattenating-text" id="toc-concattenating-text" class="nav-link" data-scroll-target="#concattenating-text">Concattenating text</a></li>
+  <li><a href="#handle-missing-data" id="toc-handle-missing-data" class="nav-link" data-scroll-target="#handle-missing-data">Handle missing data</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/sebastian-gerdes/sbloggel/blob/main/posts/2023-03-17-interesting-r-packages/2023-03-17-interesting-r-packages.qmd" class="toc-action">View source</a></p></div></div></nav>
     </div>
@@ -425,6 +426,92 @@ Attaching package: 'Ryacas'</code></pre>
 <ul>
 <li><a href="https://cran.r-project.org/package=glue">Package glue</a></li>
 </ul>
+</section>
+<section id="handle-missing-data" class="level2">
+<h2 class="anchored" data-anchor-id="handle-missing-data">Handle missing data</h2>
+<ul>
+<li><a href="https://naniar.njtierney.com/articles/getting-started-w-naniar.html">Package nania - getting started</a>
+<ul>
+<li>However, there seem to be no methods for categorical data… → <a href="https://github.com/njtierney/naniar/issues/336">Opened issue</a></li>
+</ul></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">'naniar'</span>)</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">'tidyverse'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.2     ✔ readr     2.1.4
+✔ forcats   1.0.0     ✔ stringr   1.5.0
+✔ ggplot2   3.4.2     ✔ tibble    3.2.1
+✔ lubridate 1.9.2     ✔ tidyr     1.3.0
+✔ purrr     1.0.1     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ tidyr::extract()   masks magrittr::extract()
+✖ dplyr::filter()    masks stats::filter()
+✖ dplyr::lag()       masks stats::lag()
+✖ purrr::set_names() masks magrittr::set_names()
+✖ purrr::simplify()  masks Ryacas::simplify()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">'simputation'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'simputation'
+
+The following object is masked from 'package:naniar':
+
+    impute_median</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>aq <span class="ot">&lt;-</span> airquality <span class="sc">|&gt;</span> </span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Ozone =</span> <span class="fu">as.double</span>(Ozone), </span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">fct =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">'a'</span>, <span class="st">'b'</span>, <span class="cn">NA</span>), <span class="at">replace =</span> <span class="cn">TRUE</span>, <span class="at">size =</span> <span class="fu">nrow</span>(airquality)))</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="fu">colSums</span>(<span class="fu">is.na</span>(aq))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Ozone Solar.R    Wind    Temp   Month     Day     fct 
+     37       7       0       0       0       0      57 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vis_miss</span>(aq)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="2023-03-17-interesting-r-packages_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>aq_nabular <span class="ot">&lt;-</span> <span class="fu">nabular</span>(aq)</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>aq_nabular</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 153 × 14
+   Ozone Solar.R  Wind  Temp Month   Day fct   Ozone_NA Solar.R_NA Wind_NA
+   &lt;dbl&gt;   &lt;int&gt; &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;fct&gt;    &lt;fct&gt;      &lt;fct&gt;  
+ 1    41     190   7.4    67     5     1 &lt;NA&gt;  !NA      !NA        !NA    
+ 2    36     118   8      72     5     2 &lt;NA&gt;  !NA      !NA        !NA    
+ 3    12     149  12.6    74     5     3 b     !NA      !NA        !NA    
+ 4    18     313  11.5    62     5     4 &lt;NA&gt;  !NA      !NA        !NA    
+ 5    NA      NA  14.3    56     5     5 b     NA       NA         !NA    
+ 6    28      NA  14.9    66     5     6 b     !NA      NA         !NA    
+ 7    23     299   8.6    65     5     7 &lt;NA&gt;  !NA      !NA        !NA    
+ 8    19      99  13.8    59     5     8 a     !NA      !NA        !NA    
+ 9     8      19  20.1    61     5     9 &lt;NA&gt;  !NA      !NA        !NA    
+10    NA     194   8.6    69     5    10 a     NA       !NA        !NA    
+# ℹ 143 more rows
+# ℹ 4 more variables: Temp_NA &lt;fct&gt;, Month_NA &lt;fct&gt;, Day_NA &lt;fct&gt;, fct_NA &lt;fct&gt;</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>aq_nabular <span class="sc">|&gt;</span> <span class="fu">impute_lm</span>(Ozone <span class="sc">~</span> Temp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 153 × 14
+   Ozone Solar.R  Wind  Temp Month   Day fct   Ozone_NA Solar.R_NA Wind_NA
+ * &lt;dbl&gt;   &lt;int&gt; &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;fct&gt;    &lt;fct&gt;      &lt;fct&gt;  
+ 1  41       190   7.4    67     5     1 &lt;NA&gt;  !NA      !NA        !NA    
+ 2  36       118   8      72     5     2 &lt;NA&gt;  !NA      !NA        !NA    
+ 3  12       149  12.6    74     5     3 b     !NA      !NA        !NA    
+ 4  18       313  11.5    62     5     4 &lt;NA&gt;  !NA      !NA        !NA    
+ 5 -11.0      NA  14.3    56     5     5 b     NA       NA         !NA    
+ 6  28        NA  14.9    66     5     6 b     !NA      NA         !NA    
+ 7  23       299   8.6    65     5     7 &lt;NA&gt;  !NA      !NA        !NA    
+ 8  19        99  13.8    59     5     8 a     !NA      !NA        !NA    
+ 9   8        19  20.1    61     5     9 &lt;NA&gt;  !NA      !NA        !NA    
+10  20.6     194   8.6    69     5    10 a     NA       !NA        !NA    
+# ℹ 143 more rows
+# ℹ 4 more variables: Temp_NA &lt;fct&gt;, Month_NA &lt;fct&gt;, Day_NA &lt;fct&gt;, fct_NA &lt;fct&gt;</code></pre>
+</div>
+</div>
 
 
 </section>
