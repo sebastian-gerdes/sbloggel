@@ -3,19 +3,16 @@ title: Leave-one-out cross-validation in R
 date: 2023-08-08
 categories:
   - R
+  - 'Linear model vs neural nets'
 ---
 
 ## Strategy
-* Fit "straight" models
-  * linear model - `fm_lm`
-  * neural net with 2 layers with 3 perceptrons each - `fm_nn`
-* Fit models with "Leave-one-out-cross-validation"
-  * linear model - `lm_looc`
-  * neural net - `nn_looc`
-  * Calculate mean absolute prediction error for both model types (predict each data point based on a model that is based on all but the current data point)
+* Fit "straight" models: linear model, neural net with 2 layers with 3 perceptrons each
+* Perform "Leave-one-out-cross-validation"
+* Calculate mean absolute prediction error of the different methods
+  * In cross-validation case for the left-out data point
 
 ## Implementation
-### Init
 ```{r}
 #| label: init
 #| message: false
@@ -23,40 +20,29 @@ set.seed(123)
 library('tidyverse')
 library('knitr')
 library('neuralnet')
-library('plotly')
+update_geom_defaults("line", list(linewidth = 1))
 ```
 
-### Define function for performing leave-one-out-crossvalidation
 ```{r}
-# A function that removes one data point from the cars data set, 
-# fits either a linear model or a neural net to the remaining data 
-# and returns the model prediction for the data point 
-# that had been removed in the first place
-# 
-# Parameters:
-#   * i: which data points to remove - the function is vectorized for this parameter
-#   * model_type: which type of model is to be fit - either "lm" or if not "lm", a neural 
 leave_one_out <- Vectorize(
-  function(i, model_type) {
+  function(i, type) {
     training <- cars[-i, ]
     test <- cars[i, ]
-    if(model_type == 'lm') {
+    if(type == 'lm') {
       fm <- lm(speed ~ dist, data = training)
       pp <- predict(fm, newdata = test)
-    } else if(model_type == 'nn'){
+    } else {
       fm <- neuralnet(speed ~ dist, 
                       linear.output = TRUE, data = training, 
                       hidden = c(3, 3), 
                       stepmax = 1e+7, threshold = .5)
       pp <- predict(fm, newdata = test)[, 1]
-    } else {
-      stop('Invalid model type')
     }
     return(pp)
   }, vectorize.args = 'i')
 ```
 
-### Fit models
+
 ```{r}
 #| cache: true
 fm_lm <- lm(speed ~ dist, data = cars)
@@ -64,42 +50,59 @@ fm_nn <- neuralnet(speed ~ dist,
                    linear.output = TRUE, data = cars, 
                    hidden = c(3, 3), 
                    stepmax = 1e+7, threshold = .5)
-
 data <- tibble(
   cars,
-  prediction_lm_straight = predict(fm_lm),
-  prediction_nn_straight = predict(fm_nn, newdata = cars)[, 1],
-  prediction_lm_looc = leave_one_out(1:nrow(cars), model_type = 'lm'),
-  prediction_nn_looc = leave_one_out(1:nrow(cars), model_type = 'nn')) |> 
-  rename(measured_speed = 'speed')
+  p_lm_straight = predict(fm_lm),
+  p_nn_straight= predict(fm_nn, newdata = cars)[, 1],
+  p_lm_looc = leave_one_out(1:nrow(cars), type = 'lm'),
+  p_nn_looc = leave_one_out(1:nrow(cars), type = 'nn')
+)
 ```
 
-### Show and analyze results
+```{r}
+pred_df <- tibble(dist = 0:125)
+pred_df <- pred_df |> 
+  mutate(pred_lm = predict(fm_lm, pred_df),
+         pred_nn = predict(fm_nn, pred_df)[, 1])
+
+text_to_add <- tibble(dist = 80, value = 7, text = 'Original data as black dots')
+pred_df |> pivot_longer(cols = -dist) |> 
+  ggplot(aes(dist, value, colour = name)) + geom_line() +
+  geom_point(mapping = aes(dist, speed), data = cars, inherit.aes = FALSE) +
+  geom_label(aes(dist, value, label = text), data = text_to_add, inherit.aes = FALSE) +
+  labs(colour = 'Predictions', y = 'speed', 
+       title = 'Predictions for straight models for all integers from 0 to 125')
+```
+
+
+
 ```{r}
 data |> 
-  pivot_longer(cols = -dist, names_to = 'Method', values_to = 'speed') |> 
-  ggplot(aes(dist, speed, colour = Method)) +
-  geom_point() +
-  labs(y = 'speed')
+  select(-speed) |> 
+  pivot_longer(cols = -dist) |> 
+  ggplot(aes(dist, value, colour = name)) +
+  geom_line(linewidth = 1) + 
+  labs(y = 'speed', colour = '',
+       title = 'Predictions for all dist values that are in the original data set as well') +
+  geom_point(aes(dist, speed), cars, inherit.aes = FALSE) +
+  geom_label(aes(dist, value, label = text), data = text_to_add, inherit.aes = FALSE)
 
-# the previous plot with plotly library so it can be appreciated interactively:
-ggplot2::last_plot() |> ggplotly()
+
 
 data_long <- data |> 
-  pivot_longer(cols = -c(dist, measured_speed), names_to = 'Method',
-               values_to = 'prediction') |>
-  mutate(error = prediction - measured_speed,
-         squared_error = error^2)
+  pivot_longer(cols = -c(dist, speed)) 
 
 data_long |> 
-  ggplot(aes(dist, error)) + geom_point() + 
-  facet_wrap(vars(Method), labeller = label_both) +
+  ggplot(aes(dist, speed - value)) + geom_point() + facet_wrap(vars(name)) +
   labs(y = 'Prediction error')
 
 data_long |> 
+  mutate(error = value - speed,
+         squarred_error = error^2) |> 
+  rename(Method = 'name') |> 
   group_by(Method) |> 
   summarize('Mean absolute error' = mean(abs(error)),
-            'Root mean squared error' = sqrt(mean(squared_error))) |> 
+            'Mean squarred error' = mean(squarred_error)) |> 
   kable(align = 'c')
 ```
 

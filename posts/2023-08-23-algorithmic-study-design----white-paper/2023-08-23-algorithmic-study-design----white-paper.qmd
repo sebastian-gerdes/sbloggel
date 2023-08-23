@@ -1,0 +1,53 @@
+---
+title: Algorithmic study design -- white paper
+date: 2023-08-23
+categories:
+  - R
+  - 'Algorithmic study design'
+---
+
+Currently, the design of clinical studies is carried out mostly manually by domaine experts. Here, we want to do first steps to think about how the design of experiments could be done in an algorithmic way, potentially / hopefully resulting in more useful clinical studies.
+
+## What defines a study design?
+Non-exhaustive list of parameters:
+
+* Parameter to study (e. g. Hba1c, blood pressure / survival time)
+* Inclusion criteria (e. g. age > 65 / Diabetes Mellitus Type II)
+* Intervention / grouping (e. g. Metformine + diet vs. diet only)
+* Hypotheses (e. g. Hba1c after 3 months in group Metformine + diet lower than in group diet only)
+* ...
+
+### Open questions:
+
+* How can we formally describe the space of possible studies?
+
+&rarr; in the end, a study should be represented as a point $\mathbf x$ in the space of different study designs
+
+## Utility of a particular study design
+* Each study design is associated with different possible outcomes
+* An outcome could be formally defined as the combination of statements about the hypotheses
+  * e. g. hypothesis 1 - evidence for alternative hypothesis, hypotheses 2 - no evidence for alternative hypotheses
+  * another example: single hypothesis -- Hba1c is lower in Metformine group
+  * Not clear, if this definition is sufficient
+* We model the utiliy of a study design as a random variable $U$, each realization being a study carried out the particular study design
+* The expected value of $U$ can be determined if we have the probabilities and utilities of each outcome
+
+## Sketch of an algorithmic approach
+Idea: Find an algorithm to maximize the expected utility over the space of different study designs
+
+* Define the space of all study designs to be taken into consideration
+  * Complex, but probably doable in some way, maybe in a meaningful way
+* Enumerate all different outcomes of each study
+  * Probably doable
+* Assign probability and utility to each study outcome of each study in order to determine the expected utility of all studies
+  * This is difficult - I don't know how to algorithmically determine the utility of a study
+* Select studies with a high utility 
+  * I don't know how to design an "optimizer" in a meaningful / useful way
+  * One idea is to simulate many studies and use the simulations to train an optimizer. But how can we assign utilities to the simulated designs?`
+
+
+&rarr; In conclusion, this approach (especially steps 3 and 4) seems so complex to me that I have doubts if I can do it, I would definitely need guidance how to do it
+
+
+## Another approach?
+* Does anyone have an idea for an easier approach?

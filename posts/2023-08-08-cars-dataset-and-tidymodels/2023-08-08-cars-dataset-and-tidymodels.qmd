@@ -3,6 +3,7 @@ title: Cars dataset and tidymodels
 date: 2023-08-08
 categories:
   - R
+  - 'Linear model vs neural nets'
 toc: true
 ---
 

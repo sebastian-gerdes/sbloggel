@@ -3,6 +3,7 @@ title: Leave-one-out cross-validation in Python
 date: 2023-08-11
 categories:
   - Python
+  - 'Linear model vs neural nets'
 ---
 
 ## Strategy
@@ -19,7 +20,7 @@ categories:
 ```{r}
 #| label: init
 library('reticulate')
-use_condaenv('sbloggel')
+use_condaenv('sbloggel', required = TRUE)
 ```
 
 #### Chunk to load Python libraries and set up the data

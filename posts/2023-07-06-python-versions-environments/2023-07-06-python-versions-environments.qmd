@@ -3,6 +3,8 @@ title: Managing python versions in RStudio
 date: 2023-07-05
 categories:
   - Python
+execute: 
+  eval: false
 ---
 
 ## Ressources
@@ -22,7 +24,7 @@ py_list_packages(envname = py_exe())
 ```
 
 
-# Managing python installation
+## Managing python installation
 ```{r}
 #| eval: false
 library('reticulate')
@@ -43,7 +45,7 @@ use_condaenv('base')
 ```
 
 
-# Install virtual environments to jupyter
+## Install virtual environments to jupyter
 * [Link](https://janakiev.com/blog/jupyter-virtual-envs/)
 
 
@@ -66,5 +68,15 @@ Start Jupyter from terminal:
 ```{bash}
 #| eval: false
 jupyter notebook
+```
+
+## Installing tensorflow_decision_forests
+* I couldn't install it via conda, so I created a new environment and installed it via pip:
+```{r}
+#| eval: false
+conda_create('tf')
+use_condaenv('tf')
+conda_install('tf', c('tensorflow', 'tensorflow_decision_forests'), pip = TRUE)
+conda_install('tf', c('matplotlib', 'seaborn'), pip = TRUE)
 ```
 

@@ -154,6 +154,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#ressources" id="toc-ressources" class="nav-link active" data-scroll-target="#ressources">Ressources</a></li>
   <li><a href="#managing-python-installation" id="toc-managing-python-installation" class="nav-link" data-scroll-target="#managing-python-installation">Managing python installation</a></li>
   <li><a href="#install-virtual-environments-to-jupyter" id="toc-install-virtual-environments-to-jupyter" class="nav-link" data-scroll-target="#install-virtual-environments-to-jupyter">Install virtual environments to jupyter</a></li>
+  <li><a href="#installing-tensorflow_decision_forests" id="toc-installing-tensorflow_decision_forests" class="nav-link" data-scroll-target="#installing-tensorflow_decision_forests">Installing tensorflow_decision_forests</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/sebastian-gerdes/sbloggel/blob/main/posts/2023-07-06-python-versions-environments/2023-07-06-python-versions-environments.qmd" class="toc-action">View source</a></p></div></div></nav>
     </div>
@@ -163,6 +164,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Managing python versions in RStudio</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">Python</div>
+  </div>
   </div>
 
 
@@ -190,8 +194,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Link to question on stackoverflow - <a href="https://stackoverflow.com/questions/76745347/how-to-make-quarto-use-the-same-python-environment-that-was-specified-in-rstudio">Link</a></li>
 </ul>
 </section>
-<section id="managing-python-installation" class="level1">
-<h1>Managing python installation</h1>
+<section id="managing-python-installation" class="level2">
+<h2 class="anchored" data-anchor-id="managing-python-installation">Managing python installation</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">'reticulate'</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">py_discover_config</span>()</span>
@@ -210,8 +214,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="fu">use_condaenv</span>(<span class="st">'base'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="install-virtual-environments-to-jupyter" class="level1">
-<h1>Install virtual environments to jupyter</h1>
+<section id="install-virtual-environments-to-jupyter" class="level2">
+<h2 class="anchored" data-anchor-id="install-virtual-environments-to-jupyter">Install virtual environments to jupyter</h2>
 <ul>
 <li><a href="https://janakiev.com/blog/jupyter-virtual-envs/">Link</a></li>
 </ul>
@@ -230,6 +234,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Start Jupyter from terminal:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">jupyter</span> notebook</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="installing-tensorflow_decision_forests" class="level2">
+<h2 class="anchored" data-anchor-id="installing-tensorflow_decision_forests">Installing tensorflow_decision_forests</h2>
+<ul>
+<li>I couldn’t install it via conda, so I created a new environment and installed it via pip:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">conda_create</span>(<span class="st">'tf'</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">use_condaenv</span>(<span class="st">'tf'</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">conda_install</span>(<span class="st">'tf'</span>, <span class="fu">c</span>(<span class="st">'tensorflow'</span>, <span class="st">'tensorflow_decision_forests'</span>), <span class="at">pip =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">conda_install</span>(<span class="st">'tf'</span>, <span class="fu">c</span>(<span class="st">'matplotlib'</span>, <span class="st">'seaborn'</span>), <span class="at">pip =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 

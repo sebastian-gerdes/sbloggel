@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2023-07-12">
+<meta name="dcterms.date" content="2023-08-23">
 
-<title>Seb’s blog - Pie chart</title>
+<title>Seb’s blog - Algorithmic study design – white paper</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,40 +20,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -96,14 +62,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="../../styles.css">
-<meta property="og:title" content="Seb’s blog - Pie chart">
+<meta property="og:title" content="Seb’s blog - Algorithmic study design – white paper">
 <meta property="og:description" content="">
-<meta property="og:image" content="https://sbloggel.netlify.app/posts/2023-07-12-pie-chart/2023-07-12-pie-chart_files/figure-html/init-1.png">
 <meta property="og:site-name" content="Seb's blog">
-<meta property="og:image:height" content="960">
-<meta property="og:image:width" content="1344">
 </head>
 
 <body class="nav-fixed">
@@ -150,16 +115,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#what-defines-a-study-design" id="toc-what-defines-a-study-design" class="nav-link active" data-scroll-target="#what-defines-a-study-design">What defines a study design?</a>
+  <ul class="collapse">
+  <li><a href="#open-questions" id="toc-open-questions" class="nav-link" data-scroll-target="#open-questions">Open questions:</a></li>
+  </ul></li>
+  <li><a href="#utility-of-a-particular-study-design" id="toc-utility-of-a-particular-study-design" class="nav-link" data-scroll-target="#utility-of-a-particular-study-design">Utility of a particular study design</a></li>
+  <li><a href="#sketch-of-an-algorithmic-approach" id="toc-sketch-of-an-algorithmic-approach" class="nav-link" data-scroll-target="#sketch-of-an-algorithmic-approach">Sketch of an algorithmic approach</a></li>
+  <li><a href="#another-approach" id="toc-another-approach" class="nav-link" data-scroll-target="#another-approach">Another approach?</a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/sebastian-gerdes/sbloggel/blob/main/posts/2023-08-23-algorithmic-study-design----white-paper/2023-08-23-algorithmic-study-design----white-paper.qmd" class="toc-action">View source</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Pie chart</h1>
+<h1 class="title">Algorithmic study design – white paper</h1>
   <div class="quarto-categories">
     <div class="quarto-category">R</div>
+    <div class="quarto-category">Algorithmic study design</div>
   </div>
   </div>
 
@@ -171,7 +149,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">July 12, 2023</p>
+      <p class="date">August 23, 2023</p>
     </div>
   </div>
   
@@ -181,30 +159,75 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<p>To build a simple pie chart:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">'tidyverse'</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">value =</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">23</span>, <span class="dv">15</span>, <span class="dv">18</span>),</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">Group =</span> <span class="fu">paste0</span>(<span class="st">"G"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>))</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> <span class="st">""</span>, <span class="at">y =</span> value, <span class="at">fill =</span> Group)) <span class="sc">+</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">''</span>) <span class="sc">+</span> </span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> value),</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>            <span class="at">position =</span> <span class="fu">position_stack</span>(<span class="at">vjust =</span> <span class="fl">0.5</span>)) <span class="sc">+</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_polar</span>(<span class="at">theta =</span> <span class="st">"y"</span>) <span class="sc">+</span> </span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid  =</span> <span class="fu">element_blank</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="2023-07-12-pie-chart_files/figure-html/init-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
+<p>Currently, the design of clinical studies is carried out mostly manually by domaine experts. Here, we want to do first steps to think about how the design of experiments could be done in an algorithmic way, potentially / hopefully resulting in more useful clinical studies.</p>
+<section id="what-defines-a-study-design" class="level2">
+<h2 class="anchored" data-anchor-id="what-defines-a-study-design">What defines a study design?</h2>
+<p>Non-exhaustive list of parameters:</p>
+<ul>
+<li>Parameter to study (e. g. Hba1c, blood pressure / survival time)</li>
+<li>Inclusion criteria (e. g. age &gt; 65 / Diabetes Mellitus Type II)</li>
+<li>Intervention / grouping (e. g. Metformine + diet vs.&nbsp;diet only)</li>
+<li>Hypotheses (e. g. Hba1c after 3 months in group Metformine + diet lower than in group diet only)</li>
+<li>…</li>
+</ul>
+<section id="open-questions" class="level3">
+<h3 class="anchored" data-anchor-id="open-questions">Open questions:</h3>
+<ul>
+<li>How can we formally describe the space of possible studies?</li>
+</ul>
+<p>→ in the end, a study should be represented as a point <span class="math inline">\(\mathbf x\)</span> in the space of different study designs</p>
+</section>
+</section>
+<section id="utility-of-a-particular-study-design" class="level2">
+<h2 class="anchored" data-anchor-id="utility-of-a-particular-study-design">Utility of a particular study design</h2>
+<ul>
+<li>Each study design is associated with different possible outcomes</li>
+<li>An outcome could be formally defined as the combination of statements about the hypotheses
+<ul>
+<li><ol start="5" type="a">
+<li><ol start="7" type="a">
+<li>hypothesis 1 - evidence for alternative hypothesis, hypotheses 2 - no evidence for alternative hypotheses</li>
+</ol></li>
+</ol></li>
+<li>another example: single hypothesis – Hba1c is lower in Metformine group</li>
+<li>Not clear, if this definition is sufficient</li>
+</ul></li>
+<li>We model the utiliy of a study design as a random variable <span class="math inline">\(U\)</span>, each realization being a study carried out the particular study design</li>
+<li>The expected value of <span class="math inline">\(U\)</span> can be determined if we have the probabilities and utilities of each outcome</li>
+</ul>
+</section>
+<section id="sketch-of-an-algorithmic-approach" class="level2">
+<h2 class="anchored" data-anchor-id="sketch-of-an-algorithmic-approach">Sketch of an algorithmic approach</h2>
+<p>Idea: Find an algorithm to maximize the expected utility over the space of different study designs</p>
+<ul>
+<li>Define the space of all study designs to be taken into consideration
+<ul>
+<li>Complex, but probably doable in some way, maybe in a meaningful way</li>
+</ul></li>
+<li>Enumerate all different outcomes of each study
+<ul>
+<li>Probably doable</li>
+</ul></li>
+<li>Assign probability and utility to each study outcome of each study in order to determine the expected utility of all studies
+<ul>
+<li>This is difficult - I don’t know how to algorithmically determine the utility of a study</li>
+</ul></li>
+<li>Select studies with a high utility
+<ul>
+<li>I don’t know how to design an “optimizer” in a meaningful / useful way</li>
+<li>One idea is to simulate many studies and use the simulations to train an optimizer. But how can we assign utilities to the simulated designs?`</li>
+</ul></li>
+</ul>
+<p>→ In conclusion, this approach (especially steps 3 and 4) seems so complex to me that I have doubts if I can do it, I would definitely need guidance how to do it</p>
+</section>
+<section id="another-approach" class="level2">
+<h2 class="anchored" data-anchor-id="another-approach">Another approach?</h2>
+<ul>
+<li>Does anyone have an idea for an easier approach?</li>
+</ul>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -444,4 +467,4 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/sebastian-gerdes/sbloggel/blob/main/posts/2023-07-12-pie-chart/2023-07-12-pie-chart.qmd" class="toc-action">View source</a></p></div></div></div></div></footer></body></html>
+</body></html>
