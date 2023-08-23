@@ -1,0 +1,140 @@
+---
+title: Simulating a clinical study with a mechanistic model in the background
+date: 2023-08-22
+categories:
+  - 'Algorithmic study design'
+---
+
+
+```{r}
+#| label: init
+#| include: false
+library('tidyverse')
+library('knitr')
+library('skimr')
+```
+
+
+## Description of virtual study
+* Increased doses for leukemia in comparison to "standard" doses with some substance X is to be studied
+* Randomized, controlled, double-blind clinical trial
+* Groups:
+  * standard regimen: X 1 mg - 0 - 2 mg - 0 for 10 days
+  * adjusted regimen: X 2 mg - 0 - 3 mg - 0 for 10 days
+* Leukemic burden is assumed to be lognormally distributed initially
+* Postleukemic burden is assumed to be: Leukemic burden pretherapy divided by area under the plasma level curve
+* Some plausible pharmacokinetic model is assumed, with rate constants depending on age and weight
+* Primary endpoint: Molecular remission (defined as postleukemic burden < 0.0012)
+
+
+## Definition of study population
+```{r}
+#| label: population_definition
+
+set.seed(123)
+nr_of_patients <- 200
+patients <- tibble(id = 1:nr_of_patients,
+                   group = rep(c('standard_dosing', 'adjusted_dosing'), each = nr_of_patients / 2),
+                   age = rnorm(nr_of_patients, mean = 60, sd = 10),
+                   weight = rnorm(nr_of_patients, mean = 80, sd = 10),
+                   age_scaled = scale(age)[, 1],
+                   weight_scaled = scale(weight)[, 1],
+                   sex = sample(c('male', 'female'), 
+                                size = nr_of_patients, 
+                                replace = TRUE),
+                   leukemic_burden_pretherapy = rlnorm(nr_of_patients))
+
+patients |> 
+  sample_n(5) |> 
+  kable(align = 'c')
+```
+
+## Definition of pharmacokinetic model
+```{r}
+#| label: pharmacokinetic_model
+calc_plasma_levels <- function(applications, patient, t_max = 10) {
+  plasma <- tibble(timepoint = 1:t_max, 
+                   level = 0, 
+                   id = patient$id, 
+                   group = patient$group) 
+  for(i in 1:nrow(applications)) {
+    ii <- applications$time[i]
+    plasma$level[ii:t_max] <- plasma$level[ii:t_max] + applications$dose[i]
+  }
+  degraded <- 0
+  for(i in 2:t_max) {
+    degraded <- degraded + 
+      plasma$level[i - 1] * 
+      (0.05 + (patient$age_scaled + patient$weight_scaled) / 100)
+    plasma$level[i] <- plasma$level[i] - degraded
+  }
+  plasma
+}
+```
+
+## Definition of dosing schemes
+```{r}
+standard_dosing <- tibble(time = c(12 * 0:19 + 1), 
+                            dose = rep(c(1, 2), length.out = 20))
+adjusted_dosing <- tibble(time = c(12 * 0:19 + 1), 
+                            dose = rep(c(2, 3), length.out = 20))
+```
+
+## Calcuation of plasma levels
+```{r}
+plasma_levels <- tibble()
+for(i in 1:nr_of_patients){
+  if(patients$group[i] == 'standard_dosing') {
+    current_dosing <- standard_dosing
+  } else {
+    current_dosing <- adjusted_dosing
+  }
+  plasma_levels <- plasma_levels |> 
+    bind_rows(calc_plasma_levels(
+      applications = current_dosing, 
+      patient = patients[i, ],
+      t_max = 300))
+}
+```
+
+## Analysis
+```{r}
+plasma_levels |> 
+  filter(id %in% sample(nr_of_patients, 20)) |> 
+  ggplot(aes(timepoint, level, group = factor(id), colour = group)) + geom_line() + 
+  labs(title = 'Plasma levels of randomly chosen individuals', colour = 'Patient id')
+
+
+patients <- patients |> 
+  full_join(group_by(plasma_levels, id) |> summarize(auc = sum(level)))
+
+patients <- patients |> 
+  mutate(leukemic_burden_posttherapy = leukemic_burden_pretherapy / auc,
+         molecular_remission = leukemic_burden_posttherapy > 1.2e-3)
+
+summary(patients$leukemic_burden_posttherapy)
+
+# Contigency table of group vs. molecular_remission (yes / no)
+(study_outcome <- xtabs(~ group + molecular_remission, data = patients))
+
+# Calculate study p-value
+chisq.test(study_outcome)
+
+```
+
+
+## Conclusion
+* Here, a hypothetical clinical study has been simulated
+* a lot of fine-tuning and a lot of knowledge about the underlying mechanisms is needed
+* hard to generalize that for the next application - probably, a similar amount of fine-tuning will be needed
+
+```{r}
+#| label: study_design_definitions
+```
+
+```{r}
+#| label: study_design_evaluation
+```
+
+
+

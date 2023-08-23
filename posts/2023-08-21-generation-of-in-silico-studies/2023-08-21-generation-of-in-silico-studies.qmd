@@ -1,0 +1,106 @@
+---
+title: Generation of *in silico* studies
+date: 2023-08-21
+categories:
+  - 'Algorithmic study design'
+---
+
+
+## Description of simulation model
+* `disease`: Random names for quantity of interest (in reality something like 'Hba1c', 'Survival after therapy with Imatinibe' etc.)
+  * 3 letters, duplicates allowed
+* `assumed_delta`: Assumed difference in means that has been used for designing the study, lognormal distribution is assumed
+* `actual_delta`: *Ground truth* difference in means, assumed 0 in 50% of the cases, in the rest of the cases `assumed_delta` multiplied by random number uniformly distributed between 0.2 and 1.3
+* `sd`: Standard deviation of `disease` - some hopefully reasonable random number
+* `n_planned`: Designed group size according to `assumed_delta` and `sd` based on `stats::power.t.test()`
+* `n_per_year_assumed`: Assumed mean number of patients that can be included in study
+* `n_per_year_actual`: Actual number of patients that can be included per year
+* `expected_study duration` and `actual_study_duration`: Designed group size divided by expected / actual number of patients per year
+* `actual_power`: Power calculated based on `actual_delta` and `sd`
+* `null_rejected`: Boolean variable based on Bernoulli trial with $p$ taken from `actual_power`
+* `utiliy_null_rejected`: Utility of study - uniformly distributed random number between 0 and 1
+* `utiliy_null_not_rejected`: `utiliy_null_rejected` / 2
+* `cost_per_patient`: Monetary cost to include a patient in the study - random number on arbitrary scale
+
+
+
+## Simulation results
+```{r}
+#| include: false
+#| label: init
+library('tidyverse')
+library('knitr')
+library('skimr')
+```
+
+```{r}
+#| label: simulation
+#| cache: true
+
+# set parameters:
+set.seed(87)
+nr_of_studies <- 1e4
+
+# utiliy functions:
+get_random_names <- function(n, length = 3) {
+  replicate(n = n, paste0(sample(letters, size = length), collapse = ''))
+}
+
+get_n_planned <- Vectorize(function(delta, sd, power) {
+  power.t.test(delta = delta, sd = sd, power = 0.8)$n |> 
+    ceiling()
+})
+
+get_actual_power <- Vectorize(function(delta, sd, n) {
+  power.t.test(delta = delta, sd = sd, n = n)$power
+})
+
+
+# simulate studies:
+studies <- tibble(disease = get_random_names(n = nr_of_studies, length = 2),
+                  endpoint = get_random_names(n = nr_of_studies, length = 1),
+                  assumed_delta = rlnorm(nr_of_studies),
+                  actual_delta = ifelse(runif(nr_of_studies) > 0.5, 
+                                        0, 
+                                        assumed_delta * runif(nr_of_studies, 0.2, 1.3)),
+                  sd = assumed_delta * (1 + rlnorm(nr_of_studies)),
+                  n_planned = 
+                    get_n_planned(delta = assumed_delta, 
+                                  sd = sd, 
+                                  power = 0.8),
+                  n_per_year_assumed = 10 + rlnorm(nr_of_studies),
+                  n_per_year_actual = 
+                    n_per_year_assumed * runif(n_planned, 0.5, 1.2),
+                  expected_study_duration = n_planned / n_per_year_assumed,
+                  actual_study_duration = n_planned / n_per_year_actual,
+                  actual_power = get_actual_power(delta = actual_delta, 
+                                                  sd = sd, 
+                                                  n = n_planned),
+                  null_rejected = runif(nr_of_studies) < actual_power,
+                  utility_null_rejected = runif(nr_of_studies),
+                  utility_null_not_rejected = utility_null_rejected / 2,
+                  cost_per_patient = rlnorm(nr_of_studies))
+```
+
+## Analysis
+### 20 randomly chosen studies:
+```{r}
+sample_n(studies, 20) |> 
+           kable(align = 'c', digits = 2)
+```
+
+### Descripive statistics
+```{r}
+skimr::skim(studies)
+```
+
+### Additional aspects:
+
+* `expected_study_duration` and `actual_study_duration` have not very realistic values yet &rarr; maybe not all of the considered studies would have been feasible due to insufficient patient numbers `expected_study_duration` *very* long for some studies
+
+
+
+
+
+
+
