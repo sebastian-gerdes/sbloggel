@@ -1,5 +1,5 @@
 ---
-title: F1NOVF1 with interactions vs. individual t-tests
+title: ANOVA with interactions vs. individual t-tests
 date: 2023-08-28
 categories:
   - R
