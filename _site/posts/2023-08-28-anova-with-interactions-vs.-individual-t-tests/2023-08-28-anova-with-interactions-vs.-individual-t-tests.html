@@ -8,7 +8,7 @@
 
 <meta name="dcterms.date" content="2023-08-28">
 
-<title>Seb’s blog - ANOVA with interactions vs.&nbsp;individual t-tests</title>
+<title>Seb’s blog - Two-ANOVA with interaction vs.&nbsp;individual t-tests</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -100,11 +100,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="../../styles.css">
-<meta property="og:title" content="Seb’s blog - ANOVA with interactions vs.&nbsp;individual t-tests">
+<meta property="og:title" content="Seb’s blog - Two-ANOVA with interaction vs.&nbsp;individual t-tests">
 <meta property="og:image" content="https://sbloggel.netlify.app/posts/2023-08-28-anova-with-interactions-vs.-individual-t-tests/2023-08-28-anova-with-interactions-vs.-individual-t-tests_files/figure-html/unnamed-chunk-2-1.png">
 <meta property="og:site-name" content="Seb's blog">
-<meta property="og:image:height" content="960">
-<meta property="og:image:width" content="1344">
 </head>
 
 <body class="nav-fixed">
@@ -163,10 +161,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#power-of-separate-t-tests" id="toc-power-of-separate-t-tests" class="nav-link" data-scroll-target="#power-of-separate-t-tests">Power of separate t-tests</a></li>
   <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
   </ul></li>
-  <li><a href="#appendix" id="toc-appendix" class="nav-link" data-scroll-target="#appendix">Appendix</a>
-  <ul class="collapse">
-  <li><a href="#use-power.anova.test-to-replicate-the-results-of-power.t.test" id="toc-use-power.anova.test-to-replicate-the-results-of-power.t.test" class="nav-link" data-scroll-target="#use-power.anova.test-to-replicate-the-results-of-power.t.test">Use <code>power.anova.test</code> to replicate the results of <code>power.t.test</code></a></li>
-  </ul></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/sebastian-gerdes/sbloggel/blob/main/posts/2023-08-28-anova-with-interactions-vs.-individual-t-tests/2023-08-28-anova-with-interactions-vs.-individual-t-tests.qmd" class="toc-action">View source</a></p></div></div></nav>
     </div>
@@ -175,7 +169,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">ANOVA with interactions vs.&nbsp;individual t-tests</h1>
+<h1 class="title">Two-ANOVA with interaction vs.&nbsp;individual t-tests</h1>
   <div class="quarto-categories">
     <div class="quarto-category">R</div>
   </div>
@@ -199,11 +193,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<div class="cell" data-hash="2023-08-28-anova-with-interactions-vs.-individual-t-tests_cache/html/init_a84c9ee6fc74a984d142a775dfe40da2">
+<div class="cell" data-hash="2023-08-28-anova-with-interactions-vs.-individual-t-tests_cache/html/init_d305052b16d91e5147626f46c9968e2c">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">'tidyverse'</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">'multcomp'</span>)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">'knitr'</span>)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="simulation-model" class="level2">
 <h2 class="anchored" data-anchor-id="simulation-model">Simulation model</h2>
@@ -322,70 +316,14 @@ NOTE: n is number in *each* group</code></pre>
 <li>In ANOVA setting with additional group, the interaction can be tested (power is a little less)</li>
 <li>Note that in the given scenario, 4 groups à 10 individuals are needed in the ANOVA case and 3 groups à 10 individuals are needed in the case of separate t-tests (provided that the control group is ‘recycled’)</li>
 </ul>
-</section>
-</section>
-<section id="appendix" class="level2">
-<h2 class="anchored" data-anchor-id="appendix">Appendix</h2>
-<section id="use-power.anova.test-to-replicate-the-results-of-power.t.test" class="level3">
-<h3 class="anchored" data-anchor-id="use-power.anova.test-to-replicate-the-results-of-power.t.test">Use <code>power.anova.test</code> to replicate the results of <code>power.t.test</code></h3>
-<div class="cell" data-hash="2023-08-28-anova-with-interactions-vs.-individual-t-tests_cache/html/unnamed-chunk-5_9ff8824ffcdd5f62a6d1712bd6bcb186">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">power.t.test</span>(<span class="at">delta =</span> <span class="fu">sqrt</span>(<span class="dv">2</span>) <span class="sc">*</span> <span class="dv">2</span> , <span class="at">sd =</span> <span class="dv">2</span>, <span class="at">sig.level =</span> <span class="fl">0.05</span>, <span class="at">power =</span> <span class="fl">0.8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-     Two-sample t test power calculation 
-
-              n = 8.919575
-          delta = 2.828427
-             sd = 2
-      sig.level = 0.05
-          power = 0.8
-    alternative = two.sided
-
-NOTE: n is number in *each* group</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">power.anova.test</span>(<span class="at">groups =</span> <span class="dv">2</span>, <span class="at">between.var =</span> <span class="dv">4</span>, <span class="at">within.var =</span> <span class="dv">4</span>, <span class="at">sig.level =</span> <span class="fl">0.05</span>, <span class="at">power =</span> <span class="fl">0.8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-     Balanced one-way analysis of variance power calculation 
-
-         groups = 2
-              n = 8.919584
-    between.var = 4
-     within.var = 4
-      sig.level = 0.05
-          power = 0.8
-
-NOTE: n is number in each group</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">power.t.test</span>(<span class="at">delta =</span> <span class="dv">2</span>, <span class="at">sd =</span> <span class="dv">1</span>, <span class="at">sig.level =</span> <span class="fl">0.05</span>, <span class="at">power =</span> <span class="fl">0.8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-     Two-sample t test power calculation 
-
-              n = 5.090008
-          delta = 2
-             sd = 1
-      sig.level = 0.05
-          power = 0.8
-    alternative = two.sided
-
-NOTE: n is number in *each* group</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">power.anova.test</span>(<span class="at">groups =</span> <span class="dv">2</span>, <span class="at">between.var =</span> <span class="dv">8</span>, <span class="at">within.var =</span> <span class="dv">4</span>, <span class="at">sig.level =</span> <span class="fl">0.05</span>, <span class="at">power =</span> <span class="fl">0.8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-     Balanced one-way analysis of variance power calculation 
-
-         groups = 2
-              n = 5.090003
-    between.var = 8
-     within.var = 4
-      sig.level = 0.05
-          power = 0.8
-
-NOTE: n is number in each group</code></pre>
-</div>
-</div>
+<!-- ## Appendix -->
+<!-- ### Use `power.anova.test` to replicate the results of `power.t.test` -->
+<!-- ```{r} -->
+<!-- power.t.test(delta = sqrt(2) * 2 , sd = 2, sig.level = 0.05, power = 0.8) -->
+<!-- power.anova.test(groups = 2, between.var = 4, within.var = 4, sig.level = 0.05, power = 0.8) -->
+<!-- power.t.test(delta = 2, sd = 1, sig.level = 0.05, power = 0.8) -->
+<!-- power.anova.test(groups = 2, between.var = 8, within.var = 4, sig.level = 0.05, power = 0.8) -->
+<!-- ``` -->
 
 
 </section>

@@ -1,5 +1,5 @@
 ---
-title: ANOVA with interactions vs. individual t-tests
+title: Two-ANOVA with interaction vs. individual t-tests
 date: 2023-08-28
 categories:
   - R
@@ -13,7 +13,7 @@ execute:
 library('tidyverse')
 library('multcomp')
 library('knitr')
-set.seed(1)
+set.seed(2)
 ```
 
 ## Simulation model
@@ -78,12 +78,12 @@ power.t.test(n = 10, delta = 1, sd = 1, sig.level = 0.05 / 2)
 * In ANOVA setting with additional group, the interaction can be tested (power is a little less)
 * Note that in the given scenario, 4 groups à 10 individuals are needed in the ANOVA case and 3 groups à 10 individuals are needed in the case of separate t-tests (provided that the control group is 'recycled')
 
-## Appendix
-### Use `power.anova.test` to replicate the results of `power.t.test`
-```{r}
-power.t.test(delta = sqrt(2) * 2 , sd = 2, sig.level = 0.05, power = 0.8)
-power.anova.test(groups = 2, between.var = 4, within.var = 4, sig.level = 0.05, power = 0.8)
+<!-- ## Appendix -->
+<!-- ### Use `power.anova.test` to replicate the results of `power.t.test` -->
+<!-- ```{r} -->
+<!-- power.t.test(delta = sqrt(2) * 2 , sd = 2, sig.level = 0.05, power = 0.8) -->
+<!-- power.anova.test(groups = 2, between.var = 4, within.var = 4, sig.level = 0.05, power = 0.8) -->
 
-power.t.test(delta = 2, sd = 1, sig.level = 0.05, power = 0.8)
-power.anova.test(groups = 2, between.var = 8, within.var = 4, sig.level = 0.05, power = 0.8)
-```
+<!-- power.t.test(delta = 2, sd = 1, sig.level = 0.05, power = 0.8) -->
+<!-- power.anova.test(groups = 2, between.var = 8, within.var = 4, sig.level = 0.05, power = 0.8) -->
+<!-- ``` -->
