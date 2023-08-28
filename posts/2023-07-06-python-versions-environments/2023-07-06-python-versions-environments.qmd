@@ -15,7 +15,7 @@ execute:
 #| label: init_python
 #| include: false
 library('reticulate')
-use_miniconda(condaenv = 'sbloggel')
+use_condaenv('sbloggel', required = FALSE)
 py_run_string('x = 10 + 10')
 py_run_string('print(x)')
 py_version()
@@ -33,7 +33,6 @@ py_config()
 conda_list()
 
 conda_version()
-configure_environment()
 conda_create('sbloggel')
 
 
@@ -71,12 +70,40 @@ jupyter notebook
 ```
 
 ## Installing tensorflow_decision_forests
-* I couldn't install it via conda, so I created a new environment and installed it via pip:
+* I couldn't install it via conda, so I created a new environment and installed it via pip (this seems also to be the recommended way on the tensorflow website):
 ```{r}
-#| eval: false
-conda_create('tf')
-use_condaenv('tf')
-conda_install('tf', c('tensorflow', 'tensorflow_decision_forests'), pip = TRUE)
-conda_install('tf', c('matplotlib', 'seaborn'), pip = TRUE)
+library('reticulate')
+conda_create('tensorflow', python_version = '3.11')
+use_condaenv('tensorflow')
+conda_install('tensorflow', c('tensorflow', 'tensorflow_decision_forests'), pip = TRUE)
+conda_install('tensorflow', c('pandas', 'matplotlib', 'seaborn'), pip = TRUE)
+conda_install('tensorflow', 'IPython', pip = TRUE)
+py_version()
+```
+
+
+## Installing environment - rebuild sbloggel
+```{r}
+library('reticulate')
+conda_create('sbloggel', python_version = '3.11')
+packages_to_install <- c('pandas', 'matplotlib', 'seaborn', 'plotly', 'statsmodels', 'scipy', 'scikit-learn', 'pytorch', 'torchvision')
+conda_install('sbloggel', packages_to_install)
+use_condaenv('sbloggel')
+py_version()
+```
+
+```{python}
+10 + 10
+import pandas as pd
+import fastai as fa
+import torch
+device = (
+    "cuda"
+    if torch.cuda.is_available()
+    else "mps"
+    if torch.backends.mps.is_available()
+    else "cpu"
+)
+print(f"Using {device} device")
 ```
 

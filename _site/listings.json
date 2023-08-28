@@ -2,9 +2,8 @@
   {
     "listing": "/index.html",
     "items": [
-      "/posts/2023-08-22-simulating-a-clinical-study-with-a-mechanistic-model-in-the-background/2023-08-22-simulating-a-clinical-study-with-a-mechanistic-model-in-the-background.html",
-      "/posts/2023-08-21-generation-of-in-silico-studies/2023-08-21-generation-of-in-silico-studies.html",
-      "/posts/2023-08-21-algorithmic-study-design----white-paper/2023-08-21-algorithmic-study-design----white-paper.html",
+      "/posts/2023-08-28-tensorflow-decision-forests-/2023-08-28-tensorflow-decision-forests-.html",
+      "/posts/2023-08-28-anova-with-interactions-vs.-individual-t-tests/2023-08-28-anova-with-interactions-vs.-individual-t-tests.html",
       "/posts/2023-08-11-leave-one-out-cross-validation-in-python/2023-08-11-leave-one-out-cross-validation-in-python.html",
       "/posts/2023-08-08-cars-dataset-and-tidymodels/2023-08-08-cars-dataset-and-tidymodels.html",
       "/posts/2023-08-08-leave-one-out-cross-validation-in-r/2023-08-08-leave-one-out-cross-validation-in-r.html",

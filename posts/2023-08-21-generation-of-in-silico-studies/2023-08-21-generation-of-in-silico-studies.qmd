@@ -1,6 +1,7 @@
 ---
 title: Generation of *in silico* studies
 date: 2023-08-21
+draft: true
 categories:
   - 'Algorithmic study design'
 ---

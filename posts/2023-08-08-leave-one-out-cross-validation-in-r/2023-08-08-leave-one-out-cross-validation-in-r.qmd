@@ -9,7 +9,7 @@ categories:
 ## Strategy
 * Fit "straight" models: linear model, neural net with 2 layers with 3 perceptrons each
 * Perform "Leave-one-out-cross-validation"
-* Calculate mean absolute prediction error of the different methods
+* Calculate mean absolute prediction error and root mean squared error of the different methods
   * In cross-validation case for the left-out data point
 
 ## Implementation
@@ -44,46 +44,47 @@ leave_one_out <- Vectorize(
 
 
 ```{r}
-#| cache: true
+#| cache: false
 fm_lm <- lm(speed ~ dist, data = cars)
+
 fm_nn <- neuralnet(speed ~ dist, 
                    linear.output = TRUE, data = cars, 
                    hidden = c(3, 3), 
                    stepmax = 1e+7, threshold = .5)
+
 data <- tibble(
   cars,
-  p_lm_straight = predict(fm_lm),
-  p_nn_straight= predict(fm_nn, newdata = cars)[, 1],
-  p_lm_looc = leave_one_out(1:nrow(cars), type = 'lm'),
-  p_nn_looc = leave_one_out(1:nrow(cars), type = 'nn')
+  'Linear model straight' = predict(fm_lm),
+  'Neural net straight'= predict(fm_nn, newdata = cars)[, 1],
+  'Linear model with LOOC' = leave_one_out(1:nrow(cars), type = 'lm'),
+  'Neural net with LOOC' = leave_one_out(1:nrow(cars), type = 'nn')
 )
 ```
 
+### Predictions for straight models for all integers from 0 to 125
 ```{r}
 pred_df <- tibble(dist = 0:125)
 pred_df <- pred_df |> 
-  mutate(pred_lm = predict(fm_lm, pred_df),
-         pred_nn = predict(fm_nn, pred_df)[, 1])
+  mutate('Linear model' = predict(fm_lm, pred_df),
+         'Neural net' = predict(fm_nn, pred_df)[, 1])
 
 text_to_add <- tibble(dist = 80, value = 7, text = 'Original data as black dots')
 pred_df |> pivot_longer(cols = -dist) |> 
   ggplot(aes(dist, value, colour = name)) + geom_line() +
   geom_point(mapping = aes(dist, speed), data = cars, inherit.aes = FALSE) +
   geom_label(aes(dist, value, label = text), data = text_to_add, inherit.aes = FALSE) +
-  labs(colour = 'Predictions', y = 'speed', 
-       title = 'Predictions for straight models for all integers from 0 to 125')
+  labs(colour = 'Model type', y = 'speed')
 ```
 
 
-
+### Predictions for all dist values that are in the original data set as well
 ```{r}
 data |> 
   select(-speed) |> 
   pivot_longer(cols = -dist) |> 
   ggplot(aes(dist, value, colour = name)) +
   geom_line(linewidth = 1) + 
-  labs(y = 'speed', colour = '',
-       title = 'Predictions for all dist values that are in the original data set as well') +
+  labs(y = 'speed', colour = 'Model type') + 
   geom_point(aes(dist, speed), cars, inherit.aes = FALSE) +
   geom_label(aes(dist, value, label = text), data = text_to_add, inherit.aes = FALSE)
 
@@ -93,17 +94,13 @@ data_long <- data |>
   pivot_longer(cols = -c(dist, speed)) 
 
 data_long |> 
-  ggplot(aes(dist, speed - value)) + geom_point() + facet_wrap(vars(name)) +
-  labs(y = 'Prediction error')
-
-data_long |> 
   mutate(error = value - speed,
-         squarred_error = error^2) |> 
+         squared_error = error^2) |> 
   rename(Method = 'name') |> 
   group_by(Method) |> 
   summarize('Mean absolute error' = mean(abs(error)),
-            'Mean squarred error' = mean(squarred_error)) |> 
-  kable(align = 'c')
+            'Rout mean squared error' = sqrt(mean(squared_error))) |> 
+  kable(align = 'c', digits = 2)
 ```
 
 ## Conclusion

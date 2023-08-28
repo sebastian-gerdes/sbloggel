@@ -154,7 +154,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#strategy" id="toc-strategy" class="nav-link active" data-scroll-target="#strategy">Strategy</a></li>
-  <li><a href="#implementation" id="toc-implementation" class="nav-link" data-scroll-target="#implementation">Implementation</a></li>
+  <li><a href="#implementation" id="toc-implementation" class="nav-link" data-scroll-target="#implementation">Implementation</a>
+  <ul class="collapse">
+  <li><a href="#predictions-for-straight-models-for-all-integers-from-0-to-125" id="toc-predictions-for-straight-models-for-all-integers-from-0-to-125" class="nav-link" data-scroll-target="#predictions-for-straight-models-for-all-integers-from-0-to-125">Predictions for straight models for all integers from 0 to 125</a></li>
+  <li><a href="#predictions-for-all-dist-values-that-are-in-the-original-data-set-as-well" id="toc-predictions-for-all-dist-values-that-are-in-the-original-data-set-as-well" class="nav-link" data-scroll-target="#predictions-for-all-dist-values-that-are-in-the-original-data-set-as-well">Predictions for all dist values that are in the original data set as well</a></li>
+  </ul></li>
   <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/sebastian-gerdes/sbloggel/blob/main/posts/2023-08-08-leave-one-out-cross-validation-in-r/2023-08-08-leave-one-out-cross-validation-in-r.qmd" class="toc-action">View source</a></p></div></div></nav>
@@ -194,7 +198,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li>Fit “straight” models: linear model, neural net with 2 layers with 3 perceptrons each</li>
 <li>Perform “Leave-one-out-cross-validation”</li>
-<li>Calculate mean absolute prediction error of the different methods
+<li>Calculate mean absolute prediction error and root mean squared error of the different methods
 <ul>
 <li>In cross-validation case for the left-out data point</li>
 </ul></li>
@@ -227,47 +231,52 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(pp)</span>
 <span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  }, <span class="at">vectorize.args =</span> <span class="st">'i'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-hash="2023-08-08-leave-one-out-cross-validation-in-r_cache/html/unnamed-chunk-3_367370ea00c6080b861f9ee57b95d84f">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>fm_lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(speed <span class="sc">~</span> dist, <span class="at">data =</span> cars)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>fm_nn <span class="ot">&lt;-</span> <span class="fu">neuralnet</span>(speed <span class="sc">~</span> dist, </span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">linear.output =</span> <span class="cn">TRUE</span>, <span class="at">data =</span> cars, </span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">hidden =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">3</span>), </span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>                   <span class="at">stepmax =</span> <span class="fl">1e+7</span>, <span class="at">threshold =</span> .<span class="dv">5</span>)</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  cars,</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">p_lm_straight =</span> <span class="fu">predict</span>(fm_lm),</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">p_nn_straight=</span> <span class="fu">predict</span>(fm_nn, <span class="at">newdata =</span> cars)[, <span class="dv">1</span>],</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">p_lm_looc =</span> <span class="fu">leave_one_out</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(cars), <span class="at">type =</span> <span class="st">'lm'</span>),</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">p_nn_looc =</span> <span class="fu">leave_one_out</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(cars), <span class="at">type =</span> <span class="st">'nn'</span>)</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>fm_nn <span class="ot">&lt;-</span> <span class="fu">neuralnet</span>(speed <span class="sc">~</span> dist, </span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">linear.output =</span> <span class="cn">TRUE</span>, <span class="at">data =</span> cars, </span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>                   <span class="at">hidden =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">3</span>), </span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>                   <span class="at">stepmax =</span> <span class="fl">1e+7</span>, <span class="at">threshold =</span> .<span class="dv">5</span>)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  cars,</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">'Linear model straight'</span> <span class="ot">=</span> <span class="fu">predict</span>(fm_lm),</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">'Neural net straight'</span><span class="ot">=</span> <span class="fu">predict</span>(fm_nn, <span class="at">newdata =</span> cars)[, <span class="dv">1</span>],</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="st">'Linear model with LOOC'</span> <span class="ot">=</span> <span class="fu">leave_one_out</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(cars), <span class="at">type =</span> <span class="st">'lm'</span>),</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="st">'Neural net with LOOC'</span> <span class="ot">=</span> <span class="fu">leave_one_out</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(cars), <span class="at">type =</span> <span class="st">'nn'</span>)</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<section id="predictions-for-straight-models-for-all-integers-from-0-to-125" class="level3">
+<h3 class="anchored" data-anchor-id="predictions-for-straight-models-for-all-integers-from-0-to-125">Predictions for straight models for all integers from 0 to 125</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>pred_df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">dist =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">125</span>)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>pred_df <span class="ot">&lt;-</span> pred_df <span class="sc">|&gt;</span> </span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pred_lm =</span> <span class="fu">predict</span>(fm_lm, pred_df),</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">pred_nn =</span> <span class="fu">predict</span>(fm_nn, pred_df)[, <span class="dv">1</span>])</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">'Linear model'</span> <span class="ot">=</span> <span class="fu">predict</span>(fm_lm, pred_df),</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>         <span class="st">'Neural net'</span> <span class="ot">=</span> <span class="fu">predict</span>(fm_nn, pred_df)[, <span class="dv">1</span>])</span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>text_to_add <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">dist =</span> <span class="dv">80</span>, <span class="at">value =</span> <span class="dv">7</span>, <span class="at">text =</span> <span class="st">'Original data as black dots'</span>)</span>
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>pred_df <span class="sc">|&gt;</span> <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">-</span>dist) <span class="sc">|&gt;</span> </span>
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(dist, value, <span class="at">colour =</span> name)) <span class="sc">+</span> <span class="fu">geom_line</span>() <span class="sc">+</span></span>
 <span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(dist, speed), <span class="at">data =</span> cars, <span class="at">inherit.aes =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
 <span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_label</span>(<span class="fu">aes</span>(dist, value, <span class="at">label =</span> text), <span class="at">data =</span> text_to_add, <span class="at">inherit.aes =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">colour =</span> <span class="st">'Predictions'</span>, <span class="at">y =</span> <span class="st">'speed'</span>, </span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">'Predictions for straight models for all integers from 0 to 125'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">colour =</span> <span class="st">'Model type'</span>, <span class="at">y =</span> <span class="st">'speed'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="2023-08-08-leave-one-out-cross-validation-in-r_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+</section>
+<section id="predictions-for-all-dist-values-that-are-in-the-original-data-set-as-well" class="level3">
+<h3 class="anchored" data-anchor-id="predictions-for-all-dist-values-that-are-in-the-original-data-set-as-well">Predictions for all dist values that are in the original data set as well</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span> </span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>speed) <span class="sc">|&gt;</span> </span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">-</span>dist) <span class="sc">|&gt;</span> </span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(dist, value, <span class="at">colour =</span> name)) <span class="sc">+</span></span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span> </span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">'speed'</span>, <span class="at">colour =</span> <span class="st">''</span>,</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">'Predictions for all dist values that are in the original data set as well'</span>) <span class="sc">+</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(dist, speed), cars, <span class="at">inherit.aes =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_label</span>(<span class="fu">aes</span>(dist, value, <span class="at">label =</span> text), <span class="at">data =</span> text_to_add, <span class="at">inherit.aes =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">'speed'</span>, <span class="at">colour =</span> <span class="st">'Model type'</span>) <span class="sc">+</span> </span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(dist, speed), cars, <span class="at">inherit.aes =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_label</span>(<span class="fu">aes</span>(dist, value, <span class="at">label =</span> text), <span class="at">data =</span> text_to_add, <span class="at">inherit.aes =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="2023-08-08-leave-one-out-cross-validation-in-r_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -275,53 +284,53 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">-</span><span class="fu">c</span>(dist, speed)) </span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>data_long <span class="sc">|&gt;</span> </span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(dist, speed <span class="sc">-</span> value)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(name)) <span class="sc">+</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">'Prediction error'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="2023-08-08-leave-one-out-cross-validation-in-r_files/figure-html/unnamed-chunk-5-2.png" class="img-fluid" width="672"></p>
-</div>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>data_long <span class="sc">|&gt;</span> </span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">error =</span> value <span class="sc">-</span> speed,</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">squarred_error =</span> error<span class="sc">^</span><span class="dv">2</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">Method =</span> <span class="st">'name'</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Method) <span class="sc">|&gt;</span> </span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="st">'Mean absolute error'</span> <span class="ot">=</span> <span class="fu">mean</span>(<span class="fu">abs</span>(error)),</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>            <span class="st">'Mean squarred error'</span> <span class="ot">=</span> <span class="fu">mean</span>(squarred_error)) <span class="sc">|&gt;</span> </span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">align =</span> <span class="st">'c'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">error =</span> value <span class="sc">-</span> speed,</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">squared_error =</span> error<span class="sc">^</span><span class="dv">2</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">Method =</span> <span class="st">'name'</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Method) <span class="sc">|&gt;</span> </span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="st">'Mean absolute error'</span> <span class="ot">=</span> <span class="fu">mean</span>(<span class="fu">abs</span>(error)),</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>            <span class="st">'Rout mean squared error'</span> <span class="ot">=</span> <span class="fu">sqrt</span>(<span class="fu">mean</span>(squared_error))) <span class="sc">|&gt;</span> </span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">align =</span> <span class="st">'c'</span>, <span class="at">digits =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 34%">
+<col style="width: 30%">
+<col style="width: 35%">
+</colgroup>
 <thead>
 <tr class="header">
 <th style="text-align: center;">Method</th>
 <th style="text-align: center;">Mean absolute error</th>
-<th style="text-align: center;">Mean squarred error</th>
+<th style="text-align: center;">Rout mean squared error</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: center;">p_lm_looc</td>
-<td style="text-align: center;">2.633568</td>
-<td style="text-align: center;">10.525331</td>
+<td style="text-align: center;">Linear model straight</td>
+<td style="text-align: center;">2.52</td>
+<td style="text-align: center;">3.09</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">p_lm_straight</td>
-<td style="text-align: center;">2.518286</td>
-<td style="text-align: center;">9.560425</td>
+<td style="text-align: center;">Linear model with LOOC</td>
+<td style="text-align: center;">2.63</td>
+<td style="text-align: center;">3.24</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;">p_nn_looc</td>
-<td style="text-align: center;">2.888501</td>
-<td style="text-align: center;">11.961281</td>
+<td style="text-align: center;">Neural net straight</td>
+<td style="text-align: center;">1.95</td>
+<td style="text-align: center;">2.43</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">p_nn_straight</td>
-<td style="text-align: center;">1.948435</td>
-<td style="text-align: center;">5.906101</td>
+<td style="text-align: center;">Neural net with LOOC</td>
+<td style="text-align: center;">2.89</td>
+<td style="text-align: center;">3.46</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
+</section>
 </section>
 <section id="conclusion" class="level2">
 <h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
