@@ -1,5 +1,5 @@
 ---
-title: Two-ANOVA with interaction vs. individual t-tests
+title: Two-Way-ANOVA with and without interaction vs. individual t-tests
 date: 2023-08-28
 categories:
   - R
@@ -7,6 +7,8 @@ execute:
   cache: true
 ---
 
+## Introduction
+...
 ```{r}
 #| label: init
 #| message: false
@@ -29,6 +31,7 @@ set.seed(2)
 * Standard deviation of error:
   * $\sigma = 1$
 * In treatment coding, this corresponds to the coefficient vector $\beta = (0, 1, 1, 1)^T$
+* 10 individuals per group
 
   
 ## Example of simulated data
@@ -40,11 +43,13 @@ generate_data <- function(n = 10, beta = c(0, 1, 1, 1)) {
 }
 
 generate_data() |> 
-  ggplot(aes(y = y)) + 
-  geom_boxplot() + 
+  mutate(x = 0) |> 
+  ggplot(aes(x, y)) + 
+  geom_boxplot() + geom_jitter(width = 0.1, height = 0) +
   facet_wrap(vars(F1, F2), labeller = label_both, ncol = 4) +
+  labs(x = '(Points are jittered along x-axis)') +
   theme(axis.text.x=element_blank(),
-        axis.ticks.x=element_blank())
+        axis.ticks.x=element_blank()) 
 ```
 
 ## Simulate many datasets in order to estimate power to test the hypotheses
@@ -52,20 +57,38 @@ generate_data() |>
 * Calculate p-values testing the main effects ($\beta_1 = 0$ and $\beta_2 = 0$) and the interaction ($\beta_3 = 0$) for each of the simulations
 * Estimate power empirically
 
-### Power of ANOVA analysis
 ```{r}
-simulate_two_way_ANOVA <- function() {
-  fm <- lm(y ~ F1 * F2, data = generate_data())
-  p_values <- summary(glht(fm, linfct = paste(names(coef(fm))[-1], '= 0')))$test$pvalues
+simulate_two_way_ANOVA <- function(include_interaction = FALSE) {
+  if(include_interaction) {
+    fm <- lm(y ~ F1 * F2, data = generate_data())
+    ii <- -1
+  } else {
+    fm <- lm(y ~ F1 + F2, data = generate_data(), subset = (F1 == 'A' | F2 == 'A'))
+    ii <- c(-1, -4)
+  }
+  p_values <- summary(glht(fm, linfct = paste(names(coef(fm))[ii], '= 0')))$test$pvalues
   attributes(p_values) <- NULL
   return(p_values)
 }
+```
 
-nr_of_sims <- 1e4
-tibble(Effect = c('Main effect 1', 'Main effect 2', 'Interaction'),
+### Power of ANOVA analysis without interaction
+```{r}
+nr_of_sims <- 5e4
+tibble(Effect = c('Main effect 1', 'Main effect 2'),
        Power = rowSums(replicate(n = nr_of_sims, simulate_two_way_ANOVA()) < 
                          0.05) / nr_of_sims) |> 
-  kable(align = 'c', digits = 2)
+  kable(align = 'c', digits = 3)
+```
+
+### Power of ANOVA analysis with interaction
+```{r}
+nr_of_sims <- 5e4
+tibble(Effect = c('Main effect 1', 'Main effect 2', 'Interaction'),
+       Power = rowSums(replicate(n = nr_of_sims, 
+                                 simulate_two_way_ANOVA(include_interaction = TRUE)) < 
+                         0.05) / nr_of_sims) |> 
+  kable(align = 'c', digits = 3)
 ```
 
 ### Power of separate t-tests
@@ -73,17 +96,7 @@ tibble(Effect = c('Main effect 1', 'Main effect 2', 'Interaction'),
 power.t.test(n = 10, delta = 1, sd = 1, sig.level = 0.05 / 2)
 ```
 
-### Conclusion
-* Power of multivariate test with three hypotheses is approximately equal to power of two separate t-tests with group size $n = 10$
-* In ANOVA setting with additional group, the interaction can be tested (power is a little less)
-* Note that in the given scenario, 4 groups à 10 individuals are needed in the ANOVA case and 3 groups à 10 individuals are needed in the case of separate t-tests (provided that the control group is 'recycled')
-
-<!-- ## Appendix -->
-<!-- ### Use `power.anova.test` to replicate the results of `power.t.test` -->
-<!-- ```{r} -->
-<!-- power.t.test(delta = sqrt(2) * 2 , sd = 2, sig.level = 0.05, power = 0.8) -->
-<!-- power.anova.test(groups = 2, between.var = 4, within.var = 4, sig.level = 0.05, power = 0.8) -->
-
-<!-- power.t.test(delta = 2, sd = 1, sig.level = 0.05, power = 0.8) -->
-<!-- power.anova.test(groups = 2, between.var = 8, within.var = 4, sig.level = 0.05, power = 0.8) -->
-<!-- ``` -->
+## Conclusion
+* Power in Two-Way-ANOVA without interaction is slightly greater than power of two separate t-tests corrected with Bonferroni procedure (30 individuals needed in both cases, provided that the control group is 'recycled' in the t-test case)
+* Power in Two-Way-ANOVA with interaction is approximately equal to power of two separate t-tests corrected with Bonferroni procedure (10 additional individuals needed in order to test interaction)
+* Power could be improved without increased total sample size by appropriately increasing the size of the control group
