@@ -999,7 +999,7 @@ font-style: inherit;">1</span>)</span></code></pre></div>
 <ul>
 <li><img src="https://latex.codecogs.com/png.latex?%5Csigma%20=%201"></li>
 </ul></li>
-<li>In treatment coding, this corresponds to the coefficient vector <img src="https://latex.codecogs.com/png.latex?%5Cbeta%20=%20(0,%201,%201,%203)%5ET"></li>
+<li>In treatment coding, this corresponds to the coefficient vector <img src="https://latex.codecogs.com/png.latex?%5Cbeta%20=%20(0,%201,%201,%201)%5ET"></li>
 </ul>
 </section>
 <section id="example-of-simulated-data" class="level2">

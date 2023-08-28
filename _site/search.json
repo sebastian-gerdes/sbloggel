@@ -851,7 +851,7 @@
     "href": "posts/2023-08-28-anova-with-interactions-vs.-individual-t-tests/2023-08-28-anova-with-interactions-vs.-individual-t-tests.html#simulation-model",
     "title": "F1NOVF1 with interactions vs. individual t-tests",
     "section": "Simulation model",
-    "text": "Simulation model\n\nNormally distributed data\nTwo-way ANOVA design\n\nFactor F1 with levels A and B\nFactor F2 with levels A and B\n\nMeans:\n\nF1 = A, F2 = A → \\(\\mu = 0\\)\nF1 = A, F2 = B → \\(\\mu = 1\\)\nF1 = B, F2 = A → \\(\\mu = 1\\)\nF1 = B, F2 = B → \\(\\mu = 3\\)\n\nStandard deviation of error:\n\n\\(\\sigma = 1\\)\n\nIn treatment coding, this corresponds to the coefficient vector \\(\\beta = (0, 1, 1, 3)^T\\)"
+    "text": "Simulation model\n\nNormally distributed data\nTwo-way ANOVA design\n\nFactor F1 with levels A and B\nFactor F2 with levels A and B\n\nMeans:\n\nF1 = A, F2 = A → \\(\\mu = 0\\)\nF1 = A, F2 = B → \\(\\mu = 1\\)\nF1 = B, F2 = A → \\(\\mu = 1\\)\nF1 = B, F2 = B → \\(\\mu = 3\\)\n\nStandard deviation of error:\n\n\\(\\sigma = 1\\)\n\nIn treatment coding, this corresponds to the coefficient vector \\(\\beta = (0, 1, 1, 1)^T\\)"
   },
   {
     "objectID": "posts/2023-08-28-anova-with-interactions-vs.-individual-t-tests/2023-08-28-anova-with-interactions-vs.-individual-t-tests.html#example-of-simulated-data",
