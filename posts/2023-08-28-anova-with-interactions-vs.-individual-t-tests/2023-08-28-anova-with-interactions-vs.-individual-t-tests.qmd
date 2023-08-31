@@ -14,12 +14,11 @@ Often, the effect of different interventions is to be studied. This can be done 
 Here, it is studied if ANOVA analysis with subsequent joint testing of the relevant hypotheses offers advantages in terms of required sample size / statistical power in comparison to analysis via separate t-tests for some configurations.
 
 ```{r}
-#| label: init
 #| message: false
+set.seed(2)
 library('tidyverse')
 library('multcomp')
 library('knitr')
-set.seed(2)
 ```
 
 ## Simulation model
@@ -57,7 +56,7 @@ generate_data() |>
 ```
 
 ## Simulate many datasets in order to estimate power to test the hypotheses
-* For ANOVA analysis the multcomp package is used in order to simultaneously test the hypotheses (correction for multiple testing with respect to the three hypotheses is included by design)
+* For ANOVA analysis the multcomp package is used in order to simultaneously test the hypotheses (correction for multiple testing with respect to the two (without interactgion) or three hypotheses (with interaction) is included by design)
 * Calculate p-values testing the main effects ($\beta_1 = 0$ and $\beta_2 = 0$) and the interaction ($\beta_3 = 0$) for each of the simulations
 * Estimate power empirically
 

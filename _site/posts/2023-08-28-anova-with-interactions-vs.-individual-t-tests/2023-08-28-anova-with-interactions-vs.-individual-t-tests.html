@@ -203,11 +203,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
 <p>Often, the effect of different interventions is to be studied. This can be done by comparing individual sets of interventions (e. g. drug A vs.&nbsp;placebo and drug B vs.&nbsp;placebo) or in a factorial design (e. g. ANOVA). For individual comparisons statistical tests such as the t-test can be appropriate. Importantly, correction for multiple testing should to be carried out. The effect of combination of several drugs can be studied easily in the factorial design, while it is more complicated via t-tests.</p>
 <p>Here, it is studied if ANOVA analysis with subsequent joint testing of the relevant hypotheses offers advantages in terms of required sample size / statistical power in comparison to analysis via separate t-tests for some configurations.</p>
-<div class="cell" data-hash="2023-08-28-anova-with-interactions-vs.-individual-t-tests_cache/html/init_d305052b16d91e5147626f46c9968e2c">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">'tidyverse'</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">'multcomp'</span>)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">'knitr'</span>)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="2023-08-28-anova-with-interactions-vs.-individual-t-tests_cache/html/unnamed-chunk-1_19c4a0b3c1507c45dbbe01ffcf3c3a4f">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">'tidyverse'</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">'multcomp'</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">'knitr'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="simulation-model" class="level2">
@@ -259,7 +259,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="simulate-many-datasets-in-order-to-estimate-power-to-test-the-hypotheses" class="level2">
 <h2 class="anchored" data-anchor-id="simulate-many-datasets-in-order-to-estimate-power-to-test-the-hypotheses">Simulate many datasets in order to estimate power to test the hypotheses</h2>
 <ul>
-<li>For ANOVA analysis the multcomp package is used in order to simultaneously test the hypotheses (correction for multiple testing with respect to the three hypotheses is included by design)</li>
+<li>For ANOVA analysis the multcomp package is used in order to simultaneously test the hypotheses (correction for multiple testing with respect to the two (without interactgion) or three hypotheses (with interaction) is included by design)</li>
 <li>Calculate p-values testing the main effects (<span class="math inline">\(\beta_1 = 0\)</span> and <span class="math inline">\(\beta_2 = 0\)</span>) and the interaction (<span class="math inline">\(\beta_3 = 0\)</span>) for each of the simulations</li>
 <li>Estimate power empirically</li>
 </ul>
