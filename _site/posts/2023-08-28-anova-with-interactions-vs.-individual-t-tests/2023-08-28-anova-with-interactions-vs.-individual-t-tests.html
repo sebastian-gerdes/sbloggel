@@ -200,7 +200,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>…</p>
+<p>Often, the effect of different interventions is to be studied. This can be done by comparing individual sets of interventions (e. g. drug A vs.&nbsp;placebo and drug B vs.&nbsp;placebo) or in a factorial design (e. g. ANOVA). For individual comparisons statistical tests such as the t-test can be appropriate. Importantly, correction for multiple testing should to be carried out. The effect of combination of several drugs can be studied easily in the factorial design, while it is more complicated via t-tests.</p>
+<p>Here, it is studied if ANOVA analysis with subsequent joint testing of the relevant hypotheses offers advantages in terms of required sample size / statistical power in comparison to analysis via separate t-tests for some configurations.</p>
 <div class="cell" data-hash="2023-08-28-anova-with-interactions-vs.-individual-t-tests_cache/html/init_d305052b16d91e5147626f46c9968e2c">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">'tidyverse'</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">'multcomp'</span>)</span>
@@ -212,7 +213,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="simulation-model">Simulation model</h2>
 <ul>
 <li>Normally distributed data</li>
-<li>Two-way ANOVA design
+<li>Two-way factorial design
 <ul>
 <li>Factor <code>F1</code> with levels <code>A</code> and <code>B</code></li>
 <li>Factor <code>F2</code> with levels <code>A</code> and <code>B</code></li>
@@ -261,7 +262,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Calculate p-values testing the main effects (<span class="math inline">\(\beta_1 = 0\)</span> and <span class="math inline">\(\beta_2 = 0\)</span>) and the interaction (<span class="math inline">\(\beta_3 = 0\)</span>) for each of the simulations</li>
 <li>Estimate power empirically</li>
 </ul>
-<div class="cell" data-hash="2023-08-28-anova-with-interactions-vs.-individual-t-tests_cache/html/unnamed-chunk-3_55ccdd55c1db7ea17669af1fc193a238">
+<div class="cell" data-hash="2023-08-28-anova-with-interactions-vs.-individual-t-tests_cache/html/unnamed-chunk-3_aebdb080e40921e6e3edce7d25c7a0db">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>simulate_two_way_ANOVA <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">include_interaction =</span> <span class="cn">FALSE</span>) {</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(include_interaction) {</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    fm <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> F1 <span class="sc">*</span> F2, <span class="at">data =</span> <span class="fu">generate_data</span>())</span>
@@ -270,10 +271,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    fm <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> F1 <span class="sc">+</span> F2, <span class="at">data =</span> <span class="fu">generate_data</span>(), <span class="at">subset =</span> (F1 <span class="sc">==</span> <span class="st">'A'</span> <span class="sc">|</span> F2 <span class="sc">==</span> <span class="st">'A'</span>))</span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    ii <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="sc">-</span><span class="dv">4</span>)</span>
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  p_values <span class="ot">&lt;-</span> <span class="fu">summary</span>(<span class="fu">glht</span>(fm, <span class="at">linfct =</span> <span class="fu">paste</span>(<span class="fu">names</span>(<span class="fu">coef</span>(fm))[ii], <span class="st">'= 0'</span>)))<span class="sc">$</span>test<span class="sc">$</span>pvalues</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">attributes</span>(p_values) <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(p_values)</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  hypotheses_tests <span class="ot">&lt;-</span> <span class="fu">glht</span>(fm, <span class="at">linfct =</span> <span class="fu">paste</span>(<span class="fu">names</span>(<span class="fu">coef</span>(fm))[ii], <span class="st">'= 0'</span>))</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  p_values <span class="ot">&lt;-</span> <span class="fu">summary</span>(hypotheses_tests)<span class="sc">$</span>test<span class="sc">$</span>pvalues</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">attributes</span>(p_values) <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(p_values)</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="power-of-anova-analysis-without-interaction" class="level3">
 <h3 class="anchored" data-anchor-id="power-of-anova-analysis-without-interaction">Power of ANOVA analysis without interaction</h3>
@@ -381,7 +383,8 @@ NOTE: n is number in *each* group</code></pre>
 <ul>
 <li>Power in Two-Way-ANOVA without interaction is slightly greater than power of two separate t-tests corrected with Bonferroni procedure (30 individuals needed in both cases, provided that the control group is ‘recycled’ in the t-test case)</li>
 <li>Power in Two-Way-ANOVA with interaction is approximately equal to power of two separate t-tests corrected with Bonferroni procedure (10 additional individuals needed in order to test interaction)</li>
-<li>Power could be improved without increased total sample size by appropriately increasing the size of the control group</li>
+<li>Analysis of interaction effect is possible, however laborious, via separate t-tests</li>
+<li>Power could be improved without increased total sample size by appropriately increasing the size of the control group (not shown here)</li>
 </ul>
 
 

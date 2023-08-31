@@ -8,7 +8,10 @@ execute:
 ---
 
 ## Introduction
-...
+Often, the effect of different interventions is to be studied. This can be done by comparing individual sets of interventions (e. g. drug A vs. placebo and drug B vs. placebo) or in a factorial design (e. g. ANOVA). For individual comparisons statistical tests such as the t-test can be appropriate. Importantly, correction for multiple testing should to be carried out. The effect of combination of several drugs can be studied easily in the factorial design, while it is more complicated via t-tests.
+
+Here, it is studied if ANOVA analysis with subsequent joint testing of the relevant hypotheses offers advantages in terms of required sample size / statistical power in comparison to analysis via separate t-tests for some configurations.
+
 ```{r}
 #| label: init
 #| message: false
@@ -20,7 +23,7 @@ set.seed(2)
 
 ## Simulation model
 * Normally distributed data
-* Two-way ANOVA design
+* Two-way factorial design
   * Factor `F1` with levels `A` and `B`
   * Factor `F2` with levels `A` and `B`
 * Means:
@@ -66,7 +69,8 @@ simulate_two_way_ANOVA <- function(include_interaction = FALSE) {
     fm <- lm(y ~ F1 + F2, data = generate_data(), subset = (F1 == 'A' | F2 == 'A'))
     ii <- c(-1, -4)
   }
-  p_values <- summary(glht(fm, linfct = paste(names(coef(fm))[ii], '= 0')))$test$pvalues
+  hypotheses_tests <- glht(fm, linfct = paste(names(coef(fm))[ii], '= 0'))
+  p_values <- summary(hypotheses_tests)$test$pvalues
   attributes(p_values) <- NULL
   return(p_values)
 }
@@ -102,4 +106,5 @@ power.t.test(n = 10, delta = 1, sd = 1, sig.level = 0.05 / 3)
 ## Conclusion
 * Power in Two-Way-ANOVA without interaction is slightly greater than power of two separate t-tests corrected with Bonferroni procedure (30 individuals needed in both cases, provided that the control group is 'recycled' in the t-test case)
 * Power in Two-Way-ANOVA with interaction is approximately equal to power of two separate t-tests corrected with Bonferroni procedure (10 additional individuals needed in order to test interaction)
-* Power could be improved without increased total sample size by appropriately increasing the size of the control group
+* Analysis of interaction effect is possible, however laborious, via separate t-tests
+* Power could be improved without increased total sample size by appropriately increasing the size of the control group (not shown here)
