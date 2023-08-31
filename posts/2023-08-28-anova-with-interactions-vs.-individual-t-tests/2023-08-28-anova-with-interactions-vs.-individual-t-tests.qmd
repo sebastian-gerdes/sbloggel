@@ -3,6 +3,7 @@ title: Two-Way-ANOVA with and without interaction vs. individual t-tests
 date: 2023-08-28
 categories:
   - R
+  - 'ANOVA vs t-Tests'
 execute:
   cache: true
 ---
