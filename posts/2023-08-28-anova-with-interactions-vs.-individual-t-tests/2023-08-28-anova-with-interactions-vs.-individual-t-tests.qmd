@@ -93,7 +93,10 @@ tibble(Effect = c('Main effect 1', 'Main effect 2', 'Interaction'),
 
 ### Power of separate t-tests
 ```{r}
+# Bonferroni correction for two tests:
 power.t.test(n = 10, delta = 1, sd = 1, sig.level = 0.05 / 2)
+# Bonferroni correction for three tests:
+power.t.test(n = 10, delta = 1, sd = 1, sig.level = 0.05 / 3)
 ```
 
 ## Conclusion

@@ -1437,8 +1437,11 @@ font-style: inherit;">3</span>)</span></code></pre></div>
 </section>
 <section id="power-of-separate-t-tests" class="level3">
 <h3 class="anchored" data-anchor-id="power-of-separate-t-tests">Power of separate t-tests</h3>
-<div class="cell" data-hash="2023-08-28-anova-with-interactions-vs.-individual-t-tests_cache/html/unnamed-chunk-6_9e1a4e54d5b1c5bf9ee403a4c82b9157">
-<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><span class="fu" style="color: #4758AB;
+<div class="cell" data-hash="2023-08-28-anova-with-interactions-vs.-individual-t-tests_cache/html/unnamed-chunk-6_d5ec28b9b7078eaecc9f85af74906637">
+<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Bonferroni correction for two tests:</span></span>
+<span id="cb6-2"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">power.t.test</span>(<span class="at" style="color: #657422;
 background-color: null;
@@ -1470,6 +1473,45 @@ font-style: inherit;">2</span>)</span></code></pre></div>
              sd = 1
       sig.level = 0.025
           power = 0.4360626
+    alternative = two.sided
+
+NOTE: n is number in *each* group</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Bonferroni correction for three tests:</span></span>
+<span id="cb8-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">power.t.test</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">n =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">delta =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">sd =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">sig.level =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.05</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+     Two-sample t test power calculation 
+
+              n = 10
+          delta = 1
+             sd = 1
+      sig.level = 0.01666667
+          power = 0.3690371
     alternative = two.sided
 
 NOTE: n is number in *each* group</code></pre>
