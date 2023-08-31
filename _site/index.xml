@@ -69,72 +69,64 @@ font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"Found TensorFlow Decision Forests v"</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">+</span> tfdf.__version__)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Found TensorFlow Decision Forests v1.5.0</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><span class="co" style="color: #5E5E5E;
+font-style: inherit;">+</span> tfdf.__version__)</span>
+<span id="cb2-11"></span>
+<span id="cb2-12"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Download the dataset</span></span>
-<span id="cb4-2"><span class="co" style="color: #5E5E5E;
+<span id="cb2-13"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># !wget -q https://storage.googleapis.com/download.tensorflow.org/data/palmer_penguins/penguins.csv -O /tmp/penguins.csv</span></span>
-<span id="cb4-3"></span>
-<span id="cb4-4"><span class="co" style="color: #5E5E5E;
+<span id="cb2-14"></span>
+<span id="cb2-15"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Load a dataset into a Pandas Dataframe.</span></span>
-<span id="cb4-5">dataset_df <span class="op" style="color: #5E5E5E;
+<span id="cb2-16">dataset_df <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> pd.read_csv(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"/tmp/penguins.csv"</span>)</span>
-<span id="cb4-6"></span>
-<span id="cb4-7"><span class="co" style="color: #5E5E5E;
+<span id="cb2-17"></span>
+<span id="cb2-18"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Display the first 3 examples.</span></span>
-<span id="cb4-8">dataset_df.head(<span class="dv" style="color: #AD0000;
+<span id="cb2-19">dataset_df.head(<span class="dv" style="color: #AD0000;
 background-color: null;
-font-style: inherit;">3</span>)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  species     island  bill_length_mm  ...  body_mass_g     sex  year
-0  Adelie  Torgersen            39.1  ...       3750.0    male  2007
-1  Adelie  Torgersen            39.5  ...       3800.0  female  2007
-2  Adelie  Torgersen            40.3  ...       3250.0  female  2007
-
-[3 rows x 8 columns]</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><span class="co" style="color: #5E5E5E;
+font-style: inherit;">3</span>)</span>
+<span id="cb2-20"></span>
+<span id="cb2-21"></span>
+<span id="cb2-22"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Encode the categorical labels as integers.</span></span>
-<span id="cb6-2"><span class="co" style="color: #5E5E5E;
+<span id="cb2-23"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">#</span></span>
-<span id="cb6-3"><span class="co" style="color: #5E5E5E;
+<span id="cb2-24"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Details:</span></span>
-<span id="cb6-4"><span class="co" style="color: #5E5E5E;
+<span id="cb2-25"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># This stage is necessary if your classification label is represented as a</span></span>
-<span id="cb6-5"><span class="co" style="color: #5E5E5E;
+<span id="cb2-26"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># string since Keras expects integer classification labels.</span></span>
-<span id="cb6-6"><span class="co" style="color: #5E5E5E;
+<span id="cb2-27"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># When using `pd_dataframe_to_tf_dataset` (see below), this step can be skipped.</span></span>
-<span id="cb6-7"></span>
-<span id="cb6-8"><span class="co" style="color: #5E5E5E;
+<span id="cb2-28"></span>
+<span id="cb2-29"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Name of the label column.</span></span>
-<span id="cb6-9">label <span class="op" style="color: #5E5E5E;
+<span id="cb2-30">label <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"species"</span></span>
-<span id="cb6-10"></span>
-<span id="cb6-11">classes <span class="op" style="color: #5E5E5E;
+<span id="cb2-31"></span>
+<span id="cb2-32">classes <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> dataset_df[label].unique().tolist()</span>
-<span id="cb6-12"><span class="bu" style="color: null;
+<span id="cb2-33"><span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
 background-color: null;
@@ -144,48 +136,46 @@ font-style: inherit;">{</span>classes<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">}</span><span class="ss" style="color: #20794D;
 background-color: null;
-font-style: inherit;">"</span>)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Label classes: ['Adelie', 'Gentoo', 'Chinstrap']</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1">dataset_df[label] <span class="op" style="color: #5E5E5E;
+font-style: inherit;">"</span>)</span>
+<span id="cb2-34"></span>
+<span id="cb2-35">dataset_df[label] <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> dataset_df[label].<span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">map</span>(classes.index)</span>
-<span id="cb8-2"></span>
-<span id="cb8-3"><span class="co" style="color: #5E5E5E;
+<span id="cb2-36"></span>
+<span id="cb2-37"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Split the dataset into a training and a testing dataset.</span></span>
-<span id="cb8-4"></span>
-<span id="cb8-5"><span class="kw" style="color: #003B4F;
+<span id="cb2-38"></span>
+<span id="cb2-39"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">def</span> split_dataset(dataset, test_ratio<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="fl" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0.30</span>):</span>
-<span id="cb8-6">  <span class="co" style="color: #5E5E5E;
+<span id="cb2-40">  <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">"""Splits a panda dataframe in two."""</span></span>
-<span id="cb8-7">  test_indices <span class="op" style="color: #5E5E5E;
+<span id="cb2-41">  test_indices <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.random.rand(<span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">len</span>(dataset)) <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">&lt;</span> test_ratio</span>
-<span id="cb8-8">  <span class="cf" style="color: #003B4F;
+<span id="cb2-42">  <span class="cf" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">return</span> dataset[<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">~</span>test_indices], dataset[test_indices]</span>
-<span id="cb8-9"></span>
-<span id="cb8-10"></span>
-<span id="cb8-11">train_ds_pd, test_ds_pd <span class="op" style="color: #5E5E5E;
+<span id="cb2-43"></span>
+<span id="cb2-44"></span>
+<span id="cb2-45">train_ds_pd, test_ds_pd <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> split_dataset(dataset_df)</span>
-<span id="cb8-12"><span class="bu" style="color: null;
+<span id="cb2-46"><span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
 background-color: null;
@@ -200,281 +190,70 @@ background-color: null;
 font-style: inherit;"> examples for testing."</span>.<span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">format</span>(</span>
-<span id="cb8-13">  <span class="bu" style="color: null;
+<span id="cb2-47">  <span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">len</span>(train_ds_pd), <span class="bu" style="color: null;
 background-color: null;
-font-style: inherit;">len</span>(test_ds_pd)))</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>239 examples in training, 105 examples for testing.</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1">train_ds <span class="op" style="color: #5E5E5E;
+font-style: inherit;">len</span>(test_ds_pd)))</span>
+<span id="cb2-48"></span>
+<span id="cb2-49"></span>
+<span id="cb2-50">train_ds <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> tfdf.keras.pd_dataframe_to_tf_dataset(train_ds_pd, label<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span>label)</span>
-<span id="cb10-2">test_ds <span class="op" style="color: #5E5E5E;
+<span id="cb2-51">test_ds <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> tfdf.keras.pd_dataframe_to_tf_dataset(test_ds_pd, label<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span>label)</span>
-<span id="cb10-3"></span>
-<span id="cb10-4"></span>
-<span id="cb10-5"><span class="co" style="color: #5E5E5E;
+<span id="cb2-52"></span>
+<span id="cb2-53"></span>
+<span id="cb2-54"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># %set_cell_height 300</span></span>
-<span id="cb10-6"></span>
-<span id="cb10-7"><span class="co" style="color: #5E5E5E;
+<span id="cb2-55"></span>
+<span id="cb2-56"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Specify the model.</span></span>
-<span id="cb10-8">model_1 <span class="op" style="color: #5E5E5E;
+<span id="cb2-57">model_1 <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> tfdf.keras.RandomForestModel(verbose<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
 background-color: null;
-font-style: inherit;">2</span>)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Use 10 thread(s) for training
-Use /var/folders/jl/yt17k74x37l_mv93mfg5h7n00000gn/T/tmpwjc2yd91 as temporary training directory</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><span class="co" style="color: #5E5E5E;
+font-style: inherit;">2</span>)</span>
+<span id="cb2-58"></span>
+<span id="cb2-59"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Train the model.</span></span>
-<span id="cb12-2">model_1.fit(train_ds)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Reading training dataset...
-Training tensor examples:
-Features: {'island': &lt;tf.Tensor 'data:0' shape=(None,) dtype=string&gt;, 'bill_length_mm': &lt;tf.Tensor 'data_1:0' shape=(None,) dtype=float64&gt;, 'bill_depth_mm': &lt;tf.Tensor 'data_2:0' shape=(None,) dtype=float64&gt;, 'flipper_length_mm': &lt;tf.Tensor 'data_3:0' shape=(None,) dtype=float64&gt;, 'body_mass_g': &lt;tf.Tensor 'data_4:0' shape=(None,) dtype=float64&gt;, 'sex': &lt;tf.Tensor 'data_5:0' shape=(None,) dtype=string&gt;, 'year': &lt;tf.Tensor 'data_6:0' shape=(None,) dtype=int64&gt;}
-Label: Tensor("data_7:0", shape=(None,), dtype=int64)
-Weights: None
-Normalized tensor features:
- {'island': SemanticTensor(semantic=&lt;Semantic.CATEGORICAL: 2&gt;, tensor=&lt;tf.Tensor 'data:0' shape=(None,) dtype=string&gt;), 'bill_length_mm': SemanticTensor(semantic=&lt;Semantic.NUMERICAL: 1&gt;, tensor=&lt;tf.Tensor 'Cast:0' shape=(None,) dtype=float32&gt;), 'bill_depth_mm': SemanticTensor(semantic=&lt;Semantic.NUMERICAL: 1&gt;, tensor=&lt;tf.Tensor 'Cast_1:0' shape=(None,) dtype=float32&gt;), 'flipper_length_mm': SemanticTensor(semantic=&lt;Semantic.NUMERICAL: 1&gt;, tensor=&lt;tf.Tensor 'Cast_2:0' shape=(None,) dtype=float32&gt;), 'body_mass_g': SemanticTensor(semantic=&lt;Semantic.NUMERICAL: 1&gt;, tensor=&lt;tf.Tensor 'Cast_3:0' shape=(None,) dtype=float32&gt;), 'sex': SemanticTensor(semantic=&lt;Semantic.CATEGORICAL: 2&gt;, tensor=&lt;tf.Tensor 'data_5:0' shape=(None,) dtype=string&gt;), 'year': SemanticTensor(semantic=&lt;Semantic.NUMERICAL: 1&gt;, tensor=&lt;tf.Tensor 'Cast_4:0' shape=(None,) dtype=float32&gt;)}
-Training dataset read in 0:00:01.480043. Found 239 examples.
-Training model...
-Standard output detected as not visible to the user e.g. running in a notebook. Creating a training log redirection. If training gets stuck, try calling tfdf.keras.set_training_logs_redirection(False).
-Model trained in 0:00:00.026059
-Compiling model...
-Model compiled.
-&lt;keras.src.callbacks.History object at 0x134f12890&gt;
-
-[INFO 23-08-28 10:50:46.5211 CEST kernel.cc:773] Start Yggdrasil model training
-[INFO 23-08-28 10:50:46.5216 CEST kernel.cc:774] Collect training examples
-[INFO 23-08-28 10:50:46.5216 CEST kernel.cc:787] Dataspec guide:
-column_guides {
-  column_name_pattern: "^__LABEL$"
-  type: CATEGORICAL
-  categorial {
-    min_vocab_frequency: 0
-    max_vocab_count: -1
-  }
-}
-default_column_guide {
-  categorial {
-    max_vocab_count: 2000
-  }
-  discretized_numerical {
-    maximum_num_bins: 255
-  }
-}
-ignore_columns_without_guides: false
-detect_numerical_as_discretized_numerical: false
-
-[INFO 23-08-28 10:50:46.5218 CEST kernel.cc:393] Number of batches: 1
-[INFO 23-08-28 10:50:46.5218 CEST kernel.cc:394] Number of examples: 239
-[INFO 23-08-28 10:50:46.5219 CEST kernel.cc:794] Training dataset:
-Number of records: 239
-Number of columns: 8
-
-Number of columns by type:
-    NUMERICAL: 5 (62.5%)
-    CATEGORICAL: 3 (37.5%)
-
-Columns:
-
-NUMERICAL: 5 (62.5%)
-    1: "bill_depth_mm" NUMERICAL num-nas:1 (0.41841%) mean:17.1164 min:13.3 max:21.5 sd:2.02827
-    2: "bill_length_mm" NUMERICAL num-nas:1 (0.41841%) mean:44.095 min:32.1 max:55.1 sd:5.26063
-    3: "body_mass_g" NUMERICAL num-nas:1 (0.41841%) mean:4248.11 min:2700 max:6300 sd:808.78
-    4: "flipper_length_mm" NUMERICAL num-nas:1 (0.41841%) mean:201.697 min:178 max:230 sd:14.1846
-    7: "year" NUMERICAL mean:2008 min:2007 max:2009 sd:0.805306
-
-CATEGORICAL: 3 (37.5%)
-    0: "__LABEL" CATEGORICAL integerized vocab-size:4 no-ood-item
-    5: "island" CATEGORICAL has-dict vocab-size:4 zero-ood-items most-frequent:"Biscoe" 118 (49.3724%)
-    6: "sex" CATEGORICAL num-nas:7 (2.92887%) has-dict vocab-size:3 zero-ood-items most-frequent:"male" 121 (52.1552%)
-
-Terminology:
-    nas: Number of non-available (i.e. missing) values.
-    ood: Out of dictionary.
-    manually-defined: Attribute which type is manually defined by the user i.e. the type was not automatically inferred.
-    tokenized: The attribute value is obtained through tokenization.
-    has-dict: The attribute is attached to a string dictionary e.g. a categorical attribute stored as a string.
-    vocab-size: Number of unique values.
-
-[INFO 23-08-28 10:50:46.5219 CEST kernel.cc:810] Configure learner
-[INFO 23-08-28 10:50:46.5220 CEST kernel.cc:824] Training config:
-learner: "RANDOM_FOREST"
-features: "^bill_depth_mm$"
-features: "^bill_length_mm$"
-features: "^body_mass_g$"
-features: "^flipper_length_mm$"
-features: "^island$"
-features: "^sex$"
-features: "^year$"
-label: "^__LABEL$"
-task: CLASSIFICATION
-random_seed: 123456
-metadata {
-  framework: "TF Keras"
-}
-pure_serving_model: false
-[yggdrasil_decision_forests.model.random_forest.proto.random_forest_config] {
-  num_trees: 300
-  decision_tree {
-    max_depth: 16
-    min_examples: 5
-    in_split_min_examples_check: true
-    keep_non_leaf_label_distribution: true
-    num_candidate_attributes: 0
-    missing_value_policy: GLOBAL_IMPUTATION
-    allow_na_conditions: false
-    categorical_set_greedy_forward {
-      sampling: 0.1
-      max_num_items: -1
-      min_item_frequency: 1
-    }
-    growing_strategy_local {
-    }
-    categorical {
-      cart {
-      }
-    }
-    axis_aligned_split {
-    }
-    internal {
-      sorting_strategy: PRESORTED
-    }
-    uplift {
-      min_examples_in_treatment: 5
-      split_score: KULLBACK_LEIBLER
-    }
-  }
-  winner_take_all_inference: true
-  compute_oob_performances: true
-  compute_oob_variable_importances: false
-  num_oob_variable_importances_permutations: 1
-  bootstrap_training_dataset: true
-  bootstrap_size_ratio: 1
-  adapt_bootstrap_size_ratio_for_maximum_training_duration: false
-  sampling_with_replacement: true
-}
-
-[INFO 23-08-28 10:50:46.5222 CEST kernel.cc:827] Deployment config:
-cache_path: "/var/folders/jl/yt17k74x37l_mv93mfg5h7n00000gn/T/tmpwjc2yd91/working_cache"
-num_threads: 10
-try_resume_training: true
-
-[INFO 23-08-28 10:50:46.5223 CEST kernel.cc:889] Train model
-[INFO 23-08-28 10:50:46.5223 CEST random_forest.cc:416] Training random forest on 239 example(s) and 7 feature(s).
-[INFO 23-08-28 10:50:46.5229 CEST random_forest.cc:802] Training of tree  1/300 (tree index:2) done accuracy:0.918605 logloss:2.93379
-[INFO 23-08-28 10:50:46.5231 CEST random_forest.cc:802] Training of tree  14/300 (tree index:14) done accuracy:0.93133 logloss:1.15914
-[INFO 23-08-28 10:50:46.5233 CEST random_forest.cc:802] Training of tree  25/300 (tree index:24) done accuracy:0.962343 logloss:0.24584
-[INFO 23-08-28 10:50:46.5235 CEST random_forest.cc:802] Training of tree  39/300 (tree index:38) done accuracy:0.962343 logloss:0.238283
-[INFO 23-08-28 10:50:46.5238 CEST random_forest.cc:802] Training of tree  50/300 (tree index:49) done accuracy:0.962343 logloss:0.234376
-[INFO 23-08-28 10:50:46.5240 CEST random_forest.cc:802] Training of tree  64/300 (tree index:60) done accuracy:0.966527 logloss:0.0941994
-[INFO 23-08-28 10:50:46.5242 CEST random_forest.cc:802] Training of tree  75/300 (tree index:74) done accuracy:0.966527 logloss:0.0934996
-[INFO 23-08-28 10:50:46.5244 CEST random_forest.cc:802] Training of tree  85/300 (tree index:84) done accuracy:0.970711 logloss:0.0903579
-[INFO 23-08-28 10:50:46.5246 CEST random_forest.cc:802] Training of tree  95/300 (tree index:94) done accuracy:0.970711 logloss:0.0873026
-[INFO 23-08-28 10:50:46.5247 CEST random_forest.cc:802] Training of tree  105/300 (tree index:104) done accuracy:0.970711 logloss:0.086929
-[INFO 23-08-28 10:50:46.5249 CEST random_forest.cc:802] Training of tree  117/300 (tree index:116) done accuracy:0.970711 logloss:0.0848943
-[INFO 23-08-28 10:50:46.5251 CEST random_forest.cc:802] Training of tree  129/300 (tree index:128) done accuracy:0.974895 logloss:0.0844767
-[INFO 23-08-28 10:50:46.5252 CEST random_forest.cc:802] Training of tree  139/300 (tree index:138) done accuracy:0.974895 logloss:0.0813079
-[INFO 23-08-28 10:50:46.5254 CEST random_forest.cc:802] Training of tree  150/300 (tree index:150) done accuracy:0.974895 logloss:0.0816927
-[INFO 23-08-28 10:50:46.5256 CEST random_forest.cc:802] Training of tree  160/300 (tree index:159) done accuracy:0.974895 logloss:0.0821032
-[INFO 23-08-28 10:50:46.5258 CEST random_forest.cc:802] Training of tree  170/300 (tree index:169) done accuracy:0.974895 logloss:0.0811745
-[INFO 23-08-28 10:50:46.5259 CEST random_forest.cc:802] Training of tree  181/300 (tree index:181) done accuracy:0.974895 logloss:0.0817699
-[INFO 23-08-28 10:50:46.5261 CEST random_forest.cc:802] Training of tree  194/300 (tree index:193) done accuracy:0.974895 logloss:0.0828385
-[INFO 23-08-28 10:50:46.5263 CEST random_forest.cc:802] Training of tree  205/300 (tree index:203) done accuracy:0.974895 logloss:0.082928
-[INFO 23-08-28 10:50:46.5264 CEST random_forest.cc:802] Training of tree  215/300 (tree index:215) done accuracy:0.970711 logloss:0.0828813
-[INFO 23-08-28 10:50:46.5266 CEST random_forest.cc:802] Training of tree  227/300 (tree index:223) done accuracy:0.974895 logloss:0.0829924
-[INFO 23-08-28 10:50:46.5268 CEST random_forest.cc:802] Training of tree  239/300 (tree index:238) done accuracy:0.979079 logloss:0.0826984
-[INFO 23-08-28 10:50:46.5270 CEST random_forest.cc:802] Training of tree  249/300 (tree index:249) done accuracy:0.974895 logloss:0.082548
-[INFO 23-08-28 10:50:46.5271 CEST random_forest.cc:802] Training of tree  259/300 (tree index:259) done accuracy:0.974895 logloss:0.0823658
-[INFO 23-08-28 10:50:46.5273 CEST random_forest.cc:802] Training of tree  269/300 (tree index:269) done accuracy:0.979079 logloss:0.0828393
-[INFO 23-08-28 10:50:46.5275 CEST random_forest.cc:802] Training of tree  279/300 (tree index:279) done accuracy:0.983264 logloss:0.0830823
-[INFO 23-08-28 10:50:46.5276 CEST random_forest.cc:802] Training of tree  289/300 (tree index:288) done accuracy:0.970711 logloss:0.0832093
-[INFO 23-08-28 10:50:46.5278 CEST random_forest.cc:802] Training of tree  299/300 (tree index:298) done accuracy:0.970711 logloss:0.083786
-[INFO 23-08-28 10:50:46.5278 CEST random_forest.cc:802] Training of tree  300/300 (tree index:299) done accuracy:0.970711 logloss:0.0836702
-[INFO 23-08-28 10:50:46.5279 CEST random_forest.cc:882] Final OOB metrics: accuracy:0.970711 logloss:0.0836702
-[INFO 23-08-28 10:50:46.5282 CEST kernel.cc:926] Export model in log directory: /var/folders/jl/yt17k74x37l_mv93mfg5h7n00000gn/T/tmpwjc2yd91 with prefix a02b057747ad4a71
-[INFO 23-08-28 10:50:46.5306 CEST kernel.cc:944] Save model in resources
-[INFO 23-08-28 10:50:46.5314 CEST abstract_model.cc:849] Model self evaluation:
-Number of predictions (without weights): 239
-Number of predictions (with weights): 239
-Task: CLASSIFICATION
-Label: __LABEL
-
-Accuracy: 0.970711  CI95[W][0.945693 0.986175]
-LogLoss: : 0.0836702
-ErrorRate: : 0.0292887
-
-Default Accuracy: : 0.41841
-Default LogLoss: : 1.05187
-Default ErrorRate: : 0.58159
-
-Confusion Table:
-truth\prediction
-   0   1   2   3
-0  0   0   0   0
-1  0  97   1   2
-2  0   1  91   0
-3  0   2   1  44
-Total: 239
-
-One vs other classes:
-
-[INFO 23-08-28 10:50:46.5370 CEST kernel.cc:1243] Loading model from path /var/folders/jl/yt17k74x37l_mv93mfg5h7n00000gn/T/tmpwjc2yd91/model/ with prefix a02b057747ad4a71
-[INFO 23-08-28 10:50:46.5431 CEST decision_forest.cc:660] Model loaded with 300 root(s), 4420 node(s), and 7 input feature(s).
-[INFO 23-08-28 10:50:46.5431 CEST abstract_model.cc:1312] Engine "RandomForestGeneric" built
-[INFO 23-08-28 10:50:46.5431 CEST kernel.cc:1075] Use fast generic engine
-WARNING:tensorflow:AutoGraph could not transform &lt;function simple_ml_inference_op_with_handle at 0x1635fc0e0&gt; and will run it as-is.
-Please report this to the TensorFlow team. When filing the bug, set the verbosity to 10 (on Linux, `export AUTOGRAPH_VERBOSITY=10`) and attach the full output.
-Cause: could not get source code
-To silence this warning, decorate the function with @tf.autograph.experimental.do_not_convert
-WARNING:tensorflow:AutoGraph could not transform &lt;function simple_ml_inference_op_with_handle at 0x1635fc0e0&gt; and will run it as-is.
-Please report this to the TensorFlow team. When filing the bug, set the verbosity to 10 (on Linux, `export AUTOGRAPH_VERBOSITY=10`) and attach the full output.
-Cause: could not get source code
-To silence this warning, decorate the function with @tf.autograph.experimental.do_not_convert</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1">model_1.<span class="bu" style="color: null;
+<span id="cb2-60">model_1.fit(train_ds)</span>
+<span id="cb2-61"></span>
+<span id="cb2-62"></span>
+<span id="cb2-63">model_1.<span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">compile</span>(metrics<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span>[<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"accuracy"</span>])</span>
-<span id="cb14-2">evaluation <span class="op" style="color: #5E5E5E;
+<span id="cb2-64">evaluation <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> model_1.evaluate(test_ds, return_dict<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="va" style="color: #111111;
 background-color: null;
-font-style: inherit;">True</span>)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-1/1 [==============================] - ETA: 0s - loss: 0.0000e+00 - accuracy: 0.9810
-1/1 [==============================] - 0s 120ms/step - loss: 0.0000e+00 - accuracy: 0.9810</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><span class="bu" style="color: null;
+font-style: inherit;">True</span>)</span>
+<span id="cb2-65"><span class="bu" style="color: null;
 background-color: null;
-font-style: inherit;">print</span>()</span></code></pre></div>
-<div class="sourceCode cell-code" id="cb17" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><span class="cf" style="color: #003B4F;
+font-style: inherit;">print</span>()</span>
+<span id="cb2-66"></span>
+<span id="cb2-67"><span class="cf" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">for</span> name, value <span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">in</span> evaluation.items():</span>
-<span id="cb17-2">  <span class="bu" style="color: null;
+<span id="cb2-68">  <span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
 background-color: null;
@@ -490,12 +269,10 @@ font-style: inherit;">{</span>value<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">:.4f}</span><span class="ss" style="color: #20794D;
 background-color: null;
-font-style: inherit;">"</span>)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>loss: 0.0000
-accuracy: 0.9810</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb19" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1">tfdf.model_plotter.plot_model_in_colab(model_1, tree_idx<span class="op" style="color: #5E5E5E;
+font-style: inherit;">"</span>)</span>
+<span id="cb2-69"></span>
+<span id="cb2-70"></span>
+<span id="cb2-71">tfdf.model_plotter.plot_model_in_colab(model_1, tree_idx<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
 background-color: null;
@@ -504,443 +281,6 @@ background-color: null;
 font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">3</span>)</span></code></pre></div>
-<div class="cell-output-display">
-
-<script src="https://d3js.org/d3.v6.min.js"></script>
-<div id="tree_plot_89454907ef5f4918976bf7a74248ed24"></div>
-<script>
-/*
- * Copyright 2021 Google LLC.
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     https://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-/**
- *  Plotting of decision trees generated by TF-DF.
- *
- *  A tree is a recursive structure of node objects.
- *  A node contains one or more of the following components:
- *
- *    - A value: Representing the output of the node. If the node is not a leaf,
- *      the value is only present for analysis i.e. it is not used for
- *      predictions.
- *
- *    - A condition : For non-leaf nodes, the condition (also known as split)
- *      defines a binary test to branch to the positive or negative child.
- *
- *    - An explanation: Generally a plot showing the relation between the label
- *      and the condition to give insights about the effect of the condition.
- *
- *    - Two children : For non-leaf nodes, the children nodes. The first
- *      children (i.e. "node.children[0]") is the negative children (drawn in
- *      red). The second children is the positive one (drawn in green).
- *
- */
-
-/**
- * Plots a single decision tree into a DOM element.
- * @param {!options} options Dictionary of configurations.
- * @param {!tree} raw_tree Recursive tree structure.
- * @param {string} canvas_id Id of the output dom element.
- */
-function display_tree(options, raw_tree, canvas_id) {
-  console.log(options);
-
-  // Determine the node placement.
-  const tree_struct = d3.tree().nodeSize(
-      [options.node_y_offset, options.node_x_offset])(d3.hierarchy(raw_tree));
-
-  // Boundaries of the node placement.
-  let x_min = Infinity;
-  let x_max = -x_min;
-  let y_min = Infinity;
-  let y_max = -x_min;
-
-  tree_struct.each(d => {
-    if (d.x > x_max) x_max = d.x;
-    if (d.x < x_min) x_min = d.x;
-    if (d.y > y_max) y_max = d.y;
-    if (d.y < y_min) y_min = d.y;
-  });
-
-  // Size of the plot.
-  const width = y_max - y_min + options.node_x_size + options.margin * 2;
-  const height = x_max - x_min + options.node_y_size + options.margin * 2 +
-      options.node_y_offset - options.node_y_size;
-
-  const plot = d3.select(canvas_id);
-
-  // Tool tip
-  options.tooltip = plot.append('div')
-                        .attr('width', 100)
-                        .attr('height', 100)
-                        .style('padding', '4px')
-                        .style('background', '#fff')
-                        .style('box-shadow', '4px 4px 0px rgba(0,0,0,0.1)')
-                        .style('border', '1px solid black')
-                        .style('font-family', 'sans-serif')
-                        .style('font-size', options.font_size)
-                        .style('position', 'absolute')
-                        .style('z-index', '10')
-                        .attr('pointer-events', 'none')
-                        .style('display', 'none');
-
-  // Create canvas
-  const svg = plot.append('svg').attr('width', width).attr('height', height);
-  const graph =
-      svg.style('overflow', 'visible')
-          .append('g')
-          .attr('font-family', 'sans-serif')
-          .attr('font-size', options.font_size)
-          .attr(
-              'transform',
-              () => `translate(${options.margin},${
-                  - x_min + options.node_y_offset / 2 + options.margin})`);
-
-  // Plot bounding box.
-  if (options.show_plot_bounding_box) {
-    svg.append('rect')
-        .attr('width', width)
-        .attr('height', height)
-        .attr('fill', 'none')
-        .attr('stroke-width', 1.0)
-        .attr('stroke', 'black');
-  }
-
-  // Draw the edges.
-  display_edges(options, graph, tree_struct);
-
-  // Draw the nodes.
-  display_nodes(options, graph, tree_struct);
-}
-
-/**
- * Draw the nodes of the tree.
- * @param {!options} options Dictionary of configurations.
- * @param {!graph} graph D3 search handle containing the graph.
- * @param {!tree_struct} tree_struct Structure of the tree (node placement,
- *     data, etc.).
- */
-function display_nodes(options, graph, tree_struct) {
-  const nodes = graph.append('g')
-                    .selectAll('g')
-                    .data(tree_struct.descendants())
-                    .join('g')
-                    .attr('transform', d => `translate(${d.y},${d.x})`);
-
-  nodes.append('rect')
-      .attr('x', 0.5)
-      .attr('y', 0.5)
-      .attr('width', options.node_x_size)
-      .attr('height', options.node_y_size)
-      .attr('stroke', 'lightgrey')
-      .attr('stroke-width', 1)
-      .attr('fill', 'white')
-      .attr('y', -options.node_y_size / 2);
-
-  // Brackets on the right of condition nodes without children.
-  non_leaf_node_without_children =
-      nodes.filter(node => node.data.condition != null && node.children == null)
-          .append('g')
-          .attr('transform', `translate(${options.node_x_size},0)`);
-
-  non_leaf_node_without_children.append('path')
-      .attr('d', 'M0,0 C 10,0 0,10 10,10')
-      .attr('fill', 'none')
-      .attr('stroke-width', 1.0)
-      .attr('stroke', '#F00');
-
-  non_leaf_node_without_children.append('path')
-      .attr('d', 'M0,0 C 10,0 0,-10 10,-10')
-      .attr('fill', 'none')
-      .attr('stroke-width', 1.0)
-      .attr('stroke', '#0F0');
-
-  const node_content = nodes.append('g').attr(
-      'transform',
-      `translate(0,${options.node_padding - options.node_y_size / 2})`);
-
-  node_content.append(node => create_node_element(options, node));
-}
-
-/**
- * Creates the D3 content for a single node.
- * @param {!options} options Dictionary of configurations.
- * @param {!node} node Node to draw.
- * @return {!d3} D3 content.
- */
-function create_node_element(options, node) {
-  // Output accumulator.
-  let output = {
-    // Content to draw.
-    content: d3.create('svg:g'),
-    // Vertical offset to the next element to draw.
-    vertical_offset: 0
-  };
-
-  // Conditions.
-  if (node.data.condition != null) {
-    display_condition(options, node.data.condition, output);
-  }
-
-  // Values.
-  if (node.data.value != null) {
-    display_value(options, node.data.value, output);
-  }
-
-  // Explanations.
-  if (node.data.explanation != null) {
-    display_explanation(options, node.data.explanation, output);
-  }
-
-  return output.content.node();
-}
-
-
-/**
- * Adds a single line of text inside of a node.
- * @param {!options} options Dictionary of configurations.
- * @param {string} text Text to display.
- * @param {!output} output Output display accumulator.
- */
-function display_node_text(options, text, output) {
-  output.content.append('text')
-      .attr('x', options.node_padding)
-      .attr('y', output.vertical_offset)
-      .attr('alignment-baseline', 'hanging')
-      .text(text);
-  output.vertical_offset += 10;
-}
-
-/**
- * Adds a single line of text inside of a node with a tooltip.
- * @param {!options} options Dictionary of configurations.
- * @param {string} text Text to display.
- * @param {string} tooltip Text in the Tooltip.
- * @param {!output} output Output display accumulator.
- */
-function display_node_text_with_tooltip(options, text, tooltip, output) {
-  const item = output.content.append('text')
-                   .attr('x', options.node_padding)
-                   .attr('alignment-baseline', 'hanging')
-                   .text(text);
-
-  add_tooltip(options, item, () => tooltip);
-  output.vertical_offset += 10;
-}
-
-/**
- * Adds a tooltip to a dom element.
- * @param {!options} options Dictionary of configurations.
- * @param {!dom} target Dom element to equip with a tooltip.
- * @param {!func} get_content Generates the html content of the tooltip.
- */
-function add_tooltip(options, target, get_content) {
-  function show(d) {
-    options.tooltip.style('display', 'block');
-    options.tooltip.html(get_content());
-  }
-
-  function hide(d) {
-    options.tooltip.style('display', 'none');
-  }
-
-  function move(d) {
-    options.tooltip.style('display', 'block');
-    options.tooltip.style('left', (d.pageX + 5) + 'px');
-    options.tooltip.style('top', d.pageY + 'px');
-  }
-
-  target.on('mouseover', show);
-  target.on('mouseout', hide);
-  target.on('mousemove', move);
-}
-
-/**
- * Adds a condition inside of a node.
- * @param {!options} options Dictionary of configurations.
- * @param {!condition} condition Condition to display.
- * @param {!output} output Output display accumulator.
- */
-function display_condition(options, condition, output) {
-  threshold_format = d3.format('r');
-
-  if (condition.type === 'IS_MISSING') {
-    display_node_text(options, `${condition.attribute} is missing`, output);
-    return;
-  }
-
-  if (condition.type === 'IS_TRUE') {
-    display_node_text(options, `${condition.attribute} is true`, output);
-    return;
-  }
-
-  if (condition.type === 'NUMERICAL_IS_HIGHER_THAN') {
-    format = d3.format('r');
-    display_node_text(
-        options,
-        `${condition.attribute} >= ${threshold_format(condition.threshold)}`,
-        output);
-    return;
-  }
-
-  if (condition.type === 'CATEGORICAL_IS_IN') {
-    display_node_text_with_tooltip(
-        options, `${condition.attribute} in [...]`,
-        `${condition.attribute} in [${condition.mask}]`, output);
-    return;
-  }
-
-  if (condition.type === 'CATEGORICAL_SET_CONTAINS') {
-    display_node_text_with_tooltip(
-        options, `${condition.attribute} intersect [...]`,
-        `${condition.attribute} intersect [${condition.mask}]`, output);
-    return;
-  }
-
-  if (condition.type === 'NUMERICAL_SPARSE_OBLIQUE') {
-    display_node_text_with_tooltip(
-        options, `Sparse oblique split...`,
-        `[${condition.attributes}]*[${condition.weights}]>=${
-            threshold_format(condition.threshold)}`,
-        output);
-    return;
-  }
-
-  display_node_text(
-      options, `Non supported condition ${condition.type}`, output);
-}
-
-/**
- * Adds a value inside of a node.
- * @param {!options} options Dictionary of configurations.
- * @param {!value} value Value to display.
- * @param {!output} output Output display accumulator.
- */
-function display_value(options, value, output) {
-  if (value.type === 'PROBABILITY') {
-    const left_margin = 0;
-    const right_margin = 50;
-    const plot_width = options.node_x_size - options.node_padding * 2 -
-        left_margin - right_margin;
-
-    let cusum = Array.from(d3.cumsum(value.distribution));
-    cusum.unshift(0);
-    const distribution_plot = output.content.append('g').attr(
-        'transform', `translate(0,${output.vertical_offset + 0.5})`);
-
-    distribution_plot.selectAll('rect')
-        .data(value.distribution)
-        .join('rect')
-        .attr('height', 10)
-        .attr(
-            'x',
-            (d, i) =>
-                (cusum[i] * plot_width + left_margin + options.node_padding))
-        .attr('width', (d, i) => d * plot_width)
-        .style('fill', (d, i) => d3.schemeSet1[i]);
-
-    const num_examples =
-        output.content.append('g')
-            .attr('transform', `translate(0,${output.vertical_offset})`)
-            .append('text')
-            .attr('x', options.node_x_size - options.node_padding)
-            .attr('alignment-baseline', 'hanging')
-            .attr('text-anchor', 'end')
-            .text(`(${value.num_examples})`);
-
-    const distribution_details = d3.create('ul');
-    distribution_details.selectAll('li')
-        .data(value.distribution)
-        .join('li')
-        .append('span')
-        .text(
-            (d, i) =>
-                'class ' + i + ': ' + d3.format('.3%')(value.distribution[i]));
-
-    add_tooltip(options, distribution_plot, () => distribution_details.html());
-    add_tooltip(options, num_examples, () => 'Number of examples');
-
-    output.vertical_offset += 10;
-    return;
-  }
-
-  if (value.type === 'REGRESSION') {
-    display_node_text(
-        options,
-        'value: ' + d3.format('r')(value.value) + ` (` +
-            d3.format('.6')(value.num_examples) + `)`,
-        output);
-    return;
-  }
-
-  if (value.type === 'UPLIFT') {
-    display_node_text(
-        options,
-        'effect: ' + d3.format('r')(value.treatment_effect) + ` (` +
-            d3.format('.6')(value.num_examples) + `)`,
-        output);
-    return;
-  }
-
-  display_node_text(options, `Non supported value ${value.type}`, output);
-}
-
-/**
- * Adds an explanation inside of a node.
- * @param {!options} options Dictionary of configurations.
- * @param {!explanation} explanation Explanation to display.
- * @param {!output} output Output display accumulator.
- */
-function display_explanation(options, explanation, output) {
-  // Margin before the explanation.
-  output.vertical_offset += 10;
-
-  display_node_text(
-      options, `Non supported explanation ${explanation.type}`, output);
-}
-
-
-/**
- * Draw the edges of the tree.
- * @param {!options} options Dictionary of configurations.
- * @param {!graph} graph D3 search handle containing the graph.
- * @param {!tree_struct} tree_struct Structure of the tree (node placement,
- *     data, etc.).
- */
-function display_edges(options, graph, tree_struct) {
-  // Draw an edge between a parent and a child node with a bezier.
-  function draw_single_edge(d) {
-    return 'M' + (d.source.y + options.node_x_size) + ',' + d.source.x + ' C' +
-        (d.source.y + options.node_x_size + options.edge_rounding) + ',' +
-        d.source.x + ' ' + (d.target.y - options.edge_rounding) + ',' +
-        d.target.x + ' ' + d.target.y + ',' + d.target.x;
-  }
-
-  graph.append('g')
-      .attr('fill', 'none')
-      .attr('stroke-width', 1.2)
-      .selectAll('path')
-      .data(tree_struct.links())
-      .join('path')
-      .attr('d', draw_single_edge)
-      .attr(
-          'stroke', d => (d.target === d.source.children[0]) ? '#0F0' : '#F00');
-}
-
-display_tree({"margin": 10, "node_x_size": 160, "node_y_size": 28, "node_x_offset": 180, "node_y_offset": 33, "font_size": 10, "edge_rounding": 20, "node_padding": 2, "show_plot_bounding_box": false}, {"value": {"type": "PROBABILITY", "distribution": [0.3389121338912134, 0.4393305439330544, 0.2217573221757322], "num_examples": 239.0}, "condition": {"type": "CATEGORICAL_IS_IN", "attribute": "island", "mask": ["Dream", "Torgersen"]}, "children": [{"value": {"type": "PROBABILITY", "distribution": [0.5309734513274337, 0.0, 0.4690265486725664], "num_examples": 113.0}, "condition": {"type": "NUMERICAL_IS_HIGHER_THAN", "attribute": "bill_length_mm", "threshold": 44.20000076293945}, "children": [{"value": {"type": "PROBABILITY", "distribution": [0.04, 0.0, 0.96], "num_examples": 50.0}, "condition": {"type": "NUMERICAL_IS_HIGHER_THAN", "attribute": "bill_length_mm", "threshold": 46.04999923706055}, "children": [{"value": {"type": "PROBABILITY", "distribution": [0.0, 0.0, 1.0], "num_examples": 40.0}}, {"value": {"type": "PROBABILITY", "distribution": [0.2, 0.0, 0.8], "num_examples": 10.0}, "condition": {"type": "NUMERICAL_IS_HIGHER_THAN", "attribute": "body_mass_g", "threshold": 3737.5}}]}, {"value": {"type": "PROBABILITY", "distribution": [0.9206349206349206, 0.0, 0.07936507936507936], "num_examples": 63.0}, "condition": {"type": "NUMERICAL_IS_HIGHER_THAN", "attribute": "bill_length_mm", "threshold": 40.849998474121094}, "children": [{"value": {"type": "PROBABILITY", "distribution": [0.7916666666666666, 0.0, 0.20833333333333334], "num_examples": 24.0}, "condition": {"type": "CATEGORICAL_IS_IN", "attribute": "sex", "mask": ["female"]}}, {"value": {"type": "PROBABILITY", "distribution": [1.0, 0.0, 0.0], "num_examples": 39.0}}]}]}, {"value": {"type": "PROBABILITY", "distribution": [0.16666666666666666, 0.8333333333333334, 0.0], "num_examples": 126.0}, "condition": {"type": "NUMERICAL_IS_HIGHER_THAN", "attribute": "bill_length_mm", "threshold": 42.75}, "children": [{"value": {"type": "PROBABILITY", "distribution": [0.009523809523809525, 0.9904761904761905, 0.0], "num_examples": 105.0}, "condition": {"type": "NUMERICAL_IS_HIGHER_THAN", "attribute": "flipper_length_mm", "threshold": 208.5}, "children": [{"value": {"type": "PROBABILITY", "distribution": [0.0, 1.0, 0.0], "num_examples": 98.0}}, {"value": {"type": "PROBABILITY", "distribution": [0.14285714285714285, 0.8571428571428571, 0.0], "num_examples": 7.0}}]}, {"value": {"type": "PROBABILITY", "distribution": [0.9523809523809523, 0.047619047619047616, 0.0], "num_examples": 21.0}, "condition": {"type": "NUMERICAL_IS_HIGHER_THAN", "attribute": "body_mass_g", "threshold": 3862.5}, "children": [{"value": {"type": "PROBABILITY", "distribution": [0.8, 0.2, 0.0], "num_examples": 5.0}}, {"value": {"type": "PROBABILITY", "distribution": [1.0, 0.0, 0.0], "num_examples": 16.0}}]}]}]}, "#tree_plot_89454907ef5f4918976bf7a74248ed24")
-</script>
-
-</div>
 </div>
 
 
