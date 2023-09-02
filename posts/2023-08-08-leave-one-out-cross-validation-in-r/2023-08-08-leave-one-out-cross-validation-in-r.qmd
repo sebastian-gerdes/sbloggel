@@ -8,7 +8,7 @@ categories:
 
 ## Strategy
 * Fit "straight" models: linear model, neural net with 2 layers with 3 perceptrons each
-* Perform "Leave-one-out-cross-validation"
+* Perform "Leave-one-out-cross-validation" (LOOC)
 * Calculate mean absolute prediction error and root mean squared error of the different methods
   * In cross-validation case for the left-out data point
 
@@ -91,15 +91,14 @@ data |>
 
 
 data_long <- data |> 
-  pivot_longer(cols = -c(dist, speed)) 
+  pivot_longer(cols = -c(dist, speed), names_to = 'Method') 
 
 data_long |> 
   mutate(error = value - speed,
          squared_error = error^2) |> 
-  rename(Method = 'name') |> 
   group_by(Method) |> 
   summarize('Mean absolute error' = mean(abs(error)),
-            'Rout mean squared error' = sqrt(mean(squared_error))) |> 
+            'Root mean squared error' = sqrt(mean(squared_error))) |> 
   kable(align = 'c', digits = 2)
 ```
 
