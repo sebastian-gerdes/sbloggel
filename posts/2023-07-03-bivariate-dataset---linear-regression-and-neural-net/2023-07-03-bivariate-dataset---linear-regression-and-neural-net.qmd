@@ -1,0 +1,82 @@
+---
+title: Bivariate dataset - linear regression and neural net
+date: 2023-07-03
+categories:
+  - R
+  - 'Linear model vs neural nets'
+---
+
+## Basic neural net
+### Init
+```{r}
+#| message: false
+set.seed(1)
+library('neuralnet')
+library('tidyverse')
+library('knitr')
+```
+
+### We are looking at the `cars` dataset (more about the dataset via `help(cars)`)
+* `dist` is the stopping distance (not what I said today)
+```{r}
+cars |> 
+  ggplot(aes(dist, speed)) + 
+  geom_point()
+```
+
+### We can fit a linear regression model:
+```{r}
+fm_lm <- lm(speed ~ dist, data = cars)
+summary(fm_lm)
+```
+
+### We can do basically the same thing using a neural net with a single perceptron
+* Note that the coefficients of the linear regression model are (almost) identical to the weights in the neural net
+
+```{r}
+nn_0 <- neuralnet(speed ~ dist, 
+                  linear.output = TRUE, 
+                  data = cars, 
+                  hidden = 0)
+plot(nn_0, rep = 'best')
+```
+
+### The neuralnet package uses RSS / 2 as cost function ([this might be the reason](https://community.rstudio.com/t/why-the-sse-error-function-on-the-neuralnet-package-divides-by-2/39301/4))
+
+```{r}
+# RSS / 2 of the linear regression model
+sum(((predict(fm_lm) - cars$speed))^2) / 2
+```
+
+### A more complex neural net can be trained (two hidden layers with three perceptrons each):
+* `stepmax` and `threshold` have to be tuned due to problems with convergence
+```{r}
+nn_1 <- neuralnet(speed ~ dist, 
+                  linear.output = TRUE, data = cars, 
+                  hidden = c(3, 3), 
+                  stepmax = 1e+7, threshold = .5)
+
+plot(nn_1, rep = 'best')
+```
+
+### The predictions of the simple (basically linear regression) neural net and the more complex neural net plotted here:
+```{r}
+cc <- cars |> mutate(
+  nn_0_prediction = as.vector(predict(nn_0, cars)),
+  nn_1_prediction = as.vector(predict(nn_1, cars))) |> 
+  pivot_longer(cols = c(nn_0_prediction, nn_1_prediction))  
+
+cc |> 
+  ggplot(aes(dist, value, color = name)) + geom_line(linewidth = 2) + 
+  geom_point(aes(dist, speed, color = 'original data'), data = cars) +
+  labs(y = 'speed', color = 'Group')
+```
+
+
+### The residual sum of squares is (as expected) less in the more complex model:
+```{r}
+cc |> 
+  group_by(name) |> 
+  summarize(RSS = sum((value - speed)^2)) |> 
+  kable(align = 'c', digits = 2)
+```
