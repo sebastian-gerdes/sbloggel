@@ -107,4 +107,4 @@ power.t.test(n = 10, delta = 1, sd = 1, sig.level = 0.05 / 3)
 * Power in Two-Way-ANOVA without interaction is slightly greater than power of two separate t-tests corrected with Bonferroni procedure (30 individuals needed in both cases, provided that the control group is 'recycled' in the t-test case)
 * Power in Two-Way-ANOVA with interaction is approximately equal to power of two separate t-tests corrected with Bonferroni procedure (10 additional individuals needed in order to test interaction)
 * Analysis of interaction effect is possible, however laborious, via separate t-tests
-* Power could be improved without increased total sample size by appropriately increasing the size of the control group (not shown here)
+* Power could be improved without increased total sample size by appropriately increasing the size of the control group (not shown here) - see Friedemann's document (is in local folder however not uploaded)

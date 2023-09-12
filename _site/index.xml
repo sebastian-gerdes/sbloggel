@@ -10,7 +10,43 @@
 <atom:link href="https://sbloggel.netlify.app/index.xml" rel="self" type="application/rss+xml"/>
 <description>Seb&#39;s private blog about statistics and other topics</description>
 <generator>quarto-1.3.433</generator>
-<lastBuildDate>Sun, 27 Aug 2023 22:00:00 GMT</lastBuildDate>
+<lastBuildDate>Wed, 06 Sep 2023 22:00:00 GMT</lastBuildDate>
+<item>
+  <title>Algorithmic study design – possible approaches</title>
+  <link>https://sbloggel.netlify.app/posts/2023-09-07-algorithmic-study-design-possible-concepts/2023-09-07-algorithmic-study-design-possible-concepts.html</link>
+  <description><![CDATA[ 
+
+
+
+<section id="possible-concepts" class="level2">
+<h2 class="anchored" data-anchor-id="possible-concepts">Possible concepts:</h2>
+<ul>
+<li>Model of research environment (e. g. university hospital) and simulate a lot of studies in this environment</li>
+<li>Continue Elena’s work</li>
+<li>Use clinicaltrials.gov data set as training dataset for neural net</li>
+<li>Simulate a lot of studies in <a href="../../posts/2023-08-21-algorithmic-study-design----white-paper/2023-08-21-algorithmic-study-design----white-paper.html">this</a> manner</li>
+</ul>
+</section>
+<section id="further-ideas" class="level2">
+<h2 class="anchored" data-anchor-id="further-ideas">Further ideas:</h2>
+<ul>
+<li>We could start with a descriptive analysis of the clinicaltrials.gov database</li>
+<li>There are some older papers
+<ul>
+<li><a href="https://scholar.google.com/scholar?hl=de&amp;as_sdt=0%2C5&amp;q=clinicaltrials+database&amp;btnG=">Overview at google scholar</a></li>
+<li><a href="https://jamanetwork.com/journals/jama/article-abstract/1150093">Characteristics of Clinical Trials Registered in ClinicalTrials.gov, 2007-2010</a></li>
+<li><a href="https://www.bmj.com/content/361/bmj.k1452.abstract">How to avoid common problems when using ClinicalTrials.gov in research: 10 issues to consider - BMJ 2018</a></li>
+</ul></li>
+</ul>
+
+
+</section>
+
+ ]]></description>
+  <category>Algorithmic study design</category>
+  <guid>https://sbloggel.netlify.app/posts/2023-09-07-algorithmic-study-design-possible-concepts/2023-09-07-algorithmic-study-design-possible-concepts.html</guid>
+  <pubDate>Wed, 06 Sep 2023 22:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Tensorflow Decision Forests</title>
   <link>https://sbloggel.netlify.app/posts/2023-08-28-tensorflow-decision-forests-/2023-08-28-tensorflow-decision-forests-.html</link>
@@ -869,7 +905,7 @@ NOTE: n is number in *each* group</code></pre>
 <li>Power in Two-Way-ANOVA without interaction is slightly greater than power of two separate t-tests corrected with Bonferroni procedure (30 individuals needed in both cases, provided that the control group is ‘recycled’ in the t-test case)</li>
 <li>Power in Two-Way-ANOVA with interaction is approximately equal to power of two separate t-tests corrected with Bonferroni procedure (10 additional individuals needed in order to test interaction)</li>
 <li>Analysis of interaction effect is possible, however laborious, via separate t-tests</li>
-<li>Power could be improved without increased total sample size by appropriately increasing the size of the control group (not shown here)</li>
+<li>Power could be improved without increased total sample size by appropriately increasing the size of the control group (not shown here) - see Friedemann’s document (is in local folder however not uploaded)</li>
 </ul>
 
 
@@ -7730,166 +7766,6 @@ git push</code></pre>
  ]]></description>
   <category>Quarto</category>
   <guid>https://sbloggel.netlify.app/posts/2023-07-12-easier-publishing/2023-07-12-easier-publishing.html</guid>
-  <pubDate>Tue, 11 Jul 2023 22:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Model diagnostics for logistic regression</title>
-  <link>https://sbloggel.netlify.app/posts/2023-07-12-model-diagnostics-for-logistic-regression/2023-07-12-model-diagnostics-for-logistic-regression.html</link>
-  <description><![CDATA[ 
-
-
-
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'tidyverse'</span>)</span>
-<span id="cb1-2"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'faraway'</span>)</span>
-<span id="cb1-3"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">set.seed</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>)</span></code></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1">n <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">100</span></span>
-<span id="cb2-2">dat <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">tibble</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">x1 =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">rnorm</span>(n), </span>
-<span id="cb2-3">              <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">x2 =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">rnorm</span>(n),</span>
-<span id="cb2-4">              <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">x3 =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">rnorm</span>(n),)</span>
-<span id="cb2-5"></span>
-<span id="cb2-6">X <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">model.matrix</span>(<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">~</span> ., <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">data =</span> dat)</span>
-<span id="cb2-7">beta <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">rnorm</span>(<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">ncol</span>(X))</span>
-<span id="cb2-8"></span>
-<span id="cb2-9"></span>
-<span id="cb2-10"></span>
-<span id="cb2-11">dat <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> dat <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span> </span>
-<span id="cb2-12">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">mu =</span> X <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">%*%</span> beta,</span>
-<span id="cb2-13">         <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">p =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">plogis</span>(mu),</span>
-<span id="cb2-14">         <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">result =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">rbinom</span>(n, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, p))</span>
-<span id="cb2-15"></span>
-<span id="cb2-16">fitted_model <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">glm</span>(result <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">~</span> x1 <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> x2 <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> x3, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">data =</span> dat, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">family =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">binomial</span>())</span>
-<span id="cb2-17"></span>
-<span id="cb2-18"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">plot</span>(fitted_model)</span></code></pre></div>
-<div class="cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2023-07-12-model-diagnostics-for-logistic-regression/2023-07-12-model-diagnostics-for-logistic-regression_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
-</div>
-<div class="cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2023-07-12-model-diagnostics-for-logistic-regression/2023-07-12-model-diagnostics-for-logistic-regression_files/figure-html/unnamed-chunk-2-2.png" class="img-fluid" width="672"></p>
-</div>
-<div class="cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2023-07-12-model-diagnostics-for-logistic-regression/2023-07-12-model-diagnostics-for-logistic-regression_files/figure-html/unnamed-chunk-2-3.png" class="img-fluid" width="672"></p>
-</div>
-<div class="cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2023-07-12-model-diagnostics-for-logistic-regression/2023-07-12-model-diagnostics-for-logistic-regression_files/figure-html/unnamed-chunk-2-4.png" class="img-fluid" width="672"></p>
-</div>
-<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">prplot</span>(fitted_model, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>)</span></code></pre></div>
-<div class="cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2023-07-12-model-diagnostics-for-logistic-regression/2023-07-12-model-diagnostics-for-logistic-regression_files/figure-html/unnamed-chunk-2-5.png" class="img-fluid" width="672"></p>
-</div>
-<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">prplot</span>(fitted_model, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>)</span></code></pre></div>
-<div class="cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2023-07-12-model-diagnostics-for-logistic-regression/2023-07-12-model-diagnostics-for-logistic-regression_files/figure-html/unnamed-chunk-2-6.png" class="img-fluid" width="672"></p>
-</div>
-<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">prplot</span>(fitted_model, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span>)</span></code></pre></div>
-<div class="cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2023-07-12-model-diagnostics-for-logistic-regression/2023-07-12-model-diagnostics-for-logistic-regression_files/figure-html/unnamed-chunk-2-7.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-
-
-
- ]]></description>
-  <category>R</category>
-  <guid>https://sbloggel.netlify.app/posts/2023-07-12-model-diagnostics-for-logistic-regression/2023-07-12-model-diagnostics-for-logistic-regression.html</guid>
   <pubDate>Tue, 11 Jul 2023 22:00:00 GMT</pubDate>
 </item>
 </channel>

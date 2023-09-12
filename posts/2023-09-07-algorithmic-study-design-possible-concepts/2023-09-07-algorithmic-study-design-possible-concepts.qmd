@@ -1,0 +1,21 @@
+---
+title: Algorithmic study design -- possible approaches
+date: 2023-09-07
+categories:
+  - 'Algorithmic study design'
+---
+
+## Possible concepts:
+
+* Model of research environment (e. g. university hospital) and simulate a lot of studies in this environment
+* Continue Elena's work
+* Use clinicaltrials.gov data set as training dataset for neural net
+* Simulate a lot of studies in [this](/posts/2023-08-21-algorithmic-study-design----white-paper/2023-08-21-algorithmic-study-design----white-paper.qmd) manner
+
+## Further ideas:
+
+* We could start with a descriptive analysis of the clinicaltrials.gov database
+* There are some older papers
+  * [Overview at google scholar](https://scholar.google.com/scholar?hl=de&as_sdt=0%2C5&q=clinicaltrials+database&btnG=)
+  * [Characteristics of Clinical Trials Registered in ClinicalTrials.gov, 2007-2010](https://jamanetwork.com/journals/jama/article-abstract/1150093)
+  * [How to avoid common problems when using ClinicalTrials.gov in research: 10 issues to consider - BMJ 2018](https://www.bmj.com/content/361/bmj.k1452.abstract)
