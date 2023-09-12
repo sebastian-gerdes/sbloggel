@@ -1,0 +1,30 @@
+---
+title: SVM code example
+date: 2023-09-12
+categories:
+  - R
+  - Self-study
+---
+
+Inspired from [this](https://www.spsanderson.com/steveondata/posts/2023-09-11/index.html) blog post
+
+```{r}
+#| label: init
+#| message: false
+set.seed(1)
+library('tidyverse')
+library('e1071')
+```
+
+```{r}
+ir <- iris |> 
+  mutate(is_setosa = as.factor(ifelse(Species == 'setosa', 'Yes', 'No'))) |> 
+  select(-c(Species, Sepal.Length, Petal.Length))
+
+ir <- as.data.frame(ir)
+
+fm_svm <- svm(is_setosa ~ ., data = ir)
+
+plot(fm_svm, data = ir)
+```
+

@@ -18,9 +18,9 @@ set.seed(1)
 ```{r}
 #| label: new_post
 #| execute: false
-post_title <- 'Bivariate dataset - linear regression and neural net'
-post_date <- format(Sys.Date(), "%Y-%m-%d")
+post_title <- 'SVM code example'
 post_date <- '2023-07-03'
+post_date <- format(Sys.Date(), "%Y-%m-%d")
 
 post_filename <- gsub(" ", "-", tolower(paste0(post_date, '-', post_title)))
 post_dir <- paste0('../posts/', post_filename)
