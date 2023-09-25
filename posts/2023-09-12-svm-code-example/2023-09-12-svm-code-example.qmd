@@ -6,7 +6,7 @@ categories:
   - Self-study
 ---
 
-Inspired from [this](https://www.spsanderson.com/steveondata/posts/2023-09-11/index.html) blog post
+Inspired from [this](https://www.spsanderson.com/steveondata/posts/2023-09-11/index.html) blog post.
 
 ```{r}
 #| label: init

@@ -1,0 +1,55 @@
+---
+title: Testing Observable
+date: 2023-09-25
+categories:
+  - Observable
+---
+
+```{R}
+library('tidyverse')
+glimpse(iris)
+summary(iris)
+iris_new <- tibble(species = iris$Species, 
+                   sepal_length = iris$Sepal.Length,
+                   sepal_width = iris$Sepal.Width)
+write_csv(iris_new, file = 'iris.csv')
+```
+
+
+```{ojs}
+data = FileAttachment("iris.csv").csv({ typed: true })
+```
+
+
+```{ojs}
+viewof sepal_length_min = Inputs.range(
+  [5, 10], 
+  {value: 5, step: 1, label: "Sepal length min:"}
+)
+```
+
+```{ojs}
+filtered = data.filter(function(iris) {
+  return sepal_length_min < iris.sepal_length;
+})
+```
+
+```{ojs}
+Plot.rectY(filtered, 
+  Plot.binX(
+    {y: "count"}, 
+    {x: "sepal_length", fill: "species"}
+  ))
+  .plot({
+    facet: {
+      data: filtered,
+      x: "species",
+      y: "sepal_length",
+      marginRight: 80
+    },
+    marks: [
+      Plot.frame(),
+    ]
+  }
+)
+```
