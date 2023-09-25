@@ -5,6 +5,7 @@ categories:
   - Observable
 ---
 
+## Plot 1
 ```{R}
 library('tidyverse')
 glimpse(iris)
@@ -52,4 +53,16 @@ Plot.rectY(filtered,
     ]
   }
 )
+```
+
+## Plot 2
+```{ojs}
+Plot.plot({
+  marks: [
+    Plot.dot(penguins, {x: "culmen_length_mm", y: "culmen_depth_mm", stroke: "species"}), // try changing "stroke" to "fill"
+    Plot.linearRegressionY(penguins, {x: "culmen_length_mm", y: "culmen_depth_mm", stroke: "species"})
+  ],
+  ariaLabel: "Penguin culmen dimensions",
+  ariaDescription: "Scatterplot of culmen length by culmen depth for three penguin species. Linear trendlines are added to each, revealing similar positive linear trends between culmen length and depth for chinstrap, gentoo and Adelie penguins."
+})
 ```

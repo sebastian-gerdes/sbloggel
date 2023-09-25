@@ -120,6 +120,8 @@
 
 
 
+<section id="plot-1" class="level2">
+<h2 class="anchored" data-anchor-id="plot-1">Plot 1</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -197,7 +199,7 @@ background-color: null;
 font-style: inherit;">'iris.csv'</span>)</span></code></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8" data-startfrom="19" data-source-offset="0" style="background: #f1f3f5;"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 18;"><span id="cb8-19">data <span class="op" style="color: #5E5E5E;
+<div class="sourceCode cell-code" id="cb8" data-startfrom="20" data-source-offset="0" style="background: #f1f3f5;"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 19;"><span id="cb8-20">data <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -221,14 +223,14 @@ font-style: inherit;">true</span> })</span></code></pre></div>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9" data-startfrom="24" data-source-offset="0" style="background: #f1f3f5;"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 23;"><span id="cb9-24">viewof sepal_length_min <span class="op" style="color: #5E5E5E;
+<div class="sourceCode cell-code" id="cb9" data-startfrom="25" data-source-offset="0" style="background: #f1f3f5;"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 24;"><span id="cb9-25">viewof sepal_length_min <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> Inputs<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">.</span><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">range</span>(</span>
-<span id="cb9-25">  [<span class="dv" style="color: #AD0000;
+<span id="cb9-26">  [<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">5</span><span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -237,7 +239,7 @@ background-color: null;
 font-style: inherit;">10</span>]<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">,</span> </span>
-<span id="cb9-26">  {<span class="dt" style="color: #AD0000;
+<span id="cb9-27">  {<span class="dt" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">value</span><span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -260,7 +262,7 @@ background-color: null;
 font-style: inherit;">:</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"Sepal length min:"</span>}</span>
-<span id="cb9-27">)</span></code></pre></div>
+<span id="cb9-28">)</span></code></pre></div>
 <div class="cell-output cell-output-display">
 <div id="ojs-cell-2" data-nodetype="declaration">
 
@@ -268,7 +270,7 @@ font-style: inherit;">"Sepal length min:"</span>}</span>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10" data-startfrom="31" data-source-offset="0" style="background: #f1f3f5;"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 30;"><span id="cb10-31">filtered <span class="op" style="color: #5E5E5E;
+<div class="sourceCode cell-code" id="cb10" data-startfrom="32" data-source-offset="0" style="background: #f1f3f5;"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 31;"><span id="cb10-32">filtered <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> data<span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -277,7 +279,7 @@ background-color: null;
 font-style: inherit;">filter</span>(<span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">function</span>(iris) {</span>
-<span id="cb10-32">  <span class="cf" style="color: #003B4F;
+<span id="cb10-33">  <span class="cf" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">return</span> sepal_length_min <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -288,7 +290,7 @@ background-color: null;
 font-style: inherit;">sepal_length</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">;</span></span>
-<span id="cb10-33">})</span></code></pre></div>
+<span id="cb10-34">})</span></code></pre></div>
 <div class="cell-output cell-output-display">
 <div id="ojs-cell-3" data-nodetype="declaration">
 
@@ -296,19 +298,19 @@ font-style: inherit;">;</span></span>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11" data-startfrom="37" data-source-offset="0" style="background: #f1f3f5;"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 36;"><span id="cb11-37">Plot<span class="op" style="color: #5E5E5E;
+<div class="sourceCode cell-code" id="cb11" data-startfrom="38" data-source-offset="0" style="background: #f1f3f5;"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 37;"><span id="cb11-38">Plot<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">.</span><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">rectY</span>(filtered<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">,</span> </span>
-<span id="cb11-38">  Plot<span class="op" style="color: #5E5E5E;
+<span id="cb11-39">  Plot<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">.</span><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">binX</span>(</span>
-<span id="cb11-39">    {<span class="dt" style="color: #AD0000;
+<span id="cb11-40">    {<span class="dt" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">y</span><span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -317,7 +319,7 @@ background-color: null;
 font-style: inherit;">"count"</span>}<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">,</span> </span>
-<span id="cb11-40">    {<span class="dt" style="color: #AD0000;
+<span id="cb11-41">    {<span class="dt" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">x</span><span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -332,25 +334,25 @@ background-color: null;
 font-style: inherit;">:</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"species"</span>}</span>
-<span id="cb11-41">  ))</span>
-<span id="cb11-42">  <span class="op" style="color: #5E5E5E;
+<span id="cb11-42">  ))</span>
+<span id="cb11-43">  <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">.</span><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">plot</span>({</span>
-<span id="cb11-43">    <span class="dt" style="color: #AD0000;
+<span id="cb11-44">    <span class="dt" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">facet</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">:</span> {</span>
-<span id="cb11-44">      <span class="dt" style="color: #AD0000;
+<span id="cb11-45">      <span class="dt" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">data</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">:</span> filtered<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">,</span></span>
-<span id="cb11-45">      <span class="dt" style="color: #AD0000;
+<span id="cb11-46">      <span class="dt" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">x</span><span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -359,7 +361,7 @@ background-color: null;
 font-style: inherit;">"species"</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">,</span></span>
-<span id="cb11-46">      <span class="dt" style="color: #AD0000;
+<span id="cb11-47">      <span class="dt" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">y</span><span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -368,39 +370,142 @@ background-color: null;
 font-style: inherit;">"sepal_length"</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">,</span></span>
-<span id="cb11-47">      <span class="dt" style="color: #AD0000;
+<span id="cb11-48">      <span class="dt" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">marginRight</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">:</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">80</span></span>
-<span id="cb11-48">    }<span class="op" style="color: #5E5E5E;
+<span id="cb11-49">    }<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">,</span></span>
-<span id="cb11-49">    <span class="dt" style="color: #AD0000;
+<span id="cb11-50">    <span class="dt" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">marks</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">:</span> [</span>
-<span id="cb11-50">      Plot<span class="op" style="color: #5E5E5E;
+<span id="cb11-51">      Plot<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">.</span><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">frame</span>()<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">,</span></span>
-<span id="cb11-51">    ]</span>
-<span id="cb11-52">  }</span>
-<span id="cb11-53">)</span></code></pre></div>
+<span id="cb11-52">    ]</span>
+<span id="cb11-53">  }</span>
+<span id="cb11-54">)</span></code></pre></div>
 <div class="cell-output cell-output-display">
 <div id="ojs-cell-4" data-nodetype="expression">
 
 </div>
 </div>
 </div>
+</section>
+<section id="plot-2" class="level2">
+<h2 class="anchored" data-anchor-id="plot-2">Plot 2</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12" data-startfrom="59" data-source-offset="0" style="background: #f1f3f5;"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 58;"><span id="cb12-59">Plot<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">plot</span>({</span>
+<span id="cb12-60">  <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">marks</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span> [</span>
+<span id="cb12-61">    Plot<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">dot</span>(penguins<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">,</span> {<span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">x</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"culmen_length_mm"</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">,</span> <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">y</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"culmen_depth_mm"</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">,</span> <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">stroke</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"species"</span>})<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">,</span> <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">// try changing "stroke" to "fill"</span></span>
+<span id="cb12-62">    Plot<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">linearRegressionY</span>(penguins<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">,</span> {<span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">x</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"culmen_length_mm"</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">,</span> <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">y</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"culmen_depth_mm"</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">,</span> <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">stroke</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"species"</span>})</span>
+<span id="cb12-63">  ]<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">,</span></span>
+<span id="cb12-64">  <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">ariaLabel</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Penguin culmen dimensions"</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">,</span></span>
+<span id="cb12-65">  <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">ariaDescription</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Scatterplot of culmen length by culmen depth for three penguin species. Linear trendlines are added to each, revealing similar positive linear trends between culmen length and depth for chinstrap, gentoo and Adelie penguins."</span></span>
+<span id="cb12-66">})</span></code></pre></div>
+<div class="cell-output cell-output-display">
+<div id="ojs-cell-5" data-nodetype="expression">
+
+</div>
+</div>
+</div>
 
 
+</section>
 
  ]]></description>
   <category>Observable</category>
