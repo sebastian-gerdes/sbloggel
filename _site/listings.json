@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/2023-09-25-subfigures-in-quarto/2023-09-25-subfigures-in-quarto.html",
       "/posts/2023-09-25-testing-observable/2023-09-25-testing-observable.html",
       "/posts/2023-09-12-svm-code-example/2023-09-12-svm-code-example.html",
       "/posts/2023-09-07-algorithmic-study-design-possible-concepts/2023-09-07-algorithmic-study-design-possible-concepts.html",

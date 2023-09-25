@@ -1,0 +1,74 @@
+---
+title: Subfigures in quarto
+date: 2023-09-25
+categories:
+  - R
+execute:
+  echo: false
+---
+
+## Option 1
+Quelle: [Link](https://quarto.org/docs/authoring/figures.html)
+
+::: {#fig-elephants layout="[[1,1], [1]]"}
+```{r}
+#| label: fig-test-left
+#| fig-subcap: This is a test
+#| fig-height: 4
+#| fig-width: 3
+plot(1:10)
+```
+
+```{r}
+#| label: fig-test-right
+#| fig-subcap: This is another test
+#| fig-width: 3
+plot(1:10)
+```
+
+```{r}
+#| label: fig-test-bottom
+#| fig-subcap: And yet a third test
+#| fig-width: 6
+plot(10:1)
+```
+
+Famous Elephants
+:::
+
+@fig-elephants
+
+@fig-test-left
+
+@fig-test-right
+
+@fig-test-bottom
+
+```{r}
+#| label: init
+#| cache: false
+#| include: false
+library('tidyverse')
+set.seed(1)
+
+library('reticulate')
+use_condaenv('sbloggel')
+```
+
+
+## Option 2
+* Source: [Link](https://quarto.org/docs/authoring/figures.html#computations)
+```{r}
+#| layout: [[1,1], [1]]
+#| label: fig-charts
+#| fig-cap: "Charts"
+#| fig-subcap: 
+#|   - "First"
+#|   - "Second"
+#|   - "Third"
+plot(1:10)
+plot(10:1)
+plot(c(1:5, 5:1))
+```
+
+@fig-charts

@@ -12,6 +12,108 @@
 <generator>quarto-1.3.433</generator>
 <lastBuildDate>Sun, 24 Sep 2023 22:00:00 GMT</lastBuildDate>
 <item>
+  <title>Subfigures in quarto</title>
+  <link>https://sbloggel.netlify.app/posts/2023-09-25-subfigures-in-quarto/2023-09-25-subfigures-in-quarto.html</link>
+  <description><![CDATA[ 
+
+
+
+<section id="option-1" class="level2">
+<h2 class="anchored" data-anchor-id="option-1">Option 1</h2>
+<p>Quelle: <a href="https://quarto.org/docs/authoring/figures.html">Link</a></p>
+<div id="fig-elephants" class="quarto-layout-panel">
+<figure class="figure">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell-output-display">
+<div id="fig-test-left" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="https://sbloggel.netlify.app/posts/2023-09-25-subfigures-in-quarto/2023-09-25-subfigures-in-quarto_files/figure-html/fig-test-left-1.png" class="img-fluid figure-img" data-ref-parent="fig-elephants" width="288"></p>
+<figcaption class="figure-caption">(a) This is a test</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell-output-display">
+<div id="fig-test-right" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="https://sbloggel.netlify.app/posts/2023-09-25-subfigures-in-quarto/2023-09-25-subfigures-in-quarto_files/figure-html/fig-test-right-1.png" class="img-fluid figure-img" data-ref-parent="fig-elephants" width="288"></p>
+<figcaption class="figure-caption">(b) This is another test</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<div class="cell-output-display">
+<div id="fig-test-bottom" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="https://sbloggel.netlify.app/posts/2023-09-25-subfigures-in-quarto/2023-09-25-subfigures-in-quarto_files/figure-html/fig-test-bottom-1.png" class="img-fluid figure-img" data-ref-parent="fig-elephants" width="576"></p>
+<figcaption class="figure-caption">(c) And yet a third test</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<p></p><figcaption class="figure-caption">Figure&nbsp;1: Famous Elephants</figcaption><p></p>
+</figure>
+</div>
+<p>Figure&nbsp;1</p>
+<p>Figure&nbsp;1 (a)</p>
+<p>Figure&nbsp;1 (b)</p>
+<p>Figure&nbsp;1 (c)</p>
+</section>
+<section id="option-2" class="level2">
+<h2 class="anchored" data-anchor-id="option-2">Option 2</h2>
+<ul>
+<li>Source: <a href="https://quarto.org/docs/authoring/figures.html#computations">Link</a></li>
+</ul>
+<div id="fig-charts" class="cell quarto-layout-panel">
+<figure class="figure">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-charts-1" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="https://sbloggel.netlify.app/posts/2023-09-25-subfigures-in-quarto/2023-09-25-subfigures-in-quarto_files/figure-html/fig-charts-1.png" class="img-fluid figure-img" data-ref-parent="fig-charts" width="672"></p>
+<figcaption class="figure-caption">(a) First</figcaption>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-charts-2" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="https://sbloggel.netlify.app/posts/2023-09-25-subfigures-in-quarto/2023-09-25-subfigures-in-quarto_files/figure-html/fig-charts-2.png" class="img-fluid figure-img" data-ref-parent="fig-charts" width="672"></p>
+<figcaption class="figure-caption">(b) Second</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 100.0%;justify-content: center;">
+<div id="fig-charts-3" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="https://sbloggel.netlify.app/posts/2023-09-25-subfigures-in-quarto/2023-09-25-subfigures-in-quarto_files/figure-html/fig-charts-3.png" class="img-fluid figure-img" data-ref-parent="fig-charts" width="672"></p>
+<figcaption class="figure-caption">(c) Third</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p></p><figcaption class="figure-caption">Figure&nbsp;2: Charts</figcaption><p></p>
+</figure>
+</div>
+<p>Figure&nbsp;2</p>
+
+
+</section>
+
+ ]]></description>
+  <category>R</category>
+  <guid>https://sbloggel.netlify.app/posts/2023-09-25-subfigures-in-quarto/2023-09-25-subfigures-in-quarto.html</guid>
+  <pubDate>Sun, 24 Sep 2023 22:00:00 GMT</pubDate>
+</item>
+<item>
   <title>Testing Observable</title>
   <link>https://sbloggel.netlify.app/posts/2023-09-25-testing-observable/2023-09-25-testing-observable.html</link>
   <description><![CDATA[ 
@@ -7165,670 +7267,6 @@ font-style: inherit;">"'</span>)</span></code></pre></div>
   <category>Python</category>
   <guid>https://sbloggel.netlify.app/posts/2023-07-21-first-pytorch-tutorial/2023-07-21-first-pytorch-tutorial.html</guid>
   <pubDate>Thu, 20 Jul 2023 22:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Starting with fastai</title>
-  <link>https://sbloggel.netlify.app/posts/2023-07-20-starting-with-fastai/2023-07-20-starting-with-fastai.html</link>
-  <description><![CDATA[ 
-
-
-
-<ul>
-<li><a href="https://course.fast.ai/Resources/book.html">Link to the book</a></li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'tidyverse'</span>)</span></code></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.1.2     ✔ readr     2.1.4
-✔ forcats   1.0.0     ✔ stringr   1.5.0
-✔ ggplot2   3.4.2     ✔ tibble    3.2.1
-✔ lubridate 1.9.2     ✔ tidyr     1.3.0
-✔ purrr     1.0.1     
-── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-✖ dplyr::filter() masks stats::filter()
-✖ dplyr::lag()    masks stats::lag()
-ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">set.seed</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>)</span>
-<span id="cb3-2"></span>
-<span id="cb3-3"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'reticulate'</span>)</span>
-<span id="cb3-4"></span>
-<span id="cb3-5"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># conda_create('machine_learning')</span></span>
-<span id="cb3-6"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">use_condaenv</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'machine_learning'</span>)</span>
-<span id="cb3-7"></span>
-<span id="cb3-8"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># conda_install('machine_learning', 'fastai')</span></span>
-<span id="cb3-9"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># conda_install('machine_learning', 'torchvision')</span></span>
-<span id="cb3-10"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># conda_install('machine_learning', 'pytorch')</span></span></code></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">#id first_training</span></span>
-<span id="cb4-2"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">#caption Results from the first training</span></span>
-<span id="cb4-3"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># CLICK ME</span></span>
-<span id="cb4-4"></span>
-<span id="cb4-5"></span>
-<span id="cb4-6"><span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">import</span> torch</span>
-<span id="cb4-7">x <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> torch.rand(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">5</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span>)</span>
-<span id="cb4-8"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(x)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>tensor([[0.7172, 0.8668, 0.7743],
-        [0.0462, 0.2161, 0.4469],
-        [0.2911, 0.3335, 0.2292],
-        [0.1917, 0.9395, 0.4347],
-        [0.9052, 0.2584, 0.6975]])</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">from</span> fastai.vision.<span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">all</span> <span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">import</span> <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span></span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>/Users/seb/Library/r-miniconda-arm64/envs/machine_learning/lib/python3.9/site-packages/torchvision/io/image.py:13: UserWarning: Failed to load image Python extension: 'dlopen(/Users/seb/Library/r-miniconda-arm64/envs/machine_learning/lib/python3.9/site-packages/torchvision/image.so, 0x0006): Symbol not found: __ZN3c106detail19maybe_wrap_dim_slowIxEET_S2_S2_b
-  Referenced from: &lt;8CBD0B78-6C7C-3C8B-8C76-ACA7B6112818&gt; /Users/seb/Library/r-miniconda-arm64/envs/machine_learning/lib/python3.9/site-packages/torchvision/image.so
-  Expected in:     &lt;07CB8E54-8386-3606-A01E-B92223F93B74&gt; /Users/seb/Library/r-miniconda-arm64/envs/machine_learning/lib/python3.9/site-packages/torch/lib/libc10.dylib'If you don't plan on using image functionality from `torchvision.io`, you can ignore this warning. Otherwise, there might be something wrong with your environment. Did you have `libjpeg` or `libpng` installed before building `torchvision` from source?
-  warn(</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1">path <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> untar_data(URLs.PETS)<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'images'</span></span>
-<span id="cb8-2"></span>
-<span id="cb8-3"><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">def</span> is_cat(x): <span class="cf" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">return</span> x[<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>].isupper()</span>
-<span id="cb8-4">dls <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> ImageDataLoaders.from_name_func(</span>
-<span id="cb8-5">    path, get_image_files(path), valid_pct<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.2</span>, seed<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">42</span>,</span>
-<span id="cb8-6">    label_func<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span>is_cat, item_tfms<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span>Resize(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">224</span>))</span>
-<span id="cb8-7"></span>
-<span id="cb8-8">learn <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> vision_learner(dls, resnet34, metrics<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span>error_rate)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>/Users/seb/Library/r-miniconda-arm64/envs/machine_learning/lib/python3.9/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
-  warnings.warn(
-/Users/seb/Library/r-miniconda-arm64/envs/machine_learning/lib/python3.9/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=ResNet34_Weights.IMAGENET1K_V1`. You can also use `weights=ResNet34_Weights.DEFAULT` to get the most up-to-date weights.
-  warnings.warn(msg)</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1">learn.fine_tune(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>█
-epoch     train_loss  valid_loss  error_rate  time    
-█
-
-Epoch 1/1 : |----------------------------------------| 0.00% [0/92 00:00&lt;?]
-
-Epoch 1/1 : |----------------------------------------| 1.09% [1/92 00:05&lt;07:54]
-
-Epoch 1/1 : |----------------------------------------| 2.17% [2/92 00:05&lt;04:20 1.4611]
-
-Epoch 1/1 : |█---------------------------------------| 3.26% [3/92 00:06&lt;03:08 1.4571]
-
-Epoch 1/1 : |█---------------------------------------| 4.35% [4/92 00:06&lt;02:32 1.5097]
-
-Epoch 1/1 : |██--------------------------------------| 5.43% [5/92 00:07&lt;02:11 1.4588]
-
-Epoch 1/1 : |██--------------------------------------| 6.52% [6/92 00:08&lt;01:56 1.4491]
-
-Epoch 1/1 : |███-------------------------------------| 7.61% [7/92 00:08&lt;01:46 1.3571]
-
-Epoch 1/1 : |███-------------------------------------| 8.70% [8/92 00:09&lt;01:37 1.3298]
-
-Epoch 1/1 : |███-------------------------------------| 9.78% [9/92 00:09&lt;01:31 1.2889]
-
-Epoch 1/1 : |████------------------------------------| 10.87% [10/92 00:10&lt;01:25 1.2722]
-
-Epoch 1/1 : |████------------------------------------| 11.96% [11/92 00:11&lt;01:21 1.2364]
-
-Epoch 1/1 : |█████-----------------------------------| 13.04% [12/92 00:11&lt;01:17 1.1908]
-
-Epoch 1/1 : |█████-----------------------------------| 14.13% [13/92 00:12&lt;01:14 1.1453]
-
-Epoch 1/1 : |██████----------------------------------| 15.22% [14/92 00:12&lt;01:11 1.1057]
-
-Epoch 1/1 : |██████----------------------------------| 16.30% [15/92 00:13&lt;01:08 1.0928]
-
-Epoch 1/1 : |██████----------------------------------| 17.39% [16/92 00:13&lt;01:06 1.0707]
-
-Epoch 1/1 : |███████---------------------------------| 18.48% [17/92 00:14&lt;01:04 1.0227]
-
-Epoch 1/1 : |███████---------------------------------| 19.57% [18/92 00:15&lt;01:02 1.0178]
-
-Epoch 1/1 : |████████--------------------------------| 20.65% [19/92 00:15&lt;01:00 0.9841]
-
-Epoch 1/1 : |████████--------------------------------| 21.74% [20/92 00:16&lt;00:58 0.9457]
-
-Epoch 1/1 : |█████████-------------------------------| 22.83% [21/92 00:16&lt;00:57 0.9079]
-
-Epoch 1/1 : |█████████-------------------------------| 23.91% [22/92 00:17&lt;00:55 0.8819]
-
-Epoch 1/1 : |██████████------------------------------| 25.00% [23/92 00:18&lt;00:54 0.8478]
-
-Epoch 1/1 : |██████████------------------------------| 26.09% [24/92 00:18&lt;00:52 0.8204]
-
-Epoch 1/1 : |██████████------------------------------| 27.17% [25/92 00:19&lt;00:51 0.7875]
-
-Epoch 1/1 : |███████████-----------------------------| 28.26% [26/92 00:19&lt;00:50 0.7594]
-
-Epoch 1/1 : |███████████-----------------------------| 29.35% [27/92 00:20&lt;00:48 0.7458]
-
-Epoch 1/1 : |████████████----------------------------| 30.43% [28/92 00:20&lt;00:47 0.7307]
-
-Epoch 1/1 : |████████████----------------------------| 31.52% [29/92 00:21&lt;00:46 0.7085]
-
-Epoch 1/1 : |█████████████---------------------------| 32.61% [30/92 00:22&lt;00:45 0.6856]
-
-Epoch 1/1 : |█████████████---------------------------| 33.70% [31/92 00:22&lt;00:44 0.6655]
-
-Epoch 1/1 : |█████████████---------------------------| 34.78% [32/92 00:23&lt;00:43 0.6427]
-
-Epoch 1/1 : |██████████████--------------------------| 35.87% [33/92 00:23&lt;00:42 0.6247]
-
-Epoch 1/1 : |██████████████--------------------------| 36.96% [34/92 00:24&lt;00:41 0.6038]
-
-Epoch 1/1 : |███████████████-------------------------| 38.04% [35/92 00:24&lt;00:40 0.5811]
-
-Epoch 1/1 : |███████████████-------------------------| 39.13% [36/92 00:25&lt;00:39 0.5666]
-
-Epoch 1/1 : |████████████████------------------------| 40.22% [37/92 00:25&lt;00:38 0.5499]
-
-Epoch 1/1 : |████████████████------------------------| 41.30% [38/92 00:26&lt;00:37 0.5333]
-
-Epoch 1/1 : |████████████████------------------------| 42.39% [39/92 00:27&lt;00:36 0.5166]
-
-Epoch 1/1 : |█████████████████-----------------------| 43.48% [40/92 00:27&lt;00:35 0.4998]
-
-Epoch 1/1 : |█████████████████-----------------------| 44.57% [41/92 00:28&lt;00:35 0.4840]
-
-Epoch 1/1 : |██████████████████----------------------| 45.65% [42/92 00:28&lt;00:34 0.4746]
-
-Epoch 1/1 : |██████████████████----------------------| 46.74% [43/92 00:29&lt;00:33 0.4632]
-
-Epoch 1/1 : |███████████████████---------------------| 47.83% [44/92 00:29&lt;00:32 0.4558]
-
-Epoch 1/1 : |███████████████████---------------------| 48.91% [45/92 00:30&lt;00:31 0.4430]
-
-Epoch 1/1 : |████████████████████--------------------| 50.00% [46/92 00:30&lt;00:30 0.4459]
-
-Epoch 1/1 : |████████████████████--------------------| 51.09% [47/92 00:31&lt;00:30 0.4323]
-
-Epoch 1/1 : |████████████████████--------------------| 52.17% [48/92 00:32&lt;00:29 0.4198]
-
-Epoch 1/1 : |█████████████████████-------------------| 53.26% [49/92 00:32&lt;00:28 0.4096]
-
-Epoch 1/1 : |█████████████████████-------------------| 54.35% [50/92 00:33&lt;00:27 0.3991]
-
-Epoch 1/1 : |██████████████████████------------------| 55.43% [51/92 00:33&lt;00:27 0.3871]
-
-Epoch 1/1 : |██████████████████████------------------| 56.52% [52/92 00:34&lt;00:26 0.3804]
-
-Epoch 1/1 : |███████████████████████-----------------| 57.61% [53/92 00:34&lt;00:25 0.3694]
-
-Epoch 1/1 : |███████████████████████-----------------| 58.70% [54/92 00:35&lt;00:24 0.3596]
-
-Epoch 1/1 : |███████████████████████-----------------| 59.78% [55/92 00:35&lt;00:24 0.3558]
-
-Epoch 1/1 : |████████████████████████----------------| 60.87% [56/92 00:36&lt;00:23 0.3468]
-
-Epoch 1/1 : |████████████████████████----------------| 61.96% [57/92 00:37&lt;00:22 0.3376]
-
-Epoch 1/1 : |█████████████████████████---------------| 63.04% [58/92 00:37&lt;00:22 0.3308]
-
-Epoch 1/1 : |█████████████████████████---------------| 64.13% [59/92 00:38&lt;00:21 0.3219]
-
-Epoch 1/1 : |██████████████████████████--------------| 65.22% [60/92 00:38&lt;00:20 0.3154]
-
-Epoch 1/1 : |██████████████████████████--------------| 66.30% [61/92 00:39&lt;00:20 0.3070]
-
-Epoch 1/1 : |██████████████████████████--------------| 67.39% [62/92 00:39&lt;00:19 0.2997]
-
-Epoch 1/1 : |███████████████████████████-------------| 68.48% [63/92 00:40&lt;00:18 0.2921]
-
-Epoch 1/1 : |███████████████████████████-------------| 69.57% [64/92 00:41&lt;00:17 0.2911]
-
-Epoch 1/1 : |████████████████████████████------------| 70.65% [65/92 00:41&lt;00:17 0.2831]
-
-Epoch 1/1 : |████████████████████████████------------| 71.74% [66/92 00:42&lt;00:16 0.2813]
-
-Epoch 1/1 : |█████████████████████████████-----------| 72.83% [67/92 00:42&lt;00:15 0.2766]
-
-Epoch 1/1 : |█████████████████████████████-----------| 73.91% [68/92 00:43&lt;00:15 0.2695]
-
-Epoch 1/1 : |██████████████████████████████----------| 75.00% [69/92 00:43&lt;00:14 0.2640]
-
-Epoch 1/1 : |██████████████████████████████----------| 76.09% [70/92 00:44&lt;00:13 0.2586]
-
-Epoch 1/1 : |██████████████████████████████----------| 77.17% [71/92 00:44&lt;00:13 0.2522]
-
-Epoch 1/1 : |███████████████████████████████---------| 78.26% [72/92 00:45&lt;00:12 0.2456]
-
-Epoch 1/1 : |███████████████████████████████---------| 79.35% [73/92 00:46&lt;00:12 0.2398]
-
-Epoch 1/1 : |████████████████████████████████--------| 80.43% [74/92 00:46&lt;00:11 0.2364]
-
-Epoch 1/1 : |████████████████████████████████--------| 81.52% [75/92 00:47&lt;00:10 0.2304]
-
-Epoch 1/1 : |█████████████████████████████████-------| 82.61% [76/92 00:47&lt;00:10 0.2249]
-
-Epoch 1/1 : |█████████████████████████████████-------| 83.70% [77/92 00:48&lt;00:09 0.2200]
-
-Epoch 1/1 : |█████████████████████████████████-------| 84.78% [78/92 00:48&lt;00:08 0.2168]
-
-Epoch 1/1 : |██████████████████████████████████------| 85.87% [79/92 00:49&lt;00:08 0.2143]
-
-Epoch 1/1 : |██████████████████████████████████------| 86.96% [80/92 00:50&lt;00:07 0.2101]
-
-Epoch 1/1 : |███████████████████████████████████-----| 88.04% [81/92 00:50&lt;00:06 0.2057]
-
-Epoch 1/1 : |███████████████████████████████████-----| 89.13% [82/92 00:51&lt;00:06 0.2008]
-
-Epoch 1/1 : |████████████████████████████████████----| 90.22% [83/92 00:51&lt;00:05 0.1978]
-
-Epoch 1/1 : |████████████████████████████████████----| 91.30% [84/92 00:52&lt;00:04 0.1937]
-
-Epoch 1/1 : |████████████████████████████████████----| 92.39% [85/92 00:52&lt;00:04 0.1925]
-
-Epoch 1/1 : |█████████████████████████████████████---| 93.48% [86/92 00:53&lt;00:03 0.1879]
-
-Epoch 1/1 : |█████████████████████████████████████---| 94.57% [87/92 00:54&lt;00:03 0.1834]
-
-Epoch 1/1 : |██████████████████████████████████████--| 95.65% [88/92 00:54&lt;00:02 0.1834]
-
-Epoch 1/1 : |██████████████████████████████████████--| 96.74% [89/92 00:55&lt;00:01 0.1855]
-
-Epoch 1/1 : |███████████████████████████████████████-| 97.83% [90/92 00:55&lt;00:01 0.1848]
-
-Epoch 1/1 : |███████████████████████████████████████-| 98.91% [91/92 00:56&lt;00:00 0.1809]
-
-Epoch 1/1 : |████████████████████████████████████████| 100.00% [92/92 00:56&lt;00:00 0.1839]
-
-Epoch 1/1 :                                                                              
-
-Epoch 1/1 :                                                                              
-█
-
-Epoch 1/1 : |----------------------------------------| 0.00% [0/24 00:00&lt;?]
-
-Epoch 1/1 : |█---------------------------------------| 4.17% [1/24 00:00&lt;00:10]
-
-Epoch 1/1 : |███-------------------------------------| 8.33% [2/24 00:00&lt;00:08 0.1796]
-
-Epoch 1/1 : |█████-----------------------------------| 12.50% [3/24 00:01&lt;00:08 0.1796]
-
-Epoch 1/1 : |██████----------------------------------| 16.67% [4/24 00:01&lt;00:07 0.1796]
-
-Epoch 1/1 : |████████--------------------------------| 20.83% [5/24 00:01&lt;00:07 0.1796]
-
-Epoch 1/1 : |██████████------------------------------| 25.00% [6/24 00:02&lt;00:06 0.1796]
-
-Epoch 1/1 : |███████████-----------------------------| 29.17% [7/24 00:02&lt;00:06 0.1796]
-
-Epoch 1/1 : |█████████████---------------------------| 33.33% [8/24 00:02&lt;00:05 0.1796]
-
-Epoch 1/1 : |███████████████-------------------------| 37.50% [9/24 00:03&lt;00:05 0.1796]
-
-Epoch 1/1 : |████████████████------------------------| 41.67% [10/24 00:03&lt;00:05 0.1796]
-
-Epoch 1/1 : |██████████████████----------------------| 45.83% [11/24 00:03&lt;00:04 0.1796]
-
-Epoch 1/1 : |████████████████████--------------------| 50.00% [12/24 00:04&lt;00:04 0.1796]
-
-Epoch 1/1 : |█████████████████████-------------------| 54.17% [13/24 00:04&lt;00:03 0.1796]
-
-Epoch 1/1 : |███████████████████████-----------------| 58.33% [14/24 00:05&lt;00:03 0.1796]
-
-Epoch 1/1 : |█████████████████████████---------------| 62.50% [15/24 00:05&lt;00:03 0.1796]
-
-Epoch 1/1 : |██████████████████████████--------------| 66.67% [16/24 00:05&lt;00:02 0.1796]
-
-Epoch 1/1 : |████████████████████████████------------| 70.83% [17/24 00:06&lt;00:02 0.1796]
-
-Epoch 1/1 : |██████████████████████████████----------| 75.00% [18/24 00:06&lt;00:02 0.1796]
-
-Epoch 1/1 : |███████████████████████████████---------| 79.17% [19/24 00:06&lt;00:01 0.1796]
-
-Epoch 1/1 : |█████████████████████████████████-------| 83.33% [20/24 00:07&lt;00:01 0.1796]
-
-Epoch 1/1 : |███████████████████████████████████-----| 87.50% [21/24 00:07&lt;00:01 0.1796]
-
-Epoch 1/1 : |████████████████████████████████████----| 91.67% [22/24 00:08&lt;00:00 0.1796]
-
-Epoch 1/1 : |██████████████████████████████████████--| 95.83% [23/24 00:08&lt;00:00 0.1796]
-
-Epoch 1/1 : |████████████████████████████████████████| 100.00% [24/24 00:08&lt;00:00 0.1796]
-
-Epoch 1/1 :                                                                              
-
-Epoch 1/1 :                                                                              
-0         0.179568    0.032552    0.012855    01:05     
-█
-epoch     train_loss  valid_loss  error_rate  time    
-█
-
-Epoch 1/1 : |----------------------------------------| 0.00% [0/92 00:00&lt;?]
-
-Epoch 1/1 : |----------------------------------------| 1.09% [1/92 00:01&lt;02:29]
-
-Epoch 1/1 : |----------------------------------------| 2.17% [2/92 00:02&lt;01:51 0.1797]
-
-Epoch 1/1 : |█---------------------------------------| 3.26% [3/92 00:03&lt;01:38 0.1064]
-
-Epoch 1/1 : |█---------------------------------------| 4.35% [4/92 00:04&lt;01:30 0.0731]
-
-Epoch 1/1 : |██--------------------------------------| 5.43% [5/92 00:04&lt;01:26 0.0828]
-
-Epoch 1/1 : |██--------------------------------------| 6.52% [6/92 00:05&lt;01:22 0.0750]
-
-Epoch 1/1 : |███-------------------------------------| 7.61% [7/92 00:06&lt;01:20 0.0639]
-
-Epoch 1/1 : |███-------------------------------------| 8.70% [8/92 00:07&lt;01:17 0.0550]
-
-Epoch 1/1 : |███-------------------------------------| 9.78% [9/92 00:08&lt;01:16 0.0483]
-
-Epoch 1/1 : |████------------------------------------| 10.87% [10/92 00:09&lt;01:14 0.0460]
-
-Epoch 1/1 : |████------------------------------------| 11.96% [11/92 00:09&lt;01:13 0.0580]
-
-Epoch 1/1 : |█████-----------------------------------| 13.04% [12/92 00:10&lt;01:11 0.0529]
-
-Epoch 1/1 : |█████-----------------------------------| 14.13% [13/92 00:11&lt;01:10 0.0525]
-
-Epoch 1/1 : |██████----------------------------------| 15.22% [14/92 00:12&lt;01:09 0.0680]
-
-Epoch 1/1 : |██████----------------------------------| 16.30% [15/92 00:13&lt;01:07 0.0632]
-
-Epoch 1/1 : |██████----------------------------------| 17.39% [16/92 00:14&lt;01:06 0.0612]
-
-Epoch 1/1 : |███████---------------------------------| 18.48% [17/92 00:14&lt;01:05 0.0966]
-
-Epoch 1/1 : |███████---------------------------------| 19.57% [18/92 00:15&lt;01:04 0.0946]
-
-Epoch 1/1 : |████████--------------------------------| 20.65% [19/92 00:16&lt;01:03 0.0967]
-
-Epoch 1/1 : |████████--------------------------------| 21.74% [20/92 00:17&lt;01:02 0.1005]
-
-Epoch 1/1 : |█████████-------------------------------| 22.83% [21/92 00:18&lt;01:01 0.0976]
-
-Epoch 1/1 : |█████████-------------------------------| 23.91% [22/92 00:19&lt;01:00 0.0920]
-
-Epoch 1/1 : |██████████------------------------------| 25.00% [23/92 00:19&lt;00:59 0.0877]
-
-Epoch 1/1 : |██████████------------------------------| 26.09% [24/92 00:20&lt;00:58 0.0830]
-
-Epoch 1/1 : |██████████------------------------------| 27.17% [25/92 00:21&lt;00:57 0.0832]
-
-Epoch 1/1 : |███████████-----------------------------| 28.26% [26/92 00:22&lt;00:56 0.0834]
-
-Epoch 1/1 : |███████████-----------------------------| 29.35% [27/92 00:23&lt;00:56 0.0868]
-
-Epoch 1/1 : |████████████----------------------------| 30.43% [28/92 00:24&lt;00:55 0.0931]
-
-Epoch 1/1 : |████████████----------------------------| 31.52% [29/92 00:24&lt;00:54 0.0893]
-
-Epoch 1/1 : |█████████████---------------------------| 32.61% [30/92 00:25&lt;00:53 0.0865]
-
-Epoch 1/1 : |█████████████---------------------------| 33.70% [31/92 00:26&lt;00:52 0.0861]
-
-Epoch 1/1 : |█████████████---------------------------| 34.78% [32/92 00:27&lt;00:51 0.0888]
-
-Epoch 1/1 : |██████████████--------------------------| 35.87% [33/92 00:28&lt;00:50 0.0852]
-
-Epoch 1/1 : |██████████████--------------------------| 36.96% [34/92 00:29&lt;00:49 0.0883]
-
-Epoch 1/1 : |███████████████-------------------------| 38.04% [35/92 00:29&lt;00:48 0.0849]
-
-Epoch 1/1 : |███████████████-------------------------| 39.13% [36/92 00:30&lt;00:47 0.0865]
-
-Epoch 1/1 : |████████████████------------------------| 40.22% [37/92 00:31&lt;00:47 0.0887]
-
-Epoch 1/1 : |████████████████------------------------| 41.30% [38/92 00:32&lt;00:46 0.0949]
-
-Epoch 1/1 : |████████████████------------------------| 42.39% [39/92 00:33&lt;00:45 0.0992]
-
-Epoch 1/1 : |█████████████████-----------------------| 43.48% [40/92 00:34&lt;00:44 0.0956]
-
-Epoch 1/1 : |█████████████████-----------------------| 44.57% [41/92 00:34&lt;00:43 0.0950]
-
-Epoch 1/1 : |██████████████████----------------------| 45.65% [42/92 00:35&lt;00:42 0.0925]
-
-Epoch 1/1 : |██████████████████----------------------| 46.74% [43/92 00:36&lt;00:41 0.0915]
-
-Epoch 1/1 : |███████████████████---------------------| 47.83% [44/92 00:37&lt;00:40 0.0920]
-
-Epoch 1/1 : |███████████████████---------------------| 48.91% [45/92 00:38&lt;00:39 0.0902]
-
-Epoch 1/1 : |████████████████████--------------------| 50.00% [46/92 00:39&lt;00:39 0.0919]
-
-Epoch 1/1 : |████████████████████--------------------| 51.09% [47/92 00:39&lt;00:38 0.1026]
-
-Epoch 1/1 : |████████████████████--------------------| 52.17% [48/92 00:40&lt;00:37 0.1011]
-
-Epoch 1/1 : |█████████████████████-------------------| 53.26% [49/92 00:41&lt;00:36 0.0981]
-
-Epoch 1/1 : |█████████████████████-------------------| 54.35% [50/92 00:42&lt;00:35 0.1058]
-
-Epoch 1/1 : |██████████████████████------------------| 55.43% [51/92 00:43&lt;00:34 0.1025]
-
-Epoch 1/1 : |██████████████████████------------------| 56.52% [52/92 00:44&lt;00:33 0.1030]
-
-Epoch 1/1 : |███████████████████████-----------------| 57.61% [53/92 00:44&lt;00:33 0.1020]
-
-Epoch 1/1 : |███████████████████████-----------------| 58.70% [54/92 00:45&lt;00:32 0.1046]
-
-Epoch 1/1 : |███████████████████████-----------------| 59.78% [55/92 00:46&lt;00:31 0.1033]
-
-Epoch 1/1 : |████████████████████████----------------| 60.87% [56/92 00:47&lt;00:30 0.1014]
-
-Epoch 1/1 : |████████████████████████----------------| 61.96% [57/92 00:48&lt;00:29 0.0984]
-
-Epoch 1/1 : |█████████████████████████---------------| 63.04% [58/92 00:49&lt;00:28 0.0960]
-
-Epoch 1/1 : |█████████████████████████---------------| 64.13% [59/92 00:49&lt;00:27 0.0944]
-
-Epoch 1/1 : |██████████████████████████--------------| 65.22% [60/92 00:50&lt;00:27 0.0969]
-
-Epoch 1/1 : |██████████████████████████--------------| 66.30% [61/92 00:51&lt;00:26 0.0946]
-
-Epoch 1/1 : |██████████████████████████--------------| 67.39% [62/92 00:52&lt;00:25 0.0945]
-
-Epoch 1/1 : |███████████████████████████-------------| 68.48% [63/92 00:53&lt;00:24 0.0930]
-
-Epoch 1/1 : |███████████████████████████-------------| 69.57% [64/92 00:54&lt;00:23 0.0931]
-
-Epoch 1/1 : |████████████████████████████------------| 70.65% [65/92 00:54&lt;00:22 0.0908]
-
-Epoch 1/1 : |████████████████████████████------------| 71.74% [66/92 00:55&lt;00:21 0.0884]
-
-Epoch 1/1 : |█████████████████████████████-----------| 72.83% [67/92 00:56&lt;00:21 0.0871]
-
-Epoch 1/1 : |█████████████████████████████-----------| 73.91% [68/92 00:57&lt;00:20 0.0861]
-
-Epoch 1/1 : |██████████████████████████████----------| 75.00% [69/92 00:58&lt;00:19 0.0839]
-
-Epoch 1/1 : |██████████████████████████████----------| 76.09% [70/92 00:59&lt;00:18 0.0831]
-
-Epoch 1/1 : |██████████████████████████████----------| 77.17% [71/92 01:00&lt;00:17 0.0838]
-
-Epoch 1/1 : |███████████████████████████████---------| 78.26% [72/92 01:00&lt;00:16 0.0848]
-
-Epoch 1/1 : |███████████████████████████████---------| 79.35% [73/92 01:01&lt;00:16 0.0865]
-
-Epoch 1/1 : |████████████████████████████████--------| 80.43% [74/92 01:02&lt;00:15 0.0885]
-
-Epoch 1/1 : |████████████████████████████████--------| 81.52% [75/92 01:03&lt;00:14 0.0864]
-
-Epoch 1/1 : |█████████████████████████████████-------| 82.61% [76/92 01:04&lt;00:13 0.0872]
-
-Epoch 1/1 : |█████████████████████████████████-------| 83.70% [77/92 01:05&lt;00:12 0.0859]
-
-Epoch 1/1 : |█████████████████████████████████-------| 84.78% [78/92 01:06&lt;00:11 0.0837]
-
-Epoch 1/1 : |██████████████████████████████████------| 85.87% [79/92 01:07&lt;00:11 0.0838]
-
-Epoch 1/1 : |██████████████████████████████████------| 86.96% [80/92 01:07&lt;00:10 0.0828]
-
-Epoch 1/1 : |███████████████████████████████████-----| 88.04% [81/92 01:08&lt;00:09 0.0814]
-
-Epoch 1/1 : |███████████████████████████████████-----| 89.13% [82/92 01:09&lt;00:08 0.0795]
-
-Epoch 1/1 : |████████████████████████████████████----| 90.22% [83/92 01:10&lt;00:07 0.0776]
-
-Epoch 1/1 : |████████████████████████████████████----| 91.30% [84/92 01:11&lt;00:06 0.0795]
-
-Epoch 1/1 : |████████████████████████████████████----| 92.39% [85/92 01:12&lt;00:05 0.0781]
-
-Epoch 1/1 : |█████████████████████████████████████---| 93.48% [86/92 01:13&lt;00:05 0.0765]
-
-Epoch 1/1 : |█████████████████████████████████████---| 94.57% [87/92 01:13&lt;00:04 0.0749]
-
-Epoch 1/1 : |██████████████████████████████████████--| 95.65% [88/92 01:14&lt;00:03 0.0731]
-
-Epoch 1/1 : |██████████████████████████████████████--| 96.74% [89/92 01:15&lt;00:02 0.0732]
-
-Epoch 1/1 : |███████████████████████████████████████-| 97.83% [90/92 01:16&lt;00:01 0.0729]
-
-Epoch 1/1 : |███████████████████████████████████████-| 98.91% [91/92 01:17&lt;00:00 0.0712]
-
-Epoch 1/1 : |████████████████████████████████████████| 100.00% [92/92 01:18&lt;00:00 0.0702]
-
-Epoch 1/1 :                                                                              
-
-Epoch 1/1 :                                                                              
-█
-
-Epoch 1/1 : |----------------------------------------| 0.00% [0/24 00:00&lt;?]
-
-Epoch 1/1 : |█---------------------------------------| 4.17% [1/24 00:00&lt;00:08]
-
-Epoch 1/1 : |███-------------------------------------| 8.33% [2/24 00:00&lt;00:08 0.0691]
-
-Epoch 1/1 : |█████-----------------------------------| 12.50% [3/24 00:01&lt;00:07 0.0691]
-
-Epoch 1/1 : |██████----------------------------------| 16.67% [4/24 00:01&lt;00:07 0.0691]
-
-Epoch 1/1 : |████████--------------------------------| 20.83% [5/24 00:01&lt;00:07 0.0691]
-
-Epoch 1/1 : |██████████------------------------------| 25.00% [6/24 00:02&lt;00:06 0.0691]
-
-Epoch 1/1 : |███████████-----------------------------| 29.17% [7/24 00:02&lt;00:06 0.0691]
-
-Epoch 1/1 : |█████████████---------------------------| 33.33% [8/24 00:02&lt;00:05 0.0691]
-
-Epoch 1/1 : |███████████████-------------------------| 37.50% [9/24 00:03&lt;00:05 0.0691]
-
-Epoch 1/1 : |████████████████------------------------| 41.67% [10/24 00:03&lt;00:05 0.0691]
-
-Epoch 1/1 : |██████████████████----------------------| 45.83% [11/24 00:03&lt;00:04 0.0691]
-
-Epoch 1/1 : |████████████████████--------------------| 50.00% [12/24 00:04&lt;00:04 0.0691]
-
-Epoch 1/1 : |█████████████████████-------------------| 54.17% [13/24 00:04&lt;00:04 0.0691]
-
-Epoch 1/1 : |███████████████████████-----------------| 58.33% [14/24 00:05&lt;00:03 0.0691]
-
-Epoch 1/1 : |█████████████████████████---------------| 62.50% [15/24 00:05&lt;00:03 0.0691]
-
-Epoch 1/1 : |██████████████████████████--------------| 66.67% [16/24 00:05&lt;00:02 0.0691]
-
-Epoch 1/1 : |████████████████████████████------------| 70.83% [17/24 00:06&lt;00:02 0.0691]
-
-Epoch 1/1 : |██████████████████████████████----------| 75.00% [18/24 00:06&lt;00:02 0.0691]
-
-Epoch 1/1 : |███████████████████████████████---------| 79.17% [19/24 00:07&lt;00:01 0.0691]
-
-Epoch 1/1 : |█████████████████████████████████-------| 83.33% [20/24 00:07&lt;00:01 0.0691]
-
-Epoch 1/1 : |███████████████████████████████████-----| 87.50% [21/24 00:07&lt;00:01 0.0691]
-
-Epoch 1/1 : |████████████████████████████████████----| 91.67% [22/24 00:08&lt;00:00 0.0691]
-
-Epoch 1/1 : |██████████████████████████████████████--| 95.83% [23/24 00:08&lt;00:00 0.0691]
-
-Epoch 1/1 : |████████████████████████████████████████| 100.00% [24/24 00:08&lt;00:00 0.0691]
-
-Epoch 1/1 :                                                                              
-
-Epoch 1/1 :                                                                              
-0         0.069070    0.013186    0.004736    01:26     </code></pre>
-</div>
-</div>
-
-
-
- ]]></description>
-  <category>Python</category>
-  <guid>https://sbloggel.netlify.app/posts/2023-07-20-starting-with-fastai/2023-07-20-starting-with-fastai.html</guid>
-  <pubDate>Wed, 19 Jul 2023 22:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
