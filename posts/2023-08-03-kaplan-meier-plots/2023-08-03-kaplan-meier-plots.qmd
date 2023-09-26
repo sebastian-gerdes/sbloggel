@@ -100,3 +100,19 @@ gg$plot + facet_wrap(vars(sex)) + theme_gray() +
 
 ```
 
+## With ggsurvfit
+* Link to package: [Link](https://www.danieldsjoberg.com/ggsurvfit/index.html)
+* I found this package later -- I don't know why I haven't across it earlier
+* At first glance, it seams actively maintained and seems to produce really nice plots
+
+```{r}
+library('ggsurvfit')
+glimpse(df_colon)
+
+survfit2(Surv(time, status) ~ surg, data = df_colon) |>
+  ggsurvfit(linewidth = 1) +
+  add_confidence_interval() +
+  add_risktable() +
+  add_quantile(y_value = 0.6, color = "gray50", linewidth = 0.75)
+```
+

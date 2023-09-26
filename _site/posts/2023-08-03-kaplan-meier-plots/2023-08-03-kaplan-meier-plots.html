@@ -162,6 +162,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#show-possible-problem-in-survminer" id="toc-show-possible-problem-in-survminer" class="nav-link" data-scroll-target="#show-possible-problem-in-survminer">Show possible problem in survminer</a></li>
   <li><a href="#try-to-help-someone" id="toc-try-to-help-someone" class="nav-link" data-scroll-target="#try-to-help-someone">Try to help someone</a></li>
   </ul></li>
+  <li><a href="#with-ggsurvfit" id="toc-with-ggsurvfit" class="nav-link" data-scroll-target="#with-ggsurvfit">With ggsurvfit</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/sebastian-gerdes/sbloggel/blob/main/posts/2023-08-03-kaplan-meier-plots/2023-08-03-kaplan-meier-plots.qmd" class="toc-action">View source</a></p></div></div></nav>
     </div>
@@ -384,9 +385,47 @@ Attaching package: 'survminer'</code></pre>
 <p><img src="2023-08-03-kaplan-meier-plots_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-
-
 </section>
+</section>
+<section id="with-ggsurvfit" class="level2">
+<h2 class="anchored" data-anchor-id="with-ggsurvfit">With ggsurvfit</h2>
+<ul>
+<li>Link to package: <a href="https://www.danieldsjoberg.com/ggsurvfit/index.html">Link</a></li>
+<li>I found this package later – I don’t know why I haven’t across it earlier</li>
+<li>At first glance, it seams actively maintained and seems to produce really nice plots</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">'ggsurvfit'</span>)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(df_colon)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 929
+Columns: 14
+$ id       &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18…
+$ rx       &lt;fct&gt; Levamisole+5-FU, Levamisole+5-FU, Observation, Levamisole+5-F…
+$ sex      &lt;fct&gt; Male, Male, Female, Female, Male, Female, Male, Male, Male, F…
+$ age      &lt;dbl&gt; 43, 63, 71, 66, 69, 57, 77, 54, 46, 68, 47, 52, 64, 68, 46, 6…
+$ obstruct &lt;fct&gt; Not Obstructed, Not Obstructed, Not Obstructed, Obstructed, N…
+$ perfor   &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
+$ adhere   &lt;fct&gt; Not Adhered, Not Adhered, Adhered, Not Adhered, Not Adhered, …
+$ nodes    &lt;dbl&gt; 5, 1, 7, 6, 22, 9, 5, 1, 2, 1, 1, 2, 1, 3, 4, 1, 6, 1, 1, 1, …
+$ status   &lt;dbl&gt; 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 0, 0…
+$ differ   &lt;fct&gt; Moderate, Moderate, Moderate, Moderate, Moderate, Moderate, M…
+$ extent   &lt;fct&gt; Serosa, Serosa, Muscle, Serosa, Serosa, Serosa, Serosa, Seros…
+$ surg     &lt;fct&gt; Limited Time Since Surgery, Limited Time Since Surgery, Limit…
+$ node4    &lt;dbl&gt; 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0…
+$ time     &lt;dbl&gt; 2.6502396, 8.4517454, 1.4839151, 0.6707734, 1.4318960, 2.4750…</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">survfit2</span>(<span class="fu">Surv</span>(time, status) <span class="sc">~</span> surg, <span class="at">data =</span> df_colon) <span class="sc">|&gt;</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggsurvfit</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_confidence_interval</span>() <span class="sc">+</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_risktable</span>() <span class="sc">+</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_quantile</span>(<span class="at">y_value =</span> <span class="fl">0.6</span>, <span class="at">color =</span> <span class="st">"gray50"</span>, <span class="at">linewidth =</span> <span class="fl">0.75</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="2023-08-03-kaplan-meier-plots_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+
+
 </section>
 
 </main> <!-- /main -->
