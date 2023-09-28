@@ -1,0 +1,10 @@
+---
+title: Book series - use R
+date: 2023-09-28
+categories:
+  - R
+  - Self-study
+---
+
+The "Use R!" book series seems to contain a lot of books that are worthwile reading!
+[Link to the book series](https://www.springer.com/series/6991).

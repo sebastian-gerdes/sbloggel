@@ -1,0 +1,10 @@
+---
+title: Book study notes - Competing Risks and Multistate Models with R
+date: 2023-09-28
+categories:
+  - R
+  - survival
+---
+
+Here, I want to collect some study notes of the book by Beyersmann et al. "Competing Risks and Multistate Models with R" -  ([Link](https://link.springer.com/book/10.1007/978-1-4614-2035-4)).
+
