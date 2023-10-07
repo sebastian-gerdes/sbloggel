@@ -1,0 +1,37 @@
+---
+title: Decision trees
+date: 2023-10-07
+categories:
+  - R
+---
+
+```{r}
+#| label: init
+#| cache: false
+#| message: false
+library('tidyverse')
+library('rpart')
+library('rpart.plot')
+set.seed(1)
+```
+
+```{r}
+
+train_index <- sample(1:nrow(iris), size = 0.7 * nrow(iris))
+train <- iris[train_index, ]
+test <- iris[-train_index, ]
+
+tree <- rpart(Species ~ ., data = train, method = "class")
+
+rpart.plot(tree, main = "Decision Tree for the Iris Dataset")
+```
+
+
+```{r}
+cfit2 <- rpart(pgstat ~ age + eet + g2 + grade + gleason + ploidy,
+               data = stagec)
+
+rpart.plot(cfit2, main = "Decision Tree for the stagec Dataset")
+
+```
+

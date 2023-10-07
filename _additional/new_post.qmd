@@ -18,7 +18,7 @@ set.seed(1)
 ```{r}
 #| label: new_post
 #| execute: false
-post_title <- 'Book series - use R'
+post_title <- 'Decision trees'
 post_date <- '2023-07-03'
 post_date <- format(Sys.Date(), "%Y-%m-%d")
 

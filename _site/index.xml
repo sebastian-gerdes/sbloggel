@@ -10,7 +10,782 @@
 <atom:link href="https://sbloggel.netlify.app/index.xml" rel="self" type="application/rss+xml"/>
 <description>Seb&#39;s private blog about statistics and other topics</description>
 <generator>quarto-1.3.433</generator>
-<lastBuildDate>Wed, 27 Sep 2023 22:00:00 GMT</lastBuildDate>
+<lastBuildDate>Fri, 06 Oct 2023 22:00:00 GMT</lastBuildDate>
+<item>
+  <title>Decision trees</title>
+  <link>https://sbloggel.netlify.app/posts/2023-10-07-decision-trees/2023-10-07-decision-trees.html</link>
+  <description><![CDATA[ 
+
+
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'tidyverse'</span>)</span>
+<span id="cb1-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'rpart'</span>)</span>
+<span id="cb1-3"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'rpart.plot'</span>)</span>
+<span id="cb1-4"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">set.seed</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)</span></code></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1">train_index <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sample</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">nrow</span>(iris), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">size =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.7</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">nrow</span>(iris))</span>
+<span id="cb2-2">train <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> iris[train_index, ]</span>
+<span id="cb2-3">test <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> iris[<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span>train_index, ]</span>
+<span id="cb2-4"></span>
+<span id="cb2-5">tree <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rpart</span>(Species <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> ., <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">data =</span> train, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">method =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"class"</span>)</span>
+<span id="cb2-6"></span>
+<span id="cb2-7"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rpart.plot</span>(tree, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">main =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Decision Tree for the Iris Dataset"</span>)</span></code></pre></div>
+<div class="cell-output-display">
+<p><img src="https://sbloggel.netlify.app/posts/2023-10-07-decision-trees/2023-10-07-decision-trees_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1">cfit2 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rpart</span>(pgstat <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> age <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> eet <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> g2 <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> grade <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> gleason <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> ploidy,</span>
+<span id="cb3-2">               <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">data =</span> stagec)</span>
+<span id="cb3-3"></span>
+<span id="cb3-4"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rpart.plot</span>(cfit2, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">main =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Decision Tree for the stagec Dataset"</span>)</span></code></pre></div>
+<div class="cell-output-display">
+<p><img src="https://sbloggel.netlify.app/posts/2023-10-07-decision-trees/2023-10-07-decision-trees_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+
+
+
+ ]]></description>
+  <category>R</category>
+  <guid>https://sbloggel.netlify.app/posts/2023-10-07-decision-trees/2023-10-07-decision-trees.html</guid>
+  <pubDate>Fri, 06 Oct 2023 22:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Gradient descent</title>
+  <link>https://sbloggel.netlify.app/posts/2023-10-07-gradient-descent/2023-10-07-gradient-descent.html</link>
+  <description><![CDATA[ 
+
+
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'tidyverse'</span>)</span>
+<span id="cb1-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">set.seed</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)</span></code></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1">n <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">200</span></span>
+<span id="cb2-2">beta <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.8</span>, <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.3</span>)</span>
+<span id="cb2-3">X <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">matrix</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">nrow =</span> n, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">ncol =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">length</span>(beta), </span>
+<span id="cb2-4">            <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">data =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rnorm</span>(n <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">length</span>(beta), <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span>))</span>
+<span id="cb2-5"></span>
+<span id="cb2-6">y <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> X <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%*%</span> beta <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rnorm</span>(n, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>)</span>
+<span id="cb2-7"></span>
+<span id="cb2-8">fm <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">lm</span>(y <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> X <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)</span>
+<span id="cb2-9"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">summary</span>(fm)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = y ~ X - 1)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-9.0310 -2.1055 -0.2301  1.9095 11.2183 
+
+Coefficients:
+   Estimate Std. Error t value Pr(&gt;|t|)    
+X1  0.85705    0.06124  13.995  &lt; 2e-16 ***
+X2 -0.32103    0.05629  -5.703 4.24e-08 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 3.212 on 198 degrees of freedom
+Multiple R-squared:  0.5391,    Adjusted R-squared:  0.5344 
+F-statistic: 115.8 on 2 and 198 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1">X <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%*%</span> beta</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>               [,1]
+  [1,] -2.495934402
+  [2,] -1.438989306
+  [3,] -4.577917680
+  [4,]  5.501987928
+  [5,]  3.796707512
+  [6,] -5.622692737
+  [7,]  0.759293568
+  [8,]  1.713046253
+  [9,]  1.858579753
+ [10,] -1.589372946
+ [11,]  5.034950737
+ [12,]  0.742664785
+ [13,] -1.507673765
+ [14,] -5.442790186
+ [15,]  2.414373017
+ [16,] -1.967481579
+ [17,]  0.318679841
+ [18,]  4.524223581
+ [19,]  1.857218258
+ [20,]  1.954135192
+ [21,]  5.020589677
+ [22,]  2.500277931
+ [23,]  0.994968347
+ [24,] -5.956763131
+ [25,]  3.371329228
+ [26,] -2.343382256
+ [27,] -0.101187178
+ [28,] -2.779791534
+ [29,] -1.766712303
+ [30,]  1.021602217
+ [31,]  5.530766605
+ [32,]  3.137784079
+ [33,]  2.009127200
+ [34,] -0.856785293
+ [35,] -4.334922651
+ [36,] -1.210168110
+ [37,] -1.934712726
+ [38,]  1.233947497
+ [39,]  2.203948737
+ [40,]  2.448575229
+ [41,] -1.375248309
+ [42,] -2.051686658
+ [43,]  1.962106303
+ [44,]  2.835771371
+ [45,] -3.599575690
+ [46,]  0.136213431
+ [47,]  1.820411167
+ [48,]  2.766110209
+ [49,] -0.160162635
+ [50,]  1.594988034
+ [51,]  1.110472545
+ [52,] -2.447085583
+ [53,]  1.175168788
+ [54,] -3.316764698
+ [55,]  3.751014877
+ [56,]  4.961805647
+ [57,]  1.708606733
+ [58,] -4.028518271
+ [59,]  1.373433520
+ [60,]  0.078146533
+ [61,]  6.543961465
+ [62,]  0.341516609
+ [63,]  2.548362754
+ [64,] -0.939284826
+ [65,] -4.442027027
+ [66,]  0.280069477
+ [67,] -5.269246801
+ [68,]  6.116711511
+ [69,]  0.887650257
+ [70,]  8.080152537
+ [71,]  1.832349592
+ [72,] -2.745083581
+ [73,]  2.976552842
+ [74,] -6.168112679
+ [75,] -4.198840892
+ [76,] -0.423620767
+ [77,]  1.328414782
+ [78,] -0.885664263
+ [79,]  1.817386430
+ [80,] -2.990231441
+ [81,] -2.297496132
+ [82,]  0.056462727
+ [83,]  2.180768033
+ [84,] -4.033935758
+ [85,]  2.597364965
+ [86,]  2.266727805
+ [87,]  4.203733807
+ [88,] -2.107610500
+ [89,]  0.663617612
+ [90,] -0.351474931
+ [91,] -1.267921702
+ [92,]  3.413532629
+ [93,]  3.420290461
+ [94,]  3.952192489
+ [95,]  2.943751910
+ [96,]  1.625819369
+ [97,] -5.003813866
+ [98,] -2.980613338
+ [99,] -3.858081526
+[100,] -1.147903533
+[101,] -3.057581810
+[102,]  1.391528573
+[103,] -5.280554139
+[104,]  0.966050599
+[105,] -4.079645223
+[106,]  3.840664029
+[107,]  2.193905043
+[108,]  2.231892437
+[109,]  2.458851320
+[110,]  4.995355654
+[111,] -3.286691603
+[112,] -1.596157321
+[113,]  5.128267454
+[114,] -1.295290108
+[115,] -0.620511472
+[116,] -2.539979127
+[117,] -0.443207263
+[118,] -0.747950436
+[119,]  3.134370665
+[120,] -1.160632946
+[121,] -3.188545703
+[122,]  2.501275029
+[123,] -1.664297384
+[124,]  1.669165652
+[125,] -0.899045777
+[126,]  1.733169459
+[127,]  0.188674250
+[128,] -0.325016714
+[129,] -1.144470387
+[130,] -1.852741800
+[131,]  0.585034627
+[132,] -0.001563734
+[133,]  2.141728724
+[134,] -6.496182977
+[135,]  1.382122792
+[136,] -5.795939486
+[137,] -2.099026374
+[138,] -1.695774139
+[139,] -1.663916532
+[140,]  0.453564922
+[141,] -7.013457233
+[142,]  5.041215497
+[143,] -5.623364808
+[144,] -1.135898045
+[145,] -0.853077108
+[146,] -0.712000257
+[147,]  5.579709751
+[148,]  0.285200724
+[149,] -5.080101557
+[150,] -7.514907066
+[151,] -0.328058693
+[152,] -0.872113655
+[153,] -1.473774022
+[154,] -2.742600760
+[155,] -6.653343146
+[156,] -4.156096280
+[157,]  4.608384501
+[158,] -1.801282381
+[159,] -2.127474127
+[160,]  6.216040607
+[161,]  4.471114412
+[162,] -2.340473324
+[163,]  4.149797357
+[164,]  3.352527091
+[165,] -1.778395756
+[166,]  6.324866078
+[167,] -1.630094709
+[168,] -5.239925248
+[169,]  0.224972398
+[170,]  2.300072193
+[171,]  7.851997570
+[172,]  0.005070618
+[173,]  2.450093523
+[174,] -0.164280272
+[175,]  0.332392096
+[176,] -0.101152474
+[177,]  2.365820256
+[178,]  6.815834782
+[179,]  3.484348952
+[180,]  1.749044471
+[181,] -4.855338764
+[182,]  1.814748527
+[183,]  1.811607715
+[184,] -4.892410299
+[185,]  0.281482552
+[186,] -0.440189026
+[187,]  7.241912176
+[188,] -2.865277313
+[189,]  0.909268922
+[190,] -1.990146208
+[191,] -2.155537862
+[192,]  0.547673475
+[193,] -3.651596901
+[194,]  2.289268304
+[195,] -3.733674401
+[196,] -2.244374793
+[197,]  2.700208157
+[198,] -3.304724607
+[199,]  2.176473160
+[200,] -2.257711083</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1">dat <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">expand_grid</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">beta_1 =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">seq</span>(<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">by =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.1</span>), </span>
+<span id="cb6-2">                   <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">beta_2 =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">seq</span>(<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">by =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.1</span>))</span>
+<span id="cb6-3"></span>
+<span id="cb6-4"></span>
+<span id="cb6-5">calc_log_likelihood <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">function</span>(beta_1, beta_2) {</span>
+<span id="cb6-6">  beta_hat <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(beta_1, beta_2)</span>
+<span id="cb6-7">  y_hat <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> X <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%*%</span> beta_hat</span>
+<span id="cb6-8">  epsilon_hat <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> y <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> y_hat </span>
+<span id="cb6-9">  sigma_hat <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sd</span>(epsilon_hat)</span>
+<span id="cb6-10">  dn <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">dnorm</span>(epsilon_hat, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, sigma_hat, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">log =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>)</span>
+<span id="cb6-11">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">return</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sum</span>(dn))</span>
+<span id="cb6-12">}</span>
+<span id="cb6-13"></span>
+<span id="cb6-14"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">calc_log_likelihood</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">coef</span>(fm)[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>], <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">coef</span>(fm)[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>])</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -516.1865</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">logLik</span>(fm)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'log Lik.' -516.1859 (df=3)</code></pre>
+</div>
+</div>
+<section id="example-from-r-bloggers" class="level2">
+<h2 class="anchored" data-anchor-id="example-from-r-bloggers">Example from r-bloggers</h2>
+<ul>
+<li>Source: <a href="https://www.r-bloggers.com/2017/02/implementing-the-gradient-descent-algorithm-in-r/">Link</a></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">attach</span>(mtcars)</span></code></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from package:ggplot2:
+
+    mpg</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1">gradientDesc <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">function</span>(x, y, learn_rate, conv_threshold, n, max_iter) {</span>
+<span id="cb12-2">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">plot</span>(x, y, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">col =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"blue"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">pch =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">20</span>)</span>
+<span id="cb12-3">  m <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">runif</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)</span>
+<span id="cb12-4">  c <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">runif</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)</span>
+<span id="cb12-5">  yhat <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> m <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> x <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> c</span>
+<span id="cb12-6">  MSE <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sum</span>((y <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> yhat) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">^</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span> n</span>
+<span id="cb12-7">  converged <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> F</span>
+<span id="cb12-8">  iterations <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span></span>
+<span id="cb12-9">  <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">while</span>(converged <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> F) {</span>
+<span id="cb12-10">    <span class="do" style="color: #5E5E5E;
+background-color: null;
+font-style: italic;">## Implement the gradient descent algorithm</span></span>
+<span id="cb12-11">    m_new <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> m <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> learn_rate <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> ((<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span> n) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> (<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sum</span>((yhat <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> y) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> x)))</span>
+<span id="cb12-12">    c_new <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> c <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> learn_rate <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> ((<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span> n) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> (<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sum</span>(yhat <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> y)))</span>
+<span id="cb12-13">    m <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> m_new</span>
+<span id="cb12-14">    c <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> c_new</span>
+<span id="cb12-15">    yhat <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> m <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> x <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> c</span>
+<span id="cb12-16">    MSE_new <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sum</span>((y <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> yhat) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">^</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span> n</span>
+<span id="cb12-17">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span>(MSE <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> MSE_new <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&lt;=</span> conv_threshold) {</span>
+<span id="cb12-18">      <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">abline</span>(c, m) </span>
+<span id="cb12-19">      converged <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> T</span>
+<span id="cb12-20">      <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">return</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">paste</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Optimal intercept:"</span>, c, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Optimal slope:"</span>, m))</span>
+<span id="cb12-21">    }</span>
+<span id="cb12-22">    iterations <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> iterations <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span></span>
+<span id="cb12-23">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span>(iterations <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;</span> max_iter) { </span>
+<span id="cb12-24">      <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">abline</span>(c, m) </span>
+<span id="cb12-25">      converged <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> T</span>
+<span id="cb12-26">      <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">return</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">paste</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Optimal intercept:"</span>, c, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Optimal slope:"</span>, m))</span>
+<span id="cb12-27">    }</span>
+<span id="cb12-28">  }</span>
+<span id="cb12-29">}</span>
+<span id="cb12-30"></span>
+<span id="cb12-31"></span>
+<span id="cb12-32"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Run the function </span></span>
+<span id="cb12-33"></span>
+<span id="cb12-34"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">gradientDesc</span>(disp, mpg, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.0000293</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.001</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">32</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2500000</span>)</span></code></pre></div>
+<div class="cell-output-display">
+<p><img src="https://sbloggel.netlify.app/posts/2023-10-07-gradient-descent/2023-10-07-gradient-descent_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Optimal intercept: 29.5998515177117 Optimal slope: -0.0412151089930703"</code></pre>
+</div>
+</div>
+
+
+</section>
+
+ ]]></description>
+  <category>R</category>
+  <guid>https://sbloggel.netlify.app/posts/2023-10-07-gradient-descent/2023-10-07-gradient-descent.html</guid>
+  <pubDate>Fri, 06 Oct 2023 22:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Book study notes - Competing Risks and Multistate Models with R</title>
   <link>https://sbloggel.netlify.app/posts/2023-09-28-book-study-notes---competing-risks-and-multistate-models-with-r/2023-09-28-book-study-notes---competing-risks-and-multistate-models-with-r.html</link>
@@ -6057,444 +6832,6 @@ font-style: inherit;">0.75</span>)</span></code></pre></div>
   <category>R</category>
   <guid>https://sbloggel.netlify.app/posts/2023-08-03-kaplan-meier-plots/2023-08-03-kaplan-meier-plots.html</guid>
   <pubDate>Wed, 02 Aug 2023 22:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Reducing image file size with ImageMagick</title>
-  <link>https://sbloggel.netlify.app/posts/2023-08-03-reducing-image-file-size-with-imagemagick/2023-08-03-reducing-image-file-size-with-imagemagick.html</link>
-  <description><![CDATA[ 
-
-
-
-<section id="links" class="level2">
-<h2 class="anchored" data-anchor-id="links">Links</h2>
-<ul>
-<li><a href="https://stackoverflow.com/questions/7261855/recommendation-for-compressing-jpg-files-with-imagemagick">stackoverflow post recommandations for compressing</a></li>
-<li><a href="https://stackoverflow.com/questions/6917219/imagemagick-scale-jpeg-image-with-a-maximum-file-size">stackoverflow maximum file size</a></li>
-<li><a href="https://www.smashingmagazine.com/2015/06/efficient-image-resizing-with-imagemagick/">Extensive analysis of imagemagick options</a></li>
-</ul>
-</section>
-<section id="initial-analysis" class="level2">
-<h2 class="anchored" data-anchor-id="initial-analysis">Initial analysis</h2>
-<p><img src="https://sbloggel.netlify.app/posts/2023-08-03-reducing-image-file-size-with-imagemagick/koga_original.jpg" class="img-fluid" style="width:32.0%" data-fig-align="center" alt="Koga Original"> <img src="https://sbloggel.netlify.app/posts/2023-08-03-reducing-image-file-size-with-imagemagick/koga_signal.jpeg" class="img-fluid" style="width:32.0%" data-fig-align="center" alt="Koga Signal version"> <img src="https://sbloggel.netlify.app/posts/2023-08-03-reducing-image-file-size-with-imagemagick/koga_edited.jpg" class="img-fluid" style="width:32.0%" data-fig-align="center" alt="Koga ImageMagick"></p>
-<p><img src="https://sbloggel.netlify.app/posts/2023-08-03-reducing-image-file-size-with-imagemagick/koga_original.jpg" class="img-fluid" style="width:99.0%" data-fig-align="center" alt="Koga Original"> <img src="https://sbloggel.netlify.app/posts/2023-08-03-reducing-image-file-size-with-imagemagick/koga_signal.jpeg" class="img-fluid" style="width:99.0%" data-fig-align="center" alt="Koga Signal version"> <img src="https://sbloggel.netlify.app/posts/2023-08-03-reducing-image-file-size-with-imagemagick/koga_edited.jpg" class="img-fluid" style="width:99.0%" data-fig-align="center" alt="Koga ImageMagick"></p>
-</section>
-<section id="currently-best-version" class="level2">
-<h2 class="anchored" data-anchor-id="currently-best-version">Currently best version</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">system</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'convert koga_original.jpg -quality 50 -resize 2048 low_quality_3.jpg'</span>)</span></code></pre></div>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://sbloggel.netlify.app/posts/2023-08-03-reducing-image-file-size-with-imagemagick/low_quality_3.jpg" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Currently best version</figcaption>
-</figure>
-</div>
-</section>
-<section id="even-a-lot-smaller" class="level2">
-<h2 class="anchored" data-anchor-id="even-a-lot-smaller">Even a lot smaller</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">system</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'convert koga_original.jpg -quality 50 -resize 1024 low_quality_4.jpg'</span>)</span>
-<span id="cb2-2"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">system</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'convert koga_original.jpg -quality 50 -resize 512 low_quality_5.jpg'</span>)</span></code></pre></div>
-</div>
-<p><img src="https://sbloggel.netlify.app/posts/2023-08-03-reducing-image-file-size-with-imagemagick/low_quality_4.jpg" class="img-fluid" alt="Even a lot smaller"> <img src="https://sbloggel.netlify.app/posts/2023-08-03-reducing-image-file-size-with-imagemagick/low_quality_5.jpg" class="img-fluid" alt="Even a lot smaller"></p>
-</section>
-<section id="file-sizes" class="level2">
-<h2 class="anchored" data-anchor-id="file-sizes">File sizes</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'fs'</span>)</span>
-<span id="cb3-2"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'knitr'</span>)</span>
-<span id="cb3-3"></span>
-<span id="cb3-4"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">tibble</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">filenames =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">dir_ls</span>(), </span>
-<span id="cb3-5">       <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">filesizes =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">file_size</span>(filenames)) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span> </span>
-<span id="cb3-6">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">kable</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">align =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'c'</span>)</span></code></pre></div>
-<div class="cell-output-display">
-<table class="table table-sm table-striped small">
-<colgroup>
-<col style="width: 85%">
-<col style="width: 14%">
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: center;">filenames</th>
-<th style="text-align: center;">filesizes</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: center;">2023-08-03-reducing-image-file-size-with-imagemagick.qmd</td>
-<td style="text-align: center;">2.09K</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">2023-08-03-reducing-image-file-size-with-imagemagick.rmarkdown</td>
-<td style="text-align: center;">2.1K</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">2023-08-03-reducing-image-file-size-with-imagemagick_files</td>
-<td style="text-align: center;">96</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">koga_edited.jpg</td>
-<td style="text-align: center;">193.93K</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">koga_original.jpg</td>
-<td style="text-align: center;">2.5M</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">koga_signal.jpeg</td>
-<td style="text-align: center;">505.13K</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">low_quality_1.jpg</td>
-<td style="text-align: center;">206.18K</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">low_quality_2.jpg</td>
-<td style="text-align: center;">516.7K</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">low_quality_3.jpg</td>
-<td style="text-align: center;">387.38K</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">low_quality_4.jpg</td>
-<td style="text-align: center;">206.18K</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">low_quality_5.jpg</td>
-<td style="text-align: center;">146.79K</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-
-
-</section>
-
- ]]></description>
-  <category>R</category>
-  <category>Mishmash</category>
-  <guid>https://sbloggel.netlify.app/posts/2023-08-03-reducing-image-file-size-with-imagemagick/2023-08-03-reducing-image-file-size-with-imagemagick.html</guid>
-  <pubDate>Wed, 02 Aug 2023 22:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Approximating Pi</title>
-  <link>https://sbloggel.netlify.app/posts/2023-07-23-approximating-pi/2023-07-23-approximating-pi.html</link>
-  <description><![CDATA[ 
-
-
-
-<p>This is a really pointless post about approximating <img src="https://latex.codecogs.com/png.latex?%5Cpi">, inspired by <a href="https://www.r-bloggers.com/2023/07/happy-pi-approximation-day/">this</a> post.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1">current_min_error <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">abs</span>(pi <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">22</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">7</span>)</span>
-<span id="cb1-2">current_best_numerator <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">22</span></span>
-<span id="cb1-3">current_best_denominator <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">7</span></span>
-<span id="cb1-4"></span>
-<span id="cb1-5"><span class="cf" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">for</span>(denominator <span class="cf" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">in</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">:</span><span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1e7</span>) {</span>
-<span id="cb1-6">  numerator <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">round</span>(denominator <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> pi)</span>
-<span id="cb1-7">  pi_approx <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> numerator <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span> denominator</span>
-<span id="cb1-8">  pi_error <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">abs</span>(pi <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span> pi_approx)</span>
-<span id="cb1-9">  <span class="cf" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">if</span>(pi_error <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">&lt;</span> current_min_error) {</span>
-<span id="cb1-10">    current_min_error <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> pi_error</span>
-<span id="cb1-11">    current_best_numerator <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> numerator</span>
-<span id="cb1-12">    current_best_denominator <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> denominator</span>
-<span id="cb1-13">    <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">cat</span>(<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">paste</span>(<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'numerator:'</span>, numerator, </span>
-<span id="cb1-14">                  <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">', denominator:'</span>, denominator, </span>
-<span id="cb1-15">                  <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">', pi_approx: '</span>, numerator <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span> denominator, </span>
-<span id="cb1-16">                  <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">', absolute error'</span>, pi_error, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'</span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">\n</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'</span>)))</span>
-<span id="cb1-17">  }</span>
-<span id="cb1-18">}</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>numerator: 179 , denominator: 57 , pi_approx:  3.14035087719298 , absolute error 0.00124177639681067 
-numerator: 201 , denominator: 64 , pi_approx:  3.140625 , absolute error 0.000967653589793116 
-numerator: 223 , denominator: 71 , pi_approx:  3.14084507042254 , absolute error 0.000747583167258092 
-numerator: 245 , denominator: 78 , pi_approx:  3.14102564102564 , absolute error 0.000567012564152147 
-numerator: 267 , denominator: 85 , pi_approx:  3.14117647058824 , absolute error 0.000416183001557879 
-numerator: 289 , denominator: 92 , pi_approx:  3.14130434782609 , absolute error 0.000288305763706198 
-numerator: 311 , denominator: 99 , pi_approx:  3.14141414141414 , absolute error 0.000178512175651679 
-numerator: 333 , denominator: 106 , pi_approx:  3.14150943396226 , absolute error 8.32196275291075e-05 
-numerator: 355 , denominator: 113 , pi_approx:  3.14159292035398 , absolute error 2.66764189404967e-07 
-numerator: 52163 , denominator: 16604 , pi_approx:  3.14159238737654 , absolute error 2.66213257216208e-07 
-numerator: 52518 , denominator: 16717 , pi_approx:  3.14159239097924 , absolute error 2.62610550638698e-07 
-numerator: 52873 , denominator: 16830 , pi_approx:  3.14159239453357 , absolute error 2.5905622225153e-07 
-numerator: 53228 , denominator: 16943 , pi_approx:  3.14159239804049 , absolute error 2.55549304384317e-07 
-numerator: 53583 , denominator: 17056 , pi_approx:  3.14159240150094 , absolute error 2.52088855123844e-07 
-numerator: 53938 , denominator: 17169 , pi_approx:  3.14159240491584 , absolute error 2.48673956537715e-07 
-numerator: 54293 , denominator: 17282 , pi_approx:  3.14159240828608 , absolute error 2.45303715118439e-07 
-numerator: 54648 , denominator: 17395 , pi_approx:  3.14159241161253 , absolute error 2.41977260895254e-07 
-numerator: 55003 , denominator: 17508 , pi_approx:  3.14159241489605 , absolute error 2.3869374565777e-07 
-numerator: 55358 , denominator: 17621 , pi_approx:  3.14159241813745 , absolute error 2.35452343400055e-07 
-numerator: 55713 , denominator: 17734 , pi_approx:  3.14159242133754 , absolute error 2.32252249432463e-07 
-numerator: 56068 , denominator: 17847 , pi_approx:  3.14159242449711 , absolute error 2.29092678605269e-07 
-numerator: 56423 , denominator: 17960 , pi_approx:  3.14159242761693 , absolute error 2.25972866640944e-07 
-numerator: 56778 , denominator: 18073 , pi_approx:  3.14159243069773 , absolute error 2.22892067025526e-07 
-numerator: 57133 , denominator: 18186 , pi_approx:  3.14159243374024 , absolute error 2.19849553229068e-07 
-numerator: 57488 , denominator: 18299 , pi_approx:  3.14159243674518 , absolute error 2.16844615597012e-07 
-numerator: 57843 , denominator: 18412 , pi_approx:  3.14159243971323 , absolute error 2.13876562682458e-07 
-numerator: 58198 , denominator: 18525 , pi_approx:  3.14159244264507 , absolute error 2.10944719025719e-07 
-numerator: 58553 , denominator: 18638 , pi_approx:  3.14159244554137 , absolute error 2.08048426042495e-07 
-numerator: 58908 , denominator: 18751 , pi_approx:  3.14159244840275 , absolute error 2.05187041135702e-07 
-numerator: 59263 , denominator: 18864 , pi_approx:  3.14159245122986 , absolute error 2.02359937251373e-07 
-numerator: 59618 , denominator: 18977 , pi_approx:  3.14159245402329 , absolute error 1.995665015464e-07 
-numerator: 59973 , denominator: 19090 , pi_approx:  3.14159245678366 , absolute error 1.96806136720795e-07 
-numerator: 60328 , denominator: 19203 , pi_approx:  3.14159245951153 , absolute error 1.94078258353159e-07 
-numerator: 60683 , denominator: 19316 , pi_approx:  3.1415924622075 , absolute error 1.91382296677034e-07 
-numerator: 61038 , denominator: 19429 , pi_approx:  3.1415924648721 , absolute error 1.88717694804552e-07 
-numerator: 61393 , denominator: 19542 , pi_approx:  3.14159246750588 , absolute error 1.86083908282342e-07 
-numerator: 61748 , denominator: 19655 , pi_approx:  3.14159247010939 , absolute error 1.83480405979708e-07 
-numerator: 62103 , denominator: 19768 , pi_approx:  3.14159247268312 , absolute error 1.80906668756364e-07 
-numerator: 62458 , denominator: 19881 , pi_approx:  3.1415924752276 , absolute error 1.78362189018344e-07 
-numerator: 62813 , denominator: 19994 , pi_approx:  3.14159247774332 , absolute error 1.7584647027391e-07 
-numerator: 63168 , denominator: 20107 , pi_approx:  3.14159248023077 , absolute error 1.73359027577646e-07 
-numerator: 63523 , denominator: 20220 , pi_approx:  3.14159248269041 , absolute error 1.70899387530454e-07 
-numerator: 63878 , denominator: 20333 , pi_approx:  3.14159248512271 , absolute error 1.6846708605911e-07 
-numerator: 64233 , denominator: 20446 , pi_approx:  3.14159248752812 , absolute error 1.66061670192619e-07 
-numerator: 64588 , denominator: 20559 , pi_approx:  3.1415924899071 , absolute error 1.63682696285861e-07 
-numerator: 64943 , denominator: 20672 , pi_approx:  3.14159249226006 , absolute error 1.61329731351856e-07 
-numerator: 65298 , denominator: 20785 , pi_approx:  3.14159249458744 , absolute error 1.5900235039723e-07 
-numerator: 65653 , denominator: 20898 , pi_approx:  3.14159249688965 , absolute error 1.56700138642663e-07 
-numerator: 66008 , denominator: 21011 , pi_approx:  3.1415924991671 , absolute error 1.54422690190614e-07 
-numerator: 66363 , denominator: 21124 , pi_approx:  3.14159250142019 , absolute error 1.52169607581243e-07 
-numerator: 66718 , denominator: 21237 , pi_approx:  3.14159250364929 , absolute error 1.499405017924e-07 
-numerator: 67073 , denominator: 21350 , pi_approx:  3.1415925058548 , absolute error 1.47734992239634e-07 
-numerator: 67428 , denominator: 21463 , pi_approx:  3.14159250803709 , absolute error 1.45552705888008e-07 
-numerator: 67783 , denominator: 21576 , pi_approx:  3.14159251019651 , absolute error 1.43393278584369e-07 
-numerator: 68138 , denominator: 21689 , pi_approx:  3.14159251233344 , absolute error 1.41256352392816e-07 
-numerator: 68493 , denominator: 21802 , pi_approx:  3.14159251444822 , absolute error 1.39141577371049e-07 
-numerator: 68848 , denominator: 21915 , pi_approx:  3.14159251654118 , absolute error 1.37048611126289e-07 
-numerator: 69203 , denominator: 22028 , pi_approx:  3.14159251861267 , absolute error 1.34977118371182e-07 
-numerator: 69558 , denominator: 22141 , pi_approx:  3.14159252066302 , absolute error 1.32926769591535e-07 
-numerator: 69913 , denominator: 22254 , pi_approx:  3.14159252269255 , absolute error 1.30897243266759e-07 
-numerator: 70268 , denominator: 22367 , pi_approx:  3.14159252470157 , absolute error 1.28888223649426e-07 
-numerator: 70623 , denominator: 22480 , pi_approx:  3.14159252669039 , absolute error 1.26899401653446e-07 
-numerator: 70978 , denominator: 22593 , pi_approx:  3.14159252865932 , absolute error 1.2493047396589e-07 
-numerator: 71333 , denominator: 22706 , pi_approx:  3.14159253060865 , absolute error 1.22981143491074e-07 
-numerator: 71688 , denominator: 22819 , pi_approx:  3.14159253253867 , absolute error 1.21051119350568e-07 
-numerator: 72043 , denominator: 22932 , pi_approx:  3.14159253444968 , absolute error 1.19140115995009e-07 
-numerator: 72398 , denominator: 23045 , pi_approx:  3.14159253634194 , absolute error 1.17247853648195e-07 
-numerator: 72753 , denominator: 23158 , pi_approx:  3.14159253821574 , absolute error 1.15374057862994e-07 
-numerator: 73108 , denominator: 23271 , pi_approx:  3.14159254007133 , absolute error 1.13518459521345e-07 
-numerator: 73463 , denominator: 23384 , pi_approx:  3.141592541909 , absolute error 1.11680795722435e-07 
-numerator: 73818 , denominator: 23497 , pi_approx:  3.14159254372899 , absolute error 1.09860806229989e-07 
-numerator: 74173 , denominator: 23610 , pi_approx:  3.14159254553155 , absolute error 1.08058238801334e-07 
-numerator: 74528 , denominator: 23723 , pi_approx:  3.14159254731695 , absolute error 1.06272843414246e-07 
-numerator: 74883 , denominator: 23836 , pi_approx:  3.14159254908542 , absolute error 1.04504376263748e-07 
-numerator: 75238 , denominator: 23949 , pi_approx:  3.1415925508372 , absolute error 1.02752597541667e-07 
-numerator: 75593 , denominator: 24062 , pi_approx:  3.14159255257252 , absolute error 1.0101727232481e-07 
-numerator: 75948 , denominator: 24175 , pi_approx:  3.14159255429162 , absolute error 9.92981696867901e-08 
-numerator: 76303 , denominator: 24288 , pi_approx:  3.14159255599473 , absolute error 9.75950631421085e-08 
-numerator: 76658 , denominator: 24401 , pi_approx:  3.14159255768206 , absolute error 9.59077310902501e-08 
-numerator: 77013 , denominator: 24514 , pi_approx:  3.14159255935384 , absolute error 9.42359545952343e-08 
-numerator: 77368 , denominator: 24627 , pi_approx:  3.14159256101027 , absolute error 9.25795200501511e-08 
-numerator: 77723 , denominator: 24740 , pi_approx:  3.14159256265158 , absolute error 9.0938216512626e-08 
-numerator: 78078 , denominator: 24853 , pi_approx:  3.14159256427795 , absolute error 8.9311838813444e-08 
-numerator: 78433 , denominator: 24966 , pi_approx:  3.14159256588961 , absolute error 8.77001831156576e-08 
-numerator: 78788 , denominator: 25079 , pi_approx:  3.14159256748674 , absolute error 8.61030513554795e-08 
-numerator: 79143 , denominator: 25192 , pi_approx:  3.14159256906955 , absolute error 8.45202472454787e-08 
-numerator: 79498 , denominator: 25305 , pi_approx:  3.14159257063821 , absolute error 8.29515793832059e-08 
-numerator: 79853 , denominator: 25418 , pi_approx:  3.14159257219293 , absolute error 8.13968590307468e-08 
-numerator: 80208 , denominator: 25531 , pi_approx:  3.14159257373389 , absolute error 7.9855901002901e-08 
-numerator: 80563 , denominator: 25644 , pi_approx:  3.14159257526127 , absolute error 7.83285232230924e-08 
-numerator: 80918 , denominator: 25757 , pi_approx:  3.14159257677525 , absolute error 7.68145476115478e-08 
-numerator: 81273 , denominator: 25870 , pi_approx:  3.141592578276 , absolute error 7.5313797864851e-08 
-numerator: 81628 , denominator: 25983 , pi_approx:  3.14159257976369 , absolute error 7.38261016763886e-08 
-numerator: 81983 , denominator: 26096 , pi_approx:  3.1415925812385 , absolute error 7.23512889599931e-08 
-numerator: 82338 , denominator: 26209 , pi_approx:  3.1415925827006 , absolute error 7.08891940703893e-08 
-numerator: 82693 , denominator: 26322 , pi_approx:  3.14159258415014 , absolute error 6.94396526945695e-08 
-numerator: 83048 , denominator: 26435 , pi_approx:  3.14159258558729 , absolute error 6.80025036281506e-08 
-numerator: 83403 , denominator: 26548 , pi_approx:  3.1415925870122 , absolute error 6.65775887753739e-08 
-numerator: 83758 , denominator: 26661 , pi_approx:  3.14159258842504 , absolute error 6.51647527050159e-08 
-numerator: 84113 , denominator: 26774 , pi_approx:  3.14159258982595 , absolute error 6.37638426503884e-08 
-numerator: 84468 , denominator: 26887 , pi_approx:  3.14159259121509 , absolute error 6.237470762116e-08 
-numerator: 84823 , denominator: 27000 , pi_approx:  3.14159259259259 , absolute error 6.09972006238024e-08 
-numerator: 85178 , denominator: 27113 , pi_approx:  3.14159259395862 , absolute error 5.96311755529655e-08 
-numerator: 85533 , denominator: 27226 , pi_approx:  3.1415925953133 , absolute error 5.82764898560129e-08 
-numerator: 85888 , denominator: 27339 , pi_approx:  3.14159259665679 , absolute error 5.69330023125758e-08 
-numerator: 86243 , denominator: 27452 , pi_approx:  3.14159259798922 , absolute error 5.56005756990885e-08 
-numerator: 86598 , denominator: 27565 , pi_approx:  3.14159259931072 , absolute error 5.42790727919851e-08 
-numerator: 86953 , denominator: 27678 , pi_approx:  3.14159260062143 , absolute error 5.29683608085918e-08 
-numerator: 87308 , denominator: 27791 , pi_approx:  3.14159260192149 , absolute error 5.16683078544133e-08 
-numerator: 87663 , denominator: 27904 , pi_approx:  3.14159260321101 , absolute error 5.03787838113112e-08 
-numerator: 88018 , denominator: 28017 , pi_approx:  3.14159260449013 , absolute error 4.90996621138606e-08 
-numerator: 88373 , denominator: 28130 , pi_approx:  3.14159260575898 , absolute error 4.78308170848152e-08 
-numerator: 88728 , denominator: 28243 , pi_approx:  3.14159260701767 , absolute error 4.65721248232853e-08 
-numerator: 89083 , denominator: 28356 , pi_approx:  3.14159260826633 , absolute error 4.53234649810952e-08 
-numerator: 89438 , denominator: 28469 , pi_approx:  3.14159260950508 , absolute error 4.40847172100689e-08 
-numerator: 89793 , denominator: 28582 , pi_approx:  3.14159261073403 , absolute error 4.28557647147443e-08 
-numerator: 90148 , denominator: 28695 , pi_approx:  3.1415926119533 , absolute error 4.16364911437483e-08 
-numerator: 90503 , denominator: 28808 , pi_approx:  3.14159261316301 , absolute error 4.04267828102434e-08 
-numerator: 90858 , denominator: 28921 , pi_approx:  3.14159261436327 , absolute error 3.92265278037485e-08 
-numerator: 91213 , denominator: 29034 , pi_approx:  3.14159261555418 , absolute error 3.80356151019612e-08 
-numerator: 91568 , denominator: 29147 , pi_approx:  3.14159261673586 , absolute error 3.68539367912035e-08 
-numerator: 91923 , denominator: 29260 , pi_approx:  3.14159261790841 , absolute error 3.56813858459759e-08 
-numerator: 92278 , denominator: 29373 , pi_approx:  3.14159261907194 , absolute error 3.45178561289572e-08 
-numerator: 92633 , denominator: 29486 , pi_approx:  3.14159262022655 , absolute error 3.33632450555399e-08 
-numerator: 92988 , denominator: 29599 , pi_approx:  3.14159262137234 , absolute error 3.22174495970273e-08 
-numerator: 93343 , denominator: 29712 , pi_approx:  3.14159262250942 , absolute error 3.10803693892581e-08 
-numerator: 93698 , denominator: 29825 , pi_approx:  3.14159262363789 , absolute error 2.99519054003383e-08 
-numerator: 94053 , denominator: 29938 , pi_approx:  3.14159262475783 , absolute error 2.88319603747311e-08 
-numerator: 94408 , denominator: 30051 , pi_approx:  3.14159262586936 , absolute error 2.77204375009887e-08 
-numerator: 94763 , denominator: 30164 , pi_approx:  3.14159262697255 , absolute error 2.66172430762879e-08 
-numerator: 95118 , denominator: 30277 , pi_approx:  3.14159262806751 , absolute error 2.55222829537161e-08 
-numerator: 95473 , denominator: 30390 , pi_approx:  3.14159262915433 , absolute error 2.44354660949853e-08 
-numerator: 95828 , denominator: 30503 , pi_approx:  3.14159263023309 , absolute error 2.33567014618075e-08 
-numerator: 96183 , denominator: 30616 , pi_approx:  3.14159263130389 , absolute error 2.22858997922515e-08 
-numerator: 96538 , denominator: 30729 , pi_approx:  3.14159263236682 , absolute error 2.1222973600743e-08 
-numerator: 96893 , denominator: 30842 , pi_approx:  3.14159263342196 , absolute error 2.01678358457968e-08 
-numerator: 97248 , denominator: 30955 , pi_approx:  3.14159263446939 , absolute error 1.91204021504632e-08 
-numerator: 97603 , denominator: 31068 , pi_approx:  3.14159263550921 , absolute error 1.80805876937029e-08 
-numerator: 97958 , denominator: 31181 , pi_approx:  3.14159263654148 , absolute error 1.70483094308338e-08 
-numerator: 98313 , denominator: 31294 , pi_approx:  3.14159263756631 , absolute error 1.60234865376196e-08 
-numerator: 98668 , denominator: 31407 , pi_approx:  3.14159263858376 , absolute error 1.50060377457351e-08 
-numerator: 99023 , denominator: 31520 , pi_approx:  3.14159263959391 , absolute error 1.39958844513899e-08 
-numerator: 99378 , denominator: 31633 , pi_approx:  3.14159264059685 , absolute error 1.2992948050794e-08 
-numerator: 99733 , denominator: 31746 , pi_approx:  3.14159264159264 , absolute error 1.19971517165141e-08 
-numerator: 100088 , denominator: 31859 , pi_approx:  3.14159264258137 , absolute error 1.1008419065206e-08 
-numerator: 100443 , denominator: 31972 , pi_approx:  3.14159264356312 , absolute error 1.00266754898826e-08 
-numerator: 100798 , denominator: 32085 , pi_approx:  3.14159264453795 , absolute error 9.0518468276457e-09 
-numerator: 101153 , denominator: 32198 , pi_approx:  3.14159264550593 , absolute error 8.08386113604342e-09 
-numerator: 101508 , denominator: 32311 , pi_approx:  3.14159264646715 , absolute error 7.12264558444531e-09 
-numerator: 101863 , denominator: 32424 , pi_approx:  3.14159264742166 , absolute error 6.1681300067562e-09 
-numerator: 102218 , denominator: 32537 , pi_approx:  3.14159264836955 , absolute error 5.22024468097015e-09 
-numerator: 102573 , denominator: 32650 , pi_approx:  3.14159264931087 , absolute error 4.27892032917043e-09 
-numerator: 102928 , denominator: 32763 , pi_approx:  3.1415926502457 , absolute error 3.34408900570793e-09 
-numerator: 103283 , denominator: 32876 , pi_approx:  3.14159265117411 , absolute error 2.41568454129037e-09 
-numerator: 103638 , denominator: 32989 , pi_approx:  3.14159265209615 , absolute error 1.49363987844708e-09 
-numerator: 103993 , denominator: 33102 , pi_approx:  3.1415926530119 , absolute error 5.77890624242627e-10 
-numerator: 104348 , denominator: 33215 , pi_approx:  3.14159265392142 , absolute error 3.31628058347633e-10 
-numerator: 208341 , denominator: 66317 , pi_approx:  3.14159265346744 , absolute error 1.22356347276309e-10 
-numerator: 312689 , denominator: 99532 , pi_approx:  3.14159265361894 , absolute error 2.91433543964104e-11 
-numerator: 833719 , denominator: 265381 , pi_approx:  3.14159265358108 , absolute error 8.71525074330748e-12 
-numerator: 1146408 , denominator: 364913 , pi_approx:  3.1415926535914 , absolute error 1.61071156412618e-12 
-numerator: 3126535 , denominator: 995207 , pi_approx:  3.14159265358865 , absolute error 1.14264153694421e-12 
-numerator: 4272943 , denominator: 1360120 , pi_approx:  3.14159265358939 , absolute error 4.04121180963557e-13 
-numerator: 5419351 , denominator: 1725033 , pi_approx:  3.14159265358982 , absolute error 2.22044604925031e-14 </code></pre>
-</div>
-</div>
-
-
-
- ]]></description>
-  <category>R</category>
-  <guid>https://sbloggel.netlify.app/posts/2023-07-23-approximating-pi/2023-07-23-approximating-pi.html</guid>
-  <pubDate>Sat, 22 Jul 2023 22:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>

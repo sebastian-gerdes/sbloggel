@@ -1,0 +1,33 @@
+---
+title: Baby names
+date: 2023-10-07
+draft: true
+categories:
+  - R
+---
+
+```{r}
+#| label: init
+#| message: false
+library('tidyverse')
+```
+
+```{r}
+library('babynames')
+library('tidyverse')
+
+str(babynames)
+
+babynames |> 
+  filter(name %in% c('Susan', 'Sebastian', 'Flora', 'Anne', 'Wolfgang', 'Jan',
+                     'Dorothea', 'Lotta', 'Helmut', 'Lasse', 'Lena', 'Natascha',
+                     'Stefanie', 'Barbel')) |> 
+  ggplot(aes(year, n, colour = sex)) + geom_line() +
+  facet_wrap(vars(name)) + 
+  scale_y_continuous(trans = 'log10')
+
+babynames |> 
+  filter(name == 'Sebastian', sex == 'M') |> 
+  DT::datatable()
+```
+

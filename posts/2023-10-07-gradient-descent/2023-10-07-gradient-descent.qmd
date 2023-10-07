@@ -1,0 +1,90 @@
+---
+title: Gradient descent
+date: 2023-10-07
+categories:
+  - R
+---
+
+```{r}
+#| label: init
+#| message: false
+library('tidyverse')
+set.seed(1)
+```
+
+
+```{r}
+n <- 200
+beta <- c(0.8, -0.3)
+X <- matrix(nrow = n, ncol = length(beta), 
+            data = rnorm(n * length(beta), 0, 4))
+
+y <- X %*% beta + rnorm(n, 0, 3)
+
+fm <- lm(y ~ X - 1)
+summary(fm)
+
+
+X %*% beta
+
+dat <- expand_grid(beta_1 = seq(-1, 1, by = 0.1), 
+                   beta_2 = seq(-1, 1, by = 0.1))
+
+
+calc_log_likelihood <- function(beta_1, beta_2) {
+  beta_hat <- c(beta_1, beta_2)
+  y_hat <- X %*% beta_hat
+  epsilon_hat <- y - y_hat 
+  sigma_hat <- sd(epsilon_hat)
+  dn <- dnorm(epsilon_hat, 0, sigma_hat, log = TRUE)
+  return(sum(dn))
+}
+
+calc_log_likelihood(coef(fm)[1], coef(fm)[2])
+logLik(fm)
+
+
+```
+
+
+## Example from r-bloggers
+* Source: [Link](https://www.r-bloggers.com/2017/02/implementing-the-gradient-descent-algorithm-in-r/)
+```{r}
+attach(mtcars)
+
+gradientDesc <- function(x, y, learn_rate, conv_threshold, n, max_iter) {
+  plot(x, y, col = "blue", pch = 20)
+  m <- runif(1, 0, 1)
+  c <- runif(1, 0, 1)
+  yhat <- m * x + c
+  MSE <- sum((y - yhat) ^ 2) / n
+  converged = F
+  iterations = 0
+  while(converged == F) {
+    ## Implement the gradient descent algorithm
+    m_new <- m - learn_rate * ((1 / n) * (sum((yhat - y) * x)))
+    c_new <- c - learn_rate * ((1 / n) * (sum(yhat - y)))
+    m <- m_new
+    c <- c_new
+    yhat <- m * x + c
+    MSE_new <- sum((y - yhat) ^ 2) / n
+    if(MSE - MSE_new <= conv_threshold) {
+      abline(c, m) 
+      converged = T
+      return(paste("Optimal intercept:", c, "Optimal slope:", m))
+    }
+    iterations = iterations + 1
+    if(iterations > max_iter) { 
+      abline(c, m) 
+      converged = T
+      return(paste("Optimal intercept:", c, "Optimal slope:", m))
+    }
+  }
+}
+
+
+# Run the function 
+
+gradientDesc(disp, mpg, 0.0000293, 0.001, 32, 2500000)
+```
+
