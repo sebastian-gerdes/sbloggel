@@ -25,14 +25,11 @@ fm <- lm(y ~ X - 1)
 summary(fm)
 
 
-X %*% beta
-
-dat <- expand_grid(beta_1 = seq(-1, 1, by = 0.1), 
-                   beta_2 = seq(-1, 1, by = 0.1))
-
-
 calc_log_likelihood <- function(beta_1, beta_2) {
   beta_hat <- c(beta_1, beta_2)
+  # print(beta_hat)
+  # cat('\n')
+  # return(NULL)
   y_hat <- X %*% beta_hat
   epsilon_hat <- y - y_hat 
   sigma_hat <- sd(epsilon_hat)
@@ -43,6 +40,22 @@ calc_log_likelihood <- function(beta_1, beta_2) {
 calc_log_likelihood(coef(fm)[1], coef(fm)[2])
 logLik(fm)
 
+
+dat <- expand_grid(beta_1 = seq(-5, 5, by = 0.1), 
+                   beta_2 = seq(-5, 5, by = 0.1))
+
+dat$loglik <- map2_dbl(dat$beta_1, dat$beta_2, calc_log_likelihood)
+
+ii <- which.max(dat$loglik)
+
+middle <- dat[ii, ]
+
+dat |> 
+  ggplot(aes(beta_1, beta_2, z = loglik)) + 
+  geom_contour() + 
+  geom_point(aes(x = middle$beta_1, 
+                 y = middle$beta_2), 
+             inherit.aes = FALSE)
 
 ```
 
