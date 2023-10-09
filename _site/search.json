@@ -564,7 +564,7 @@
     "href": "posts/2023-07-05-python-graphics/2023-07-05-python-graphics.html#seaborn",
     "title": "Python graphics",
     "section": "Seaborn",
-    "text": "Seaborn\n\ng = sns.FacetGrid(iris, col = 'species', col_wrap = 1, height = 2, aspect = 2)\ng = g.map(plt.scatter, 'sepal_length', 'sepal_width')\nplt.show()\n\n\n\n\n\n\n\nplt.close()"
+    "text": "Seaborn\n\ng = sns.FacetGrid(iris, col = 'species', col_wrap = 1, height = 2, aspect = 2)\ng = g.map(plt.scatter, 'sepal_length', 'sepal_width')\n\n/Users/seb/Library/r-miniconda-arm64/envs/sbloggel/lib/python3.11/site-packages/seaborn/axisgrid.py:118: UserWarning: The figure layout has changed to tight\n  self._figure.tight_layout(*args, **kwargs)\n\nplt.show()\n\n\n\n\n\n\n\nplt.close()"
   },
   {
     "objectID": "posts/2023-07-20-starting-with-fastai/2023-07-20-starting-with-fastai.html",
@@ -599,14 +599,14 @@
     "href": "posts/2023-07-06-python-versions-environments/2023-07-06-python-versions-environments.html",
     "title": "Managing python versions in RStudio",
     "section": "",
-    "text": "Good resources are found in the {reticulate} vignettes: Link, in particular this\nLink to question on stackoverflow - Link"
+    "text": "Good resources are found in the {reticulate} vignettes: Link, in particular this\nLink to question on stackoverflow - Link\nQuarto documentation explaining how to use different environments: Link\nAn interesting blog post how to managage package versions in python: Link"
   },
   {
     "objectID": "posts/2023-07-06-python-versions-environments/2023-07-06-python-versions-environments.html#ressources",
     "href": "posts/2023-07-06-python-versions-environments/2023-07-06-python-versions-environments.html#ressources",
     "title": "Managing python versions in RStudio",
     "section": "",
-    "text": "Good resources are found in the {reticulate} vignettes: Link, in particular this\nLink to question on stackoverflow - Link"
+    "text": "Good resources are found in the {reticulate} vignettes: Link, in particular this\nLink to question on stackoverflow - Link\nQuarto documentation explaining how to use different environments: Link\nAn interesting blog post how to managage package versions in python: Link"
   },
   {
     "objectID": "posts/2023-07-06-python-versions-environments/2023-07-06-python-versions-environments.html#managing-python-installation",

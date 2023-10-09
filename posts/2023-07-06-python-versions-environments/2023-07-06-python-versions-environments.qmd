@@ -10,6 +10,8 @@ execute:
 ## Ressources
 * Good resources are found in the {reticulate} vignettes: [Link](https://cran.r-project.org/web/packages/reticulate/index.html), in particular [this](https://cran.r-project.org/web/packages/reticulate/vignettes/versions.html)
 * Link to question on stackoverflow - [Link](https://stackoverflow.com/questions/76745347/how-to-make-quarto-use-the-same-python-environment-that-was-specified-in-rstudio)
+* Quarto documentation explaining how to use different environments: [Link](https://quarto.org/docs/projects/virtual-environments.html)
+* An interesting blog post how to managage package versions in python: [Link](https://python-bloggers.com/2023/10/an-introduction-to-python-package-managers/)
 
 ```{r}
 #| label: init_python

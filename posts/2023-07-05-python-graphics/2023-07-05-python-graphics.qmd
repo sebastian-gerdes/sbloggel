@@ -60,8 +60,9 @@ plt.close()
 ```
 
 # Plotly examples
+* Width and height seem to be controlled mainly by `width` and `height` arguments of `px.scatter` (or whatever other plotly function)
 ```{python}
-#| fig-width: 3
+#| fig-width: 30
 #| fig-align: center
 # x and y given as array_like objects
 import plotly.express as px
