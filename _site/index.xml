@@ -10,7 +10,479 @@
 <atom:link href="https://sbloggel.netlify.app/index.xml" rel="self" type="application/rss+xml"/>
 <description>Seb&#39;s private blog about statistics and other topics</description>
 <generator>quarto-1.3.433</generator>
-<lastBuildDate>Fri, 06 Oct 2023 22:00:00 GMT</lastBuildDate>
+<lastBuildDate>Thu, 02 Nov 2023 23:00:00 GMT</lastBuildDate>
+<item>
+  <title>Stammbaeume</title>
+  <link>https://sbloggel.netlify.app/posts/2023-11-03-stammbaeume/2023-11-03-stammbaeume.html</link>
+  <description><![CDATA[ 
+
+
+
+<section id="mit-dem-paket-ggenealogy" class="level2">
+<h2 class="anchored" data-anchor-id="mit-dem-paket-ggenealogy">Mit dem Paket <code>ggenealogy</code></h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'tidyverse'</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.2     ✔ readr     2.1.4
+✔ forcats   1.0.0     ✔ stringr   1.5.0
+✔ ggplot2   3.4.2     ✔ tibble    3.2.1
+✔ lubridate 1.9.2     ✔ tidyr     1.3.0
+✔ purrr     1.0.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'ggenealogy'</span>)</span>
+<span id="cb3-2"></span>
+<span id="cb3-3"></span>
+<span id="cb3-4"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">data</span>(sbGeneal)</span>
+<span id="cb3-5"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">plotAncDes</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Tokyo"</span>, sbGeneal, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">vColor =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"red"</span>)</span></code></pre></div>
+<div class="cell-output-display">
+<p><img src="https://sbloggel.netlify.app/posts/2023-11-03-stammbaeume/2023-11-03-stammbaeume_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">plotAncDes</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Essex"</span>, sbGeneal, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"blue"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> ggplot2<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">labs</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Generation index"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">""</span>)</span></code></pre></div>
+<div class="cell-output-display">
+<p><img src="https://sbloggel.netlify.app/posts/2023-11-03-stammbaeume/2023-11-03-stammbaeume_files/figure-html/unnamed-chunk-1-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="mit-dem-paket-igraph" class="level2">
+<h2 class="anchored" data-anchor-id="mit-dem-paket-igraph">Mit dem Paket <code>igraph</code></h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'igraph'</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'igraph'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:lubridate':
+
+    %--%, union</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:dplyr':
+
+    as_data_frame, groups, union</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:purrr':
+
+    compose, simplify</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:tidyr':
+
+    crossing</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:tibble':
+
+    as_data_frame</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:stats':
+
+    decompose, spectrum</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:base':
+
+    union</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1">tree <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">make_tree</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">20</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>)</span>
+<span id="cb14-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">plot</span>(tree, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">layout=</span>layout_as_tree)</span></code></pre></div>
+<div class="cell-output-display">
+<p><img src="https://sbloggel.netlify.app/posts/2023-11-03-stammbaeume/2023-11-03-stammbaeume_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">plot</span>(tree, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">layout=</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">layout_as_tree</span>(tree, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">flip.y=</span><span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">FALSE</span>))</span></code></pre></div>
+<div class="cell-output-display">
+<p><img src="https://sbloggel.netlify.app/posts/2023-11-03-stammbaeume/2023-11-03-stammbaeume_files/figure-html/unnamed-chunk-2-2.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">plot</span>(tree, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">layout=</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">layout_as_tree</span>(tree, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">circular=</span><span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>))</span></code></pre></div>
+<div class="cell-output-display">
+<p><img src="https://sbloggel.netlify.app/posts/2023-11-03-stammbaeume/2023-11-03-stammbaeume_files/figure-html/unnamed-chunk-2-3.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+
+
+</section>
+
+ ]]></description>
+  <category>R</category>
+  <guid>https://sbloggel.netlify.app/posts/2023-11-03-stammbaeume/2023-11-03-stammbaeume.html</guid>
+  <pubDate>Thu, 02 Nov 2023 23:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Quantifizierung von Alkoholintoxikation</title>
+  <link>https://sbloggel.netlify.app/posts/2023-10-17-quantifizierung-von-alkoholintoxikation/2023-10-17-quantifizierung-von-alkoholintoxikation.html</link>
+  <description><![CDATA[ 
+
+
+
+<p><a href="https://psychiatrietogo.de/tag/atemalkohol/">Link</a> zu Jan Drehers Beitrag</p>
+
+
+
+ ]]></description>
+  <category>R</category>
+  <guid>https://sbloggel.netlify.app/posts/2023-10-17-quantifizierung-von-alkoholintoxikation/2023-10-17-quantifizierung-von-alkoholintoxikation.html</guid>
+  <pubDate>Mon, 16 Oct 2023 22:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Understanding the multivariate normal distribution</title>
+  <link>https://sbloggel.netlify.app/posts/2023-10-10-understanding-the-multivariate-normal-distribution/2023-10-10-understanding-the-multivariate-normal-distribution.html</link>
+  <description><![CDATA[ 
+
+
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'tidyverse'</span>)</span>
+<span id="cb1-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">set.seed</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)</span></code></pre></div>
+</div>
+<section id="relations" class="level2">
+<h2 class="anchored" data-anchor-id="relations">Relations</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1">n <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1e4</span></span>
+<span id="cb2-2">x <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rnorm</span>(n)</span>
+<span id="cb2-3">p_values <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">pnorm</span>(x)</span>
+<span id="cb2-4"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">plot</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ecdf</span>(p_values))</span>
+<span id="cb2-5"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">abline</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">col =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'red'</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">lty =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'dotted'</span>)</span></code></pre></div>
+<div class="cell-output-display">
+<p><img src="https://sbloggel.netlify.app/posts/2023-10-10-understanding-the-multivariate-normal-distribution/2023-10-10-understanding-the-multivariate-normal-distribution_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># help(package = 'mvtnorm')</span></span>
+<span id="cb3-2"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># help(package = 'multcomp')</span></span>
+<span id="cb3-3"></span>
+<span id="cb3-4"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'mvtnorm'</span>)</span>
+<span id="cb3-5">var_x1 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span></span>
+<span id="cb3-6">var_x2 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span></span>
+<span id="cb3-7">cov_x1_x2 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.3</span></span>
+<span id="cb3-8">sigma <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cbind</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(var_x1, cov_x1_x2), <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(cov_x1_x2, var_x2))</span>
+<span id="cb3-9">dat <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rmvnorm</span>(n, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">mean =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">sigma =</span> sigma)</span>
+<span id="cb3-10"></span>
+<span id="cb3-11"></span>
+<span id="cb3-12"></span>
+<span id="cb3-13">calc_p <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">function</span>(x) {</span>
+<span id="cb3-14">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">pmvnorm</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">lower =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ifelse</span>(x <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&lt;</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, x, <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">Inf</span>),</span>
+<span id="cb3-15">          <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">upper =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ifelse</span>(x <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, x, <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">Inf</span>),</span>
+<span id="cb3-16">          <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">corr =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cov2cor</span>(sigma))</span>
+<span id="cb3-17">}</span>
+<span id="cb3-18"></span>
+<span id="cb3-19"></span>
+<span id="cb3-20"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># should be a straight line, but isn't - I don't understand why...</span></span>
+<span id="cb3-21">p_values <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">apply</span>(dat[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">min</span>(n, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1e4</span>), ], <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, calc_p)</span>
+<span id="cb3-22"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">plot</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ecdf</span>(p_values), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">xlim =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>))</span>
+<span id="cb3-23"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">abline</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">col =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'red'</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">lty =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'dotted'</span>)</span></code></pre></div>
+<div class="cell-output-display">
+<p><img src="https://sbloggel.netlify.app/posts/2023-10-10-understanding-the-multivariate-normal-distribution/2023-10-10-understanding-the-multivariate-normal-distribution_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1">ii_1 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> dat[, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>] <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&lt;</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">qnorm</span>(<span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.025</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">sd =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sqrt</span>(var_x1))</span>
+<span id="cb4-2">ii_2 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> dat[, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>] <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&lt;</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">qnorm</span>(<span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.025</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">sd =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sqrt</span>(var_x2))</span>
+<span id="cb4-3"></span>
+<span id="cb4-4"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sum</span>(ii_1)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 229</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sum</span>(ii_2)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 246</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sum</span>(ii_1 <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|</span> ii_2)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 457</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sum</span>(ii_1 <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&amp;</span> ii_2)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 18</code></pre>
+</div>
+</div>
+
+
+</section>
+
+ ]]></description>
+  <category>R</category>
+  <guid>https://sbloggel.netlify.app/posts/2023-10-10-understanding-the-multivariate-normal-distribution/2023-10-10-understanding-the-multivariate-normal-distribution.html</guid>
+  <pubDate>Mon, 09 Oct 2023 22:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Decision trees</title>
   <link>https://sbloggel.netlify.app/posts/2023-10-07-decision-trees/2023-10-07-decision-trees.html</link>
@@ -5245,1458 +5717,6 @@ font-style: inherit;">1</span>)</span></code></pre></div>
   <category>R</category>
   <guid>https://sbloggel.netlify.app/posts/2023-08-05-regularization-in-r/2023-08-05-regularization-in-r.html</guid>
   <pubDate>Fri, 04 Aug 2023 22:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Getting to know mlr3</title>
-  <link>https://sbloggel.netlify.app/posts/2023-08-04-getting-to-know-mlr3/2023-08-04-getting-to-know-mlr3.html</link>
-  <description><![CDATA[ 
-
-
-
-<p><a href="https://cran.r-project.org/package=mlr3">Link to package</a></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">set.seed</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>)</span>
-<span id="cb1-2"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'mlr3'</span>)</span></code></pre></div>
-</div>
-
-
-
- ]]></description>
-  <category>R</category>
-  <guid>https://sbloggel.netlify.app/posts/2023-08-04-getting-to-know-mlr3/2023-08-04-getting-to-know-mlr3.html</guid>
-  <pubDate>Thu, 03 Aug 2023 22:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Getting to know tidymodels</title>
-  <link>https://sbloggel.netlify.app/posts/2023-08-04-getting-to-know-tidymodels/2023-08-04-getting-to-know-tidymodels.html</link>
-  <description><![CDATA[ 
-
-
-
-<ul>
-<li>Tutorials by Julia Silge: <a href="https://www.youtube.com/@JuliaSilge/search">Link</a></li>
-<li>Blog post criticising tidymodels: <a href="https://staffblogs.le.ac.uk/teachingr/2020/10/05/on-not-using-tidymodels/">Link</a>, written by <a href="https://github.com/thompson575">this person</a></li>
-</ul>
-<section id="which-packages-belong-to-the-metapackage-tidymodels" class="level2">
-<h2 class="anchored" data-anchor-id="which-packages-belong-to-the-metapackage-tidymodels">Which packages belong to the metapackage tidymodels</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1">tidymodels<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">tidymodels_packages</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">include_self =</span> <span class="cn" style="color: #8f5902;
-background-color: null;
-font-style: inherit;">TRUE</span>)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code> [1] "broom"        "cli"          "conflicted"   "dials"        "dplyr"       
- [6] "ggplot2"      "hardhat"      "infer"        "modeldata"    "parsnip"     
-[11] "purrr"        "recipes"      "rlang"        "rsample"      "rstudioapi"  
-[16] "tibble"       "tidyr"        "tune"         "workflows"    "workflowsets"
-[21] "yardstick"    "tidymodels"  </code></pre>
-</div>
-</div>
-</section>
-<section id="tutorial-1---palmerpenguins-dataset" class="level2">
-<h2 class="anchored" data-anchor-id="tutorial-1---palmerpenguins-dataset">Tutorial 1 - palmerpenguins dataset</h2>
-<ul>
-<li><a href="https://juliasilge.com/blog/palmer-penguins/">Link</a></li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">set.seed</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>)</span>
-<span id="cb3-2"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'tidyverse'</span>)</span></code></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.1.2     ✔ readr     2.1.4
-✔ forcats   1.0.0     ✔ stringr   1.5.0
-✔ ggplot2   3.4.2     ✔ tibble    3.2.1
-✔ lubridate 1.9.2     ✔ tidyr     1.3.0
-✔ purrr     1.0.1     
-── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-✖ dplyr::filter() masks stats::filter()
-✖ dplyr::lag()    masks stats::lag()
-ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'palmerpenguins'</span>)</span>
-<span id="cb5-2"></span>
-<span id="cb5-3">penguins_df <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> penguins <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">%&gt;%</span></span>
-<span id="cb5-4">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">filter</span>(<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">!</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">is.na</span>(sex)) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">%&gt;%</span></span>
-<span id="cb5-5">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">select</span>(<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span>year, <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span>island)</span></code></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(tidymodels)</span></code></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>── Attaching packages ────────────────────────────────────── tidymodels 1.1.0 ──</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>✔ broom        1.0.4     ✔ rsample      1.1.1
-✔ dials        1.2.0     ✔ tune         1.1.1
-✔ infer        1.0.4     ✔ workflows    1.1.3
-✔ modeldata    1.1.0     ✔ workflowsets 1.0.1
-✔ parsnip      1.1.0     ✔ yardstick    1.2.0
-✔ recipes      1.0.6     </code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>── Conflicts ───────────────────────────────────────── tidymodels_conflicts() ──
-✖ scales::discard() masks purrr::discard()
-✖ dplyr::filter()   masks stats::filter()
-✖ recipes::fixed()  masks stringr::fixed()
-✖ dplyr::lag()      masks stats::lag()
-✖ yardstick::spec() masks readr::spec()
-✖ recipes::step()   masks stats::step()
-• Search for functions across packages at https://www.tidymodels.org/find/</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">glimpse</span>(penguins_df)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Rows: 333
-Columns: 6
-$ species           &lt;fct&gt; Adelie, Adelie, Adelie, Adelie, Adelie, Adelie, Adel…
-$ bill_length_mm    &lt;dbl&gt; 39.1, 39.5, 40.3, 36.7, 39.3, 38.9, 39.2, 41.1, 38.6…
-$ bill_depth_mm     &lt;dbl&gt; 18.7, 17.4, 18.0, 19.3, 20.6, 17.8, 19.6, 17.6, 21.2…
-$ flipper_length_mm &lt;int&gt; 181, 186, 195, 193, 190, 181, 195, 182, 191, 198, 18…
-$ body_mass_g       &lt;int&gt; 3750, 3800, 3250, 3450, 3650, 3625, 4675, 3200, 3800…
-$ sex               &lt;fct&gt; male, female, female, female, male, female, male, fe…</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1">penguin_split <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">initial_split</span>(penguins_df, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">strata =</span> sex)</span>
-<span id="cb12-2"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">str</span>(penguin_split)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>List of 4
- $ data  : tibble [333 × 6] (S3: tbl_df/tbl/data.frame)
-  ..$ species          : Factor w/ 3 levels "Adelie","Chinstrap",..: 1 1 1 1 1 1 1 1 1 1 ...
-  ..$ bill_length_mm   : num [1:333] 39.1 39.5 40.3 36.7 39.3 38.9 39.2 41.1 38.6 34.6 ...
-  ..$ bill_depth_mm    : num [1:333] 18.7 17.4 18 19.3 20.6 17.8 19.6 17.6 21.2 21.1 ...
-  ..$ flipper_length_mm: int [1:333] 181 186 195 193 190 181 195 182 191 198 ...
-  ..$ body_mass_g      : int [1:333] 3750 3800 3250 3450 3650 3625 4675 3200 3800 4400 ...
-  ..$ sex              : Factor w/ 2 levels "female","male": 2 1 1 1 2 1 2 1 2 2 ...
- $ in_id : int [1:249] 2 3 4 11 12 18 24 26 28 33 ...
- $ out_id: logi NA
- $ id    : tibble [1 × 1] (S3: tbl_df/tbl/data.frame)
-  ..$ id: chr "Resample1"
- - attr(*, "class")= chr [1:3] "initial_split" "mc_split" "rsplit"</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1">penguin_train <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">training</span>(penguin_split)</span>
-<span id="cb14-2"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">str</span>(penguin_train)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>tibble [249 × 6] (S3: tbl_df/tbl/data.frame)
- $ species          : Factor w/ 3 levels "Adelie","Chinstrap",..: 1 1 1 1 1 1 1 1 1 1 ...
- $ bill_length_mm   : num [1:249] 39.5 40.3 36.7 36.6 38.7 35.9 37.9 39.5 39.5 42.2 ...
- $ bill_depth_mm    : num [1:249] 17.4 18 19.3 17.8 19 19.2 18.6 16.7 17.8 18.5 ...
- $ flipper_length_mm: int [1:249] 186 195 193 185 195 189 172 178 188 180 ...
- $ body_mass_g      : int [1:249] 3800 3250 3450 3700 3450 3800 3150 3250 3300 3550 ...
- $ sex              : Factor w/ 2 levels "female","male": 1 1 1 1 1 1 1 1 1 1 ...</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1">penguin_test <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">testing</span>(penguin_split)</span></code></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb17" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">set.seed</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">123</span>)</span>
-<span id="cb17-2">penguin_boot <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">bootstraps</span>(penguin_train)</span>
-<span id="cb17-3">penguin_boot</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># Bootstrap sampling 
-# A tibble: 25 × 2
-   splits           id         
-   &lt;list&gt;           &lt;chr&gt;      
- 1 &lt;split [249/93]&gt; Bootstrap01
- 2 &lt;split [249/91]&gt; Bootstrap02
- 3 &lt;split [249/90]&gt; Bootstrap03
- 4 &lt;split [249/91]&gt; Bootstrap04
- 5 &lt;split [249/85]&gt; Bootstrap05
- 6 &lt;split [249/87]&gt; Bootstrap06
- 7 &lt;split [249/94]&gt; Bootstrap07
- 8 &lt;split [249/88]&gt; Bootstrap08
- 9 &lt;split [249/95]&gt; Bootstrap09
-10 &lt;split [249/89]&gt; Bootstrap10
-# ℹ 15 more rows</code></pre>
-</div>
-</div>
-<section id="question" class="level3">
-<h3 class="anchored" data-anchor-id="question">Question:</h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb19" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># how can I extract a single bootstrap sample?</span></span>
-<span id="cb19-2">x <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> penguin_boot <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span> </span>
-<span id="cb19-3">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">select</span>(splits) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span> </span>
-<span id="cb19-4">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">slice</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span></span>
-<span id="cb19-5">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">pull</span>()</span>
-<span id="cb19-6"></span>
-<span id="cb19-7">x[[<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>]]<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span>data</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 249 × 6
-   species bill_length_mm bill_depth_mm flipper_length_mm body_mass_g sex   
-   &lt;fct&gt;            &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;       &lt;int&gt; &lt;fct&gt; 
- 1 Adelie            39.5          17.4               186        3800 female
- 2 Adelie            40.3          18                 195        3250 female
- 3 Adelie            36.7          19.3               193        3450 female
- 4 Adelie            36.6          17.8               185        3700 female
- 5 Adelie            38.7          19                 195        3450 female
- 6 Adelie            35.9          19.2               189        3800 female
- 7 Adelie            37.9          18.6               172        3150 female
- 8 Adelie            39.5          16.7               178        3250 female
- 9 Adelie            39.5          17.8               188        3300 female
-10 Adelie            42.2          18.5               180        3550 female
-# ℹ 239 more rows</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb21" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1">x <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> penguin_boot <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span> </span>
-<span id="cb21-2">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">filter</span>(id <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">==</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'Bootstrap01'</span>) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span> </span>
-<span id="cb21-3">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">select</span>(splits) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span> </span>
-<span id="cb21-4">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">pull</span>()</span>
-<span id="cb21-5"></span>
-<span id="cb21-6">x[[<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>]]<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span>data</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 249 × 6
-   species bill_length_mm bill_depth_mm flipper_length_mm body_mass_g sex   
-   &lt;fct&gt;            &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;       &lt;int&gt; &lt;fct&gt; 
- 1 Adelie            39.5          17.4               186        3800 female
- 2 Adelie            40.3          18                 195        3250 female
- 3 Adelie            36.7          19.3               193        3450 female
- 4 Adelie            36.6          17.8               185        3700 female
- 5 Adelie            38.7          19                 195        3450 female
- 6 Adelie            35.9          19.2               189        3800 female
- 7 Adelie            37.9          18.6               172        3150 female
- 8 Adelie            39.5          16.7               178        3250 female
- 9 Adelie            39.5          17.8               188        3300 female
-10 Adelie            42.2          18.5               180        3550 female
-# ℹ 239 more rows</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb23" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1">glm_spec <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">logistic_reg</span>() <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">%&gt;%</span></span>
-<span id="cb23-2">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">set_engine</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"glm"</span>)</span></code></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb24" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1">rf_spec <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">rand_forest</span>() <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">%&gt;%</span></span>
-<span id="cb24-2">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">set_mode</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"classification"</span>) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">%&gt;%</span></span>
-<span id="cb24-3">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">set_engine</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"ranger"</span>)</span>
-<span id="cb24-4"></span>
-<span id="cb24-5">rf_spec</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Random Forest Model Specification (classification)
-
-Computational engine: ranger </code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb26" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1">penguin_wf <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">workflow</span>() <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">%&gt;%</span></span>
-<span id="cb26-2">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">add_formula</span>(sex <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">~</span> .)</span>
-<span id="cb26-3"></span>
-<span id="cb26-4">penguin_wf</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>══ Workflow ════════════════════════════════════════════════════════════════════
-Preprocessor: Formula
-Model: None
-
-── Preprocessor ────────────────────────────────────────────────────────────────
-sex ~ .</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb28" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1">glm_rs <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> penguin_wf <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">%&gt;%</span></span>
-<span id="cb28-2">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">add_model</span>(glm_spec) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">%&gt;%</span></span>
-<span id="cb28-3">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">fit_resamples</span>(</span>
-<span id="cb28-4">    <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">resamples =</span> penguin_boot,</span>
-<span id="cb28-5">    <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">control =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">control_resamples</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">save_pred =</span> <span class="cn" style="color: #8f5902;
-background-color: null;
-font-style: inherit;">TRUE</span>)</span>
-<span id="cb28-6">  )</span></code></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>→ A | warning: glm.fit: fitted probabilities numerically 0 or 1 occurred</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>There were issues with some computations   A: x1</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>There were issues with some computations   A: x2</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code></code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb33" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1">glm_rs</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># Resampling results
-# Bootstrap sampling 
-# A tibble: 25 × 5
-   splits           id          .metrics         .notes           .predictions
-   &lt;list&gt;           &lt;chr&gt;       &lt;list&gt;           &lt;list&gt;           &lt;list&gt;      
- 1 &lt;split [249/93]&gt; Bootstrap01 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 3]&gt; &lt;tibble&gt;    
- 2 &lt;split [249/91]&gt; Bootstrap02 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 3]&gt; &lt;tibble&gt;    
- 3 &lt;split [249/90]&gt; Bootstrap03 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 3]&gt; &lt;tibble&gt;    
- 4 &lt;split [249/91]&gt; Bootstrap04 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 3]&gt; &lt;tibble&gt;    
- 5 &lt;split [249/85]&gt; Bootstrap05 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 3]&gt; &lt;tibble&gt;    
- 6 &lt;split [249/87]&gt; Bootstrap06 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 3]&gt; &lt;tibble&gt;    
- 7 &lt;split [249/94]&gt; Bootstrap07 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 3]&gt; &lt;tibble&gt;    
- 8 &lt;split [249/88]&gt; Bootstrap08 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 3]&gt; &lt;tibble&gt;    
- 9 &lt;split [249/95]&gt; Bootstrap09 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 3]&gt; &lt;tibble&gt;    
-10 &lt;split [249/89]&gt; Bootstrap10 &lt;tibble [2 × 4]&gt; &lt;tibble [1 × 3]&gt; &lt;tibble&gt;    
-# ℹ 15 more rows
-
-There were issues with some computations:
-
-  - Warning(s) x2: glm.fit: fitted probabilities numerically 0 or 1 occurred
-
-Run `show_notes(.Last.tune.result)` for more information.</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb35" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1">rf_rs <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> penguin_wf <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">%&gt;%</span></span>
-<span id="cb35-2">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">add_model</span>(rf_spec) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">%&gt;%</span></span>
-<span id="cb35-3">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">fit_resamples</span>(</span>
-<span id="cb35-4">    <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">resamples =</span> penguin_boot,</span>
-<span id="cb35-5">    <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">control =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">control_resamples</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">save_pred =</span> <span class="cn" style="color: #8f5902;
-background-color: null;
-font-style: inherit;">TRUE</span>)</span>
-<span id="cb35-6">  )</span>
-<span id="cb35-7"></span>
-<span id="cb35-8">rf_rs</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># Resampling results
-# Bootstrap sampling 
-# A tibble: 25 × 5
-   splits           id          .metrics         .notes           .predictions
-   &lt;list&gt;           &lt;chr&gt;       &lt;list&gt;           &lt;list&gt;           &lt;list&gt;      
- 1 &lt;split [249/93]&gt; Bootstrap01 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 3]&gt; &lt;tibble&gt;    
- 2 &lt;split [249/91]&gt; Bootstrap02 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 3]&gt; &lt;tibble&gt;    
- 3 &lt;split [249/90]&gt; Bootstrap03 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 3]&gt; &lt;tibble&gt;    
- 4 &lt;split [249/91]&gt; Bootstrap04 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 3]&gt; &lt;tibble&gt;    
- 5 &lt;split [249/85]&gt; Bootstrap05 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 3]&gt; &lt;tibble&gt;    
- 6 &lt;split [249/87]&gt; Bootstrap06 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 3]&gt; &lt;tibble&gt;    
- 7 &lt;split [249/94]&gt; Bootstrap07 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 3]&gt; &lt;tibble&gt;    
- 8 &lt;split [249/88]&gt; Bootstrap08 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 3]&gt; &lt;tibble&gt;    
- 9 &lt;split [249/95]&gt; Bootstrap09 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 3]&gt; &lt;tibble&gt;    
-10 &lt;split [249/89]&gt; Bootstrap10 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 3]&gt; &lt;tibble&gt;    
-# ℹ 15 more rows</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb37" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">collect_metrics</span>(rf_rs)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 2 × 6
-  .metric  .estimator  mean     n std_err .config             
-  &lt;chr&gt;    &lt;chr&gt;      &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;               
-1 accuracy binary     0.899    25 0.00704 Preprocessor1_Model1
-2 roc_auc  binary     0.971    25 0.00307 Preprocessor1_Model1</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb39" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">collect_metrics</span>(glm_rs)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 2 × 6
-  .metric  .estimator  mean     n std_err .config             
-  &lt;chr&gt;    &lt;chr&gt;      &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;               
-1 accuracy binary     0.919    25 0.00527 Preprocessor1_Model1
-2 roc_auc  binary     0.977    25 0.00220 Preprocessor1_Model1</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb41" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1">glm_rs <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">%&gt;%</span></span>
-<span id="cb41-2">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">conf_mat_resampled</span>()</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 4 × 3
-  Prediction Truth   Freq
-  &lt;fct&gt;      &lt;fct&gt;  &lt;dbl&gt;
-1 female     female 41.8 
-2 female     male    3.72
-3 male       female  3.68
-4 male       male   41.6 </code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb43" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1">glm_rs <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">%&gt;%</span></span>
-<span id="cb43-2">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">collect_predictions</span>() <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">%&gt;%</span></span>
-<span id="cb43-3">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">group_by</span>(id) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">%&gt;%</span></span>
-<span id="cb43-4">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">roc_curve</span>(sex, .pred_female) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">%&gt;%</span></span>
-<span id="cb43-5">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">ggplot</span>(<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">aes</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span> specificity, sensitivity, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">color =</span> id)) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span></span>
-<span id="cb43-6">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">geom_abline</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">lty =</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">color =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"gray80"</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">linewidth =</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1.5</span>) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span></span>
-<span id="cb43-7">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">geom_path</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">show.legend =</span> <span class="cn" style="color: #8f5902;
-background-color: null;
-font-style: inherit;">FALSE</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">alpha =</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.6</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">linewidth =</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1.2</span>) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span></span>
-<span id="cb43-8">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">coord_equal</span>()</span></code></pre></div>
-<div class="cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2023-08-04-getting-to-know-tidymodels/2023-08-04-getting-to-know-tidymodels_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb44" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1">penguin_final <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> penguin_wf <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">%&gt;%</span></span>
-<span id="cb44-2">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">add_model</span>(glm_spec) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">%&gt;%</span></span>
-<span id="cb44-3">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">last_fit</span>(penguin_split)</span>
-<span id="cb44-4"></span>
-<span id="cb44-5">penguin_final</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># Resampling results
-# Manual resampling 
-# A tibble: 1 × 6
-  splits           id               .metrics .notes   .predictions .workflow 
-  &lt;list&gt;           &lt;chr&gt;            &lt;list&gt;   &lt;list&gt;   &lt;list&gt;       &lt;list&gt;    
-1 &lt;split [249/84]&gt; train/test split &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt;     &lt;workflow&gt;</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb46" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">collect_metrics</span>(penguin_final)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 2 × 4
-  .metric  .estimator .estimate .config             
-  &lt;chr&gt;    &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt;               
-1 accuracy binary         0.905 Preprocessor1_Model1
-2 roc_auc  binary         0.966 Preprocessor1_Model1</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb48" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">collect_predictions</span>(penguin_final) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">%&gt;%</span></span>
-<span id="cb48-2">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">conf_mat</span>(sex, .pred_class)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>          Truth
-Prediction female male
-    female     39    5
-    male        3   37</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb50" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1">penguin_final<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span>.workflow[[<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>]] <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">%&gt;%</span></span>
-<span id="cb50-2">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">tidy</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">exponentiate =</span> <span class="cn" style="color: #8f5902;
-background-color: null;
-font-style: inherit;">TRUE</span>)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 7 × 5
-  term              estimate std.error statistic     p.value
-  &lt;chr&gt;                &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt;
-1 (Intercept)       2.35e-42  18.1        -5.30  0.000000115
-2 speciesChinstrap  9.76e- 4   1.91       -3.62  0.000295   
-3 speciesGentoo     1.96e- 4   3.25       -2.63  0.00866    
-4 bill_length_mm    1.88e+ 0   0.159       4.00  0.0000639  
-5 bill_depth_mm     7.50e+ 0   0.455       4.43  0.00000940 
-6 flipper_length_mm 1.06e+ 0   0.0653      0.863 0.388      
-7 body_mass_g       1.01e+ 0   0.00138     4.63  0.00000374 </code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb52" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1">penguins <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">%&gt;%</span></span>
-<span id="cb52-2">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">filter</span>(<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">!</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">is.na</span>(sex)) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">%&gt;%</span></span>
-<span id="cb52-3">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">ggplot</span>(<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">aes</span>(bill_depth_mm, bill_length_mm, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">color =</span> sex, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">size =</span> body_mass_g)) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span></span>
-<span id="cb52-4">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">geom_point</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">alpha =</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.5</span>) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span></span>
-<span id="cb52-5">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">facet_wrap</span>(<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">~</span>species)</span></code></pre></div>
-<div class="cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2023-08-04-getting-to-know-tidymodels/2023-08-04-getting-to-know-tidymodels_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-
-
-</section>
-</section>
-
- ]]></description>
-  <category>R</category>
-  <guid>https://sbloggel.netlify.app/posts/2023-08-04-getting-to-know-tidymodels/2023-08-04-getting-to-know-tidymodels.html</guid>
-  <pubDate>Thu, 03 Aug 2023 22:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Kaplan Meier plots</title>
-  <link>https://sbloggel.netlify.app/posts/2023-08-03-kaplan-meier-plots/2023-08-03-kaplan-meier-plots.html</link>
-  <description><![CDATA[ 
-
-
-
-<p>Goal: draw facetted Kaplan-Meier-plots with p-value</p>
-<section id="with-ggquickeda" class="level2">
-<h2 class="anchored" data-anchor-id="with-ggquickeda">With ggquickeda</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'tidyverse'</span>)</span></code></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.1.2     ✔ readr     2.1.4
-✔ forcats   1.0.0     ✔ stringr   1.5.0
-✔ ggplot2   3.4.2     ✔ tibble    3.2.1
-✔ lubridate 1.9.2     ✔ tidyr     1.3.0
-✔ purrr     1.0.1     
-── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-✖ dplyr::filter() masks stats::filter()
-✖ dplyr::lag()    masks stats::lag()
-ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'survival'</span>)</span>
-<span id="cb3-2"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'ggquickeda'</span>)</span></code></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>
-Attaching package: 'ggquickeda'
-
-The following object is masked from 'package:base':
-
-    +</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1">text_to_add <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> </span>
-<span id="cb5-2">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">tribble</span>(<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">~</span> sex, <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">~</span> text, <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">~</span> x, <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">~</span> y, </span>
-<span id="cb5-3">          <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'Male'</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'p = 0.1'</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3000</span>, <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.95</span>,</span>
-<span id="cb5-4">          <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'Female'</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'p = 0.03'</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3000</span>, <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.95</span>)</span>
-<span id="cb5-5"></span>
-<span id="cb5-6"></span>
-<span id="cb5-7"></span>
-<span id="cb5-8">colon <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span> </span>
-<span id="cb5-9">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">sex =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">case_when</span>(</span>
-<span id="cb5-10">    sex <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">==</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">~</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'Male'</span>,</span>
-<span id="cb5-11">    sex <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">==</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">~</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'Female'</span>)) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span> </span>
-<span id="cb5-12">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">perfor =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">factor</span>(perfor)) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span> </span>
-<span id="cb5-13">  </span>
-<span id="cb5-14">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">ggplot</span>(<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">aes</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">time =</span> time, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">status =</span> status, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">colour =</span> perfor)) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> </span>
-<span id="cb5-15">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">facet_wrap</span>(<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">vars</span>(sex)) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span></span>
-<span id="cb5-16">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">geom_km</span>() <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">geom_kmticks</span>() <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> </span>
-<span id="cb5-17">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">geom_label</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">mapping =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">aes</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">label =</span> text, </span>
-<span id="cb5-18">                           <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">x =</span> x, </span>
-<span id="cb5-19">                           <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">y =</span> y), </span>
-<span id="cb5-20">             <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">data =</span> text_to_add, </span>
-<span id="cb5-21">             <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">inherit.aes =</span> <span class="cn" style="color: #8f5902;
-background-color: null;
-font-style: inherit;">FALSE</span>) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span></span>
-<span id="cb5-22">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">labs</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">x =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'Time'</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">y =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'Estimated survival'</span>)</span></code></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: The following aesthetics were dropped during statistical transformation: status
-ℹ This can happen when ggplot fails to infer the correct grouping structure in
-  the data.
-ℹ Did you forget to specify a `group` aesthetic or to convert a numerical
-  variable into a factor?
-The following aesthetics were dropped during statistical transformation: status
-ℹ This can happen when ggplot fails to infer the correct grouping structure in
-  the data.
-ℹ Did you forget to specify a `group` aesthetic or to convert a numerical
-  variable into a factor?
-The following aesthetics were dropped during statistical transformation: status
-ℹ This can happen when ggplot fails to infer the correct grouping structure in
-  the data.
-ℹ Did you forget to specify a `group` aesthetic or to convert a numerical
-  variable into a factor?
-The following aesthetics were dropped during statistical transformation: status
-ℹ This can happen when ggplot fails to infer the correct grouping structure in
-  the data.
-ℹ Did you forget to specify a `group` aesthetic or to convert a numerical
-  variable into a factor?</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: Using the `size` aesthetic with geom_path was deprecated in ggplot2 3.4.0.
-ℹ Please use the `linewidth` aesthetic instead.</code></pre>
-</div>
-<div class="cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2023-08-03-kaplan-meier-plots/2023-08-03-kaplan-meier-plots_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-</section>
-<section id="with-survminer" class="level2">
-<h2 class="anchored" data-anchor-id="with-survminer">With survminer</h2>
-<section id="do-faceting-with-survminer" class="level3">
-<h3 class="anchored" data-anchor-id="do-faceting-with-survminer">Do faceting with survminer</h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'survminer'</span>)</span></code></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: ggpubr</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>
-Attaching package: 'survminer'</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following object is masked from 'package:survival':
-
-    myeloma</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1">fit <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">survfit</span>( <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">Surv</span>(time, status) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">~</span> sex <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> rx, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">data =</span> colon )</span>
-<span id="cb12-2"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">ggsurvplot_facet</span>(fit, colon, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">facet.by =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'rx'</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'perfor'</span>), </span>
-<span id="cb12-3">                 <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">pval =</span> <span class="cn" style="color: #8f5902;
-background-color: null;
-font-style: inherit;">TRUE</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">ggtheme =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">theme_grey</span>())</span></code></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: `as.tibble()` was deprecated in tibble 2.0.0.
-ℹ Please use `as_tibble()` instead.
-ℹ The signature and semantics have changed, see `?as_tibble`.
-ℹ The deprecated feature was likely used in the survminer package.
-  Please report the issue at &lt;https://github.com/kassambara/survminer/issues&gt;.</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: `select_()` was deprecated in dplyr 0.7.0.
-ℹ Please use `select()` instead.
-ℹ The deprecated feature was likely used in the survminer package.
-  Please report the issue at &lt;https://github.com/kassambara/survminer/issues&gt;.</code></pre>
-</div>
-<div class="cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2023-08-03-kaplan-meier-plots/2023-08-03-kaplan-meier-plots_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-</section>
-<section id="extract-plot-object-so-it-can-be-modified-in-a-more-usual-ggplot2-style" class="level3">
-<h3 class="anchored" data-anchor-id="extract-plot-object-so-it-can-be-modified-in-a-more-usual-ggplot2-style">Extract plot object so it can be modified in a more usual ggplot2 style</h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1">fit <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">survfit</span>( <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">Surv</span>(time, status) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">~</span> sex <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> rx <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> perfor, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">data =</span> colon )</span>
-<span id="cb15-2">gg <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">ggsurvplot</span>(fit, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">data =</span> colon, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">color =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'perfor'</span>)</span>
-<span id="cb15-3">gg<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span>plot <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">theme_grey</span>() <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">labs</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">color =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'perfor'</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">x =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'Time [days]'</span>) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">facet_wrap</span>(<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">~</span> sex <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> rx, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">labeller =</span> label_both)</span></code></pre></div>
-<div class="cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2023-08-03-kaplan-meier-plots/2023-08-03-kaplan-meier-plots_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1">fit <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">survfit</span>( <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">Surv</span>(time, status) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">~</span> sex <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> perfor, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">data =</span> colon )</span>
-<span id="cb16-2">gg <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">ggsurvplot</span>(fit, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">data =</span> colon, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">color =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'perfor'</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">pval =</span> <span class="cn" style="color: #8f5902;
-background-color: null;
-font-style: inherit;">TRUE</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">facet.by =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'sex'</span>)</span></code></pre></div>
-</div>
-</section>
-<section id="show-possible-problem-in-survminer" class="level3">
-<h3 class="anchored" data-anchor-id="show-possible-problem-in-survminer">Show possible problem in survminer</h3>
-<ul>
-<li>After facetting, the p-values seem not be correct anymore</li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb17" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1">fit <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">survfit</span>(<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">Surv</span>(time, status) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">~</span> sex <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> rx, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">data =</span> colon)</span>
-<span id="cb17-2">gg <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">ggsurvplot</span>(fit, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">pval =</span> <span class="cn" style="color: #8f5902;
-background-color: null;
-font-style: inherit;">TRUE</span>)</span>
-<span id="cb17-3">gg</span></code></pre></div>
-<div class="cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2023-08-03-kaplan-meier-plots/2023-08-03-kaplan-meier-plots_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
-</div>
-<div class="sourceCode cell-code" id="cb18" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1">gg<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span>plot <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">facet_wrap</span>(<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">vars</span>(rx))</span></code></pre></div>
-<div class="cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2023-08-03-kaplan-meier-plots/2023-08-03-kaplan-meier-plots_files/figure-html/unnamed-chunk-5-2.png" class="img-fluid" width="672"></p>
-</div>
-<div class="sourceCode cell-code" id="cb19" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1">gg<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span>plot <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">facet_wrap</span>(<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">vars</span>(rx, sex))</span></code></pre></div>
-<div class="cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2023-08-03-kaplan-meier-plots/2023-08-03-kaplan-meier-plots_files/figure-html/unnamed-chunk-5-3.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-</section>
-<section id="try-to-help-someone" class="level3">
-<h3 class="anchored" data-anchor-id="try-to-help-someone">Try to help someone</h3>
-<ul>
-<li><a href="https://github.com/kassambara/survminer/issues/617">Link</a></li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb20" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'survival'</span>)</span>
-<span id="cb20-2"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'tidyverse'</span>)</span>
-<span id="cb20-3"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'survminer'</span>)</span>
-<span id="cb20-4"></span>
-<span id="cb20-5">text_to_add <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> </span>
-<span id="cb20-6">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">tribble</span>(<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">~</span> sex, <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">~</span> text, <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">~</span> x, <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">~</span> y, </span>
-<span id="cb20-7">          <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'Some text'</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1000</span>, <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.1</span>,</span>
-<span id="cb20-8">          <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'Some other text'</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1000</span>, <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.1</span>)</span>
-<span id="cb20-9"></span>
-<span id="cb20-10">fit <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">survfit</span>(<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">Surv</span>(time, status) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">~</span> sex, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">data =</span> colon)</span>
-<span id="cb20-11">gg <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">ggsurvplot</span>(fit)</span>
-<span id="cb20-12">gg<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span>plot <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">facet_wrap</span>(<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">vars</span>(sex)) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">theme_gray</span>() <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> </span>
-<span id="cb20-13">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">geom_label</span>(<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">aes</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">x =</span> x, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">y =</span> y, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">label =</span> text),</span>
-<span id="cb20-14">             text_to_add, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">inherit.aes =</span> <span class="cn" style="color: #8f5902;
-background-color: null;
-font-style: inherit;">FALSE</span>)</span></code></pre></div>
-<div class="cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2023-08-03-kaplan-meier-plots/2023-08-03-kaplan-meier-plots_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb21" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1">gg <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">ggsurvplot</span>(fit, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">palette =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'black'</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'black'</span>))</span>
-<span id="cb21-2">gg<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span>plot <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">facet_wrap</span>(<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">vars</span>(sex)) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">theme_gray</span>() <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> </span>
-<span id="cb21-3">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">geom_label</span>(<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">aes</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">x =</span> x, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">y =</span> y, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">label =</span> text),</span>
-<span id="cb21-4">             text_to_add, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">inherit.aes =</span> <span class="cn" style="color: #8f5902;
-background-color: null;
-font-style: inherit;">FALSE</span>) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span></span>
-<span id="cb21-5">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">theme</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">legend.position =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"none"</span>)</span></code></pre></div>
-<div class="cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2023-08-03-kaplan-meier-plots/2023-08-03-kaplan-meier-plots_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-</section>
-</section>
-<section id="with-ggsurvfit" class="level2">
-<h2 class="anchored" data-anchor-id="with-ggsurvfit">With ggsurvfit</h2>
-<ul>
-<li>Link to package: <a href="https://www.danieldsjoberg.com/ggsurvfit/index.html">Link</a></li>
-<li>I found this package later – I don’t know why I haven’t across it earlier</li>
-<li>At first glance, it seams actively maintained and seems to produce really nice plots</li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb22" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'ggsurvfit'</span>)</span>
-<span id="cb22-2"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">glimpse</span>(df_colon)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Rows: 929
-Columns: 14
-$ id       &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18…
-$ rx       &lt;fct&gt; Levamisole+5-FU, Levamisole+5-FU, Observation, Levamisole+5-F…
-$ sex      &lt;fct&gt; Male, Male, Female, Female, Male, Female, Male, Male, Male, F…
-$ age      &lt;dbl&gt; 43, 63, 71, 66, 69, 57, 77, 54, 46, 68, 47, 52, 64, 68, 46, 6…
-$ obstruct &lt;fct&gt; Not Obstructed, Not Obstructed, Not Obstructed, Obstructed, N…
-$ perfor   &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
-$ adhere   &lt;fct&gt; Not Adhered, Not Adhered, Adhered, Not Adhered, Not Adhered, …
-$ nodes    &lt;dbl&gt; 5, 1, 7, 6, 22, 9, 5, 1, 2, 1, 1, 2, 1, 3, 4, 1, 6, 1, 1, 1, …
-$ status   &lt;dbl&gt; 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 0, 0…
-$ differ   &lt;fct&gt; Moderate, Moderate, Moderate, Moderate, Moderate, Moderate, M…
-$ extent   &lt;fct&gt; Serosa, Serosa, Muscle, Serosa, Serosa, Serosa, Serosa, Seros…
-$ surg     &lt;fct&gt; Limited Time Since Surgery, Limited Time Since Surgery, Limit…
-$ node4    &lt;dbl&gt; 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0…
-$ time     &lt;dbl&gt; 2.6502396, 8.4517454, 1.4839151, 0.6707734, 1.4318960, 2.4750…</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb24" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">survfit2</span>(<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">Surv</span>(time, status) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">~</span> surg, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">data =</span> df_colon) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span></span>
-<span id="cb24-2">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">ggsurvfit</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">linewidth =</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span></span>
-<span id="cb24-3">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">add_confidence_interval</span>() <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span></span>
-<span id="cb24-4">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">add_risktable</span>() <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span></span>
-<span id="cb24-5">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">add_quantile</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">y_value =</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.6</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">color =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"gray50"</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">linewidth =</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.75</span>)</span></code></pre></div>
-<div class="cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2023-08-03-kaplan-meier-plots/2023-08-03-kaplan-meier-plots_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-
-
-</section>
-
- ]]></description>
-  <category>R</category>
-  <guid>https://sbloggel.netlify.app/posts/2023-08-03-kaplan-meier-plots/2023-08-03-kaplan-meier-plots.html</guid>
-  <pubDate>Wed, 02 Aug 2023 22:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>

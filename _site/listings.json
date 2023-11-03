@@ -2,6 +2,9 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/2023-11-03-stammbaeume/2023-11-03-stammbaeume.html",
+      "/posts/2023-10-17-quantifizierung-von-alkoholintoxikation/2023-10-17-quantifizierung-von-alkoholintoxikation.html",
+      "/posts/2023-10-10-understanding-the-multivariate-normal-distribution/2023-10-10-understanding-the-multivariate-normal-distribution.html",
       "/posts/2023-10-07-decision-trees/2023-10-07-decision-trees.html",
       "/posts/2023-10-07-gradient-descent/2023-10-07-gradient-descent.html",
       "/posts/2023-09-28-book-study-notes---competing-risks-and-multistate-models-with-r/2023-09-28-book-study-notes---competing-risks-and-multistate-models-with-r.html",

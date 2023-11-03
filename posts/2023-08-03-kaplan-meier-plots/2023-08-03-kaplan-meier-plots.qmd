@@ -102,6 +102,7 @@ gg$plot + facet_wrap(vars(sex)) + theme_gray() +
 
 ## With ggsurvfit
 * Link to package: [Link](https://www.danieldsjoberg.com/ggsurvfit/index.html)
+* Link to article: [Link](https://www.danieldsjoberg.com/ggsurvfit/articles/gallery.html)
 * I found this package later -- I don't know why I haven't across it earlier
 * At first glance, it seams actively maintained and seems to produce really nice plots
 
@@ -114,5 +115,39 @@ survfit2(Surv(time, status) ~ surg, data = df_colon) |>
   add_confidence_interval() +
   add_risktable() +
   add_quantile(y_value = 0.6, color = "gray50", linewidth = 0.75)
+```
+
+
+```{r}
+library('tidyverse')
+library('survival')
+library('tidycmprsk')
+library('ggsurvfit')
+
+n <- 100
+dat <- tibble(t_death = rexp(n),
+              t_relapse = rexp(n),
+              t_censoring = rexp(n),
+              t_event = pmin(t_death, t_censoring),
+              event = ifelse(t_censoring < t_death, 0, 1),
+              group = sample(c('Group A', 'Group B'), replace = TRUE, size = 100))
+
+survfit2(Surv(t_event, event) ~ group, data = dat) |> 
+  ggsurvfit() + 
+  facet_wrap(~ strata) + 
+  add_censor_mark()
+
+
+cuminc(Surv(ttdeath, death_cr) ~ trt + stage, trial) %>%
+  ggcuminc(outcome = "death from cancer") + facet_wrap( ~ strata)
+
+
+survfit2(Surv(time, status) ~ surg, data = df_colon) %>%
+  ggsurvfit() +
+  add_confidence_interval() +
+  facet_wrap(~strata, nrow = 1) +
+  theme(legend.position = "none") +
+  scale_x_continuous(n.breaks = 6) +
+  labs(title = "PFS by Duration between Surgery and Treatment")
 ```
 

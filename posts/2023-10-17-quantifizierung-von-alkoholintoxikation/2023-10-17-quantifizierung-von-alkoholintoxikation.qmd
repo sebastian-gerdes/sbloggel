@@ -1,0 +1,16 @@
+---
+title: Quantifizierung von Alkoholintoxikation
+date: 2023-10-17
+categories:
+  - R
+---
+
+```{r}
+#| label: init
+#| cache: false
+#| include: false
+library('tidyverse')
+set.seed(1)
+```
+
+[Link](https://psychiatrietogo.de/tag/atemalkohol/) zu Jan Drehers Beitrag
