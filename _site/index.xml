@@ -10,188 +10,7 @@
 <atom:link href="https://sbloggel.netlify.app/index.xml" rel="self" type="application/rss+xml"/>
 <description>Seb&#39;s private blog about statistics and other topics</description>
 <generator>quarto-1.3.433</generator>
-<lastBuildDate>Thu, 02 Nov 2023 23:00:00 GMT</lastBuildDate>
-<item>
-  <title>Stammbaeume</title>
-  <link>https://sbloggel.netlify.app/posts/2023-11-03-stammbaeume/2023-11-03-stammbaeume.html</link>
-  <description><![CDATA[ 
-
-
-
-<section id="mit-dem-paket-ggenealogy" class="level2">
-<h2 class="anchored" data-anchor-id="mit-dem-paket-ggenealogy">Mit dem Paket <code>ggenealogy</code></h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'tidyverse'</span>)</span></code></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.1.2     ✔ readr     2.1.4
-✔ forcats   1.0.0     ✔ stringr   1.5.0
-✔ ggplot2   3.4.2     ✔ tibble    3.2.1
-✔ lubridate 1.9.2     ✔ tidyr     1.3.0
-✔ purrr     1.0.2     
-── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-✖ dplyr::filter() masks stats::filter()
-✖ dplyr::lag()    masks stats::lag()
-ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'ggenealogy'</span>)</span>
-<span id="cb3-2"></span>
-<span id="cb3-3"></span>
-<span id="cb3-4"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">data</span>(sbGeneal)</span>
-<span id="cb3-5"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">plotAncDes</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Tokyo"</span>, sbGeneal, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">vColor =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"red"</span>)</span></code></pre></div>
-<div class="cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2023-11-03-stammbaeume/2023-11-03-stammbaeume_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="672"></p>
-</div>
-<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">plotAncDes</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Essex"</span>, sbGeneal, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"blue"</span>) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> ggplot2<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">labs</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">x =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Generation index"</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">y =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">""</span>)</span></code></pre></div>
-<div class="cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2023-11-03-stammbaeume/2023-11-03-stammbaeume_files/figure-html/unnamed-chunk-1-2.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-</section>
-<section id="mit-dem-paket-igraph" class="level2">
-<h2 class="anchored" data-anchor-id="mit-dem-paket-igraph">Mit dem Paket <code>igraph</code></h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'igraph'</span>)</span></code></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>
-Attaching package: 'igraph'</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following objects are masked from 'package:lubridate':
-
-    %--%, union</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following objects are masked from 'package:dplyr':
-
-    as_data_frame, groups, union</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following objects are masked from 'package:purrr':
-
-    compose, simplify</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following object is masked from 'package:tidyr':
-
-    crossing</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following object is masked from 'package:tibble':
-
-    as_data_frame</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following objects are masked from 'package:stats':
-
-    decompose, spectrum</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following object is masked from 'package:base':
-
-    union</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1">tree <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">make_tree</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">20</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span>)</span>
-<span id="cb14-2"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">plot</span>(tree, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">layout=</span>layout_as_tree)</span></code></pre></div>
-<div class="cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2023-11-03-stammbaeume/2023-11-03-stammbaeume_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
-</div>
-<div class="sourceCode cell-code" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">plot</span>(tree, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">layout=</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">layout_as_tree</span>(tree, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">flip.y=</span><span class="cn" style="color: #8f5902;
-background-color: null;
-font-style: inherit;">FALSE</span>))</span></code></pre></div>
-<div class="cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2023-11-03-stammbaeume/2023-11-03-stammbaeume_files/figure-html/unnamed-chunk-2-2.png" class="img-fluid" width="672"></p>
-</div>
-<div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">plot</span>(tree, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">layout=</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">layout_as_tree</span>(tree, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">circular=</span><span class="cn" style="color: #8f5902;
-background-color: null;
-font-style: inherit;">TRUE</span>))</span></code></pre></div>
-<div class="cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2023-11-03-stammbaeume/2023-11-03-stammbaeume_files/figure-html/unnamed-chunk-2-3.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-
-
-</section>
-
- ]]></description>
-  <category>R</category>
-  <guid>https://sbloggel.netlify.app/posts/2023-11-03-stammbaeume/2023-11-03-stammbaeume.html</guid>
-  <pubDate>Thu, 02 Nov 2023 23:00:00 GMT</pubDate>
-</item>
+<lastBuildDate>Mon, 16 Oct 2023 22:00:00 GMT</lastBuildDate>
 <item>
   <title>Quantifizierung von Alkoholintoxikation</title>
   <link>https://sbloggel.netlify.app/posts/2023-10-17-quantifizierung-von-alkoholintoxikation/2023-10-17-quantifizierung-von-alkoholintoxikation.html</link>
@@ -227,6 +46,7 @@ font-style: inherit;">set.seed</span>(<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>)</span></code></pre></div>
 </div>
+<p><a href="https://stats.stackexchange.com/questions/628367/how-do-i-adequately-calculate-the-distribution-of-function-of-the-multivariate-n">Link to question at stackexchange</a></p>
 <section id="relations" class="level2">
 <h2 class="anchored" data-anchor-id="relations">Relations</h2>
 <div class="cell">
@@ -5717,6 +5537,34 @@ font-style: inherit;">1</span>)</span></code></pre></div>
   <category>R</category>
   <guid>https://sbloggel.netlify.app/posts/2023-08-05-regularization-in-r/2023-08-05-regularization-in-r.html</guid>
   <pubDate>Fri, 04 Aug 2023 22:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Getting to know mlr3</title>
+  <link>https://sbloggel.netlify.app/posts/2023-08-04-getting-to-know-mlr3/2023-08-04-getting-to-know-mlr3.html</link>
+  <description><![CDATA[ 
+
+
+
+<p><a href="https://cran.r-project.org/package=mlr3">Link to package</a></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">set.seed</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)</span>
+<span id="cb1-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'mlr3'</span>)</span></code></pre></div>
+</div>
+
+
+
+ ]]></description>
+  <category>R</category>
+  <guid>https://sbloggel.netlify.app/posts/2023-08-04-getting-to-know-mlr3/2023-08-04-getting-to-know-mlr3.html</guid>
+  <pubDate>Thu, 03 Aug 2023 22:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>

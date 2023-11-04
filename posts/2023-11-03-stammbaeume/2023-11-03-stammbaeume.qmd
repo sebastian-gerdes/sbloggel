@@ -1,6 +1,7 @@
 ---
 title: Stammbaeume
 date: 2023-11-03
+draft: true
 categories:
   - R
 ---
