@@ -95,16 +95,55 @@ tibble(Effect = c('Main effect 1', 'Main effect 2', 'Interaction'),
   kable(align = 'c', digits = 3)
 ```
 
+
 ### Power of separate t-tests
+#### Bonferroni correction for two tests:
 ```{r}
-# Bonferroni correction for two tests:
 power.t.test(n = 10, delta = 1, sd = 1, sig.level = 0.05 / 2)
-# Bonferroni correction for three tests:
+```
+
+
+#### Bonferroni correction for three tests:
+* Variance of estimator of interaction effect
+  * "the variance of a sum of uncorrelated random variables is equal to the sum of their variances" [(Source)](https://en.wikipedia.org/w/index.php?title=Variance&oldid=1180635227)
+  * Hypothesis for testing main effects: sum with two terms
+  
+\begin{align}
+H_0: \qquad \mu_A - \mu_0 = 0 \qquad (&\iff \beta_1 = 0)\\
+H_0: \qquad \mu_B - \mu_0 = 0 \qquad (&\iff \beta_2 = 0)
+\end{align}
+  
+  * Hypotheses for testing interaction: sum with four terms 
+
+\begin{align}
+H_0: \qquad \mu_A + \mu_B - \mu_{AB} - \mu_0 = 0  \qquad (&\iff \beta_3 = 0)
+\end{align}
+
+* Additional formulations of $H_0$ for interaction effect:
+\begin{align}
+H_0: \qquad & \mu_A - \mu_0 & + & \mu_B - \mu_0 & = & \mu_{AB} - \mu_0 \\
+H_0: \qquad & \beta_1 & + & \beta_2 & = & \beta_1 + \beta_2 + \beta_3
+\end{align}
+* Conclusion: Variance of estimate of interaction effect is twice the variance of the estimate of the main effects
+
+```{r}
+# Main effects:
 power.t.test(n = 10, delta = 1, sd = 1, sig.level = 0.05 / 3)
+# Interaction effect:
+power.t.test(n = 10, delta = 1, sd = sqrt(2), sig.level = 0.05 / 3)
 ```
 
 ## Conclusion
 * Power in Two-Way-ANOVA without interaction is slightly greater than power of two separate t-tests corrected with Bonferroni procedure (30 individuals needed in both cases, provided that the control group is 'recycled' in the t-test case)
+  * Model without interaction:
+    * Power for main effects ANOVA: 0.469
+    * Power for main effects t-test: 0.436
+  * Model with interaction:
+    * Power for main effects ANOVA: 0.441
+    * Power for main effects t-test: 0.369
+    * Power for interaction ANOVA: 0.218
+    * Power for interaction t-test: 0.175
+    
+  
 * Power in Two-Way-ANOVA with interaction is approximately equal to power of two separate t-tests corrected with Bonferroni procedure (10 additional individuals needed in order to test interaction)
-* Analysis of interaction effect is possible, however laborious, via separate t-tests
 * Power could be improved without increased total sample size by appropriately increasing the size of the control group (not shown here) - see Friedemann's document (is in local folder however not uploaded)

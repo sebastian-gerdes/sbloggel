@@ -2376,11 +2376,10 @@ font-style: inherit;">3</span>)</span></code></pre></div>
 </section>
 <section id="power-of-separate-t-tests" class="level3">
 <h3 class="anchored" data-anchor-id="power-of-separate-t-tests">Power of separate t-tests</h3>
-<div class="cell" data-hash="2023-08-28-anova-with-interactions-vs.-individual-t-tests_cache/html/unnamed-chunk-6_d5ec28b9b7078eaecc9f85af74906637">
-<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Bonferroni correction for two tests:</span></span>
-<span id="cb6-2"><span class="fu" style="color: #4758AB;
+<section id="bonferroni-correction-for-two-tests" class="level4">
+<h4 class="anchored" data-anchor-id="bonferroni-correction-for-two-tests">Bonferroni correction for two tests:</h4>
+<div class="cell" data-hash="2023-08-28-anova-with-interactions-vs.-individual-t-tests_cache/html/unnamed-chunk-6_9e1a4e54d5b1c5bf9ee403a4c82b9157">
+<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">power.t.test</span>(<span class="at" style="color: #657422;
 background-color: null;
@@ -2416,9 +2415,30 @@ font-style: inherit;">2</span>)</span></code></pre></div>
 
 NOTE: n is number in *each* group</code></pre>
 </div>
+</div>
+</section>
+<section id="bonferroni-correction-for-three-tests" class="level4">
+<h4 class="anchored" data-anchor-id="bonferroni-correction-for-three-tests">Bonferroni correction for three tests:</h4>
+<ul>
+<li>Variance of estimator of interaction effect
+<ul>
+<li>“the variance of a sum of uncorrelated random variables is equal to the sum of their variances” <a href="https://en.wikipedia.org/w/index.php?title=Variance&amp;oldid=1180635227">(Source)</a></li>
+<li>Hypothesis for testing main effects: sum with two terms</li>
+</ul></li>
+</ul>
+<p><img src="https://latex.codecogs.com/png.latex?%5Cbegin%7Balign%7D%0AH_0:%20%5Cqquad%20%5Cmu_A%20-%20%5Cmu_0%20=%200%20%5Cqquad%20(&amp;%5Ciff%20%5Cbeta_1%20=%200)%5C%5C%0AH_0:%20%5Cqquad%20%5Cmu_B%20-%20%5Cmu_0%20=%200%20%5Cqquad%20(&amp;%5Ciff%20%5Cbeta_2%20=%200)%0A%5Cend%7Balign%7D"></p>
+<ul>
+<li>Hypotheses for testing interaction: sum with four terms</li>
+</ul>
+<p><img src="https://latex.codecogs.com/png.latex?%5Cbegin%7Balign%7D%0AH_0:%20%5Cqquad%20%5Cmu_A%20+%20%5Cmu_B%20-%20%5Cmu_%7BAB%7D%20-%20%5Cmu_0%20=%200%20%20%5Cqquad%20(&amp;%5Ciff%20%5Cbeta_3%20=%200)%0A%5Cend%7Balign%7D"></p>
+<ul>
+<li>Additional formulations of <img src="https://latex.codecogs.com/png.latex?H_0"> for interaction effect: <img src="https://latex.codecogs.com/png.latex?%5Cbegin%7Balign%7D%0AH_0:%20%5Cqquad%20&amp;%20%5Cmu_A%20-%20%5Cmu_0%20&amp;%20+%20&amp;%20%5Cmu_B%20-%20%5Cmu_0%20&amp;%20=%20&amp;%20%5Cmu_%7BAB%7D%20-%20%5Cmu_0%20%5C%5C%0AH_0:%20%5Cqquad%20&amp;%20%5Cbeta_1%20&amp;%20+%20&amp;%20%5Cbeta_2%20&amp;%20=%20&amp;%20%5Cbeta_1%20+%20%5Cbeta_2%20+%20%5Cbeta_3%0A%5Cend%7Balign%7D"></li>
+<li>Conclusion: Variance of estimate of interaction effect is twice the variance of the estimate of the main effects</li>
+</ul>
+<div class="cell" data-hash="2023-08-28-anova-with-interactions-vs.-individual-t-tests_cache/html/unnamed-chunk-7_b2db971aa74f343e7302758d107d22db">
 <div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;"># Bonferroni correction for three tests:</span></span>
+font-style: inherit;"># Main effects:</span></span>
 <span id="cb8-2"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">power.t.test</span>(<span class="at" style="color: #657422;
@@ -2455,15 +2475,70 @@ font-style: inherit;">3</span>)</span></code></pre></div>
 
 NOTE: n is number in *each* group</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Interaction effect:</span></span>
+<span id="cb10-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">power.t.test</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">n =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">delta =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">sd =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sqrt</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">sig.level =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.05</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+     Two-sample t test power calculation 
+
+              n = 10
+          delta = 1
+             sd = 1.414214
+      sig.level = 0.01666667
+          power = 0.1746347
+    alternative = two.sided
+
+NOTE: n is number in *each* group</code></pre>
 </div>
+</div>
+</section>
 </section>
 </section>
 <section id="conclusion" class="level2">
 <h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
 <ul>
-<li>Power in Two-Way-ANOVA without interaction is slightly greater than power of two separate t-tests corrected with Bonferroni procedure (30 individuals needed in both cases, provided that the control group is ‘recycled’ in the t-test case)</li>
+<li>Power in Two-Way-ANOVA without interaction is slightly greater than power of two separate t-tests corrected with Bonferroni procedure (30 individuals needed in both cases, provided that the control group is ‘recycled’ in the t-test case)
+<ul>
+<li>Model without interaction:
+<ul>
+<li>Power for main effects ANOVA: 0.469</li>
+<li>Power for main effects t-test: 0.436</li>
+</ul></li>
+<li>Model with interaction:
+<ul>
+<li>Power for main effects ANOVA: 0.441</li>
+<li>Power for main effects t-test: 0.369</li>
+<li>Power for interaction ANOVA: 0.218</li>
+<li>Power for interaction t-test: 0.175</li>
+</ul></li>
+</ul></li>
 <li>Power in Two-Way-ANOVA with interaction is approximately equal to power of two separate t-tests corrected with Bonferroni procedure (10 additional individuals needed in order to test interaction)</li>
-<li>Analysis of interaction effect is possible, however laborious, via separate t-tests</li>
 <li>Power could be improved without increased total sample size by appropriately increasing the size of the control group (not shown here) - see Friedemann’s document (is in local folder however not uploaded)</li>
 </ul>
 
