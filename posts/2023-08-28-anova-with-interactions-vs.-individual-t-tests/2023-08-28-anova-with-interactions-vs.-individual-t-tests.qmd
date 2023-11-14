@@ -6,6 +6,7 @@ categories:
   - 'ANOVA vs t-Tests'
 execute:
   cache: true
+  message: false
 ---
 
 ## Introduction
@@ -14,7 +15,6 @@ Often, the effect of different interventions is to be studied. This can be done 
 Here, it is studied if ANOVA analysis with subsequent joint testing of the relevant hypotheses offers advantages in terms of required sample size / statistical power in comparison to analysis via separate t-tests for some configurations.
 
 ```{r}
-#| message: false
 set.seed(2)
 library('tidyverse')
 library('multcomp')

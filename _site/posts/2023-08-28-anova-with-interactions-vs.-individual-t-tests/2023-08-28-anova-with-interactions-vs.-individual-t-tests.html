@@ -204,7 +204,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
 <p>Often, the effect of different interventions is to be studied. This can be done by comparing individual sets of interventions (e. g. drug A vs.&nbsp;placebo and drug B vs.&nbsp;placebo) or in a factorial design (e. g. ANOVA). For individual comparisons statistical tests such as the t-test can be appropriate. Importantly, correction for multiple testing should to be carried out. The effect of combination of several drugs can be studied easily in the factorial design, while it is more complicated via t-tests.</p>
 <p>Here, it is studied if ANOVA analysis with subsequent joint testing of the relevant hypotheses offers advantages in terms of required sample size / statistical power in comparison to analysis via separate t-tests for some configurations.</p>
-<div class="cell" data-hash="2023-08-28-anova-with-interactions-vs.-individual-t-tests_cache/html/unnamed-chunk-1_19c4a0b3c1507c45dbbe01ffcf3c3a4f">
+<div class="cell" data-hash="2023-08-28-anova-with-interactions-vs.-individual-t-tests_cache/html/unnamed-chunk-1_32b4f618354443779e55c8ddb747263c">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">'tidyverse'</span>)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">'multcomp'</span>)</span>
