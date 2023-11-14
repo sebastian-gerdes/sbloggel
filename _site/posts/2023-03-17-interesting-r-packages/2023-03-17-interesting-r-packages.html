@@ -169,6 +169,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#package-for-formatting-labels-in-ggplot" id="toc-package-for-formatting-labels-in-ggplot" class="nav-link" data-scroll-target="#package-for-formatting-labels-in-ggplot">Package for formatting labels in ggplot</a></li>
   <li><a href="#concattenating-text" id="toc-concattenating-text" class="nav-link" data-scroll-target="#concattenating-text">Concattenating text</a></li>
   <li><a href="#handle-missing-data" id="toc-handle-missing-data" class="nav-link" data-scroll-target="#handle-missing-data">Handle missing data</a></li>
+  <li><a href="#collaborative-writing" id="toc-collaborative-writing" class="nav-link" data-scroll-target="#collaborative-writing">Collaborative writing</a></li>
+  <li><a href="#journal-templates-in-quarto" id="toc-journal-templates-in-quarto" class="nav-link" data-scroll-target="#journal-templates-in-quarto">Journal templates in quarto</a></li>
+  <li><a href="#debugging" id="toc-debugging" class="nav-link" data-scroll-target="#debugging">Debugging</a></li>
+  <li><a href="#update-r" id="toc-update-r" class="nav-link" data-scroll-target="#update-r">Update R</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/sebastian-gerdes/sbloggel/blob/main/posts/2023-03-17-interesting-r-packages/2023-03-17-interesting-r-packages.qmd" class="toc-action">View source</a></p></div></div></nav>
     </div>
@@ -443,11 +447,11 @@ Attaching package: 'Ryacas'</code></pre>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">'tidyverse'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.1.2     ✔ readr     2.1.4
+✔ dplyr     1.1.3     ✔ readr     2.1.4
 ✔ forcats   1.0.0     ✔ stringr   1.5.0
-✔ ggplot2   3.4.2     ✔ tibble    3.2.1
+✔ ggplot2   3.4.4     ✔ tibble    3.2.1
 ✔ lubridate 1.9.2     ✔ tidyr     1.3.0
-✔ purrr     1.0.1     
+✔ purrr     1.0.2     
 ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ tidyr::extract()   masks magrittr::extract()
 ✖ dplyr::filter()    masks stats::filter()
@@ -471,7 +475,7 @@ The following object is masked from 'package:naniar':
 <span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="fu">colSums</span>(<span class="fu">is.na</span>(aq))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  Ozone Solar.R    Wind    Temp   Month     Day     fct 
-     37       7       0       0       0       0      57 </code></pre>
+     37       7       0       0       0       0      47 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vis_miss</span>(aq)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -486,13 +490,13 @@ The following object is masked from 'package:naniar':
  1    41     190   7.4    67     5     1 &lt;NA&gt;  !NA      !NA        !NA    
  2    36     118   8      72     5     2 &lt;NA&gt;  !NA      !NA        !NA    
  3    12     149  12.6    74     5     3 b     !NA      !NA        !NA    
- 4    18     313  11.5    62     5     4 &lt;NA&gt;  !NA      !NA        !NA    
- 5    NA      NA  14.3    56     5     5 b     NA       NA         !NA    
- 6    28      NA  14.9    66     5     6 b     !NA      NA         !NA    
- 7    23     299   8.6    65     5     7 &lt;NA&gt;  !NA      !NA        !NA    
- 8    19      99  13.8    59     5     8 a     !NA      !NA        !NA    
+ 4    18     313  11.5    62     5     4 b     !NA      !NA        !NA    
+ 5    NA      NA  14.3    56     5     5 a     NA       NA         !NA    
+ 6    28      NA  14.9    66     5     6 &lt;NA&gt;  !NA      NA         !NA    
+ 7    23     299   8.6    65     5     7 a     !NA      !NA        !NA    
+ 8    19      99  13.8    59     5     8 &lt;NA&gt;  !NA      !NA        !NA    
  9     8      19  20.1    61     5     9 &lt;NA&gt;  !NA      !NA        !NA    
-10    NA     194   8.6    69     5    10 a     NA       !NA        !NA    
+10    NA     194   8.6    69     5    10 b     NA       !NA        !NA    
 # ℹ 143 more rows
 # ℹ 4 more variables: Temp_NA &lt;fct&gt;, Month_NA &lt;fct&gt;, Day_NA &lt;fct&gt;, fct_NA &lt;fct&gt;</code></pre>
 </div>
@@ -504,16 +508,84 @@ The following object is masked from 'package:naniar':
  1  41       190   7.4    67     5     1 &lt;NA&gt;  !NA      !NA        !NA    
  2  36       118   8      72     5     2 &lt;NA&gt;  !NA      !NA        !NA    
  3  12       149  12.6    74     5     3 b     !NA      !NA        !NA    
- 4  18       313  11.5    62     5     4 &lt;NA&gt;  !NA      !NA        !NA    
- 5 -11.0      NA  14.3    56     5     5 b     NA       NA         !NA    
- 6  28        NA  14.9    66     5     6 b     !NA      NA         !NA    
- 7  23       299   8.6    65     5     7 &lt;NA&gt;  !NA      !NA        !NA    
- 8  19        99  13.8    59     5     8 a     !NA      !NA        !NA    
+ 4  18       313  11.5    62     5     4 b     !NA      !NA        !NA    
+ 5 -11.0      NA  14.3    56     5     5 a     NA       NA         !NA    
+ 6  28        NA  14.9    66     5     6 &lt;NA&gt;  !NA      NA         !NA    
+ 7  23       299   8.6    65     5     7 a     !NA      !NA        !NA    
+ 8  19        99  13.8    59     5     8 &lt;NA&gt;  !NA      !NA        !NA    
  9   8        19  20.1    61     5     9 &lt;NA&gt;  !NA      !NA        !NA    
-10  20.6     194   8.6    69     5    10 a     NA       !NA        !NA    
+10  20.6     194   8.6    69     5    10 b     NA       !NA        !NA    
 # ℹ 143 more rows
 # ℹ 4 more variables: Temp_NA &lt;fct&gt;, Month_NA &lt;fct&gt;, Day_NA &lt;fct&gt;, fct_NA &lt;fct&gt;</code></pre>
 </div>
+</div>
+</section>
+<section id="collaborative-writing" class="level2">
+<h2 class="anchored" data-anchor-id="collaborative-writing">Collaborative writing</h2>
+<p><a href="https://claudiozandonella.github.io/trackdown/">Trackdown</a></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"trackdown"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="journal-templates-in-quarto" class="level2">
+<h2 class="anchored" data-anchor-id="journal-templates-in-quarto">Journal templates in quarto</h2>
+<ul>
+<li><a href="https://quarto.org/docs/journals/">Link</a></li>
+<li>Can we add a template for Frontiers journals?</li>
+</ul>
+</section>
+<section id="debugging" class="level2">
+<h2 class="anchored" data-anchor-id="debugging">Debugging</h2>
+<ul>
+<li><a href="https://jcarroll.com.au/2023/11/07/print-debugging-now-with-icecream/">Link to blog</a></li>
+<li><a href="https://github.com/lewinfox/icecream">Link to package</a></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">'icecream'</span>)</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span></span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ic</span>(x <span class="sc">+</span> y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>ℹ ic| `x + y`: num [1:1000] 11 12 13 14 15 16 17 18 19 20 ...</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ic</span>(cars)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>ℹ ic| `cars`: data.frame [50 x 2]: $'speed': dbl [50], ...</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">icecream.max.lines =</span> <span class="dv">5</span>,</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">icecream.prefix =</span> <span class="st">"dbg:"</span>,</span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">icecream.always.include.context =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ic</span>(x <span class="sc">+</span> y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>ℹ dbg: &lt;env: global&gt; | `x + y`: num [1:1000] 11 12 13 14 15 16 17 18 19 20 ...</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">icecream.peeking.function =</span> utils<span class="sc">::</span>head,</span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">icecream.max.lines =</span> <span class="dv">5</span>,</span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">icecream.prefix =</span> <span class="st">"dbg:"</span>,</span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">icecream.always.include.context =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ic</span>(x <span class="sc">+</span> y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>ℹ dbg: &lt;env: global&gt; | `x + y`: [1] 11 12 13 14 15 16</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ic</span>(cars)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>ℹ dbg: &lt;env: global&gt; | `cars`: 
+speed dist
+1     4    2
+2     4   10
+3     7    4
+4     7   22</code></pre>
+</div>
+</div>
+</section>
+<section id="update-r" class="level2">
+<h2 class="anchored" data-anchor-id="update-r">Update R</h2>
+<ul>
+<li><a href="https://cloud.r-project.org/bin/macosx/">Link at r-project</a></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(<span class="fu">installed.packages</span>(), <span class="at">file =</span> <span class="fu">paste0</span>(<span class="fu">Sys.Date</span>(), <span class="st">'_installed_packages_'</span>, <span class="fu">sample</span>(<span class="fl">1e3</span>, <span class="at">size =</span> <span class="dv">1</span>) , <span class="st">'.csv'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 

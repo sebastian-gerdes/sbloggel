@@ -180,3 +180,47 @@ aq_nabular
 
 aq_nabular |> impute_lm(Ozone ~ Temp)
 ```
+
+## Collaborative writing
+[Trackdown](https://claudiozandonella.github.io/trackdown/)
+```{r}
+library("trackdown")
+```
+
+## Journal templates in quarto
+* [Link](https://quarto.org/docs/journals/)
+* Can we add a template for Frontiers journals?
+
+## Debugging
+* [Link to blog](https://jcarroll.com.au/2023/11/07/print-debugging-now-with-icecream/)
+* [Link to package](https://github.com/lewinfox/icecream)
+```{r}
+library('icecream')
+x <- 10
+y <- 1:1000
+ic(x + y)
+
+ic(cars)
+
+options(icecream.max.lines = 5,
+        icecream.prefix = "dbg:",
+        icecream.always.include.context = TRUE)
+ic(x + y)
+
+
+options(icecream.peeking.function = utils::head,
+        icecream.max.lines = 5,
+        icecream.prefix = "dbg:",
+        icecream.always.include.context = TRUE)
+
+ic(x + y)
+ic(cars)
+```
+
+## Update R
+* [Link at r-project](https://cloud.r-project.org/bin/macosx/)
+```{r}
+write.csv(installed.packages(), file = paste0(Sys.Date(), '_installed_packages_', sample(1e3, size = 1) , '.csv'))
+```
+
+
