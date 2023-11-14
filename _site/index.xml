@@ -2107,14 +2107,13 @@ font-style: inherit;">element_blank</span>())</span></code></pre></div>
 </section>
 <section id="interaction-plots" class="level2">
 <h2 class="anchored" data-anchor-id="interaction-plots">Interaction plots</h2>
-<div class="cell" data-hash="2023-08-28-anova-with-interactions-vs.-individual-t-tests_cache/html/unnamed-chunk-3_26860a1f746a0ae021ded4f7d7f5c071">
-<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># with base R</span></span>
-<span id="cb3-2"><span class="fu" style="color: #4758AB;
+<section id="with-base-r" class="level3">
+<h3 class="anchored" data-anchor-id="with-base-r">With base R</h3>
+<div class="cell" data-hash="2023-08-28-anova-with-interactions-vs.-individual-t-tests_cache/html/unnamed-chunk-3_7c3f6586bb3e7869156e9245e8c0f34f">
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">with</span>(sample_data, </span>
-<span id="cb3-3">     <span class="fu" style="color: #4758AB;
+<span id="cb3-2">     <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">interaction.plot</span>(F1, F2, y))</span></code></pre></div>
 <div class="cell-output-display">
@@ -2130,19 +2129,16 @@ font-style: inherit;">interaction.plot</span>(F2, F1, y))</span></code></pre></d
 <p><img src="https://sbloggel.netlify.app/posts/2023-08-28-anova-with-interactions-vs.-individual-t-tests/2023-08-28-anova-with-interactions-vs.-individual-t-tests_files/figure-html/unnamed-chunk-3-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<div class="cell" data-hash="2023-08-28-anova-with-interactions-vs.-individual-t-tests_cache/html/unnamed-chunk-4_34117c9a54330bd0a825233125686f32">
+</section>
+<section id="with-catstats-package" class="level3">
+<h3 class="anchored" data-anchor-id="with-catstats-package">With catstats package</h3>
+<div class="cell" data-hash="2023-08-28-anova-with-interactions-vs.-individual-t-tests_cache/html/unnamed-chunk-4_de68bbebf23ccb5e84038ee01cdb382c">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;"># with catstats package</span></span>
-<span id="cb5-2"><span class="co" style="color: #5E5E5E;
-background-color: null;
 font-style: inherit;"># remotes::install_github("greenwood-stat/catstats")</span></span>
-<span id="cb5-3"><span class="fu" style="color: #4758AB;
+<span id="cb5-2">catstats<span class="sc" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'catstats'</span>)</span>
-<span id="cb5-4"><span class="fu" style="color: #4758AB;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">intplotarray</span>(y <span class="sc" style="color: #5E5E5E;
 background-color: null;
@@ -2151,127 +2147,11 @@ background-color: null;
 font-style: inherit;">*</span> F2, <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">data =</span> sample_data)</span></code></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: yarrr</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: jpeg</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: BayesFactor</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: coda</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: Matrix</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>
-Attaching package: 'Matrix'</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following objects are masked from 'package:tidyr':
-
-    expand, pack, unpack</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>************
-Welcome to BayesFactor 0.9.12-4.5. If you have questions, please contact Richard Morey (richarddmorey@gmail.com).
-
-Type BFManual() to open the manual.
-************</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: circlize</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>========================================
-circlize version 0.4.15
-CRAN page: https://cran.r-project.org/package=circlize
-Github page: https://github.com/jokergoo/circlize
-Documentation: https://jokergoo.github.io/circlize_book/book/
-
-If you use it in published research, please cite:
-Gu, Z. circlize implements and enhances circular visualization
-  in R. Bioinformatics 2014.
-
-This message can be suppressed by:
-  suppressPackageStartupMessages(library(circlize))
-========================================</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>yarrr v0.1.5. Citation info at citation('yarrr'). Package guide at yarrr.guide()</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Email me at Nathaniel.D.Phillips.is@gmail.com</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>
-Attaching package: 'yarrr'</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following object is masked from 'package:ggplot2':
-
-    diamonds</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: mosaic</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Registered S3 method overwritten by 'mosaic':
-  method                           from   
-  fortify.SpatialPolygonsDataFrame ggplot2</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>
-The 'mosaic' package masks several functions from core packages in order to add 
-additional features.  The original behavior of these functions should not be affected by this.</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>
-Attaching package: 'mosaic'</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following object is masked from 'package:BayesFactor':
-
-    compare</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following object is masked from 'package:Matrix':
-
-    mean</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following objects are masked from 'package:dplyr':
-
-    count, do, tally</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following object is masked from 'package:purrr':
-
-    cross</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following object is masked from 'package:ggplot2':
-
-    stat</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following objects are masked from 'package:stats':
-
-    binom.test, cor, cor.test, cov, fivenum, IQR, median, prop.test,
-    quantile, sd, t.test, var</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following objects are masked from 'package:base':
-
-    max, mean, min, prod, range, sample, sum</code></pre>
-</div>
 <div class="cell-output-display">
 <p><img src="https://sbloggel.netlify.app/posts/2023-08-28-anova-with-interactions-vs.-individual-t-tests/2023-08-28-anova-with-interactions-vs.-individual-t-tests_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+</section>
 </section>
 <section id="simulate-many-datasets-in-order-to-estimate-power-to-test-the-hypotheses" class="level2">
 <h2 class="anchored" data-anchor-id="simulate-many-datasets-in-order-to-estimate-power-to-test-the-hypotheses">Simulate many datasets in order to estimate power to test the hypotheses</h2>
@@ -2281,7 +2161,7 @@ Attaching package: 'mosaic'</code></pre>
 <li>Estimate power empirically</li>
 </ul>
 <div class="cell" data-hash="2023-08-28-anova-with-interactions-vs.-individual-t-tests_cache/html/unnamed-chunk-5_85e82bd34fd44952673618c6300f47a6">
-<div class="sourceCode cell-code" id="cb31" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1">simulate_two_way_ANOVA <span class="ot" style="color: #003B4F;
+<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1">simulate_two_way_ANOVA <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
@@ -2290,10 +2170,10 @@ background-color: null;
 font-style: inherit;">include_interaction =</span> <span class="cn" style="color: #8f5902;
 background-color: null;
 font-style: inherit;">FALSE</span>) {</span>
-<span id="cb31-2">  <span class="cf" style="color: #003B4F;
+<span id="cb6-2">  <span class="cf" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">if</span>(include_interaction) {</span>
-<span id="cb31-3">    fm <span class="ot" style="color: #003B4F;
+<span id="cb6-3">    fm <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -2306,17 +2186,17 @@ background-color: null;
 font-style: inherit;">data =</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">generate_data</span>())</span>
-<span id="cb31-4">    ii <span class="ot" style="color: #003B4F;
+<span id="cb6-4">    ii <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span></span>
-<span id="cb31-5">  } <span class="cf" style="color: #003B4F;
+<span id="cb6-5">  } <span class="cf" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">else</span> {</span>
-<span id="cb31-6">    fm <span class="ot" style="color: #003B4F;
+<span id="cb6-6">    fm <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -2341,7 +2221,7 @@ background-color: null;
 font-style: inherit;">==</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'A'</span>))</span>
-<span id="cb31-7">    ii <span class="ot" style="color: #003B4F;
+<span id="cb6-7">    ii <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -2354,8 +2234,8 @@ background-color: null;
 font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">4</span>)</span>
-<span id="cb31-8">  }</span>
-<span id="cb31-9">  hypotheses_tests <span class="ot" style="color: #003B4F;
+<span id="cb6-8">  }</span>
+<span id="cb6-9">  hypotheses_tests <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -2370,7 +2250,7 @@ background-color: null;
 font-style: inherit;">coef</span>(fm))[ii], <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'= 0'</span>))</span>
-<span id="cb31-10">  p_values <span class="ot" style="color: #003B4F;
+<span id="cb6-10">  p_values <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -2379,27 +2259,27 @@ background-color: null;
 font-style: inherit;">$</span>test<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">$</span>pvalues</span>
-<span id="cb31-11">  <span class="fu" style="color: #4758AB;
+<span id="cb6-11">  <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">attributes</span>(p_values) <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cn" style="color: #8f5902;
 background-color: null;
 font-style: inherit;">NULL</span></span>
-<span id="cb31-12">  <span class="fu" style="color: #4758AB;
+<span id="cb6-12">  <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">return</span>(p_values)</span>
-<span id="cb31-13">}</span></code></pre></div>
+<span id="cb6-13">}</span></code></pre></div>
 </div>
 <section id="power-of-anova-analysis-without-interaction" class="level3">
 <h3 class="anchored" data-anchor-id="power-of-anova-analysis-without-interaction">Power of ANOVA analysis without interaction</h3>
 <div class="cell" data-hash="2023-08-28-anova-with-interactions-vs.-individual-t-tests_cache/html/unnamed-chunk-6_7cd266f5fe4e0633c20dab6de656e14d">
-<div class="sourceCode cell-code" id="cb32" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1">nr_of_sims <span class="ot" style="color: #003B4F;
+<div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1">nr_of_sims <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fl" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">5e4</span></span>
-<span id="cb32-2"><span class="fu" style="color: #4758AB;
+<span id="cb7-2"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">tibble</span>(<span class="at" style="color: #657422;
 background-color: null;
@@ -2410,7 +2290,7 @@ background-color: null;
 font-style: inherit;">'Main effect 1'</span>, <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'Main effect 2'</span>),</span>
-<span id="cb32-3">       <span class="at" style="color: #657422;
+<span id="cb7-3">       <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">Power =</span> <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -2423,14 +2303,14 @@ background-color: null;
 font-style: inherit;">simulate_two_way_ANOVA</span>()) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">&lt;</span> </span>
-<span id="cb32-4">                         <span class="fl" style="color: #AD0000;
+<span id="cb7-4">                         <span class="fl" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0.05</span>) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">/</span> nr_of_sims) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">|&gt;</span> </span>
-<span id="cb32-5">  <span class="fu" style="color: #4758AB;
+<span id="cb7-5">  <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">kable</span>(<span class="at" style="color: #657422;
 background-color: null;
@@ -2466,12 +2346,12 @@ font-style: inherit;">3</span>)</span></code></pre></div>
 <section id="power-of-anova-analysis-with-interaction" class="level3">
 <h3 class="anchored" data-anchor-id="power-of-anova-analysis-with-interaction">Power of ANOVA analysis with interaction</h3>
 <div class="cell" data-hash="2023-08-28-anova-with-interactions-vs.-individual-t-tests_cache/html/unnamed-chunk-7_26f309f0ab4b61966ed69bd471b79c27">
-<div class="sourceCode cell-code" id="cb33" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1">nr_of_sims <span class="ot" style="color: #003B4F;
+<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1">nr_of_sims <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fl" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">5e4</span></span>
-<span id="cb33-2"><span class="fu" style="color: #4758AB;
+<span id="cb8-2"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">tibble</span>(<span class="at" style="color: #657422;
 background-color: null;
@@ -2484,7 +2364,7 @@ background-color: null;
 font-style: inherit;">'Main effect 2'</span>, <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'Interaction'</span>),</span>
-<span id="cb33-3">       <span class="at" style="color: #657422;
+<span id="cb8-3">       <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">Power =</span> <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -2493,7 +2373,7 @@ background-color: null;
 font-style: inherit;">replicate</span>(<span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">n =</span> nr_of_sims, </span>
-<span id="cb33-4">                                 <span class="fu" style="color: #4758AB;
+<span id="cb8-4">                                 <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">simulate_two_way_ANOVA</span>(<span class="at" style="color: #657422;
 background-color: null;
@@ -2502,14 +2382,14 @@ background-color: null;
 font-style: inherit;">TRUE</span>)) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">&lt;</span> </span>
-<span id="cb33-5">                         <span class="fl" style="color: #AD0000;
+<span id="cb8-5">                         <span class="fl" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0.05</span>) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">/</span> nr_of_sims) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">|&gt;</span> </span>
-<span id="cb33-6">  <span class="fu" style="color: #4758AB;
+<span id="cb8-6">  <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">kable</span>(<span class="at" style="color: #657422;
 background-color: null;
@@ -2551,7 +2431,7 @@ font-style: inherit;">3</span>)</span></code></pre></div>
 <section id="bonferroni-correction-for-two-tests" class="level4">
 <h4 class="anchored" data-anchor-id="bonferroni-correction-for-two-tests">Bonferroni correction for two tests:</h4>
 <div class="cell" data-hash="2023-08-28-anova-with-interactions-vs.-individual-t-tests_cache/html/unnamed-chunk-8_b0e1688ea7e4260f6842b37b36f1c5ac">
-<div class="sourceCode cell-code" id="cb34" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><span class="fu" style="color: #4758AB;
+<div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">power.t.test</span>(<span class="at" style="color: #657422;
 background-color: null;
@@ -2608,10 +2488,10 @@ NOTE: n is number in *each* group</code></pre>
 <li>Conclusion: Variance of estimate of interaction effect is twice the variance of the estimate of the main effects</li>
 </ul>
 <div class="cell" data-hash="2023-08-28-anova-with-interactions-vs.-individual-t-tests_cache/html/unnamed-chunk-9_bee45e162b85b31bafce374a315b8f7b">
-<div class="sourceCode cell-code" id="cb36" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><span class="co" style="color: #5E5E5E;
+<div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Main effects:</span></span>
-<span id="cb36-2"><span class="fu" style="color: #4758AB;
+<span id="cb11-2"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">power.t.test</span>(<span class="at" style="color: #657422;
 background-color: null;
@@ -2647,10 +2527,10 @@ font-style: inherit;">3</span>)</span></code></pre></div>
 
 NOTE: n is number in *each* group</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb38" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><span class="co" style="color: #5E5E5E;
+<div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Interaction effect:</span></span>
-<span id="cb38-2"><span class="fu" style="color: #4758AB;
+<span id="cb13-2"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">power.t.test</span>(<span class="at" style="color: #657422;
 background-color: null;
