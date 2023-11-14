@@ -54,14 +54,26 @@ sample_data|>
   facet_wrap(vars(F1, F2), labeller = label_both, ncol = 4) +
   labs(x = '(Points are jittered along x-axis)') +
   theme(axis.text.x=element_blank(),
-        axis.ticks.x=element_blank()) 
+        axis.ticks.x=element_blank())
+```
 
+## Interaction plots
+```{r}
+# with base R
 with(sample_data, 
      interaction.plot(F1, F2, y))
 
 with(sample_data, 
      interaction.plot(F2, F1, y))
 ```
+
+```{r}
+# with catstats package
+# remotes::install_github("greenwood-stat/catstats")
+library('catstats')
+intplotarray(y ~ F1 * F2, data = sample_data)
+```
+
 
 ## Simulate many datasets in order to estimate power to test the hypotheses
 * For ANOVA analysis the multcomp package is used in order to simultaneously test the hypotheses (correction for multiple testing with respect to the two (without interactgion) or three hypotheses (with interaction) is included by design)
