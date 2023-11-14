@@ -236,23 +236,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="example-of-simulated-data" class="level2">
 <h2 class="anchored" data-anchor-id="example-of-simulated-data">Example of simulated data</h2>
-<div class="cell" data-hash="2023-08-28-anova-with-interactions-vs.-individual-t-tests_cache/html/unnamed-chunk-2_593d4bdc27dabda465437e9315223d39">
+<div class="cell" data-hash="2023-08-28-anova-with-interactions-vs.-individual-t-tests_cache/html/unnamed-chunk-2_726672d3af9f97a8ec19a9d51d15e772">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>generate_data <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">n =</span> <span class="dv">10</span>, <span class="at">beta =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>)) {</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  dd <span class="ot">&lt;-</span> <span class="fu">expand_grid</span>(<span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span>n, <span class="at">F1 =</span> <span class="fu">c</span>(<span class="st">'A'</span>, <span class="st">'B'</span>), <span class="at">F2 =</span> <span class="fu">c</span>(<span class="st">'A'</span>, <span class="st">'B'</span>))</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  X <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(<span class="sc">~</span> F1 <span class="sc">*</span> F2, <span class="at">data =</span> dd)</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  dd <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">y =</span> (X <span class="sc">%*%</span> beta)[, <span class="dv">1</span>] <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="fu">nrow</span>(dd)))</span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">generate_data</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">x =</span> <span class="dv">0</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(x, y)) <span class="sc">+</span> </span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span> <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.1</span>, <span class="at">height =</span> <span class="dv">0</span>) <span class="sc">+</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(F1, F2), <span class="at">labeller =</span> label_both, <span class="at">ncol =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">'(Points are jittered along x-axis)'</span>) <span class="sc">+</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x=</span><span class="fu">element_blank</span>(),</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks.x=</span><span class="fu">element_blank</span>()) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>sample_data <span class="ot">&lt;-</span> <span class="fu">generate_data</span>()</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>sample_data<span class="sc">|&gt;</span> </span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">x =</span> <span class="dv">0</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(x, y)) <span class="sc">+</span> </span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span> <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.1</span>, <span class="at">height =</span> <span class="dv">0</span>) <span class="sc">+</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(F1, F2), <span class="at">labeller =</span> label_both, <span class="at">ncol =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">'(Points are jittered along x-axis)'</span>) <span class="sc">+</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x=</span><span class="fu">element_blank</span>(),</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks.x=</span><span class="fu">element_blank</span>()) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="2023-08-28-anova-with-interactions-vs.-individual-t-tests_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">with</span>(sample_data, </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>     <span class="fu">interaction.plot</span>(F1, F2, y))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="2023-08-28-anova-with-interactions-vs.-individual-t-tests_files/figure-html/unnamed-chunk-2-2.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">with</span>(sample_data, </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>     <span class="fu">interaction.plot</span>(F2, F1, y))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="2023-08-28-anova-with-interactions-vs.-individual-t-tests_files/figure-html/unnamed-chunk-2-3.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -264,28 +276,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Estimate power empirically</li>
 </ul>
 <div class="cell" data-hash="2023-08-28-anova-with-interactions-vs.-individual-t-tests_cache/html/unnamed-chunk-3_aebdb080e40921e6e3edce7d25c7a0db">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>simulate_two_way_ANOVA <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">include_interaction =</span> <span class="cn">FALSE</span>) {</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(include_interaction) {</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    fm <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> F1 <span class="sc">*</span> F2, <span class="at">data =</span> <span class="fu">generate_data</span>())</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    ii <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">1</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    fm <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> F1 <span class="sc">+</span> F2, <span class="at">data =</span> <span class="fu">generate_data</span>(), <span class="at">subset =</span> (F1 <span class="sc">==</span> <span class="st">'A'</span> <span class="sc">|</span> F2 <span class="sc">==</span> <span class="st">'A'</span>))</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    ii <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="sc">-</span><span class="dv">4</span>)</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  hypotheses_tests <span class="ot">&lt;-</span> <span class="fu">glht</span>(fm, <span class="at">linfct =</span> <span class="fu">paste</span>(<span class="fu">names</span>(<span class="fu">coef</span>(fm))[ii], <span class="st">'= 0'</span>))</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  p_values <span class="ot">&lt;-</span> <span class="fu">summary</span>(hypotheses_tests)<span class="sc">$</span>test<span class="sc">$</span>pvalues</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">attributes</span>(p_values) <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(p_values)</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>simulate_two_way_ANOVA <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">include_interaction =</span> <span class="cn">FALSE</span>) {</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(include_interaction) {</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    fm <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> F1 <span class="sc">*</span> F2, <span class="at">data =</span> <span class="fu">generate_data</span>())</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    ii <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">1</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    fm <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> F1 <span class="sc">+</span> F2, <span class="at">data =</span> <span class="fu">generate_data</span>(), <span class="at">subset =</span> (F1 <span class="sc">==</span> <span class="st">'A'</span> <span class="sc">|</span> F2 <span class="sc">==</span> <span class="st">'A'</span>))</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    ii <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="sc">-</span><span class="dv">4</span>)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  hypotheses_tests <span class="ot">&lt;-</span> <span class="fu">glht</span>(fm, <span class="at">linfct =</span> <span class="fu">paste</span>(<span class="fu">names</span>(<span class="fu">coef</span>(fm))[ii], <span class="st">'= 0'</span>))</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  p_values <span class="ot">&lt;-</span> <span class="fu">summary</span>(hypotheses_tests)<span class="sc">$</span>test<span class="sc">$</span>pvalues</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">attributes</span>(p_values) <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(p_values)</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="power-of-anova-analysis-without-interaction" class="level3">
 <h3 class="anchored" data-anchor-id="power-of-anova-analysis-without-interaction">Power of ANOVA analysis without interaction</h3>
 <div class="cell" data-hash="2023-08-28-anova-with-interactions-vs.-individual-t-tests_cache/html/unnamed-chunk-4_ca941b34e3aa066c86681533e0a9331b">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>nr_of_sims <span class="ot">&lt;-</span> <span class="fl">5e4</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">Effect =</span> <span class="fu">c</span>(<span class="st">'Main effect 1'</span>, <span class="st">'Main effect 2'</span>),</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">Power =</span> <span class="fu">rowSums</span>(<span class="fu">replicate</span>(<span class="at">n =</span> nr_of_sims, <span class="fu">simulate_two_way_ANOVA</span>()) <span class="sc">&lt;</span> </span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>                         <span class="fl">0.05</span>) <span class="sc">/</span> nr_of_sims) <span class="sc">|&gt;</span> </span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">align =</span> <span class="st">'c'</span>, <span class="at">digits =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>nr_of_sims <span class="ot">&lt;-</span> <span class="fl">5e4</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">Effect =</span> <span class="fu">c</span>(<span class="st">'Main effect 1'</span>, <span class="st">'Main effect 2'</span>),</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">Power =</span> <span class="fu">rowSums</span>(<span class="fu">replicate</span>(<span class="at">n =</span> nr_of_sims, <span class="fu">simulate_two_way_ANOVA</span>()) <span class="sc">&lt;</span> </span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>                         <span class="fl">0.05</span>) <span class="sc">/</span> nr_of_sims) <span class="sc">|&gt;</span> </span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">align =</span> <span class="st">'c'</span>, <span class="at">digits =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="table table-sm table-striped small">
 <thead>
@@ -311,12 +323,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="power-of-anova-analysis-with-interaction" class="level3">
 <h3 class="anchored" data-anchor-id="power-of-anova-analysis-with-interaction">Power of ANOVA analysis with interaction</h3>
 <div class="cell" data-hash="2023-08-28-anova-with-interactions-vs.-individual-t-tests_cache/html/unnamed-chunk-5_ce711e28450238c3e96aec2545d3ca99">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>nr_of_sims <span class="ot">&lt;-</span> <span class="fl">5e4</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">Effect =</span> <span class="fu">c</span>(<span class="st">'Main effect 1'</span>, <span class="st">'Main effect 2'</span>, <span class="st">'Interaction'</span>),</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">Power =</span> <span class="fu">rowSums</span>(<span class="fu">replicate</span>(<span class="at">n =</span> nr_of_sims, </span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>                                 <span class="fu">simulate_two_way_ANOVA</span>(<span class="at">include_interaction =</span> <span class="cn">TRUE</span>)) <span class="sc">&lt;</span> </span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>                         <span class="fl">0.05</span>) <span class="sc">/</span> nr_of_sims) <span class="sc">|&gt;</span> </span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">align =</span> <span class="st">'c'</span>, <span class="at">digits =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>nr_of_sims <span class="ot">&lt;-</span> <span class="fl">5e4</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">Effect =</span> <span class="fu">c</span>(<span class="st">'Main effect 1'</span>, <span class="st">'Main effect 2'</span>, <span class="st">'Interaction'</span>),</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">Power =</span> <span class="fu">rowSums</span>(<span class="fu">replicate</span>(<span class="at">n =</span> nr_of_sims, </span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>                                 <span class="fu">simulate_two_way_ANOVA</span>(<span class="at">include_interaction =</span> <span class="cn">TRUE</span>)) <span class="sc">&lt;</span> </span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>                         <span class="fl">0.05</span>) <span class="sc">/</span> nr_of_sims) <span class="sc">|&gt;</span> </span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">align =</span> <span class="st">'c'</span>, <span class="at">digits =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="table table-sm table-striped small">
 <thead>
@@ -348,7 +360,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="bonferroni-correction-for-two-tests" class="level4">
 <h4 class="anchored" data-anchor-id="bonferroni-correction-for-two-tests">Bonferroni correction for two tests:</h4>
 <div class="cell" data-hash="2023-08-28-anova-with-interactions-vs.-individual-t-tests_cache/html/unnamed-chunk-6_9e1a4e54d5b1c5bf9ee403a4c82b9157">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">power.t.test</span>(<span class="at">n =</span> <span class="dv">10</span>, <span class="at">delta =</span> <span class="dv">1</span>, <span class="at">sd =</span> <span class="dv">1</span>, <span class="at">sig.level =</span> <span class="fl">0.05</span> <span class="sc">/</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">power.t.test</span>(<span class="at">n =</span> <span class="dv">10</span>, <span class="at">delta =</span> <span class="dv">1</span>, <span class="at">sd =</span> <span class="dv">1</span>, <span class="at">sig.level =</span> <span class="fl">0.05</span> <span class="sc">/</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
      Two-sample t test power calculation 
@@ -391,8 +403,8 @@ H_0: \qquad &amp; \beta_1 &amp; + &amp; \beta_2 &amp; = &amp; \beta_1 + \beta_2 
 <li>Conclusion: Variance of estimate of interaction effect is twice the variance of the estimate of the main effects</li>
 </ul>
 <div class="cell" data-hash="2023-08-28-anova-with-interactions-vs.-individual-t-tests_cache/html/unnamed-chunk-7_b2db971aa74f343e7302758d107d22db">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Main effects:</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">power.t.test</span>(<span class="at">n =</span> <span class="dv">10</span>, <span class="at">delta =</span> <span class="dv">1</span>, <span class="at">sd =</span> <span class="dv">1</span>, <span class="at">sig.level =</span> <span class="fl">0.05</span> <span class="sc">/</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Main effects:</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">power.t.test</span>(<span class="at">n =</span> <span class="dv">10</span>, <span class="at">delta =</span> <span class="dv">1</span>, <span class="at">sd =</span> <span class="dv">1</span>, <span class="at">sig.level =</span> <span class="fl">0.05</span> <span class="sc">/</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
      Two-sample t test power calculation 
@@ -406,8 +418,8 @@ H_0: \qquad &amp; \beta_1 &amp; + &amp; \beta_2 &amp; = &amp; \beta_1 + \beta_2 
 
 NOTE: n is number in *each* group</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Interaction effect:</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">power.t.test</span>(<span class="at">n =</span> <span class="dv">10</span>, <span class="at">delta =</span> <span class="dv">1</span>, <span class="at">sd =</span> <span class="fu">sqrt</span>(<span class="dv">2</span>), <span class="at">sig.level =</span> <span class="fl">0.05</span> <span class="sc">/</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Interaction effect:</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">power.t.test</span>(<span class="at">n =</span> <span class="dv">10</span>, <span class="at">delta =</span> <span class="dv">1</span>, <span class="at">sd =</span> <span class="fu">sqrt</span>(<span class="dv">2</span>), <span class="at">sig.level =</span> <span class="fl">0.05</span> <span class="sc">/</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
      Two-sample t test power calculation 

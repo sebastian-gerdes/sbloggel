@@ -222,8 +222,10 @@ ic(cars)
 
 ## Installed packages
 ```{r}
-dd <- dput(installed.packages())
-save(dd, file = paste0('installed_packages_', Sys.Date(), '.RData'))
+dd <- installed.packages()
+dd[, 'Package']
+dput(dd[, 'Package'], file = paste0('installed_packages_', Sys.Date(), '.RData'))
+dput(dd, file = paste0('installed_packages_with_version_', Sys.Date(), '.RData'))
 ```
 
 
