@@ -219,8 +219,11 @@ ic(cars)
 
 ## Update R
 * [Link at r-project](https://cloud.r-project.org/bin/macosx/)
+
+## Installed packages
 ```{r}
-write.csv(installed.packages(), file = paste0(Sys.Date(), '_installed_packages_', sample(1e3, size = 1) , '.csv'))
+dd <- dput(installed.packages())
+save(dd, file = paste0('installed_packages_', Sys.Date(), '.RData'))
 ```
 
 
