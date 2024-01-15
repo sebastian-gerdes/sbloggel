@@ -208,7 +208,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
 <p>Often, the effect of different interventions is to be studied. This can be done by comparing individual sets of interventions (e. g. drug A vs.&nbsp;placebo and drug B vs.&nbsp;placebo) or in a factorial design (e. g. ANOVA). For individual comparisons statistical tests such as the t-test can be appropriate. Importantly, correction for multiple testing should to be carried out. The effect of combination of several drugs can be studied easily in the factorial design, while it is more complicated via t-tests.</p>
 <p>Here, it is studied if ANOVA analysis with subsequent joint testing of the relevant hypotheses offers advantages in terms of required sample size / statistical power in comparison to analysis via separate t-tests for some configurations.</p>
-<div class="cell" data-hash="2023-08-28-anova-with-interactions-vs.-individual-t-tests_cache/html/unnamed-chunk-1_32b4f618354443779e55c8ddb747263c">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">'tidyverse'</span>)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">'multcomp'</span>)</span>
@@ -241,7 +241,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="example-of-simulated-data" class="level2">
 <h2 class="anchored" data-anchor-id="example-of-simulated-data">Example of simulated data</h2>
-<div class="cell" data-hash="2023-08-28-anova-with-interactions-vs.-individual-t-tests_cache/html/unnamed-chunk-2_93248dc347c75a045a84f47771a1c758">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>generate_data <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">n =</span> <span class="dv">10</span>, <span class="at">beta =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>)) {</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  dd <span class="ot">&lt;-</span> <span class="fu">expand_grid</span>(<span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span>n, <span class="at">F1 =</span> <span class="fu">c</span>(<span class="st">'A'</span>, <span class="st">'B'</span>), <span class="at">F2 =</span> <span class="fu">c</span>(<span class="st">'A'</span>, <span class="st">'B'</span>))</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  X <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(<span class="sc">~</span> F1 <span class="sc">*</span> F2, <span class="at">data =</span> dd)</span>
@@ -267,7 +267,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="interaction-plots">Interaction plots</h2>
 <section id="with-base-r" class="level3">
 <h3 class="anchored" data-anchor-id="with-base-r">With base R</h3>
-<div class="cell" data-hash="2023-08-28-anova-with-interactions-vs.-individual-t-tests_cache/html/unnamed-chunk-3_7c3f6586bb3e7869156e9245e8c0f34f">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">with</span>(sample_data, </span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>     <span class="fu">interaction.plot</span>(F1, F2, y))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -282,7 +282,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="with-catstats-package" class="level3">
 <h3 class="anchored" data-anchor-id="with-catstats-package">With catstats package</h3>
-<div class="cell" data-hash="2023-08-28-anova-with-interactions-vs.-individual-t-tests_cache/html/unnamed-chunk-4_de68bbebf23ccb5e84038ee01cdb382c">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># remotes::install_github("greenwood-stat/catstats")</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>catstats<span class="sc">::</span><span class="fu">intplotarray</span>(y <span class="sc">~</span> F1 <span class="sc">*</span> F2, <span class="at">data =</span> sample_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -298,7 +298,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Calculate p-values testing the main effects (<span class="math inline">\(\beta_1 = 0\)</span> and <span class="math inline">\(\beta_2 = 0\)</span>) and the interaction (<span class="math inline">\(\beta_3 = 0\)</span>) for each of the simulations</li>
 <li>Estimate power empirically</li>
 </ul>
-<div class="cell" data-hash="2023-08-28-anova-with-interactions-vs.-individual-t-tests_cache/html/unnamed-chunk-5_85e82bd34fd44952673618c6300f47a6">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>simulate_two_way_ANOVA <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">include_interaction =</span> <span class="cn">FALSE</span>) {</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(include_interaction) {</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    fm <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> F1 <span class="sc">*</span> F2, <span class="at">data =</span> <span class="fu">generate_data</span>())</span>
@@ -315,8 +315,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <section id="power-of-anova-analysis-without-interaction" class="level3">
 <h3 class="anchored" data-anchor-id="power-of-anova-analysis-without-interaction">Power of ANOVA analysis without interaction</h3>
-<div class="cell" data-hash="2023-08-28-anova-with-interactions-vs.-individual-t-tests_cache/html/unnamed-chunk-6_7cd266f5fe4e0633c20dab6de656e14d">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>nr_of_sims <span class="ot">&lt;-</span> <span class="fl">5e4</span></span>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>nr_of_sims <span class="ot">&lt;-</span> <span class="fl">1e4</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">Effect =</span> <span class="fu">c</span>(<span class="st">'Main effect 1'</span>, <span class="st">'Main effect 2'</span>),</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">Power =</span> <span class="fu">rowSums</span>(<span class="fu">replicate</span>(<span class="at">n =</span> nr_of_sims, <span class="fu">simulate_two_way_ANOVA</span>()) <span class="sc">&lt;</span> </span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>                         <span class="fl">0.05</span>) <span class="sc">/</span> nr_of_sims) <span class="sc">|&gt;</span> </span>
@@ -336,7 +336,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td style="text-align: center;">Main effect 2</td>
-<td style="text-align: center;">0.469</td>
+<td style="text-align: center;">0.463</td>
 </tr>
 </tbody>
 </table>
@@ -345,8 +345,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="power-of-anova-analysis-with-interaction" class="level3">
 <h3 class="anchored" data-anchor-id="power-of-anova-analysis-with-interaction">Power of ANOVA analysis with interaction</h3>
-<div class="cell" data-hash="2023-08-28-anova-with-interactions-vs.-individual-t-tests_cache/html/unnamed-chunk-7_26f309f0ab4b61966ed69bd471b79c27">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>nr_of_sims <span class="ot">&lt;-</span> <span class="fl">5e4</span></span>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>nr_of_sims <span class="ot">&lt;-</span> <span class="fl">1e4</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">Effect =</span> <span class="fu">c</span>(<span class="st">'Main effect 1'</span>, <span class="st">'Main effect 2'</span>, <span class="st">'Interaction'</span>),</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">Power =</span> <span class="fu">rowSums</span>(<span class="fu">replicate</span>(<span class="at">n =</span> nr_of_sims, </span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>                                 <span class="fu">simulate_two_way_ANOVA</span>(<span class="at">include_interaction =</span> <span class="cn">TRUE</span>)) <span class="sc">&lt;</span> </span>
@@ -363,15 +363,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tbody>
 <tr class="odd">
 <td style="text-align: center;">Main effect 1</td>
-<td style="text-align: center;">0.441</td>
+<td style="text-align: center;">0.438</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">Main effect 2</td>
-<td style="text-align: center;">0.441</td>
+<td style="text-align: center;">0.439</td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;">Interaction</td>
-<td style="text-align: center;">0.218</td>
+<td style="text-align: center;">0.222</td>
 </tr>
 </tbody>
 </table>
@@ -382,7 +382,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="power-of-separate-t-tests">Power of separate t-tests</h3>
 <section id="bonferroni-correction-for-two-tests" class="level4">
 <h4 class="anchored" data-anchor-id="bonferroni-correction-for-two-tests">Bonferroni correction for two tests:</h4>
-<div class="cell" data-hash="2023-08-28-anova-with-interactions-vs.-individual-t-tests_cache/html/unnamed-chunk-8_b0e1688ea7e4260f6842b37b36f1c5ac">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">power.t.test</span>(<span class="at">n =</span> <span class="dv">10</span>, <span class="at">delta =</span> <span class="dv">1</span>, <span class="at">sd =</span> <span class="dv">1</span>, <span class="at">sig.level =</span> <span class="fl">0.05</span> <span class="sc">/</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -425,7 +425,7 @@ H_0: \qquad &amp; \beta_1 &amp; + &amp; \beta_2 &amp; = &amp; \beta_1 + \beta_2 
 \end{align}\]</span></li>
 <li>Conclusion: Variance of estimate of interaction effect is twice the variance of the estimate of the main effects</li>
 </ul>
-<div class="cell" data-hash="2023-08-28-anova-with-interactions-vs.-individual-t-tests_cache/html/unnamed-chunk-9_bee45e162b85b31bafce374a315b8f7b">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Main effects:</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">power.t.test</span>(<span class="at">n =</span> <span class="dv">10</span>, <span class="at">delta =</span> <span class="dv">1</span>, <span class="at">sd =</span> <span class="dv">1</span>, <span class="at">sig.level =</span> <span class="fl">0.05</span> <span class="sc">/</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">

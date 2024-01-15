@@ -1,0 +1,84 @@
+---
+title: Understanding competing risks
+date: 2023-11-19
+categories:
+  - R
+  - Self-study
+---
+
+```{r}
+#| label: init
+#| message: false
+set.seed(2)
+library(tidyverse)
+library(survival)
+```
+
+
+* Kaplan-Meier-Estimator: 
+
+```{r}
+#| label: generate_data
+n <- 1000
+dat <- 
+  tibble(t_event_1 = rexp(n), 
+         t_event_2 = rexp(n), 
+         t_observed = pmin(t_event_1, t_event_2), 
+         event = ifelse(t_event_1 < t_event_2, 1, 2),
+         status_event_1 = t_event_1 < t_event_2, 
+         status_event_2 = t_event_2 < t_event_1) |> 
+  arrange(t_observed)
+```
+
+
+```{r}
+#| label: competing_risks_km
+s_event_1 <- with(dat, survfit(Surv(dat$t_event_1, status_event_1) ~ 1))
+s_event_2 <- with(dat, survfit(Surv(dat$t_event_2, status_event_2) ~ 1))
+                                    
+inc_event_1 <- stepfun(c(s_event_1$time), c(0, 1 - s_event_1$surv))
+plot(inc_event_1)
+
+inc_event_2 <- stepfun(c(s_event_2$time), c(0, 1 - s_event_2$surv))
+plot(inc_event_2)
+
+plot(function(x) inc_event_1(x) + inc_event_2(x), from = 0, to = 10)
+```
+
+
+```{r}
+#| label: without_censoring
+s_event_1 <- with(dat, survfit(Surv(dat$t_event_1) ~ 1))
+s_event_2 <- with(dat, survfit(Surv(dat$t_event_2) ~ 1))
+
+inc_event_1 <- stepfun(c(s_event_1$time), c(0, 1 - s_event_1$surv))
+plot(inc_event_1)
+
+inc_event_2 <- stepfun(c(s_event_2$time), c(0, 1 - s_event_2$surv))
+plot(inc_event_2)
+
+plot(function(x) inc_event_1(x) + inc_event_2(x), from = 0, to = 10)
+```
+
+
+```{r}
+#| label: area_plot
+dd <- tibble(event_id = 0:n, 
+             no_event = n:0,
+             event_1 = 0,
+             event_2 = 0,
+             time = c(0, dat$t_observed))
+
+for (i in 1:n) {
+  dd$event_1[i + 1] <- dd$event_1[i] + ifelse(dat$event[i] == 1, 1, 0)
+  dd$event_2[i + 1] <- dd$event_2[i] + ifelse(dat$event[i] == 2, 1, 0)
+}
+
+dd |> 
+  pivot_longer(c(no_event, event_1, event_2)) |> 
+  ggplot(aes(time, value, fill = name)) + geom_area() +
+  labs(x = 'Time', y = 'Individuals', fill = '')
+
+
+```
+

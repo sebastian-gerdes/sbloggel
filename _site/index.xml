@@ -10,7 +10,497 @@
 <atom:link href="https://sbloggel.netlify.app/index.xml" rel="self" type="application/rss+xml"/>
 <description>Seb&#39;s private blog about statistics and other topics</description>
 <generator>quarto-1.3.433</generator>
-<lastBuildDate>Mon, 16 Oct 2023 22:00:00 GMT</lastBuildDate>
+<lastBuildDate>Sun, 14 Jan 2024 23:00:00 GMT</lastBuildDate>
+<item>
+  <title>Plotnine and sample data sets from statsmodels</title>
+  <link>https://sbloggel.netlify.app/posts/2024-01-15-plotnine-and-sample-data-sets-from-statsmodels/2024-01-15-plotnine-and-sample-data-sets-from-statsmodels.html</link>
+  <description><![CDATA[ 
+
+
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> statsmodels.api <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> sm</span>
+<span id="cb1-2">cars <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> sm.datasets.get_rdataset(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"cars"</span>)[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"data"</span>]</span>
+<span id="cb1-3"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">from</span> plotnine <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> ggplot, aes, geom_point</span>
+<span id="cb1-4">p <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> ggplot(cars, aes(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"speed"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"dist"</span>)) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> geom_point()</span>
+<span id="cb1-5"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># p.save("test.pdf", width = 24, height = 24)</span></span>
+<span id="cb1-6">p</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;Figure Size: (640 x 480)&gt;</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="https://sbloggel.netlify.app/posts/2024-01-15-plotnine-and-sample-data-sets-from-statsmodels/2024-01-15-plotnine-and-sample-data-sets-from-statsmodels_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="614"></p>
+</div>
+</div>
+
+
+
+ ]]></description>
+  <category>R</category>
+  <guid>https://sbloggel.netlify.app/posts/2024-01-15-plotnine-and-sample-data-sets-from-statsmodels/2024-01-15-plotnine-and-sample-data-sets-from-statsmodels.html</guid>
+  <pubDate>Sun, 14 Jan 2024 23:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Understanding competing risks</title>
+  <link>https://sbloggel.netlify.app/posts/2023-11-19-understanding-competing-risks/2023-11-19-understanding-competing-risks.html</link>
+  <description><![CDATA[ 
+
+
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">set.seed</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>)</span>
+<span id="cb1-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(tidyverse)</span>
+<span id="cb1-3"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(survival)</span></code></pre></div>
+</div>
+<ul>
+<li>Kaplan-Meier-Estimator:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1">n <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1000</span></span>
+<span id="cb2-2">dat <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> </span>
+<span id="cb2-3">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">tibble</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">t_event_1 =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rexp</span>(n), </span>
+<span id="cb2-4">         <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">t_event_2 =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rexp</span>(n), </span>
+<span id="cb2-5">         <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">t_observed =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">pmin</span>(t_event_1, t_event_2), </span>
+<span id="cb2-6">         <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">event =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ifelse</span>(t_event_1 <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&lt;</span> t_event_2, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>),</span>
+<span id="cb2-7">         <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">status_event_1 =</span> t_event_1 <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&lt;</span> t_event_2, </span>
+<span id="cb2-8">         <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">status_event_2 =</span> t_event_2 <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&lt;</span> t_event_1) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> </span>
+<span id="cb2-9">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">arrange</span>(t_observed)</span></code></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1">s_event_1 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">with</span>(dat, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">survfit</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">Surv</span>(dat<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>t_event_1, status_event_1) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>))</span>
+<span id="cb3-2">s_event_2 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">with</span>(dat, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">survfit</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">Surv</span>(dat<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>t_event_2, status_event_2) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>))</span>
+<span id="cb3-3">                                    </span>
+<span id="cb3-4">inc_event_1 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">stepfun</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(s_event_1<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>time), <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> s_event_1<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>surv))</span>
+<span id="cb3-5"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">plot</span>(inc_event_1)</span></code></pre></div>
+<div class="cell-output-display">
+<p><img src="https://sbloggel.netlify.app/posts/2023-11-19-understanding-competing-risks/2023-11-19-understanding-competing-risks_files/figure-html/competing_risks_km-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1">inc_event_2 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">stepfun</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(s_event_2<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>time), <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> s_event_2<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>surv))</span>
+<span id="cb4-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">plot</span>(inc_event_2)</span></code></pre></div>
+<div class="cell-output-display">
+<p><img src="https://sbloggel.netlify.app/posts/2023-11-19-understanding-competing-risks/2023-11-19-understanding-competing-risks_files/figure-html/competing_risks_km-2.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">plot</span>(<span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">function</span>(x) <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">inc_event_1</span>(x) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">inc_event_2</span>(x), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">from =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">to =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10</span>)</span></code></pre></div>
+<div class="cell-output-display">
+<p><img src="https://sbloggel.netlify.app/posts/2023-11-19-understanding-competing-risks/2023-11-19-understanding-competing-risks_files/figure-html/competing_risks_km-3.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1">s_event_1 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">with</span>(dat, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">survfit</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">Surv</span>(dat<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>t_event_1) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>))</span>
+<span id="cb6-2">s_event_2 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">with</span>(dat, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">survfit</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">Surv</span>(dat<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>t_event_2) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>))</span>
+<span id="cb6-3"></span>
+<span id="cb6-4">inc_event_1 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">stepfun</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(s_event_1<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>time), <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> s_event_1<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>surv))</span>
+<span id="cb6-5"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">plot</span>(inc_event_1)</span></code></pre></div>
+<div class="cell-output-display">
+<p><img src="https://sbloggel.netlify.app/posts/2023-11-19-understanding-competing-risks/2023-11-19-understanding-competing-risks_files/figure-html/without_censoring-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1">inc_event_2 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">stepfun</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(s_event_2<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>time), <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> s_event_2<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>surv))</span>
+<span id="cb7-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">plot</span>(inc_event_2)</span></code></pre></div>
+<div class="cell-output-display">
+<p><img src="https://sbloggel.netlify.app/posts/2023-11-19-understanding-competing-risks/2023-11-19-understanding-competing-risks_files/figure-html/without_censoring-2.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">plot</span>(<span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">function</span>(x) <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">inc_event_1</span>(x) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">inc_event_2</span>(x), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">from =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">to =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10</span>)</span></code></pre></div>
+<div class="cell-output-display">
+<p><img src="https://sbloggel.netlify.app/posts/2023-11-19-understanding-competing-risks/2023-11-19-understanding-competing-risks_files/figure-html/without_censoring-3.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1">dd <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">tibble</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">event_id =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span>n, </span>
+<span id="cb9-2">             <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">no_event =</span> n<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>,</span>
+<span id="cb9-3">             <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">event_1 =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>,</span>
+<span id="cb9-4">             <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">event_2 =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>,</span>
+<span id="cb9-5">             <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">time =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, dat<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>t_observed))</span>
+<span id="cb9-6"></span>
+<span id="cb9-7"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span> (i <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span>n) {</span>
+<span id="cb9-8">  dd<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>event_1[i <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>] <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> dd<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>event_1[i] <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ifelse</span>(dat<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>event[i] <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>)</span>
+<span id="cb9-9">  dd<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>event_2[i <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>] <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> dd<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>event_2[i] <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ifelse</span>(dat<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>event[i] <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>)</span>
+<span id="cb9-10">}</span>
+<span id="cb9-11"></span>
+<span id="cb9-12">dd <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> </span>
+<span id="cb9-13">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">pivot_longer</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(no_event, event_1, event_2)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> </span>
+<span id="cb9-14">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ggplot</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(time, value, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">fill =</span> name)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_area</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb9-15">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">labs</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Time'</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Individuals'</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">fill =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">''</span>)</span></code></pre></div>
+<div class="cell-output-display">
+<p><img src="https://sbloggel.netlify.app/posts/2023-11-19-understanding-competing-risks/2023-11-19-understanding-competing-risks_files/figure-html/area_plot-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+
+
+
+ ]]></description>
+  <category>R</category>
+  <category>Self-study</category>
+  <guid>https://sbloggel.netlify.app/posts/2023-11-19-understanding-competing-risks/2023-11-19-understanding-competing-risks.html</guid>
+  <pubDate>Sat, 18 Nov 2023 23:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Quantifizierung von Alkoholintoxikation</title>
   <link>https://sbloggel.netlify.app/posts/2023-10-17-quantifizierung-von-alkoholintoxikation/2023-10-17-quantifizierung-von-alkoholintoxikation.html</link>
@@ -126,7 +616,13 @@ background-color: null;
 font-style: inherit;">c</span>(var_x1, cov_x1_x2), <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">c</span>(cov_x1_x2, var_x2))</span>
-<span id="cb3-9">dat <span class="ot" style="color: #003B4F;
+<span id="cb3-9">sigma</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2]
+[1,]  1.0  0.3
+[2,]  0.3  1.0</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1">dat <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -141,15 +637,30 @@ background-color: null;
 font-style: inherit;">0</span>), <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">sigma =</span> sigma)</span>
-<span id="cb3-10"></span>
-<span id="cb3-11"></span>
-<span id="cb3-12"></span>
-<span id="cb3-13">calc_p <span class="ot" style="color: #003B4F;
+<span id="cb5-2"></span>
+<span id="cb5-3"></span>
+<span id="cb5-4"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># calc_p &lt;- function(x) {</span></span>
+<span id="cb5-5"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#   pmvnorm(lower = -abs(x),</span></span>
+<span id="cb5-6"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#           upper = abs(x),</span></span>
+<span id="cb5-7"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#           sigma = sigma)</span></span>
+<span id="cb5-8"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># }</span></span>
+<span id="cb5-9"></span>
+<span id="cb5-10">calc_p <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">function</span>(x) {</span>
-<span id="cb3-14">  <span class="fu" style="color: #4758AB;
+<span id="cb5-11">  <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">pmvnorm</span>(<span class="at" style="color: #657422;
 background-color: null;
@@ -164,7 +675,7 @@ background-color: null;
 font-style: inherit;">-</span><span class="cn" style="color: #8f5902;
 background-color: null;
 font-style: inherit;">Inf</span>),</span>
-<span id="cb3-15">          <span class="at" style="color: #657422;
+<span id="cb5-12">          <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">upper =</span> <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -175,18 +686,19 @@ background-color: null;
 font-style: inherit;">0</span>, x, <span class="cn" style="color: #8f5902;
 background-color: null;
 font-style: inherit;">Inf</span>),</span>
-<span id="cb3-16">          <span class="at" style="color: #657422;
+<span id="cb5-13">          <span class="at" style="color: #657422;
 background-color: null;
-font-style: inherit;">corr =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">cov2cor</span>(sigma))</span>
-<span id="cb3-17">}</span>
-<span id="cb3-18"></span>
-<span id="cb3-19"></span>
-<span id="cb3-20"><span class="co" style="color: #5E5E5E;
+font-style: inherit;">sigma =</span> sigma)</span>
+<span id="cb5-14">}</span>
+<span id="cb5-15"></span>
+<span id="cb5-16"></span>
+<span id="cb5-17"></span>
+<span id="cb5-18"></span>
+<span id="cb5-19"></span>
+<span id="cb5-20"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># should be a straight line, but isn't - I don't understand why...</span></span>
-<span id="cb3-21">p_values <span class="ot" style="color: #003B4F;
+<span id="cb5-21">p_values <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -201,7 +713,7 @@ background-color: null;
 font-style: inherit;">1e4</span>), ], <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>, calc_p)</span>
-<span id="cb3-22"><span class="fu" style="color: #4758AB;
+<span id="cb5-22"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">plot</span>(<span class="fu" style="color: #4758AB;
 background-color: null;
@@ -214,7 +726,7 @@ background-color: null;
 font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>))</span>
-<span id="cb3-23"><span class="fu" style="color: #4758AB;
+<span id="cb5-23"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">abline</span>(<span class="dv" style="color: #AD0000;
 background-color: null;
@@ -234,7 +746,7 @@ font-style: inherit;">'dotted'</span>)</span></code></pre></div>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1">ii_1 <span class="ot" style="color: #003B4F;
+<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1">ii_1 <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> dat[, <span class="dv" style="color: #AD0000;
 background-color: null;
@@ -249,7 +761,7 @@ background-color: null;
 font-style: inherit;">sd =</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">sqrt</span>(var_x1))</span>
-<span id="cb4-2">ii_2 <span class="ot" style="color: #003B4F;
+<span id="cb6-2">ii_2 <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> dat[, <span class="dv" style="color: #AD0000;
 background-color: null;
@@ -264,20 +776,20 @@ background-color: null;
 font-style: inherit;">sd =</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">sqrt</span>(var_x2))</span>
-<span id="cb4-3"></span>
-<span id="cb4-4"><span class="fu" style="color: #4758AB;
+<span id="cb6-3"></span>
+<span id="cb6-4"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">sum</span>(ii_1)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 229</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><span class="fu" style="color: #4758AB;
+<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">sum</span>(ii_2)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 246</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><span class="fu" style="color: #4758AB;
+<div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">sum</span>(ii_1 <span class="sc" style="color: #5E5E5E;
 background-color: null;
@@ -285,7 +797,7 @@ font-style: inherit;">|</span> ii_2)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 457</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><span class="fu" style="color: #4758AB;
+<div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">sum</span>(ii_1 <span class="sc" style="color: #5E5E5E;
 background-color: null;
@@ -1896,7 +2408,7 @@ font-style: inherit;">3</span>)</span></code></pre></div>
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
 <p>Often, the effect of different interventions is to be studied. This can be done by comparing individual sets of interventions (e. g. drug A vs.&nbsp;placebo and drug B vs.&nbsp;placebo) or in a factorial design (e. g. ANOVA). For individual comparisons statistical tests such as the t-test can be appropriate. Importantly, correction for multiple testing should to be carried out. The effect of combination of several drugs can be studied easily in the factorial design, while it is more complicated via t-tests.</p>
 <p>Here, it is studied if ANOVA analysis with subsequent joint testing of the relevant hypotheses offers advantages in terms of required sample size / statistical power in comparison to analysis via separate t-tests for some configurations.</p>
-<div class="cell" data-hash="2023-08-28-anova-with-interactions-vs.-individual-t-tests_cache/html/unnamed-chunk-1_32b4f618354443779e55c8ddb747263c">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">set.seed</span>(<span class="dv" style="color: #AD0000;
@@ -1945,7 +2457,7 @@ font-style: inherit;">'knitr'</span>)</span></code></pre></div>
 </section>
 <section id="example-of-simulated-data" class="level2">
 <h2 class="anchored" data-anchor-id="example-of-simulated-data">Example of simulated data</h2>
-<div class="cell" data-hash="2023-08-28-anova-with-interactions-vs.-individual-t-tests_cache/html/unnamed-chunk-2_93248dc347c75a045a84f47771a1c758">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1">generate_data <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
@@ -2109,7 +2621,7 @@ font-style: inherit;">element_blank</span>())</span></code></pre></div>
 <h2 class="anchored" data-anchor-id="interaction-plots">Interaction plots</h2>
 <section id="with-base-r" class="level3">
 <h3 class="anchored" data-anchor-id="with-base-r">With base R</h3>
-<div class="cell" data-hash="2023-08-28-anova-with-interactions-vs.-individual-t-tests_cache/html/unnamed-chunk-3_7c3f6586bb3e7869156e9245e8c0f34f">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">with</span>(sample_data, </span>
@@ -2132,7 +2644,7 @@ font-style: inherit;">interaction.plot</span>(F2, F1, y))</span></code></pre></d
 </section>
 <section id="with-catstats-package" class="level3">
 <h3 class="anchored" data-anchor-id="with-catstats-package">With catstats package</h3>
-<div class="cell" data-hash="2023-08-28-anova-with-interactions-vs.-individual-t-tests_cache/html/unnamed-chunk-4_de68bbebf23ccb5e84038ee01cdb382c">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># remotes::install_github("greenwood-stat/catstats")</span></span>
@@ -2160,7 +2672,7 @@ font-style: inherit;">data =</span> sample_data)</span></code></pre></div>
 <li>Calculate p-values testing the main effects (<img src="https://latex.codecogs.com/png.latex?%5Cbeta_1%20=%200"> and <img src="https://latex.codecogs.com/png.latex?%5Cbeta_2%20=%200">) and the interaction (<img src="https://latex.codecogs.com/png.latex?%5Cbeta_3%20=%200">) for each of the simulations</li>
 <li>Estimate power empirically</li>
 </ul>
-<div class="cell" data-hash="2023-08-28-anova-with-interactions-vs.-individual-t-tests_cache/html/unnamed-chunk-5_85e82bd34fd44952673618c6300f47a6">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1">simulate_two_way_ANOVA <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
@@ -2273,12 +2785,12 @@ font-style: inherit;">return</span>(p_values)</span>
 </div>
 <section id="power-of-anova-analysis-without-interaction" class="level3">
 <h3 class="anchored" data-anchor-id="power-of-anova-analysis-without-interaction">Power of ANOVA analysis without interaction</h3>
-<div class="cell" data-hash="2023-08-28-anova-with-interactions-vs.-individual-t-tests_cache/html/unnamed-chunk-6_7cd266f5fe4e0633c20dab6de656e14d">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1">nr_of_sims <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fl" style="color: #AD0000;
 background-color: null;
-font-style: inherit;">5e4</span></span>
+font-style: inherit;">1e4</span></span>
 <span id="cb7-2"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">tibble</span>(<span class="at" style="color: #657422;
@@ -2336,7 +2848,7 @@ font-style: inherit;">3</span>)</span></code></pre></div>
 </tr>
 <tr class="even">
 <td style="text-align: center;">Main effect 2</td>
-<td style="text-align: center;">0.469</td>
+<td style="text-align: center;">0.463</td>
 </tr>
 </tbody>
 </table>
@@ -2345,12 +2857,12 @@ font-style: inherit;">3</span>)</span></code></pre></div>
 </section>
 <section id="power-of-anova-analysis-with-interaction" class="level3">
 <h3 class="anchored" data-anchor-id="power-of-anova-analysis-with-interaction">Power of ANOVA analysis with interaction</h3>
-<div class="cell" data-hash="2023-08-28-anova-with-interactions-vs.-individual-t-tests_cache/html/unnamed-chunk-7_26f309f0ab4b61966ed69bd471b79c27">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1">nr_of_sims <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fl" style="color: #AD0000;
 background-color: null;
-font-style: inherit;">5e4</span></span>
+font-style: inherit;">1e4</span></span>
 <span id="cb8-2"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">tibble</span>(<span class="at" style="color: #657422;
@@ -2411,15 +2923,15 @@ font-style: inherit;">3</span>)</span></code></pre></div>
 <tbody>
 <tr class="odd">
 <td style="text-align: center;">Main effect 1</td>
-<td style="text-align: center;">0.441</td>
+<td style="text-align: center;">0.438</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">Main effect 2</td>
-<td style="text-align: center;">0.441</td>
+<td style="text-align: center;">0.439</td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;">Interaction</td>
-<td style="text-align: center;">0.218</td>
+<td style="text-align: center;">0.222</td>
 </tr>
 </tbody>
 </table>
@@ -2430,7 +2942,7 @@ font-style: inherit;">3</span>)</span></code></pre></div>
 <h3 class="anchored" data-anchor-id="power-of-separate-t-tests">Power of separate t-tests</h3>
 <section id="bonferroni-correction-for-two-tests" class="level4">
 <h4 class="anchored" data-anchor-id="bonferroni-correction-for-two-tests">Bonferroni correction for two tests:</h4>
-<div class="cell" data-hash="2023-08-28-anova-with-interactions-vs.-individual-t-tests_cache/html/unnamed-chunk-8_b0e1688ea7e4260f6842b37b36f1c5ac">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">power.t.test</span>(<span class="at" style="color: #657422;
@@ -2487,7 +2999,7 @@ NOTE: n is number in *each* group</code></pre>
 <li>Additional formulations of <img src="https://latex.codecogs.com/png.latex?H_0"> for interaction effect: <img src="https://latex.codecogs.com/png.latex?%5Cbegin%7Balign%7D%0AH_0:%20%5Cqquad%20&amp;%20%5Cmu_A%20-%20%5Cmu_0%20&amp;%20+%20&amp;%20%5Cmu_B%20-%20%5Cmu_0%20&amp;%20=%20&amp;%20%5Cmu_%7BAB%7D%20-%20%5Cmu_0%20%5C%5C%0AH_0:%20%5Cqquad%20&amp;%20%5Cbeta_1%20&amp;%20+%20&amp;%20%5Cbeta_2%20&amp;%20=%20&amp;%20%5Cbeta_1%20+%20%5Cbeta_2%20+%20%5Cbeta_3%0A%5Cend%7Balign%7D"></li>
 <li>Conclusion: Variance of estimate of interaction effect is twice the variance of the estimate of the main effects</li>
 </ul>
-<div class="cell" data-hash="2023-08-28-anova-with-interactions-vs.-individual-t-tests_cache/html/unnamed-chunk-9_bee45e162b85b31bafce374a315b8f7b">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Main effects:</span></span>
@@ -5620,78 +6132,6 @@ font-style: inherit;">2</span>)</span></code></pre></div>
   <category>Linear model vs neural nets</category>
   <guid>https://sbloggel.netlify.app/posts/2023-08-08-leave-one-out-cross-validation-in-r/2023-08-08-leave-one-out-cross-validation-in-r.html</guid>
   <pubDate>Mon, 07 Aug 2023 22:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Regularization in R</title>
-  <link>https://sbloggel.netlify.app/posts/2023-08-05-regularization-in-r/2023-08-05-regularization-in-r.html</link>
-  <description><![CDATA[ 
-
-
-
-<ul>
-<li>ridge regression</li>
-<li>lasso regression</li>
-<li>elastic net</li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'tidyverse'</span>)</span></code></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.1.2     ✔ readr     2.1.4
-✔ forcats   1.0.0     ✔ stringr   1.5.0
-✔ ggplot2   3.4.2     ✔ tibble    3.2.1
-✔ lubridate 1.9.2     ✔ tidyr     1.3.0
-✔ purrr     1.0.1     
-── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-✖ dplyr::filter() masks stats::filter()
-✖ dplyr::lag()    masks stats::lag()
-ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">set.seed</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>)</span></code></pre></div>
-</div>
-
-
-
- ]]></description>
-  <category>R</category>
-  <guid>https://sbloggel.netlify.app/posts/2023-08-05-regularization-in-r/2023-08-05-regularization-in-r.html</guid>
-  <pubDate>Fri, 04 Aug 2023 22:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Getting to know mlr3</title>
-  <link>https://sbloggel.netlify.app/posts/2023-08-04-getting-to-know-mlr3/2023-08-04-getting-to-know-mlr3.html</link>
-  <description><![CDATA[ 
-
-
-
-<p><a href="https://cran.r-project.org/package=mlr3">Link to package</a></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">set.seed</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>)</span>
-<span id="cb1-2"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'mlr3'</span>)</span></code></pre></div>
-</div>
-
-
-
- ]]></description>
-  <category>R</category>
-  <guid>https://sbloggel.netlify.app/posts/2023-08-04-getting-to-know-mlr3/2023-08-04-getting-to-know-mlr3.html</guid>
-  <pubDate>Thu, 03 Aug 2023 22:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>

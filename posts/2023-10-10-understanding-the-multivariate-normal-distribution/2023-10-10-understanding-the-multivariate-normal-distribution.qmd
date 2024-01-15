@@ -35,15 +35,24 @@ var_x1 <- 1
 var_x2 <- 1
 cov_x1_x2 <- 0.3
 sigma <- cbind(c(var_x1, cov_x1_x2), c(cov_x1_x2, var_x2))
+sigma
 dat <- rmvnorm(n, mean = c(0, 0), sigma = sigma)
 
 
+# calc_p <- function(x) {
+#   pmvnorm(lower = -abs(x),
+#           upper = abs(x),
+#           sigma = sigma)
+# }
 
 calc_p <- function(x) {
   pmvnorm(lower = ifelse(x < 0, x, -Inf),
           upper = ifelse(x > 0, x, Inf),
-          corr = cov2cor(sigma))
+          sigma = sigma)
 }
+
+
+
 
 
 # should be a straight line, but isn't - I don't understand why...

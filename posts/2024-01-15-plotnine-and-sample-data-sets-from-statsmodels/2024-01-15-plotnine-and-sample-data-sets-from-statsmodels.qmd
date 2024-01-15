@@ -1,0 +1,27 @@
+---
+title: Plotnine and sample data sets from statsmodels
+date: 2024-01-15
+categories:
+  - R
+---
+
+```{r}
+#| label: init
+#| cache: false
+#| include: false
+library('tidyverse')
+set.seed(1)
+
+library('reticulate')
+use_condaenv('tutorials')
+```
+
+```{python}
+import statsmodels.api as sm
+cars = sm.datasets.get_rdataset("cars")["data"]
+from plotnine import ggplot, aes, geom_point
+p = ggplot(cars, aes("speed", "dist")) + geom_point()
+# p.save("test.pdf", width = 24, height = 24)
+p
+```
+

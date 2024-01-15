@@ -6,7 +6,6 @@ categories:
   - 'ANOVA vs t-Tests'
 execute:
   cache: true
-  message: false
 ---
 
 ## Introduction
@@ -15,6 +14,7 @@ Often, the effect of different interventions is to be studied. This can be done 
 Here, it is studied if ANOVA analysis with subsequent joint testing of the relevant hypotheses offers advantages in terms of required sample size / statistical power in comparison to analysis via separate t-tests for some configurations.
 
 ```{r}
+#| message: false
 set.seed(2)
 library('tidyverse')
 library('multcomp')
@@ -57,23 +57,6 @@ sample_data|>
         axis.ticks.x=element_blank())
 ```
 
-## Interaction plots
-### With base R 
-```{r}
-with(sample_data, 
-     interaction.plot(F1, F2, y))
-
-with(sample_data, 
-     interaction.plot(F2, F1, y))
-```
-
-### With catstats package
-```{r}
-# remotes::install_github("greenwood-stat/catstats")
-catstats::intplotarray(y ~ F1 * F2, data = sample_data)
-```
-
-
 ## Simulate many datasets in order to estimate power to test the hypotheses
 * For ANOVA analysis the multcomp package is used in order to simultaneously test the hypotheses (correction for multiple testing with respect to the two (without interactgion) or three hypotheses (with interaction) is included by design)
 * Calculate p-values testing the main effects ($\beta_1 = 0$ and $\beta_2 = 0$) and the interaction ($\beta_3 = 0$) for each of the simulations
@@ -97,7 +80,7 @@ simulate_two_way_ANOVA <- function(include_interaction = FALSE) {
 
 ### Power of ANOVA analysis without interaction
 ```{r}
-nr_of_sims <- 5e4
+nr_of_sims <- 1e4
 tibble(Effect = c('Main effect 1', 'Main effect 2'),
        Power = rowSums(replicate(n = nr_of_sims, simulate_two_way_ANOVA()) < 
                          0.05) / nr_of_sims) |> 
@@ -106,7 +89,7 @@ tibble(Effect = c('Main effect 1', 'Main effect 2'),
 
 ### Power of ANOVA analysis with interaction
 ```{r}
-nr_of_sims <- 5e4
+nr_of_sims <- 1e4
 tibble(Effect = c('Main effect 1', 'Main effect 2', 'Interaction'),
        Power = rowSums(replicate(n = nr_of_sims, 
                                  simulate_two_way_ANOVA(include_interaction = TRUE)) < 
@@ -166,3 +149,21 @@ power.t.test(n = 10, delta = 1, sd = sqrt(2), sig.level = 0.05 / 3)
   
 * Power in Two-Way-ANOVA with interaction is approximately equal to power of two separate t-tests corrected with Bonferroni procedure (10 additional individuals needed in order to test interaction)
 * Power could be improved without increased total sample size by appropriately increasing the size of the control group (not shown here) - see Friedemann's document (is in local folder however not uploaded)
+
+## Appendix: Interaction plots for Anna
+### With base R 
+```{r}
+with(sample_data, 
+     interaction.plot(F1, F2, y))
+
+with(sample_data, 
+     interaction.plot(F2, F1, y))
+```
+
+### With catstats package
+```{r}
+#| message: false
+# remotes::install_github("greenwood-stat/catstats")
+catstats::intplotarray(y ~ F1 * F2, data = sample_data)
+```
+
