@@ -2,7 +2,7 @@
 title: Plotnine and sample data sets from statsmodels
 date: 2024-01-15
 categories:
-  - R
+  - Python
 ---
 
 ```{r}

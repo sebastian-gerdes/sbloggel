@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2024-01-15">
+<meta name="dcterms.date" content="2024-01-22">
 
-<title>Seb’s blog - Plotnine and sample data sets from statsmodels</title>
+<title>Seb’s blog - Simulating data in Python</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -95,14 +95,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
 <link rel="stylesheet" href="../../styles.css">
-<meta property="og:title" content="Seb’s blog - Plotnine and sample data sets from statsmodels">
-<meta property="og:image" content="https://sbloggel.netlify.app/posts/2024-01-15-plotnine-and-sample-data-sets-from-statsmodels/2024-01-15-plotnine-and-sample-data-sets-from-statsmodels_files/figure-html/unnamed-chunk-2-1.png">
+<meta property="og:title" content="Seb’s blog - Simulating data in Python">
+<meta property="og:image" content="https://sbloggel.netlify.app/posts/2024-01-22-simulating-data-in-python/2024-01-22-simulating-data-in-python_files/figure-html/cell-6-output-2.png">
 <meta property="og:site-name" content="Seb's blog">
-<meta property="og:image:height" content="921">
-<meta property="og:image:width" content="1228">
+<meta property="og:image:height" content="432">
+<meta property="og:image:width" content="574">
 </head>
 
 <body class="nav-fixed">
@@ -149,14 +152,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#which-environment" id="toc-which-environment" class="nav-link active" data-scroll-target="#which-environment">Which environment?</a></li>
+  <li><a href="#importing-the-required-libraries" id="toc-importing-the-required-libraries" class="nav-link" data-scroll-target="#importing-the-required-libraries">Importing the required libraries</a></li>
+  <li><a href="#simulating-the-data" id="toc-simulating-the-data" class="nav-link" data-scroll-target="#simulating-the-data">Simulating the data</a></li>
+  <li><a href="#showing-the-data" id="toc-showing-the-data" class="nav-link" data-scroll-target="#showing-the-data">Showing the data</a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/sebastian-gerdes/sbloggel/blob/main/posts/2024-01-22-simulating-data-in-python/2024-01-22-simulating-data-in-python.ipynb" class="toc-action">View source</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Plotnine and sample data sets from statsmodels</h1>
+<h1 class="title">Simulating data in Python</h1>
   <div class="quarto-categories">
     <div class="quarto-category">Python</div>
   </div>
@@ -170,7 +182,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">January 15, 2024</p>
+      <p class="date">January 22, 2024</p>
     </div>
   </div>
   
@@ -180,22 +192,196 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.api <span class="im">as</span> sm</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>cars <span class="op">=</span> sm.datasets.get_rdataset(<span class="st">"cars"</span>)[<span class="st">"data"</span>]</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> plotnine <span class="im">import</span> ggplot, aes, geom_point</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> ggplot(cars, aes(<span class="st">"speed"</span>, <span class="st">"dist"</span>)) <span class="op">+</span> geom_point()</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># p.save("test.pdf", width = 24, height = 24)</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>&lt;Figure Size: (640 x 480)&gt;</code></pre>
+<section id="which-environment" class="level2">
+<h2 class="anchored" data-anchor-id="which-environment">Which environment?</h2>
+<div class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_env():</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    sp <span class="op">=</span> sys.path[<span class="dv">1</span>].split(<span class="st">"/"</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="st">"envs"</span> <span class="kw">in</span> sp:</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> sp[sp.index(<span class="st">"envs"</span>) <span class="op">+</span> <span class="dv">1</span>]</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">""</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>get_env()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="12">
+<pre><code>'fast_ai_course_2022'</code></pre>
 </div>
-<div class="cell-output-display">
-<p><img src="2024-01-15-plotnine-and-sample-data-sets-from-statsmodels_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="614"></p>
+</div>
+</section>
+<section id="importing-the-required-libraries" class="level2">
+<h2 class="anchored" data-anchor-id="importing-the-required-libraries">Importing the required libraries</h2>
+<div class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> patsy <span class="im">import</span> dmatrices, dmatrix</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="simulating-the-data" class="level2">
+<h2 class="anchored" data-anchor-id="simulating-the-data">Simulating the data</h2>
+<div class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>sd <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>dat <span class="op">=</span> pd.DataFrame()</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>dat[<span class="st">"x1"</span>] <span class="op">=</span> np.random.normal(<span class="dv">0</span>, <span class="dv">5</span>, n)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>dat[<span class="st">"x2"</span>] <span class="op">=</span> np.random.normal(<span class="dv">0</span>, <span class="dv">5</span>, n)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>dat[<span class="st">"x3"</span>] <span class="op">=</span> np.random.choice([<span class="st">"A"</span>, <span class="st">"B"</span>], size<span class="op">=</span>n, replace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>dat[<span class="st">"epsilon"</span>] <span class="op">=</span> np.random.normal(<span class="dv">0</span>, sd, n)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> dmatrix(<span class="st">" ~ x1 + x2 + x3"</span>, dat)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>X.design_info.column_names</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>beta <span class="op">=</span> [<span class="dv">14</span>, <span class="dv">50</span>, <span class="dv">1</span>, <span class="op">-</span><span class="dv">2</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>dat[<span class="st">"y"</span>] <span class="op">=</span> np.matmul(X, beta) <span class="op">+</span> dat[<span class="st">"epsilon"</span>]</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>dat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="15">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">x1</th>
+<th data-quarto-table-cell-role="th">x2</th>
+<th data-quarto-table-cell-role="th">x3</th>
+<th data-quarto-table-cell-role="th">epsilon</th>
+<th data-quarto-table-cell-role="th">y</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>-2.157284</td>
+<td>3.042443</td>
+<td>A</td>
+<td>-3.271442</td>
+<td>2.486387</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>-3.458105</td>
+<td>-6.317998</td>
+<td>B</td>
+<td>0.370765</td>
+<td>73.548654</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>4.439751</td>
+<td>3.108154</td>
+<td>B</td>
+<td>0.114254</td>
+<td>62.337697</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>-3.059616</td>
+<td>-5.881156</td>
+<td>A</td>
+<td>1.271250</td>
+<td>23.973945</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>2.113333</td>
+<td>9.439539</td>
+<td>A</td>
+<td>2.211661</td>
+<td>-0.554084</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">95</td>
+<td>2.378619</td>
+<td>-2.459607</td>
+<td>A</td>
+<td>2.843193</td>
+<td>24.141026</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">96</td>
+<td>-0.802452</td>
+<td>3.819083</td>
+<td>A</td>
+<td>-1.764879</td>
+<td>3.794504</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">97</td>
+<td>-6.072932</td>
+<td>-4.261568</td>
+<td>B</td>
+<td>-4.046033</td>
+<td>62.404172</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">98</td>
+<td>7.436910</td>
+<td>-5.782830</td>
+<td>A</td>
+<td>3.558384</td>
+<td>36.560954</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">99</td>
+<td>-2.709327</td>
+<td>2.501132</td>
+<td>B</td>
+<td>-1.476932</td>
+<td>54.811477</td>
+</tr>
+</tbody>
+</table>
+
+<p>100 rows × 5 columns</p>
+</div>
+</div>
+</div>
+</section>
+<section id="showing-the-data" class="level2">
+<h2 class="anchored" data-anchor-id="showing-the-data">Showing the data</h2>
+<div class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(data<span class="op">=</span>dat, x<span class="op">=</span><span class="st">"x1"</span>, y<span class="op">=</span><span class="st">"y"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="16">
+<pre><code>&lt;Axes: xlabel='x1', ylabel='y'&gt;</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="2024-01-22-simulating-data-in-python_files/figure-html/cell-6-output-2.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(data<span class="op">=</span>dat, x<span class="op">=</span><span class="st">"x2"</span>, y<span class="op">=</span><span class="st">"y"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="17">
+<pre><code>&lt;Axes: xlabel='x2', ylabel='y'&gt;</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="2024-01-22-simulating-data-in-python_files/figure-html/cell-7-output-2.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(data<span class="op">=</span>dat, x<span class="op">=</span><span class="st">"x2"</span>, y<span class="op">=</span><span class="st">"y"</span>, hue<span class="op">=</span><span class="st">"x3"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="18">
+<pre><code>&lt;Axes: xlabel='x2', ylabel='y'&gt;</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="2024-01-22-simulating-data-in-python_files/figure-html/cell-8-output-2.png" class="img-fluid"></p>
 </div>
 </div>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -435,4 +621,4 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/sebastian-gerdes/sbloggel/blob/main/posts/2024-01-15-plotnine-and-sample-data-sets-from-statsmodels/2024-01-15-plotnine-and-sample-data-sets-from-statsmodels.qmd" class="toc-action">View source</a></p></div></div></div></div></footer></body></html>
+</body></html>
