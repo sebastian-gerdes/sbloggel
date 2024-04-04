@@ -174,6 +174,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#debugging" id="toc-debugging" class="nav-link" data-scroll-target="#debugging">Debugging</a></li>
   <li><a href="#update-r" id="toc-update-r" class="nav-link" data-scroll-target="#update-r">Update R</a></li>
   <li><a href="#installed-packages" id="toc-installed-packages" class="nav-link" data-scroll-target="#installed-packages">Installed packages</a></li>
+  <li><a href="#interesting-packages-for-annoting-ggplot-plots" id="toc-interesting-packages-for-annoting-ggplot-plots" class="nav-link" data-scroll-target="#interesting-packages-for-annoting-ggplot-plots">Interesting packages for annoting ggplot plots</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/sebastian-gerdes/sbloggel/blob/main/posts/2023-03-17-interesting-r-packages/2023-03-17-interesting-r-packages.qmd" class="toc-action">View source</a></p></div></div></nav>
     </div>
@@ -448,10 +449,10 @@ Attaching package: 'Ryacas'</code></pre>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">'tidyverse'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.1.3     ✔ readr     2.1.4
-✔ forcats   1.0.0     ✔ stringr   1.5.0
+✔ dplyr     1.1.4     ✔ readr     2.1.4
+✔ forcats   1.0.0     ✔ stringr   1.5.1
 ✔ ggplot2   3.4.4     ✔ tibble    3.2.1
-✔ lubridate 1.9.2     ✔ tidyr     1.3.0
+✔ lubridate 1.9.3     ✔ tidyr     1.3.0
 ✔ purrr     1.0.2     
 ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ tidyr::extract()   masks magrittr::extract()
@@ -476,7 +477,7 @@ The following object is masked from 'package:naniar':
 <span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="fu">colSums</span>(<span class="fu">is.na</span>(aq))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  Ozone Solar.R    Wind    Temp   Month     Day     fct 
-     37       7       0       0       0       0      37 </code></pre>
+     37       7       0       0       0       0      48 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vis_miss</span>(aq)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -489,15 +490,15 @@ The following object is masked from 'package:naniar':
    Ozone Solar.R  Wind  Temp Month   Day fct   Ozone_NA Solar.R_NA Wind_NA
    &lt;dbl&gt;   &lt;int&gt; &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;fct&gt;    &lt;fct&gt;      &lt;fct&gt;  
  1    41     190   7.4    67     5     1 b     !NA      !NA        !NA    
- 2    36     118   8      72     5     2 b     !NA      !NA        !NA    
- 3    12     149  12.6    74     5     3 b     !NA      !NA        !NA    
- 4    18     313  11.5    62     5     4 a     !NA      !NA        !NA    
- 5    NA      NA  14.3    56     5     5 a     NA       NA         !NA    
- 6    28      NA  14.9    66     5     6 &lt;NA&gt;  !NA      NA         !NA    
- 7    23     299   8.6    65     5     7 &lt;NA&gt;  !NA      !NA        !NA    
- 8    19      99  13.8    59     5     8 a     !NA      !NA        !NA    
- 9     8      19  20.1    61     5     9 a     !NA      !NA        !NA    
-10    NA     194   8.6    69     5    10 &lt;NA&gt;  NA       !NA        !NA    
+ 2    36     118   8      72     5     2 a     !NA      !NA        !NA    
+ 3    12     149  12.6    74     5     3 a     !NA      !NA        !NA    
+ 4    18     313  11.5    62     5     4 &lt;NA&gt;  !NA      !NA        !NA    
+ 5    NA      NA  14.3    56     5     5 b     NA       NA         !NA    
+ 6    28      NA  14.9    66     5     6 a     !NA      NA         !NA    
+ 7    23     299   8.6    65     5     7 a     !NA      !NA        !NA    
+ 8    19      99  13.8    59     5     8 &lt;NA&gt;  !NA      !NA        !NA    
+ 9     8      19  20.1    61     5     9 &lt;NA&gt;  !NA      !NA        !NA    
+10    NA     194   8.6    69     5    10 a     NA       !NA        !NA    
 # ℹ 143 more rows
 # ℹ 4 more variables: Temp_NA &lt;fct&gt;, Month_NA &lt;fct&gt;, Day_NA &lt;fct&gt;, fct_NA &lt;fct&gt;</code></pre>
 </div>
@@ -507,15 +508,15 @@ The following object is masked from 'package:naniar':
    Ozone Solar.R  Wind  Temp Month   Day fct   Ozone_NA Solar.R_NA Wind_NA
  * &lt;dbl&gt;   &lt;int&gt; &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;fct&gt;    &lt;fct&gt;      &lt;fct&gt;  
  1  41       190   7.4    67     5     1 b     !NA      !NA        !NA    
- 2  36       118   8      72     5     2 b     !NA      !NA        !NA    
- 3  12       149  12.6    74     5     3 b     !NA      !NA        !NA    
- 4  18       313  11.5    62     5     4 a     !NA      !NA        !NA    
- 5 -11.0      NA  14.3    56     5     5 a     NA       NA         !NA    
- 6  28        NA  14.9    66     5     6 &lt;NA&gt;  !NA      NA         !NA    
- 7  23       299   8.6    65     5     7 &lt;NA&gt;  !NA      !NA        !NA    
- 8  19        99  13.8    59     5     8 a     !NA      !NA        !NA    
- 9   8        19  20.1    61     5     9 a     !NA      !NA        !NA    
-10  20.6     194   8.6    69     5    10 &lt;NA&gt;  NA       !NA        !NA    
+ 2  36       118   8      72     5     2 a     !NA      !NA        !NA    
+ 3  12       149  12.6    74     5     3 a     !NA      !NA        !NA    
+ 4  18       313  11.5    62     5     4 &lt;NA&gt;  !NA      !NA        !NA    
+ 5 -11.0      NA  14.3    56     5     5 b     NA       NA         !NA    
+ 6  28        NA  14.9    66     5     6 a     !NA      NA         !NA    
+ 7  23       299   8.6    65     5     7 a     !NA      !NA        !NA    
+ 8  19        99  13.8    59     5     8 &lt;NA&gt;  !NA      !NA        !NA    
+ 9   8        19  20.1    61     5     9 &lt;NA&gt;  !NA      !NA        !NA    
+10  20.6     194   8.6    69     5    10 a     NA       !NA        !NA    
 # ℹ 143 more rows
 # ℹ 4 more variables: Temp_NA &lt;fct&gt;, Month_NA &lt;fct&gt;, Day_NA &lt;fct&gt;, fct_NA &lt;fct&gt;</code></pre>
 </div>
@@ -592,46 +593,52 @@ speed dist
 <div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>dd <span class="ot">&lt;-</span> <span class="fu">installed.packages</span>()</span>
 <span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>dd[, <span class="st">'Package'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>                 abind                  akima          alphavantager 
-               "abind"                "akima"        "alphavantager" 
-               anytime                    asd                askpass 
-             "anytime"                  "asd"              "askpass" 
-            assertthat              available              babynames 
-          "assertthat"            "available"            "babynames" 
-             backports                   base              base64enc 
-           "backports"                 "base"            "base64enc" 
+<pre><code>                 abind               airports                  akima 
+               "abind"             "airports"                "akima" 
+         alphavantager                anytime                archive 
+       "alphavantager"              "anytime"              "archive" 
+                   asd                askpass             assertthat 
+                 "asd"              "askpass"           "assertthat" 
+             available              babynames              backports 
+           "available"            "babynames"            "backports" 
+                  base              base64enc            BayesFactor 
+                "base"            "base64enc"          "BayesFactor" 
              bayesplot             bayestestR               beanplot 
            "bayesplot"           "bayestestR"             "beanplot" 
-              beeswarm                     BH                   bigD 
-            "beeswarm"                   "BH"                 "bigD" 
-                   bit                  bit64                 bitops 
-                 "bit"                "bit64"               "bitops" 
-              blastula                   blob                    bmp 
-            "blastula"                 "blob"                  "bmp" 
-                  boot                   brew         bridgesampling 
-                "boot"                 "brew"       "bridgesampling" 
-                  brio                   brms            Brobdingnag 
-                "brio"                 "brms"          "Brobdingnag" 
-                 broom          broom.helpers                  bslib 
-               "broom"        "broom.helpers"                "bslib" 
-                cachem                  callr                    car 
-              "cachem"                "callr"                  "car" 
-               carData                  caret                caTools 
-             "carData"                "caret"              "caTools" 
-            cellranger              checkmate                  class 
-          "cellranger"            "checkmate"                "class" 
-              classInt                    cli         clinicaltrialr 
-            "classInt"                  "cli"       "clinicaltrialr" 
-                 clipr             clisymbols                  clock 
-               "clipr"           "clisymbols"                "clock" 
-               cluster                 cmprsk                   coda 
-             "cluster"               "cmprsk"                 "coda" 
-             codetools                   coin            collections 
-           "codetools"                 "coin"          "collections" 
-            colorspace           colourpicker             commonmark 
-          "colorspace"         "colourpicker"           "commonmark" 
-              compiler               confintr             conflicted 
-            "compiler"             "confintr"           "conflicted" 
+              beeswarm                betareg                     BH 
+            "beeswarm"              "betareg"                   "BH" 
+                  bigD                    bit                  bit64 
+                "bigD"                  "bit"                "bit64" 
+                bitops               blastula                   blob 
+              "bitops"             "blastula"                 "blob" 
+                   bmp                   boot                    box 
+                 "bmp"                 "boot"                  "box" 
+                  brew         bridgesampling                   brio 
+                "brew"       "bridgesampling"                 "brio" 
+                  brms            Brobdingnag                  broom 
+                "brms"          "Brobdingnag"                "broom" 
+         broom.helpers                  bslib                 cachem 
+       "broom.helpers"                "bslib"               "cachem" 
+                 callr                    car                carData 
+               "callr"                  "car"              "carData" 
+                 caret                caTools               catstats 
+               "caret"              "caTools"             "catstats" 
+            cellranger              checkmate          cherryblossom 
+          "cellranger"            "checkmate"        "cherryblossom" 
+              circlize                  class               classInt 
+            "circlize"                "class"             "classInt" 
+                   cli         clinicaltrialr                  clipr 
+                 "cli"       "clinicaltrialr"                "clipr" 
+            clisymbols                  clock                cluster 
+          "clisymbols"                "clock"              "cluster" 
+                cmprsk                   coda              codetools 
+              "cmprsk"                 "coda"            "codetools" 
+                  coin            collections             colorspace 
+                "coin"          "collections"           "colorspace" 
+          colourpicker             commonmark               compiler 
+        "colourpicker"           "commonmark"             "compiler" 
+              confintr             conflicted               contfrac 
+            "confintr"           "conflicted"             "contfrac" 
                   coro               corrplot                COVID19 
                 "coro"             "corrplot"              "COVID19" 
                cowplot                  coxed                  cpp11 
@@ -644,30 +651,38 @@ speed dist
            "cyclocomp"           "data.table"             "datasets" 
             datawizard                    DBI                 dbplyr 
           "datawizard"                  "DBI"               "dbplyr" 
-              DEoptimR                  Deriv                   desc 
-            "DEoptimR"                "Deriv"                 "desc" 
-               deSolve               devtools                diagram 
-             "deSolve"             "devtools"              "diagram" 
-                 dials             DiceDesign                diffobj 
-               "dials"           "DiceDesign"              "diffobj" 
-            diffviewer                 digest               digitize 
-          "diffviewer"               "digest"             "digitize" 
-        distributional             doParallel                  doRNG 
-      "distributional"           "doParallel"                "doRNG" 
-             dotCall64                downlit                  dplyr 
-           "dotCall64"              "downlit"                "dplyr" 
+                deldir               DEoptimR                  Deriv 
+              "deldir"             "DEoptimR"                "Deriv" 
+                  desc              DescTools                deSolve 
+                "desc"            "DescTools"              "deSolve" 
+              devtools                diagram                  dials 
+            "devtools"              "diagram"                "dials" 
+            DiceDesign                diffobj             diffviewer 
+          "DiceDesign"              "diffobj"           "diffviewer" 
+                digest               digitize         distributional 
+              "digest"             "digitize"       "distributional" 
+            doParallel                  doRNG              dotCall64 
+          "doParallel"                "doRNG"            "dotCall64" 
+               downlit                  dplyr                  dqrng 
+             "downlit"                "dplyr"                "dqrng" 
                     DT                 dtplyr               dygraphs 
                   "DT"               "dtplyr"             "dygraphs" 
-                 e1071             effectsize               ellipsis 
-               "e1071"           "effectsize"             "ellipsis" 
+                 e1071                effects             effectsize 
+               "e1071"              "effects"           "effectsize" 
+               effsize               ellipsis               elliptic 
+             "effsize"             "ellipsis"             "elliptic" 
                emmeans           estimability               evaluate 
              "emmeans"         "estimability"             "evaluate" 
-        exactRankTests                   expm                  fansi 
-      "exactRankTests"                 "expm"                "fansi" 
-               faraway                 farver                fastmap 
-             "faraway"               "farver"              "fastmap" 
-                fields               filelock              flextable 
-              "fields"             "filelock"            "flextable" 
+                 Exact         exactRankTests                   expm 
+               "Exact"       "exactRankTests"                 "expm" 
+                 fansi                faraway                 farver 
+               "fansi"              "faraway"               "farver" 
+                fastai            fastDummies                fastmap 
+              "fastai"          "fastDummies"              "fastmap" 
+                fields               filelock           fitdistrplus 
+              "fields"             "filelock"         "fitdistrplus" 
+               flexmix              flextable                    FNN 
+             "flexmix"            "flextable"                  "FNN" 
            fontawesome      fontBitstreamVera         fontLiberation 
          "fontawesome"    "fontBitstreamVera"       "fontLiberation" 
             fontquiver                forcats                foreach 
@@ -682,210 +697,250 @@ speed dist
               "gargle"              "gdtools"             "generics" 
                   gert                getPass                 gfonts 
                 "gert"              "getPass"               "gfonts" 
-                GGally             ggbeeswarm                 ggdist 
-              "GGally"           "ggbeeswarm"               "ggdist" 
-             ggeffects             ggenealogy                ggforce 
-           "ggeffects"           "ggenealogy"              "ggforce" 
-              ggmosaic                ggplot2                ggpmisc 
-            "ggmosaic"              "ggplot2"              "ggpmisc" 
+                GGally             ggbeeswarm                 ggdark 
+              "GGally"           "ggbeeswarm"               "ggdark" 
+                ggdist              ggeffects             ggenealogy 
+              "ggdist"            "ggeffects"           "ggenealogy" 
+               ggforce              ggformula               ggmosaic 
+             "ggforce"            "ggformula"             "ggmosaic" 
+             ggpattern                ggplot2                ggpmisc 
+           "ggpattern"              "ggplot2"              "ggpmisc" 
                   ggpp                 ggpubr             ggquickeda 
                 "ggpp"               "ggpubr"           "ggquickeda" 
                 ggraph                ggrepel               ggridges 
               "ggraph"              "ggrepel"             "ggridges" 
-                 ggsci               ggsignif              ggsurvfit 
-               "ggsci"             "ggsignif"            "ggsurvfit" 
-                ggtext          ggVennDiagram                     gh 
-              "ggtext"        "ggVennDiagram"                   "gh" 
-          GillespieSSA               gitcreds                glmmTMB 
-        "GillespieSSA"             "gitcreds"              "glmmTMB" 
-                glmnet          GlobalOptions                globals 
-              "glmnet"        "GlobalOptions"              "globals" 
-                  glue                  Gmisc            googledrive 
-                "glue"                "Gmisc"          "googledrive" 
-         googlesheets4                  gower                  GPfit 
-       "googlesheets4"                "gower"                "GPfit" 
-                gplots               graphics           graphlayouts 
-              "gplots"             "graphics"         "graphlayouts" 
-             grDevices                   grid              gridExtra 
-           "grDevices"                 "grid"            "gridExtra" 
+                 ggsci               ggsignif               ggstance 
+               "ggsci"             "ggsignif"             "ggstance" 
+               ggstats              ggsurvfit                 ggtext 
+             "ggstats"            "ggsurvfit"               "ggtext" 
+              ggthemes          ggVennDiagram                     gh 
+            "ggthemes"        "ggVennDiagram"                   "gh" 
+          GillespieSSA               gitcreds                    gld 
+        "GillespieSSA"             "gitcreds"                  "gld" 
+               glmmTMB                 glmnet          GlobalOptions 
+             "glmmTMB"               "glmnet"        "GlobalOptions" 
+               globals                   glue                  Gmisc 
+             "globals"                 "glue"                "Gmisc" 
+               goftest            googledrive          googlesheets4 
+             "goftest"          "googledrive"        "googlesheets4" 
+                 gower                  GPfit                 gplots 
+               "gower"                "GPfit"               "gplots" 
+              graphics           graphlayouts              grDevices 
+            "graphics"         "graphlayouts"            "grDevices" 
+                  grid              gridExtra            gridpattern 
+                "grid"            "gridExtra"          "gridpattern" 
               gridtext                     gt                 gtable 
             "gridtext"                   "gt"               "gtable" 
-                gtools              gtsummary                hardhat 
-              "gtools"            "gtsummary"              "hardhat" 
-                 haven                   here                  hfhub 
-               "haven"                 "here"                "hfhub" 
-                 highr                  Hmisc                    hms 
-               "highr"                "Hmisc"                  "hms" 
-             htmlTable              htmltools            htmlwidgets 
-           "htmlTable"            "htmltools"          "htmlwidgets" 
-              httpcode                 httpuv                   httr 
-            "httpcode"               "httpuv"                 "httr" 
-                 httr2               icecream                    ids 
-               "httr2"             "icecream"                  "ids" 
-                igraph                  infer                    ini 
-              "igraph"                "infer"                  "ini" 
-                inline                insight                  ipred 
-              "inline"              "insight"                "ipred" 
-               isoband              iterators              itertools 
-             "isoband"            "iterators"            "itertools" 
-           janeaustenr                janitor                jmvcore 
-         "janeaustenr"              "janitor"              "jmvcore" 
-                  jpeg              jquerylib               jsonlite 
-                "jpeg"            "jquerylib"             "jsonlite" 
-            juicyjuice             KernSmooth               kinship2 
-          "juicyjuice"           "KernSmooth"             "kinship2" 
-                 km.ci                 KMsurv                  knitr 
-               "km.ci"               "KMsurv"                "knitr" 
-      knitrProgressBar               labeling               labelled 
-    "knitrProgressBar"             "labeling"             "labelled" 
-                laeken                 Lahman         languageserver 
-              "laeken"               "Lahman"       "languageserver" 
-                 later              latex2exp                lattice 
-               "later"            "latex2exp"              "lattice" 
-                  lava               lazyeval                 learnr 
-                "lava"             "lazyeval"               "learnr" 
+                gtools              gtsummary                 hablar 
+              "gtools"            "gtsummary"               "hablar" 
+               hardhat                  haven                   here 
+             "hardhat"                "haven"                 "here" 
+                 hfhub                  highr                  Hmisc 
+               "hfhub"                "highr"                "Hmisc" 
+                   hms              htmlTable              htmltools 
+                 "hms"            "htmlTable"            "htmltools" 
+           htmlwidgets               httpcode                 httpgd 
+         "htmlwidgets"             "httpcode"               "httpgd" 
+                httpuv                   httr                  httr2 
+              "httpuv"                 "httr"                "httr2" 
+              hypergeo                    ica               icecream 
+            "hypergeo"                  "ica"             "icecream" 
+                   ids                 igraph                  infer 
+                 "ids"               "igraph"                "infer" 
+                   ini                 inline                insight 
+                 "ini"               "inline"              "insight" 
+                 ipred                  irlba                isoband 
+               "ipred"                "irlba"              "isoband" 
+             iterators              itertools            janeaustenr 
+           "iterators"            "itertools"          "janeaustenr" 
+               janitor                jmvcore                   jpeg 
+             "janitor"              "jmvcore"                 "jpeg" 
+             jquerylib               jsonlite             juicyjuice 
+           "jquerylib"             "jsonlite"           "juicyjuice" 
+            KernSmooth               kinship2                  km.ci 
+          "KernSmooth"             "kinship2"                "km.ci" 
+                KMsurv                  knitr       knitrProgressBar 
+              "KMsurv"                "knitr"     "knitrProgressBar" 
+              labeling               labelled                 laeken 
+            "labeling"             "labelled"               "laeken" 
+                Lahman         languageserver                  later 
+              "Lahman"       "languageserver"                "later" 
+             latex2exp                lattice                   lava 
+           "latex2exp"              "lattice"                 "lava" 
+              lazyeval                 learnr                 leiden 
+            "lazyeval"               "learnr"               "leiden" 
                    lgr                    lhs                libcoin 
                  "lgr"                  "lhs"              "libcoin" 
              lifecycle                  lintr                listenv 
            "lifecycle"                "lintr"              "listenv" 
-                  lme4                lmodel2                 lmtest 
-                "lme4"              "lmodel2"               "lmtest" 
-                   loo                lpSolve              lubridate 
-                 "loo"              "lpSolve"            "lubridate" 
-                magick               magrittr                   maps 
-              "magick"             "magrittr"                 "maps" 
-              markdown                   MASS                 Matrix 
-            "markdown"                 "MASS"               "Matrix" 
+                  lme4                lmodel2                   lmom 
+                "lme4"              "lmodel2"                 "lmom" 
+                lmtest                 logger                    loo 
+              "lmtest"               "logger"                  "loo" 
+               lpSolve              lubridate                 magick 
+             "lpSolve"            "lubridate"               "magick" 
+              magrittr                   maps               markdown 
+            "magrittr"                 "maps"             "markdown" 
+                  MASS               mathjaxr                 Matrix 
+                "MASS"             "mathjaxr"               "Matrix" 
           MatrixModels            matrixStats                maxstat 
         "MatrixModels"          "matrixStats"              "maxstat" 
                Mediana              mediation                memoise 
              "Mediana"            "mediation"              "memoise" 
-               methods                   mgcv         microbenchmark 
-             "methods"                 "mgcv"       "microbenchmark" 
-                  mime                 minhub                 miniUI 
-                "mime"               "minhub"               "miniUI" 
-                 minqa             missForest                mlbench 
-               "minqa"           "missForest"              "mlbench" 
+               metadat                metafor                methods 
+             "metadat"              "metafor"              "methods" 
+                  mgcv         microbenchmark                   mime 
+                "mgcv"       "microbenchmark"                 "mime" 
+                minhub                 miniUI                  minqa 
+              "minhub"               "miniUI"                "minqa" 
+            missForest                mitools                mlbench 
+          "missForest"              "mitools"              "mlbench" 
                   mlr3           mlr3measures               mlr3misc 
                 "mlr3"         "mlr3measures"             "mlr3misc" 
-             modeldata               modelenv           ModelMetrics 
-           "modeldata"             "modelenv"         "ModelMetrics" 
-                modelr             modeltools                    msm 
-              "modelr"           "modeltools"                  "msm" 
-                mstate               multcomp                munsell 
-              "mstate"             "multcomp"              "munsell" 
+                mnormt              modeldata               modelenv 
+              "mnormt"            "modeldata"             "modelenv" 
+          ModelMetrics                 modelr             modeltools 
+        "ModelMetrics"               "modelr"           "modeltools" 
+                mosaic             mosaicCore             mosaicData 
+              "mosaic"           "mosaicCore"           "mosaicData" 
+                   msm                 mstate               multcomp 
+                 "msm"               "mstate"             "multcomp" 
+          multcompView                  MuMIn                munsell 
+        "multcompView"                "MuMIn"              "munsell" 
                mvtnorm                 naniar              neuralnet 
              "mvtnorm"               "naniar"            "neuralnet" 
                nleqslv                   nlme                 nloptr 
              "nleqslv"                 "nlme"               "nloptr" 
                   nnet                   norm               numDeriv 
                 "nnet"                 "norm"             "numDeriv" 
-          nycflights13                officer                openssl 
-        "nycflights13"              "officer"              "openssl" 
-               packrat                   padr         palmerpenguins 
-             "packrat"                 "padr"       "palmerpenguins" 
-               paradox               parallel             parallelly 
-             "paradox"             "parallel"           "parallelly" 
-            parameters                parsnip              patchwork 
-          "parameters"              "parsnip"            "patchwork" 
-               pbapply               pbkrtest            performance 
-             "pbapply"             "pbkrtest"          "performance" 
-  PerformanceAnalytics               PermAlgo                permute 
-"PerformanceAnalytics"             "PermAlgo"              "permute" 
-              pheatmap                 pillar               pkgbuild 
-            "pheatmap"               "pillar"             "pkgbuild" 
-             pkgconfig                pkgdown                pkgload 
-           "pkgconfig"              "pkgdown"              "pkgload" 
-                 plogr                 plotly                   plyr 
-               "plogr"               "plotly"                 "plyr" 
-                   png              polspline               polyclip 
-                 "png"            "polspline"             "polyclip" 
-               polynom              posterior                 praise 
-             "polynom"            "posterior"               "praise" 
-           prettyunits                   pROC               processx 
-         "prettyunits"                 "pROC"             "processx" 
-               prodlim           productplots                profvis 
-             "prodlim"         "productplots"              "profvis" 
-              progress              progressr               promises 
-            "progress"            "progressr"             "promises" 
-                 proxy                  PRROC                     ps 
-               "proxy"                "PRROC"                   "ps" 
-                 purrr               quadprog                 Quandl 
-               "purrr"             "quadprog"               "Quandl" 
-              quantmod               quantreg                 quarto 
-            "quantmod"             "quantreg"               "quarto" 
+          nycflights13                officer              openintro 
+        "nycflights13"              "officer"            "openintro" 
+               openssl                packrat                   padr 
+             "openssl"              "packrat"                 "padr" 
+        palmerpenguins                paradox               parallel 
+      "palmerpenguins"              "paradox"             "parallel" 
+            parallelly             parameters                parsnip 
+          "parallelly"           "parameters"              "parsnip" 
+             patchwork                pbapply               pbkrtest 
+           "patchwork"              "pbapply"             "pbkrtest" 
+           performance   PerformanceAnalytics               PermAlgo 
+         "performance" "PerformanceAnalytics"             "PermAlgo" 
+               permute               pheatmap                 pillar 
+             "permute"             "pheatmap"               "pillar" 
+              pkgbuild              pkgconfig                pkgdown 
+            "pkgbuild"            "pkgconfig"              "pkgdown" 
+               pkgload                  plogr                 plotly 
+             "pkgload"                "plogr"               "plotly" 
+                  plyr                    png              polspline 
+                "plyr"                  "png"            "polspline" 
+              polyclip                polynom              posterior 
+            "polyclip"              "polynom"            "posterior" 
+                praise            prettyunits                   pROC 
+              "praise"          "prettyunits"                 "pROC" 
+              processx                prodlim           productplots 
+            "processx"              "prodlim"         "productplots" 
+               profvis               progress              progressr 
+             "profvis"             "progress"            "progressr" 
+              promises                  proxy                  PRROC 
+            "promises"                "proxy"                "PRROC" 
+                    ps                  psych                  purrr 
+                  "ps"                "psych"                "purrr" 
+              quadprog                 Quandl               quantmod 
+            "quadprog"               "Quandl"             "quantmod" 
+              quantreg                 quarto               QuickJSR 
+            "quantreg"               "quarto"             "QuickJSR" 
                R.cache            R.methodsS3                   R.oo 
              "R.cache"          "R.methodsS3"                 "R.oo" 
                R.utils                     R6                   ragg 
              "R.utils"                   "R6"                 "ragg" 
-          randomForest                 ranger               rappdirs 
-        "randomForest"               "ranger"             "rappdirs" 
-             rcmdcheck           RColorBrewer                   Rcpp 
-           "rcmdcheck"         "RColorBrewer"                 "Rcpp" 
-         RcppArmadillo              RcppEigen           RcppParallel 
-       "RcppArmadillo"            "RcppEigen"         "RcppParallel" 
-              RcppRoll               RcppTOML              reactable 
-            "RcppRoll"             "RcppTOML"            "reactable" 
-                reactR             readbitmap                readODS 
-              "reactR"           "readbitmap"              "readODS" 
-                 readr                 readxl                recipes 
-               "readr"               "readxl"              "recipes" 
-               rematch               rematch2                remotes 
-             "rematch"             "rematch2"              "remotes" 
-                  renv                   repr                 reprex 
-                "renv"                 "repr"               "reprex" 
-               reshape               reshape2      ResourceSelection 
-             "reshape"             "reshape2"    "ResourceSelection" 
-            reticulate                    rex                    rgl 
-          "reticulate"                  "rex"                  "rgl" 
-                riingo                    rim                  rlang 
-              "riingo"                  "rim"                "rlang" 
-             rmarkdown                    rms               rngtools 
-           "rmarkdown"                  "rms"             "rngtools" 
-            robustbase                   ROCR               roxygen2 
-          "robustbase"                 "ROCR"             "roxygen2" 
+          randomForest                 ranger                   RANN 
+        "randomForest"               "ranger"                 "RANN" 
+              rappdirs              rcmdcheck           RColorBrewer 
+            "rappdirs"            "rcmdcheck"         "RColorBrewer" 
+                  Rcpp              RcppAnnoy          RcppArmadillo 
+                "Rcpp"            "RcppAnnoy"        "RcppArmadillo" 
+             RcppEigen               RcppHNSW           RcppParallel 
+           "RcppEigen"             "RcppHNSW"         "RcppParallel" 
+          RcppProgress               RcppRoll               RcppTOML 
+        "RcppProgress"             "RcppRoll"             "RcppTOML" 
+             reactable                 reactR             readbitmap 
+           "reactable"               "reactR"           "readbitmap" 
+               readODS                  readr                 readxl 
+             "readODS"                "readr"               "readxl" 
+               recipes                rematch               rematch2 
+             "recipes"              "rematch"             "rematch2" 
+               remotes                   renv                   repr 
+             "remotes"                 "renv"                 "repr" 
+                reprex                reshape               reshape2 
+              "reprex"              "reshape"             "reshape2" 
+     ResourceSelection             reticulate                    rex 
+   "ResourceSelection"           "reticulate"                  "rex" 
+                   rgl                 riingo                    rim 
+                 "rgl"               "riingo"                  "rim" 
+                 rjags                  rlang              rmarkdown 
+               "rjags"                "rlang"            "rmarkdown" 
+                   rms               rngtools             robustbase 
+                 "rms"             "rngtools"           "robustbase" 
+                  ROCR              rootSolve               roxygen2 
+                "ROCR"            "rootSolve"             "roxygen2" 
                  rpart             rpart.plot              RPostgres 
                "rpart"           "rpart.plot"            "RPostgres" 
              rprojroot                rsample              rsconnect 
            "rprojroot"              "rsample"            "rsconnect" 
-                 rstan             rstantools                rstatix 
-               "rstan"           "rstantools"              "rstatix" 
-            rstudioapi                rticles                  RVenn 
-          "rstudioapi"              "rticles"                "RVenn" 
-             rversions                  rvest                 Ryacas 
-           "rversions"                "rvest"               "Ryacas" 
-                    s2            safetensors               sandwich 
-                  "s2"          "safetensors"             "sandwich" 
-                  sass                 scales                scholar 
-                "sass"               "scales"              "scholar" 
-               selectr            sessioninfo                     sf 
-             "selectr"          "sessioninfo"                   "sf" 
-                 shape                  shiny             shinyFiles 
-               "shape"                "shiny"           "shinyFiles" 
-             shinyjqui                shinyjs              shinystan 
-           "shinyjqui"              "shinyjs"            "shinystan" 
-           shinythemes            simputation             sjlabelled 
-         "shinythemes"          "simputation"           "sjlabelled" 
-                sjmisc                 sjPlot                sjstats 
-              "sjmisc"               "sjPlot"              "sjstats" 
-                 skimr                 slider                  smisc 
-               "skimr"               "slider"                "smisc" 
-             snakecase              SnowballC            sourcetools 
-           "snakecase"            "SnowballC"          "sourcetools" 
-                    sp                   spam                SparseM 
-                  "sp"                 "spam"              "SparseM" 
-               spatial                splines                splus2R 
-             "spatial"              "splines"              "splus2R" 
-               SQUAREM            StanHeaders                  stats 
-             "SQUAREM"          "StanHeaders"                "stats" 
-                stats4             stringdist                stringi 
-              "stats4"           "stringdist"              "stringi" 
-               stringr                 styler               survival 
-             "stringr"               "styler"             "survival" 
-             survminer               survMisc                    sys 
-           "survminer"             "survMisc"                  "sys" 
-           systemfonts                 table1                  tcltk 
-         "systemfonts"               "table1"                "tcltk" 
+              RSpectra                  rstan             rstantools 
+            "RSpectra"                "rstan"           "rstantools" 
+               rstatix             rstudioapi                rticles 
+             "rstatix"           "rstudioapi"              "rticles" 
+                 Rtsne                  RVenn              rversions 
+               "Rtsne"                "RVenn"            "rversions" 
+                 rvest                 Ryacas                     s2 
+               "rvest"               "Ryacas"                   "s2" 
+           safetensors               sandwich                   sass 
+         "safetensors"             "sandwich"                 "sass" 
+                scales            scattermore          scatterplot3d 
+              "scales"          "scattermore"        "scatterplot3d" 
+               scholar                  scico            sctransform 
+             "scholar"                "scico"          "sctransform" 
+               selectr            sessioninfo                 Seurat 
+             "selectr"          "sessioninfo"               "Seurat" 
+          SeuratObject                     sf                  shape 
+        "SeuratObject"                   "sf"                "shape" 
+                 shiny           shiny.fluent            shiny.react 
+               "shiny"         "shiny.fluent"          "shiny.react" 
+        shinydashboard             shinyFiles              shinyjqui 
+      "shinydashboard"           "shinyFiles"            "shinyjqui" 
+               shinyjs              shinylive              shinystan 
+             "shinyjs"            "shinylive"            "shinystan" 
+           shinythemes            simputation                  sitmo 
+         "shinythemes"          "simputation"                "sitmo" 
+            sjlabelled                 sjmisc                 sjPlot 
+          "sjlabelled"               "sjmisc"               "sjPlot" 
+               sjstats                  skimr                 slider 
+             "sjstats"                "skimr"               "slider" 
+                 smisc              snakecase              SnowballC 
+               "smisc"            "snakecase"            "SnowballC" 
+                sodium            sourcetools                     sp 
+              "sodium"          "sourcetools"                   "sp" 
+                  spam                SparseM                spatial 
+                "spam"              "SparseM"              "spatial" 
+         spatstat.data       spatstat.explore          spatstat.geom 
+       "spatstat.data"     "spatstat.explore"        "spatstat.geom" 
+       spatstat.random        spatstat.sparse         spatstat.utils 
+     "spatstat.random"      "spatstat.sparse"       "spatstat.utils" 
+               splines                splus2R                SQUAREM 
+             "splines"              "splus2R"              "SQUAREM" 
+                  sscn            StanHeaders                statmod 
+                "sscn"          "StanHeaders"              "statmod" 
+                 stats                 stats4             stringdist 
+               "stats"               "stats4"           "stringdist" 
+               stringi                stringr                 styler 
+             "stringi"              "stringr"               "styler" 
+                survey               survival              survminer 
+              "survey"             "survival"            "survminer" 
+              survMisc                    sys            systemfonts 
+            "survMisc"                  "sys"          "systemfonts" 
+                table1                  tcltk                 tensor 
+              "table1"                "tcltk"               "tensor" 
                tensorA               testthat            textshaping 
              "tensorA"             "testthat"          "textshaping" 
                TH.data                threejs                 tibble 
@@ -912,18 +967,20 @@ speed dist
                 "tzdb"                "units"               "UpSetR" 
                   urca             urlchecker               urltools 
                 "urca"           "urlchecker"             "urltools" 
-               usethis                   utf8                  utils 
-             "usethis"                 "utf8"                "utils" 
-                  uuid                     V8                    vcd 
-                "uuid"                   "V8"                  "vcd" 
-                 vctrs                  vegan                    VIM 
-               "vctrs"                "vegan"                  "VIM" 
-                 vipor                viridis            viridisLite 
-               "vipor"              "viridis"          "viridisLite" 
-                visdat                  vroom                  waldo 
-              "visdat"                "vroom"                "waldo" 
-                  warp                whisker                  withr 
-                "warp"              "whisker"                "withr" 
+                usdata                usethis                   utf8 
+              "usdata"              "usethis"                 "utf8" 
+                 utils                   uuid                   uwot 
+               "utils"                 "uuid"                 "uwot" 
+                    V8                    vcd                  vctrs 
+                  "V8"                  "vcd"                "vctrs" 
+                 vegan                    VIM                  vipor 
+               "vegan"                  "VIM"                "vipor" 
+               viridis            viridisLite                 visdat 
+             "viridis"          "viridisLite"               "visdat" 
+                 vroom                  waldo                   warp 
+               "vroom"                "waldo"                 "warp" 
+           wesanderson                whisker                  withr 
+         "wesanderson"              "whisker"                "withr" 
                     wk              workflows           workflowsets 
                   "wk"            "workflows"         "workflowsets" 
                   xfun                    XML                   xml2 
@@ -932,14 +989,20 @@ speed dist
         "xmlparsedata"                "xopen"               "xtable" 
                    xts                   yaml              yardstick 
                  "xts"                 "yaml"            "yardstick" 
-                 yesno            yulab.utils                zeallot 
-               "yesno"          "yulab.utils"              "zeallot" 
-                   zip                    zoo 
-                 "zip"                  "zoo" </code></pre>
+                 yarrr                  yesno            yulab.utils 
+               "yarrr"                "yesno"          "yulab.utils" 
+               zeallot                    zip                   zoib 
+             "zeallot"                  "zip"                 "zoib" 
+                   zoo 
+                 "zoo" </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dput</span>(dd[, <span class="st">'Package'</span>], <span class="at">file =</span> <span class="fu">paste0</span>(<span class="st">'installed_packages_'</span>, <span class="fu">Sys.Date</span>(), <span class="st">'.RData'</span>))</span>
 <span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dput</span>(dd, <span class="at">file =</span> <span class="fu">paste0</span>(<span class="st">'installed_packages_with_version_'</span>, <span class="fu">Sys.Date</span>(), <span class="st">'.RData'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section>
+<section id="interesting-packages-for-annoting-ggplot-plots" class="level2">
+<h2 class="anchored" data-anchor-id="interesting-packages-for-annoting-ggplot-plots">Interesting packages for annoting ggplot plots</h2>
+<p><a href="https://jkunst.com/blog/posts/2023-07-10-my-favorite-ggplot2-packages-with-examples/">Link</a></p>
 
 
 </section>

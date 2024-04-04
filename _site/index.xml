@@ -10,7 +10,189 @@
 <atom:link href="https://sbloggel.netlify.app/index.xml" rel="self" type="application/rss+xml"/>
 <description>Seb&#39;s private blog about statistics and other topics</description>
 <generator>quarto-1.3.433</generator>
-<lastBuildDate>Sun, 21 Jan 2024 23:00:00 GMT</lastBuildDate>
+<lastBuildDate>Tue, 26 Mar 2024 23:00:00 GMT</lastBuildDate>
+<item>
+  <title>Clone size distributions</title>
+  <link>https://sbloggel.netlify.app/posts/2024-03-27-clone-size-distributions/2024-03-27-clone-size-distributions.html</link>
+  <description><![CDATA[ 
+
+
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> np</span>
+<span id="cb1-2"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> pandas <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> pd</span>
+<span id="cb1-3"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> random</span></code></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1">n <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1000</span></span>
+<span id="cb2-2">nr_of_steps <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1000000</span></span>
+<span id="cb2-3">cell_ids <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.zeros((nr_of_steps <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, n))</span>
+<span id="cb2-4">cell_ids[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, ] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">range</span>(n)</span>
+<span id="cb2-5"></span>
+<span id="cb2-6"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span> i <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">range</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, nr_of_steps <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>):</span>
+<span id="cb2-7">  cell_ids[i, ] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> cell_ids[i <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, ]</span>
+<span id="cb2-8">  ii_death <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> random.randint(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, n <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)</span>
+<span id="cb2-9">  ii_birth <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> random.randint(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, n <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)</span>
+<span id="cb2-10">  cell_ids[i, ii_death] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> cell_ids[i <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, ii_birth]</span>
+<span id="cb2-11"></span>
+<span id="cb2-12">np.column_stack(np.unique(cell_ids[nr_of_steps], return_counts<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">True</span>))</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>array([[ 857., 1000.]])</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1">n <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">20</span></span>
+<span id="cb4-2">nr_of_steps <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">100</span></span>
+<span id="cb4-3">cell_ids <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.arange(n)</span>
+<span id="cb4-4"></span>
+<span id="cb4-5"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span> i <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">range</span>(nr_of_steps):</span>
+<span id="cb4-6">  ii_death <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> random.randint(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, n <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)</span>
+<span id="cb4-7">  ii_birth <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> random.randint(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, n <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)</span>
+<span id="cb4-8">  cell_ids[ii_death] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> cell_ids[ii_birth]</span>
+<span id="cb4-9"></span>
+<span id="cb4-10">np.column_stack(np.unique(cell_ids, return_counts<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">True</span>))</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>array([[ 0,  7],
+       [ 4,  6],
+       [ 5,  3],
+       [18,  4]])</code></pre>
+</div>
+</div>
+
+
+
+ ]]></description>
+  <category>R</category>
+  <guid>https://sbloggel.netlify.app/posts/2024-03-27-clone-size-distributions/2024-03-27-clone-size-distributions.html</guid>
+  <pubDate>Tue, 26 Mar 2024 23:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Testing shinylive</title>
+  <link>https://sbloggel.netlify.app/posts/2024-03-11-testing-shinylive/2024-03-11-testing-shinylive.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+
+ ]]></description>
+  <category>R</category>
+  <guid>https://sbloggel.netlify.app/posts/2024-03-11-testing-shinylive/2024-03-11-testing-shinylive.html</guid>
+  <pubDate>Sun, 10 Mar 2024 23:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Simulating data in Python</title>
   <link>https://sbloggel.netlify.app/posts/2024-01-22-simulating-data-in-python/2024-01-22-simulating-data-in-python.html</link>
@@ -20,7 +202,7 @@
 
 <section id="which-environment" class="level2">
 <h2 class="anchored" data-anchor-id="which-environment">Which environment?</h2>
-<div class="cell" data-execution_count="12">
+<div class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> sys</span>
@@ -61,14 +243,14 @@ background-color: null;
 font-style: inherit;">""</span></span>
 <span id="cb1-9"></span>
 <span id="cb1-10">get_env()</span></code></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="12">
+<div class="cell-output cell-output-display" data-execution_count="1">
 <pre><code>'fast_ai_course_2022'</code></pre>
 </div>
 </div>
 </section>
 <section id="importing-the-required-libraries" class="level2">
 <h2 class="anchored" data-anchor-id="importing-the-required-libraries">Importing the required libraries</h2>
-<div class="cell" data-execution_count="13">
+<div class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
@@ -98,7 +280,7 @@ font-style: inherit;">import</span> dmatrices, dmatrix</span></code></pre></div>
 </section>
 <section id="simulating-the-data" class="level2">
 <h2 class="anchored" data-anchor-id="simulating-the-data">Simulating the data</h2>
-<div class="cell" data-execution_count="14">
+<div class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1">n <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
@@ -173,7 +355,7 @@ font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">2</span>]</span></code></pre></div>
 </div>
-<div class="cell" data-execution_count="15">
+<div class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">dat[<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"y"</span>] <span class="op" style="color: #5E5E5E;
@@ -184,7 +366,7 @@ font-style: inherit;">+</span> dat[<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"epsilon"</span>]</span>
 <span id="cb5-2">dat</span></code></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="15">
+<div class="cell-output cell-output-display" data-execution_count="4">
 <div>
 
 
@@ -202,43 +384,43 @@ font-style: inherit;">"epsilon"</span>]</span>
 <tbody>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">0</td>
-<td>-2.157284</td>
-<td>3.042443</td>
-<td>A</td>
-<td>-3.271442</td>
-<td>2.486387</td>
+<td>-7.579337</td>
+<td>-1.600375</td>
+<td>B</td>
+<td>1.394259</td>
+<td>61.015673</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">1</td>
-<td>-3.458105</td>
-<td>-6.317998</td>
+<td>1.827419</td>
+<td>1.912467</td>
 <td>B</td>
-<td>0.370765</td>
-<td>73.548654</td>
+<td>-2.066038</td>
+<td>59.936446</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">2</td>
-<td>4.439751</td>
-<td>3.108154</td>
+<td>0.916864</td>
+<td>3.079072</td>
 <td>B</td>
-<td>0.114254</td>
-<td>62.337697</td>
+<td>-2.647573</td>
+<td>56.111148</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">3</td>
-<td>-3.059616</td>
-<td>-5.881156</td>
-<td>A</td>
-<td>1.271250</td>
-<td>23.973945</td>
+<td>-8.580745</td>
+<td>11.137583</td>
+<td>B</td>
+<td>-0.409475</td>
+<td>32.734615</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">4</td>
-<td>2.113333</td>
-<td>9.439539</td>
-<td>A</td>
-<td>2.211661</td>
-<td>-0.554084</td>
+<td>11.100234</td>
+<td>4.150596</td>
+<td>B</td>
+<td>0.588830</td>
+<td>67.387871</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">...</td>
@@ -250,43 +432,43 @@ font-style: inherit;">"epsilon"</span>]</span>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">95</td>
-<td>2.378619</td>
-<td>-2.459607</td>
-<td>A</td>
-<td>2.843193</td>
-<td>24.141026</td>
+<td>-5.862918</td>
+<td>-7.058553</td>
+<td>B</td>
+<td>-1.026161</td>
+<td>71.228028</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">96</td>
-<td>-0.802452</td>
-<td>3.819083</td>
+<td>3.791414</td>
+<td>2.979757</td>
 <td>A</td>
-<td>-1.764879</td>
-<td>3.794504</td>
+<td>-2.858461</td>
+<td>8.973439</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">97</td>
-<td>-6.072932</td>
-<td>-4.261568</td>
+<td>4.200092</td>
+<td>3.668948</td>
 <td>B</td>
-<td>-4.046033</td>
-<td>62.404172</td>
+<td>-1.505371</td>
+<td>59.356825</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">98</td>
-<td>7.436910</td>
-<td>-5.782830</td>
-<td>A</td>
-<td>3.558384</td>
-<td>36.560954</td>
+<td>-0.381726</td>
+<td>-1.413223</td>
+<td>B</td>
+<td>2.492208</td>
+<td>68.936928</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">99</td>
-<td>-2.709327</td>
-<td>2.501132</td>
-<td>B</td>
-<td>-1.476932</td>
-<td>54.811477</td>
+<td>-6.374441</td>
+<td>-0.552026</td>
+<td>A</td>
+<td>3.637649</td>
+<td>12.367261</td>
 </tr>
 </tbody>
 </table>
@@ -298,7 +480,7 @@ font-style: inherit;">"epsilon"</span>]</span>
 </section>
 <section id="showing-the-data" class="level2">
 <h2 class="anchored" data-anchor-id="showing-the-data">Showing the data</h2>
-<div class="cell" data-execution_count="16">
+<div class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1">sns.scatterplot(data<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span>dat, x<span class="op" style="color: #5E5E5E;
@@ -309,16 +491,15 @@ font-style: inherit;">"x1"</span>, y<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">"y"</span>)</span></code></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="16">
-<pre><code>&lt;Axes: xlabel='x1', ylabel='y'&gt;</code></pre>
-</div>
+font-style: inherit;">"y"</span>)<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span></span></code></pre></div>
 <div class="cell-output cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2024-01-22-simulating-data-in-python/2024-01-22-simulating-data-in-python_files/figure-html/cell-6-output-2.png" class="img-fluid"></p>
+<p><img src="https://sbloggel.netlify.app/posts/2024-01-22-simulating-data-in-python/2024-01-22-simulating-data-in-python_files/figure-html/cell-6-output-1.png" class="img-fluid"></p>
 </div>
 </div>
-<div class="cell" data-execution_count="17">
-<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1">sns.scatterplot(data<span class="op" style="color: #5E5E5E;
+<div class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1">sns.scatterplot(data<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span>dat, x<span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -328,16 +509,15 @@ font-style: inherit;">"x2"</span>, y<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">"y"</span>)</span></code></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="17">
-<pre><code>&lt;Axes: xlabel='x2', ylabel='y'&gt;</code></pre>
-</div>
+font-style: inherit;">"y"</span>)<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span></span></code></pre></div>
 <div class="cell-output cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2024-01-22-simulating-data-in-python/2024-01-22-simulating-data-in-python_files/figure-html/cell-7-output-2.png" class="img-fluid"></p>
+<p><img src="https://sbloggel.netlify.app/posts/2024-01-22-simulating-data-in-python/2024-01-22-simulating-data-in-python_files/figure-html/cell-7-output-1.png" class="img-fluid"></p>
 </div>
 </div>
-<div class="cell" data-execution_count="18">
-<div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1">sns.scatterplot(data<span class="op" style="color: #5E5E5E;
+<div class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1">sns.scatterplot(data<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span>dat, x<span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -351,12 +531,11 @@ font-style: inherit;">"y"</span>, hue<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">"x3"</span>)</span></code></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="18">
-<pre><code>&lt;Axes: xlabel='x2', ylabel='y'&gt;</code></pre>
-</div>
+font-style: inherit;">"x3"</span>)<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span></span></code></pre></div>
 <div class="cell-output cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2024-01-22-simulating-data-in-python/2024-01-22-simulating-data-in-python_files/figure-html/cell-8-output-2.png" class="img-fluid"></p>
+<p><img src="https://sbloggel.netlify.app/posts/2024-01-22-simulating-data-in-python/2024-01-22-simulating-data-in-python_files/figure-html/cell-8-output-1.png" class="img-fluid"></p>
 </div>
 </div>
 
@@ -5208,697 +5387,6 @@ font-style: inherit;">skim</span>(studies)</span></code></pre></div>
   <category>Algorithmic study design</category>
   <guid>https://sbloggel.netlify.app/posts/2023-08-21-algorithmic-study-design----white-paper/2023-08-21-algorithmic-study-design----white-paper.html</guid>
   <pubDate>Sun, 20 Aug 2023 22:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Leave-one-out cross-validation in Python</title>
-  <link>https://sbloggel.netlify.app/posts/2023-08-11-leave-one-out-cross-validation-in-python/2023-08-11-leave-one-out-cross-validation-in-python.html</link>
-  <description><![CDATA[ 
-
-
-
-<section id="strategy" class="level2">
-<h2 class="anchored" data-anchor-id="strategy">Strategy</h2>
-<ul>
-<li>Look at the <code>cars</code> dataset that is shipped in <code>base</code> R</li>
-<li>Fit models
-<ul>
-<li>for each model, leave out one data point</li>
-<li>predict the response value for that data point based on the model that is not based on that data point</li>
-<li>calculate mean absolute error and mean squared error</li>
-</ul></li>
-</ul>
-</section>
-<section id="implementation" class="level2">
-<h2 class="anchored" data-anchor-id="implementation">Implementation</h2>
-<section id="init" class="level3">
-<h3 class="anchored" data-anchor-id="init">Init</h3>
-<section id="chunk-in-r-to-setup-my-python-environment-can-be-omitted-for-users-with-python-ready-to-use" class="level4">
-<h4 class="anchored" data-anchor-id="chunk-in-r-to-setup-my-python-environment-can-be-omitted-for-users-with-python-ready-to-use">Chunk in R to setup my Python environment (can be omitted for users with Python ready to use)</h4>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'reticulate'</span>)</span>
-<span id="cb1-2"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">use_condaenv</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'sbloggel'</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">required =</span> <span class="cn" style="color: #8f5902;
-background-color: null;
-font-style: inherit;">TRUE</span>)</span></code></pre></div>
-</div>
-</section>
-<section id="chunk-to-load-python-libraries-and-set-up-the-data" class="level4">
-<h4 class="anchored" data-anchor-id="chunk-to-load-python-libraries-and-set-up-the-data">Chunk to load Python libraries and set up the data</h4>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">import</span> pandas <span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">as</span> pd</span>
-<span id="cb2-2"><span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">import</span> statsmodels.formula.api <span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">as</span> smf</span>
-<span id="cb2-3"><span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">as</span> np</span>
-<span id="cb2-4">cars <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> pd.DataFrame(r[<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'cars'</span>])</span></code></pre></div>
-</div>
-</section>
-</section>
-<section id="show-that-fitting-in-r-and-python-yields-identical-results" class="level3">
-<h3 class="anchored" data-anchor-id="show-that-fitting-in-r-and-python-yields-identical-results">Show that fitting in R and Python yields identical results</h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">fm <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> smf.ols(formula <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'speed ~ dist'</span>, data <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> cars).fit()</span>
-<span id="cb3-2">fm.summary()</span></code></pre></div>
-<div class="cell-output-display">
-<table class="simpletable table table-sm table-striped small" data-quarto-postprocess="true">
-<caption>OLS Regression Results</caption>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Dep. Variable:</td>
-<td>speed</td>
-<td data-quarto-table-cell-role="th">R-squared:</td>
-<td>0.651</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">Model:</td>
-<td>OLS</td>
-<td data-quarto-table-cell-role="th">Adj. R-squared:</td>
-<td>0.644</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Method:</td>
-<td>Least Squares</td>
-<td data-quarto-table-cell-role="th">F-statistic:</td>
-<td>89.57</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">Date:</td>
-<td>Wed, 23 Aug 2023</td>
-<td data-quarto-table-cell-role="th">Prob (F-statistic):</td>
-<td>1.49e-12</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Time:</td>
-<td>12:04:41</td>
-<td data-quarto-table-cell-role="th">Log-Likelihood:</td>
-<td>-127.39</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">No. Observations:</td>
-<td>50</td>
-<td data-quarto-table-cell-role="th">AIC:</td>
-<td>258.8</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Df Residuals:</td>
-<td>48</td>
-<td data-quarto-table-cell-role="th">BIC:</td>
-<td>262.6</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">Df Model:</td>
-<td>1</td>
-<td data-quarto-table-cell-role="th"></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Covariance Type:</td>
-<td>nonrobust</td>
-<td data-quarto-table-cell-role="th"></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<table class="simpletable table table-sm table-striped small" data-quarto-postprocess="true">
-<tbody>
-<tr class="odd">
-<td></td>
-<td data-quarto-table-cell-role="th">coef</td>
-<td data-quarto-table-cell-role="th">std err</td>
-<td data-quarto-table-cell-role="th">t</td>
-<td data-quarto-table-cell-role="th">P&gt;|t|</td>
-<td data-quarto-table-cell-role="th">[0.025</td>
-<td data-quarto-table-cell-role="th">0.975]</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">Intercept</td>
-<td>8.2839</td>
-<td>0.874</td>
-<td>9.474</td>
-<td>0.000</td>
-<td>6.526</td>
-<td>10.042</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">dist</td>
-<td>0.1656</td>
-<td>0.017</td>
-<td>9.464</td>
-<td>0.000</td>
-<td>0.130</td>
-<td>0.201</td>
-</tr>
-</tbody>
-</table>
-<table class="simpletable table table-sm table-striped small" data-quarto-postprocess="true">
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Omnibus:</td>
-<td>0.720</td>
-<td data-quarto-table-cell-role="th">Durbin-Watson:</td>
-<td>1.195</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">Prob(Omnibus):</td>
-<td>0.698</td>
-<td data-quarto-table-cell-role="th">Jarque-Bera (JB):</td>
-<td>0.827</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Skew:</td>
-<td>-0.207</td>
-<td data-quarto-table-cell-role="th">Prob(JB):</td>
-<td>0.661</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">Kurtosis:</td>
-<td>2.526</td>
-<td data-quarto-table-cell-role="th">Cond. No.</td>
-<td>98.0</td>
-</tr>
-</tbody>
-</table>
-<br><br>Notes:<br>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1">fm <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">lm</span>(speed <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">~</span> dist, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">data =</span> cars)</span>
-<span id="cb4-2"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">summary</span>(fm)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Call:
-lm(formula = speed ~ dist, data = cars)
-
-Residuals:
-    Min      1Q  Median      3Q     Max 
--7.5293 -2.1550  0.3615  2.4377  6.4179 
-
-Coefficients:
-            Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)  8.28391    0.87438   9.474 1.44e-12 ***
-dist         0.16557    0.01749   9.464 1.49e-12 ***
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-Residual standard error: 3.156 on 48 degrees of freedom
-Multiple R-squared:  0.6511,    Adjusted R-squared:  0.6438 
-F-statistic: 89.57 on 1 and 48 DF,  p-value: 1.49e-12</code></pre>
-</div>
-</div>
-</section>
-<section id="show-that-prediction-in-r-and-python-yields-identical-results" class="level3">
-<h3 class="anchored" data-anchor-id="show-that-prediction-in-r-and-python-yields-identical-results">Show that prediction in R and Python yields identical results</h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1">fm.predict(cars.iloc[<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>])</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>0    8.615041
-dtype: float64</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">predict</span>(fm, cars[<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, ])</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>       1 
-8.615041 </code></pre>
-</div>
-</div>
-</section>
-<section id="perform-leave-one-out-cross-validation-in-python" class="level3">
-<h3 class="anchored" data-anchor-id="perform-leave-one-out-cross-validation-in-python">Perform leave-one-out-cross-validation in Python</h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># prepare column for predictions:</span></span>
-<span id="cb10-2">cars[<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'prediction'</span>] <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> np.nan</span>
-<span id="cb10-3"></span>
-<span id="cb10-4"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># fit models:</span></span>
-<span id="cb10-5"><span class="cf" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">for</span> i <span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">in</span> <span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">range</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">50</span>):</span>
-<span id="cb10-6">  train <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> cars.drop(index <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> i)</span>
-<span id="cb10-7">  test <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> cars.iloc[i]</span>
-<span id="cb10-8">  fm <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> smf.ols(formula<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'speed ~ dist'</span>, data<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span>train).fit()</span>
-<span id="cb10-9">  cars[<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'prediction'</span>].iloc[i] <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> fm.predict(test)</span>
-<span id="cb10-10"></span>
-<span id="cb10-11"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># calculate prediction error:</span></span>
-<span id="cb10-12">cars[<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'error'</span>] <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> cars[<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'speed'</span>] <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span> cars[<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'prediction'</span>]</span>
-<span id="cb10-13"></span>
-<span id="cb10-14"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># mean absolute error:</span></span>
-<span id="cb10-15">np.mean(np.<span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">abs</span>(cars[<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'error'</span>]))</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>2.6335683917489323</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># root mean squared error:</span></span>
-<span id="cb12-2">np.sqrt(np.mean(np.square(cars[<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'error'</span>])))</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>3.244276599631193</code></pre>
-</div>
-</div>
-</section>
-</section>
-<section id="conclusion" class="level2">
-<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
-<ul>
-<li>Results are identical to those produced in R: <a href="https://sbloggel.netlify.app/posts/2023-08-08-leave-one-out-cross-validation-in-r/2023-08-08-leave-one-out-cross-validation-in-r">Link</a></li>
-<li>Also, the discrepancy with Friedemann’s results is now resolved</li>
-</ul>
-
-
-</section>
-
- ]]></description>
-  <category>Python</category>
-  <category>Linear model vs neural nets</category>
-  <guid>https://sbloggel.netlify.app/posts/2023-08-11-leave-one-out-cross-validation-in-python/2023-08-11-leave-one-out-cross-validation-in-python.html</guid>
-  <pubDate>Thu, 10 Aug 2023 22:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Cars dataset and tidymodels</title>
-  <link>https://sbloggel.netlify.app/posts/2023-08-08-cars-dataset-and-tidymodels/2023-08-08-cars-dataset-and-tidymodels.html</link>
-  <description><![CDATA[ 
-
-
-
-<section id="init" class="level2">
-<h2 class="anchored" data-anchor-id="init">Init</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">set.seed</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>)</span>
-<span id="cb1-2"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'tidymodels'</span>)</span></code></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>── Attaching packages ────────────────────────────────────── tidymodels 1.1.0 ──</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>✔ broom        1.0.4     ✔ recipes      1.0.6
-✔ dials        1.2.0     ✔ rsample      1.1.1
-✔ dplyr        1.1.2     ✔ tibble       3.2.1
-✔ ggplot2      3.4.2     ✔ tidyr        1.3.0
-✔ infer        1.0.4     ✔ tune         1.1.1
-✔ modeldata    1.1.0     ✔ workflows    1.1.3
-✔ parsnip      1.1.0     ✔ workflowsets 1.0.1
-✔ purrr        1.0.1     ✔ yardstick    1.2.0</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>── Conflicts ───────────────────────────────────────── tidymodels_conflicts() ──
-✖ purrr::discard() masks scales::discard()
-✖ dplyr::filter()  masks stats::filter()
-✖ dplyr::lag()     masks stats::lag()
-✖ recipes::step()  masks stats::step()
-• Learn how to get started at https://www.tidymodels.org/start/</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'knitr'</span>)</span></code></pre></div>
-</div>
-</section>
-<section id="do-vfold-cross-validation-on-the-cars-dataset-using-a-linear-model-a-random-forest-model-and-a-neural-net" class="level2">
-<h2 class="anchored" data-anchor-id="do-vfold-cross-validation-on-the-cars-dataset-using-a-linear-model-a-random-forest-model-and-a-neural-net">Do vfold cross-validation on the cars dataset using a linear model, a random forest model and a neural net</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Create data for resampling:</span></span>
-<span id="cb6-2">cars_folds <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">vfold_cv</span>(cars, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">v =</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">10</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">repeats =</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>)</span>
-<span id="cb6-3"></span>
-<span id="cb6-4"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Create model specifications:</span></span>
-<span id="cb6-5">lm_spec <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">linear_reg</span>()</span>
-<span id="cb6-6">rf_spec <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">rand_forest</span>() <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">set_mode</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'regression'</span>)</span>
-<span id="cb6-7">nn_spec <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">mlp</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">epochs =</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">500</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">hidden_units =</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">penalty =</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.01</span>) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span> </span>
-<span id="cb6-8">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">set_mode</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'regression'</span>)</span>
-<span id="cb6-9"></span>
-<span id="cb6-10"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Create workflows:</span></span>
-<span id="cb6-11">all_workflows <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> </span>
-<span id="cb6-12">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">workflow_set</span>(</span>
-<span id="cb6-13">    <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">preproc =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">list</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"formula"</span> <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">=</span> speed <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">~</span> dist),</span>
-<span id="cb6-14">    <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">models =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">list</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">lm =</span> lm_spec, </span>
-<span id="cb6-15">                  <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">rf =</span> rf_spec,</span>
-<span id="cb6-16">                  <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">nn =</span> nn_spec)</span>
-<span id="cb6-17">  )</span>
-<span id="cb6-18"></span>
-<span id="cb6-19"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Run the workflows:</span></span>
-<span id="cb6-20">result <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> all_workflows <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span> </span>
-<span id="cb6-21">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">workflow_map</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">resamples =</span> cars_folds,</span>
-<span id="cb6-22">               <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">control =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">control_resamples</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">save_pred =</span> <span class="cn" style="color: #8f5902;
-background-color: null;
-font-style: inherit;">TRUE</span>))</span>
-<span id="cb6-23"></span>
-<span id="cb6-24"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Display summary statistics for all model types:</span></span>
-<span id="cb6-25">(metrics <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">collect_metrics</span>(result))</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6 × 9
-  wflow_id   .config        preproc model .metric .estimator  mean     n std_err
-  &lt;chr&gt;      &lt;chr&gt;          &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;      &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt;
-1 formula_lm Preprocessor1… formula line… rmse    standard   3.18     10  0.288 
-2 formula_lm Preprocessor1… formula line… rsq     standard   0.656    10  0.0885
-3 formula_rf Preprocessor1… formula rand… rmse    standard   3.14     10  0.340 
-4 formula_rf Preprocessor1… formula rand… rsq     standard   0.621    10  0.0901
-5 formula_nn Preprocessor1… formula mlp   rmse    standard   2.99     10  0.253 
-6 formula_nn Preprocessor1… formula mlp   rsq     standard   0.643    10  0.0834</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1">metrics <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">pivot_wider</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">names_from =</span> .metric, </span>
-<span id="cb8-2">                       <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">values_from =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">c</span>(mean, std_err), </span>
-<span id="cb8-3">                       <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">id_cols =</span> wflow_id) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span> </span>
-<span id="cb8-4">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">kable</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">align =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'c'</span>)</span></code></pre></div>
-<div class="cell-output-display">
-<table class="table table-sm table-striped small">
-<thead>
-<tr class="header">
-<th style="text-align: center;">wflow_id</th>
-<th style="text-align: center;">mean_rmse</th>
-<th style="text-align: center;">mean_rsq</th>
-<th style="text-align: center;">std_err_rmse</th>
-<th style="text-align: center;">std_err_rsq</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: center;">formula_lm</td>
-<td style="text-align: center;">3.180583</td>
-<td style="text-align: center;">0.6561715</td>
-<td style="text-align: center;">0.2883717</td>
-<td style="text-align: center;">0.0885333</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">formula_rf</td>
-<td style="text-align: center;">3.142965</td>
-<td style="text-align: center;">0.6212505</td>
-<td style="text-align: center;">0.3399041</td>
-<td style="text-align: center;">0.0901077</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">formula_nn</td>
-<td style="text-align: center;">2.994578</td>
-<td style="text-align: center;">0.6426283</td>
-<td style="text-align: center;">0.2528375</td>
-<td style="text-align: center;">0.0833891</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Plot predictions against actual values for all predictions:</span></span>
-<span id="cb9-2"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">collect_predictions</span>(result) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span> </span>
-<span id="cb9-3">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">pivot_longer</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">cols =</span> model) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span> </span>
-<span id="cb9-4">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">ggplot</span>(<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">aes</span>(speed, .pred, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">colour =</span> value)) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> </span>
-<span id="cb9-5">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">geom_point</span>() <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> </span>
-<span id="cb9-6">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">geom_abline</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">slope =</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">intercept =</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span></span>
-<span id="cb9-7">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">labs</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">x =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'Real value of speed'</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">y =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'Prediction'</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">colour =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'Model'</span>)</span></code></pre></div>
-<div class="cell-output-display">
-<p><img src="https://sbloggel.netlify.app/posts/2023-08-08-cars-dataset-and-tidymodels/2023-08-08-cars-dataset-and-tidymodels_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-</section>
-<section id="open-questions" class="level2">
-<h2 class="anchored" data-anchor-id="open-questions">Open Questions</h2>
-<ul>
-<li>I don’t exactly understand how tidymodels performs cross-validation, how the metrics are calculated etc. Documentation of the tidymodels package has not been informative to me so far (probably I have to read more into it).</li>
-<li>How to collect other metrics, e.g.&nbsp;mean absolute error?</li>
-<li>How to conventiently join the predictors to the prediction tibble?</li>
-<li>How do I extract honest coefficients from the linear model?</li>
-</ul>
-
-
-</section>
-
- ]]></description>
-  <category>R</category>
-  <category>Linear model vs neural nets</category>
-  <guid>https://sbloggel.netlify.app/posts/2023-08-08-cars-dataset-and-tidymodels/2023-08-08-cars-dataset-and-tidymodels.html</guid>
-  <pubDate>Mon, 07 Aug 2023 22:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>

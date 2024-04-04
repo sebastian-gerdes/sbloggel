@@ -1,0 +1,51 @@
+---
+title: Clone size distributions
+date: 2024-03-27
+categories:
+  - R
+---
+
+```{r}
+#| label: init
+#| cache: false
+#| include: false
+library('reticulate')
+use_condaenv('sbloggel')
+```
+
+```{python}
+import numpy as np
+import pandas as pd
+import random
+```
+
+
+```{python}
+n = 1000
+nr_of_steps = 1000000
+cell_ids = np.zeros((nr_of_steps + 1, n))
+cell_ids[0, ] = range(n)
+
+for i in range(1, nr_of_steps + 1):
+  cell_ids[i, ] = cell_ids[i - 1, ]
+  ii_death = random.randint(0, n - 1)
+  ii_birth = random.randint(0, n - 1)
+  cell_ids[i, ii_death] = cell_ids[i - 1, ii_birth]
+
+np.column_stack(np.unique(cell_ids[nr_of_steps], return_counts=True))
+```
+
+
+```{python}
+n = 20
+nr_of_steps = 100
+cell_ids = np.arange(n)
+
+for i in range(nr_of_steps):
+  ii_death = random.randint(0, n - 1)
+  ii_birth = random.randint(0, n - 1)
+  cell_ids[ii_death] = cell_ids[ii_birth]
+
+np.column_stack(np.unique(cell_ids, return_counts=True))
+```
+

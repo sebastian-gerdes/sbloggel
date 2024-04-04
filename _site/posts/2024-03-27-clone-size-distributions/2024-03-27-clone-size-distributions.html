@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2024-01-22">
+<meta name="dcterms.date" content="2024-03-27">
 
-<title>Seb’s blog - Simulating data in Python</title>
+<title>Seb’s blog - Clone size distributions</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -95,17 +95,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
-<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
 <link rel="stylesheet" href="../../styles.css">
-<meta property="og:title" content="Seb’s blog - Simulating data in Python">
-<meta property="og:image" content="https://sbloggel.netlify.app/posts/2024-01-22-simulating-data-in-python/2024-01-22-simulating-data-in-python_files/figure-html/cell-6-output-1.png">
+<meta property="og:title" content="Seb’s blog - Clone size distributions">
 <meta property="og:site-name" content="Seb's blog">
-<meta property="og:image:height" content="432">
-<meta property="og:image:width" content="562">
 </head>
 
 <body class="nav-fixed">
@@ -152,25 +146,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#which-environment" id="toc-which-environment" class="nav-link active" data-scroll-target="#which-environment">Which environment?</a></li>
-  <li><a href="#importing-the-required-libraries" id="toc-importing-the-required-libraries" class="nav-link" data-scroll-target="#importing-the-required-libraries">Importing the required libraries</a></li>
-  <li><a href="#simulating-the-data" id="toc-simulating-the-data" class="nav-link" data-scroll-target="#simulating-the-data">Simulating the data</a></li>
-  <li><a href="#showing-the-data" id="toc-showing-the-data" class="nav-link" data-scroll-target="#showing-the-data">Showing the data</a></li>
-  </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/sebastian-gerdes/sbloggel/blob/main/posts/2024-01-22-simulating-data-in-python/2024-01-22-simulating-data-in-python.ipynb" class="toc-action">View source</a></p></div></div></nav>
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Simulating data in Python</h1>
+<h1 class="title">Clone size distributions</h1>
   <div class="quarto-categories">
-    <div class="quarto-category">Python</div>
+    <div class="quarto-category">R</div>
   </div>
   </div>
 
@@ -182,7 +167,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">January 22, 2024</p>
+      <p class="date">March 27, 2024</p>
     </div>
   </div>
   
@@ -192,187 +177,48 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<section id="which-environment" class="level2">
-<h2 class="anchored" data-anchor-id="which-environment">Which environment?</h2>
-<div class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_env():</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    sp <span class="op">=</span> sys.path[<span class="dv">1</span>].split(<span class="st">"/"</span>)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="st">"envs"</span> <span class="kw">in</span> sp:</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> sp[sp.index(<span class="st">"envs"</span>) <span class="op">+</span> <span class="dv">1</span>]</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">""</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>get_env()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="1">
-<pre><code>'fast_ai_course_2022'</code></pre>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">1000</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>nr_of_steps <span class="op">=</span> <span class="dv">1000000</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>cell_ids <span class="op">=</span> np.zeros((nr_of_steps <span class="op">+</span> <span class="dv">1</span>, n))</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>cell_ids[<span class="dv">0</span>, ] <span class="op">=</span> <span class="bu">range</span>(n)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, nr_of_steps <span class="op">+</span> <span class="dv">1</span>):</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  cell_ids[i, ] <span class="op">=</span> cell_ids[i <span class="op">-</span> <span class="dv">1</span>, ]</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  ii_death <span class="op">=</span> random.randint(<span class="dv">0</span>, n <span class="op">-</span> <span class="dv">1</span>)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  ii_birth <span class="op">=</span> random.randint(<span class="dv">0</span>, n <span class="op">-</span> <span class="dv">1</span>)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  cell_ids[i, ii_death] <span class="op">=</span> cell_ids[i <span class="op">-</span> <span class="dv">1</span>, ii_birth]</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>np.column_stack(np.unique(cell_ids[nr_of_steps], return_counts<span class="op">=</span><span class="va">True</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>array([[ 857., 1000.]])</code></pre>
 </div>
 </div>
-</section>
-<section id="importing-the-required-libraries" class="level2">
-<h2 class="anchored" data-anchor-id="importing-the-required-libraries">Importing the required libraries</h2>
-<div class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> patsy <span class="im">import</span> dmatrices, dmatrix</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="simulating-the-data" class="level2">
-<h2 class="anchored" data-anchor-id="simulating-the-data">Simulating the data</h2>
-<div class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">100</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>sd <span class="op">=</span> <span class="dv">2</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>dat <span class="op">=</span> pd.DataFrame()</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>dat[<span class="st">"x1"</span>] <span class="op">=</span> np.random.normal(<span class="dv">0</span>, <span class="dv">5</span>, n)</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>dat[<span class="st">"x2"</span>] <span class="op">=</span> np.random.normal(<span class="dv">0</span>, <span class="dv">5</span>, n)</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>dat[<span class="st">"x3"</span>] <span class="op">=</span> np.random.choice([<span class="st">"A"</span>, <span class="st">"B"</span>], size<span class="op">=</span>n, replace<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>dat[<span class="st">"epsilon"</span>] <span class="op">=</span> np.random.normal(<span class="dv">0</span>, sd, n)</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> dmatrix(<span class="st">" ~ x1 + x2 + x3"</span>, dat)</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>X.design_info.column_names</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>beta <span class="op">=</span> [<span class="dv">14</span>, <span class="dv">50</span>, <span class="dv">1</span>, <span class="op">-</span><span class="dv">2</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>dat[<span class="st">"y"</span>] <span class="op">=</span> np.matmul(X, beta) <span class="op">+</span> dat[<span class="st">"epsilon"</span>]</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>dat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="4">
-<div>
-
-
-<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">x1</th>
-<th data-quarto-table-cell-role="th">x2</th>
-<th data-quarto-table-cell-role="th">x3</th>
-<th data-quarto-table-cell-role="th">epsilon</th>
-<th data-quarto-table-cell-role="th">y</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
-<td>-7.579337</td>
-<td>-1.600375</td>
-<td>B</td>
-<td>1.394259</td>
-<td>61.015673</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
-<td>1.827419</td>
-<td>1.912467</td>
-<td>B</td>
-<td>-2.066038</td>
-<td>59.936446</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
-<td>0.916864</td>
-<td>3.079072</td>
-<td>B</td>
-<td>-2.647573</td>
-<td>56.111148</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
-<td>-8.580745</td>
-<td>11.137583</td>
-<td>B</td>
-<td>-0.409475</td>
-<td>32.734615</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
-<td>11.100234</td>
-<td>4.150596</td>
-<td>B</td>
-<td>0.588830</td>
-<td>67.387871</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">95</td>
-<td>-5.862918</td>
-<td>-7.058553</td>
-<td>B</td>
-<td>-1.026161</td>
-<td>71.228028</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">96</td>
-<td>3.791414</td>
-<td>2.979757</td>
-<td>A</td>
-<td>-2.858461</td>
-<td>8.973439</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">97</td>
-<td>4.200092</td>
-<td>3.668948</td>
-<td>B</td>
-<td>-1.505371</td>
-<td>59.356825</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">98</td>
-<td>-0.381726</td>
-<td>-1.413223</td>
-<td>B</td>
-<td>2.492208</td>
-<td>68.936928</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">99</td>
-<td>-6.374441</td>
-<td>-0.552026</td>
-<td>A</td>
-<td>3.637649</td>
-<td>12.367261</td>
-</tr>
-</tbody>
-</table>
-
-<p>100 rows × 5 columns</p>
-</div>
-</div>
-</div>
-</section>
-<section id="showing-the-data" class="level2">
-<h2 class="anchored" data-anchor-id="showing-the-data">Showing the data</h2>
-<div class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(data<span class="op">=</span>dat, x<span class="op">=</span><span class="st">"x1"</span>, y<span class="op">=</span><span class="st">"y"</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<p><img src="2024-01-22-simulating-data-in-python_files/figure-html/cell-6-output-1.png" class="img-fluid"></p>
-</div>
-</div>
-<div class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(data<span class="op">=</span>dat, x<span class="op">=</span><span class="st">"x2"</span>, y<span class="op">=</span><span class="st">"y"</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<p><img src="2024-01-22-simulating-data-in-python_files/figure-html/cell-7-output-1.png" class="img-fluid"></p>
-</div>
-</div>
-<div class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(data<span class="op">=</span>dat, x<span class="op">=</span><span class="st">"x2"</span>, y<span class="op">=</span><span class="st">"y"</span>, hue<span class="op">=</span><span class="st">"x3"</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<p><img src="2024-01-22-simulating-data-in-python_files/figure-html/cell-8-output-1.png" class="img-fluid"></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">20</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>nr_of_steps <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>cell_ids <span class="op">=</span> np.arange(n)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(nr_of_steps):</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  ii_death <span class="op">=</span> random.randint(<span class="dv">0</span>, n <span class="op">-</span> <span class="dv">1</span>)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  ii_birth <span class="op">=</span> random.randint(<span class="dv">0</span>, n <span class="op">-</span> <span class="dv">1</span>)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  cell_ids[ii_death] <span class="op">=</span> cell_ids[ii_birth]</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>np.column_stack(np.unique(cell_ids, return_counts<span class="op">=</span><span class="va">True</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>array([[ 0,  7],
+       [ 4,  6],
+       [ 5,  3],
+       [18,  4]])</code></pre>
 </div>
 </div>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -612,4 +458,4 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-</body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/sebastian-gerdes/sbloggel/blob/main/posts/2024-03-27-clone-size-distributions/2024-03-27-clone-size-distributions.qmd" class="toc-action">View source</a></p></div></div></div></div></footer></body></html>
