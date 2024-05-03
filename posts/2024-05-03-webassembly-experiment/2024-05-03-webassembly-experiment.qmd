@@ -1,0 +1,27 @@
+---
+title: WebAssembly experiment
+date: 2024-05-03
+webr: 
+  packages: ['ggplot2', 'dplyr']
+filters: 
+  - webr
+categories:
+  - R
+---
+
+* Link to source code: [Link](https://github.com/jperkel/jperkel.github.io/blob/main/webr-demo.qmd)
+* Link to Nature article: [Link](https://www.nature.com/articles/d41586-024-00725-1)
+
+```{r}
+#| label: init
+#| cache: false
+#| include: false
+library('tidyverse')
+set.seed(1)
+```
+
+```{webr-r}
+plot(1:10)
+
+```
+

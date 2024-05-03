@@ -1,0 +1,44 @@
+---
+title: Type I and type II errors
+date: 2024-04-22
+categories:
+  - R
+---
+
+```{r}
+#| label: init
+#| cache: false
+#| include: false
+library('tidyverse')
+set.seed(1)
+```
+
+
+```{r}
+nr_of_trials <- 100
+
+calc_p <- Vectorize(
+  function(effect_size, n) {
+    y1 <- rnorm(n)
+    y2 <- rnorm(n, effect_size)
+    t.test(y1, y2)$p.value
+  }
+)
+
+calc_p(1, 10)
+
+dat <- tibble(effect_size = c(rep(0, nr_of_trials), rexp(nr_of_trials)),
+              effect_present = rep(c('No', 'Yes'), each = nr_of_trials),
+              n = 10,
+              p = calc_p(effect_size, nr_of_trials))
+
+
+plot(sort(dat$p))
+
+dat |> 
+  ggplot(aes(effect_size, p, colour = effect_present)) + 
+  geom_point() +
+  geom_smooth()
+
+```
+
