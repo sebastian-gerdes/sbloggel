@@ -231,3 +231,11 @@ dput(dd, file = paste0('installed_packages_with_version_', Sys.Date(), '.RData')
 
 ## Interesting packages for annoting ggplot plots
 [Link](https://jkunst.com/blog/posts/2023-07-10-my-favorite-ggplot2-packages-with-examples/)
+
+## Interesting packages for surveys
+*  shinysurveys
+```{r}
+library('shinysurveys')
+if (interactive()) demo_survey_multipage()
+if (interactive()) demo_survey()
+```
