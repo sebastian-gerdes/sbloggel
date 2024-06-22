@@ -31,3 +31,5 @@ format:
     css: styles.css
     title-block-banner: false
 
+execute: 
+  freeze: auto

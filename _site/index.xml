@@ -252,7 +252,7 @@ font-style: inherit;">5</span></span>
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
 background-color: null;
-font-style: inherit;">100</span></span>
+font-style: inherit;">11</span></span>
 <span id="cb11-10">nr_of_individuals <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
@@ -458,17 +458,17 @@ font-style: inherit;">1</span>))</span></code></pre></div>
 <pre><code>Nonlinear mixed-effects model fit by maximum likelihood
   Model: y ~ a * exp(-b * x) + c * x + d 
   Data: dat 
-  Log-likelihood: -14761.06
+  Log-likelihood: -1975.921
   Fixed: a + b + c + d ~ 1 
         a         b         c         d 
-29.291262  2.005542  4.051517  4.971401 
+29.160210  2.007677  4.052822  5.032469 
 
 Random effects:
  Formula: a ~ 1 | ID
                a Residual
-StdDev: 19.07462 1.011827
+StdDev: 19.15211 1.067241
 
-Number of Observations: 10000
+Number of Observations: 1100
 Number of Groups: 100 </code></pre>
 </div>
 </div>

@@ -48,7 +48,7 @@ pp <- list(
 )
 
 
-nr_of_time_points <- 100
+nr_of_time_points <- 11
 nr_of_individuals <- 100
 
 dat <- tibble(ID = 1:nr_of_individuals,
