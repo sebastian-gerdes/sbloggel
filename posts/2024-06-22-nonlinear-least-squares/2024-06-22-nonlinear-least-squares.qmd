@@ -1,0 +1,80 @@
+---
+title: Fitting nonlinear models with `stats::nls` and `nlme::nlme`
+date: 2024-06-22
+categories:
+  - R
+---
+
+```{r}
+#| message: false
+set.seed(1)
+library('tidyverse')
+```
+
+## Nonlinear model
+```{r}
+n <- 100
+
+pp <- list(
+  a = 30,
+  b = 2,
+  c = 4,
+  d = 5
+)
+
+dat <- tibble(x = seq(0, 1, length.out = n), 
+              y = pp$a * exp(-pp$b * x) + pp$c * x + pp$d + rnorm(n))
+
+dat |> 
+  ggplot(aes(x, y)) +
+  geom_point()
+
+(fm <- nls(y ~ a * exp(-b * x) + c * x + d, 
+           data = dat, 
+           start = c(a = 1, b = 2, c = 1, d = 1)))
+
+confint(fm)
+```
+
+## Nonlinear model with mixed effects
+```{r}
+library('nlme')
+
+pp <- list(
+  a = 30,
+  b = 2,
+  c = 4,
+  d = 5
+)
+
+
+nr_of_time_points <- 100
+nr_of_individuals <- 100
+
+dat <- tibble(ID = 1:nr_of_individuals,
+              a = pp$a + rnorm(nr_of_individuals, sd = 20),
+              b = pp$b,
+              c = pp$c,
+              d = pp$d) |> 
+  expand_grid(x = seq(0, 1, length.out = nr_of_time_points)) |> 
+  mutate(
+    ID_F = factor(paste0('ID', format(ID, justify = 'right'))),
+    y = a * exp(-b * x) + c * x + d + rnorm(nr_of_individuals * nr_of_time_points))
+
+
+dat |> 
+  filter(ID <= 10) |> 
+  ggplot(aes(x, y, colour = ID_F)) + 
+  geom_point()
+
+nlme(y ~ a * exp(-b * x) + c * x + d,
+     fixed = a + b + c + d ~ 1,
+     random = a ~ 1 | ID,
+     data = dat,
+     start = c(a = 1, b = 2, c = 1, d = 1))
+
+
+```
+
+
+
