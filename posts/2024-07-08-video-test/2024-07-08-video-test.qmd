@@ -1,0 +1,12 @@
+---
+title: Video test
+date: 2024-07-08
+categories:
+  - Mishmash
+---
+
+Videos are about 300 kB per second -> 20 MB per minute
+
+I don't know if there is a limit on github for videos?
+
+{{< video test_video.mp4 >}}
