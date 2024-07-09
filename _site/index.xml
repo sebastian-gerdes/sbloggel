@@ -10,7 +10,51 @@
 <atom:link href="https://sbloggel.netlify.app/index.xml" rel="self" type="application/rss+xml"/>
 <description>Seb&#39;s private blog about statistics and other topics</description>
 <generator>quarto-1.4.553</generator>
-<lastBuildDate>Sun, 07 Jul 2024 22:00:00 GMT</lastBuildDate>
+<lastBuildDate>Mon, 08 Jul 2024 22:00:00 GMT</lastBuildDate>
+<item>
+  <title>Eisen</title>
+  <link>https://sbloggel.netlify.app/posts/2024-07-09-eisen/2024-07-09-eisen.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="wieviel-eisen-brauchen-wir-am-tag" class="level2">
+
+<ul>
+<li>Kinder 8-10 mg pro Tag</li>
+<li>Erwachsene 10-15 mg pro Tag</li>
+<li><a href="https://www.bfr.bund.de/cd/28366">Quelle</a></li>
+</ul>
+</section>
+<section id="floradix" class="level2">
+<h2 class="anchored" data-anchor-id="floradix">Floradix</h2>
+<ul>
+<li>100 ml enthalten 80 mg Eisen</li>
+<li>2 * 20 ml (großes Schapsglas) ldecken ganz grob etwa die Hälfte des wöchentlichen Eisenbedarfs
+<ul>
+<li>Samstag und Sonntag zum Frühstück für jeden ein Schnapsglas
+<ul>
+<li>-&gt; 160 ml pro Woche -&gt; Kosten von ca. 260 Euro pro Jahr</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="ferrosanol" class="level2">
+<h2 class="anchored" data-anchor-id="ferrosanol">Ferrosanol</h2>
+<ul>
+<li><a href="https://www.shop-apotheke.com/arzneimittel/2799421/ferro-sanol-duodenal.htm">Quelle</a></li>
+<li>Menge pro Kapsel: ca. 100 mg, 1 - 3 Kapseln pro Tag empfohlen</li>
+</ul>
+
+
+</section>
+
+ ]]></description>
+  <category>R</category>
+  <guid>https://sbloggel.netlify.app/posts/2024-07-09-eisen/2024-07-09-eisen.html</guid>
+  <pubDate>Mon, 08 Jul 2024 22:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Video test</title>
   <link>https://sbloggel.netlify.app/posts/2024-07-08-video-test/2024-07-08-video-test.html</link>
@@ -3947,286 +3991,6 @@ font-style: inherit;">data =</span> ir)</span></code></pre></div>
   <category>Algorithmic study design</category>
   <guid>https://sbloggel.netlify.app/posts/2023-09-07-algorithmic-study-design-possible-concepts/2023-09-07-algorithmic-study-design-possible-concepts.html</guid>
   <pubDate>Wed, 06 Sep 2023 22:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Tensorflow Decision Forests</title>
-  <link>https://sbloggel.netlify.app/posts/2023-08-28-tensorflow-decision-forests-/2023-08-28-tensorflow-decision-forests-.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<ul>
-<li>Source</li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'reticulate'</span>)</span>
-<span id="cb1-2"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">use_condaenv</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'tensorflow'</span>)</span></code></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">import</span> tensorflow_decision_forests <span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">as</span> tfdf</span>
-<span id="cb2-2"></span>
-<span id="cb2-3"><span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">import</span> os</span>
-<span id="cb2-4"><span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">as</span> np</span>
-<span id="cb2-5"><span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">import</span> pandas <span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">as</span> pd</span>
-<span id="cb2-6"><span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">import</span> tensorflow <span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">as</span> tf</span>
-<span id="cb2-7"><span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">import</span> math</span>
-<span id="cb2-8"></span>
-<span id="cb2-9"></span>
-<span id="cb2-10"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Found TensorFlow Decision Forests v"</span> <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> tfdf.__version__)</span>
-<span id="cb2-11"></span>
-<span id="cb2-12"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Download the dataset</span></span>
-<span id="cb2-13"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># !wget -q https://storage.googleapis.com/download.tensorflow.org/data/palmer_penguins/penguins.csv -O /tmp/penguins.csv</span></span>
-<span id="cb2-14"></span>
-<span id="cb2-15"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Load a dataset into a Pandas Dataframe.</span></span>
-<span id="cb2-16">dataset_df <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> pd.read_csv(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"/tmp/penguins.csv"</span>)</span>
-<span id="cb2-17"></span>
-<span id="cb2-18"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Display the first 3 examples.</span></span>
-<span id="cb2-19">dataset_df.head(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span>)</span>
-<span id="cb2-20"></span>
-<span id="cb2-21"></span>
-<span id="cb2-22"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Encode the categorical labels as integers.</span></span>
-<span id="cb2-23"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">#</span></span>
-<span id="cb2-24"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Details:</span></span>
-<span id="cb2-25"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># This stage is necessary if your classification label is represented as a</span></span>
-<span id="cb2-26"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># string since Keras expects integer classification labels.</span></span>
-<span id="cb2-27"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># When using `pd_dataframe_to_tf_dataset` (see below), this step can be skipped.</span></span>
-<span id="cb2-28"></span>
-<span id="cb2-29"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Name of the label column.</span></span>
-<span id="cb2-30">label <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"species"</span></span>
-<span id="cb2-31"></span>
-<span id="cb2-32">classes <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> dataset_df[label].unique().tolist()</span>
-<span id="cb2-33"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">f"Label classes: </span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{</span>classes<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">}</span><span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"</span>)</span>
-<span id="cb2-34"></span>
-<span id="cb2-35">dataset_df[label] <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> dataset_df[label].<span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">map</span>(classes.index)</span>
-<span id="cb2-36"></span>
-<span id="cb2-37"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Split the dataset into a training and a testing dataset.</span></span>
-<span id="cb2-38"></span>
-<span id="cb2-39"><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">def</span> split_dataset(dataset, test_ratio<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.30</span>):</span>
-<span id="cb2-40">  <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">"""Splits a panda dataframe in two."""</span></span>
-<span id="cb2-41">  test_indices <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> np.random.rand(<span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">len</span>(dataset)) <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">&lt;</span> test_ratio</span>
-<span id="cb2-42">  <span class="cf" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">return</span> dataset[<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">~</span>test_indices], dataset[test_indices]</span>
-<span id="cb2-43"></span>
-<span id="cb2-44"></span>
-<span id="cb2-45">train_ds_pd, test_ds_pd <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> split_dataset(dataset_df)</span>
-<span id="cb2-46"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"</span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{}</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;"> examples in training, </span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{}</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;"> examples for testing."</span>.<span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">format</span>(</span>
-<span id="cb2-47">  <span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">len</span>(train_ds_pd), <span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">len</span>(test_ds_pd)))</span>
-<span id="cb2-48"></span>
-<span id="cb2-49"></span>
-<span id="cb2-50">train_ds <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> tfdf.keras.pd_dataframe_to_tf_dataset(train_ds_pd, label<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span>label)</span>
-<span id="cb2-51">test_ds <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> tfdf.keras.pd_dataframe_to_tf_dataset(test_ds_pd, label<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span>label)</span>
-<span id="cb2-52"></span>
-<span id="cb2-53"></span>
-<span id="cb2-54"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># %set_cell_height 300</span></span>
-<span id="cb2-55"></span>
-<span id="cb2-56"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Specify the model.</span></span>
-<span id="cb2-57">model_1 <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> tfdf.keras.RandomForestModel(verbose<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>)</span>
-<span id="cb2-58"></span>
-<span id="cb2-59"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Train the model.</span></span>
-<span id="cb2-60">model_1.fit(train_ds)</span>
-<span id="cb2-61"></span>
-<span id="cb2-62"></span>
-<span id="cb2-63">model_1.<span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">compile</span>(metrics<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span>[<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"accuracy"</span>])</span>
-<span id="cb2-64">evaluation <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> model_1.evaluate(test_ds, return_dict<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">True</span>)</span>
-<span id="cb2-65"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>()</span>
-<span id="cb2-66"></span>
-<span id="cb2-67"><span class="cf" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">for</span> name, value <span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">in</span> evaluation.items():</span>
-<span id="cb2-68">  <span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">f"</span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{</span>name<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">}</span><span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">: </span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{</span>value<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">:.4f}</span><span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"</span>)</span>
-<span id="cb2-69"></span>
-<span id="cb2-70"></span>
-<span id="cb2-71">tfdf.model_plotter.plot_model_in_colab(model_1, tree_idx<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>, max_depth<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span>)</span></code></pre></div>
-</div>
-
-
-
- ]]></description>
-  <category>Python</category>
-  <guid>https://sbloggel.netlify.app/posts/2023-08-28-tensorflow-decision-forests-/2023-08-28-tensorflow-decision-forests-.html</guid>
-  <pubDate>Sun, 27 Aug 2023 22:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
