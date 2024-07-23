@@ -1,0 +1,17 @@
+---
+title: VS Code and Jupyter shortcuts
+date: 2024-07-23
+categories:
+  - R
+---
+
+```{r}
+#| label: init
+#| cache: false
+#| include: false
+library('tidyverse')
+set.seed(1)
+
+library('reticulate')
+use_condaenv('sbloggel')
+```

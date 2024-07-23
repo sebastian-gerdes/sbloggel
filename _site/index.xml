@@ -10,7 +10,820 @@
 <atom:link href="https://sbloggel.netlify.app/index.xml" rel="self" type="application/rss+xml"/>
 <description>Seb&#39;s private blog about statistics and other topics</description>
 <generator>quarto-1.4.553</generator>
-<lastBuildDate>Mon, 08 Jul 2024 22:00:00 GMT</lastBuildDate>
+<lastBuildDate>Mon, 22 Jul 2024 22:00:00 GMT</lastBuildDate>
+<item>
+  <title>VS Code and Jupyter shortcuts</title>
+  <link>https://sbloggel.netlify.app/posts/2024-07-23-vs-code-and-jupyter-shortcuts/2024-07-23-vs-code-and-jupyter-shortcuts.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+
+
+ ]]></description>
+  <category>R</category>
+  <guid>https://sbloggel.netlify.app/posts/2024-07-23-vs-code-and-jupyter-shortcuts/2024-07-23-vs-code-and-jupyter-shortcuts.html</guid>
+  <pubDate>Mon, 22 Jul 2024 22:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Elena’s paper</title>
+  <link>https://sbloggel.netlify.app/posts/2024-07-23-paper-elena/cml_python.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="elenas-paper" class="level1">
+<h1>Elena’s paper</h1>
+<p>Started to play with Elena’s paper: <a href="https://www.frontiersin.org/journals/oncology/articles/10.3389/fonc.2022.1028871/full">Link to the paper</a></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://sbloggel.netlify.app/posts/2024-07-23-paper-elena/cml_python_files/figure-html/cell-2-1-image.png" class="img-fluid figure-img"></p>
+<figcaption>image.png</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://sbloggel.netlify.app/posts/2024-07-23-paper-elena/cml_python_files/figure-html/cell-3-1-image.png" class="img-fluid figure-img"></p>
+<figcaption>image.png</figcaption>
+</figure>
+</div>
+<div id="cell-4" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> pandas <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> pd</span>
+<span id="cb1-2"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> plotnine <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> p9</span>
+<span id="cb1-3"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> np</span>
+<span id="cb1-4"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">from</span> scipy.integrate <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> odeint</span>
+<span id="cb1-5"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">from</span> plotnine <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> ggplot, aes, geom_point, geom_line, facet_wrap</span>
+<span id="cb1-6">p9.theme_set(p9.theme_bw())</span>
+<span id="cb1-7"></span>
+<span id="cb1-8"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">def</span> dict_to_tuple(x):</span>
+<span id="cb1-9">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">return</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">tuple</span>(x.values())</span></code></pre></div>
+</div>
+<div id="cell-5" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">def</span> get_p_and_y0(df, d <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, i <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>):</span>
+<span id="cb2-2">    pp <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> df.iloc[i].to_dict()</span>
+<span id="cb2-3">    p <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> {key: pp[key] <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span> key <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> [<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Pz'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Pyx'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Pxy'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'TKI'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Kz'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Ky'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Py'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'m'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'rz'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'a'</span>]}</span>
+<span id="cb2-4">    p[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'d'</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> d</span>
+<span id="cb2-5">    y_0 <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> {key: pp[key] <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span> key <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> [<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'X(0)'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Y(0)'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Z(0)'</span>]}</span>
+<span id="cb2-6">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">return</span> p, y_0</span>
+<span id="cb2-7"></span>
+<span id="cb2-8"></span>
+<span id="cb2-9">params_df <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> pd.read_csv(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'ParameterSets.csv'</span>)</span>
+<span id="cb2-10"></span>
+<span id="cb2-11">p, y0 <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> get_p_and_y0(params_df, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)</span>
+<span id="cb2-12">params_df</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="2">
+<div>
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Unnamed: 0</th>
+<th data-quarto-table-cell-role="th">PatID</th>
+<th data-quarto-table-cell-role="th">Pz</th>
+<th data-quarto-table-cell-role="th">Pyx</th>
+<th data-quarto-table-cell-role="th">Pxy</th>
+<th data-quarto-table-cell-role="th">TKI</th>
+<th data-quarto-table-cell-role="th">Kz</th>
+<th data-quarto-table-cell-role="th">Ky</th>
+<th data-quarto-table-cell-role="th">Py</th>
+<th data-quarto-table-cell-role="th">m</th>
+<th data-quarto-table-cell-role="th">rz</th>
+<th data-quarto-table-cell-role="th">a</th>
+<th data-quarto-table-cell-role="th">X(0)</th>
+<th data-quarto-table-cell-role="th">Y(0)</th>
+<th data-quarto-table-cell-role="th">Z(0)</th>
+<th data-quarto-table-cell-role="th">HalfingDoseTime</th>
+<th data-quarto-table-cell-role="th">CessationTime</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>1</td>
+<td>002-095</td>
+<td>918.212826</td>
+<td>0.003674</td>
+<td>0.043994</td>
+<td>1.953862</td>
+<td>217.221302</td>
+<td>1000000.0</td>
+<td>0.973924</td>
+<td>0.0001</td>
+<td>200</td>
+<td>2</td>
+<td>78382.854581</td>
+<td>938723.700292</td>
+<td>100.048931</td>
+<td>61.545205</td>
+<td>73.545205</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>2</td>
+<td>002-109</td>
+<td>23083.129866</td>
+<td>0.032012</td>
+<td>0.066389</td>
+<td>0.500185</td>
+<td>1870.604823</td>
+<td>1000000.0</td>
+<td>0.001000</td>
+<td>0.0001</td>
+<td>200</td>
+<td>2</td>
+<td>216186.368403</td>
+<td>448352.579679</td>
+<td>102.642186</td>
+<td>120.295890</td>
+<td>132.295890</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>3</td>
+<td>002-123</td>
+<td>10092.226454</td>
+<td>0.082485</td>
+<td>0.081357</td>
+<td>0.687386</td>
+<td>796.735702</td>
+<td>1000000.0</td>
+<td>0.003026</td>
+<td>0.0001</td>
+<td>200</td>
+<td>2</td>
+<td>13010.901299</td>
+<td>12832.979836</td>
+<td>164.393817</td>
+<td>61.709589</td>
+<td>73.709589</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>4</td>
+<td>003-133</td>
+<td>345.298359</td>
+<td>0.000673</td>
+<td>0.030023</td>
+<td>0.897634</td>
+<td>62.137465</td>
+<td>1000000.0</td>
+<td>0.200074</td>
+<td>0.0001</td>
+<td>200</td>
+<td>2</td>
+<td>17996.873639</td>
+<td>802776.842858</td>
+<td>100.021511</td>
+<td>96.164384</td>
+<td>108.164384</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>5</td>
+<td>003-141</td>
+<td>306.696917</td>
+<td>0.001098</td>
+<td>0.000037</td>
+<td>0.675628</td>
+<td>1272.917683</td>
+<td>1000000.0</td>
+<td>0.527287</td>
+<td>0.0001</td>
+<td>200</td>
+<td>2</td>
+<td>312316.113662</td>
+<td>10632.126673</td>
+<td>101.442441</td>
+<td>118.882192</td>
+<td>130.882192</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">73</td>
+<td>74</td>
+<td>218-105</td>
+<td>227.900944</td>
+<td>0.000629</td>
+<td>0.021212</td>
+<td>0.540216</td>
+<td>44.762743</td>
+<td>1000000.0</td>
+<td>0.371630</td>
+<td>0.0001</td>
+<td>200</td>
+<td>2</td>
+<td>9617.275519</td>
+<td>324397.497286</td>
+<td>100.035139</td>
+<td>117.172603</td>
+<td>129.172603</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">74</td>
+<td>75</td>
+<td>218-113</td>
+<td>707.776619</td>
+<td>0.000947</td>
+<td>0.082137</td>
+<td>0.936809</td>
+<td>109.291797</td>
+<td>1000000.0</td>
+<td>0.004144</td>
+<td>0.0001</td>
+<td>200</td>
+<td>2</td>
+<td>10082.133001</td>
+<td>874421.411603</td>
+<td>100.040488</td>
+<td>52.898630</td>
+<td>64.898630</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">75</td>
+<td>76</td>
+<td>230-140</td>
+<td>4355.988897</td>
+<td>0.003152</td>
+<td>0.081907</td>
+<td>1.065387</td>
+<td>898.457630</td>
+<td>1000000.0</td>
+<td>0.470243</td>
+<td>0.0001</td>
+<td>200</td>
+<td>2</td>
+<td>33711.053422</td>
+<td>876082.957124</td>
+<td>100.249225</td>
+<td>76.832877</td>
+<td>88.832877</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">76</td>
+<td>77</td>
+<td>230-142</td>
+<td>1445.428430</td>
+<td>0.000161</td>
+<td>0.000878</td>
+<td>0.794767</td>
+<td>323.840047</td>
+<td>1000000.0</td>
+<td>0.679967</td>
+<td>0.0001</td>
+<td>200</td>
+<td>2</td>
+<td>33011.628854</td>
+<td>180303.529279</td>
+<td>100.402444</td>
+<td>60.263014</td>
+<td>72.263014</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">77</td>
+<td>78</td>
+<td>364-068</td>
+<td>99103.442607</td>
+<td>0.021462</td>
+<td>0.144025</td>
+<td>1.115338</td>
+<td>2699.192860</td>
+<td>1000000.0</td>
+<td>0.289565</td>
+<td>0.0001</td>
+<td>200</td>
+<td>2</td>
+<td>133376.913958</td>
+<td>895060.326195</td>
+<td>105.860525</td>
+<td>45.073973</td>
+<td>57.073973</td>
+</tr>
+</tbody>
+</table>
+
+<p>78 rows × 17 columns</p>
+</div>
+</div>
+</div>
+</div>
+<div id="cell-6" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">def</span> cml_model(y, t, Pz, Pyx, Pxy, TKI, Kz, Ky, Py, m, rz, a, d):</span>
+<span id="cb3-2">    X, Y, Z <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> y</span>
+<span id="cb3-3">    dX <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> Pyx <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> Y <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> Pxy <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> X</span>
+<span id="cb3-4">    dY <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> Pxy <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> X <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> Pyx <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> Y <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> Py <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> (<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> Y <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span> Ky) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> Y <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> m <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> Z <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> Y <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> d <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> TKI <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> Y</span>
+<span id="cb3-5">    dZ <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> rz <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> Z <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> Pz <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> (Y <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span> (Kz <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">**</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> Y <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">**</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>)) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> a <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> Z</span>
+<span id="cb3-6">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">return</span> (dX, dY, dZ)</span></code></pre></div>
+</div>
+<div id="cell-7" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1">ii <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">tuple</span>(<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">range</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">len</span>(params_df) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>))</span>
+<span id="cb4-2">ii <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">tuple</span>(<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">range</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">9</span>))</span></code></pre></div>
+</div>
+<div id="cell-8" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"></span>
+<span id="cb5-2">t <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.arange(<span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.0</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">100</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.01</span>)</span>
+<span id="cb5-3">result_list <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> []</span>
+<span id="cb5-4"></span>
+<span id="cb5-5"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span> i <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> ii:</span>
+<span id="cb5-6">    p, y0 <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> get_p_and_y0(params_df, i <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> i)</span>
+<span id="cb5-7">    result <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> odeint(cml_model, </span>
+<span id="cb5-8">                    dict_to_tuple(y0), </span>
+<span id="cb5-9">                    t,</span>
+<span id="cb5-10">                    args<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>dict_to_tuple(p))</span>
+<span id="cb5-11">    df <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> pd.DataFrame(result, columns <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> [<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'X'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Y'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Z'</span>])</span>
+<span id="cb5-12">    df <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> df.assign(t <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> t)</span>
+<span id="cb5-13">    df[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'PatID'</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> i</span>
+<span id="cb5-14">    result_list.append(df)</span>
+<span id="cb5-15"></span>
+<span id="cb5-16">result <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> pd.concat(result_list, ignore_index<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">True</span>)</span>
+<span id="cb5-17">result[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'PatID'</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> result[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'PatID'</span>].astype(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'category'</span>)</span></code></pre></div>
+</div>
+<div id="cell-9" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1">result_long <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> pd.melt(result, </span>
+<span id="cb6-2">                      id_vars <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> [<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'t'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'PatID'</span>], </span>
+<span id="cb6-3">                      value_vars <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> [<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'X'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Y'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Z'</span>],</span>
+<span id="cb6-4">                      value_name <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'cell_count'</span>)</span>
+<span id="cb6-5">(</span>
+<span id="cb6-6">    ggplot(result_long, aes(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'t'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'cell_count'</span>, color <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'variable'</span>)) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> </span>
+<span id="cb6-7">    geom_line() <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> </span>
+<span id="cb6-8">    facet_wrap(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'PatID'</span>)<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> p9.scale_y_continuous(trans<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'log10'</span>) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb6-9">    p9.theme(figure_size<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">12</span>,<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">9</span>)) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb6-10">    p9.labs(y<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Cell count'</span>, color <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Compartment'</span>)</span>
+<span id="cb6-11">)</span>
+<span id="cb6-12"></span></code></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://sbloggel.netlify.app/posts/2024-07-23-paper-elena/cml_python_files/figure-html/cell-7-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="cell-10" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1">(</span>
+<span id="cb7-2">    ggplot(result, aes(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'t'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Y'</span>, color <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'PatID'</span>)) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> </span>
+<span id="cb7-3">    geom_line() <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> p9.scale_y_continuous(trans<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'log10'</span>)</span>
+<span id="cb7-4">)</span></code></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://sbloggel.netlify.app/posts/2024-07-23-paper-elena/cml_python_files/figure-html/cell-8-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://sbloggel.netlify.app/posts/2024-07-23-paper-elena/cml_python_files/figure-html/cell-11-1-image.png" class="img-fluid figure-img"></p>
+<figcaption>image.png</figcaption>
+</figure>
+</div>
+<div id="cell-12" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">def</span> LRATIO(Y, KY<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1e6</span>):</span>
+<span id="cb8-2">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">return</span> Y <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span> (Y <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> (KY <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> Y))</span>
+<span id="cb8-3"></span>
+<span id="cb8-4">result[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'LRATIO'</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> LRATIO(result[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Y"</span>])</span>
+<span id="cb8-5"></span>
+<span id="cb8-6">(</span>
+<span id="cb8-7">    ggplot(result, aes(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'t'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'LRATIO'</span>, color<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'PatID'</span>)) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> </span>
+<span id="cb8-8">    geom_line() <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> p9.scale_y_continuous(trans<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'log10'</span>, </span>
+<span id="cb8-9">                                        breaks<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1e-1</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1e-2</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1e-3</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1e-4</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1e-5</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1e-6</span>), </span>
+<span id="cb8-10">                                        labels<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'MR0 (100%)'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'MR1 (10%)'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'MR2 (1%)'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'MR3 (0.1%)'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'MR4 (0.01%)'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'MR5 (0.001%)'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'MR6 (0.0001)'</span>)) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb8-11">    p9.theme(figure_size<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">7</span>))</span>
+<span id="cb8-12">)</span></code></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://sbloggel.netlify.app/posts/2024-07-23-paper-elena/cml_python_files/figure-html/cell-9-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+
+
+</section>
+
+ ]]></description>
+  <category>Python</category>
+  <guid>https://sbloggel.netlify.app/posts/2024-07-23-paper-elena/cml_python.html</guid>
+  <pubDate>Mon, 22 Jul 2024 22:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Eisen</title>
   <link>https://sbloggel.netlify.app/posts/2024-07-09-eisen/2024-07-09-eisen.html</link>
@@ -3857,140 +4670,6 @@ font-style: inherit;">"Scatterplot of culmen length by culmen depth for three pe
   <category>Observable</category>
   <guid>https://sbloggel.netlify.app/posts/2023-09-25-testing-observable/2023-09-25-testing-observable.html</guid>
   <pubDate>Sun, 24 Sep 2023 22:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>SVM code example</title>
-  <link>https://sbloggel.netlify.app/posts/2023-09-12-svm-code-example/2023-09-12-svm-code-example.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<p>Inspired from <a href="https://www.spsanderson.com/steveondata/posts/2023-09-11/index.html">this</a> blog post.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">set.seed</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>)</span>
-<span id="cb1-2"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'tidyverse'</span>)</span>
-<span id="cb1-3"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'e1071'</span>)</span></code></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1">ir <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> iris <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span> </span>
-<span id="cb2-2">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">is_setosa =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">as.factor</span>(<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">ifelse</span>(Species <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">==</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'setosa'</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'Yes'</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'No'</span>))) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span> </span>
-<span id="cb2-3">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">select</span>(<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">c</span>(Species, Sepal.Length, Petal.Length))</span>
-<span id="cb2-4"></span>
-<span id="cb2-5">ir <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">as.data.frame</span>(ir)</span>
-<span id="cb2-6"></span>
-<span id="cb2-7">fm_svm <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">svm</span>(is_setosa <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">~</span> ., <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">data =</span> ir)</span>
-<span id="cb2-8"></span>
-<span id="cb2-9"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">plot</span>(fm_svm, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">data =</span> ir)</span></code></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="https://sbloggel.netlify.app/posts/2023-09-12-svm-code-example/2023-09-12-svm-code-example_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-
-
-
- ]]></description>
-  <category>R</category>
-  <category>Self-study</category>
-  <guid>https://sbloggel.netlify.app/posts/2023-09-12-svm-code-example/2023-09-12-svm-code-example.html</guid>
-  <pubDate>Mon, 11 Sep 2023 22:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Algorithmic study design – possible approaches</title>
-  <link>https://sbloggel.netlify.app/posts/2023-09-07-algorithmic-study-design-possible-concepts/2023-09-07-algorithmic-study-design-possible-concepts.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<section id="possible-concepts" class="level2">
-
-<ul>
-<li>Model of research environment (e. g. university hospital) and simulate a lot of studies in this environment</li>
-<li>Continue Elena’s work</li>
-<li>Use clinicaltrials.gov data set as training dataset for neural net</li>
-<li>Simulate a lot of studies in <a href="../../posts/2023-08-21-algorithmic-study-design----white-paper/2023-08-21-algorithmic-study-design----white-paper.html">this</a> manner</li>
-</ul>
-</section>
-<section id="further-ideas" class="level2">
-<h2 class="anchored" data-anchor-id="further-ideas">Further ideas:</h2>
-<ul>
-<li>We could start with a descriptive analysis of the clinicaltrials.gov database</li>
-<li>There are some older papers
-<ul>
-<li><a href="https://scholar.google.com/scholar?hl=de&amp;as_sdt=0%2C5&amp;q=clinicaltrials+database&amp;btnG=">Overview at google scholar</a></li>
-<li><a href="https://jamanetwork.com/journals/jama/article-abstract/1150093">Characteristics of Clinical Trials Registered in ClinicalTrials.gov, 2007-2010</a></li>
-<li><a href="https://www.bmj.com/content/361/bmj.k1452.abstract">How to avoid common problems when using ClinicalTrials.gov in research: 10 issues to consider - BMJ 2018</a></li>
-</ul></li>
-</ul>
-
-
-</section>
-
- ]]></description>
-  <category>Algorithmic study design</category>
-  <guid>https://sbloggel.netlify.app/posts/2023-09-07-algorithmic-study-design-possible-concepts/2023-09-07-algorithmic-study-design-possible-concepts.html</guid>
-  <pubDate>Wed, 06 Sep 2023 22:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
