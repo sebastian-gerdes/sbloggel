@@ -1,0 +1,68 @@
+---
+title: Power analysis
+date: 2024-08-05
+categories:
+  - R
+execute:
+  cache: true
+---
+
+```{r}
+#| label: init
+#| cache: false
+#| include: false
+library('tidyverse')
+set.seed(1)
+```
+
+```{r}
+draw_sample <- function(x, n) {
+  ii <- sample(x, size = n, replace = TRUE)
+  x[ii]
+}
+
+
+calc_p_value <- function(effect_size, n) {
+  dd <- tibble(x = rnorm(n), 
+               y = rnorm(n, effect_size)) |> 
+    pivot_longer(everything())
+  t.test(value ~ name, data = dd)$p.value
+}
+
+calc_power <- Vectorize(
+  function(effect_size, n, nr_of_trials) {
+    p_values <- replicate(nr_of_trials, calc_p_value(effect_size, n))
+    return(mean(p_values < 0.05))
+  }
+)
+
+calc_power(0.25, 4, 1e3)
+
+get_n_needed <- Vectorize(
+  function(my_delta, my_power) {
+    power.t.test(delta = my_delta, sd = 1, sig.level = 0.05,
+                 power = my_power)$n
+  }
+)
+
+dat <- 
+  expand_grid(power = plogis(-3:3),
+              effect_size = c(2^(-2:2))) |> 
+  # slice(1:5) |> 
+  mutate(n_needed_exact = get_n_needed(effect_size, power),
+         n_needed = ceiling(n_needed_exact),
+         power_simulated = calc_power(effect_size, n_needed, 1e3)) |> 
+  pivot_longer(cols = c(power, power_simulated))
+
+dat |> 
+  ggplot(aes(n_needed_exact, value, colour = name)) + 
+  facet_grid(cols = vars(effect_size), 
+             scales = 'free', 
+             labeller = label_both) + 
+  geom_hline(yintercept = 0.8, lty = 'dashed') + 
+  geom_line() + 
+  scale_x_continuous(trans = 'log10') + 
+  ylim(0, 1) +
+  labs(colour = 'Effect size')
+```
+
