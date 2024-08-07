@@ -10,6 +10,8 @@ website:
   repo-url: https://github.com/sebastian-gerdes/sbloggel
   repo-actions: [source]
   open-graph: true
+  cookie-consent: 
+    type: express
   # comments: 
   #   hypothesis:
   #     theme: clean
