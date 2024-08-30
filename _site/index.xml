@@ -10,7 +10,47 @@
 <atom:link href="https://sbloggel.netlify.app/index.xml" rel="self" type="application/rss+xml"/>
 <description>Seb&#39;s private blog about statistics and other topics</description>
 <generator>quarto-1.4.553</generator>
-<lastBuildDate>Sun, 04 Aug 2024 22:00:00 GMT</lastBuildDate>
+<lastBuildDate>Thu, 29 Aug 2024 22:00:00 GMT</lastBuildDate>
+<item>
+  <title>Test post</title>
+  <link>https://sbloggel.netlify.app/posts/2024-08-30-test-post/2024-08-30-test-post.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">str</span>(cars)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   50 obs. of  2 variables:
+ $ speed: num  4 4 7 7 8 9 10 10 10 11 ...
+ $ dist : num  2 10 4 22 16 10 18 26 34 17 ...</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">plot</span>(speed <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> dist, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">data =</span> cars)</span></code></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://sbloggel.netlify.app/posts/2024-08-30-test-post/2024-08-30-test-post_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+
+
+
+ ]]></description>
+  <category>R</category>
+  <guid>https://sbloggel.netlify.app/posts/2024-08-30-test-post/2024-08-30-test-post.html</guid>
+  <pubDate>Thu, 29 Aug 2024 22:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Power analysis</title>
   <link>https://sbloggel.netlify.app/posts/2024-08-05-power-analysis/2024-08-05-power-analysis.html</link>
@@ -4424,143 +4464,6 @@ font-style: inherit;">2500000</span>)</span></code></pre></div>
   <category>Self-study</category>
   <guid>https://sbloggel.netlify.app/posts/2023-09-28-book-series---use-r/2023-09-28-book-series---use-r.html</guid>
   <pubDate>Wed, 27 Sep 2023 22:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Subfigures in quarto</title>
-  <link>https://sbloggel.netlify.app/posts/2023-09-25-subfigures-in-quarto/2023-09-25-subfigures-in-quarto.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<section id="option-1" class="level2">
-<h2 class="anchored" data-anchor-id="option-1">Option 1</h2>
-<p>Quelle: <a href="https://quarto.org/docs/authoring/figures.html">Link</a></p>
-<div id="fig-elephants" class="quarto-layout-panel">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-elephants-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="quarto-layout-row">
-<div class="cell quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-elephants" style="flex-basis: 50.0%;justify-content: flex-start;">
-<div class="cell-output-display quarto-layout-cell-subref" data-ref-parent="fig-elephants">
-<div id="fig-test-left" class="quarto-figure quarto-figure-center quarto-float anchored">
-<figure class="quarto-float quarto-subfloat-fig figure">
-<div aria-describedby="fig-test-left-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="https://sbloggel.netlify.app/posts/2023-09-25-subfigures-in-quarto/2023-09-25-subfigures-in-quarto_files/figure-html/fig-test-left-1.png" class="img-fluid figure-img" data-ref-parent="fig-elephants" width="288">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-test-left-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-(a) This is a test
-</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-elephants" style="flex-basis: 50.0%;justify-content: flex-start;">
-<div class="cell-output-display quarto-layout-cell-subref" data-ref-parent="fig-elephants">
-<div id="fig-test-right" class="quarto-figure quarto-figure-center quarto-float anchored">
-<figure class="quarto-float quarto-subfloat-fig figure">
-<div aria-describedby="fig-test-right-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="https://sbloggel.netlify.app/posts/2023-09-25-subfigures-in-quarto/2023-09-25-subfigures-in-quarto_files/figure-html/fig-test-right-1.png" class="img-fluid figure-img" data-ref-parent="fig-elephants" width="288">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-test-right-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-(b) This is another test
-</figcaption>
-</figure>
-</div>
-</div>
-</div>
-</div>
-<div class="quarto-layout-row">
-<div class="cell quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-elephants" style="flex-basis: 100.0%;justify-content: flex-start;">
-<div class="cell-output-display quarto-layout-cell-subref" data-ref-parent="fig-elephants">
-<div id="fig-test-bottom" class="quarto-figure quarto-figure-center quarto-float anchored">
-<figure class="quarto-float quarto-subfloat-fig figure">
-<div aria-describedby="fig-test-bottom-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="https://sbloggel.netlify.app/posts/2023-09-25-subfigures-in-quarto/2023-09-25-subfigures-in-quarto_files/figure-html/fig-test-bottom-1.png" class="img-fluid figure-img" data-ref-parent="fig-elephants" width="576">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-test-bottom-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-(c) And yet a third test
-</figcaption>
-</figure>
-</div>
-</div>
-</div>
-</div>
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-elephants-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1: Famous Elephants
-</figcaption>
-</figure>
-</div>
-<p>Figure&nbsp;1</p>
-<p>Figure&nbsp;1 (a)</p>
-<p>Figure&nbsp;1 (b)</p>
-<p>Figure&nbsp;1 (c)</p>
-</section>
-<section id="option-2" class="level2">
-<h2 class="anchored" data-anchor-id="option-2">Option 2</h2>
-<ul>
-<li>Source: <a href="https://quarto.org/docs/authoring/figures.html#computations">Link</a></li>
-</ul>
-<div class="cell" data-layout="[[1,1],[1]]">
-<div id="fig-charts" class="quarto-layout-panel">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-charts-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="quarto-layout-row">
-<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-charts" style="flex-basis: 50.0%;justify-content: flex-start;">
-<div id="fig-charts-1" class="quarto-figure quarto-figure-center quarto-float anchored">
-<figure class="quarto-float quarto-subfloat-fig figure">
-<div aria-describedby="fig-charts-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="https://sbloggel.netlify.app/posts/2023-09-25-subfigures-in-quarto/2023-09-25-subfigures-in-quarto_files/figure-html/fig-charts-1.png" class="img-fluid figure-img" data-ref-parent="fig-charts" width="672">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-charts-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-(a) First
-</figcaption>
-</figure>
-</div>
-</div>
-<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-charts" style="flex-basis: 50.0%;justify-content: flex-start;">
-<div id="fig-charts-2" class="quarto-figure quarto-figure-center quarto-float anchored">
-<figure class="quarto-float quarto-subfloat-fig figure">
-<div aria-describedby="fig-charts-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="https://sbloggel.netlify.app/posts/2023-09-25-subfigures-in-quarto/2023-09-25-subfigures-in-quarto_files/figure-html/fig-charts-2.png" class="img-fluid figure-img" data-ref-parent="fig-charts" width="672">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-charts-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-(b) Second
-</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<div class="quarto-layout-row">
-<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-charts" style="flex-basis: 100.0%;justify-content: flex-start;">
-<div id="fig-charts-3" class="quarto-figure quarto-figure-center quarto-float anchored">
-<figure class="quarto-float quarto-subfloat-fig figure">
-<div aria-describedby="fig-charts-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="https://sbloggel.netlify.app/posts/2023-09-25-subfigures-in-quarto/2023-09-25-subfigures-in-quarto_files/figure-html/fig-charts-3.png" class="img-fluid figure-img" data-ref-parent="fig-charts" width="672">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-charts-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-(c) Third
-</figcaption>
-</figure>
-</div>
-</div>
-</div>
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-charts-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2: Charts
-</figcaption>
-</figure>
-</div>
-</div>
-<p>Figure&nbsp;2</p>
-
-
-</section>
-
- ]]></description>
-  <category>R</category>
-  <guid>https://sbloggel.netlify.app/posts/2023-09-25-subfigures-in-quarto/2023-09-25-subfigures-in-quarto.html</guid>
-  <pubDate>Sun, 24 Sep 2023 22:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
