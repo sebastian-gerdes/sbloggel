@@ -32,6 +32,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
 <link href="../../images/favicon.ico" rel="icon">
+<script src="../../site_libs/cookie-consent/cookie-consent.js"></script>
+<link href="../../site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -68,6 +70,24 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+
+<script type="text/javascript" charset="UTF-8">
+document.addEventListener('DOMContentLoaded', function () {
+cookieconsent.run({
+  "notice_banner_type":"simple",
+  "consent_type":"express",
+  "palette":"light",
+  "language":"en",
+  "page_load_consent_levels":["strictly-necessary"],
+  "notice_banner_reject_button_hide":false,
+  "preferences_center_close_button_hide":false,
+  "website_name":""
+  ,
+"language":"en"
+  });
+});
+</script> 
+  
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/monaco-editor@0.47.0/min/vs/editor/editor.main.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
   
@@ -273,7 +293,7 @@ globalThis.qwebrCustomizedWebROptions = {
 };
 
 // Store cell data
-globalThis.qwebrCellDetails = [{"id":1,"code":"plot(1:10)\ncars |> \n  ggplot(aes(speed, dist)) + geom_point()","options":{"dpi":72,"label":"unnamed-chunk-1","context":"interactive","autorun":"false","results":"markup","classes":"","editor-font-scale":1,"editor-max-height":"","message":"true","fig-height":5,"editor-quick-suggestions":"false","fig-cap":"","fig-width":7,"warning":"true","comment":"","read-only":"false","out-width":"700px","out-height":"","output":"true"}}];
+globalThis.qwebrCellDetails = [{"options":{"comment":"","read-only":"false","context":"interactive","message":"true","label":"unnamed-chunk-1","fig-cap":"","output":"true","results":"markup","classes":"","editor-max-height":"","dpi":72,"fig-width":7,"out-width":"700px","editor-quick-suggestions":"false","fig-height":5,"warning":"true","out-height":"","editor-font-scale":1,"autorun":"false"},"code":"plot(1:10)\ncars |> \n  ggplot(aes(speed, dist)) + geom_point()","id":1}];
 
 </script>
 <script type="module">
@@ -1840,7 +1860,20 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><ul><li><a href="https://github.com/sebastian-gerdes/sbloggel/blob/main/posts/2024-05-03-webassembly-experiment/2024-05-03-webassembly-experiment.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></div></div></footer><script type="module">
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+
+<div class="toc-actions"><ul><li><a href="https://github.com/sebastian-gerdes/sbloggel/blob/main/posts/2024-05-03-webassembly-experiment/2024-05-03-webassembly-experiment.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div><div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+<script type="module">
 // Handle cell initialization initialization
 qwebrCellDetails.map(
   (entry) => {

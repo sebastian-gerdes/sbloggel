@@ -10,46 +10,192 @@
 <atom:link href="https://sbloggel.netlify.app/index.xml" rel="self" type="application/rss+xml"/>
 <description>Seb&#39;s private blog about statistics and other topics</description>
 <generator>quarto-1.4.553</generator>
-<lastBuildDate>Thu, 29 Aug 2024 22:00:00 GMT</lastBuildDate>
+<lastBuildDate>Mon, 16 Sep 2024 22:00:00 GMT</lastBuildDate>
 <item>
-  <title>Test post</title>
-  <link>https://sbloggel.netlify.app/posts/2024-08-30-test-post/2024-08-30-test-post.html</link>
+  <title>Testing the package summarytools</title>
+  <link>https://sbloggel.netlify.app/posts/2024-09-17-testing-the-package-summarytools/2024-09-17-testing-the-package-summarytools.html</link>
   <description><![CDATA[ 
 
 
 
 
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">str</span>(cars)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>'data.frame':   50 obs. of  2 variables:
- $ speed: num  4 4 7 7 8 9 10 10 10 11 ...
- $ dist : num  2 10 4 22 16 10 18 26 34 17 ...</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">plot</span>(speed <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">~</span> dist, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">data =</span> cars)</span></code></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="https://sbloggel.netlify.app/posts/2024-08-30-test-post/2024-08-30-test-post_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
+<p>Data Frame Summary<br>
+iris<br>
+Dimensions: 150 x 5<br>
+Duplicates: 1</p>
+<table class="table">
+<colgroup>
+<col style="width: 4%">
+<col style="width: 13%">
+<col style="width: 22%">
+<col style="width: 19%">
+<col style="width: 20%">
+<col style="width: 10%">
+<col style="width: 10%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">No</th>
+<th style="text-align: left;">Variable</th>
+<th style="text-align: left;">Stats / Values</th>
+<th style="text-align: left;">Freqs (% of Valid)</th>
+<th style="text-align: left;">Graph</th>
+<th style="text-align: left;">Valid</th>
+<th style="text-align: left;">Missing</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">Sepal.Length [numeric]</td>
+<td style="text-align: left;">Mean (sd) : 5.8 (0.8) min &lt; med &lt; max: 4.3 &lt; 5.8 &lt; 7.9 IQR (CV) : 1.3 (0.1)</td>
+<td style="text-align: left;">35 distinct values</td>
+<td style="text-align: left;">. . : : : : : : : : : : : : : : : : : : : : : : : :</td>
+<td style="text-align: left;">150 (100.0%)</td>
+<td style="text-align: left;">0 (0.0%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">Sepal.Width [numeric]</td>
+<td style="text-align: left;">Mean (sd) : 3.1 (0.4) min &lt; med &lt; max: 2 &lt; 3 &lt; 4.4 IQR (CV) : 0.5 (0.1)</td>
+<td style="text-align: left;">23 distinct values</td>
+<td style="text-align: left;">: : . : : : : : . . : : : : : :</td>
+<td style="text-align: left;">150 (100.0%)</td>
+<td style="text-align: left;">0 (0.0%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">Petal.Length [numeric]</td>
+<td style="text-align: left;">Mean (sd) : 3.8 (1.8) min &lt; med &lt; max: 1 &lt; 4.3 &lt; 6.9 IQR (CV) : 3.5 (0.5)</td>
+<td style="text-align: left;">43 distinct values</td>
+<td style="text-align: left;">: : . : : : : . : : : : : . : : . : : : : : .</td>
+<td style="text-align: left;">150 (100.0%)</td>
+<td style="text-align: left;">0 (0.0%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">4</td>
+<td style="text-align: left;">Petal.Width [numeric]</td>
+<td style="text-align: left;">Mean (sd) : 1.2 (0.8) min &lt; med &lt; max: 0.1 &lt; 1.3 &lt; 2.5 IQR (CV) : 1.5 (0.6)</td>
+<td style="text-align: left;">22 distinct values</td>
+<td style="text-align: left;">: : : . . : : : : : . : : : : : . : : :</td>
+<td style="text-align: left;">150 (100.0%)</td>
+<td style="text-align: left;">0 (0.0%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">5</td>
+<td style="text-align: left;">Species [factor]</td>
+<td style="text-align: left;">1. setosa 2. versicolor 3. virginica</td>
+<td style="text-align: left;">50 (33.3%) 50 (33.3%) 50 (33.3%)</td>
+<td style="text-align: left;">IIIIII IIIIII IIIIII</td>
+<td style="text-align: left;">150 (100.0%)</td>
+<td style="text-align: left;">0 (0.0%)</td>
+</tr>
+</tbody>
+</table>
+<pre><code>temporary images written to '/Users/seb/Documents/Projects/00_websites/sbloggel/posts/2024-09-17-testing-the-package-summarytools'</code></pre>
+<section id="data-frame-summary" class="level3">
+<h3 class="anchored" data-anchor-id="data-frame-summary">Data Frame Summary</h3>
+<section id="iris" class="level4">
+<h4 class="anchored" data-anchor-id="iris">iris</h4>
+<p><strong>Dimensions:</strong> 150 x 5<br>
+<strong>Duplicates:</strong> 1</p>
+<table class="table">
+<colgroup>
+<col style="width: 4%">
+<col style="width: 15%">
+<col style="width: 24%">
+<col style="width: 20%">
+<col style="width: 19%">
+<col style="width: 9%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>No</th>
+<th>Variable</th>
+<th>Stats / Values</th>
+<th>Freqs (% of Valid)</th>
+<th>Graph</th>
+<th>Missing</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Sepal.Length<br>
+[numeric]</td>
+<td>Mean (sd) : 5.8 (0.8)<br>
+min &lt; med &lt; max:<br>
+4.3 &lt; 5.8 &lt; 7.9<br>
+IQR (CV) : 1.3 (0.1)</td>
+<td>35 distinct values</td>
+<td><img src="https://sbloggel.netlify.app/posts/2024-09-17-testing-the-package-summarytools/ds0006.png" class="img-fluid"></td>
+<td>0<br>
+(0.0%)</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Sepal.Width<br>
+[numeric]</td>
+<td>Mean (sd) : 3.1 (0.4)<br>
+min &lt; med &lt; max:<br>
+2 &lt; 3 &lt; 4.4<br>
+IQR (CV) : 0.5 (0.1)</td>
+<td>23 distinct values</td>
+<td><img src="https://sbloggel.netlify.app/posts/2024-09-17-testing-the-package-summarytools/ds0007.png" class="img-fluid"></td>
+<td>0<br>
+(0.0%)</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Petal.Length<br>
+[numeric]</td>
+<td>Mean (sd) : 3.8 (1.8)<br>
+min &lt; med &lt; max:<br>
+1 &lt; 4.3 &lt; 6.9<br>
+IQR (CV) : 3.5 (0.5)</td>
+<td>43 distinct values</td>
+<td><img src="https://sbloggel.netlify.app/posts/2024-09-17-testing-the-package-summarytools/ds0008.png" class="img-fluid"></td>
+<td>0<br>
+(0.0%)</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>Petal.Width<br>
+[numeric]</td>
+<td>Mean (sd) : 1.2 (0.8)<br>
+min &lt; med &lt; max:<br>
+0.1 &lt; 1.3 &lt; 2.5<br>
+IQR (CV) : 1.5 (0.6)</td>
+<td>22 distinct values</td>
+<td><img src="https://sbloggel.netlify.app/posts/2024-09-17-testing-the-package-summarytools/ds0009.png" class="img-fluid"></td>
+<td>0<br>
+(0.0%)</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>Species<br>
+[factor]</td>
+<td>1. setosa<br>
+2. versicolor<br>
+3. virginica</td>
+<td>50 (33.3%)<br>
+50 (33.3%)<br>
+50 (33.3%)</td>
+<td><img src="https://sbloggel.netlify.app/posts/2024-09-17-testing-the-package-summarytools/ds0010.png" class="img-fluid"></td>
+<td>0<br>
+(0.0%)</td>
+</tr>
+</tbody>
+</table>
 
 
+</section>
+</section>
 
  ]]></description>
   <category>R</category>
-  <guid>https://sbloggel.netlify.app/posts/2024-08-30-test-post/2024-08-30-test-post.html</guid>
-  <pubDate>Thu, 29 Aug 2024 22:00:00 GMT</pubDate>
+  <guid>https://sbloggel.netlify.app/posts/2024-09-17-testing-the-package-summarytools/2024-09-17-testing-the-package-summarytools.html</guid>
+  <pubDate>Mon, 16 Sep 2024 22:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Power analysis</title>

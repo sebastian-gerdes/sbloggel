@@ -1,0 +1,22 @@
+---
+title: Testing the package summarytools
+date: 2024-09-17
+categories:
+  - R
+---
+
+```{r}
+#| echo: false
+#| output: asis
+library('summarytools')
+dfSummary(iris)
+
+dfSummary(iris,
+          plain.ascii  = FALSE, 
+          style        = "grid", 
+          graph.magnif = 0.75, 
+          valid.col    = FALSE,
+          tmp.img.dir  = ".")
+
+```
+
