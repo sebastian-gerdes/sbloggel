@@ -19,6 +19,18 @@
 
 
 
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'summarytools'</span>)</span></code></pre></div>
+</div>
+<section id="standard-settings" class="level2">
+<h2 class="anchored" data-anchor-id="standard-settings">Standard settings</h2>
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">dfSummary</span>(iris)</span></code></pre></div>
 <p>Data Frame Summary<br>
 iris<br>
 Dimensions: 150 x 5<br>
@@ -92,7 +104,38 @@ Duplicates: 1</p>
 </tr>
 </tbody>
 </table>
-<pre><code>temporary images written to '/Users/seb/Documents/Projects/00_websites/sbloggel/posts/2024-09-17-testing-the-package-summarytools'</code></pre>
+</section>
+<section id="with-images" class="level2">
+<h2 class="anchored" data-anchor-id="with-images">With images</h2>
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">dfSummary</span>(iris,</span>
+<span id="cb3-2">          <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">plain.ascii  =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">FALSE</span>, </span>
+<span id="cb3-3">          <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">style        =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"grid"</span>, </span>
+<span id="cb3-4">          <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">graph.magnif =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.75</span>, </span>
+<span id="cb3-5">          <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">valid.col    =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">FALSE</span>,</span>
+<span id="cb3-6">          <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">tmp.img.dir  =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"plots"</span>)</span></code></pre></div>
+<pre><code>temporary images written to '/Users/seb/Documents/Projects/00_websites/sbloggel/posts/2024-09-17-testing-the-package-summarytools/plots'</code></pre>
 <section id="data-frame-summary" class="level3">
 <h3 class="anchored" data-anchor-id="data-frame-summary">Data Frame Summary</h3>
 <section id="iris" class="level4">
@@ -103,9 +146,9 @@ Duplicates: 1</p>
 <colgroup>
 <col style="width: 4%">
 <col style="width: 15%">
-<col style="width: 24%">
+<col style="width: 23%">
 <col style="width: 20%">
-<col style="width: 19%">
+<col style="width: 22%">
 <col style="width: 9%">
 </colgroup>
 <thead>
@@ -128,7 +171,7 @@ min &lt; med &lt; max:<br>
 4.3 &lt; 5.8 &lt; 7.9<br>
 IQR (CV) : 1.3 (0.1)</td>
 <td>35 distinct values</td>
-<td><img src="https://sbloggel.netlify.app/posts/2024-09-17-testing-the-package-summarytools/ds0006.png" class="img-fluid"></td>
+<td><img src="https://sbloggel.netlify.app/posts/2024-09-17-testing-the-package-summarytools/plots/ds0006.png" class="img-fluid"></td>
 <td>0<br>
 (0.0%)</td>
 </tr>
@@ -141,7 +184,7 @@ min &lt; med &lt; max:<br>
 2 &lt; 3 &lt; 4.4<br>
 IQR (CV) : 0.5 (0.1)</td>
 <td>23 distinct values</td>
-<td><img src="https://sbloggel.netlify.app/posts/2024-09-17-testing-the-package-summarytools/ds0007.png" class="img-fluid"></td>
+<td><img src="https://sbloggel.netlify.app/posts/2024-09-17-testing-the-package-summarytools/plots/ds0007.png" class="img-fluid"></td>
 <td>0<br>
 (0.0%)</td>
 </tr>
@@ -154,7 +197,7 @@ min &lt; med &lt; max:<br>
 1 &lt; 4.3 &lt; 6.9<br>
 IQR (CV) : 3.5 (0.5)</td>
 <td>43 distinct values</td>
-<td><img src="https://sbloggel.netlify.app/posts/2024-09-17-testing-the-package-summarytools/ds0008.png" class="img-fluid"></td>
+<td><img src="https://sbloggel.netlify.app/posts/2024-09-17-testing-the-package-summarytools/plots/ds0008.png" class="img-fluid"></td>
 <td>0<br>
 (0.0%)</td>
 </tr>
@@ -167,7 +210,7 @@ min &lt; med &lt; max:<br>
 0.1 &lt; 1.3 &lt; 2.5<br>
 IQR (CV) : 1.5 (0.6)</td>
 <td>22 distinct values</td>
-<td><img src="https://sbloggel.netlify.app/posts/2024-09-17-testing-the-package-summarytools/ds0009.png" class="img-fluid"></td>
+<td><img src="https://sbloggel.netlify.app/posts/2024-09-17-testing-the-package-summarytools/plots/ds0009.png" class="img-fluid"></td>
 <td>0<br>
 (0.0%)</td>
 </tr>
@@ -181,7 +224,7 @@ IQR (CV) : 1.5 (0.6)</td>
 <td>50 (33.3%)<br>
 50 (33.3%)<br>
 50 (33.3%)</td>
-<td><img src="https://sbloggel.netlify.app/posts/2024-09-17-testing-the-package-summarytools/ds0010.png" class="img-fluid"></td>
+<td><img src="https://sbloggel.netlify.app/posts/2024-09-17-testing-the-package-summarytools/plots/ds0010.png" class="img-fluid"></td>
 <td>0<br>
 (0.0%)</td>
 </tr>
@@ -189,6 +232,7 @@ IQR (CV) : 1.5 (0.6)</td>
 </table>
 
 
+</section>
 </section>
 </section>
 
