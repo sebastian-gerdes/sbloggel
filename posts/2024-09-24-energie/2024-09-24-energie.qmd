@@ -1,0 +1,47 @@
+---
+title: Energie
+date: 2024-09-24
+categories:
+  - Sustainibility
+---
+
+
+
+
+```{r}
+#| label: init
+#| cache: false
+#| include: false
+library('tidyverse')
+```
+
+```{r}
+
+
+# Schätzwert für Leistung des menschlichen Körpers
+# entspricht 2160 kcal pro Tag
+p_human_W <- 100
+
+# ca. 10.000 kWh pro Person Heizenergie 
+# (https://www.thermondo.de/info/rat/heizen/energieverbrauch-durchschnittsfamilie/) 
+# das ist wahrscheinlich ein recht hoher Wert
+# entspricht einer Leistung von:
+(p_heating_W <- 1e4 * 3.6e6 / 365 / 24 / 3600)
+
+# Wir als vierköpfige Familie haben in 2023 ca. 1.400 kWh Strom verbraucht
+# Das entspricht einer pro-Kopf-Leistung von:
+(p_electricity_W <- 1.3e3 / 4 * 3.6e6 / 365 / 24 / 3600)
+
+# Interessant wäre jetzt noch, wieviel kWh wir an Fernwärme bezogen haben
+
+```
+
+## Recherchen von ChatGPT
+* [Link](https://chatgpt.com/share/66f26e23-4188-8013-af74-26280eb12039)
+* Großteil des Energieverbrauchs der Privatpersonen für Heizung
+
+
+## Information from cleanenergywire.org
+* [https://www.cleanenergywire.org/factsheets/germanys-energy-consumption-and-power-mix-charts](https://www.cleanenergywire.org/factsheets/germanys-energy-consumption-and-power-mix-charts)
+
+![](fig11-final-energy-consumption-consumer-group-1990-2022.png)

@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2024-07-23">
+<meta name="dcterms.date" content="2024-09-24">
 
-<title>Seb’s blog - Elena’s paper</title>
+<title>Seb’s blog - Energie</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -125,8 +125,7 @@ cookieconsent.run({
 
 
 <link rel="stylesheet" href="../../styles.css">
-<meta property="og:title" content="Seb’s blog - Elena’s paper">
-<meta property="og:description" content="Seb’s private blog about statistics and other topics">
+<meta property="og:title" content="Seb’s blog - Energie">
 <meta property="og:site_name" content="Seb's blog">
 </head>
 
@@ -178,18 +177,19 @@ cookieconsent.run({
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#elenas-paper" id="toc-elenas-paper" class="nav-link active" data-scroll-target="#elenas-paper">Elena’s paper</a></li>
+  <li><a href="#recherchen-von-chatgpt" id="toc-recherchen-von-chatgpt" class="nav-link active" data-scroll-target="#recherchen-von-chatgpt">Recherchen von ChatGPT</a></li>
+  <li><a href="#information-from-cleanenergywire.org" id="toc-information-from-cleanenergywire.org" class="nav-link" data-scroll-target="#information-from-cleanenergywire.org">Information from cleanenergywire.org</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/sebastian-gerdes/sbloggel/blob/main/posts/2024-07-23-paper-elena/cml_python.ipynb" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/sebastian-gerdes/sbloggel/blob/main/posts/2024-09-24-energie/2024-09-24-energie.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Elena’s paper</h1>
+<h1 class="title">Energie</h1>
   <div class="quarto-categories">
-    <div class="quarto-category">Python</div>
+    <div class="quarto-category">Sustainibility</div>
   </div>
   </div>
 
@@ -201,7 +201,7 @@ cookieconsent.run({
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">July 23, 2024</p>
+      <p class="date">September 24, 2024</p>
     </div>
   </div>
   
@@ -213,141 +213,40 @@ cookieconsent.run({
 </header>
 
 
-<section id="elenas-paper" class="level1">
-<h1>Elena’s paper</h1>
-<p>Started to play with Elena’s paper: <a href="https://www.frontiersin.org/journals/oncology/articles/10.3389/fonc.2022.1028871/full">Link to the paper</a></p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="cml_python_files/figure-html/cell-2-1-image.png" class="img-fluid figure-img"></p>
-<figcaption>image.png</figcaption>
-</figure>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Schätzwert für Leistung des menschlichen Körpers</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># entspricht 2160 kcal pro Tag</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>p_human_W <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># ca. 10.000 kWh pro Person Heizenergie </span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># (https://www.thermondo.de/info/rat/heizen/energieverbrauch-durchschnittsfamilie/) </span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># das ist wahrscheinlich ein recht hoher Wert</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># entspricht einer Leistung von:</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>(p_heating_W <span class="ot">&lt;-</span> <span class="fl">1e4</span> <span class="sc">*</span> <span class="fl">3.6e6</span> <span class="sc">/</span> <span class="dv">365</span> <span class="sc">/</span> <span class="dv">24</span> <span class="sc">/</span> <span class="dv">3600</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1141.553</code></pre>
 </div>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="cml_python_files/figure-html/cell-3-1-image.png" class="img-fluid figure-img"></p>
-<figcaption>image.png</figcaption>
-</figure>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Wir als vierköpfige Familie haben in 2023 ca. 1.400 kWh Strom verbraucht</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Das entspricht einer pro-Kopf-Leistung von:</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>(p_electricity_W <span class="ot">&lt;-</span> <span class="fl">1.3e3</span> <span class="sc">/</span> <span class="dv">4</span> <span class="sc">*</span> <span class="fl">3.6e6</span> <span class="sc">/</span> <span class="dv">365</span> <span class="sc">/</span> <span class="dv">24</span> <span class="sc">/</span> <span class="dv">3600</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 37.10046</code></pre>
 </div>
-<div id="cell-4" class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotnine <span class="im">as</span> p9</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.integrate <span class="im">import</span> odeint</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> plotnine <span class="im">import</span> ggplot, aes, geom_point, geom_line, facet_wrap</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>p9.theme_set(p9.theme_bw())</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> dict_to_tuple(x):</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">tuple</span>(x.values())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Interessant wäre jetzt noch, wieviel kWh wir an Fernwärme bezogen haben</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-5" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_p_and_y0(df, d <span class="op">=</span> <span class="dv">1</span>, i <span class="op">=</span> <span class="dv">1</span>):</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    pp <span class="op">=</span> df.iloc[i].to_dict()</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    p <span class="op">=</span> {key: pp[key] <span class="cf">for</span> key <span class="kw">in</span> [<span class="st">'Pz'</span>, <span class="st">'Pyx'</span>, <span class="st">'Pxy'</span>, <span class="st">'TKI'</span>, <span class="st">'Kz'</span>, <span class="st">'Ky'</span>, <span class="st">'Py'</span>, <span class="st">'m'</span>, <span class="st">'rz'</span>, <span class="st">'a'</span>]}</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    p[<span class="st">'d'</span>] <span class="op">=</span> d</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    y_0 <span class="op">=</span> {key: pp[key] <span class="cf">for</span> key <span class="kw">in</span> [<span class="st">'X(0)'</span>, <span class="st">'Y(0)'</span>, <span class="st">'Z(0)'</span>]}</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> p, y_0</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>params_df <span class="op">=</span> pd.read_csv(<span class="st">'ParameterSets.csv'</span>)</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>p, y0 <span class="op">=</span> get_p_and_y0(params_df, <span class="dv">1</span>)</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>params_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-error">
-<pre><code>FileNotFoundError: [Errno 2] No such file or directory: 'ParameterSets.csv'</code></pre>
-</div>
-</div>
-<div id="cell-6" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> cml_model(y, t, Pz, Pyx, Pxy, TKI, Kz, Ky, Py, m, rz, a, d):</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    X, Y, Z <span class="op">=</span> y</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    dX <span class="op">=</span> Pyx <span class="op">*</span> Y <span class="op">-</span> Pxy <span class="op">*</span> X</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    dY <span class="op">=</span> Pxy <span class="op">*</span> X <span class="op">-</span> Pyx <span class="op">*</span> Y <span class="op">+</span> Py <span class="op">*</span> (<span class="dv">1</span> <span class="op">-</span> Y <span class="op">/</span> Ky) <span class="op">*</span> Y <span class="op">-</span> m <span class="op">*</span> Z <span class="op">*</span> Y <span class="op">-</span> d <span class="op">*</span> TKI <span class="op">*</span> Y</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    dZ <span class="op">=</span> rz <span class="op">+</span> Z <span class="op">*</span> Pz <span class="op">*</span> (Y <span class="op">/</span> (Kz <span class="op">**</span> <span class="dv">2</span> <span class="op">+</span> Y <span class="op">**</span> <span class="dv">2</span>)) <span class="op">-</span> a <span class="op">*</span> Z</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (dX, dY, dZ)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div id="cell-7" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>ii <span class="op">=</span> <span class="bu">tuple</span>(<span class="bu">range</span>(<span class="dv">0</span>, <span class="bu">len</span>(params_df) <span class="op">-</span> <span class="dv">1</span>))</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>ii <span class="op">=</span> <span class="bu">tuple</span>(<span class="bu">range</span>(<span class="dv">0</span>, <span class="dv">9</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div id="cell-8" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> np.arange(<span class="fl">0.0</span>, <span class="dv">100</span>, <span class="fl">0.01</span>)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>result_list <span class="op">=</span> []</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> ii:</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    p, y0 <span class="op">=</span> get_p_and_y0(params_df, i <span class="op">=</span> i)</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> odeint(cml_model, </span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>                    dict_to_tuple(y0), </span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>                    t,</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>                    args<span class="op">=</span>dict_to_tuple(p))</span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> pd.DataFrame(result, columns <span class="op">=</span> [<span class="st">'X'</span>, <span class="st">'Y'</span>, <span class="st">'Z'</span>])</span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> df.assign(t <span class="op">=</span> t)</span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    df[<span class="st">'PatID'</span>] <span class="op">=</span> i</span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    result_list.append(df)</span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> pd.concat(result_list, ignore_index<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>result[<span class="st">'PatID'</span>] <span class="op">=</span> result[<span class="st">'PatID'</span>].astype(<span class="st">'category'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div id="cell-9" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>result_long <span class="op">=</span> pd.melt(result, </span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>                      id_vars <span class="op">=</span> [<span class="st">'t'</span>, <span class="st">'PatID'</span>], </span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>                      value_vars <span class="op">=</span> [<span class="st">'X'</span>, <span class="st">'Y'</span>, <span class="st">'Z'</span>],</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>                      value_name <span class="op">=</span> <span class="st">'cell_count'</span>)</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>(</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    ggplot(result_long, aes(<span class="st">'t'</span>, <span class="st">'cell_count'</span>, color <span class="op">=</span> <span class="st">'variable'</span>)) <span class="op">+</span> </span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    geom_line() <span class="op">+</span> </span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    facet_wrap(<span class="st">'PatID'</span>)<span class="op">+</span> p9.scale_y_continuous(trans<span class="op">=</span><span class="st">'log10'</span>) <span class="op">+</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    p9.theme(figure_size<span class="op">=</span>(<span class="dv">12</span>,<span class="dv">9</span>)) <span class="op">+</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    p9.labs(y<span class="op">=</span><span class="st">'Cell count'</span>, color <span class="op">=</span> <span class="st">'Compartment'</span>)</span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="cml_python_files/figure-html/cell-7-output-1.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-<div id="cell-10" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>(</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    ggplot(result, aes(<span class="st">'t'</span>, <span class="st">'Y'</span>, color <span class="op">=</span> <span class="st">'PatID'</span>)) <span class="op">+</span> </span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    geom_line() <span class="op">+</span> p9.scale_y_continuous(trans<span class="op">=</span><span class="st">'log10'</span>)</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="cml_python_files/figure-html/cell-8-output-1.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="cml_python_files/figure-html/cell-11-1-image.png" class="img-fluid figure-img"></p>
-<figcaption>image.png</figcaption>
-</figure>
-</div>
-<div id="cell-12" class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> LRATIO(Y, KY<span class="op">=</span><span class="fl">1e6</span>):</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> Y <span class="op">/</span> (Y <span class="op">+</span> <span class="dv">2</span> <span class="op">*</span> (KY <span class="op">-</span> Y))</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>result[<span class="st">'LRATIO'</span>] <span class="op">=</span> LRATIO(result[<span class="st">"Y"</span>])</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>(</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    ggplot(result, aes(<span class="st">'t'</span>, <span class="st">'LRATIO'</span>, color<span class="op">=</span><span class="st">'PatID'</span>)) <span class="op">+</span> </span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    geom_line() <span class="op">+</span> p9.scale_y_continuous(trans<span class="op">=</span><span class="st">'log10'</span>, </span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>                                        breaks<span class="op">=</span>(<span class="dv">1</span>, <span class="fl">1e-1</span>, <span class="fl">1e-2</span>, <span class="fl">1e-3</span>, <span class="fl">1e-4</span>, <span class="fl">1e-5</span>, <span class="fl">1e-6</span>), </span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>                                        labels<span class="op">=</span>(<span class="st">'MR0 (100%)'</span>, <span class="st">'MR1 (10%)'</span>, <span class="st">'MR2 (1%)'</span>, <span class="st">'MR3 (0.1%)'</span>, <span class="st">'MR4 (0.01%)'</span>, <span class="st">'MR5 (0.001%)'</span>, <span class="st">'MR6 (0.0001)'</span>)) <span class="op">+</span></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    p9.theme(figure_size<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">7</span>))</span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="cml_python_files/figure-html/cell-9-output-1.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
+<section id="recherchen-von-chatgpt" class="level2">
+<h2 class="anchored" data-anchor-id="recherchen-von-chatgpt">Recherchen von ChatGPT</h2>
+<ul>
+<li><a href="https://chatgpt.com/share/66f26e23-4188-8013-af74-26280eb12039">Link</a></li>
+<li>Großteil des Energieverbrauchs der Privatpersonen für Heizung</li>
+</ul>
+</section>
+<section id="information-from-cleanenergywire.org" class="level2">
+<h2 class="anchored" data-anchor-id="information-from-cleanenergywire.org">Information from cleanenergywire.org</h2>
+<ul>
+<li><a href="https://www.cleanenergywire.org/factsheets/germanys-energy-consumption-and-power-mix-charts">https://www.cleanenergywire.org/factsheets/germanys-energy-consumption-and-power-mix-charts</a></li>
+</ul>
+<p><img src="fig11-final-energy-consumption-consumer-group-1990-2022.png" class="img-fluid"></p>
 
 
 </section>
@@ -770,7 +669,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>   
     <div class="nav-footer-center">
 
-<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/sebastian-gerdes/sbloggel/blob/main/posts/2024-07-23-paper-elena/cml_python.ipynb" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div><div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/sebastian-gerdes/sbloggel/blob/main/posts/2024-09-24-energie/2024-09-24-energie.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div><div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
