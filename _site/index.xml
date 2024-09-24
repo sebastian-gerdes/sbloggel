@@ -19,32 +19,41 @@
 
 
 
+<section id="pi-mal-daumen-berechnungen" class="level2">
+<h2 class="anchored" data-anchor-id="pi-mal-daumen-berechnungen">Pi-mal-Daumen-Berechnungen</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="co" style="color: #5E5E5E;
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'tidyverse'</span>)</span></code></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Schätzwert für Leistung des menschlichen Körpers</span></span>
-<span id="cb1-2"><span class="co" style="color: #5E5E5E;
+<span id="cb2-2"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># entspricht 2160 kcal pro Tag</span></span>
-<span id="cb1-3">p_human_W <span class="ot" style="color: #003B4F;
+<span id="cb2-3">p_human_W <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">100</span></span>
-<span id="cb1-4"></span>
-<span id="cb1-5"><span class="co" style="color: #5E5E5E;
+<span id="cb2-4"></span>
+<span id="cb2-5"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># ca. 10.000 kWh pro Person Heizenergie </span></span>
-<span id="cb1-6"><span class="co" style="color: #5E5E5E;
+<span id="cb2-6"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># (https://www.thermondo.de/info/rat/heizen/energieverbrauch-durchschnittsfamilie/) </span></span>
-<span id="cb1-7"><span class="co" style="color: #5E5E5E;
+<span id="cb2-7"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># das ist wahrscheinlich ein recht hoher Wert</span></span>
-<span id="cb1-8"><span class="co" style="color: #5E5E5E;
+<span id="cb2-8"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># entspricht einer Leistung von:</span></span>
-<span id="cb1-9">(p_heating_W <span class="ot" style="color: #003B4F;
+<span id="cb2-9">(p_heating_W <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fl" style="color: #AD0000;
 background-color: null;
@@ -68,13 +77,13 @@ font-style: inherit;">3600</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1141.553</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="co" style="color: #5E5E5E;
+<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Wir als vierköpfige Familie haben in 2023 ca. 1.400 kWh Strom verbraucht</span></span>
-<span id="cb3-2"><span class="co" style="color: #5E5E5E;
+<span id="cb4-2"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Das entspricht einer pro-Kopf-Leistung von:</span></span>
-<span id="cb3-3">(p_electricity_W <span class="ot" style="color: #003B4F;
+<span id="cb4-3">(p_electricity_W <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fl" style="color: #AD0000;
 background-color: null;
@@ -102,10 +111,11 @@ font-style: inherit;">3600</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 37.10046</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><span class="co" style="color: #5E5E5E;
+<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Interessant wäre jetzt noch, wieviel kWh wir an Fernwärme bezogen haben</span></span></code></pre></div>
 </div>
+</section>
 <section id="recherchen-von-chatgpt" class="level2">
 <h2 class="anchored" data-anchor-id="recherchen-von-chatgpt">Recherchen von ChatGPT</h2>
 <ul>
@@ -119,6 +129,95 @@ font-style: inherit;"># Interessant wäre jetzt noch, wieviel kWh wir an Fernwä
 <li><a href="https://www.cleanenergywire.org/factsheets/germanys-energy-consumption-and-power-mix-charts">https://www.cleanenergywire.org/factsheets/germanys-energy-consumption-and-power-mix-charts</a></li>
 </ul>
 <p><img src="https://sbloggel.netlify.app/posts/2024-09-24-energie/fig11-final-energy-consumption-consumer-group-1990-2022.png" class="img-fluid"></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1">(p_primaerenergie_pro_person <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1e4</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1e15</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">8e7</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">365</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">24</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3600</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3963.724</code></pre>
+</div>
+</div>
+<ul>
+<li>ca. 200 kWh pro qm PV pro Jahr: https://www.iwb.ch/klimadreh/ratgeber/solaranlage/wie-viel-flaeche-benoetigt-meine-solaranlage
+<ul>
+<li>entspricht ca. 20 W im Jahresmittel:</li>
+</ul></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1">(p_pv_pro_qm <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">200</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3.6e6</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">365</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">24</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3600</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 22.83105</code></pre>
+</div>
+</div>
+<p>Also PV-Fläche pro Person benötigt:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1">(A_PV_per_person <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> p_primaerenergie_pro_person <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span> p_pv_pro_qm)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 173.6111</code></pre>
+</div>
+</div>
+<p>Fläche pro Person in Deutschland vorhanden:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1">(A_per_person <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3.6e11</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">8e7</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4500</code></pre>
+</div>
+</div>
+<p>Also müsste ein Anteil von 0.0385802 in Deutschland mit PV belegt werden um den PV-Bedarf komplett zu decken. Könnte gehen, oder?</p>
 
 
 </section>

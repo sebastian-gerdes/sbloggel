@@ -5,19 +5,15 @@ categories:
   - Sustainibility
 ---
 
-
-
-
+## Pi-mal-Daumen-Berechnungen
 ```{r}
 #| label: init
 #| cache: false
-#| include: false
+#| message: false
 library('tidyverse')
 ```
 
 ```{r}
-
-
 # Schätzwert für Leistung des menschlichen Körpers
 # entspricht 2160 kcal pro Tag
 p_human_W <- 100
@@ -45,3 +41,28 @@ p_human_W <- 100
 * [https://www.cleanenergywire.org/factsheets/germanys-energy-consumption-and-power-mix-charts](https://www.cleanenergywire.org/factsheets/germanys-energy-consumption-and-power-mix-charts)
 
 ![](fig11-final-energy-consumption-consumer-group-1990-2022.png)
+
+
+```{r}
+(p_primaerenergie_pro_person <- 1e4 * 1e15 / 8e7 / 365 / 24 / 3600)
+```
+
+* ca. 200 kWh pro qm PV pro Jahr: https://www.iwb.ch/klimadreh/ratgeber/solaranlage/wie-viel-flaeche-benoetigt-meine-solaranlage
+  * entspricht ca. 20 W im Jahresmittel:
+```{r}
+(p_pv_pro_qm <- 200 * 3.6e6 / 365 / 24 / 3600)
+```
+
+Also PV-Fläche pro Person benötigt:
+```{r}
+(A_PV_per_person <- p_primaerenergie_pro_person / p_pv_pro_qm)
+```
+
+Fläche pro Person in Deutschland vorhanden:
+```{r}
+(A_per_person <- 3.6e11 / 8e7)
+```
+
+Also müsste ein Anteil von  `r A_PV_per_person / A_per_person` in Deutschland mit PV belegt werden um den PV-Bedarf komplett zu decken. Könnte gehen, oder?
+
+
