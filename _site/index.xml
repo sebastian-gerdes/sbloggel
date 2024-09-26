@@ -113,8 +113,45 @@ font-style: inherit;">3600</span>)</span></code></pre></div>
 </div>
 <div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;"># Interessant wäre jetzt noch, wieviel kWh wir an Fernwärme bezogen haben</span></span></code></pre></div>
+font-style: inherit;"># Wieviel Fernwärme wir bezogen haben:</span></span>
+<span id="cb6-2">(W_kWh <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">8e3</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 8000</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1">(p_heating_BoGe_W <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">8e3</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3.6e6</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">365</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">24</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3600</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 913.242</code></pre>
+</div>
+</div>
+<ul>
+<li>Nach diesen Schätzwerten verbrauchen wir als gesamte Familie weniger Heizenergie als ein Durchschnittsdeutscher!</li>
+<li>Kosten pro kWh Fernwärme in DD ca. 20 ct – <a href="https://www.drewag.de/wps/portal/drewag/cms/menu_main/privatkunden/waerme/tarife/fernwaerme">Link</a></li>
+<li>Wirkungsgrad von Fernwärme: Laut ChatGPT 75%-90% – <a href="https://chatgpt.com/share/66f4fff0-d55c-8013-9544-dadcf72a8270">Link</a></li>
+</ul>
 </section>
 <section id="recherchen-von-chatgpt" class="level2">
 <h2 class="anchored" data-anchor-id="recherchen-von-chatgpt">Recherchen von ChatGPT</h2>
@@ -130,7 +167,7 @@ font-style: inherit;"># Interessant wäre jetzt noch, wieviel kWh wir an Fernwä
 </ul>
 <p><img src="https://sbloggel.netlify.app/posts/2024-09-24-energie/fig11-final-energy-consumption-consumer-group-1990-2022.png" class="img-fluid"></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1">(p_primaerenergie_pro_person <span class="ot" style="color: #003B4F;
+<div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1">(p_primaerenergie_pro_person <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fl" style="color: #AD0000;
 background-color: null;
@@ -166,7 +203,7 @@ font-style: inherit;">3600</span>)</span></code></pre></div>
 </ul></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1">(p_pv_pro_qm <span class="ot" style="color: #003B4F;
+<div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1">(p_pv_pro_qm <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
 background-color: null;
@@ -193,7 +230,7 @@ font-style: inherit;">3600</span>)</span></code></pre></div>
 </div>
 <p>Also PV-Fläche pro Person benötigt:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1">(A_PV_per_person <span class="ot" style="color: #003B4F;
+<div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1">(A_PV_per_person <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> p_primaerenergie_pro_person <span class="sc" style="color: #5E5E5E;
 background-color: null;
@@ -204,7 +241,7 @@ font-style: inherit;">/</span> p_pv_pro_qm)</span></code></pre></div>
 </div>
 <p>Fläche pro Person in Deutschland vorhanden:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1">(A_per_person <span class="ot" style="color: #003B4F;
+<div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1">(A_per_person <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fl" style="color: #AD0000;
 background-color: null;

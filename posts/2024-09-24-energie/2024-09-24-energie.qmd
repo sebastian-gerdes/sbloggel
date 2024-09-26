@@ -28,9 +28,14 @@ p_human_W <- 100
 # Das entspricht einer pro-Kopf-Leistung von:
 (p_electricity_W <- 1.3e3 / 4 * 3.6e6 / 365 / 24 / 3600)
 
-# Interessant wäre jetzt noch, wieviel kWh wir an Fernwärme bezogen haben
+# Wieviel Fernwärme wir bezogen haben:
+(W_kWh <- 8e3)
+(p_heating_BoGe_W <- 8e3 * 3.6e6 / 365 / 24 / 3600)
 
 ```
+* Nach diesen Schätzwerten verbrauchen wir als gesamte Familie weniger Heizenergie als ein Durchschnittsdeutscher!
+* Kosten pro kWh Fernwärme in DD ca. 20 ct -- [Link](https://www.drewag.de/wps/portal/drewag/cms/menu_main/privatkunden/waerme/tarife/fernwaerme)
+* Wirkungsgrad von Fernwärme: Laut ChatGPT 75%-90% -- [Link](https://chatgpt.com/share/66f4fff0-d55c-8013-9544-dadcf72a8270)
 
 ## Recherchen von ChatGPT
 * [Link](https://chatgpt.com/share/66f26e23-4188-8013-af74-26280eb12039)

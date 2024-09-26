@@ -239,8 +239,21 @@ cookieconsent.run({
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 37.10046</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Interessant wäre jetzt noch, wieviel kWh wir an Fernwärme bezogen haben</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Wieviel Fernwärme wir bezogen haben:</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>(W_kWh <span class="ot">&lt;-</span> <span class="fl">8e3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 8000</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>(p_heating_BoGe_W <span class="ot">&lt;-</span> <span class="fl">8e3</span> <span class="sc">*</span> <span class="fl">3.6e6</span> <span class="sc">/</span> <span class="dv">365</span> <span class="sc">/</span> <span class="dv">24</span> <span class="sc">/</span> <span class="dv">3600</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 913.242</code></pre>
+</div>
+</div>
+<ul>
+<li>Nach diesen Schätzwerten verbrauchen wir als gesamte Familie weniger Heizenergie als ein Durchschnittsdeutscher!</li>
+<li>Kosten pro kWh Fernwärme in DD ca. 20 ct – <a href="https://www.drewag.de/wps/portal/drewag/cms/menu_main/privatkunden/waerme/tarife/fernwaerme">Link</a></li>
+<li>Wirkungsgrad von Fernwärme: Laut ChatGPT 75%-90% – <a href="https://chatgpt.com/share/66f4fff0-d55c-8013-9544-dadcf72a8270">Link</a></li>
+</ul>
 </section>
 <section id="recherchen-von-chatgpt" class="level2">
 <h2 class="anchored" data-anchor-id="recherchen-von-chatgpt">Recherchen von ChatGPT</h2>
@@ -256,7 +269,7 @@ cookieconsent.run({
 </ul>
 <p><img src="fig11-final-energy-consumption-consumer-group-1990-2022.png" class="img-fluid"></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>(p_primaerenergie_pro_person <span class="ot">&lt;-</span> <span class="fl">1e4</span> <span class="sc">*</span> <span class="fl">1e15</span> <span class="sc">/</span> <span class="fl">8e7</span> <span class="sc">/</span> <span class="dv">365</span> <span class="sc">/</span> <span class="dv">24</span> <span class="sc">/</span> <span class="dv">3600</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>(p_primaerenergie_pro_person <span class="ot">&lt;-</span> <span class="fl">1e4</span> <span class="sc">*</span> <span class="fl">1e15</span> <span class="sc">/</span> <span class="fl">8e7</span> <span class="sc">/</span> <span class="dv">365</span> <span class="sc">/</span> <span class="dv">24</span> <span class="sc">/</span> <span class="dv">3600</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 3963.724</code></pre>
 </div>
@@ -268,21 +281,21 @@ cookieconsent.run({
 </ul></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>(p_pv_pro_qm <span class="ot">&lt;-</span> <span class="dv">200</span> <span class="sc">*</span> <span class="fl">3.6e6</span> <span class="sc">/</span> <span class="dv">365</span> <span class="sc">/</span> <span class="dv">24</span> <span class="sc">/</span> <span class="dv">3600</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>(p_pv_pro_qm <span class="ot">&lt;-</span> <span class="dv">200</span> <span class="sc">*</span> <span class="fl">3.6e6</span> <span class="sc">/</span> <span class="dv">365</span> <span class="sc">/</span> <span class="dv">24</span> <span class="sc">/</span> <span class="dv">3600</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 22.83105</code></pre>
 </div>
 </div>
 <p>Also PV-Fläche pro Person benötigt:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>(A_PV_per_person <span class="ot">&lt;-</span> p_primaerenergie_pro_person <span class="sc">/</span> p_pv_pro_qm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>(A_PV_per_person <span class="ot">&lt;-</span> p_primaerenergie_pro_person <span class="sc">/</span> p_pv_pro_qm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 173.6111</code></pre>
 </div>
 </div>
 <p>Fläche pro Person in Deutschland vorhanden:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>(A_per_person <span class="ot">&lt;-</span> <span class="fl">3.6e11</span> <span class="sc">/</span> <span class="fl">8e7</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>(A_per_person <span class="ot">&lt;-</span> <span class="fl">3.6e11</span> <span class="sc">/</span> <span class="fl">8e7</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 4500</code></pre>
 </div>
