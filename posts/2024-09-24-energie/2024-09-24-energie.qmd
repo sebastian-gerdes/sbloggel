@@ -39,8 +39,17 @@ p_human_W <- 100
 
 ## Typischer CO2-Fußabdruck einer in Deutschland lebenden Person
 * [Recherche von ChatGPT](https://chatgpt.com/share/66f26e23-4188-8013-af74-26280eb12039)
-  * --> ca. 20.000 kWh pro Person pro Jahr
-  * Großteil (fast die Hälfte) des Energieverbrauchs der Privatpersonen für Heizung
+  * Insgesamt ca. 20.000 kWh (16500 - 22500 kWh) pro Person pro Jahr
+    * Strom: 1500 bis 2000 kWh
+    * Heizenergie: 8000 bis 10000 kWh
+    * Transportenergie: 3000 bis 4000 kWh
+    * Energie für Nahrung: 2000 bis 3000 kWh
+    * Energie für andere Produkte: 2000 bis 3500 kWh
+  * --> Großteil (fast die Hälfte) des Energieverbrauchs der Privatpersonen für Heizung
+```{r}
+1500 + 8000 + 3000 + 2000 + 2000
+2000 + 10000 + 4000 + 3000 + 3500
+```
 
 
 ## Primärenergieverbrauch in Deutschland

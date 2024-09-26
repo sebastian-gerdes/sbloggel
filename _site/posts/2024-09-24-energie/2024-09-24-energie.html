@@ -261,10 +261,27 @@ cookieconsent.run({
 <ul>
 <li><a href="https://chatgpt.com/share/66f26e23-4188-8013-af74-26280eb12039">Recherche von ChatGPT</a>
 <ul>
-<li>–&gt; ca. 20.000 kWh pro Person pro Jahr</li>
-<li>Großteil (fast die Hälfte) des Energieverbrauchs der Privatpersonen für Heizung</li>
+<li>Insgesamt ca. 20.000 kWh (16500 - 22500 kWh) pro Person pro Jahr
+<ul>
+<li>Strom: 1500 bis 2000 kWh</li>
+<li>Heizenergie: 8000 bis 10000 kWh</li>
+<li>Transportenergie: 3000 bis 4000 kWh</li>
+<li>Energie für Nahrung: 2000 bis 3000 kWh</li>
+<li>Energie für andere Produkte: 2000 bis 3500 kWh</li>
+</ul></li>
+<li>–&gt; Großteil (fast die Hälfte) des Energieverbrauchs der Privatpersonen für Heizung</li>
 </ul></li>
 </ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1500</span> <span class="sc">+</span> <span class="dv">8000</span> <span class="sc">+</span> <span class="dv">3000</span> <span class="sc">+</span> <span class="dv">2000</span> <span class="sc">+</span> <span class="dv">2000</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 16500</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2000</span> <span class="sc">+</span> <span class="dv">10000</span> <span class="sc">+</span> <span class="dv">4000</span> <span class="sc">+</span> <span class="dv">3000</span> <span class="sc">+</span> <span class="dv">3500</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 22500</code></pre>
+</div>
+</div>
 </section>
 <section id="primärenergieverbrauch-in-deutschland" class="level2">
 <h2 class="anchored" data-anchor-id="primärenergieverbrauch-in-deutschland">Primärenergieverbrauch in Deutschland</h2>
@@ -275,7 +292,7 @@ cookieconsent.run({
 <li>Pro Person (etwas mehr als das von ChatGPT pro Person angegebene – aber dort auch ohne Industrie)</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>(primaerenergie_pro_person_cleanenergywire_kWh <span class="ot">&lt;-</span> <span class="fl">1e19</span> <span class="sc">/</span> <span class="fl">3.6e6</span> <span class="sc">/</span> <span class="fl">8e7</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>(primaerenergie_pro_person_cleanenergywire_kWh <span class="ot">&lt;-</span> <span class="fl">1e19</span> <span class="sc">/</span> <span class="fl">3.6e6</span> <span class="sc">/</span> <span class="fl">8e7</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 34722.22</code></pre>
 </div>
@@ -284,7 +301,7 @@ cookieconsent.run({
 <li>Leistung Primärenergie pro Person:</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>(p_primaerenergie_pro_person_W <span class="ot">&lt;-</span> <span class="fl">1e4</span> <span class="sc">*</span> <span class="fl">1e15</span> <span class="sc">/</span> <span class="fl">8e7</span> <span class="sc">/</span> <span class="dv">365</span> <span class="sc">/</span> <span class="dv">24</span> <span class="sc">/</span> <span class="dv">3600</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>(p_primaerenergie_pro_person_W <span class="ot">&lt;-</span> <span class="fl">1e4</span> <span class="sc">*</span> <span class="fl">1e15</span> <span class="sc">/</span> <span class="fl">8e7</span> <span class="sc">/</span> <span class="dv">365</span> <span class="sc">/</span> <span class="dv">24</span> <span class="sc">/</span> <span class="dv">3600</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 3963.724</code></pre>
 </div>
@@ -299,21 +316,21 @@ cookieconsent.run({
 </ul></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>(p_pv_pro_qm_W <span class="ot">&lt;-</span> <span class="dv">200</span> <span class="sc">*</span> <span class="fl">3.6e6</span> <span class="sc">/</span> <span class="dv">365</span> <span class="sc">/</span> <span class="dv">24</span> <span class="sc">/</span> <span class="dv">3600</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>(p_pv_pro_qm_W <span class="ot">&lt;-</span> <span class="dv">200</span> <span class="sc">*</span> <span class="fl">3.6e6</span> <span class="sc">/</span> <span class="dv">365</span> <span class="sc">/</span> <span class="dv">24</span> <span class="sc">/</span> <span class="dv">3600</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 22.83105</code></pre>
 </div>
 </div>
 <p>Also PV-Fläche pro Person benötigt:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>(A_PV_pro_person_qm <span class="ot">&lt;-</span> p_primaerenergie_pro_person_W <span class="sc">/</span> p_pv_pro_qm_W)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>(A_PV_pro_person_qm <span class="ot">&lt;-</span> p_primaerenergie_pro_person_W <span class="sc">/</span> p_pv_pro_qm_W)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 173.6111</code></pre>
 </div>
 </div>
 <p>Fläche pro Person in Deutschland vorhanden:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>(A_pro_person_qm <span class="ot">&lt;-</span> <span class="fl">3.6e11</span> <span class="sc">/</span> <span class="fl">8e7</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>(A_pro_person_qm <span class="ot">&lt;-</span> <span class="fl">3.6e11</span> <span class="sc">/</span> <span class="fl">8e7</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 4500</code></pre>
 </div>
