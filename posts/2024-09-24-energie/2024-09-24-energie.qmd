@@ -18,7 +18,7 @@ library('tidyverse')
 # entspricht 2160 kcal pro Tag
 p_human_W <- 100
 
-# ca. 10.000 kWh pro Person Heizenergie 
+# ca. 10.000 kWh pro Person Heizenergie pro Jahr
 # (https://www.thermondo.de/info/rat/heizen/energieverbrauch-durchschnittsfamilie/) 
 # das ist wahrscheinlich ein recht hoher Wert
 # entspricht einer Leistung von:
@@ -28,7 +28,7 @@ p_human_W <- 100
 # Das entspricht einer pro-Kopf-Leistung von:
 (p_electricity_W <- 1.3e3 / 4 * 3.6e6 / 365 / 24 / 3600)
 
-# Wieviel Fernwärme wir bezogen haben:
+# Wieviel Fernwärme wir in den letzten Jahrne ca. pro Jahr  bezogen haben:
 (W_kWh <- 8e3)
 (p_heating_BoGe_W <- 8e3 * 3.6e6 / 365 / 24 / 3600)
 
@@ -37,37 +37,44 @@ p_human_W <- 100
 * Kosten pro kWh Fernwärme in DD ca. 20 ct -- [Link](https://www.drewag.de/wps/portal/drewag/cms/menu_main/privatkunden/waerme/tarife/fernwaerme)
 * Wirkungsgrad von Fernwärme: Laut ChatGPT 75%-90% -- [Link](https://chatgpt.com/share/66f4fff0-d55c-8013-9544-dadcf72a8270)
 
-## Recherchen von ChatGPT
-* [Link](https://chatgpt.com/share/66f26e23-4188-8013-af74-26280eb12039)
-* Großteil des Energieverbrauchs der Privatpersonen für Heizung
+## Typischer CO2-Fußabdruck einer in Deutschland lebenden Person
+* [Recherche von ChatGPT](https://chatgpt.com/share/66f26e23-4188-8013-af74-26280eb12039)
+  * --> ca. 20.000 kWh pro Person pro Jahr
+  * Großteil (fast die Hälfte) des Energieverbrauchs der Privatpersonen für Heizung
 
 
-## Information from cleanenergywire.org
-* [https://www.cleanenergywire.org/factsheets/germanys-energy-consumption-and-power-mix-charts](https://www.cleanenergywire.org/factsheets/germanys-energy-consumption-and-power-mix-charts)
-
+## Primärenergieverbrauch in Deutschland
+* [Infos von cleanenergywire.org](https://www.cleanenergywire.org/factsheets/germanys-energy-consumption-and-power-mix-charts)
+* Hier ein heruntergeladenes, interessantes Diagramm von cleanenergywire.org:
 ![](fig11-final-energy-consumption-consumer-group-1990-2022.png)
-
-
+* Gesamtprimärenergieverbrach ca. 10.000 PJ = 1e19 Joules
+* Pro Person (etwas mehr als das von ChatGPT pro Person angegebene -- aber dort auch ohne Industrie)
 ```{r}
-(p_primaerenergie_pro_person <- 1e4 * 1e15 / 8e7 / 365 / 24 / 3600)
+(primaerenergie_pro_person_cleanenergywire_kWh <- 1e19 / 3.6e6 / 8e7)
 ```
 
-* ca. 200 kWh pro qm PV pro Jahr: https://www.iwb.ch/klimadreh/ratgeber/solaranlage/wie-viel-flaeche-benoetigt-meine-solaranlage
+* Leistung Primärenergie pro Person:
+```{r}
+(p_primaerenergie_pro_person_W <- 1e4 * 1e15 / 8e7 / 365 / 24 / 3600)
+```
+
+## Wie viel kann Photovoltaik (PV) leisten?
+* ca. 200 kWh Ertrag pro qm PV pro Jahr ([Quelle](https://www.iwb.ch/klimadreh/ratgeber/solaranlage/wie-viel-flaeche-benoetigt-meine-solaranlage))
   * entspricht ca. 20 W im Jahresmittel:
 ```{r}
-(p_pv_pro_qm <- 200 * 3.6e6 / 365 / 24 / 3600)
+(p_pv_pro_qm_W <- 200 * 3.6e6 / 365 / 24 / 3600)
 ```
 
 Also PV-Fläche pro Person benötigt:
 ```{r}
-(A_PV_per_person <- p_primaerenergie_pro_person / p_pv_pro_qm)
+(A_PV_pro_person_qm <- p_primaerenergie_pro_person_W / p_pv_pro_qm_W)
 ```
 
 Fläche pro Person in Deutschland vorhanden:
 ```{r}
-(A_per_person <- 3.6e11 / 8e7)
+(A_pro_person_qm <- 3.6e11 / 8e7)
 ```
 
-Also müsste ein Anteil von  `r A_PV_per_person / A_per_person` in Deutschland mit PV belegt werden um den PV-Bedarf komplett zu decken. Könnte gehen, oder?
+Also müsste ein Anteil von  `r A_PV_pro_person_qm / A_pro_person_qm` in Deutschland mit PV belegt werden um den PV-Bedarf komplett zu decken. Könnte gehen, oder?
 
 

@@ -43,7 +43,7 @@ font-style: inherit;">100</span></span>
 <span id="cb2-4"></span>
 <span id="cb2-5"><span class="co" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;"># ca. 10.000 kWh pro Person Heizenergie </span></span>
+font-style: inherit;"># ca. 10.000 kWh pro Person Heizenergie pro Jahr</span></span>
 <span id="cb2-6"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># (https://www.thermondo.de/info/rat/heizen/energieverbrauch-durchschnittsfamilie/) </span></span>
@@ -113,7 +113,7 @@ font-style: inherit;">3600</span>)</span></code></pre></div>
 </div>
 <div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;"># Wieviel Fernwärme wir bezogen haben:</span></span>
+font-style: inherit;"># Wieviel Fernwärme wir in den letzten Jahrne ca. pro Jahr  bezogen haben:</span></span>
 <span id="cb6-2">(W_kWh <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fl" style="color: #AD0000;
@@ -153,21 +153,47 @@ font-style: inherit;">3600</span>)</span></code></pre></div>
 <li>Wirkungsgrad von Fernwärme: Laut ChatGPT 75%-90% – <a href="https://chatgpt.com/share/66f4fff0-d55c-8013-9544-dadcf72a8270">Link</a></li>
 </ul>
 </section>
-<section id="recherchen-von-chatgpt" class="level2">
-<h2 class="anchored" data-anchor-id="recherchen-von-chatgpt">Recherchen von ChatGPT</h2>
+<section id="typischer-co2-fußabdruck-einer-in-deutschland-lebenden-person" class="level2">
+<h2 class="anchored" data-anchor-id="typischer-co2-fußabdruck-einer-in-deutschland-lebenden-person">Typischer CO2-Fußabdruck einer in Deutschland lebenden Person</h2>
 <ul>
-<li><a href="https://chatgpt.com/share/66f26e23-4188-8013-af74-26280eb12039">Link</a></li>
-<li>Großteil des Energieverbrauchs der Privatpersonen für Heizung</li>
+<li><a href="https://chatgpt.com/share/66f26e23-4188-8013-af74-26280eb12039">Recherche von ChatGPT</a>
+<ul>
+<li>–&gt; ca. 20.000 kWh pro Person pro Jahr</li>
+<li>Großteil (fast die Hälfte) des Energieverbrauchs der Privatpersonen für Heizung</li>
+</ul></li>
 </ul>
 </section>
-<section id="information-from-cleanenergywire.org" class="level2">
-<h2 class="anchored" data-anchor-id="information-from-cleanenergywire.org">Information from cleanenergywire.org</h2>
+<section id="primärenergieverbrauch-in-deutschland" class="level2">
+<h2 class="anchored" data-anchor-id="primärenergieverbrauch-in-deutschland">Primärenergieverbrauch in Deutschland</h2>
 <ul>
-<li><a href="https://www.cleanenergywire.org/factsheets/germanys-energy-consumption-and-power-mix-charts">https://www.cleanenergywire.org/factsheets/germanys-energy-consumption-and-power-mix-charts</a></li>
+<li><a href="https://www.cleanenergywire.org/factsheets/germanys-energy-consumption-and-power-mix-charts">Infos von cleanenergywire.org</a></li>
+<li>Hier ein heruntergeladenes, interessantes Diagramm von cleanenergywire.org: <img src="https://sbloggel.netlify.app/posts/2024-09-24-energie/fig11-final-energy-consumption-consumer-group-1990-2022.png" class="img-fluid"></li>
+<li>Gesamtprimärenergieverbrach ca. 10.000 PJ = 1e19 Joules</li>
+<li>Pro Person (etwas mehr als das von ChatGPT pro Person angegebene – aber dort auch ohne Industrie)</li>
 </ul>
-<p><img src="https://sbloggel.netlify.app/posts/2024-09-24-energie/fig11-final-energy-consumption-consumer-group-1990-2022.png" class="img-fluid"></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1">(p_primaerenergie_pro_person <span class="ot" style="color: #003B4F;
+<div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1">(primaerenergie_pro_person_cleanenergywire_kWh <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1e19</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3.6e6</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">8e7</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 34722.22</code></pre>
+</div>
+</div>
+<ul>
+<li>Leistung Primärenergie pro Person:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1">(p_primaerenergie_pro_person_W <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fl" style="color: #AD0000;
 background-color: null;
@@ -196,14 +222,17 @@ font-style: inherit;">3600</span>)</span></code></pre></div>
 <pre><code>[1] 3963.724</code></pre>
 </div>
 </div>
+</section>
+<section id="wie-viel-kann-photovoltaik-pv-leisten" class="level2">
+<h2 class="anchored" data-anchor-id="wie-viel-kann-photovoltaik-pv-leisten">Wie viel kann Photovoltaik (PV) leisten?</h2>
 <ul>
-<li>ca. 200 kWh pro qm PV pro Jahr: https://www.iwb.ch/klimadreh/ratgeber/solaranlage/wie-viel-flaeche-benoetigt-meine-solaranlage
+<li>ca. 200 kWh Ertrag pro qm PV pro Jahr (<a href="https://www.iwb.ch/klimadreh/ratgeber/solaranlage/wie-viel-flaeche-benoetigt-meine-solaranlage">Quelle</a>)
 <ul>
 <li>entspricht ca. 20 W im Jahresmittel:</li>
 </ul></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1">(p_pv_pro_qm <span class="ot" style="color: #003B4F;
+<div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1">(p_pv_pro_qm_W <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
 background-color: null;
@@ -230,18 +259,18 @@ font-style: inherit;">3600</span>)</span></code></pre></div>
 </div>
 <p>Also PV-Fläche pro Person benötigt:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1">(A_PV_per_person <span class="ot" style="color: #003B4F;
+<div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1">(A_PV_pro_person_qm <span class="ot" style="color: #003B4F;
 background-color: null;
-font-style: inherit;">&lt;-</span> p_primaerenergie_pro_person <span class="sc" style="color: #5E5E5E;
+font-style: inherit;">&lt;-</span> p_primaerenergie_pro_person_W <span class="sc" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">/</span> p_pv_pro_qm)</span></code></pre></div>
+font-style: inherit;">/</span> p_pv_pro_qm_W)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 173.6111</code></pre>
 </div>
 </div>
 <p>Fläche pro Person in Deutschland vorhanden:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1">(A_per_person <span class="ot" style="color: #003B4F;
+<div class="sourceCode cell-code" id="cb18" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1">(A_pro_person_qm <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fl" style="color: #AD0000;
 background-color: null;

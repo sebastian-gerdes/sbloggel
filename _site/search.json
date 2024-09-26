@@ -620,28 +620,35 @@
     "href": "posts/2024-09-24-energie/2024-09-24-energie.html",
     "title": "Energie",
     "section": "",
-    "text": "library('tidyverse')\n\n\n# Schätzwert für Leistung des menschlichen Körpers\n# entspricht 2160 kcal pro Tag\np_human_W &lt;- 100\n\n# ca. 10.000 kWh pro Person Heizenergie \n# (https://www.thermondo.de/info/rat/heizen/energieverbrauch-durchschnittsfamilie/) \n# das ist wahrscheinlich ein recht hoher Wert\n# entspricht einer Leistung von:\n(p_heating_W &lt;- 1e4 * 3.6e6 / 365 / 24 / 3600)\n\n[1] 1141.553\n\n# Wir als vierköpfige Familie haben in 2023 ca. 1.400 kWh Strom verbraucht\n# Das entspricht einer pro-Kopf-Leistung von:\n(p_electricity_W &lt;- 1.3e3 / 4 * 3.6e6 / 365 / 24 / 3600)\n\n[1] 37.10046\n\n# Wieviel Fernwärme wir bezogen haben:\n(W_kWh &lt;- 8e3)\n\n[1] 8000\n\n(p_heating_BoGe_W &lt;- 8e3 * 3.6e6 / 365 / 24 / 3600)\n\n[1] 913.242\n\n\n\nNach diesen Schätzwerten verbrauchen wir als gesamte Familie weniger Heizenergie als ein Durchschnittsdeutscher!\nKosten pro kWh Fernwärme in DD ca. 20 ct – Link\nWirkungsgrad von Fernwärme: Laut ChatGPT 75%-90% – Link"
+    "text": "library('tidyverse')\n\n\n# Schätzwert für Leistung des menschlichen Körpers\n# entspricht 2160 kcal pro Tag\np_human_W &lt;- 100\n\n# ca. 10.000 kWh pro Person Heizenergie pro Jahr\n# (https://www.thermondo.de/info/rat/heizen/energieverbrauch-durchschnittsfamilie/) \n# das ist wahrscheinlich ein recht hoher Wert\n# entspricht einer Leistung von:\n(p_heating_W &lt;- 1e4 * 3.6e6 / 365 / 24 / 3600)\n\n[1] 1141.553\n\n# Wir als vierköpfige Familie haben in 2023 ca. 1.400 kWh Strom verbraucht\n# Das entspricht einer pro-Kopf-Leistung von:\n(p_electricity_W &lt;- 1.3e3 / 4 * 3.6e6 / 365 / 24 / 3600)\n\n[1] 37.10046\n\n# Wieviel Fernwärme wir in den letzten Jahrne ca. pro Jahr  bezogen haben:\n(W_kWh &lt;- 8e3)\n\n[1] 8000\n\n(p_heating_BoGe_W &lt;- 8e3 * 3.6e6 / 365 / 24 / 3600)\n\n[1] 913.242\n\n\n\nNach diesen Schätzwerten verbrauchen wir als gesamte Familie weniger Heizenergie als ein Durchschnittsdeutscher!\nKosten pro kWh Fernwärme in DD ca. 20 ct – Link\nWirkungsgrad von Fernwärme: Laut ChatGPT 75%-90% – Link"
   },
   {
     "objectID": "posts/2024-09-24-energie/2024-09-24-energie.html#pi-mal-daumen-berechnungen",
     "href": "posts/2024-09-24-energie/2024-09-24-energie.html#pi-mal-daumen-berechnungen",
     "title": "Energie",
     "section": "",
-    "text": "library('tidyverse')\n\n\n# Schätzwert für Leistung des menschlichen Körpers\n# entspricht 2160 kcal pro Tag\np_human_W &lt;- 100\n\n# ca. 10.000 kWh pro Person Heizenergie \n# (https://www.thermondo.de/info/rat/heizen/energieverbrauch-durchschnittsfamilie/) \n# das ist wahrscheinlich ein recht hoher Wert\n# entspricht einer Leistung von:\n(p_heating_W &lt;- 1e4 * 3.6e6 / 365 / 24 / 3600)\n\n[1] 1141.553\n\n# Wir als vierköpfige Familie haben in 2023 ca. 1.400 kWh Strom verbraucht\n# Das entspricht einer pro-Kopf-Leistung von:\n(p_electricity_W &lt;- 1.3e3 / 4 * 3.6e6 / 365 / 24 / 3600)\n\n[1] 37.10046\n\n# Wieviel Fernwärme wir bezogen haben:\n(W_kWh &lt;- 8e3)\n\n[1] 8000\n\n(p_heating_BoGe_W &lt;- 8e3 * 3.6e6 / 365 / 24 / 3600)\n\n[1] 913.242\n\n\n\nNach diesen Schätzwerten verbrauchen wir als gesamte Familie weniger Heizenergie als ein Durchschnittsdeutscher!\nKosten pro kWh Fernwärme in DD ca. 20 ct – Link\nWirkungsgrad von Fernwärme: Laut ChatGPT 75%-90% – Link"
+    "text": "library('tidyverse')\n\n\n# Schätzwert für Leistung des menschlichen Körpers\n# entspricht 2160 kcal pro Tag\np_human_W &lt;- 100\n\n# ca. 10.000 kWh pro Person Heizenergie pro Jahr\n# (https://www.thermondo.de/info/rat/heizen/energieverbrauch-durchschnittsfamilie/) \n# das ist wahrscheinlich ein recht hoher Wert\n# entspricht einer Leistung von:\n(p_heating_W &lt;- 1e4 * 3.6e6 / 365 / 24 / 3600)\n\n[1] 1141.553\n\n# Wir als vierköpfige Familie haben in 2023 ca. 1.400 kWh Strom verbraucht\n# Das entspricht einer pro-Kopf-Leistung von:\n(p_electricity_W &lt;- 1.3e3 / 4 * 3.6e6 / 365 / 24 / 3600)\n\n[1] 37.10046\n\n# Wieviel Fernwärme wir in den letzten Jahrne ca. pro Jahr  bezogen haben:\n(W_kWh &lt;- 8e3)\n\n[1] 8000\n\n(p_heating_BoGe_W &lt;- 8e3 * 3.6e6 / 365 / 24 / 3600)\n\n[1] 913.242\n\n\n\nNach diesen Schätzwerten verbrauchen wir als gesamte Familie weniger Heizenergie als ein Durchschnittsdeutscher!\nKosten pro kWh Fernwärme in DD ca. 20 ct – Link\nWirkungsgrad von Fernwärme: Laut ChatGPT 75%-90% – Link"
   },
   {
-    "objectID": "posts/2024-09-24-energie/2024-09-24-energie.html#recherchen-von-chatgpt",
-    "href": "posts/2024-09-24-energie/2024-09-24-energie.html#recherchen-von-chatgpt",
+    "objectID": "posts/2024-09-24-energie/2024-09-24-energie.html#typischer-co2-fußabdruck-einer-in-deutschland-lebenden-person",
+    "href": "posts/2024-09-24-energie/2024-09-24-energie.html#typischer-co2-fußabdruck-einer-in-deutschland-lebenden-person",
     "title": "Energie",
-    "section": "Recherchen von ChatGPT",
-    "text": "Recherchen von ChatGPT\n\nLink\nGroßteil des Energieverbrauchs der Privatpersonen für Heizung"
+    "section": "Typischer CO2-Fußabdruck einer in Deutschland lebenden Person",
+    "text": "Typischer CO2-Fußabdruck einer in Deutschland lebenden Person\n\nRecherche von ChatGPT\n\n–&gt; ca. 20.000 kWh pro Person pro Jahr\nGroßteil (fast die Hälfte) des Energieverbrauchs der Privatpersonen für Heizung"
   },
   {
-    "objectID": "posts/2024-09-24-energie/2024-09-24-energie.html#information-from-cleanenergywire.org",
-    "href": "posts/2024-09-24-energie/2024-09-24-energie.html#information-from-cleanenergywire.org",
+    "objectID": "posts/2024-09-24-energie/2024-09-24-energie.html#primärenergieverbrauch-in-deutschland",
+    "href": "posts/2024-09-24-energie/2024-09-24-energie.html#primärenergieverbrauch-in-deutschland",
     "title": "Energie",
-    "section": "Information from cleanenergywire.org",
-    "text": "Information from cleanenergywire.org\n\nhttps://www.cleanenergywire.org/factsheets/germanys-energy-consumption-and-power-mix-charts\n\n\n\n(p_primaerenergie_pro_person &lt;- 1e4 * 1e15 / 8e7 / 365 / 24 / 3600)\n\n[1] 3963.724\n\n\n\nca. 200 kWh pro qm PV pro Jahr: https://www.iwb.ch/klimadreh/ratgeber/solaranlage/wie-viel-flaeche-benoetigt-meine-solaranlage\n\nentspricht ca. 20 W im Jahresmittel:\n\n\n\n(p_pv_pro_qm &lt;- 200 * 3.6e6 / 365 / 24 / 3600)\n\n[1] 22.83105\n\n\nAlso PV-Fläche pro Person benötigt:\n\n(A_PV_per_person &lt;- p_primaerenergie_pro_person / p_pv_pro_qm)\n\n[1] 173.6111\n\n\nFläche pro Person in Deutschland vorhanden:\n\n(A_per_person &lt;- 3.6e11 / 8e7)\n\n[1] 4500\n\n\nAlso müsste ein Anteil von 0.0385802 in Deutschland mit PV belegt werden um den PV-Bedarf komplett zu decken. Könnte gehen, oder?"
+    "section": "Primärenergieverbrauch in Deutschland",
+    "text": "Primärenergieverbrauch in Deutschland\n\nInfos von cleanenergywire.org\nHier ein heruntergeladenes, interessantes Diagramm von cleanenergywire.org: \nGesamtprimärenergieverbrach ca. 10.000 PJ = 1e19 Joules\nPro Person (etwas mehr als das von ChatGPT pro Person angegebene – aber dort auch ohne Industrie)\n\n\n(primaerenergie_pro_person_cleanenergywire_kWh &lt;- 1e19 / 3.6e6 / 8e7)\n\n[1] 34722.22\n\n\n\nLeistung Primärenergie pro Person:\n\n\n(p_primaerenergie_pro_person_W &lt;- 1e4 * 1e15 / 8e7 / 365 / 24 / 3600)\n\n[1] 3963.724"
+  },
+  {
+    "objectID": "posts/2024-09-24-energie/2024-09-24-energie.html#wie-viel-kann-photovoltaik-pv-leisten",
+    "href": "posts/2024-09-24-energie/2024-09-24-energie.html#wie-viel-kann-photovoltaik-pv-leisten",
+    "title": "Energie",
+    "section": "Wie viel kann Photovoltaik (PV) leisten?",
+    "text": "Wie viel kann Photovoltaik (PV) leisten?\n\nca. 200 kWh Ertrag pro qm PV pro Jahr (Quelle)\n\nentspricht ca. 20 W im Jahresmittel:\n\n\n\n(p_pv_pro_qm_W &lt;- 200 * 3.6e6 / 365 / 24 / 3600)\n\n[1] 22.83105\n\n\nAlso PV-Fläche pro Person benötigt:\n\n(A_PV_pro_person_qm &lt;- p_primaerenergie_pro_person_W / p_pv_pro_qm_W)\n\n[1] 173.6111\n\n\nFläche pro Person in Deutschland vorhanden:\n\n(A_pro_person_qm &lt;- 3.6e11 / 8e7)\n\n[1] 4500\n\n\nAlso müsste ein Anteil von 0.0385802 in Deutschland mit PV belegt werden um den PV-Bedarf komplett zu decken. Könnte gehen, oder?"
   },
   {
     "objectID": "posts/2024-05-03-legends-in-ggplot2/2024-05-03-legends-in-ggplot2.html",
