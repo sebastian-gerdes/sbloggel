@@ -1,0 +1,50 @@
+---
+title: Hypothesis testing in mixed linear models with a factorial design
+date: 2024-09-30
+categories:
+  - R
+---
+
+```{r}
+#| label: init
+#| cache: false
+#| include: false
+library('tidyverse')
+library('lme4')
+library('multcomp')
+set.seed(2)
+```
+
+```{r}
+dat <- expand_grid(time = factor(1:3), group = factor(1:2), ID = 1:5) |> 
+  mutate(hh = paste('time', time, 'group', group, sep = '_'))
+
+X <- model.matrix(~ hh + factor(ID), data = dat)
+
+dat <- dat |> 
+  mutate(y = X %*% rnorm(10) + rnorm(30))
+
+
+fm_1 <- lmer(y ~ time * group + (1 | ID), data = dat)
+fm_2 <- lmer(y ~ hh - 1 + (1 | ID), data = dat)
+
+fm_1
+fm_2
+AIC(fm_1)
+AIC(fm_2)
+summary(fm_1)
+summary(fm_2)
+fixef(fm_1)
+fixef(fm_2)
+
+glht(fm_1, c('time2 == 0',
+             'time3 == 0',
+             'time2 + group2 + time2:group2 == 0',
+             'time3 + group2 + time3:group2 == 0'))
+
+glht(fm_2, c('hhtime_2_group_1 - hhtime_1_group_1 == 0',
+             'hhtime_3_group_1 - hhtime_1_group_1 == 0',
+             'hhtime_2_group_2 - hhtime_1_group_2 == 0',
+             'hhtime_3_group_2 - hhtime_1_group_2 == 0'))
+```
+
