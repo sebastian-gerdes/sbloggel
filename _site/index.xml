@@ -69,6 +69,49 @@ font-style: inherit;">300</span>)</span></code></pre></div>
   <pubDate>Tue, 22 Oct 2024 22:00:00 GMT</pubDate>
 </item>
 <item>
+  <title>Energie Haus</title>
+  <link>https://sbloggel.netlify.app/posts/2024-10-23-energie-haus/2024-10-23-energie-haus.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'tidyverse'</span>)</span></code></pre></div>
+</div>
+<ul>
+<li>ChatGPT sagt, dass ich ca. 1e3 Watt benötige, um 1 kg Stein um 1 Grad zu erwärmen (<a href="https://chatgpt.com/share/6718a0a2-68cc-8013-a9b6-aa25947e9b54">Quelle</a>)</li>
+<li>Ein Haus hat eine Masse von ca. 100 Tonnen (1e5 kg)</li>
+<li>ChatGPT sagt, dass ich ca. 1e3 Watt benötige, um 1 Kubikmeter Luft um 1 Grad zu erwärmen</li>
+<li>Ein Haus hat ein Volumen von ca. 500 Kubikmeter (<img src="https://latex.codecogs.com/png.latex?5e2%20m%5E3">)</li>
+</ul>
+<p>Der Quotient aus beiden:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1e5</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5e2</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 200</code></pre>
+</div>
+</div>
+<p>Ergo 200 mal so viel Energie um die Masse des Hauses um 1 Grad zu erwärmen im Vergleich zur Energie um die Masse der Luft um 1 Grad zu erwärmen!</p>
+
+
+
+ ]]></description>
+  <category>R</category>
+  <guid>https://sbloggel.netlify.app/posts/2024-10-23-energie-haus/2024-10-23-energie-haus.html</guid>
+  <pubDate>Tue, 22 Oct 2024 22:00:00 GMT</pubDate>
+</item>
+<item>
   <title>gglimpse or tibblet, tlimpse or dfsum</title>
   <link>https://sbloggel.netlify.app/posts/2024-09-30-gglimpse/2024-09-30-gglimpse.html</link>
   <description><![CDATA[ 
@@ -4485,23 +4528,6 @@ font-style: inherit;">''</span>)</span></code></pre></div>
   <category>Self-study</category>
   <guid>https://sbloggel.netlify.app/posts/2023-11-19-understanding-competing-risks/2023-11-19-understanding-competing-risks.html</guid>
   <pubDate>Sat, 18 Nov 2023 23:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Quantifizierung von Alkoholintoxikation</title>
-  <link>https://sbloggel.netlify.app/posts/2023-10-17-quantifizierung-von-alkoholintoxikation/2023-10-17-quantifizierung-von-alkoholintoxikation.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<p><a href="https://psychiatrietogo.de/tag/atemalkohol/">Link</a> zu Jan Drehers Beitrag</p>
-
-
-
- ]]></description>
-  <category>R</category>
-  <guid>https://sbloggel.netlify.app/posts/2023-10-17-quantifizierung-von-alkoholintoxikation/2023-10-17-quantifizierung-von-alkoholintoxikation.html</guid>
-  <pubDate>Mon, 16 Oct 2023 22:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>

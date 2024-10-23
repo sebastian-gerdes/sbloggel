@@ -1,0 +1,26 @@
+---
+title: Energie Haus
+date: 2024-10-23
+categories:
+  - R
+---
+
+```{r}
+#| label: init
+#| cache: false
+#| message: false
+library('tidyverse')
+```
+
+* ChatGPT sagt, dass ich ca. 1e3 Watt benötige, um 1 kg Stein um 1 Grad zu erwärmen ([Quelle](https://chatgpt.com/share/6718a0a2-68cc-8013-a9b6-aa25947e9b54))
+* Ein Haus hat eine Masse von ca. 100 Tonnen (1e5 kg)
+* ChatGPT sagt, dass ich ca. 1e3 Watt benötige, um 1 Kubikmeter Luft um 1 Grad zu erwärmen
+* Ein Haus hat ein Volumen von ca. 500 Kubikmeter ($5e2 m^3$)
+
+Der Quotient aus beiden:
+```{r}
+1e5 / 5e2
+```
+
+Ergo 200 mal so viel Energie um die Masse des Hauses um 1 Grad zu erwärmen im Vergleich zur Energie um die Masse der Luft um 1 Grad zu erwärmen!
+
