@@ -7,7 +7,7 @@ categories:
 
 
 
-How much water in cubic meters is removed from a flat with a volume if the air in the flat is changed?
+How much water in liters is removed from a flat with a volume if the air in the flat is changed?
 ```{r}
 # devtools::install_github("sebastian-gerdes/smisc")
 library('smisc')

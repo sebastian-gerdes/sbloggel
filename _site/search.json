@@ -1089,7 +1089,7 @@
     "href": "posts/2024-10-23-ventilation/2024-10-23-ventilation.html",
     "title": "Ventilation",
     "section": "",
-    "text": "How much water in cubic meters is removed from a flat with a volume if the air in the flat is changed?\n\n# devtools::install_github(\"sebastian-gerdes/smisc\")\nlibrary('smisc')\ndiff_water(temperature_out = 8, \n           relative_humidity_outside = 80, \n           temperature_inside = 20, \n           relative_humidity_inside = 70, \n           volume = 300)\n\n[1] -1.644616"
+    "text": "How much water in liters is removed from a flat with a volume if the air in the flat is changed?\n\n# devtools::install_github(\"sebastian-gerdes/smisc\")\nlibrary('smisc')\ndiff_water(temperature_out = 8, \n           relative_humidity_outside = 80, \n           temperature_inside = 20, \n           relative_humidity_inside = 70, \n           volume = 300)\n\n[1] -1.644616"
   },
   {
     "objectID": "posts/2022-11-24-r-interfaces-to-trial-registries/2022-11-24-r-interfaces-to-trial-registries.html",
