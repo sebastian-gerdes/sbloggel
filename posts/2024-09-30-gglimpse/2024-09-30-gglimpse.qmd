@@ -1,0 +1,26 @@
+---
+title: gglimpse or tibblet, tlimpse or dfsum
+date: 2024-09-30
+categories:
+  - R
+---
+
+All in all, I like the summarytools package -- however -- I don't like its heavy dependencies. Here, I want to create a lightweight alternative!
+
+```{r}
+#| label: init
+#| cache: false
+#| message: false
+library('tidyverse')
+library('summarytools')
+```
+
+```{r}
+#| output: asis
+mm <- mtcars |> 
+  mutate(model_name = row.names(mtcars), .before = 1)
+dfSummary(mm, style = 'grid', plain.ascii = FALSE, tmp.img.dir = 'plots')
+```
+
+
+

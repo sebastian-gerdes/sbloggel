@@ -10,7 +10,363 @@
 <atom:link href="https://sbloggel.netlify.app/index.xml" rel="self" type="application/rss+xml"/>
 <description>Seb&#39;s private blog about statistics and other topics</description>
 <generator>quarto-1.4.553</generator>
-<lastBuildDate>Sun, 29 Sep 2024 22:00:00 GMT</lastBuildDate>
+<lastBuildDate>Tue, 22 Oct 2024 22:00:00 GMT</lastBuildDate>
+<item>
+  <title>Ventilation</title>
+  <link>https://sbloggel.netlify.app/posts/2024-10-23-ventilation/2024-10-23-ventilation.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>How much water in cubic meters is removed from a flat with a volume if the air in the flat is changed?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># devtools::install_github("sebastian-gerdes/smisc")</span></span>
+<span id="cb1-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'smisc'</span>)</span>
+<span id="cb1-3"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">diff_water</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">temperature_out =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">8</span>, </span>
+<span id="cb1-4">           <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">relative_humidity_outside =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">80</span>, </span>
+<span id="cb1-5">           <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">temperature_inside =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">20</span>, </span>
+<span id="cb1-6">           <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">relative_humidity_inside =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">70</span>, </span>
+<span id="cb1-7">           <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">volume =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">300</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -1.644616</code></pre>
+</div>
+</div>
+
+
+
+ ]]></description>
+  <category>R</category>
+  <guid>https://sbloggel.netlify.app/posts/2024-10-23-ventilation/2024-10-23-ventilation.html</guid>
+  <pubDate>Tue, 22 Oct 2024 22:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>gglimpse or tibblet, tlimpse or dfsum</title>
+  <link>https://sbloggel.netlify.app/posts/2024-09-30-gglimpse/2024-09-30-gglimpse.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>All in all, I like the summarytools package – however – I don’t like its heavy dependencies. Here, I want to create a lightweight alternative!</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'tidyverse'</span>)</span>
+<span id="cb1-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'summarytools'</span>)</span></code></pre></div>
+</div>
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1">mm <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> mtcars <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> </span>
+<span id="cb2-2">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">model_name =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">row.names</span>(mtcars), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">.before =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)</span>
+<span id="cb2-3"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">dfSummary</span>(mm, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">style =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'grid'</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">plain.ascii =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">FALSE</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">tmp.img.dir =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'plots'</span>)</span></code></pre></div>
+<pre><code>temporary images written to '/Users/seb/Documents/Projects/00_websites/sbloggel/posts/2024-09-30-gglimpse/plots'</code></pre>
+<section id="data-frame-summary" class="level3">
+<h3 class="anchored" data-anchor-id="data-frame-summary">Data Frame Summary</h3>
+<section id="mm" class="level4">
+<h4 class="anchored" data-anchor-id="mm">mm</h4>
+<p><strong>Dimensions:</strong> 32 x 12<br>
+<strong>Duplicates:</strong> 0</p>
+<table class="table">
+<colgroup>
+<col style="width: 4%">
+<col style="width: 11%">
+<col style="width: 24%">
+<col style="width: 17%">
+<col style="width: 20%">
+<col style="width: 9%">
+<col style="width: 8%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>No</th>
+<th>Variable</th>
+<th>Stats / Values</th>
+<th>Freqs (% of Valid)</th>
+<th>Graph</th>
+<th>Valid</th>
+<th>Missing</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>model_name<br>
+[character]</td>
+<td>1. AMC Javelin<br>
+2. Cadillac Fleetwood<br>
+3. Camaro Z28<br>
+4. Chrysler Imperial<br>
+5. Datsun 710<br>
+6. Dodge Challenger<br>
+7. Duster 360<br>
+8. Ferrari Dino<br>
+9. Fiat 128<br>
+10. Fiat X1-9<br>
+[ 22 others ]</td>
+<td>1 ( 3.1%)<br>
+1 ( 3.1%)<br>
+1 ( 3.1%)<br>
+1 ( 3.1%)<br>
+1 ( 3.1%)<br>
+1 ( 3.1%)<br>
+1 ( 3.1%)<br>
+1 ( 3.1%)<br>
+1 ( 3.1%)<br>
+1 ( 3.1%)<br>
+22 (68.8%)</td>
+<td><img src="https://sbloggel.netlify.app/posts/2024-09-30-gglimpse/plots/ds0114.png" class="img-fluid"></td>
+<td>32<br>
+(100.0%)</td>
+<td>0<br>
+(0.0%)</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>mpg<br>
+[numeric]</td>
+<td>Mean (sd) : 20.1 (6)<br>
+min &lt; med &lt; max:<br>
+10.4 &lt; 19.2 &lt; 33.9<br>
+IQR (CV) : 7.4 (0.3)</td>
+<td>25 distinct values</td>
+<td><img src="https://sbloggel.netlify.app/posts/2024-09-30-gglimpse/plots/ds0115.png" class="img-fluid"></td>
+<td>32<br>
+(100.0%)</td>
+<td>0<br>
+(0.0%)</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>cyl<br>
+[numeric]</td>
+<td>Mean (sd) : 6.2 (1.8)<br>
+min &lt; med &lt; max:<br>
+4 &lt; 6 &lt; 8<br>
+IQR (CV) : 4 (0.3)</td>
+<td>4 : 11 (34.4%)<br>
+6 : 7 (21.9%)<br>
+8 : 14 (43.8%)</td>
+<td><img src="https://sbloggel.netlify.app/posts/2024-09-30-gglimpse/plots/ds0116.png" class="img-fluid"></td>
+<td>32<br>
+(100.0%)</td>
+<td>0<br>
+(0.0%)</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>disp<br>
+[numeric]</td>
+<td>Mean (sd) : 230.7 (123.9)<br>
+min &lt; med &lt; max:<br>
+71.1 &lt; 196.3 &lt; 472<br>
+IQR (CV) : 205.2 (0.5)</td>
+<td>27 distinct values</td>
+<td><img src="https://sbloggel.netlify.app/posts/2024-09-30-gglimpse/plots/ds0117.png" class="img-fluid"></td>
+<td>32<br>
+(100.0%)</td>
+<td>0<br>
+(0.0%)</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>hp<br>
+[numeric]</td>
+<td>Mean (sd) : 146.7 (68.6)<br>
+min &lt; med &lt; max:<br>
+52 &lt; 123 &lt; 335<br>
+IQR (CV) : 83.5 (0.5)</td>
+<td>22 distinct values</td>
+<td><img src="https://sbloggel.netlify.app/posts/2024-09-30-gglimpse/plots/ds0118.png" class="img-fluid"></td>
+<td>32<br>
+(100.0%)</td>
+<td>0<br>
+(0.0%)</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>drat<br>
+[numeric]</td>
+<td>Mean (sd) : 3.6 (0.5)<br>
+min &lt; med &lt; max:<br>
+2.8 &lt; 3.7 &lt; 4.9<br>
+IQR (CV) : 0.8 (0.1)</td>
+<td>22 distinct values</td>
+<td><img src="https://sbloggel.netlify.app/posts/2024-09-30-gglimpse/plots/ds0119.png" class="img-fluid"></td>
+<td>32<br>
+(100.0%)</td>
+<td>0<br>
+(0.0%)</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>wt<br>
+[numeric]</td>
+<td>Mean (sd) : 3.2 (1)<br>
+min &lt; med &lt; max:<br>
+1.5 &lt; 3.3 &lt; 5.4<br>
+IQR (CV) : 1 (0.3)</td>
+<td>29 distinct values</td>
+<td><img src="https://sbloggel.netlify.app/posts/2024-09-30-gglimpse/plots/ds0120.png" class="img-fluid"></td>
+<td>32<br>
+(100.0%)</td>
+<td>0<br>
+(0.0%)</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>qsec<br>
+[numeric]</td>
+<td>Mean (sd) : 17.8 (1.8)<br>
+min &lt; med &lt; max:<br>
+14.5 &lt; 17.7 &lt; 22.9<br>
+IQR (CV) : 2 (0.1)</td>
+<td>30 distinct values</td>
+<td><img src="https://sbloggel.netlify.app/posts/2024-09-30-gglimpse/plots/ds0121.png" class="img-fluid"></td>
+<td>32<br>
+(100.0%)</td>
+<td>0<br>
+(0.0%)</td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td>vs<br>
+[numeric]</td>
+<td>Min : 0<br>
+Mean : 0.4<br>
+Max : 1</td>
+<td>0 : 18 (56.2%)<br>
+1 : 14 (43.8%)</td>
+<td><img src="https://sbloggel.netlify.app/posts/2024-09-30-gglimpse/plots/ds0122.png" class="img-fluid"></td>
+<td>32<br>
+(100.0%)</td>
+<td>0<br>
+(0.0%)</td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td>am<br>
+[numeric]</td>
+<td>Min : 0<br>
+Mean : 0.4<br>
+Max : 1</td>
+<td>0 : 19 (59.4%)<br>
+1 : 13 (40.6%)</td>
+<td><img src="https://sbloggel.netlify.app/posts/2024-09-30-gglimpse/plots/ds0123.png" class="img-fluid"></td>
+<td>32<br>
+(100.0%)</td>
+<td>0<br>
+(0.0%)</td>
+</tr>
+<tr class="odd">
+<td>11</td>
+<td>gear<br>
+[numeric]</td>
+<td>Mean (sd) : 3.7 (0.7)<br>
+min &lt; med &lt; max:<br>
+3 &lt; 4 &lt; 5<br>
+IQR (CV) : 1 (0.2)</td>
+<td>3 : 15 (46.9%)<br>
+4 : 12 (37.5%)<br>
+5 : 5 (15.6%)</td>
+<td><img src="https://sbloggel.netlify.app/posts/2024-09-30-gglimpse/plots/ds0124.png" class="img-fluid"></td>
+<td>32<br>
+(100.0%)</td>
+<td>0<br>
+(0.0%)</td>
+</tr>
+<tr class="even">
+<td>12</td>
+<td>carb<br>
+[numeric]</td>
+<td>Mean (sd) : 2.8 (1.6)<br>
+min &lt; med &lt; max:<br>
+1 &lt; 2 &lt; 8<br>
+IQR (CV) : 2 (0.6)</td>
+<td>1 : 7 (21.9%)<br>
+2 : 10 (31.2%)<br>
+3 : 3 ( 9.4%)<br>
+4 : 10 (31.2%)<br>
+6 : 1 ( 3.1%)<br>
+8 : 1 ( 3.1%)</td>
+<td><img src="https://sbloggel.netlify.app/posts/2024-09-30-gglimpse/plots/ds0125.png" class="img-fluid"></td>
+<td>32<br>
+(100.0%)</td>
+<td>0<br>
+(0.0%)</td>
+</tr>
+</tbody>
+</table>
+
+
+</section>
+</section>
+
+ ]]></description>
+  <category>R</category>
+  <guid>https://sbloggel.netlify.app/posts/2024-09-30-gglimpse/2024-09-30-gglimpse.html</guid>
+  <pubDate>Sun, 29 Sep 2024 22:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Hypothesis testing in mixed linear models with a factorial design</title>
   <link>https://sbloggel.netlify.app/posts/2024-09-30-hypothesis-testing-in-mixed-linear-models-with-a-factorial-design/2024-09-30-hypothesis-testing-in-mixed-linear-models-with-a-factorial-design.html</link>
@@ -4146,446 +4502,6 @@ font-style: inherit;">''</span>)</span></code></pre></div>
   <category>R</category>
   <guid>https://sbloggel.netlify.app/posts/2023-10-17-quantifizierung-von-alkoholintoxikation/2023-10-17-quantifizierung-von-alkoholintoxikation.html</guid>
   <pubDate>Mon, 16 Oct 2023 22:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Understanding the multivariate normal distribution</title>
-  <link>https://sbloggel.netlify.app/posts/2023-10-10-understanding-the-multivariate-normal-distribution/2023-10-10-understanding-the-multivariate-normal-distribution.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'tidyverse'</span>)</span>
-<span id="cb1-2"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">set.seed</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>)</span></code></pre></div>
-</div>
-<p><a href="https://stats.stackexchange.com/questions/628367/how-do-i-adequately-calculate-the-distribution-of-function-of-the-multivariate-n">Link to question at stackexchange</a></p>
-<section id="relations" class="level2">
-<h2 class="anchored" data-anchor-id="relations">Relations</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1">n <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1e4</span></span>
-<span id="cb2-2">x <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">rnorm</span>(n)</span>
-<span id="cb2-3">p_values <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">pnorm</span>(x)</span>
-<span id="cb2-4"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">plot</span>(<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">ecdf</span>(p_values))</span>
-<span id="cb2-5"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">abline</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">col =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'red'</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">lty =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'dotted'</span>)</span></code></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="https://sbloggel.netlify.app/posts/2023-10-10-understanding-the-multivariate-normal-distribution/2023-10-10-understanding-the-multivariate-normal-distribution_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># help(package = 'mvtnorm')</span></span>
-<span id="cb3-2"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># help(package = 'multcomp')</span></span>
-<span id="cb3-3"></span>
-<span id="cb3-4"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'mvtnorm'</span>)</span>
-<span id="cb3-5">var_x1 <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span></span>
-<span id="cb3-6">var_x2 <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span></span>
-<span id="cb3-7">cov_x1_x2 <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.3</span></span>
-<span id="cb3-8">sigma <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">cbind</span>(<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">c</span>(var_x1, cov_x1_x2), <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">c</span>(cov_x1_x2, var_x2))</span>
-<span id="cb3-9">sigma</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>     [,1] [,2]
-[1,]  1.0  0.3
-[2,]  0.3  1.0</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1">dat <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">rmvnorm</span>(n, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">mean =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>), <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">sigma =</span> sigma)</span>
-<span id="cb5-2"></span>
-<span id="cb5-3"></span>
-<span id="cb5-4"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># calc_p &lt;- function(x) {</span></span>
-<span id="cb5-5"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">#   pmvnorm(lower = -abs(x),</span></span>
-<span id="cb5-6"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">#           upper = abs(x),</span></span>
-<span id="cb5-7"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">#           sigma = sigma)</span></span>
-<span id="cb5-8"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># }</span></span>
-<span id="cb5-9"></span>
-<span id="cb5-10">calc_p <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">function</span>(x) {</span>
-<span id="cb5-11">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">pmvnorm</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">lower =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">ifelse</span>(x <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">&lt;</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>, x, <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span><span class="cn" style="color: #8f5902;
-background-color: null;
-font-style: inherit;">Inf</span>),</span>
-<span id="cb5-12">          <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">upper =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">ifelse</span>(x <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">&gt;</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>, x, <span class="cn" style="color: #8f5902;
-background-color: null;
-font-style: inherit;">Inf</span>),</span>
-<span id="cb5-13">          <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">sigma =</span> sigma)</span>
-<span id="cb5-14">}</span>
-<span id="cb5-15"></span>
-<span id="cb5-16"></span>
-<span id="cb5-17"></span>
-<span id="cb5-18"></span>
-<span id="cb5-19"></span>
-<span id="cb5-20"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># should be a straight line, but isn't - I don't understand why...</span></span>
-<span id="cb5-21">p_values <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">apply</span>(dat[<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">:</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">min</span>(n, <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1e4</span>), ], <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, calc_p)</span>
-<span id="cb5-22"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">plot</span>(<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">ecdf</span>(p_values), <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">xlim =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>))</span>
-<span id="cb5-23"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">abline</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">col =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'red'</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">lty =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'dotted'</span>)</span></code></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="https://sbloggel.netlify.app/posts/2023-10-10-understanding-the-multivariate-normal-distribution/2023-10-10-understanding-the-multivariate-normal-distribution_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1">ii_1 <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> dat[, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>] <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">&lt;</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">qnorm</span>(<span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.025</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">sd =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">sqrt</span>(var_x1))</span>
-<span id="cb6-2">ii_2 <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> dat[, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>] <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">&lt;</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">qnorm</span>(<span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.025</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">sd =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">sqrt</span>(var_x2))</span>
-<span id="cb6-3"></span>
-<span id="cb6-4"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">sum</span>(ii_1)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 229</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">sum</span>(ii_2)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 246</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">sum</span>(ii_1 <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|</span> ii_2)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 457</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">sum</span>(ii_1 <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">&amp;</span> ii_2)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 18</code></pre>
-</div>
-</div>
-
-
-</section>
-
- ]]></description>
-  <category>R</category>
-  <guid>https://sbloggel.netlify.app/posts/2023-10-10-understanding-the-multivariate-normal-distribution/2023-10-10-understanding-the-multivariate-normal-distribution.html</guid>
-  <pubDate>Mon, 09 Oct 2023 22:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Decision trees</title>
-  <link>https://sbloggel.netlify.app/posts/2023-10-07-decision-trees/2023-10-07-decision-trees.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'tidyverse'</span>)</span>
-<span id="cb1-2"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'rpart'</span>)</span>
-<span id="cb1-3"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'rpart.plot'</span>)</span>
-<span id="cb1-4"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">set.seed</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>)</span></code></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1">train_index <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">sample</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">:</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">nrow</span>(iris), <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">size =</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.7</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">nrow</span>(iris))</span>
-<span id="cb2-2">train <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> iris[train_index, ]</span>
-<span id="cb2-3">test <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> iris[<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span>train_index, ]</span>
-<span id="cb2-4"></span>
-<span id="cb2-5">tree <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">rpart</span>(Species <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">~</span> ., <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">data =</span> train, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">method =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"class"</span>)</span>
-<span id="cb2-6"></span>
-<span id="cb2-7"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">rpart.plot</span>(tree, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">main =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Decision Tree for the Iris Dataset"</span>)</span></code></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="https://sbloggel.netlify.app/posts/2023-10-07-decision-trees/2023-10-07-decision-trees_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1">cfit2 <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">rpart</span>(pgstat <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">~</span> age <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> eet <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> g2 <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> grade <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> gleason <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> ploidy,</span>
-<span id="cb3-2">               <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">data =</span> stagec)</span>
-<span id="cb3-3"></span>
-<span id="cb3-4"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">rpart.plot</span>(cfit2, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">main =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Decision Tree for the stagec Dataset"</span>)</span></code></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="https://sbloggel.netlify.app/posts/2023-10-07-decision-trees/2023-10-07-decision-trees_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-
-
-
- ]]></description>
-  <category>R</category>
-  <guid>https://sbloggel.netlify.app/posts/2023-10-07-decision-trees/2023-10-07-decision-trees.html</guid>
-  <pubDate>Fri, 06 Oct 2023 22:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>

@@ -10,7 +10,7 @@ categories:
 # devtools::install_github('sebastian-gerdes/smisc')
 library('smisc')
 library('knitr')
-library('tibble') 
+library('tidyverse')
 library('lattice')
 ```
 
@@ -77,3 +77,34 @@ temperatures <- -10:30
 abs_humidity <- round(absolute_humidity(temperature = temperatures), digits = 3)
 kable(tibble(temperatures = temperatures, abs_humidity = abs_humidity))
 ```
+
+
+```{r}
+dw <- Vectorize(diff_water)
+
+dat <- expand_grid(temperature_inside = -20:40, 
+                   temperature_outside = -20:40,
+                   relative_humidity_inside = 0:5 * 20,
+                   relative_humidity_outside = 0:5 * 20) |> 
+  mutate(
+                   diff_water = dw(temperature_outside,
+                                           relative_humidity_outside,
+                                           temperature_inside,
+                                           relative_humidity_outside))
+
+glimpse(dat)
+
+dat |> ggplot(aes(temperature_outside, temperature_inside, z = diff_water)) + 
+  geom_contour_filled() +
+  facet_grid(rows = vars(relative_humidity_inside), 
+             cols = vars(relative_humidity_outside),
+             scales = 'free')
+
+dat |> 
+  filter(relative_humidity_inside == 40,
+         relative_humidity_outside == 40) |> 
+  ggplot(aes(temperature_outside, temperature_inside, z = diff_water)) +
+  geom_contour_filled()
+
+```
+

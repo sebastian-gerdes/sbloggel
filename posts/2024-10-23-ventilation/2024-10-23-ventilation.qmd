@@ -1,0 +1,21 @@
+---
+title: Ventilation
+date: 2024-10-23
+categories:
+  - R
+---
+
+
+
+How much water in cubic meters is removed from a flat with a volume if the air in the flat is changed?
+```{r}
+# devtools::install_github("sebastian-gerdes/smisc")
+library('smisc')
+diff_water(temperature_out = 8, 
+           relative_humidity_outside = 80, 
+           temperature_inside = 20, 
+           relative_humidity_inside = 70, 
+           volume = 300)
+```
+
+
