@@ -203,7 +203,14 @@ window.Quarto = {
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#wie-viel-energie-um-die-luft-in-einem-haus-500-m3-von-0-auf-20-zu-erwärmen" id="toc-wie-viel-energie-um-die-luft-in-einem-haus-500-m3-von-0-auf-20-zu-erwärmen" class="nav-link active" data-scroll-target="#wie-viel-energie-um-die-luft-in-einem-haus-500-m3-von-0-auf-20-zu-erwärmen">Wie viel Energie um die Luft in einem Haus (500 <span class="math inline">\(m^3\)</span>) von 0° auf 20° zu erwärmen</a></li>
+  <li><a href="#heizenergie-pro-tag-im-kalten-halbjahr" id="toc-heizenergie-pro-tag-im-kalten-halbjahr" class="nav-link" data-scroll-target="#heizenergie-pro-tag-im-kalten-halbjahr">Heizenergie pro Tag im kalten Halbjahr</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/sebastian-gerdes/sbloggel/blob/main/posts/2024-10-23-energie-haus/2024-10-23-energie-haus.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -253,8 +260,31 @@ window.Quarto = {
 </div>
 </div>
 <p>Ergo 200 mal so viel Energie um die Masse des Hauses um 1 Grad zu erwärmen im Vergleich zur Energie um die Masse der Luft um 1 Grad zu erwärmen!</p>
+<section id="wie-viel-energie-um-die-luft-in-einem-haus-500-m3-von-0-auf-20-zu-erwärmen" class="level2">
+<h2 class="anchored" data-anchor-id="wie-viel-energie-um-die-luft-in-einem-haus-500-m3-von-0-auf-20-zu-erwärmen">Wie viel Energie um die Luft in einem Haus (500 <span class="math inline">\(m^3\)</span>) von 0° auf 20° zu erwärmen</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>(E_in_J <span class="ot">&lt;-</span> <span class="fl">5e2</span> <span class="sc">*</span> <span class="dv">20</span> <span class="sc">*</span> <span class="fl">1e3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1e+07</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>(E_in_kWh <span class="ot">&lt;-</span> E_in_J <span class="sc">/</span> <span class="fl">3.6e6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.777778</code></pre>
+</div>
+</div>
+</section>
+<section id="heizenergie-pro-tag-im-kalten-halbjahr" class="level2">
+<h2 class="anchored" data-anchor-id="heizenergie-pro-tag-im-kalten-halbjahr">Heizenergie pro Tag im kalten Halbjahr</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fl">1e4</span> <span class="sc">/</span> <span class="dv">150</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 66.66667</code></pre>
+</div>
+</div>
+<p>–&gt; durch das Lüften entweicht eher der kleinere Teil der Energie</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -674,7 +704,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>   
     <div class="nav-footer-center">
 
-<div class="toc-actions"><ul><li><a href="https://github.com/sebastian-gerdes/sbloggel/blob/main/posts/2024-10-23-energie-haus/2024-10-23-energie-haus.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div><div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/sebastian-gerdes/sbloggel/blob/main/posts/2024-10-23-energie-haus/2024-10-23-energie-haus.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div><div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>

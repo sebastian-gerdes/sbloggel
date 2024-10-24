@@ -103,8 +103,55 @@ font-style: inherit;">5e2</span></span></code></pre></div>
 </div>
 </div>
 <p>Ergo 200 mal so viel Energie um die Masse des Hauses um 1 Grad zu erwärmen im Vergleich zur Energie um die Masse der Luft um 1 Grad zu erwärmen!</p>
+<section id="wie-viel-energie-um-die-luft-in-einem-haus-500-m3-von-0-auf-20-zu-erwärmen" class="level2">
+<h2 class="anchored" data-anchor-id="wie-viel-energie-um-die-luft-in-einem-haus-500-m3-von-0-auf-20-zu-erwärmen">Wie viel Energie um die Luft in einem Haus (500 <img src="https://latex.codecogs.com/png.latex?m%5E3">) von 0° auf 20° zu erwärmen</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1">(E_in_J <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5e2</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">20</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1e3</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1e+07</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1">(E_in_kWh <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> E_in_J <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3.6e6</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.777778</code></pre>
+</div>
+</div>
+</section>
+<section id="heizenergie-pro-tag-im-kalten-halbjahr" class="level2">
+<h2 class="anchored" data-anchor-id="heizenergie-pro-tag-im-kalten-halbjahr">Heizenergie pro Tag im kalten Halbjahr</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1e4</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">150</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 66.66667</code></pre>
+</div>
+</div>
+<p>–&gt; durch das Lüften entweicht eher der kleinere Teil der Energie</p>
 
 
+</section>
 
  ]]></description>
   <category>R</category>

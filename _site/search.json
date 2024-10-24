@@ -1236,7 +1236,21 @@
     "href": "posts/2024-10-23-energie-haus/2024-10-23-energie-haus.html",
     "title": "Energie Haus",
     "section": "",
-    "text": "library('tidyverse')\n\n\nChatGPT sagt, dass ich ca. 1e3 Watt benötige, um 1 kg Stein um 1 Grad zu erwärmen (Quelle)\nEin Haus hat eine Masse von ca. 100 Tonnen (1e5 kg)\nChatGPT sagt, dass ich ca. 1e3 Watt benötige, um 1 Kubikmeter Luft um 1 Grad zu erwärmen\nEin Haus hat ein Volumen von ca. 500 Kubikmeter (\\(5e2 m^3\\))\n\nDer Quotient aus beiden:\n\n1e5 / 5e2\n\n[1] 200\n\n\nErgo 200 mal so viel Energie um die Masse des Hauses um 1 Grad zu erwärmen im Vergleich zur Energie um die Masse der Luft um 1 Grad zu erwärmen!"
+    "text": "library('tidyverse')\nDer Quotient aus beiden:\n1e5 / 5e2\n\n[1] 200\nErgo 200 mal so viel Energie um die Masse des Hauses um 1 Grad zu erwärmen im Vergleich zur Energie um die Masse der Luft um 1 Grad zu erwärmen!"
+  },
+  {
+    "objectID": "posts/2024-10-23-energie-haus/2024-10-23-energie-haus.html#wie-viel-energie-um-die-luft-in-einem-haus-500-m3-von-0-auf-20-zu-erwärmen",
+    "href": "posts/2024-10-23-energie-haus/2024-10-23-energie-haus.html#wie-viel-energie-um-die-luft-in-einem-haus-500-m3-von-0-auf-20-zu-erwärmen",
+    "title": "Energie Haus",
+    "section": "Wie viel Energie um die Luft in einem Haus (500 \\(m^3\\)) von 0° auf 20° zu erwärmen",
+    "text": "Wie viel Energie um die Luft in einem Haus (500 \\(m^3\\)) von 0° auf 20° zu erwärmen\n\n(E_in_J &lt;- 5e2 * 20 * 1e3)\n\n[1] 1e+07\n\n(E_in_kWh &lt;- E_in_J / 3.6e6)\n\n[1] 2.777778"
+  },
+  {
+    "objectID": "posts/2024-10-23-energie-haus/2024-10-23-energie-haus.html#heizenergie-pro-tag-im-kalten-halbjahr",
+    "href": "posts/2024-10-23-energie-haus/2024-10-23-energie-haus.html#heizenergie-pro-tag-im-kalten-halbjahr",
+    "title": "Energie Haus",
+    "section": "Heizenergie pro Tag im kalten Halbjahr",
+    "text": "Heizenergie pro Tag im kalten Halbjahr\n\n1e4 / 150\n\n[1] 66.66667\n\n\n–&gt; durch das Lüften entweicht eher der kleinere Teil der Energie"
   },
   {
     "objectID": "posts/2022-09-08-timeline/2022-09-08-timeline.html",

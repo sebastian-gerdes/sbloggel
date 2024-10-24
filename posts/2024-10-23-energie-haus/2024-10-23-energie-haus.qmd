@@ -24,3 +24,17 @@ Der Quotient aus beiden:
 
 Ergo 200 mal so viel Energie um die Masse des Hauses um 1 Grad zu erwärmen im Vergleich zur Energie um die Masse der Luft um 1 Grad zu erwärmen!
 
+
+## Wie viel Energie um die Luft in einem Haus (500 $m^3$) von 0° auf 20° zu erwärmen
+```{r}
+(E_in_J <- 5e2 * 20 * 1e3)
+(E_in_kWh <- E_in_J / 3.6e6)
+```
+
+## Heizenergie pro Tag im kalten Halbjahr
+```{r}
+1e4 / 150
+```
+
+--> durch das Lüften entweicht eher der kleinere Teil der Energie
+
