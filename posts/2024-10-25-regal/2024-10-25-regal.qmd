@@ -2,7 +2,7 @@
 title: Regal
 date: 2024-10-25
 categories:
-  - R
+  - Mishmash
 ---
 
 * Innenmaß 336 mm
