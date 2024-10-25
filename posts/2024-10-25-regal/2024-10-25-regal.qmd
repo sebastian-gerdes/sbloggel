@@ -1,0 +1,49 @@
+---
+title: Regal
+date: 2024-10-25
+categories:
+  - R
+---
+
+* Innenmaß 336 mm
+* Außenholz 15 mm
+* Innenholz 12 mm
+* Tiefe oben 415 mm
+* Tiefe unten 390 mm
+```{r}
+#| label: init
+#| cache: false
+#| message: false
+
+# Außenmaß n Zeilen x m Spalten Quader
+# d_0: Breite, d_1: Dicke außen, d_2: Dicke innen
+# t_0: Tiefe oben, t_1: Tiefe unten
+
+library('tidyverse')
+library('knitr')
+
+calc_regal <- function(n = 3, # Zahl der Zeilen
+                       m = 3, # Zahl der Spalten
+                       d_0 = 336, # Kantenlänge Zelle
+                       d_1 = 15, # Dicke Außenbretter
+                       d_2 = 12, # Dicke Innenbretter
+                       t_0 = 415, # Tiefe über Boden
+                       t_1 = 390 # Tiefe unterste Ebene
+                       ) {
+  breite <- m * d_0 + 2 * d_1 + (m - 1) * d_2
+  hoehe <- n * d_0 + 2 * d_1 + (n - 1) * d_2
+
+    tribble(~ name, ~ n, ~ x1, ~ x2, ~ x3,
+          'gesamt', 1, breite, hoehe, t_0,
+          'brett_oben', 1, breite, t_0, d_1,
+          'brett_unten', 1, breite, t_1, d_1,
+          'brett_mitte_horizontal', n - 1, breite - 2 * d_1, t_0, d_2,
+          'brett_seite', 2, hoehe - 2 * d_1, t_0, d_1,
+          'brett_vertikal_unten', m - 1, d_0, t_1, d_2,
+          'brett_vertikal_oben', (n - 1) * (m - 1), d_0, t_0, d_2,
+          'brett_verkeilen', 2, d_0, d_0, d_2)
+  
+}
+
+calc_regal() |> kable()
+```

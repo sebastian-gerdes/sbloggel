@@ -1,0 +1,17 @@
+---
+title: Energy consumption of artificial intelligence
+date: 2024-10-24
+categories:
+  - R
+---
+
+```{r}
+#| label: init
+#| cache: false
+#| include: false
+library('tidyverse')
+set.seed(1)
+
+library('reticulate')
+use_condaenv('sbloggel')
+```

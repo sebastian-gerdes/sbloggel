@@ -10,7 +10,320 @@
 <atom:link href="https://sbloggel.netlify.app/index.xml" rel="self" type="application/rss+xml"/>
 <description>Seb&#39;s private blog about statistics and other topics</description>
 <generator>quarto-1.4.553</generator>
-<lastBuildDate>Tue, 22 Oct 2024 22:00:00 GMT</lastBuildDate>
+<lastBuildDate>Thu, 24 Oct 2024 22:00:00 GMT</lastBuildDate>
+<item>
+  <title>Regal</title>
+  <link>https://sbloggel.netlify.app/posts/2024-10-25-regal/2024-10-25-regal.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<ul>
+<li>Innenmaß 336 mm</li>
+<li>Außenholz 15 mm</li>
+<li>Innenholz 12 mm</li>
+<li>Tiefe oben 415 mm</li>
+<li>Tiefe unten 390 mm</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Außenmaß n Zeilen x m Spalten Quader</span></span>
+<span id="cb1-2"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># d_0: Breite, d_1: Dicke außen, d_2: Dicke innen</span></span>
+<span id="cb1-3"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># t_0: Tiefe oben, t_1: Tiefe unten</span></span>
+<span id="cb1-4"></span>
+<span id="cb1-5"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'tidyverse'</span>)</span>
+<span id="cb1-6"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'knitr'</span>)</span>
+<span id="cb1-7"></span>
+<span id="cb1-8">calc_regal <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">function</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">n =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>, <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Zahl der Zeilen</span></span>
+<span id="cb1-9">                       <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">m =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>, <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Zahl der Spalten</span></span>
+<span id="cb1-10">                       <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">d_0 =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">336</span>, <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Kantenlänge Zelle</span></span>
+<span id="cb1-11">                       <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">d_1 =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">15</span>, <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Dicke Außenbretter</span></span>
+<span id="cb1-12">                       <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">d_2 =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">12</span>, <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Dicke Innenbretter</span></span>
+<span id="cb1-13">                       <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">t_0 =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">415</span>, <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Tiefe über Boden</span></span>
+<span id="cb1-14">                       <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">t_1 =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">390</span> <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Tiefe unterste Ebene</span></span>
+<span id="cb1-15">                       ) {</span>
+<span id="cb1-16">  breite <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> m <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> d_0 <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> d_1 <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> (m <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> d_2</span>
+<span id="cb1-17">  hoehe <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> n <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> d_0 <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> d_1 <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> (n <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> d_2</span>
+<span id="cb1-18"></span>
+<span id="cb1-19">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">tribble</span>(<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> name, <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> n, <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> x1, <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> x2, <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> x3,</span>
+<span id="cb1-20">          <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'gesamt'</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, breite, hoehe, t_0,</span>
+<span id="cb1-21">          <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'brett_oben'</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, breite, t_0, d_1,</span>
+<span id="cb1-22">          <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'brett_unten'</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, breite, t_1, d_1,</span>
+<span id="cb1-23">          <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'brett_mitte_horizontal'</span>, n <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, breite <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> d_1, t_0, d_2,</span>
+<span id="cb1-24">          <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'brett_seite'</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>, hoehe <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> d_1, t_0, d_1,</span>
+<span id="cb1-25">          <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'brett_vertikal_unten'</span>, m <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, d_0, t_1, d_2,</span>
+<span id="cb1-26">          <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'brett_vertikal_oben'</span>, (n <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> (m <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>), d_0, t_0, d_2,</span>
+<span id="cb1-27">          <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'brett_verkeilen'</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>, d_0, d_0, d_2)</span>
+<span id="cb1-28">  </span>
+<span id="cb1-29">}</span>
+<span id="cb1-30"></span>
+<span id="cb1-31"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">calc_regal</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">kable</span>()</span></code></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">name</th>
+<th style="text-align: right;">n</th>
+<th style="text-align: right;">x1</th>
+<th style="text-align: right;">x2</th>
+<th style="text-align: right;">x3</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">gesamt</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1062</td>
+<td style="text-align: right;">1062</td>
+<td style="text-align: right;">415</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">brett_oben</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1062</td>
+<td style="text-align: right;">415</td>
+<td style="text-align: right;">15</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">brett_unten</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1062</td>
+<td style="text-align: right;">390</td>
+<td style="text-align: right;">15</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">brett_mitte_horizontal</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">1032</td>
+<td style="text-align: right;">415</td>
+<td style="text-align: right;">12</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">brett_seite</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">1032</td>
+<td style="text-align: right;">415</td>
+<td style="text-align: right;">15</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">brett_vertikal_unten</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">336</td>
+<td style="text-align: right;">390</td>
+<td style="text-align: right;">12</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">brett_vertikal_oben</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">336</td>
+<td style="text-align: right;">415</td>
+<td style="text-align: right;">12</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">brett_verkeilen</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">336</td>
+<td style="text-align: right;">336</td>
+<td style="text-align: right;">12</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+
+ ]]></description>
+  <category>R</category>
+  <guid>https://sbloggel.netlify.app/posts/2024-10-25-regal/2024-10-25-regal.html</guid>
+  <pubDate>Thu, 24 Oct 2024 22:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Energy consumption of artificial intelligence</title>
+  <link>https://sbloggel.netlify.app/posts/2024-10-24-energy-consumption-of-artificial-intelligence/2024-10-24-energy-consumption-of-artificial-intelligence.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+
+
+ ]]></description>
+  <category>R</category>
+  <guid>https://sbloggel.netlify.app/posts/2024-10-24-energy-consumption-of-artificial-intelligence/2024-10-24-energy-consumption-of-artificial-intelligence.html</guid>
+  <pubDate>Wed, 23 Oct 2024 22:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Ventilation</title>
   <link>https://sbloggel.netlify.app/posts/2024-10-23-ventilation/2024-10-23-ventilation.html</link>
@@ -64,7 +377,8 @@ font-style: inherit;">300</span>)</span></code></pre></div>
 
 
  ]]></description>
-  <category>R</category>
+  <category>Mishmash</category>
+  <category>Sustainibility</category>
   <guid>https://sbloggel.netlify.app/posts/2024-10-23-ventilation/2024-10-23-ventilation.html</guid>
   <pubDate>Tue, 22 Oct 2024 22:00:00 GMT</pubDate>
 </item>
@@ -154,7 +468,7 @@ font-style: inherit;">150</span></span></code></pre></div>
 </section>
 
  ]]></description>
-  <category>R</category>
+  <category>Sustainibility</category>
   <guid>https://sbloggel.netlify.app/posts/2024-10-23-energie-haus/2024-10-23-energie-haus.html</guid>
   <pubDate>Tue, 22 Oct 2024 22:00:00 GMT</pubDate>
 </item>
@@ -4051,530 +4365,6 @@ font-style: inherit;">;</span></span></code></pre></div>
   <category>Python</category>
   <guid>https://sbloggel.netlify.app/posts/2024-01-22-simulating-data-in-python/2024-01-22-simulating-data-in-python.html</guid>
   <pubDate>Sun, 21 Jan 2024 23:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Plotnine and sample data sets from statsmodels</title>
-  <link>https://sbloggel.netlify.app/posts/2024-01-15-plotnine-and-sample-data-sets-from-statsmodels/2024-01-15-plotnine-and-sample-data-sets-from-statsmodels.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">import</span> statsmodels.api <span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">as</span> sm</span>
-<span id="cb1-2">cars <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> sm.datasets.get_rdataset(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"cars"</span>)[<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"data"</span>]</span>
-<span id="cb1-3"><span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">from</span> plotnine <span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">import</span> ggplot, aes, geom_point</span>
-<span id="cb1-4">p <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> ggplot(cars, aes(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"speed"</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"dist"</span>)) <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> geom_point()</span>
-<span id="cb1-5"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># p.save("test.pdf", width = 24, height = 24)</span></span>
-<span id="cb1-6">p</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>&lt;Figure Size: (640 x 480)&gt;</code></pre>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="https://sbloggel.netlify.app/posts/2024-01-15-plotnine-and-sample-data-sets-from-statsmodels/2024-01-15-plotnine-and-sample-data-sets-from-statsmodels_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="614"></p>
-</figure>
-</div>
-</div>
-</div>
-
-
-
- ]]></description>
-  <category>Python</category>
-  <guid>https://sbloggel.netlify.app/posts/2024-01-15-plotnine-and-sample-data-sets-from-statsmodels/2024-01-15-plotnine-and-sample-data-sets-from-statsmodels.html</guid>
-  <pubDate>Sun, 14 Jan 2024 23:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Understanding competing risks</title>
-  <link>https://sbloggel.netlify.app/posts/2023-11-19-understanding-competing-risks/2023-11-19-understanding-competing-risks.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">set.seed</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>)</span>
-<span id="cb1-2"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(tidyverse)</span>
-<span id="cb1-3"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(survival)</span></code></pre></div>
-</div>
-<ul>
-<li>Kaplan-Meier-Estimator:</li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1">n <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1000</span></span>
-<span id="cb2-2">dat <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> </span>
-<span id="cb2-3">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">tibble</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">t_event_1 =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">rexp</span>(n), </span>
-<span id="cb2-4">         <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">t_event_2 =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">rexp</span>(n), </span>
-<span id="cb2-5">         <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">t_observed =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">pmin</span>(t_event_1, t_event_2), </span>
-<span id="cb2-6">         <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">event =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">ifelse</span>(t_event_1 <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">&lt;</span> t_event_2, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>),</span>
-<span id="cb2-7">         <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">status_event_1 =</span> t_event_1 <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">&lt;</span> t_event_2, </span>
-<span id="cb2-8">         <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">status_event_2 =</span> t_event_2 <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">&lt;</span> t_event_1) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span> </span>
-<span id="cb2-9">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">arrange</span>(t_observed)</span></code></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1">s_event_1 <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">with</span>(dat, <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">survfit</span>(<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">Surv</span>(dat<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span>t_event_1, status_event_1) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">~</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>))</span>
-<span id="cb3-2">s_event_2 <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">with</span>(dat, <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">survfit</span>(<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">Surv</span>(dat<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span>t_event_2, status_event_2) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">~</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>))</span>
-<span id="cb3-3">                                    </span>
-<span id="cb3-4">inc_event_1 <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">stepfun</span>(<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">c</span>(s_event_1<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span>time), <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span> s_event_1<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span>surv))</span>
-<span id="cb3-5"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">plot</span>(inc_event_1)</span></code></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="https://sbloggel.netlify.app/posts/2023-11-19-understanding-competing-risks/2023-11-19-understanding-competing-risks_files/figure-html/competing_risks_km-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1">inc_event_2 <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">stepfun</span>(<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">c</span>(s_event_2<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span>time), <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span> s_event_2<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span>surv))</span>
-<span id="cb4-2"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">plot</span>(inc_event_2)</span></code></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="https://sbloggel.netlify.app/posts/2023-11-19-understanding-competing-risks/2023-11-19-understanding-competing-risks_files/figure-html/competing_risks_km-2.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">plot</span>(<span class="cf" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">function</span>(x) <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">inc_event_1</span>(x) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">inc_event_2</span>(x), <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">from =</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">to =</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">10</span>)</span></code></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="https://sbloggel.netlify.app/posts/2023-11-19-understanding-competing-risks/2023-11-19-understanding-competing-risks_files/figure-html/competing_risks_km-3.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1">s_event_1 <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">with</span>(dat, <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">survfit</span>(<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">Surv</span>(dat<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span>t_event_1) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">~</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>))</span>
-<span id="cb6-2">s_event_2 <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">with</span>(dat, <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">survfit</span>(<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">Surv</span>(dat<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span>t_event_2) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">~</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>))</span>
-<span id="cb6-3"></span>
-<span id="cb6-4">inc_event_1 <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">stepfun</span>(<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">c</span>(s_event_1<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span>time), <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span> s_event_1<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span>surv))</span>
-<span id="cb6-5"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">plot</span>(inc_event_1)</span></code></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="https://sbloggel.netlify.app/posts/2023-11-19-understanding-competing-risks/2023-11-19-understanding-competing-risks_files/figure-html/without_censoring-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1">inc_event_2 <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">stepfun</span>(<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">c</span>(s_event_2<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span>time), <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span> s_event_2<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span>surv))</span>
-<span id="cb7-2"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">plot</span>(inc_event_2)</span></code></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="https://sbloggel.netlify.app/posts/2023-11-19-understanding-competing-risks/2023-11-19-understanding-competing-risks_files/figure-html/without_censoring-2.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">plot</span>(<span class="cf" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">function</span>(x) <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">inc_event_1</span>(x) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">inc_event_2</span>(x), <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">from =</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">to =</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">10</span>)</span></code></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="https://sbloggel.netlify.app/posts/2023-11-19-understanding-competing-risks/2023-11-19-understanding-competing-risks_files/figure-html/without_censoring-3.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1">dd <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">tibble</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">event_id =</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">:</span>n, </span>
-<span id="cb9-2">             <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">no_event =</span> n<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">:</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>,</span>
-<span id="cb9-3">             <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">event_1 =</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>,</span>
-<span id="cb9-4">             <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">event_2 =</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>,</span>
-<span id="cb9-5">             <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">time =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>, dat<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span>t_observed))</span>
-<span id="cb9-6"></span>
-<span id="cb9-7"><span class="cf" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">for</span> (i <span class="cf" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">in</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">:</span>n) {</span>
-<span id="cb9-8">  dd<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span>event_1[i <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>] <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> dd<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span>event_1[i] <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">ifelse</span>(dat<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span>event[i] <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">==</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>)</span>
-<span id="cb9-9">  dd<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span>event_2[i <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>] <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> dd<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span>event_2[i] <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">ifelse</span>(dat<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span>event[i] <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">==</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>)</span>
-<span id="cb9-10">}</span>
-<span id="cb9-11"></span>
-<span id="cb9-12">dd <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span> </span>
-<span id="cb9-13">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">pivot_longer</span>(<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">c</span>(no_event, event_1, event_2)) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span> </span>
-<span id="cb9-14">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">ggplot</span>(<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">aes</span>(time, value, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">fill =</span> name)) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">geom_area</span>() <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span></span>
-<span id="cb9-15">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">labs</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">x =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'Time'</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">y =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'Individuals'</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">fill =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">''</span>)</span></code></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="https://sbloggel.netlify.app/posts/2023-11-19-understanding-competing-risks/2023-11-19-understanding-competing-risks_files/figure-html/area_plot-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-
-
-
- ]]></description>
-  <category>R</category>
-  <category>Self-study</category>
-  <guid>https://sbloggel.netlify.app/posts/2023-11-19-understanding-competing-risks/2023-11-19-understanding-competing-risks.html</guid>
-  <pubDate>Sat, 18 Nov 2023 23:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
