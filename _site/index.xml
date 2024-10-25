@@ -27,28 +27,18 @@
 <li>Tiefe unten 390 mm</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Außenmaß n Zeilen x m Spalten Quader</span></span>
-<span id="cb1-2"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># d_0: Breite, d_1: Dicke außen, d_2: Dicke innen</span></span>
-<span id="cb1-3"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># t_0: Tiefe oben, t_1: Tiefe unten</span></span>
-<span id="cb1-4"></span>
-<span id="cb1-5"><span class="fu" style="color: #4758AB;
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'tidyverse'</span>)</span>
-<span id="cb1-6"><span class="fu" style="color: #4758AB;
+<span id="cb1-2"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'knitr'</span>)</span>
-<span id="cb1-7"></span>
-<span id="cb1-8">calc_regal <span class="ot" style="color: #003B4F;
+<span id="cb1-3"></span>
+<span id="cb1-4">calc_regal <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
@@ -56,53 +46,53 @@ font-style: inherit;">function</span>(<span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">n =</span> <span class="dv" style="color: #AD0000;
 background-color: null;
-font-style: inherit;">3</span>, <span class="co" style="color: #5E5E5E;
+font-style: inherit;">2</span>, <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Zahl der Zeilen</span></span>
-<span id="cb1-9">                       <span class="at" style="color: #657422;
+<span id="cb1-5">                       <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">m =</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">3</span>, <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Zahl der Spalten</span></span>
-<span id="cb1-10">                       <span class="at" style="color: #657422;
+<span id="cb1-6">                       <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">d_0 =</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">336</span>, <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Kantenlänge Zelle</span></span>
-<span id="cb1-11">                       <span class="at" style="color: #657422;
+<span id="cb1-7">                       <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">d_1 =</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">15</span>, <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Dicke Außenbretter</span></span>
-<span id="cb1-12">                       <span class="at" style="color: #657422;
+<span id="cb1-8">                       <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">d_2 =</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">12</span>, <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Dicke Innenbretter</span></span>
-<span id="cb1-13">                       <span class="at" style="color: #657422;
+<span id="cb1-9">                       <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">t_0 =</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">415</span>, <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Tiefe über Boden</span></span>
-<span id="cb1-14">                       <span class="at" style="color: #657422;
+<span id="cb1-10">                       <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">t_1 =</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">390</span> <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Tiefe unterste Ebene</span></span>
-<span id="cb1-15">                       ) {</span>
-<span id="cb1-16">  breite <span class="ot" style="color: #003B4F;
+<span id="cb1-11">                       ) {</span>
+<span id="cb1-12">  breite <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> m <span class="sc" style="color: #5E5E5E;
 background-color: null;
@@ -121,7 +111,7 @@ background-color: null;
 font-style: inherit;">1</span>) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">*</span> d_2</span>
-<span id="cb1-17">  hoehe <span class="ot" style="color: #003B4F;
+<span id="cb1-13">  hoehe <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> n <span class="sc" style="color: #5E5E5E;
 background-color: null;
@@ -140,8 +130,8 @@ background-color: null;
 font-style: inherit;">1</span>) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">*</span> d_2</span>
-<span id="cb1-18"></span>
-<span id="cb1-19">    <span class="fu" style="color: #4758AB;
+<span id="cb1-14"></span>
+<span id="cb1-15">    <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">tribble</span>(<span class="sc" style="color: #5E5E5E;
 background-color: null;
@@ -154,22 +144,22 @@ background-color: null;
 font-style: inherit;">~</span> x2, <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">~</span> x3,</span>
-<span id="cb1-20">          <span class="st" style="color: #20794D;
+<span id="cb1-16">          <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'gesamt'</span>, <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>, breite, hoehe, t_0,</span>
-<span id="cb1-21">          <span class="st" style="color: #20794D;
+<span id="cb1-17">          <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'brett_oben'</span>, <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>, breite, t_0, d_1,</span>
-<span id="cb1-22">          <span class="st" style="color: #20794D;
+<span id="cb1-18">          <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'brett_unten'</span>, <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>, breite, t_1, d_1,</span>
-<span id="cb1-23">          <span class="st" style="color: #20794D;
+<span id="cb1-19">          <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'brett_mitte_horizontal'</span>, n <span class="sc" style="color: #5E5E5E;
 background-color: null;
@@ -182,7 +172,7 @@ background-color: null;
 font-style: inherit;">2</span> <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">*</span> d_1, t_0, d_2,</span>
-<span id="cb1-24">          <span class="st" style="color: #20794D;
+<span id="cb1-20">          <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'brett_seite'</span>, <span class="dv" style="color: #AD0000;
 background-color: null;
@@ -193,14 +183,14 @@ background-color: null;
 font-style: inherit;">2</span> <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">*</span> d_1, t_0, d_1,</span>
-<span id="cb1-25">          <span class="st" style="color: #20794D;
+<span id="cb1-21">          <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'brett_vertikal_unten'</span>, m <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">-</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>, d_0, t_1, d_2,</span>
-<span id="cb1-26">          <span class="st" style="color: #20794D;
+<span id="cb1-22">          <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'brett_vertikal_oben'</span>, (n <span class="sc" style="color: #5E5E5E;
 background-color: null;
@@ -213,15 +203,15 @@ background-color: null;
 font-style: inherit;">-</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>), d_0, t_0, d_2,</span>
-<span id="cb1-27">          <span class="st" style="color: #20794D;
+<span id="cb1-23">          <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'brett_verkeilen'</span>, <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">2</span>, d_0, d_0, d_2)</span>
-<span id="cb1-28">  </span>
-<span id="cb1-29">}</span>
-<span id="cb1-30"></span>
-<span id="cb1-31"><span class="fu" style="color: #4758AB;
+<span id="cb1-24">  </span>
+<span id="cb1-25">}</span>
+<span id="cb1-26"></span>
+<span id="cb1-27"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">calc_regal</span>() <span class="sc" style="color: #5E5E5E;
 background-color: null;
@@ -244,7 +234,7 @@ font-style: inherit;">kable</span>()</span></code></pre></div>
 <td style="text-align: left;">gesamt</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">1062</td>
-<td style="text-align: right;">1062</td>
+<td style="text-align: right;">714</td>
 <td style="text-align: right;">415</td>
 </tr>
 <tr class="even">
@@ -263,7 +253,7 @@ font-style: inherit;">kable</span>()</span></code></pre></div>
 </tr>
 <tr class="even">
 <td style="text-align: left;">brett_mitte_horizontal</td>
-<td style="text-align: right;">2</td>
+<td style="text-align: right;">1</td>
 <td style="text-align: right;">1032</td>
 <td style="text-align: right;">415</td>
 <td style="text-align: right;">12</td>
@@ -271,7 +261,7 @@ font-style: inherit;">kable</span>()</span></code></pre></div>
 <tr class="odd">
 <td style="text-align: left;">brett_seite</td>
 <td style="text-align: right;">2</td>
-<td style="text-align: right;">1032</td>
+<td style="text-align: right;">684</td>
 <td style="text-align: right;">415</td>
 <td style="text-align: right;">15</td>
 </tr>
@@ -284,7 +274,7 @@ font-style: inherit;">kable</span>()</span></code></pre></div>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">brett_vertikal_oben</td>
-<td style="text-align: right;">4</td>
+<td style="text-align: right;">2</td>
 <td style="text-align: right;">336</td>
 <td style="text-align: right;">415</td>
 <td style="text-align: right;">12</td>

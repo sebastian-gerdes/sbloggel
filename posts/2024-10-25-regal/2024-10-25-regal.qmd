@@ -14,15 +14,10 @@ categories:
 #| label: init
 #| cache: false
 #| message: false
-
-# Außenmaß n Zeilen x m Spalten Quader
-# d_0: Breite, d_1: Dicke außen, d_2: Dicke innen
-# t_0: Tiefe oben, t_1: Tiefe unten
-
 library('tidyverse')
 library('knitr')
 
-calc_regal <- function(n = 3, # Zahl der Zeilen
+calc_regal <- function(n = 2, # Zahl der Zeilen
                        m = 3, # Zahl der Spalten
                        d_0 = 336, # Kantenlänge Zelle
                        d_1 = 15, # Dicke Außenbretter
