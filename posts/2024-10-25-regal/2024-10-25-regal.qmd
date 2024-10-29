@@ -18,11 +18,11 @@ library('tidyverse')
 library('knitr')
 
 calc_regal <- function(n = 2, # Zahl der Zeilen
-                       m = 3, # Zahl der Spalten
+                       m = 2, # Zahl der Spalten
                        d_0 = 336, # Kantenlänge Zelle
                        d_1 = 15, # Dicke Außenbretter
                        d_2 = 12, # Dicke Innenbretter
-                       t_0 = 415, # Tiefe über Boden
+                       t_0 = 415, # Tiefe höhere Ebenen
                        t_1 = 390 # Tiefe unterste Ebene
                        ) {
   breite <- m * d_0 + 2 * d_1 + (m - 1) * d_2
