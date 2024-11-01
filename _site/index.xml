@@ -10,7 +10,334 @@
 <atom:link href="https://sbloggel.netlify.app/index.xml" rel="self" type="application/rss+xml"/>
 <description>Seb&#39;s private blog about statistics and other topics</description>
 <generator>quarto-1.4.553</generator>
-<lastBuildDate>Thu, 24 Oct 2024 22:00:00 GMT</lastBuildDate>
+<lastBuildDate>Thu, 31 Oct 2024 23:00:00 GMT</lastBuildDate>
+<item>
+  <title>Speed of ODE solving in R and Python</title>
+  <link>https://sbloggel.netlify.app/posts/2024-11-01-speed-of-ode-solving-in-r-and-python/2024-11-01-speed-of-ode-solving-in-r-and-python.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Load the deSolve package</span></span>
+<span id="cb1-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(deSolve)</span>
+<span id="cb1-3"></span>
+<span id="cb1-4"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Define the SIR model</span></span>
+<span id="cb1-5">sir_model <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">function</span>(time, state, parameters) {</span>
+<span id="cb1-6">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">with</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">as.list</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(state, parameters)), {</span>
+<span id="cb1-7">    dS <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span>beta <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> S <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> I</span>
+<span id="cb1-8">    dI <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> beta <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> S <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> I <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> gamma <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> I</span>
+<span id="cb1-9">    dR <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> gamma <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> I</span>
+<span id="cb1-10">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">return</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">list</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(dS, dI, dR)))</span>
+<span id="cb1-11">  })</span>
+<span id="cb1-12">}</span>
+<span id="cb1-13"></span>
+<span id="cb1-14"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Initial state values</span></span>
+<span id="cb1-15">initial_state <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">S =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.99</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">I =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.01</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">R =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.0</span>)</span>
+<span id="cb1-16"></span>
+<span id="cb1-17"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Parameters</span></span>
+<span id="cb1-18">parameters <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">beta =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.3</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">gamma =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.1</span>)</span>
+<span id="cb1-19"></span>
+<span id="cb1-20"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Time points</span></span>
+<span id="cb1-21">times <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">seq</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1600</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">by =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)</span>
+<span id="cb1-22"></span>
+<span id="cb1-23"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Solve the system of ODEs</span></span>
+<span id="cb1-24">start_time <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">Sys.time</span>()</span>
+<span id="cb1-25"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span>(i <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">100</span>) {</span>
+<span id="cb1-26">  output <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ode</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> initial_state, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">times =</span> times, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">func =</span> sir_model, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">parms =</span> parameters)</span>
+<span id="cb1-27">}</span>
+<span id="cb1-28">end_time <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">Sys.time</span>()</span>
+<span id="cb1-29">r_runtime <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> end_time <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> start_time</span>
+<span id="cb1-30"></span>
+<span id="cb1-31"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Runtime for deSolve in R:"</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Runtime for deSolve in R:"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">print</span>(r_runtime)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Time difference of 1.270186 secs</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> np</span>
+<span id="cb5-2"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">from</span> scipy.integrate <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> odeint</span>
+<span id="cb5-3"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> time</span>
+<span id="cb5-4"></span>
+<span id="cb5-5"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Define the SIR model</span></span>
+<span id="cb5-6"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">def</span> sir_model(y, t, beta, gamma):</span>
+<span id="cb5-7">    S, I, R <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> y</span>
+<span id="cb5-8">    dS <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span>beta <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> S <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> I</span>
+<span id="cb5-9">    dI <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> beta <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> S <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> I <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> gamma <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> I</span>
+<span id="cb5-10">    dR <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> gamma <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> I</span>
+<span id="cb5-11">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">return</span> [dS, dI, dR]</span>
+<span id="cb5-12"></span>
+<span id="cb5-13"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Initial state values</span></span>
+<span id="cb5-14">initial_state <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> [<span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.99</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.01</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.0</span>]</span>
+<span id="cb5-15"></span>
+<span id="cb5-16"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Parameters</span></span>
+<span id="cb5-17">beta <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.3</span></span>
+<span id="cb5-18">gamma <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.1</span></span>
+<span id="cb5-19"></span>
+<span id="cb5-20"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Time points</span></span>
+<span id="cb5-21">times <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.linspace(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1600</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1601</span>)</span>
+<span id="cb5-22"></span>
+<span id="cb5-23"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Solve the system of ODEs</span></span>
+<span id="cb5-24">start_time <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> time.time()</span>
+<span id="cb5-25"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span> i <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">range</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">100</span>):</span>
+<span id="cb5-26">  output <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> odeint(sir_model, initial_state, times, args<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>(beta, gamma))</span>
+<span id="cb5-27">end_time <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> time.time()</span>
+<span id="cb5-28">python_runtime <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> end_time <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> start_time</span>
+<span id="cb5-29"></span>
+<span id="cb5-30"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Runtime for scipy.integrate.odeint in Python:"</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Runtime for scipy.integrate.odeint in Python:</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(python_runtime)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>0.035394906997680664</code></pre>
+</div>
+</div>
+
+
+
+ ]]></description>
+  <category>R</category>
+  <guid>https://sbloggel.netlify.app/posts/2024-11-01-speed-of-ode-solving-in-r-and-python/2024-11-01-speed-of-ode-solving-in-r-and-python.html</guid>
+  <pubDate>Thu, 31 Oct 2024 23:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Regal</title>
   <link>https://sbloggel.netlify.app/posts/2024-10-25-regal/2024-10-25-regal.html</link>
@@ -3986,375 +4313,6 @@ font-style: inherit;">True</span>))</span></code></pre></div>
   <category>R</category>
   <guid>https://sbloggel.netlify.app/posts/2024-03-27-clone-size-distributions/2024-03-27-clone-size-distributions.html</guid>
   <pubDate>Tue, 26 Mar 2024 23:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Simulating data in Python</title>
-  <link>https://sbloggel.netlify.app/posts/2024-01-22-simulating-data-in-python/2024-01-22-simulating-data-in-python.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<section id="which-environment" class="level2">
-<h2 class="anchored" data-anchor-id="which-environment">Which environment?</h2>
-<div id="014a79f2" class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">import</span> sys</span>
-<span id="cb1-2"></span>
-<span id="cb1-3"><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">def</span> get_env():</span>
-<span id="cb1-4">    sp <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> sys.path[<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>].split(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"/"</span>)</span>
-<span id="cb1-5">    <span class="cf" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">if</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"envs"</span> <span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">in</span> sp:</span>
-<span id="cb1-6">        <span class="cf" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">return</span> sp[sp.index(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"envs"</span>) <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>]</span>
-<span id="cb1-7">    <span class="cf" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">else</span>:</span>
-<span id="cb1-8">        <span class="cf" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">return</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">""</span></span>
-<span id="cb1-9"></span>
-<span id="cb1-10">get_env()</span></code></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="1">
-<pre><code>'fast_ai_course_2022'</code></pre>
-</div>
-</div>
-</section>
-<section id="importing-the-required-libraries" class="level2">
-<h2 class="anchored" data-anchor-id="importing-the-required-libraries">Importing the required libraries</h2>
-<div id="09e06fd5" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">as</span> np</span>
-<span id="cb3-2"><span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">import</span> pandas <span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">as</span> pd</span>
-<span id="cb3-3"><span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">import</span> seaborn <span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">as</span> sns</span>
-<span id="cb3-4"><span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">import</span> matplotlib.pyplot <span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">as</span> plt</span>
-<span id="cb3-5"><span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">from</span> patsy <span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">import</span> dmatrices, dmatrix</span></code></pre></div>
-</div>
-</section>
-<section id="simulating-the-data" class="level2">
-<h2 class="anchored" data-anchor-id="simulating-the-data">Simulating the data</h2>
-<div id="290a0ab0" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1">n <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">100</span></span>
-<span id="cb4-2">sd <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span></span>
-<span id="cb4-3"></span>
-<span id="cb4-4">dat <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> pd.DataFrame()</span>
-<span id="cb4-5">dat[<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"x1"</span>] <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> np.random.normal(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">5</span>, n)</span>
-<span id="cb4-6">dat[<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"x2"</span>] <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> np.random.normal(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">5</span>, n)</span>
-<span id="cb4-7">dat[<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"x3"</span>] <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> np.random.choice([<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"A"</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"B"</span>], size<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span>n, replace<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">True</span>)</span>
-<span id="cb4-8">dat[<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"epsilon"</span>] <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> np.random.normal(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>, sd, n)</span>
-<span id="cb4-9">X <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> dmatrix(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">" ~ x1 + x2 + x3"</span>, dat)</span>
-<span id="cb4-10">X.design_info.column_names</span>
-<span id="cb4-11">beta <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> [<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">14</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">50</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>]</span></code></pre></div>
-</div>
-<div id="b14053ae" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">dat[<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"y"</span>] <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> np.matmul(X, beta) <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> dat[<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"epsilon"</span>]</span>
-<span id="cb5-2">dat</span></code></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="4">
-<div>
-<div>
-
-
-<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">x1</th>
-<th data-quarto-table-cell-role="th">x2</th>
-<th data-quarto-table-cell-role="th">x3</th>
-<th data-quarto-table-cell-role="th">epsilon</th>
-<th data-quarto-table-cell-role="th">y</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
-<td>-7.579337</td>
-<td>-1.600375</td>
-<td>B</td>
-<td>1.394259</td>
-<td>61.015673</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
-<td>1.827419</td>
-<td>1.912467</td>
-<td>B</td>
-<td>-2.066038</td>
-<td>59.936446</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
-<td>0.916864</td>
-<td>3.079072</td>
-<td>B</td>
-<td>-2.647573</td>
-<td>56.111148</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
-<td>-8.580745</td>
-<td>11.137583</td>
-<td>B</td>
-<td>-0.409475</td>
-<td>32.734615</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
-<td>11.100234</td>
-<td>4.150596</td>
-<td>B</td>
-<td>0.588830</td>
-<td>67.387871</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">95</td>
-<td>-5.862918</td>
-<td>-7.058553</td>
-<td>B</td>
-<td>-1.026161</td>
-<td>71.228028</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">96</td>
-<td>3.791414</td>
-<td>2.979757</td>
-<td>A</td>
-<td>-2.858461</td>
-<td>8.973439</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">97</td>
-<td>4.200092</td>
-<td>3.668948</td>
-<td>B</td>
-<td>-1.505371</td>
-<td>59.356825</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">98</td>
-<td>-0.381726</td>
-<td>-1.413223</td>
-<td>B</td>
-<td>2.492208</td>
-<td>68.936928</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">99</td>
-<td>-6.374441</td>
-<td>-0.552026</td>
-<td>A</td>
-<td>3.637649</td>
-<td>12.367261</td>
-</tr>
-</tbody>
-</table>
-
-<p>100 rows × 5 columns</p>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="showing-the-data" class="level2">
-<h2 class="anchored" data-anchor-id="showing-the-data">Showing the data</h2>
-<div id="e51e59d8" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1">sns.scatterplot(data<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span>dat, x<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"x1"</span>, y<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"y"</span>)<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">;</span></span></code></pre></div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="https://sbloggel.netlify.app/posts/2024-01-22-simulating-data-in-python/2024-01-22-simulating-data-in-python_files/figure-html/cell-6-output-1.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-<div id="a9065859" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1">sns.scatterplot(data<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span>dat, x<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"x2"</span>, y<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"y"</span>)<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">;</span></span></code></pre></div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="https://sbloggel.netlify.app/posts/2024-01-22-simulating-data-in-python/2024-01-22-simulating-data-in-python_files/figure-html/cell-7-output-1.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-<div id="f94f8fd3" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1">sns.scatterplot(data<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span>dat, x<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"x2"</span>, y<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"y"</span>, hue<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"x3"</span>)<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">;</span></span></code></pre></div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="https://sbloggel.netlify.app/posts/2024-01-22-simulating-data-in-python/2024-01-22-simulating-data-in-python_files/figure-html/cell-8-output-1.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-
-
-</section>
-
- ]]></description>
-  <category>Python</category>
-  <guid>https://sbloggel.netlify.app/posts/2024-01-22-simulating-data-in-python/2024-01-22-simulating-data-in-python.html</guid>
-  <pubDate>Sun, 21 Jan 2024 23:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
