@@ -1,0 +1,29 @@
+---
+title: Parameter class in Python
+date: 2024-11-08
+categories:
+  - Python
+---
+
+```{r}
+#| label: init
+#| cache: false
+#| include: false
+library('tidyverse')
+set.seed(1)
+
+library('reticulate')
+use_condaenv('sbloggel')
+```
+
+```{python}
+class param:
+    def __init__(self, **kwargs):
+        for key, value in kwargs.items():
+            setattr(self, key, value)
+            
+p = param(a=2, b = 3)
+print('a =', p.a)
+print('b =', p.b)
+```
+

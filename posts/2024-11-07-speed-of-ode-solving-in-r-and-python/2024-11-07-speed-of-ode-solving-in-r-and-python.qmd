@@ -1,0 +1,51 @@
+---
+title: Speed of ODE solving in R and Python
+date: 2024-11-07
+categories:
+  - Python
+---
+
+```{r}
+#| label: init
+#| cache: false
+#| include: false
+library('tidyverse')
+set.seed(1)
+
+library('reticulate')
+use_condaenv('sbloggel')
+```
+
+```{python}
+import time
+
+# Start the timer
+start_time = time.time()
+
+# Your code block
+# Example:
+for i in range(1000000):
+    pass
+
+# End the timer
+end_time = time.time()
+
+# Calculate and print the elapsed time
+execution_time = end_time - start_time
+print(f"Execution time: {execution_time} seconds")
+```
+
+```{python}
+import timeit
+
+# Define your code block as a function
+def code_to_time():
+    for i in range(1000000):
+        pass
+
+# Measure the execution time
+execution_time = timeit.timeit(code_to_time, number=1)
+print(f"Execution time: {execution_time} seconds")
+
+```
+

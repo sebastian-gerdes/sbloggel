@@ -18,7 +18,7 @@ set.seed(1)
 ```{r}
 #| label: new_post
 #| execute: false
-post_title <- "Speed of ODE solving in R and Python"
+post_title <- "Parameter class in Python"
 post_date <- '2023-07-03'
 post_date <- format(Sys.Date(), "%Y-%m-%d")
 

@@ -10,7 +10,201 @@
 <atom:link href="https://sbloggel.netlify.app/index.xml" rel="self" type="application/rss+xml"/>
 <description>Seb&#39;s private blog about statistics and other topics</description>
 <generator>quarto-1.4.553</generator>
-<lastBuildDate>Thu, 31 Oct 2024 23:00:00 GMT</lastBuildDate>
+<lastBuildDate>Thu, 07 Nov 2024 23:00:00 GMT</lastBuildDate>
+<item>
+  <title>Parameter class in Python</title>
+  <link>https://sbloggel.netlify.app/posts/2024-11-08-parameter-class-in-python/2024-11-08-parameter-class-in-python.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">class</span> param:</span>
+<span id="cb1-2">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">def</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">__init__</span>(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>, <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">**</span>kwargs):</span>
+<span id="cb1-3">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span> key, value <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> kwargs.items():</span>
+<span id="cb1-4">            <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">setattr</span>(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>, key, value)</span>
+<span id="cb1-5">            </span>
+<span id="cb1-6">p <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> param(a<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>, b <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>)</span>
+<span id="cb1-7"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'a ='</span>, p.a)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>a = 2</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'b ='</span>, p.b)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>b = 3</code></pre>
+</div>
+</div>
+
+
+
+ ]]></description>
+  <category>Python</category>
+  <guid>https://sbloggel.netlify.app/posts/2024-11-08-parameter-class-in-python/2024-11-08-parameter-class-in-python.html</guid>
+  <pubDate>Thu, 07 Nov 2024 23:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Speed of ODE solving in R and Python</title>
+  <link>https://sbloggel.netlify.app/posts/2024-11-07-speed-of-ode-solving-in-r-and-python/2024-11-07-speed-of-ode-solving-in-r-and-python.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> time</span>
+<span id="cb1-2"></span>
+<span id="cb1-3"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Start the timer</span></span>
+<span id="cb1-4">start_time <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> time.time()</span>
+<span id="cb1-5"></span>
+<span id="cb1-6"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Your code block</span></span>
+<span id="cb1-7"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Example:</span></span>
+<span id="cb1-8"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span> i <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">range</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1000000</span>):</span>
+<span id="cb1-9">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">pass</span></span>
+<span id="cb1-10"></span>
+<span id="cb1-11"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># End the timer</span></span>
+<span id="cb1-12">end_time <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> time.time()</span>
+<span id="cb1-13"></span>
+<span id="cb1-14"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Calculate and print the elapsed time</span></span>
+<span id="cb1-15">execution_time <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> end_time <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> start_time</span>
+<span id="cb1-16"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"Execution time: </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>execution_time<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;"> seconds"</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Execution time: 0.021715879440307617 seconds</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> timeit</span>
+<span id="cb3-2"></span>
+<span id="cb3-3"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Define your code block as a function</span></span>
+<span id="cb3-4"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">def</span> code_to_time():</span>
+<span id="cb3-5">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span> i <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">range</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1000000</span>):</span>
+<span id="cb3-6">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">pass</span></span>
+<span id="cb3-7"></span>
+<span id="cb3-8"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Measure the execution time</span></span>
+<span id="cb3-9">execution_time <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> timeit.timeit(code_to_time, number<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)</span>
+<span id="cb3-10"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"Execution time: </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>execution_time<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;"> seconds"</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Execution time: 0.008265999989816919 seconds</code></pre>
+</div>
+</div>
+
+
+
+ ]]></description>
+  <category>Python</category>
+  <guid>https://sbloggel.netlify.app/posts/2024-11-07-speed-of-ode-solving-in-r-and-python/2024-11-07-speed-of-ode-solving-in-r-and-python.html</guid>
+  <pubDate>Wed, 06 Nov 2024 23:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Speed of ODE solving in R and Python</title>
   <link>https://sbloggel.netlify.app/posts/2024-11-01-speed-of-ode-solving-in-r-and-python/2024-11-01-speed-of-ode-solving-in-r-and-python.html</link>
@@ -4001,318 +4195,6 @@ font-style: inherit;"># Update labels</span></span></code></pre></div>
   <category>R</category>
   <guid>https://sbloggel.netlify.app/posts/2024-05-03-legends-in-ggplot2/2024-05-03-legends-in-ggplot2.html</guid>
   <pubDate>Thu, 02 May 2024 22:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Type I and type II errors</title>
-  <link>https://sbloggel.netlify.app/posts/2024-04-22-type-i-and-type-ii-errors/2024-04-22-type-i-and-type-ii-errors.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1">nr_of_trials <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">100</span></span>
-<span id="cb1-2"></span>
-<span id="cb1-3">calc_p <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">Vectorize</span>(</span>
-<span id="cb1-4">  <span class="cf" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">function</span>(effect_size, n) {</span>
-<span id="cb1-5">    y1 <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">rnorm</span>(n)</span>
-<span id="cb1-6">    y2 <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">rnorm</span>(n, effect_size)</span>
-<span id="cb1-7">    <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">t.test</span>(y1, y2)<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span>p.value</span>
-<span id="cb1-8">  }</span>
-<span id="cb1-9">)</span>
-<span id="cb1-10"></span>
-<span id="cb1-11"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">calc_p</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">10</span>)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.01657786</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1">dat <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">tibble</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">effect_size =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">c</span>(<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">rep</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>, nr_of_trials), <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">rexp</span>(nr_of_trials)),</span>
-<span id="cb3-2">              <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">effect_present =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">rep</span>(<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'No'</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'Yes'</span>), <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">each =</span> nr_of_trials),</span>
-<span id="cb3-3">              <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">n =</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">10</span>,</span>
-<span id="cb3-4">              <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">p =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">calc_p</span>(effect_size, nr_of_trials))</span>
-<span id="cb3-5"></span>
-<span id="cb3-6"></span>
-<span id="cb3-7"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">plot</span>(<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">sort</span>(dat<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span>p))</span></code></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="https://sbloggel.netlify.app/posts/2024-04-22-type-i-and-type-ii-errors/2024-04-22-type-i-and-type-ii-errors_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1">dat <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span> </span>
-<span id="cb4-2">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">ggplot</span>(<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">aes</span>(effect_size, p, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">colour =</span> effect_present)) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> </span>
-<span id="cb4-3">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">geom_point</span>() <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span></span>
-<span id="cb4-4">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">geom_smooth</span>()</span></code></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>`geom_smooth()` using method = 'loess' and formula = 'y ~ x'</code></pre>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="https://sbloggel.netlify.app/posts/2024-04-22-type-i-and-type-ii-errors/2024-04-22-type-i-and-type-ii-errors_files/figure-html/unnamed-chunk-2-2.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-
-
-
- ]]></description>
-  <category>R</category>
-  <guid>https://sbloggel.netlify.app/posts/2024-04-22-type-i-and-type-ii-errors/2024-04-22-type-i-and-type-ii-errors.html</guid>
-  <pubDate>Sun, 21 Apr 2024 22:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Clone size distributions</title>
-  <link>https://sbloggel.netlify.app/posts/2024-03-27-clone-size-distributions/2024-03-27-clone-size-distributions.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">as</span> np</span>
-<span id="cb1-2"><span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">import</span> pandas <span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">as</span> pd</span>
-<span id="cb1-3"><span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">import</span> random</span></code></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1">n <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1000</span></span>
-<span id="cb2-2">nr_of_steps <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1000000</span></span>
-<span id="cb2-3">cell_ids <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> np.zeros((nr_of_steps <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, n))</span>
-<span id="cb2-4">cell_ids[<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>, ] <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">range</span>(n)</span>
-<span id="cb2-5"></span>
-<span id="cb2-6"><span class="cf" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">for</span> i <span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">in</span> <span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">range</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, nr_of_steps <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>):</span>
-<span id="cb2-7">  cell_ids[i, ] <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> cell_ids[i <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, ]</span>
-<span id="cb2-8">  ii_death <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> random.randint(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>, n <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>)</span>
-<span id="cb2-9">  ii_birth <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> random.randint(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>, n <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>)</span>
-<span id="cb2-10">  cell_ids[i, ii_death] <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> cell_ids[i <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, ii_birth]</span>
-<span id="cb2-11"></span>
-<span id="cb2-12">np.column_stack(np.unique(cell_ids[nr_of_steps], return_counts<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">True</span>))</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>array([[ 857., 1000.]])</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1">n <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">20</span></span>
-<span id="cb4-2">nr_of_steps <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">100</span></span>
-<span id="cb4-3">cell_ids <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> np.arange(n)</span>
-<span id="cb4-4"></span>
-<span id="cb4-5"><span class="cf" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">for</span> i <span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">in</span> <span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">range</span>(nr_of_steps):</span>
-<span id="cb4-6">  ii_death <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> random.randint(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>, n <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>)</span>
-<span id="cb4-7">  ii_birth <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> random.randint(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>, n <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>)</span>
-<span id="cb4-8">  cell_ids[ii_death] <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> cell_ids[ii_birth]</span>
-<span id="cb4-9"></span>
-<span id="cb4-10">np.column_stack(np.unique(cell_ids, return_counts<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">True</span>))</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>array([[ 0,  7],
-       [ 4,  6],
-       [ 5,  3],
-       [18,  4]])</code></pre>
-</div>
-</div>
-
-
-
- ]]></description>
-  <category>R</category>
-  <guid>https://sbloggel.netlify.app/posts/2024-03-27-clone-size-distributions/2024-03-27-clone-size-distributions.html</guid>
-  <pubDate>Tue, 26 Mar 2024 23:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
