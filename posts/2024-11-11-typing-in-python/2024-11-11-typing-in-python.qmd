@@ -1,0 +1,32 @@
+---
+title: Python Enhancement Proposals -- Style guide, Type hints and Docstring Conventions
+date: 2024-11-11
+categories:
+  - Python
+---
+
+Python Enhancement Proposals (PEPs)
+
+* PEP 8 -- Style guide -- https://peps.python.org/pep-0008/
+* PEP 484 -- Type Hints -- https://peps.python.org/pep-0484/ 
+* PEP 257 -- Docstring Conventions -- https://peps.python.org/pep-0257/
+
+```{python}
+from typing import Union
+
+def foo(x: Union[int, float]) -> Union[int, float]:
+    """
+    Squares a numeric input (either int or float) and returns the result.
+
+    Parameters:
+    x (int or float): The input number to be squared.
+
+    Returns:
+    int or float: The squared result of the input.
+    """
+    return x ** 2
+
+print(5 + 5)
+help(foo)
+```
+
