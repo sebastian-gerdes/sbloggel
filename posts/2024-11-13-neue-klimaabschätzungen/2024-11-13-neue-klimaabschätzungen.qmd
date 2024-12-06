@@ -1,0 +1,52 @@
+---
+title: Neue Klimaabschätzungen
+date: 2024-11-13
+categories:
+  - Sustainibility
+---
+
+
+## Aufforstung der Sahara
+* Dialog mit ChatGPT: [Link](https://chatgpt.com/share/6735244d-a604-8013-b61c-8eb9269d0dbe)
+```{r}
+#| label: init
+#| message: false
+library('tidyverse')
+area_sahara_m2 <- 9.2e12
+co_2_per_forest_kg_per_m2 <- .5
+co_2_sahara_per_year <- area_sahara_m2 * co_2_per_forest_kg_per_m2
+co_2_sahara_per_year
+
+7e9 * 5e3
+
+
+```
+Ergo: Wenn es gelänge die Sahara komplett aufzuforsten, würde das ungefähr 10% des von Menschen emittierten CO2 gleich wieder binden!
+
+## Kumulative Kapazität der Batterien von Elektorautos
+```{r}
+nr_of_cars <- 1e7
+kWh_per_car <- 40
+J_per_car <- kWh_per_car * 3.6e6
+J_all_cars <- J_per_car * nr_of_cars
+J_all_cars
+```
+
+```{r}
+gesamt_primaer_energie_bedarf_deutschland_J <- 1e19
+energie_pro_tag <- gesamt_primaer_energie_bedarf_deutschland_J / 365
+battery_fraction <- J_all_cars / energie_pro_tag
+battery_fraction
+```
+
+Ergo: Die Autobatterien könnten ca. 5% der Energie puffern
+
+## Pumpspeicherwerke
+```{r}
+pumpspeicherwerke_J <- 40e6 * 3.6e6
+pumpspeicherwerke_J / J_all_cars
+pumpspeicherwerke_J / energie_pro_tag
+```
+ChatGPT dazu: [Link](https://chatgpt.com/share/67352ab8-d0ec-8013-855a-03ec71b623f5)
+
+

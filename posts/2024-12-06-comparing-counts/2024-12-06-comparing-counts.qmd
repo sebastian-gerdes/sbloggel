@@ -1,0 +1,29 @@
+---
+title: Comparing counts
+date: 2024-12-06
+categories:
+  - R
+---
+
+## Situation
+
+* Two random variables $X_1$ and $X_2$ with realiziations $x_1$ and $x_2$, each following a Poisson distribution with rates $\lambda_1$ and $\lambda_2$
+* Null hypothesis: $\lambda_1 = \lambda_2$
+
+## Approximate, naive test
+Very approximate, pragmatic statistical test: 
+
+* Test statistic $k = x_2 - x_1$ follows approximately (asymptotically with growing $\lambda_1$ and $\lambda_2$) a normal distribution with $\mu = 0$ and $\sigma = \sqrt{x_1 + x_2}$
+```{r}
+x_1 <- 150
+x_2 <- 160
+k <- x_1 - x_2
+sigma <- sqrt(x_1 + x_2)
+(p_value <- 2 * pnorm(k, mean = 0, sd = sigma))
+```
+
+## Exact test
+```{r}
+poisson.test(c(x_1, x_2))
+```
+
