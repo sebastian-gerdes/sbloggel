@@ -1,0 +1,23 @@
+---
+title: Saving output from R terminal
+date: 2024-12-16
+categories:
+  - R
+---
+
+In order to save output from within `R`, the `sink` commmand usually can do the job. Have a look also at the help page.
+
+To save all output:
+```{r}
+#! eval: false
+zz <- file("all.Rout", open = "wt")
+sink(zz)
+sink(zz, type = "message")
+print(1:10)
+# stop('An eror is an error!')
+warning('A warning is a warning!')
+sink(type = "message")
+sink()
+file.show("all.Rout")
+```
+

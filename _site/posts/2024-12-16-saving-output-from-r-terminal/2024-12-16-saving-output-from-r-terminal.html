@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2024-12-06">
+<meta name="dcterms.date" content="2024-12-16">
 
-<title>Seb’s blog - Comparing counts</title>
+<title>Seb’s blog - Saving output from R terminal</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -123,38 +123,9 @@ cookieconsent.run({
 </script> 
   
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="../../styles.css">
-<meta property="og:title" content="Seb’s blog - Comparing counts">
+<meta property="og:title" content="Seb’s blog - Saving output from R terminal">
 <meta property="og:description" content="Seb’s private blog about statistics and other topics">
 <meta property="og:site_name" content="Seb's blog">
 </head>
@@ -203,23 +174,14 @@ window.Quarto = {
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#description-of-problem" id="toc-description-of-problem" class="nav-link active" data-scroll-target="#description-of-problem">Description of problem</a></li>
-  <li><a href="#approximate-naive-test" id="toc-approximate-naive-test" class="nav-link" data-scroll-target="#approximate-naive-test">Approximate, naive test</a></li>
-  <li><a href="#exact-test" id="toc-exact-test" class="nav-link" data-scroll-target="#exact-test">Exact test</a></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
-  </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/sebastian-gerdes/sbloggel/blob/main/posts/2024-12-06-comparing-counts/2024-12-06-comparing-counts.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Comparing counts</h1>
+<h1 class="title">Saving output from R terminal</h1>
   <div class="quarto-categories">
     <div class="quarto-category">R</div>
   </div>
@@ -233,7 +195,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">December 6, 2024</p>
+      <p class="date">December 16, 2024</p>
     </div>
   </div>
   
@@ -245,53 +207,28 @@ window.Quarto = {
 </header>
 
 
-<section id="description-of-problem" class="level2">
-<h2 class="anchored" data-anchor-id="description-of-problem">Description of problem</h2>
-<ul>
-<li>Two random variables <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span> with realiziations <span class="math inline">\(x_1\)</span> and <span class="math inline">\(x_2\)</span>, each following a Poisson distribution with rates <span class="math inline">\(\lambda_1\)</span> and <span class="math inline">\(\lambda_2\)</span></li>
-<li>Null hypothesis: <span class="math inline">\(\lambda_1 = \lambda_2\)</span></li>
-</ul>
-</section>
-<section id="approximate-naive-test" class="level2">
-<h2 class="anchored" data-anchor-id="approximate-naive-test">Approximate, naive test</h2>
-<p>We can construct an approximate, pragmatic statistical test. The test statistic <span class="math inline">\(k = x_2 - x_1\)</span> follows approximately (asymptotically with growing <span class="math inline">\(\lambda_1\)</span> and <span class="math inline">\(\lambda_2\)</span>) a normal distribution with <span class="math inline">\(\mu = 0\)</span> and <span class="math inline">\(\sigma = \sqrt{x_1 + x_2}\)</span>.</p>
+<p>In order to save output from within <code>R</code>, the <code>sink</code> commmand usually can do the job. Have a look also at the help page.</p>
+<p>To save all output:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>x_1 <span class="ot">&lt;-</span> <span class="dv">1500</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>x_2 <span class="ot">&lt;-</span> <span class="dv">1600</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>k <span class="ot">&lt;-</span> x_1 <span class="sc">-</span> x_2</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>sigma <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(x_1 <span class="sc">+</span> x_2)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>(p_value <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> <span class="fu">pnorm</span>(k, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> sigma))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#! eval: false</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>zz <span class="ot">&lt;-</span> <span class="fu">file</span>(<span class="st">"all.Rout"</span>, <span class="at">open =</span> <span class="st">"wt"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sink</span>(zz)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sink</span>(zz, <span class="at">type =</span> <span class="st">"message"</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.07248609</code></pre>
+<pre><code> [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># stop('An eror is an error!')</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">warning</span>(<span class="st">'A warning is a warning!'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: A warning is a warning!</code></pre>
 </div>
-</section>
-<section id="exact-test" class="level2">
-<h2 class="anchored" data-anchor-id="exact-test">Exact test</h2>
-<p><code>R</code> offers an exact test.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">poisson.test</span>(<span class="fu">c</span>(x_1, x_2))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    Comparison of Poisson rates
-
-data:  c(x_1, x_2) time base: 1
-count1 = 1500, expected count1 = 1550, p-value = 0.07537
-alternative hypothesis: true rate ratio is not equal to 1
-95 percent confidence interval:
- 0.8731506 1.0065506
-sample estimates:
-rate ratio 
-    0.9375 </code></pre>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sink</span>(<span class="at">type =</span> <span class="st">"message"</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sink</span>()</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">file.show</span>(<span class="st">"all.Rout"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-</section>
-<section id="conclusion" class="level2">
-<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
-<p>It may be surprising – but measurement of two counts for different conditions can be enough in order to test for equality of event rates.</p>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -711,7 +648,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>   
     <div class="nav-footer-center">
 
-<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/sebastian-gerdes/sbloggel/blob/main/posts/2024-12-06-comparing-counts/2024-12-06-comparing-counts.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div><div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
+<div class="toc-actions"><ul><li><a href="https://github.com/sebastian-gerdes/sbloggel/blob/main/posts/2024-12-16-saving-output-from-r-terminal/2024-12-16-saving-output-from-r-terminal.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div><div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
