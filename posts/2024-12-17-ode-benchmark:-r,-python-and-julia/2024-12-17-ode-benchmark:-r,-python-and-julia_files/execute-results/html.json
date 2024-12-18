@@ -1,0 +1,15 @@
+{
+  "hash": "5d97e94982f6990cb6ed1ecda208ee18",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"ODE benchmark: R, Python and Julia\"\ndate: 2024-12-17\ncategories:\n  - R\n---\n\n\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

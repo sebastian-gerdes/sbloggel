@@ -35,3 +35,6 @@ format:
 
 execute: 
   freeze: auto
+  
+julia:
+  path: /Users/seb/.juliaup/bin/julia
