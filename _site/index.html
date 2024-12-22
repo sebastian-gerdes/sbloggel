@@ -254,18 +254,18 @@ window.Quarto = {
     </div>
 </div>
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="R" data-listing-date-sort="1734390000000" data-listing-file-modified-sort="1734507997443" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="858">
+<div class="quarto-post image-right" data-index="0" data-categories="R" data-listing-date-sort="1734390000000" data-listing-file-modified-sort="1734876405287" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="847">
 <div class="thumbnail">
-<p><a href="./posts/2024-12-17-ode-benchmark:-r,-python-and-julia/2024-12-17-ode-benchmark-r-python-and-julia.html" class="no-external"></a></p><a href="./posts/2024-12-17-ode-benchmark:-r,-python-and-julia/2024-12-17-ode-benchmark-r-python-and-julia.html" class="no-external">
-<p class="card-img-top"><img src="posts/2024-12-17-ode-benchmark:-r,-python-and-julia/2024-12-17-ode-benchmark-r-python-and-julia_files/figure-html/R-1.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/2024-12-17-ode-benchmark:-r,-python-and-julia/2024-12-17-ode-benchmark-r-python-and-julia.html" class="no-external"></a></p>
+<p><a href="./posts/2024-12-17-ode-benchmark-r-python-and-julia/2024-12-17-ode-benchmark-r-python-and-julia.html" class="no-external"></a></p><a href="./posts/2024-12-17-ode-benchmark-r-python-and-julia/2024-12-17-ode-benchmark-r-python-and-julia.html" class="no-external">
+<p class="card-img-top"><img src="posts/2024-12-17-ode-benchmark-r-python-and-julia/2024-12-17-ode-benchmark-r-python-and-julia_files/figure-html/R-1.png"  class="thumbnail-image card-img"/></p>
+</a><p><a href="./posts/2024-12-17-ode-benchmark-r-python-and-julia/2024-12-17-ode-benchmark-r-python-and-julia.html" class="no-external"></a></p>
 </div>
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="./posts/2024-12-17-ode-benchmark:-r,-python-and-julia/2024-12-17-ode-benchmark-r-python-and-julia.html" class="no-external">ODE benchmark: R, Python and Julia</a>
+<a href="./posts/2024-12-17-ode-benchmark-r-python-and-julia/2024-12-17-ode-benchmark-r-python-and-julia.html" class="no-external">ODE benchmark: R, Python and Julia</a>
 </h3>
 <div class="listing-subtitle">
-<a href="./posts/2024-12-17-ode-benchmark:-r,-python-and-julia/2024-12-17-ode-benchmark-r-python-and-julia.html" class="no-external"></a>
+<a href="./posts/2024-12-17-ode-benchmark-r-python-and-julia/2024-12-17-ode-benchmark-r-python-and-julia.html" class="no-external"></a>
 </div>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('R'); return false;">
@@ -273,22 +273,21 @@ R
 </div>
 </div>
 <div class="listing-description">
-<a href="./posts/2024-12-17-ode-benchmark:-r,-python-and-julia/2024-12-17-ode-benchmark-r-python-and-julia.html" class="no-external">
+<a href="./posts/2024-12-17-ode-benchmark-r-python-and-julia/2024-12-17-ode-benchmark-r-python-and-julia.html" class="no-external">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu">library</span>(<span class="st">'tidyverse'</span>)</span>
 <span id="cb1-2"></span>
-<span id="cb1-3"><span class="fu">library</span>(<span class="st">'reticulate'</span>)</span></code></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: package 'reticulate' was built under R version 4.3.3</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="fu">use_condaenv</span>(<span class="st">'sbloggel'</span>)</span>
-<span id="cb3-2"></span>
-<span id="cb3-3"><span class="fu">library</span>(<span class="st">'JuliaCall'</span>)</span></code></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: package…</code></pre></div><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><span class="fu"></span><span class="at"></span><span class="st"></span></span><span id="cb5-2"></span><span id="cb5-3"><span class="fu"></span><span class="dv"></span></span></code></pre></div></a>
+<span id="cb1-3"><span class="fu">library</span>(<span class="st">'reticulate'</span>)</span>
+<span id="cb1-4"><span class="fu">use_condaenv</span>(<span class="st">'sbloggel'</span>)</span>
+<span id="cb1-5"></span>
+<span id="cb1-6"><span class="fu">library</span>(<span class="st">'JuliaCall'</span>)</span>
+<span id="cb1-7"><span class="fu">julia_setup</span>(<span class="at">JULIA_HOME =</span> <span class="st">'/Users/seb/.juliaup/bin/'</span>)</span>
+<span id="cb1-8"></span>
+<span id="cb1-9"><span class="fu">set.seed</span>(<span class="dv">1</span>)</span></code></pre></div>
+</a>
 </div>
 </div>
 <div class="metadata">
-<a href="./posts/2024-12-17-ode-benchmark:-r,-python-and-julia/2024-12-17-ode-benchmark-r-python-and-julia.html" class="no-external">
+<a href="./posts/2024-12-17-ode-benchmark-r-python-and-julia/2024-12-17-ode-benchmark-r-python-and-julia.html" class="no-external">
 <div class="listing-date">
 Dec 17, 2024
 </div>
@@ -956,7 +955,7 @@ Jul 23, 2024
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="21" data-categories="R" data-listing-date-sort="1720476000000" data-listing-file-modified-sort="1721721981726" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="78">
+<div class="quarto-post image-right" data-index="21" data-categories="R" data-listing-date-sort="1720476000000" data-listing-file-modified-sort="1734509132606" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="117">
 <div class="thumbnail">
 <p><a href="./posts/2024-07-09-eisen/2024-07-09-eisen.html" class="no-external"></a></p><a href="./posts/2024-07-09-eisen/2024-07-09-eisen.html" class="no-external">
 <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
