@@ -10,7 +10,618 @@
 <atom:link href="https://sbloggel.netlify.app/index.xml" rel="self" type="application/rss+xml"/>
 <description>Seb&#39;s private blog about statistics and other topics</description>
 <generator>quarto-1.4.553</generator>
-<lastBuildDate>Mon, 16 Dec 2024 23:00:00 GMT</lastBuildDate>
+<lastBuildDate>Mon, 03 Mar 2025 23:00:00 GMT</lastBuildDate>
+<item>
+  <title>Presentation for Vorstand</title>
+  <link>https://sbloggel.netlify.app/posts/2025-03-04-presentation-for-vorstand/2025-03-04-presentation-for-vorstand.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(tidyverse)</span>
+<span id="cb1-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">set.seed</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>)</span>
+<span id="cb1-3"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">theme_set</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">theme_bw</span>())</span></code></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1">n <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">20</span></span>
+<span id="cb2-2">dat <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">tibble</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">name =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(</span>
+<span id="cb2-3">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">paste</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Maßnahme'</span>, n<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)</span>
+<span id="cb2-4">  ),</span>
+<span id="cb2-5">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">name_f =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">factor</span>(name, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">levels =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">unique</span>(name)),</span>
+<span id="cb2-6">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">index =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span>n,</span>
+<span id="cb2-7">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">cost =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sort</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rnorm</span>(n, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">decreasing =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>), </span>
+<span id="cb2-8">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">positive =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ifelse</span>(cost <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&lt;</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'yes'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'no'</span>))</span>
+<span id="cb2-9"></span>
+<span id="cb2-10">p <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> dat <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ggplot</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(cost, name_f, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">colour =</span> positive)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_point</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb2-11">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">labs</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Kosten pro gespartes CO2-Äquivalent'</span>,</span>
+<span id="cb2-12">       <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">''</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">theme</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">legend.position =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'none'</span>)</span>
+<span id="cb2-13">p</span></code></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://sbloggel.netlify.app/posts/2025-03-04-presentation-for-vorstand/2025-03-04-presentation-for-vorstand_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1">ll <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">tibble</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.8</span>), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(n, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">9</span> ), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">text =</span> </span>
+<span id="cb3-2">               <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(</span>
+<span id="cb3-3">                 <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Photovoltaikanlagen auf geeigneten Dächern?'</span>,</span>
+<span id="cb3-4">                 <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Energetische Gebäudesanierung?'</span></span>
+<span id="cb3-5">                 )</span>
+<span id="cb3-6">)</span>
+<span id="cb3-7">p <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_label</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">mapping =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(x, y, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">label =</span> text), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">data =</span> ll, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">inherit.aes =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">FALSE</span>)</span></code></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://sbloggel.netlify.app/posts/2025-03-04-presentation-for-vorstand/2025-03-04-presentation-for-vorstand_files/figure-html/unnamed-chunk-2-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">set.seed</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)</span>
+<span id="cb4-2">n <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">100</span></span>
+<span id="cb4-3">dat <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">tibble</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">index =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span>n,</span>
+<span id="cb4-4">              <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">cost =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sort</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rnorm</span>(n, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)),</span>
+<span id="cb4-5">              <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">positive =</span> cost <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>)</span>
+<span id="cb4-6">p <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> dat <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ggplot</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(index, cost, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">fill =</span> positive)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> </span>
+<span id="cb4-7">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_bar</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">stat =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'identity'</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> </span>
+<span id="cb4-8">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">labs</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Maßnahmen sortiert nach Kosten'</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Kosten pro gespartes CO2-Äquivalent'</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb4-9">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">theme</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">axis.text.x =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">element_blank</span>(),  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Remove x-axis text</span></span>
+<span id="cb4-10">        <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">axis.ticks.x =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">element_blank</span>(), </span>
+<span id="cb4-11">        <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">legend.position =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'none'</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb4-12">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">scale_colour_manual</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">values =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'chartreuse4'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'red'</span>), </span>
+<span id="cb4-13">                      <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">aesthetics =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'colour'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'fill'</span>))</span>
+<span id="cb4-14">p</span></code></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://sbloggel.netlify.app/posts/2025-03-04-presentation-for-vorstand/2025-03-04-presentation-for-vorstand_files/figure-html/kosten_1-1.png" class="img-fluid figure-img" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1">ll <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">tribble</span>(<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> x, <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> y, <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> l,</span>
+<span id="cb5-2">              <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">18</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2.5</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'PV-Anlage auf Haus ...'</span>,</span>
+<span id="cb5-3">              <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">40</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.5</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Fahrzeugflottenumstellung auf Elektroantrieb'</span>,</span>
+<span id="cb5-4">              <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">25</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Energetische Gebäudesanierung'</span>,</span>
+<span id="cb5-5">              <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">35</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Umstellung auf "echten" Ökostrom'</span>,</span>
+<span id="cb5-6">              <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">65</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Umstellung auf CO2-neutrale Medikamente'</span>,</span>
+<span id="cb5-7">              <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">70</span>, <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.5</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Umstellung auf CO2-neutrale Heizung'</span>)</span>
+<span id="cb5-8"></span>
+<span id="cb5-9">p <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_label</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(x, y, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">label =</span> l), ll <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">slice</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span>), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">inherit.aes =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">FALSE</span>)</span></code></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://sbloggel.netlify.app/posts/2025-03-04-presentation-for-vorstand/2025-03-04-presentation-for-vorstand_files/figure-html/kosten_2-1.png" class="img-fluid figure-img" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1">ll <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">tribble</span>(<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> x, <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> y, <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> l,</span>
+<span id="cb6-2">              <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">18</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2.5</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'PV-Anlage auf Haus ...'</span>,</span>
+<span id="cb6-3">              <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">40</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.5</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Fahrzeugflottenumstellung auf Elektroantrieb'</span>,</span>
+<span id="cb6-4">              <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">25</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Energetische Gebäudesanierung'</span>,</span>
+<span id="cb6-5">              <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">35</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Umstellung auf "echten" Ökostrom'</span>,</span>
+<span id="cb6-6">              <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">55</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Umstellung auf CO2-neutrale Heizung'</span>,</span>
+<span id="cb6-7">              <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">65</span>, <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.5</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Umstellung auf CO2-neutrale Medikamente'</span>)</span>
+<span id="cb6-8">p <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_label</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(x, y, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">label =</span> l), ll, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">inherit.aes =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">FALSE</span>)</span></code></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://sbloggel.netlify.app/posts/2025-03-04-presentation-for-vorstand/2025-03-04-presentation-for-vorstand_files/figure-html/kosten_3-1.png" class="img-fluid figure-img" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+
+
+
+ ]]></description>
+  <category>R</category>
+  <guid>https://sbloggel.netlify.app/posts/2025-03-04-presentation-for-vorstand/2025-03-04-presentation-for-vorstand.html</guid>
+  <pubDate>Mon, 03 Mar 2025 23:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Profiling in R and Julia</title>
+  <link>https://sbloggel.netlify.app/posts/2024-12-22-profiling-in-r-and-julia/2024-12-22-profiling-in-r-and-julia.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'tidyverse'</span>)</span></code></pre></div>
+</div>
+<section id="profiling-in-r" class="level2">
+<h2 class="anchored" data-anchor-id="profiling-in-r">Profiling in R</h2>
+<ul>
+<li>Explained on <a href="https://support.posit.co/hc/en-us/articles/218221837-Profiling-R-code-with-the-RStudio-IDE">Posit Website</a></li>
+</ul>
+<section id="for-example" class="level3">
+<h3 class="anchored" data-anchor-id="for-example">For example</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'profvis'</span>)</span>
+<span id="cb2-2"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># help(package = 'profvis')</span></span>
+<span id="cb2-3"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">profvis</span>({</span>
+<span id="cb2-4">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">data</span>(diamonds, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">package =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"ggplot2"</span>)</span>
+<span id="cb2-5"></span>
+<span id="cb2-6">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">plot</span>(price <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> carat, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">data =</span> diamonds)</span>
+<span id="cb2-7">  m <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">lm</span>(price <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> carat, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">data =</span> diamonds)</span>
+<span id="cb2-8">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">abline</span>(m, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">col =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"red"</span>)</span>
+<span id="cb2-9">})</span></code></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://sbloggel.netlify.app/posts/2024-12-22-profiling-in-r-and-julia/2024-12-22-profiling-in-r-and-julia_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="profvis html-widget html-fill-item" id="htmlwidget-0e89647b85505f48407c" style="width:100%;height:600px;"></div>
+<script type="application/json" data-for="htmlwidget-0e89647b85505f48407c">{"x":{"message":{"prof":{"time":[1,1,1,1,2,2,2,2,3,3,3,3,4,4,4,4,5,5,5,5,6,6,6,7,7,7,8,8,8,9,9,9,10,10,10,11,11,11,12,12,12,13,13,13,14,14,14,15,15,15,16,16,16,17,17,17,18,18,18,19,19,19,20,20,20,21,21,21,22,22,22,23,23,23,24,24,24,25,25,25,26,26,26,27,27,27,28,28,28,29,29,29,30,30,30,31,31,31,32,32,32,33,33,33,34,34,34,35,35,35,36,36,36,37,37,37,38,38,38,38],"depth":[4,3,2,1,4,3,2,1,4,3,2,1,4,3,2,1,4,3,2,1,3,2,1,3,2,1,3,2,1,3,2,1,3,2,1,3,2,1,3,2,1,3,2,1,3,2,1,3,2,1,3,2,1,3,2,1,3,2,1,3,2,1,3,2,1,3,2,1,3,2,1,3,2,1,3,2,1,3,2,1,3,2,1,3,2,1,3,2,1,3,2,1,3,2,1,3,2,1,3,2,1,3,2,1,3,2,1,3,2,1,3,2,1,3,2,1,4,3,2,1],"label":["deparse","deparse1","plot.default","plot.formula","deparse","deparse1","plot.default","plot.formula","deparse","deparse1","plot.default","plot.formula","deparse","deparse1","plot.default","plot.formula","deparse","deparse1","plot.default","plot.formula","plot.xy","plot.default","plot.formula","plot.xy","plot.default","plot.formula","plot.xy","plot.default","plot.formula","plot.xy","plot.default","plot.formula","plot.xy","plot.default","plot.formula","plot.xy","plot.default","plot.formula","plot.xy","plot.default","plot.formula","plot.xy","plot.default","plot.formula","plot.xy","plot.default","plot.formula","plot.xy","plot.default","plot.formula","plot.xy","plot.default","plot.formula","plot.xy","plot.default","plot.formula","plot.xy","plot.default","plot.formula","plot.xy","plot.default","plot.formula","plot.xy","plot.default","plot.formula","plot.xy","plot.default","plot.formula","plot.xy","plot.default","plot.formula","plot.xy","plot.default","plot.formula","plot.xy","plot.default","plot.formula","plot.xy","plot.default","plot.formula","plot.xy","plot.default","plot.formula","plot.xy","plot.default","plot.formula","plot.xy","plot.default","plot.formula","plot.xy","plot.default","plot.formula","plot.xy","plot.default","plot.formula","plot.xy","plot.default","plot.formula","plot.xy","plot.default","plot.formula","plot.xy","plot.default","plot.formula","plot.xy","plot.default","plot.formula","plot.xy","plot.default","plot.formula","plot.xy","plot.default","plot.formula","plot.xy","plot.default","plot.formula","anyDuplicated.default","[.data.frame","na.omit.data.frame","model.frame.default"],"filenum":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],"linenum":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],"memalloc":[23.77728271484375,23.77728271484375,23.77728271484375,23.77728271484375,23.77728271484375,23.77728271484375,23.77728271484375,23.77728271484375,23.92333221435547,23.92333221435547,23.92333221435547,23.92333221435547,24.37510681152344,24.37510681152344,24.37510681152344,24.37510681152344,24.58029174804688,24.58029174804688,24.58029174804688,24.58029174804688,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,28.61900329589844,32.55451965332031,32.55451965332031,32.55451965332031,32.55451965332031],"meminc":[0,0,0,0,0,0,0,0,0.1460494995117188,0,0,0,0.4517745971679688,0,0,0,0.2051849365234375,0,0,0,4.038711547851562,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3.935516357421875,0,0,0],"filename":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]},"interval":10,"files":[],"prof_output":"/var/folders/jl/yt17k74x37l_mv93mfg5h7n00000gn/T//Rtmp35m4YW/filec5c222e9b886.prof","highlight":{"output":["^output\\$"],"gc":["^<GC>$"],"stacktrace":["^\\.\\.stacktraceo(n|ff)\\.\\.$"]},"split":"h"}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">profvis</span>({</span>
+<span id="cb3-2">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rnorm</span>(<span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1e5</span>)</span>
+<span id="cb3-3">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rnorm</span>(<span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1e6</span>)</span>
+<span id="cb3-4">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rnorm</span>(<span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1e7</span>)</span>
+<span id="cb3-5">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rnorm</span>(<span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1e8</span>)</span>
+<span id="cb3-6">})</span></code></pre></div>
+<div class="cell-output-display">
+<div class="profvis html-widget html-fill-item" id="htmlwidget-7a77b016291093be8bdc" style="width:100%;height:600px;"></div>
+<script type="application/json" data-for="htmlwidget-7a77b016291093be8bdc">{"x":{"message":{"prof":{"time":[1,2,3,3,4,4,5,5,6,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,32,33,33,34,34,35,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196,197,198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,221,222,223,224,225,226,227,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252,253,254,255,256,257,258,259,260,261,262,263,264,265,266,267,268,269,270,271,272,273,274,275,276,277,278,279,280,281,282,283],"depth":[1,1,2,1,2,1,2,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,1,2,1,2,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],"label":["rnorm","rnorm","<GC>","rnorm","<GC>","rnorm","<GC>","rnorm","<GC>","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","<GC>","rnorm","<GC>","rnorm","<GC>","rnorm","<GC>","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm","rnorm"],"filenum":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],"linenum":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],"memalloc":[25.47499847412109,25.47499847412109,17.07785034179688,17.07785034179688,17.07784271240234,17.07784271240234,17.07784271240234,17.07784271240234,17.07784271240234,17.07784271240234,93.37162780761719,93.37162780761719,93.37162780761719,93.37162780761719,93.37162780761719,93.37162780761719,93.37162780761719,93.37162780761719,93.37162780761719,93.37162780761719,93.37162780761719,93.37162780761719,93.37162780761719,93.37162780761719,93.37162780761719,93.37162780761719,93.37162780761719,93.37162780761719,93.37162780761719,93.37162780761719,93.37162780761719,93.37162780761719,93.37162780761719,93.37162780761719,93.37162780761719,17.07768249511719,17.07768249511719,17.07768249511719,17.07768249511719,17.07768249511719,17.07768249511719,17.07768249511719,17.07768249511719,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172,780.0171356201172],"meminc":[0,0,-8.397148132324219,0,-7.62939453125e-06,0,0,0,0,0,76.29378509521484,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-76.2939453125,0,0,0,0,0,0,0,762.939453125,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"filename":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]},"interval":10,"files":[],"prof_output":"/var/folders/jl/yt17k74x37l_mv93mfg5h7n00000gn/T//Rtmp35m4YW/filec5c26242d545.prof","highlight":{"output":["^output\\$"],"gc":["^<GC>$"],"stacktrace":["^\\.\\.stacktraceo(n|ff)\\.\\.$"]},"split":"h"}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+
+
+</section>
+</section>
+
+ ]]></description>
+  <category>R</category>
+  <guid>https://sbloggel.netlify.app/posts/2024-12-22-profiling-in-r-and-julia/2024-12-22-profiling-in-r-and-julia.html</guid>
+  <pubDate>Sat, 21 Dec 2024 23:00:00 GMT</pubDate>
+</item>
 <item>
   <title>ODE benchmark: R, Python and Julia</title>
   <link>https://sbloggel.netlify.app/posts/2024-12-17-ode-benchmark-r-python-and-julia/2024-12-17-ode-benchmark-r-python-and-julia.html</link>
@@ -3674,313 +4285,6 @@ IQR (CV) : 1.5 (0.6)</td>
   <category>R</category>
   <guid>https://sbloggel.netlify.app/posts/2024-09-17-testing-the-package-summarytools/2024-09-17-testing-the-package-summarytools.html</guid>
   <pubDate>Mon, 16 Sep 2024 22:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Power analysis</title>
-  <link>https://sbloggel.netlify.app/posts/2024-08-05-power-analysis/2024-08-05-power-analysis.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1">draw_sample <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">function</span>(x, n) {</span>
-<span id="cb1-2">  ii <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">sample</span>(x, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">size =</span> n, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">replace =</span> <span class="cn" style="color: #8f5902;
-background-color: null;
-font-style: inherit;">TRUE</span>)</span>
-<span id="cb1-3">  x[ii]</span>
-<span id="cb1-4">}</span>
-<span id="cb1-5"></span>
-<span id="cb1-6"></span>
-<span id="cb1-7">calc_p_value <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">function</span>(effect_size, n) {</span>
-<span id="cb1-8">  dd <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">tibble</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">x =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">rnorm</span>(n), </span>
-<span id="cb1-9">               <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">y =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">rnorm</span>(n, effect_size)) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span> </span>
-<span id="cb1-10">    <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">pivot_longer</span>(<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">everything</span>())</span>
-<span id="cb1-11">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">t.test</span>(value <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">~</span> name, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">data =</span> dd)<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span>p.value</span>
-<span id="cb1-12">}</span>
-<span id="cb1-13"></span>
-<span id="cb1-14">calc_power <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">Vectorize</span>(</span>
-<span id="cb1-15">  <span class="cf" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">function</span>(effect_size, n, nr_of_trials) {</span>
-<span id="cb1-16">    p_values <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">replicate</span>(nr_of_trials, <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">calc_p_value</span>(effect_size, n))</span>
-<span id="cb1-17">    <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">return</span>(<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">mean</span>(p_values <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">&lt;</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.05</span>))</span>
-<span id="cb1-18">  }</span>
-<span id="cb1-19">)</span>
-<span id="cb1-20"></span>
-<span id="cb1-21"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">calc_power</span>(<span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.25</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">4</span>, <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1e3</span>)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.053</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1">get_n_needed <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">Vectorize</span>(</span>
-<span id="cb3-2">  <span class="cf" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">function</span>(my_delta, my_power) {</span>
-<span id="cb3-3">    <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">power.t.test</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">delta =</span> my_delta, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">sd =</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">sig.level =</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.05</span>,</span>
-<span id="cb3-4">                 <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">power =</span> my_power)<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span>n</span>
-<span id="cb3-5">  }</span>
-<span id="cb3-6">)</span>
-<span id="cb3-7"></span>
-<span id="cb3-8">dat <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> </span>
-<span id="cb3-9">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">expand_grid</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">power =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">plogis</span>(<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">:</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span>),</span>
-<span id="cb3-10">              <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">effect_size =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">^</span>(<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">:</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>))) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span> </span>
-<span id="cb3-11">  <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># slice(1:5) |&gt; </span></span>
-<span id="cb3-12">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">n_needed_exact =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">get_n_needed</span>(effect_size, power),</span>
-<span id="cb3-13">         <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">n_needed =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">ceiling</span>(n_needed_exact),</span>
-<span id="cb3-14">         <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">power_simulated =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">calc_power</span>(effect_size, n_needed, <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1e3</span>)) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span> </span>
-<span id="cb3-15">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">pivot_longer</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">cols =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">c</span>(power, power_simulated))</span>
-<span id="cb3-16"></span>
-<span id="cb3-17">dat <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span> </span>
-<span id="cb3-18">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">ggplot</span>(<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">aes</span>(n_needed_exact, value, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">colour =</span> name)) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> </span>
-<span id="cb3-19">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">facet_grid</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">cols =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">vars</span>(effect_size), </span>
-<span id="cb3-20">             <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">scales =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'free'</span>, </span>
-<span id="cb3-21">             <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">labeller =</span> label_both) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> </span>
-<span id="cb3-22">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">geom_hline</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">yintercept =</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.8</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">lty =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'dashed'</span>) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> </span>
-<span id="cb3-23">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">geom_line</span>() <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> </span>
-<span id="cb3-24">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">scale_x_continuous</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">trans =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'log10'</span>) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> </span>
-<span id="cb3-25">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">ylim</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span></span>
-<span id="cb3-26">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">labs</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">colour =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'Effect size'</span>)</span></code></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="https://sbloggel.netlify.app/posts/2024-08-05-power-analysis/2024-08-05-power-analysis_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-
-
-
- ]]></description>
-  <category>R</category>
-  <guid>https://sbloggel.netlify.app/posts/2024-08-05-power-analysis/2024-08-05-power-analysis.html</guid>
-  <pubDate>Sun, 04 Aug 2024 22:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>VS Code and Jupyter shortcuts</title>
-  <link>https://sbloggel.netlify.app/posts/2024-07-23-vs-code-and-jupyter-shortcuts/2024-07-23-vs-code-and-jupyter-shortcuts.html</link>
-  <description><![CDATA[ 
-
-
-
-
-
-
-
- ]]></description>
-  <category>R</category>
-  <guid>https://sbloggel.netlify.app/posts/2024-07-23-vs-code-and-jupyter-shortcuts/2024-07-23-vs-code-and-jupyter-shortcuts.html</guid>
-  <pubDate>Mon, 22 Jul 2024 22:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>

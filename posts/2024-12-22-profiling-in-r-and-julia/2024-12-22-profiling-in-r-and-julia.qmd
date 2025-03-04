@@ -1,0 +1,41 @@
+---
+title: Profiling in R and Julia
+date: 2024-12-22
+categories:
+  - R
+---
+
+```{r}
+#| label: init
+#| message: false
+#| cache: false
+library('tidyverse')
+```
+
+## Profiling in R
+* Explained on [Posit Website](https://support.posit.co/hc/en-us/articles/218221837-Profiling-R-code-with-the-RStudio-IDE)
+
+### For example
+```{r}
+library('profvis')
+# help(package = 'profvis')
+profvis({
+  data(diamonds, package = "ggplot2")
+
+  plot(price ~ carat, data = diamonds)
+  m <- lm(price ~ carat, data = diamonds)
+  abline(m, col = "red")
+})
+```
+
+```{r}
+profvis({
+  rnorm(1e5)
+  rnorm(1e6)
+  rnorm(1e7)
+  rnorm(1e8)
+})
+```
+
+
+

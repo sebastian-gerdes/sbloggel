@@ -1,0 +1,96 @@
+---
+title: Presentation for Vorstand
+date: 2025-03-04
+categories:
+  - R
+---
+
+
+
+```{r}
+#| cache: false
+#| message: false
+library(tidyverse)
+set.seed(3)
+theme_set(theme_bw())
+```
+
+```{r}
+n <- 20
+dat <- tibble(name = c(
+  paste('Maßnahme', n:1)
+  ),
+  name_f = factor(name, levels = unique(name)),
+  index = 1:n,
+  cost = sort(rnorm(n, 1, 1), decreasing = TRUE), 
+  positive = ifelse(cost < 0, 'yes', 'no'))
+
+p <- dat |> ggplot(aes(cost, name_f, colour = positive)) + geom_point() +
+  labs(x = 'Kosten pro gespartes CO2-Äquivalent',
+       y = '') + theme(legend.position = 'none')
+p
+
+ll <- tibble(x = c(1, 1.8), y = c(n, 9 ), text = 
+               c(
+                 'Photovoltaikanlagen auf geeigneten Dächern?',
+                 'Energetische Gebäudesanierung?'
+                 )
+)
+p + geom_label(mapping = aes(x, y, label = text), data = ll, inherit.aes = FALSE)
+```
+
+
+```{r}
+#| label: kosten_1
+#| fig-width: 5
+#| fig-height: 3
+set.seed(1)
+n <- 100
+dat <- tibble(index = 1:n,
+              cost = sort(rnorm(n, 1, 1)),
+              positive = cost > 0)
+p <- dat |> ggplot(aes(index, cost, fill = positive)) + 
+  geom_bar(stat = 'identity') + 
+  labs(x = 'Maßnahmen sortiert nach Kosten', y = 'Kosten pro gespartes CO2-Äquivalent') +
+  theme(axis.text.x = element_blank(),  # Remove x-axis text
+        axis.ticks.x = element_blank(), 
+        legend.position = 'none') +
+  scale_colour_manual(values = c('chartreuse4', 'red'), 
+                      aesthetics = c('colour', 'fill'))
+p
+```
+
+
+```{r}
+#| label: kosten_2
+#| fig-width: 5
+#| fig-height: 3
+
+ll <- tribble(~ x, ~ y, ~ l,
+              18, 2.5, 'PV-Anlage auf Haus ...',
+              40, 1.5, 'Fahrzeugflottenumstellung auf Elektroantrieb',
+              25, 2, 'Energetische Gebäudesanierung',
+              35, 1, 'Umstellung auf "echten" Ökostrom',
+              65, 0, 'Umstellung auf CO2-neutrale Medikamente',
+              70, -0.5, 'Umstellung auf CO2-neutrale Heizung')
+
+p + geom_label(aes(x, y, label = l), ll |> slice(1:4), inherit.aes = FALSE)
+
+```
+
+
+```{r}
+#| label: kosten_3
+#| fig-width: 5
+#| fig-height: 3
+
+ll <- tribble(~ x, ~ y, ~ l,
+              18, 2.5, 'PV-Anlage auf Haus ...',
+              40, 1.5, 'Fahrzeugflottenumstellung auf Elektroantrieb',
+              25, 2, 'Energetische Gebäudesanierung',
+              35, 1, 'Umstellung auf "echten" Ökostrom',
+              55, 0, 'Umstellung auf CO2-neutrale Heizung',
+              65, -0.5, 'Umstellung auf CO2-neutrale Medikamente')
+p + geom_label(aes(x, y, label = l), ll, inherit.aes = FALSE)
+
+```
