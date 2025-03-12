@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/2025-03-12-genetic-algorithm/2025-03-12-genetic-algorithm.html",
       "/posts/2025-03-04-presentation-for-vorstand/2025-03-04-presentation-for-vorstand.html",
       "/posts/2024-12-22-profiling-in-r-and-julia/2024-12-22-profiling-in-r-and-julia.html",
       "/posts/2024-12-17-ode-benchmark-r-python-and-julia/2024-12-17-ode-benchmark-r-python-and-julia.html",

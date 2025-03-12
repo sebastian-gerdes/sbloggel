@@ -1,0 +1,106 @@
+---
+title: Genetic algorithm
+date: 2025-03-12
+categories:
+  - R
+---
+## Background
+* We want to fit a model with parameters to data
+* Given: Data points and a function to calculate a loss function for a given parameter set
+* What we don't have: Derivative of the loss function with respect to the parameters -- hence, gradient-descent-type approaches don't work
+* Genetic algorithms are a population-based heuristic method that can optimize even when the loss function is non-differentiable or discontinuous
+
+## Example
+### True model
+* We have a linear model with $n$ data points and $p$ predictors:
+$$
+y = X\beta + \epsilon, \epsilon_i \sim \mathcal{N}
+$$
+* The true value of $\beta$ is also sampled from a normal distribution
+
+### Optimization algorithm
+* We define the residual sum of squares (RSS) as our loss function
+* We sample a "population" of $k$  $\beta$ vectors from a normal distribution and store them in a $p \times k$ matrix 
+* We repeat $m$ times:
+  * *Selection*: We select and duplicate the "better" half (=smaller RSS) of the individuals
+  * *Mutation*: We nudge the elements of $P$ by element-wise multiplication with a matrix with identical dimesion filled with values sampled from a log-normal distribution with log_mean=0 and log_sd=s
+
+## Simulate data
+```{r}
+set.seed(1)
+n <- 5              # number of data points
+p <- 3              # number of predictors
+beta <- rnorm(p)    
+X <- matrix(ncol = p, data = rnorm(n * p))
+y <- (X %*% beta)[, 1]
+dat <- as.data.frame(X)
+dat$y <- y
+```
+
+## Step by step
+```{r}
+# Create parameter population:
+k <- 6
+P <- matrix(nrow = p, data = rnorm(k * p))
+
+# Predict for first population:
+X %*% P[, 1]
+
+# Predict for all populations:
+X %*% P
+
+# Residuals for all populations:
+X %*% P - y
+
+# Define function to calc RSS:
+calc_RSS <- function(X, y, P) {
+  apply((X %*% P - y)^2, 2, sum)
+}
+
+# Calc RSS:
+(l <- calc_RSS(X, y, P))
+
+# determine indices of better half of population:
+(ii <- order(l)[1:(k / 2)])
+
+# select better half and replicate:
+(P <- P[, rep(ii, each = 2)])
+
+# mutate population:
+(P <- P * rlnorm(length(P), sdlog = 0.05))
+```
+
+
+## Whole game
+### Put algorithm in a function
+```{r}
+genetic_algorithm_optimizer <- function(X, y, k, 
+                                        m = 1000, s = 0.01) {
+  P <- matrix(nrow = p, data = rnorm(k * p))
+  for (i in 1:m) {
+    l <- calc_RSS(X, y, P)
+    # selection:
+    ii <- rep(order(l)[1:(k / 2)], 2)
+    P <- P[, ii]
+    # mutation:
+    P <- P * rlnorm(length(P), sdlog = s)
+  }
+  P  
+}
+```
+
+### Small population
+```{r}
+genetic_algorithm_optimizer(X, y, 6)
+lm(y ~ - 1 + ., data = dat)
+```
+* Results are okay, but parameters can't change sign during evolution since mutation is implemented multiplicatively 
+
+### Large population
+```{r}
+genetic_algorithm_optimizer(X, y, 60)[, 1:6]
+lm(y ~ - 1 + ., data = dat)
+```
+* Better results
+
+

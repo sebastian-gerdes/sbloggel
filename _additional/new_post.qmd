@@ -18,8 +18,8 @@ set.seed(1)
 ```{r}
 #| label: new_post
 #| execute: false
-post_title <- "Presentation for Vorstand"
-post_date <- '2024-03-04'
+post_title <- "Genetic algorithm"
+post_date <- '2024-03-12'
 post_date <- format(Sys.Date(), "%Y-%m-%d")
 
 post_filename <- gsub(" ", "-", tolower(paste0(post_date, '-', post_title)))

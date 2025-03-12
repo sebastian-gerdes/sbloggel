@@ -94,3 +94,8 @@ ll <- tribble(~ x, ~ y, ~ l,
 p + geom_label(aes(x, y, label = l), ll, inherit.aes = FALSE)
 
 ```
+
+```{r}
+
+```
+

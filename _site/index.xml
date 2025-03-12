@@ -10,7 +10,456 @@
 <atom:link href="https://sbloggel.netlify.app/index.xml" rel="self" type="application/rss+xml"/>
 <description>Seb&#39;s private blog about statistics and other topics</description>
 <generator>quarto-1.4.553</generator>
-<lastBuildDate>Mon, 03 Mar 2025 23:00:00 GMT</lastBuildDate>
+<lastBuildDate>Tue, 11 Mar 2025 23:00:00 GMT</lastBuildDate>
+<item>
+  <title>Genetic algorithm</title>
+  <link>https://sbloggel.netlify.app/posts/2025-03-12-genetic-algorithm/2025-03-12-genetic-algorithm.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="background" class="level2">
+
+<ul>
+<li>We want to fit a model with parameters to data</li>
+<li>Given: Data points and a function to calculate a loss function for a given parameter set</li>
+<li>What we don’t have: Derivative of the loss function with respect to the parameters – hence, gradient-descent-type approaches don’t work</li>
+<li>Genetic algorithms are a population-based heuristic method that can optimize even when the loss function is non-differentiable or discontinuous</li>
+</ul>
+</section>
+<section id="example" class="level2">
+<h2 class="anchored" data-anchor-id="example">Example</h2>
+<section id="true-model" class="level3">
+<h3 class="anchored" data-anchor-id="true-model">True model</h3>
+<ul>
+<li>We have a linear model with <img src="https://latex.codecogs.com/png.latex?n"> data points and <img src="https://latex.codecogs.com/png.latex?p"> predictors: <img src="https://latex.codecogs.com/png.latex?%0Ay%20=%20X%5Cbeta%20+%20%5Cepsilon,%20%5Cepsilon_i%20%5Csim%20%5Cmathcal%7BN%7D%0A"></li>
+<li>The true value of <img src="https://latex.codecogs.com/png.latex?%5Cbeta"> is also sampled from a normal distribution</li>
+</ul>
+</section>
+<section id="optimization-algorithm" class="level3">
+<h3 class="anchored" data-anchor-id="optimization-algorithm">Optimization algorithm</h3>
+<ul>
+<li>We define the residual sum of squares (RSS) as our loss function</li>
+<li>We sample a “population” of <img src="https://latex.codecogs.com/png.latex?k"> <img src="https://latex.codecogs.com/png.latex?%5Cbeta"> vectors from a normal distribution and store them in a <img src="https://latex.codecogs.com/png.latex?p%20%5Ctimes%20k"> matrix</li>
+<li>We repeat <img src="https://latex.codecogs.com/png.latex?m"> times:
+<ul>
+<li><em>Selection</em>: We select and duplicate the “better” half (=smaller RSS) of the individuals</li>
+<li><em>Mutation</em>: We nudge the elements of <img src="https://latex.codecogs.com/png.latex?P"> by element-wise multiplication with a matrix with identical dimesion filled with values sampled from a log-normal distribution with log_mean=0 and log_sd=s</li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="simulate-data" class="level2">
+<h2 class="anchored" data-anchor-id="simulate-data">Simulate data</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">set.seed</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)</span>
+<span id="cb1-2">n <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5</span>              <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># number of data points</span></span>
+<span id="cb1-3">p <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>              <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># number of predictors</span></span>
+<span id="cb1-4">beta <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rnorm</span>(p)    </span>
+<span id="cb1-5">X <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">matrix</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">ncol =</span> p, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">data =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rnorm</span>(n <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> p))</span>
+<span id="cb1-6">y <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> (X <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%*%</span> beta)[, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>]</span>
+<span id="cb1-7">dat <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">as.data.frame</span>(X)</span>
+<span id="cb1-8">dat<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>y <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> y</span></code></pre></div>
+</div>
+</section>
+<section id="step-by-step" class="level2">
+<h2 class="anchored" data-anchor-id="step-by-step">Step by step</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Create parameter population:</span></span>
+<span id="cb2-2">k <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">6</span></span>
+<span id="cb2-3">P <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">matrix</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">nrow =</span> p, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">data =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rnorm</span>(k <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> p))</span>
+<span id="cb2-4"></span>
+<span id="cb2-5"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Predict for first population:</span></span>
+<span id="cb2-6">X <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%*%</span> P[, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>]</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           [,1]
+[1,] -0.3832234
+[2,]  1.1230143
+[3,]  0.1827698
+[4,]  0.6169370
+[5,]  1.1047364</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Predict for all populations:</span></span>
+<span id="cb4-2">X <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%*%</span> P</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           [,1]       [,2]        [,3]       [,4]       [,5]        [,6]
+[1,] -0.3832234  5.6964771  1.30151853 -3.5471881  1.2497159  0.04036905
+[2,]  1.1230143 -2.0029345  0.04611928  0.1315525  0.9151894 -0.06403140
+[3,]  0.1827698 -0.4396034 -0.58640135  0.4650680 -1.2875657 -2.01902017
+[4,]  0.6169370  0.4425127  0.28276204 -0.9100576  0.6159123 -0.55634462
+[5,]  1.1047364 -1.3464744  0.34545667 -0.3943782  1.4329011  0.42407279</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Residuals for all populations:</span></span>
+<span id="cb6-2">X <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%*%</span> P <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> y</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           [,1]        [,2]       [,3]       [,4]       [,5]       [,6]
+[1,] -1.3402586  4.73944187  0.3444833 -4.5042233  0.2926806 -0.9166662
+[2,]  2.3255427 -0.80040612  1.2486477  1.3340809  2.1177178  1.1384970
+[3,] -0.6463920 -1.26876529 -1.4155632 -0.3640939 -2.1167275 -2.8481820
+[4,]  0.8371676  0.66274337  0.5029927 -0.6898270  0.8361429 -0.3361140
+[5,]  2.4700460  0.01883515  1.7107662  0.9709313  2.7982106  1.7893823</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Define function to calc RSS:</span></span>
+<span id="cb8-2">calc_RSS <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">function</span>(X, y, P) {</span>
+<span id="cb8-3">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">apply</span>((X <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%*%</span> P <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> y)<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">^</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>, sum)</span>
+<span id="cb8-4">}</span>
+<span id="cb8-5"></span>
+<span id="cb8-6"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Calc RSS:</span></span>
+<span id="cb8-7">(l <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">calc_RSS</span>(X, y, P))</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 14.424241 25.152308  6.861332 23.618933 17.580044 13.563455</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># determine indices of better half of population:</span></span>
+<span id="cb10-2">(ii <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">order</span>(l)[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span>(k <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>)])</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3 6 1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># select better half and replicate:</span></span>
+<span id="cb12-2">(P <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> P[, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rep</span>(ii, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">each =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>)])</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            [,1]        [,2]        [,3]        [,4]      [,5]      [,6]
+[1,]  0.61982575  0.61982575 -0.05380504 -0.05380504 0.8212212 0.8212212
+[2,] -0.05612874 -0.05612874 -1.37705956 -1.37705956 0.5939013 0.5939013
+[3,] -0.15579551 -0.15579551 -0.41499456 -0.41499456 0.9189774 0.9189774</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># mutate population:</span></span>
+<span id="cb14-2">(P <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> P <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rlnorm</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">length</span>(P), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">sdlog =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.05</span>))</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            [,1]        [,2]       [,3]        [,4]      [,5]      [,6]
+[1,]  0.60772586  0.64393460 -0.0557131 -0.05193497 0.8166211 0.7964714
+[2,] -0.05596253 -0.05566891 -1.4159259 -1.40239231 0.6206508 0.6041178
+[3,] -0.16460449 -0.15383432 -0.4009464 -0.43125177 0.9374532 0.8685224</code></pre>
+</div>
+</div>
+</section>
+<section id="whole-game" class="level2">
+<h2 class="anchored" data-anchor-id="whole-game">Whole game</h2>
+<section id="put-algorithm-in-a-function" class="level3">
+<h3 class="anchored" data-anchor-id="put-algorithm-in-a-function">Put algorithm in a function</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1">genetic_algorithm_optimizer <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">function</span>(X, y, k, </span>
+<span id="cb16-2">                                        <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">m =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1000</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">s =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.01</span>) {</span>
+<span id="cb16-3">  P <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">matrix</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">nrow =</span> p, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">data =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rnorm</span>(k <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> p))</span>
+<span id="cb16-4">  <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span> (i <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span>m) {</span>
+<span id="cb16-5">    l <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">calc_RSS</span>(X, y, P)</span>
+<span id="cb16-6">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># selection:</span></span>
+<span id="cb16-7">    ii <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rep</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">order</span>(l)[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span>(k <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>)], <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>)</span>
+<span id="cb16-8">    P <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> P[, ii]</span>
+<span id="cb16-9">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># mutation:</span></span>
+<span id="cb16-10">    P <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> P <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rlnorm</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">length</span>(P), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">sdlog =</span> s)</span>
+<span id="cb16-11">  }</span>
+<span id="cb16-12">  P  </span>
+<span id="cb16-13">}</span></code></pre></div>
+</div>
+</section>
+<section id="small-population" class="level3">
+<h3 class="anchored" data-anchor-id="small-population">Small population</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">genetic_algorithm_optimizer</span>(X, y, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">6</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           [,1]       [,2]       [,3]       [,4]       [,5]       [,6]
+[1,] -0.6364423 -0.6299070 -0.6076711 -0.6278940 -0.6314925 -0.6283499
+[2,]  0.1784633  0.1755761  0.1826721  0.1812118  0.1800918  0.1824767
+[3,] -0.8465504 -0.8483334 -0.8522356 -0.8475345 -0.8417183 -0.8411407</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb19" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">lm</span>(y <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> ., <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">data =</span> dat)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = y ~ -1 + ., data = dat)
+
+Coefficients:
+     V1       V2       V3  
+-0.6265   0.1836  -0.8356  </code></pre>
+</div>
+</div>
+<ul>
+<li>Results are okay, but parameters can’t change sign during evolution since mutation is implemented multiplicatively</li>
+</ul>
+</section>
+<section id="large-population" class="level3">
+<h3 class="anchored" data-anchor-id="large-population">Large population</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">genetic_algorithm_optimizer</span>(X, y, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">60</span>)[, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">6</span>]</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           [,1]       [,2]       [,3]       [,4]       [,5]       [,6]
+[1,] -0.6258730 -0.6286011 -0.6305282 -0.6261831 -0.6248831 -0.6178036
+[2,]  0.1823096  0.1859037  0.1841273  0.1850353  0.1836412  0.1866136
+[3,] -0.8371392 -0.8369705 -0.8428443 -0.8353467 -0.8504041 -0.8184441</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb23" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">lm</span>(y <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> ., <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">data =</span> dat)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = y ~ -1 + ., data = dat)
+
+Coefficients:
+     V1       V2       V3  
+-0.6265   0.1836  -0.8356  </code></pre>
+</div>
+</div>
+<ul>
+<li>Better results</li>
+</ul>
+
+
+</section>
+</section>
+
+ ]]></description>
+  <category>R</category>
+  <guid>https://sbloggel.netlify.app/posts/2025-03-12-genetic-algorithm/2025-03-12-genetic-algorithm.html</guid>
+  <pubDate>Tue, 11 Mar 2025 23:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Presentation for Vorstand</title>
   <link>https://sbloggel.netlify.app/posts/2025-03-04-presentation-for-vorstand/2025-03-04-presentation-for-vorstand.html</link>
@@ -4055,236 +4504,6 @@ font-style: inherit;">8e7</span>)</span></code></pre></div>
   <category>Sustainibility</category>
   <guid>https://sbloggel.netlify.app/posts/2024-09-24-energie/2024-09-24-energie.html</guid>
   <pubDate>Mon, 23 Sep 2024 22:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Testing the package summarytools</title>
-  <link>https://sbloggel.netlify.app/posts/2024-09-17-testing-the-package-summarytools/2024-09-17-testing-the-package-summarytools.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'summarytools'</span>)</span></code></pre></div>
-</div>
-<section id="standard-settings" class="level2">
-<h2 class="anchored" data-anchor-id="standard-settings">Standard settings</h2>
-<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">dfSummary</span>(iris)</span></code></pre></div>
-<p>Data Frame Summary<br>
-iris<br>
-Dimensions: 150 x 5<br>
-Duplicates: 1</p>
-<table class="table">
-<colgroup>
-<col style="width: 4%">
-<col style="width: 13%">
-<col style="width: 22%">
-<col style="width: 19%">
-<col style="width: 20%">
-<col style="width: 10%">
-<col style="width: 10%">
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: left;">No</th>
-<th style="text-align: left;">Variable</th>
-<th style="text-align: left;">Stats / Values</th>
-<th style="text-align: left;">Freqs (% of Valid)</th>
-<th style="text-align: left;">Graph</th>
-<th style="text-align: left;">Valid</th>
-<th style="text-align: left;">Missing</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">1</td>
-<td style="text-align: left;">Sepal.Length [numeric]</td>
-<td style="text-align: left;">Mean (sd) : 5.8 (0.8) min &lt; med &lt; max: 4.3 &lt; 5.8 &lt; 7.9 IQR (CV) : 1.3 (0.1)</td>
-<td style="text-align: left;">35 distinct values</td>
-<td style="text-align: left;">. . : : : : : : : : : : : : : : : : : : : : : : : :</td>
-<td style="text-align: left;">150 (100.0%)</td>
-<td style="text-align: left;">0 (0.0%)</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">2</td>
-<td style="text-align: left;">Sepal.Width [numeric]</td>
-<td style="text-align: left;">Mean (sd) : 3.1 (0.4) min &lt; med &lt; max: 2 &lt; 3 &lt; 4.4 IQR (CV) : 0.5 (0.1)</td>
-<td style="text-align: left;">23 distinct values</td>
-<td style="text-align: left;">: : . : : : : : . . : : : : : :</td>
-<td style="text-align: left;">150 (100.0%)</td>
-<td style="text-align: left;">0 (0.0%)</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">3</td>
-<td style="text-align: left;">Petal.Length [numeric]</td>
-<td style="text-align: left;">Mean (sd) : 3.8 (1.8) min &lt; med &lt; max: 1 &lt; 4.3 &lt; 6.9 IQR (CV) : 3.5 (0.5)</td>
-<td style="text-align: left;">43 distinct values</td>
-<td style="text-align: left;">: : . : : : : . : : : : : . : : . : : : : : .</td>
-<td style="text-align: left;">150 (100.0%)</td>
-<td style="text-align: left;">0 (0.0%)</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">4</td>
-<td style="text-align: left;">Petal.Width [numeric]</td>
-<td style="text-align: left;">Mean (sd) : 1.2 (0.8) min &lt; med &lt; max: 0.1 &lt; 1.3 &lt; 2.5 IQR (CV) : 1.5 (0.6)</td>
-<td style="text-align: left;">22 distinct values</td>
-<td style="text-align: left;">: : : . . : : : : : . : : : : : . : : :</td>
-<td style="text-align: left;">150 (100.0%)</td>
-<td style="text-align: left;">0 (0.0%)</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">5</td>
-<td style="text-align: left;">Species [factor]</td>
-<td style="text-align: left;">1. setosa 2. versicolor 3. virginica</td>
-<td style="text-align: left;">50 (33.3%) 50 (33.3%) 50 (33.3%)</td>
-<td style="text-align: left;">IIIIII IIIIII IIIIII</td>
-<td style="text-align: left;">150 (100.0%)</td>
-<td style="text-align: left;">0 (0.0%)</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="with-images" class="level2">
-<h2 class="anchored" data-anchor-id="with-images">With images</h2>
-<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">dfSummary</span>(iris,</span>
-<span id="cb3-2">          <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">plain.ascii  =</span> <span class="cn" style="color: #8f5902;
-background-color: null;
-font-style: inherit;">FALSE</span>, </span>
-<span id="cb3-3">          <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">style        =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"grid"</span>, </span>
-<span id="cb3-4">          <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">graph.magnif =</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.75</span>, </span>
-<span id="cb3-5">          <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">valid.col    =</span> <span class="cn" style="color: #8f5902;
-background-color: null;
-font-style: inherit;">FALSE</span>,</span>
-<span id="cb3-6">          <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">tmp.img.dir  =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"plots"</span>)</span></code></pre></div>
-<pre><code>temporary images written to '/Users/seb/Documents/Projects/00_websites/sbloggel/posts/2024-09-17-testing-the-package-summarytools/plots'</code></pre>
-<section id="data-frame-summary" class="level3">
-<h3 class="anchored" data-anchor-id="data-frame-summary">Data Frame Summary</h3>
-<section id="iris" class="level4">
-<h4 class="anchored" data-anchor-id="iris">iris</h4>
-<p><strong>Dimensions:</strong> 150 x 5<br>
-<strong>Duplicates:</strong> 1</p>
-<table class="table">
-<colgroup>
-<col style="width: 4%">
-<col style="width: 15%">
-<col style="width: 23%">
-<col style="width: 20%">
-<col style="width: 22%">
-<col style="width: 9%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>No</th>
-<th>Variable</th>
-<th>Stats / Values</th>
-<th>Freqs (% of Valid)</th>
-<th>Graph</th>
-<th>Missing</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>1</td>
-<td>Sepal.Length<br>
-[numeric]</td>
-<td>Mean (sd) : 5.8 (0.8)<br>
-min &lt; med &lt; max:<br>
-4.3 &lt; 5.8 &lt; 7.9<br>
-IQR (CV) : 1.3 (0.1)</td>
-<td>35 distinct values</td>
-<td><img src="https://sbloggel.netlify.app/posts/2024-09-17-testing-the-package-summarytools/plots/ds0006.png" class="img-fluid"></td>
-<td>0<br>
-(0.0%)</td>
-</tr>
-<tr class="even">
-<td>2</td>
-<td>Sepal.Width<br>
-[numeric]</td>
-<td>Mean (sd) : 3.1 (0.4)<br>
-min &lt; med &lt; max:<br>
-2 &lt; 3 &lt; 4.4<br>
-IQR (CV) : 0.5 (0.1)</td>
-<td>23 distinct values</td>
-<td><img src="https://sbloggel.netlify.app/posts/2024-09-17-testing-the-package-summarytools/plots/ds0007.png" class="img-fluid"></td>
-<td>0<br>
-(0.0%)</td>
-</tr>
-<tr class="odd">
-<td>3</td>
-<td>Petal.Length<br>
-[numeric]</td>
-<td>Mean (sd) : 3.8 (1.8)<br>
-min &lt; med &lt; max:<br>
-1 &lt; 4.3 &lt; 6.9<br>
-IQR (CV) : 3.5 (0.5)</td>
-<td>43 distinct values</td>
-<td><img src="https://sbloggel.netlify.app/posts/2024-09-17-testing-the-package-summarytools/plots/ds0008.png" class="img-fluid"></td>
-<td>0<br>
-(0.0%)</td>
-</tr>
-<tr class="even">
-<td>4</td>
-<td>Petal.Width<br>
-[numeric]</td>
-<td>Mean (sd) : 1.2 (0.8)<br>
-min &lt; med &lt; max:<br>
-0.1 &lt; 1.3 &lt; 2.5<br>
-IQR (CV) : 1.5 (0.6)</td>
-<td>22 distinct values</td>
-<td><img src="https://sbloggel.netlify.app/posts/2024-09-17-testing-the-package-summarytools/plots/ds0009.png" class="img-fluid"></td>
-<td>0<br>
-(0.0%)</td>
-</tr>
-<tr class="odd">
-<td>5</td>
-<td>Species<br>
-[factor]</td>
-<td>1. setosa<br>
-2. versicolor<br>
-3. virginica</td>
-<td>50 (33.3%)<br>
-50 (33.3%)<br>
-50 (33.3%)</td>
-<td><img src="https://sbloggel.netlify.app/posts/2024-09-17-testing-the-package-summarytools/plots/ds0010.png" class="img-fluid"></td>
-<td>0<br>
-(0.0%)</td>
-</tr>
-</tbody>
-</table>
-
-
-</section>
-</section>
-</section>
-
- ]]></description>
-  <category>R</category>
-  <guid>https://sbloggel.netlify.app/posts/2024-09-17-testing-the-package-summarytools/2024-09-17-testing-the-package-summarytools.html</guid>
-  <pubDate>Mon, 16 Sep 2024 22:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
