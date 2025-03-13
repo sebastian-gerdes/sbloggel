@@ -115,3 +115,5 @@ plot(sol$rss_history,
 data.frame(analytic_solution = coef(lm(y ~ - 1 + ., data = dat)), 
            genetic_algorithm_solution = sol$P[, 1]) 
 ```
+
+* Genetic algorithm seems to have difficulties "finding" solutions with the correct sign of the first element of $\beta$ for small populations -- larger populations (e. g. *k = 1000*) do the job quite reliably
