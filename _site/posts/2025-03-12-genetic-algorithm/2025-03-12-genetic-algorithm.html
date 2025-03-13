@@ -422,8 +422,11 @@ y = X\beta + \epsilon, \epsilon_i \sim \mathcal{N}
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">analytic_solution =</span> <span class="fu">coef</span>(<span class="fu">lm</span>(y <span class="sc">~</span> <span class="sc">-</span> <span class="dv">1</span> <span class="sc">+</span> ., <span class="at">data =</span> dat)), </span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">genetic_algorithm_solution =</span> sol<span class="sc">$</span>P[, <span class="dv">1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Comparing the results of linear model solution and genetic algorithm</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co"># when converged, all individuals should be very similar </span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co"># --&gt; showing only individual 1:</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">analytic_solution =</span> <span class="fu">coef</span>(<span class="fu">lm</span>(y <span class="sc">~</span> <span class="sc">-</span> <span class="dv">1</span> <span class="sc">+</span> ., <span class="at">data =</span> dat)), </span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">genetic_algorithm_solution =</span> sol<span class="sc">$</span>P[, <span class="dv">1</span>]) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   analytic_solution genetic_algorithm_solution
 V1        0.09093336               -0.005674275

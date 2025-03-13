@@ -456,7 +456,16 @@ font-style: inherit;">'Iteration'</span>)</span></code></pre></div>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb18" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><span class="fu" style="color: #4758AB;
+<div class="sourceCode cell-code" id="cb18" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Comparing the results of linear model solution and genetic algorithm</span></span>
+<span id="cb18-2"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># when converged, all individuals should be very similar </span></span>
+<span id="cb18-3"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># --&gt; showing only individual 1:</span></span>
+<span id="cb18-4"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">data.frame</span>(<span class="at" style="color: #657422;
 background-color: null;
@@ -475,13 +484,13 @@ background-color: null;
 font-style: inherit;">+</span> ., <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">data =</span> dat)), </span>
-<span id="cb18-2">           <span class="at" style="color: #657422;
+<span id="cb18-5">           <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">genetic_algorithm_solution =</span> sol<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">$</span>P[, <span class="dv" style="color: #AD0000;
 background-color: null;
-font-style: inherit;">1</span>])</span></code></pre></div>
+font-style: inherit;">1</span>]) </span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   analytic_solution genetic_algorithm_solution
 V1        0.09093336               -0.005674275

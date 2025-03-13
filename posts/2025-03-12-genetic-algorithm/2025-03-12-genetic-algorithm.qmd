@@ -109,6 +109,9 @@ plot(sol$rss_history,
      ylab = 'RSS on log scale', 
      xlab = 'Iteration')
 
+# Comparing the results of linear model solution and genetic algorithm
+# when converged, all individuals should be very similar 
+# --> showing only individual 1:
 data.frame(analytic_solution = coef(lm(y ~ - 1 + ., data = dat)), 
-           genetic_algorithm_solution = sol$P[, 1])
+           genetic_algorithm_solution = sol$P[, 1]) 
 ```
