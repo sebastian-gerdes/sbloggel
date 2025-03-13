@@ -23,7 +23,8 @@ $$
 * We sample a "population" of $k$  $\beta$ vectors from a normal distribution and store them in a $p \times k$ matrix 
 * We repeat $m$ times:
   * *Selection*: The top 50% of individuals (i.e., those with the lowest RSS) are selected and then duplicated to maintain the population size
-  * *Mutation*: We nudge the elements of $P$ by element-wise multiplication with a matrix with identical dimension filled with values sampled from a log-normal distribution with log_mean=0 and log_sd=s -- all updates maintain the sign of the parameter (=limitation of the algorithm)
+  * *Mutation*: We nudge the elements of $P$ by element-wise multiplication with a matrix with identical dimension filled with values sampled from a log-normal distribution with *log_mean=0* and *log_sd=s*
+    * all updates maintain the sign of the parameter (=limitation of the algorithm)
 
 ## Simulate data
 ```{r}
@@ -92,11 +93,15 @@ genetic_algorithm_optimizer <- function(X, y, k,
 ```
 
 ### Run algorithm
+* Some suggestions for playing around with tuning parameters:
+  * Vary number of individuals $k$ from 2 to 1000 (only non-odd integers please)
+  * Vary number of iterations $m$ from 10 to 1000 (look at plot of RSS to adjust in a smart fashion)
+  * Vary standard deviation on log scale of mutation strength $s$ from 0.001 to 0.1
 ```{r}
 sol <- genetic_algorithm_optimizer(X, y, 
-                                   k = 100,
+                                   k = 10,
                                    m = 1000, 
-                                   s = 0.002)
+                                   s = 0.01)
 plot(sol$rss_history, 
      type = 'l', 
      log = 'y', 
@@ -104,7 +109,6 @@ plot(sol$rss_history,
      ylab = 'RSS on log scale', 
      xlab = 'Iteration')
 
-data.frame(analytic = coef(lm(y ~ - 1 + ., data = dat)), 
-           genetic = sol$P[, 1])
+data.frame(analytic_solution = coef(lm(y ~ - 1 + ., data = dat)), 
+           genetic_algorithm_solution = sol$P[, 1])
 ```
-* 

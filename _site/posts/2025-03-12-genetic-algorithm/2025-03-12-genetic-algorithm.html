@@ -281,7 +281,10 @@ y = X\beta + \epsilon, \epsilon_i \sim \mathcal{N}
 <li>We repeat <span class="math inline">\(m\)</span> times:
 <ul>
 <li><em>Selection</em>: The top 50% of individuals (i.e., those with the lowest RSS) are selected and then duplicated to maintain the population size</li>
-<li><em>Mutation</em>: We nudge the elements of <span class="math inline">\(P\)</span> by element-wise multiplication with a matrix with identical dimension filled with values sampled from a log-normal distribution with log_mean=0 and log_sd=s – all updates maintain the sign of the parameter (=limitation of the algorithm)</li>
+<li><em>Mutation</em>: We nudge the elements of <span class="math inline">\(P\)</span> by element-wise multiplication with a matrix with identical dimension filled with values sampled from a log-normal distribution with <em>log_mean=0</em> and <em>log_sd=s</em>
+<ul>
+<li>all updates maintain the sign of the parameter (=limitation of the algorithm)</li>
+</ul></li>
 </ul></li>
 </ul>
 </section>
@@ -393,11 +396,19 @@ y = X\beta + \epsilon, \epsilon_i \sim \mathcal{N}
 </section>
 <section id="run-algorithm" class="level3">
 <h3 class="anchored" data-anchor-id="run-algorithm">Run algorithm</h3>
+<ul>
+<li>Some suggestions for playing around with tuning parameters:
+<ul>
+<li>Vary number of individuals <span class="math inline">\(k\)</span> from 2 to 1000 (only non-odd integers please)</li>
+<li>Vary number of iterations <span class="math inline">\(m\)</span> from 10 to 1000 (look at plot of RSS to adjust in a smart fashion)</li>
+<li>Vary standard deviation on log scale of mutation strength <span class="math inline">\(s\)</span> from 0.001 to 0.1</li>
+</ul></li>
+</ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>sol <span class="ot">&lt;-</span> <span class="fu">genetic_algorithm_optimizer</span>(X, y, </span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">k =</span> <span class="dv">100</span>,</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">k =</span> <span class="dv">10</span>,</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">m =</span> <span class="dv">1000</span>, </span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">s =</span> <span class="fl">0.002</span>)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">s =</span> <span class="fl">0.01</span>)</span>
 <span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(sol<span class="sc">$</span>rss_history, </span>
 <span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">type =</span> <span class="st">'l'</span>, </span>
 <span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">log =</span> <span class="st">'y'</span>, </span>
@@ -411,18 +422,15 @@ y = X\beta + \epsilon, \epsilon_i \sim \mathcal{N}
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">analytic =</span> <span class="fu">coef</span>(<span class="fu">lm</span>(y <span class="sc">~</span> <span class="sc">-</span> <span class="dv">1</span> <span class="sc">+</span> ., <span class="at">data =</span> dat)), </span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">genetic =</span> sol<span class="sc">$</span>P[, <span class="dv">1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">analytic_solution =</span> <span class="fu">coef</span>(<span class="fu">lm</span>(y <span class="sc">~</span> <span class="sc">-</span> <span class="dv">1</span> <span class="sc">+</span> ., <span class="at">data =</span> dat)), </span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">genetic_algorithm_solution =</span> sol<span class="sc">$</span>P[, <span class="dv">1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>      analytic      genetic
-V1  0.09093336 -0.006984711
-V2  1.23160902  1.172393260
-V3 -0.41057390 -0.463592375</code></pre>
+<pre><code>   analytic_solution genetic_algorithm_solution
+V1        0.09093336               -0.005674275
+V2        1.23160902                1.175974150
+V3       -0.41057390               -0.459881868</code></pre>
 </div>
 </div>
-<ul>
-<li></li>
-</ul>
 
 
 </section>
