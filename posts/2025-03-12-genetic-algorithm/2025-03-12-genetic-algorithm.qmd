@@ -12,7 +12,7 @@ categories:
 
 ## Example
 ### True model
-* We have a linear model with $n$ data points and $p$ predictors:
+* We assume a linear model with $n$ data points and $p$ predictors:
 $$
 y = X\beta + \epsilon, \epsilon_i \sim \mathcal{N}
 $$
@@ -22,8 +22,8 @@ $$
 * We define the residual sum of squares (RSS) as our loss function
 * We sample a "population" of $k$  $\beta$ vectors from a normal distribution and store them in a $p \times k$ matrix 
 * We repeat $m$ times:
-  * *Selection*: We select and duplicate the "better" half (=smaller RSS) of the individuals
-  * *Mutation*: We nudge the elements of $P$ by element-wise multiplication with a matrix with identical dimesion filled with values sampled from a log-normal distribution with log_mean=0 and log_sd=s
+  * *Selection*: The top 50% of individuals (i.e., those with the lowest RSS) are selected and then duplicated to maintain the population size
+  * *Mutation*: We nudge the elements of $P$ by element-wise multiplication with a matrix with identical dimension filled with values sampled from a log-normal distribution with log_mean=0 and log_sd=s -- all updates maintain the sign of the parameter (=limitation of the algorithm)
 
 ## Simulate data
 ```{r}
@@ -32,7 +32,7 @@ n <- 5              # number of data points
 p <- 3              # number of predictors
 beta <- rnorm(p)    
 X <- matrix(ncol = p, data = rnorm(n * p))
-y <- (X %*% beta)[, 1]
+y <- (X %*% beta)[, 1] + rnorm(n)
 dat <- as.data.frame(X)
 dat$y <- y
 ```
@@ -76,31 +76,35 @@ calc_RSS <- function(X, y, P) {
 ```{r}
 genetic_algorithm_optimizer <- function(X, y, k, 
                                         m = 1000, s = 0.01) {
-  P <- matrix(nrow = p, data = rnorm(k * p))
+  P <- matrix(nrow = p, data = rnorm(k * p)) 
+  rss_history <- vector(length = m)
   for (i in 1:m) {
     l <- calc_RSS(X, y, P)
-    # selection:
+    rss_history[i] <- min(l)
+    # Selection: Keep the top 50% with lowest RSS and duplicate them
     ii <- rep(order(l)[1:(k / 2)], 2)
     P <- P[, ii]
-    # mutation:
+    # Mutation:
     P <- P * rlnorm(length(P), sdlog = s)
   }
-  P  
+  list(P = P, rss_history = rss_history)
 }
 ```
 
-### Small population
+### Run algorithm
 ```{r}
-genetic_algorithm_optimizer(X, y, 6)
-lm(y ~ - 1 + ., data = dat)
+sol <- genetic_algorithm_optimizer(X, y, 
+                                   k = 100,
+                                   m = 1000, 
+                                   s = 0.002)
+plot(sol$rss_history, 
+     type = 'l', 
+     log = 'y', 
+     main = 'RSS of "best individual"', 
+     ylab = 'RSS on log scale', 
+     xlab = 'Iteration')
+
+data.frame(analytic = coef(lm(y ~ - 1 + ., data = dat)), 
+           genetic = sol$P[, 1])
 ```
-* Results are okay, but parameters can't change sign during evolution since mutation is implemented multiplicatively 
-
-### Large population
-```{r}
-genetic_algorithm_optimizer(X, y, 60)[, 1:6]
-lm(y ~ - 1 + ., data = dat)
-```
-* Better results
-
-
+* 
