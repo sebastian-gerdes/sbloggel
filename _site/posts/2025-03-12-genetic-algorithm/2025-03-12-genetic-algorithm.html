@@ -377,21 +377,39 @@ y = X\beta + \epsilon, \epsilon_i \sim \mathcal{N}
 <section id="put-algorithm-in-a-function" class="level3">
 <h3 class="anchored" data-anchor-id="put-algorithm-in-a-function">Put algorithm in a function</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>genetic_algorithm_optimizer <span class="ot">&lt;-</span> <span class="cf">function</span>(X, y, k, </span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">m =</span> <span class="dv">1000</span>, <span class="at">s =</span> <span class="fl">0.01</span>) {</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  P <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="at">nrow =</span> p, <span class="at">data =</span> <span class="fu">rnorm</span>(k <span class="sc">*</span> p)) </span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  rss_history <span class="ot">&lt;-</span> <span class="fu">vector</span>(<span class="at">length =</span> m)</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>m) {</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    l <span class="ot">&lt;-</span> <span class="fu">calc_RSS</span>(X, y, P)</span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    rss_history[i] <span class="ot">&lt;-</span> <span class="fu">min</span>(l)</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Selection: Keep the top 50% with lowest RSS and duplicate them</span></span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>    ii <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fu">order</span>(l)[<span class="dv">1</span><span class="sc">:</span>(k <span class="sc">/</span> <span class="dv">2</span>)], <span class="dv">2</span>)</span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>    P <span class="ot">&lt;-</span> P[, ii]</span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Mutation:</span></span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>    P <span class="ot">&lt;-</span> P <span class="sc">*</span> <span class="fu">rlnorm</span>(<span class="fu">length</span>(P), <span class="at">sdlog =</span> s)</span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list</span>(<span class="at">P =</span> P, <span class="at">rss_history =</span> rss_history)</span>
-<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">#' Genetic Algorithm Optimizer</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co">#'</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co">#' Implements a genetic algorithm to optimize a parameter matrix for minimizing residual sum of squares (RSS).</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co">#'</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co">#' @param X A matrix of predictor variables.</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co">#' @param y A numeric vector of response values.</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="co">#' @param k An integer specifying the number of parameter sets (population size).</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="co">#' @param m An integer specifying the number of iterations (default: 1000).</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="co">#' @param s A numeric value specifying the standard deviation of the log-normal mutation factor (default: 0.01).</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="co">#'</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="co">#' @return A list containing:</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="co">#' \describe{</span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="co">#'   \item{P}{A matrix of optimized parameter sets.}</span></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a><span class="co">#'   \item{rss_history}{A numeric vector of minimum RSS values across iterations.}</span></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="co">#' }</span></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a><span class="co">#'</span></span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a><span class="co">#' @details</span></span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a><span class="co">#' This function applies a genetic algorithm to optimize parameters for a given dataset. It initializes a random population of parameters, evaluates the RSS, selects the best-performing half of the population, duplicates them, and applies mutations.</span></span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>genetic_algorithm_optimizer <span class="ot">&lt;-</span> <span class="cf">function</span>(X, y, k, </span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">m =</span> <span class="dv">1000</span>, <span class="at">s =</span> <span class="fl">0.01</span>) {</span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>  P <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="at">nrow =</span> p, <span class="at">data =</span> <span class="fu">rnorm</span>(k <span class="sc">*</span> p)) </span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>  rss_history <span class="ot">&lt;-</span> <span class="fu">vector</span>(<span class="at">length =</span> m)</span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>m) {</span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>    l <span class="ot">&lt;-</span> <span class="fu">calc_RSS</span>(X, y, P)</span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>    rss_history[i] <span class="ot">&lt;-</span> <span class="fu">min</span>(l)</span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Selection: Keep the top 50% with lowest RSS and duplicate them</span></span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a>    ii <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fu">order</span>(l)[<span class="dv">1</span><span class="sc">:</span>(k <span class="sc">/</span> <span class="dv">2</span>)], <span class="dv">2</span>)</span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a>    P <span class="ot">&lt;-</span> P[, ii]</span>
+<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Mutation:</span></span>
+<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a>    P <span class="ot">&lt;-</span> P <span class="sc">*</span> <span class="fu">rlnorm</span>(<span class="fu">length</span>(P), <span class="at">sdlog =</span> s)</span>
+<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list</span>(<span class="at">P =</span> P, <span class="at">rss_history =</span> rss_history)</span>
+<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="run-algorithm" class="level3">

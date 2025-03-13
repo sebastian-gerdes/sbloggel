@@ -75,6 +75,24 @@ calc_RSS <- function(X, y, P) {
 ## Whole game
 ### Put algorithm in a function
 ```{r}
+#' Genetic Algorithm Optimizer
+#'
+#' Implements a genetic algorithm to optimize a parameter matrix for minimizing residual sum of squares (RSS).
+#'
+#' @param X A matrix of predictor variables.
+#' @param y A numeric vector of response values.
+#' @param k An integer specifying the number of parameter sets (population size).
+#' @param m An integer specifying the number of iterations (default: 1000).
+#' @param s A numeric value specifying the standard deviation of the log-normal mutation factor (default: 0.01).
+#'
+#' @return A list containing:
+#' \describe{
+#'   \item{P}{A matrix of optimized parameter sets.}
+#'   \item{rss_history}{A numeric vector of minimum RSS values across iterations.}
+#' }
+#'
+#' @details
+#' This function applies a genetic algorithm to optimize parameters for a given dataset. It initializes a random population of parameters, evaluates the RSS, selects the best-performing half of the population, duplicates them, and applies mutations.
 genetic_algorithm_optimizer <- function(X, y, k, 
                                         m = 1000, s = 0.01) {
   P <- matrix(nrow = p, data = rnorm(k * p)) 

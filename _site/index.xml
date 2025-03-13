@@ -287,12 +287,66 @@ font-style: inherit;">0.05</span>))</span></code></pre></div>
 <section id="put-algorithm-in-a-function" class="level3">
 <h3 class="anchored" data-anchor-id="put-algorithm-in-a-function">Put algorithm in a function</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1">genetic_algorithm_optimizer <span class="ot" style="color: #003B4F;
+<div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#' Genetic Algorithm Optimizer</span></span>
+<span id="cb16-2"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#'</span></span>
+<span id="cb16-3"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#' Implements a genetic algorithm to optimize a parameter matrix for minimizing residual sum of squares (RSS).</span></span>
+<span id="cb16-4"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#'</span></span>
+<span id="cb16-5"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#' @param X A matrix of predictor variables.</span></span>
+<span id="cb16-6"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#' @param y A numeric vector of response values.</span></span>
+<span id="cb16-7"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#' @param k An integer specifying the number of parameter sets (population size).</span></span>
+<span id="cb16-8"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#' @param m An integer specifying the number of iterations (default: 1000).</span></span>
+<span id="cb16-9"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#' @param s A numeric value specifying the standard deviation of the log-normal mutation factor (default: 0.01).</span></span>
+<span id="cb16-10"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#'</span></span>
+<span id="cb16-11"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#' @return A list containing:</span></span>
+<span id="cb16-12"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#' \describe{</span></span>
+<span id="cb16-13"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#'   \item{P}{A matrix of optimized parameter sets.}</span></span>
+<span id="cb16-14"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#'   \item{rss_history}{A numeric vector of minimum RSS values across iterations.}</span></span>
+<span id="cb16-15"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#' }</span></span>
+<span id="cb16-16"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#'</span></span>
+<span id="cb16-17"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#' @details</span></span>
+<span id="cb16-18"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#' This function applies a genetic algorithm to optimize parameters for a given dataset. It initializes a random population of parameters, evaluates the RSS, selects the best-performing half of the population, duplicates them, and applies mutations.</span></span>
+<span id="cb16-19">genetic_algorithm_optimizer <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">function</span>(X, y, k, </span>
-<span id="cb16-2">                                        <span class="at" style="color: #657422;
+<span id="cb16-20">                                        <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">m =</span> <span class="dv" style="color: #AD0000;
 background-color: null;
@@ -301,7 +355,7 @@ background-color: null;
 font-style: inherit;">s =</span> <span class="fl" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0.01</span>) {</span>
-<span id="cb16-3">  P <span class="ot" style="color: #003B4F;
+<span id="cb16-21">  P <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -314,14 +368,14 @@ background-color: null;
 font-style: inherit;">rnorm</span>(k <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">*</span> p)) </span>
-<span id="cb16-4">  rss_history <span class="ot" style="color: #003B4F;
+<span id="cb16-22">  rss_history <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">vector</span>(<span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">length =</span> m)</span>
-<span id="cb16-5">  <span class="cf" style="color: #003B4F;
+<span id="cb16-23">  <span class="cf" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">for</span> (i <span class="cf" style="color: #003B4F;
 background-color: null;
@@ -330,20 +384,20 @@ background-color: null;
 font-style: inherit;">1</span><span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">:</span>m) {</span>
-<span id="cb16-6">    l <span class="ot" style="color: #003B4F;
+<span id="cb16-24">    l <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">calc_RSS</span>(X, y, P)</span>
-<span id="cb16-7">    rss_history[i] <span class="ot" style="color: #003B4F;
+<span id="cb16-25">    rss_history[i] <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">min</span>(l)</span>
-<span id="cb16-8">    <span class="co" style="color: #5E5E5E;
+<span id="cb16-26">    <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Selection: Keep the top 50% with lowest RSS and duplicate them</span></span>
-<span id="cb16-9">    ii <span class="ot" style="color: #003B4F;
+<span id="cb16-27">    ii <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -360,13 +414,13 @@ background-color: null;
 font-style: inherit;">2</span>)], <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">2</span>)</span>
-<span id="cb16-10">    P <span class="ot" style="color: #003B4F;
+<span id="cb16-28">    P <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> P[, ii]</span>
-<span id="cb16-11">    <span class="co" style="color: #5E5E5E;
+<span id="cb16-29">    <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Mutation:</span></span>
-<span id="cb16-12">    P <span class="ot" style="color: #003B4F;
+<span id="cb16-30">    P <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> P <span class="sc" style="color: #5E5E5E;
 background-color: null;
@@ -377,15 +431,15 @@ background-color: null;
 font-style: inherit;">length</span>(P), <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">sdlog =</span> s)</span>
-<span id="cb16-13">  }</span>
-<span id="cb16-14">  <span class="fu" style="color: #4758AB;
+<span id="cb16-31">  }</span>
+<span id="cb16-32">  <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">list</span>(<span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">P =</span> P, <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">rss_history =</span> rss_history)</span>
-<span id="cb16-15">}</span></code></pre></div>
+<span id="cb16-33">}</span></code></pre></div>
 </div>
 </section>
 <section id="run-algorithm" class="level3">
