@@ -1,0 +1,76 @@
+---
+title: Zahlenmauern
+date: 2025-04-26
+categories:
+  - R
+---
+
+```{r}
+# i: row of Zahlenmauer
+# j: j-th entry of Zahlenmauer
+
+i_j_to_ii <- function(i, j) {
+  ii <- 0
+  if(i > 1) {
+    ii <- ii + sum(1:(i - 1))
+  }
+  return(ii + j)
+}
+
+ii_to_i_j <- function(ii) {
+  i <- findInterval(ii, cumsum(1:20)) + 1
+  j <- ii - sum(1:(i - 1))
+  return(c(i, j))
+}
+
+ii_to_i_j(8)
+
+
+plot_zahlenmauer <- function() {
+  par(mar = c(0, 0, 0, 0))
+plot(0, type = 'n', xlim = c(0, 1), ylim = c(0, 1), axes = FALSE)
+n <- 7
+w <- 1 / n
+result <- list()
+result[[n]] <- sample(2, n, replace = TRUE)
+for (i in (n - 1):1)
+  result[[i]] <- result[[i + 1]][-1] + result[[i + 1]][-length(result[[i + 1]])]
+
+result_c <- as.character(rev(unlist(result)))
+ii <- sample(length(result_c), sum(1:(n - 1)))
+result_c[ii] <- "____"
+result_c_l <- list()
+ii <- 0
+for(i in n:1) {
+  result_c_l[[i]] <- result_c[ii + (1:i)]
+  ii <- ii + i
+}
+
+
+avg <- function(x) {
+  (x[-1] + x[-length(x)]) / 2
+}
+
+(x <- seq(0, 1, by = w))
+
+
+
+
+for (i in n:1) {
+  (y <- c(1 - i * w, 1 - (i - 1) * w))
+  text(avg(x), avg(y), result_c_l[[i]])
+  x <- avg(x)
+}
+
+}
+
+for(i in 1:10) plot_zahlenmauer()
+
+pdf('~/Desktop/zahlenmauer.pdf', paper = 'A4')
+for(i in 1:5) {
+  plot_zahlenmauer()
+}
+dev.off()
+
+```
+
