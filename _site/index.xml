@@ -10,7 +10,368 @@
 <atom:link href="https://sbloggel.netlify.app/index.xml" rel="self" type="application/rss+xml"/>
 <description>Seb&#39;s private blog about statistics and other topics</description>
 <generator>quarto-1.4.553</generator>
-<lastBuildDate>Fri, 25 Apr 2025 22:00:00 GMT</lastBuildDate>
+<lastBuildDate>Wed, 18 Jun 2025 22:00:00 GMT</lastBuildDate>
+<item>
+  <title>Model diagnostics in logistic regression</title>
+  <link>https://sbloggel.netlify.app/posts/2025-06-19-model-diagnostics-in-logistic-regression/2025-06-19-model-diagnostics-in-logistic-regression.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="links" class="level2">
+<h2 class="anchored" data-anchor-id="links">Links</h2>
+<ul>
+<li><a href="https://sbloggel.netlify.app/posts/2023-07-12-model-diagnostics-for-logistic-regression/2023-07-12-model-diagnostics-for-logistic-regression.html">Previous related post</a></li>
+<li><a href="https://chatgpt.com/share/6851c5ad-9c08-8013-ad26-d03c0de42079">Background from chatGPT</a></li>
+</ul>
+</section>
+<section id="simulate-some-data" class="level2">
+<h2 class="anchored" data-anchor-id="simulate-some-data">Simulate some data</h2>
+<ul>
+<li>Idea:
+<ul>
+<li>Simulate some data with <img src="https://latex.codecogs.com/png.latex?p"> numeric predictors</li>
+<li>True relation for first predictor is quadratic, for all others true relation is linear</li>
+</ul></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Number of individuals:</span></span>
+<span id="cb1-2">n <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1000</span> </span>
+<span id="cb1-3"></span>
+<span id="cb1-4"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Number of parameters:</span></span>
+<span id="cb1-5">p <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span></span>
+<span id="cb1-6"></span>
+<span id="cb1-7"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># matrix with predictors :</span></span>
+<span id="cb1-8">X1 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">matrix</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rnorm</span>(n <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> p), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">ncol =</span> p)</span>
+<span id="cb1-9"></span>
+<span id="cb1-10"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># construct matrix, where first predictor is squarred, </span></span>
+<span id="cb1-11"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># so that a quadratic relation can be construted easily:</span></span>
+<span id="cb1-12">X2 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> X1</span>
+<span id="cb1-13">X2[, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>] <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> X2[, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>] <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">^</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span></span>
+<span id="cb1-14"></span>
+<span id="cb1-15"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># beta consists just of ones:</span></span>
+<span id="cb1-16">beta <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rep</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, p)</span>
+<span id="cb1-17"></span>
+<span id="cb1-18"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># simulate outcome:</span></span>
+<span id="cb1-19">y_logit <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> X2 <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%*%</span> beta</span>
+<span id="cb1-20">p <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">plogis</span>(y_logit)</span>
+<span id="cb1-21">outcome <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rbinom</span>(n <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> p, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, p)</span></code></pre></div>
+</div>
+</section>
+<section id="fit-a-model" class="level2">
+<h2 class="anchored" data-anchor-id="fit-a-model">Fit a model</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># fit a model with all predictors on linear scale:</span></span>
+<span id="cb2-2">fm_all_linear <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">glm</span>(outcome <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> X1, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">family =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">binomial</span>())</span>
+<span id="cb2-3"></span>
+<span id="cb2-4"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># fit a model with first predictor quadratic:</span></span>
+<span id="cb2-5">fm_first_quadratic <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">glm</span>(outcome <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> X2, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">family =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">binomial</span>())</span></code></pre></div>
+</div>
+</section>
+<section id="partial-residual-plots" class="level2">
+<h2 class="anchored" data-anchor-id="partial-residual-plots">Partial residual plots</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Function `prplot` slightly modified from package `faraway`:</span></span>
+<span id="cb3-2">prplot2 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">function</span> (g, i) </span>
+<span id="cb3-3">{</span>
+<span id="cb3-4">    xl <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">attributes</span>(g<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>terms)<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>term.labels[i]</span>
+<span id="cb3-5">    yl <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">paste</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"beta*"</span>, xl, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"+res"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">sep =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">""</span>)</span>
+<span id="cb3-6">    x <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">model.matrix</span>(g)[, i <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>]</span>
+<span id="cb3-7">    y <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> g<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>coeff[i <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>] <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> x <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> g<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>res</span>
+<span id="cb3-8">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">tibble</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> x, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> y) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> </span>
+<span id="cb3-9">      <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ggplot</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(x, y)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_point</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_smooth</span>()</span>
+<span id="cb3-10">}</span></code></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># If you fit the inadequate model with also a linear relation for the first </span></span>
+<span id="cb4-2"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># predictor, you see a characteristic pattern in the residuals:</span></span>
+<span id="cb4-3"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">prplot2</span>(fm_all_linear, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using method = 'gam' and formula = 'y ~ s(x, bs = "cs")'</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://sbloggel.netlify.app/posts/2025-06-19-model-diagnostics-in-logistic-regression/2025-06-19-model-diagnostics-in-logistic-regression_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># If you fit the "true" model there is no such pattern:</span></span>
+<span id="cb6-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">prplot2</span>(fm_first_quadratic, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using method = 'gam' and formula = 'y ~ s(x, bs = "cs")'</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://sbloggel.netlify.app/posts/2025-06-19-model-diagnostics-in-logistic-regression/2025-06-19-model-diagnostics-in-logistic-regression_files/figure-html/unnamed-chunk-5-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="binned-plot" class="level2">
+<h2 class="anchored" data-anchor-id="binned-plot">Binned plot</h2>
+<ul>
+<li>You can also see it via <code>binnedplot</code>:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(arm)</span></code></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: MASS</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'MASS'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:dplyr':
+
+    select</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: Matrix</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'Matrix'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:tidyr':
+
+    expand, pack, unpack</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: lme4</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+arm (Version 1.14-4, built: 2024-4-1)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Working directory is /Users/seb/Documents/Projects/00_websites/sbloggel/posts/2025-06-19-model-diagnostics-in-logistic-regression</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb18" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">binnedplot</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">predict</span>(fm_all_linear), <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">residuals</span>(fm_all_linear, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">type =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"response"</span>))</span></code></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://sbloggel.netlify.app/posts/2025-06-19-model-diagnostics-in-logistic-regression/2025-06-19-model-diagnostics-in-logistic-regression_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb19" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">binnedplot</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">predict</span>(fm_first_quadratic), <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">residuals</span>(fm_first_quadratic, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">type =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"response"</span>))</span></code></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://sbloggel.netlify.app/posts/2025-06-19-model-diagnostics-in-logistic-regression/2025-06-19-model-diagnostics-in-logistic-regression_files/figure-html/unnamed-chunk-6-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+
+
+</section>
+
+ ]]></description>
+  <category>R</category>
+  <guid>https://sbloggel.netlify.app/posts/2025-06-19-model-diagnostics-in-logistic-regression/2025-06-19-model-diagnostics-in-logistic-regression.html</guid>
+  <pubDate>Wed, 18 Jun 2025 22:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Zahlenmauern</title>
   <link>https://sbloggel.netlify.app/posts/2025-04-26-zahlenmauern/2025-04-26-zahlenmauern.html</link>
@@ -4278,341 +4639,6 @@ font-style: inherit;">*</span> J_per_kWh))</span></code></pre></div>
   <category>Sustainibility</category>
   <guid>https://sbloggel.netlify.app/posts/2024-09-30-pi-mal-daumen---elektromobilität/2024-09-30-pi-mal-daumen---elektromobilität.html</guid>
   <pubDate>Sun, 29 Sep 2024 22:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Energie</title>
-  <link>https://sbloggel.netlify.app/posts/2024-09-24-energie/2024-09-24-energie.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<section id="pi-mal-daumen-berechnungen" class="level2">
-<h2 class="anchored" data-anchor-id="pi-mal-daumen-berechnungen">Pi-mal-Daumen-Berechnungen</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'tidyverse'</span>)</span></code></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Schätzwert für Leistung des menschlichen Körpers</span></span>
-<span id="cb2-2"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># entspricht 2160 kcal pro Tag</span></span>
-<span id="cb2-3">p_human_W <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">100</span></span>
-<span id="cb2-4"></span>
-<span id="cb2-5"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># ca. 10.000 kWh pro Person Heizenergie pro Jahr</span></span>
-<span id="cb2-6"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># (https://www.thermondo.de/info/rat/heizen/energieverbrauch-durchschnittsfamilie/) </span></span>
-<span id="cb2-7"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># das ist wahrscheinlich ein recht hoher Wert</span></span>
-<span id="cb2-8"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># entspricht einer Leistung von:</span></span>
-<span id="cb2-9">(p_heating_W <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1e4</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3.6e6</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">365</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">24</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3600</span>)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 1141.553</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Wir als vierköpfige Familie haben in 2023 ca. 1.400 kWh Strom verbraucht</span></span>
-<span id="cb4-2"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Das entspricht einer pro-Kopf-Leistung von:</span></span>
-<span id="cb4-3">(p_electricity_W <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1.3e3</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">4</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3.6e6</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">365</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">24</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3600</span>)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 37.10046</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Wieviel Fernwärme wir in den letzten Jahrne ca. pro Jahr  bezogen haben:</span></span>
-<span id="cb6-2">(W_kWh <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">8e3</span>)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 8000</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1">(p_heating_BoGe_W <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">8e3</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3.6e6</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">365</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">24</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3600</span>)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 913.242</code></pre>
-</div>
-</div>
-<ul>
-<li>Nach diesen Schätzwerten verbrauchen wir als gesamte Familie weniger Heizenergie als ein Durchschnittsdeutscher!</li>
-<li>Kosten pro kWh Fernwärme in DD ca. 20 ct – <a href="https://www.drewag.de/wps/portal/drewag/cms/menu_main/privatkunden/waerme/tarife/fernwaerme">Link</a></li>
-<li>Wirkungsgrad von Fernwärme: Laut ChatGPT 75%-90% – <a href="https://chatgpt.com/share/66f4fff0-d55c-8013-9544-dadcf72a8270">Link</a></li>
-</ul>
-</section>
-<section id="typischer-co2-fußabdruck-einer-in-deutschland-lebenden-person" class="level2">
-<h2 class="anchored" data-anchor-id="typischer-co2-fußabdruck-einer-in-deutschland-lebenden-person">Typischer CO2-Fußabdruck einer in Deutschland lebenden Person</h2>
-<ul>
-<li><a href="https://chatgpt.com/share/66f26e23-4188-8013-af74-26280eb12039">Recherche von ChatGPT</a>
-<ul>
-<li>Insgesamt ca. 20.000 kWh (16500 - 22500 kWh) pro Person pro Jahr
-<ul>
-<li>Strom: 1500 bis 2000 kWh</li>
-<li>Heizenergie: 8000 bis 10000 kWh</li>
-<li>Transportenergie: 3000 bis 4000 kWh</li>
-<li>Energie für Nahrung: 2000 bis 3000 kWh</li>
-<li>Energie für andere Produkte: 2000 bis 3500 kWh</li>
-</ul></li>
-<li>–&gt; Großteil (fast die Hälfte) des Energieverbrauchs der Privatpersonen für Heizung</li>
-</ul></li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1500</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">8000</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3000</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2000</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2000</span></span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 16500</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2000</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">10000</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">4000</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3000</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3500</span></span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 22500</code></pre>
-</div>
-</div>
-</section>
-<section id="primärenergieverbrauch-in-deutschland" class="level2">
-<h2 class="anchored" data-anchor-id="primärenergieverbrauch-in-deutschland">Primärenergieverbrauch in Deutschland</h2>
-<ul>
-<li><a href="https://www.cleanenergywire.org/factsheets/germanys-energy-consumption-and-power-mix-charts">Infos von cleanenergywire.org</a></li>
-<li>Hier ein heruntergeladenes, interessantes Diagramm von cleanenergywire.org: <img src="https://sbloggel.netlify.app/posts/2024-09-24-energie/fig11-final-energy-consumption-consumer-group-1990-2022.png" class="img-fluid"></li>
-<li>Gesamtprimärenergieverbrach ca. 10.000 PJ = 1e19 Joules</li>
-<li>Pro Person (etwas mehr als das von ChatGPT pro Person angegebene – aber dort auch ohne Industrie)</li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1">(primaerenergie_pro_person_cleanenergywire_kWh <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1e19</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3.6e6</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">8e7</span>)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 34722.22</code></pre>
-</div>
-</div>
-<ul>
-<li>Leistung Primärenergie pro Person:</li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1">(p_primaerenergie_pro_person_W <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1e4</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1e15</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">8e7</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">365</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">24</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3600</span>)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 3963.724</code></pre>
-</div>
-</div>
-</section>
-<section id="wie-viel-kann-photovoltaik-pv-leisten" class="level2">
-<h2 class="anchored" data-anchor-id="wie-viel-kann-photovoltaik-pv-leisten">Wie viel kann Photovoltaik (PV) leisten?</h2>
-<ul>
-<li>ca. 200 kWh Ertrag pro qm PV pro Jahr (<a href="https://www.iwb.ch/klimadreh/ratgeber/solaranlage/wie-viel-flaeche-benoetigt-meine-solaranlage">Quelle</a>)
-<ul>
-<li>entspricht ca. 20 W im Jahresmittel:</li>
-</ul></li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb18" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1">(p_pv_pro_qm_W <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">200</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3.6e6</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">365</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">24</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3600</span>)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 22.83105</code></pre>
-</div>
-</div>
-<p>Also PV-Fläche pro Person benötigt:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb20" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1">(A_PV_pro_person_qm <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> p_primaerenergie_pro_person_W <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span> p_pv_pro_qm_W)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 173.6111</code></pre>
-</div>
-</div>
-<p>Fläche pro Person in Deutschland vorhanden:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb22" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1">(A_pro_person_qm <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3.6e11</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">8e7</span>)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 4500</code></pre>
-</div>
-</div>
-<p>Also müsste ein Anteil von 0.0385802 in Deutschland mit PV belegt werden um den PV-Bedarf komplett zu decken. Könnte gehen, oder?</p>
-
-
-</section>
-
- ]]></description>
-  <category>Sustainibility</category>
-  <guid>https://sbloggel.netlify.app/posts/2024-09-24-energie/2024-09-24-energie.html</guid>
-  <pubDate>Mon, 23 Sep 2024 22:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>

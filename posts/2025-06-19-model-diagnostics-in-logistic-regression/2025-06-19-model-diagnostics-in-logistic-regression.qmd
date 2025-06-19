@@ -1,0 +1,91 @@
+---
+title: Model diagnostics in logistic regression
+date: 2025-06-19
+categories:
+  - R
+---
+
+```{r}
+#| label: init
+#| cache: false
+#| include: false
+library('tidyverse')
+set.seed(1)
+```
+
+## Links
+* [Previous related post](https://sbloggel.netlify.app/posts/2023-07-12-model-diagnostics-for-logistic-regression/2023-07-12-model-diagnostics-for-logistic-regression.html
+)
+* [Background from chatGPT](https://chatgpt.com/share/6851c5ad-9c08-8013-ad26-d03c0de42079)
+
+## Simulate some data
+* Idea:
+  * Simulate some data with $p$ numeric predictors
+  * True relation for first predictor is quadratic, for all others true relation is linear
+```{r}
+# Number of individuals:
+n <- 1000 
+
+# Number of parameters:
+p <- 1
+
+# matrix with predictors :
+X1 <- matrix(rnorm(n * p), ncol = p)
+
+# construct matrix, where first predictor is squarred, 
+# so that a quadratic relation can be construted easily:
+X2 <- X1
+X2[, 1] <- X2[, 1] ^ 2
+
+# beta consists just of ones:
+beta <- rep(1, p)
+
+# simulate outcome:
+y_logit <- X2 %*% beta
+p <- plogis(y_logit)
+outcome <- rbinom(n * p, 1, p)
+```
+
+## Fit a model
+```{r}
+# fit a model with all predictors on linear scale:
+fm_all_linear <- glm(outcome ~ X1, family = binomial())
+
+# fit a model with first predictor quadratic:
+fm_first_quadratic <- glm(outcome ~ X2, family = binomial())
+```
+
+## Partial residual plots
+
+```{r}
+# Function `prplot` slightly modified from package `faraway`:
+prplot2 <- function (g, i) 
+{
+    xl <- attributes(g$terms)$term.labels[i]
+    yl <- paste("beta*", xl, "+res", sep = "")
+    x <- model.matrix(g)[, i + 1]
+    y <- g$coeff[i + 1] * x + g$res
+    tibble(x = x, y = y) |> 
+      ggplot(aes(x, y)) + geom_point() + geom_smooth()
+}
+```
+
+
+```{r}
+# If you fit the inadequate model with also a linear relation for the first 
+# predictor, you see a characteristic pattern in the residuals:
+prplot2(fm_all_linear, 1)
+
+# If you fit the "true" model there is no such pattern:
+prplot2(fm_first_quadratic, 1)
+```
+
+
+## Binned plot
+* You can also see it via `binnedplot`:
+```{r}
+library(arm)
+binnedplot(predict(fm_all_linear), residuals(fm_all_linear, type = "response"))
+binnedplot(predict(fm_first_quadratic), residuals(fm_first_quadratic, type = "response"))
+```
+

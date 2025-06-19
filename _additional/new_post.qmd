@@ -18,7 +18,7 @@ set.seed(1)
 ```{r}
 #| label: new_post
 #| execute: false
-post_title <- "Zahlenmauern"
+post_title <- "Model diagnostics in logistic regression"
 post_date <- '2024-03-12'
 post_date <- format(Sys.Date(), "%Y-%m-%d")
 
