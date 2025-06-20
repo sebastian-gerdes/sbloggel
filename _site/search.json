@@ -662,7 +662,7 @@
     "href": "posts/2024-11-08-dal/2024-11-08-dal.html",
     "title": "Dal",
     "section": "",
-    "text": "Für ein schmackhaftes Dal für 3 Personen: * 500 g geschälte Mungbohnen * 2-3 kleine Zwiebeln * etwas klein geschnittener Ingwer * Tahin * Haselnussmus * 1 Dose stückige Tomaten * 700 ml Brühe * Gewürze nach gusto\nSo macht man es: * Zwiebeln andünsten * Gewaschene Bohnen dazu, in Pfanne erhitzen * Brühe dazu, aufkochen * übrige Zutaten dazugeben"
+    "text": "Für ein schmackhaftes Dal für 3 Personen:\n\n500 g geschälte Mungbohnen\n2-3 kleine Zwiebeln\netwas klein geschnittener Ingwer\nTahin\nHaselnussmus\n1 Dose stückige Tomaten\n700 ml Brühe\nGewürze nach gusto\n\nSo macht man es:\n\nZwiebeln andünsten\nGewaschene Bohnen dazu, in Pfanne erhitzen\nBrühe dazu, aufkochen\nübrige Zutaten dazugeben"
   },
   {
     "objectID": "posts/2024-12-16-saving-output-from-r-terminal/2024-12-16-saving-output-from-r-terminal.html",
@@ -1306,7 +1306,7 @@
     "href": "posts/2025-06-19-model-diagnostics-in-logistic-regression/2025-06-19-model-diagnostics-in-logistic-regression.html#simulate-some-data",
     "title": "Model diagnostics in logistic regression",
     "section": "Simulate some data",
-    "text": "Simulate some data\n\nIdea:\n\nSimulate some data with \\(p\\) numeric predictors\nTrue relation for first predictor is quadratic, for all others true relation is linear\n\n\n\n# Number of individuals:\nn &lt;- 1000 \n\n# Number of parameters:\np &lt;- 1\n\n# matrix with predictors :\nX1 &lt;- matrix(rnorm(n * p), ncol = p)\n\n# construct matrix, where first predictor is squarred, \n# so that a quadratic relation can be construted easily:\nX2 &lt;- X1\nX2[, 1] &lt;- X2[, 1] ^ 2\n\n# beta consists just of ones:\nbeta &lt;- rep(1, p)\n\n# simulate outcome:\ny_logit &lt;- X2 %*% beta\np &lt;- plogis(y_logit)\noutcome &lt;- rbinom(n * p, 1, p)"
+    "text": "Simulate some data\n\nIdea:\n\nSimulate some data with \\(p\\) numeric predictors\nTrue relation for first predictor is quadratic, for all others true relation is linear\n\n\n\n# Number of individuals:\nn &lt;- 1000 \n\n# Number of parameters:\np &lt;- 2\n\n# matrix with predictors :\nX1 &lt;- matrix(rnorm(n * p), ncol = p)\n\n# construct matrix, where first predictor is squarred, \n# so that a quadratic relation can be construted easily:\nX2 &lt;- X1\nX2[, 1] &lt;- X2[, 1] ^ 2\n\n# beta consists just of ones:\nbeta &lt;- rep(1, p)\n\n# simulate outcome:\ny_logit &lt;- X2 %*% beta\np &lt;- plogis(y_logit)\noutcome &lt;- rbinom(n, 1, p)"
   },
   {
     "objectID": "posts/2025-06-19-model-diagnostics-in-logistic-regression/2025-06-19-model-diagnostics-in-logistic-regression.html#fit-a-model",

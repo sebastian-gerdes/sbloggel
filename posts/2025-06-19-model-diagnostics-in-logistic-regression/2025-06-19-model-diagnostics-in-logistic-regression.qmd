@@ -27,7 +27,7 @@ set.seed(1)
 n <- 1000 
 
 # Number of parameters:
-p <- 1
+p <- 2
 
 # matrix with predictors :
 X1 <- matrix(rnorm(n * p), ncol = p)
@@ -43,7 +43,7 @@ beta <- rep(1, p)
 # simulate outcome:
 y_logit <- X2 %*% beta
 p <- plogis(y_logit)
-outcome <- rbinom(n * p, 1, p)
+outcome <- rbinom(n, 1, p)
 ```
 
 ## Fit a model

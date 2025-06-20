@@ -52,7 +52,7 @@ font-style: inherit;"># Number of parameters:</span></span>
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
 background-color: null;
-font-style: inherit;">1</span></span>
+font-style: inherit;">2</span></span>
 <span id="cb1-6"></span>
 <span id="cb1-7"><span class="co" style="color: #5E5E5E;
 background-color: null;
@@ -118,9 +118,7 @@ font-style: inherit;">plogis</span>(y_logit)</span>
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">rbinom</span>(n <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> p, <span class="dv" style="color: #AD0000;
+font-style: inherit;">rbinom</span>(n, <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>, p)</span></code></pre></div>
 </div>
@@ -2948,8 +2946,24 @@ foo(x: Union[int, float]) -&gt; Union[int, float]
 
 
 
-<p>Für ein schmackhaftes Dal für 3 Personen: * 500 g geschälte Mungbohnen * 2-3 kleine Zwiebeln * etwas klein geschnittener Ingwer * Tahin * Haselnussmus * 1 Dose stückige Tomaten * 700 ml Brühe * Gewürze nach gusto</p>
-<p>So macht man es: * Zwiebeln andünsten * Gewaschene Bohnen dazu, in Pfanne erhitzen * Brühe dazu, aufkochen * übrige Zutaten dazugeben</p>
+<p>Für ein schmackhaftes Dal für 3 Personen:</p>
+<ul>
+<li>500 g geschälte Mungbohnen</li>
+<li>2-3 kleine Zwiebeln</li>
+<li>etwas klein geschnittener Ingwer</li>
+<li>Tahin</li>
+<li>Haselnussmus</li>
+<li>1 Dose stückige Tomaten</li>
+<li>700 ml Brühe</li>
+<li>Gewürze nach gusto</li>
+</ul>
+<p>So macht man es:</p>
+<ul>
+<li>Zwiebeln andünsten</li>
+<li>Gewaschene Bohnen dazu, in Pfanne erhitzen</li>
+<li>Brühe dazu, aufkochen</li>
+<li>übrige Zutaten dazugeben</li>
+</ul>
 
 
 
