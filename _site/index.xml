@@ -10,7 +10,536 @@
 <atom:link href="https://sbloggel.netlify.app/index.xml" rel="self" type="application/rss+xml"/>
 <description>Seb&#39;s private blog about statistics and other topics</description>
 <generator>quarto-1.4.553</generator>
-<lastBuildDate>Wed, 18 Jun 2025 22:00:00 GMT</lastBuildDate>
+<lastBuildDate>Tue, 29 Jul 2025 22:00:00 GMT</lastBuildDate>
+<item>
+  <title>Assessing linearity in logistic regression</title>
+  <link>https://sbloggel.netlify.app/posts/2025-07-30-assessing-linearity-in-logistic-regression/2025-07-30-assessing-linearity-in-logistic-regression.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="background" class="level2">
+<h2 class="anchored" data-anchor-id="background">Background</h2>
+<p>https://chatgpt.com/share/6851c5ad-9c08-8013-ad26-d03c0de42079</p>
+</section>
+<section id="simulate-some-data" class="level2">
+<h2 class="anchored" data-anchor-id="simulate-some-data">Simulate some data</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1">n <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1000</span></span>
+<span id="cb1-2">p <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span></span>
+<span id="cb1-3">X1 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">matrix</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rnorm</span>(n <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> p), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">ncol =</span> p)</span>
+<span id="cb1-4">X2 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> X1</span>
+<span id="cb1-5">X2[, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>] <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> X2[, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>] <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">^</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span></span>
+<span id="cb1-6">beta <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rep</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, p)</span>
+<span id="cb1-7">y_logit <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> X2 <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%*%</span> beta</span>
+<span id="cb1-8">p <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">plogis</span>(y_logit)</span>
+<span id="cb1-9">outcome <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rbinom</span>(n <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> p, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, p)</span></code></pre></div>
+</div>
+</section>
+<section id="fit-a-model" class="level2">
+<h2 class="anchored" data-anchor-id="fit-a-model">Fit a model</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1">fm1 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">glm</span>(outcome <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> X1, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">family =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">binomial</span>())</span>
+<span id="cb2-2">fm2 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">glm</span>(outcome <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> X2, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">family =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">binomial</span>())</span></code></pre></div>
+</div>
+</section>
+<section id="partial-residual-plots" class="level2">
+<h2 class="anchored" data-anchor-id="partial-residual-plots">Partial residual plots</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(faraway)</span>
+<span id="cb3-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">prplot</span>(fm1, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)</span></code></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://sbloggel.netlify.app/posts/2025-07-30-assessing-linearity-in-logistic-regression/2025-07-30-assessing-linearity-in-logistic-regression_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1">prplot</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>function (g, i) 
+{
+    xl &lt;- attributes(g$terms)$term.labels[i]
+    yl &lt;- paste("beta*", xl, "+res", sep = "")
+    x &lt;- model.matrix(g)[, i + 1]
+    plot(x, g$coeff[i + 1] * x + g$res, xlab = xl, ylab = yl)
+    abline(0, g$coeff[i + 1])
+    invisible()
+}
+&lt;bytecode: 0x10fbf0978&gt;
+&lt;environment: namespace:faraway&gt;</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'tidyverse'</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.5.1     ✔ tibble    3.2.1
+✔ lubridate 1.9.4     ✔ tidyr     1.3.1
+✔ purrr     1.0.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1">prplot2 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">function</span> (g, i) </span>
+<span id="cb8-2">{</span>
+<span id="cb8-3">    xl <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">attributes</span>(g<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>terms)<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>term.labels[i]</span>
+<span id="cb8-4">    yl <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">paste</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"beta*"</span>, xl, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"+res"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">sep =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">""</span>)</span>
+<span id="cb8-5">    x <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">model.matrix</span>(g)[, i <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>]</span>
+<span id="cb8-6">    y <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> g<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>coeff[i <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>] <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> x <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> g<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>res</span>
+<span id="cb8-7">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">tibble</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> x, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> y) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> </span>
+<span id="cb8-8">      <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ggplot</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(x, y)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_point</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_smooth</span>()</span>
+<span id="cb8-9">}</span>
+<span id="cb8-10"></span>
+<span id="cb8-11"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">prplot2</span>(fm1, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using method = 'gam' and formula = 'y ~ s(x, bs = "cs")'</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://sbloggel.netlify.app/posts/2025-07-30-assessing-linearity-in-logistic-regression/2025-07-30-assessing-linearity-in-logistic-regression_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">prplot2</span>(fm2, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using method = 'gam' and formula = 'y ~ s(x, bs = "cs")'</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://sbloggel.netlify.app/posts/2025-07-30-assessing-linearity-in-logistic-regression/2025-07-30-assessing-linearity-in-logistic-regression_files/figure-html/unnamed-chunk-4-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="binned-plot" class="level2">
+<h2 class="anchored" data-anchor-id="binned-plot">Binned plot</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(arm)</span></code></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: MASS</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'MASS'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:dplyr':
+
+    select</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: Matrix</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'Matrix'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:tidyr':
+
+    expand, pack, unpack</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: lme4</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+arm (Version 1.14-4, built: 2024-4-1)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Working directory is /Users/seb/Documents/Projects/00_websites/sbloggel/posts/2025-07-30-assessing-linearity-in-logistic-regression</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'arm'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:faraway':
+
+    fround, logit, pfround</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb24" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">binnedplot</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">predict</span>(fm1), <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">residuals</span>(fm1, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">type =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"response"</span>))</span></code></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://sbloggel.netlify.app/posts/2025-07-30-assessing-linearity-in-logistic-regression/2025-07-30-assessing-linearity-in-logistic-regression_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb25" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">binnedplot</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">predict</span>(fm2), <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">residuals</span>(fm2, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">type =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"response"</span>))</span></code></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://sbloggel.netlify.app/posts/2025-07-30-assessing-linearity-in-logistic-regression/2025-07-30-assessing-linearity-in-logistic-regression_files/figure-html/unnamed-chunk-5-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+
+
+</section>
+
+ ]]></description>
+  <category>R</category>
+  <guid>https://sbloggel.netlify.app/posts/2025-07-30-assessing-linearity-in-logistic-regression/2025-07-30-assessing-linearity-in-logistic-regression.html</guid>
+  <pubDate>Tue, 29 Jul 2025 22:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Left censored predictors</title>
+  <link>https://sbloggel.netlify.app/posts/2025-07-01-left-censored-predictors/2025-07-01-left-censored-predictors.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">set.seed</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)</span>
+<span id="cb1-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'tidyverse'</span>)</span>
+<span id="cb1-3"></span>
+<span id="cb1-4">n <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1000000</span></span>
+<span id="cb1-5">beta <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.1</span></span>
+<span id="cb1-6">dat <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">tibble</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">runif</span>(n, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">min =</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">6</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">max =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>),</span>
+<span id="cb1-7">              <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">slope =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">runif</span>(n, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.1</span>),</span>
+<span id="cb1-8">              <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">lql =</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>, <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># runif(n, min = -5, max = -4),</span></span>
+<span id="cb1-9">              <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">p_hat =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">plogis</span>(<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mean</span>(slope) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> beta <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> slope),</span>
+<span id="cb1-10">              <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rbinom</span>(n, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, p_hat),</span>
+<span id="cb1-11">              <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x_observed =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ifelse</span>(x <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&lt;</span> lql, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, x), </span>
+<span id="cb1-12">              <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">under_threshold =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ifelse</span>(x <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&lt;</span> lql, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'yes'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'no'</span>))</span>
+<span id="cb1-13"></span>
+<span id="cb1-14">(fm <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">glm</span>(y <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> slope <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> under_threshold, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">family =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">binomial</span>(), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">data =</span> dat))</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:  glm(formula = y ~ slope + under_threshold, family = binomial(), 
+    data = dat)
+
+Coefficients:
+       (Intercept)               slope  under_thresholdyes  
+         -0.048893            0.087039           -0.002241  
+
+Degrees of Freedom: 999999 Total (i.e. Null);  999997 Residual
+Null Deviance:      1386000 
+Residual Deviance: 1386000  AIC: 1386000</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">summary</span>(fm)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = y ~ slope + under_threshold, family = binomial(), 
+    data = dat)
+
+Coefficients:
+                    Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)        -0.048893   0.004473 -10.931   &lt;2e-16 ***
+slope               0.087039   0.069321   1.256    0.209    
+under_thresholdyes -0.002241   0.004001  -0.560    0.575    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 1385773  on 999999  degrees of freedom
+Residual deviance: 1385771  on 999997  degrees of freedom
+AIC: 1385777
+
+Number of Fisher Scoring iterations: 3</code></pre>
+</div>
+</div>
+
+
+
+ ]]></description>
+  <category>R</category>
+  <guid>https://sbloggel.netlify.app/posts/2025-07-01-left-censored-predictors/2025-07-01-left-censored-predictors.html</guid>
+  <pubDate>Mon, 30 Jun 2025 22:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Model diagnostics in logistic regression</title>
   <link>https://sbloggel.netlify.app/posts/2025-06-19-model-diagnostics-in-logistic-regression/2025-06-19-model-diagnostics-in-logistic-regression.html</link>
@@ -4241,417 +4770,6 @@ IQR (CV) : 2 (0.6)</td>
  ]]></description>
   <category>R</category>
   <guid>https://sbloggel.netlify.app/posts/2024-09-30-gglimpse/2024-09-30-gglimpse.html</guid>
-  <pubDate>Sun, 29 Sep 2024 22:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Hypothesis testing in mixed linear models with a factorial design</title>
-  <link>https://sbloggel.netlify.app/posts/2024-09-30-hypothesis-testing-in-mixed-linear-models-with-a-factorial-design/2024-09-30-hypothesis-testing-in-mixed-linear-models-with-a-factorial-design.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1">dat <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">expand_grid</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">time =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">factor</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">:</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span>), <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">group =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">factor</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">:</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>), <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">ID =</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">:</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">5</span>) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span> </span>
-<span id="cb1-2">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">hh =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">paste</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'time'</span>, time, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'group'</span>, group, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">sep =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'_'</span>))</span>
-<span id="cb1-3"></span>
-<span id="cb1-4">X <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">model.matrix</span>(<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">~</span> hh <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">factor</span>(ID), <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">data =</span> dat)</span>
-<span id="cb1-5"></span>
-<span id="cb1-6">dat <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> dat <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span> </span>
-<span id="cb1-7">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">y =</span> X <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">%*%</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">rnorm</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">10</span>) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">rnorm</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">30</span>))</span>
-<span id="cb1-8"></span>
-<span id="cb1-9"></span>
-<span id="cb1-10">fm_1 <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">lmer</span>(y <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">~</span> time <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> group <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> (<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|</span> ID), <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">data =</span> dat)</span>
-<span id="cb1-11">fm_2 <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">lmer</span>(y <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">~</span> hh <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> (<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|</span> ID), <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">data =</span> dat)</span>
-<span id="cb1-12"></span>
-<span id="cb1-13">fm_1</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Linear mixed model fit by REML ['lmerMod']
-Formula: y ~ time * group + (1 | ID)
-   Data: dat
-REML criterion at convergence: 92.9467
-Random effects:
- Groups   Name        Std.Dev.
- ID       (Intercept) 0.9389  
- Residual             1.2076  
-Number of obs: 30, groups:  ID, 5
-Fixed Effects:
- (Intercept)         time2         time3        group2  time2:group2  
-    -0.08427       2.12602      -0.21546      -0.15532      -3.74877  
-time3:group2  
-    -0.65262  </code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1">fm_2</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Linear mixed model fit by REML ['lmerMod']
-Formula: y ~ hh - 1 + (1 | ID)
-   Data: dat
-REML criterion at convergence: 92.9467
-Random effects:
- Groups   Name        Std.Dev.
- ID       (Intercept) 0.9389  
- Residual             1.2076  
-Number of obs: 30, groups:  ID, 5
-Fixed Effects:
-hhtime_1_group_1  hhtime_1_group_2  hhtime_2_group_1  hhtime_2_group_2  
-        -0.08427          -0.23959           2.04174          -1.86234  
-hhtime_3_group_1  hhtime_3_group_2  
-        -0.29973          -1.10767  </code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">AIC</span>(fm_1)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 108.9467</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">AIC</span>(fm_2)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 108.9467</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">summary</span>(fm_1)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Linear mixed model fit by REML ['lmerMod']
-Formula: y ~ time * group + (1 | ID)
-   Data: dat
-
-REML criterion at convergence: 92.9
-
-Scaled residuals: 
-    Min      1Q  Median      3Q     Max 
--1.7375 -0.5930  0.2371  0.6309  1.1804 
-
-Random effects:
- Groups   Name        Variance Std.Dev.
- ID       (Intercept) 0.8816   0.9389  
- Residual             1.4582   1.2076  
-Number of obs: 30, groups:  ID, 5
-
-Fixed effects:
-             Estimate Std. Error t value
-(Intercept)  -0.08427    0.68408  -0.123
-time2         2.12602    0.76373   2.784
-time3        -0.21546    0.76373  -0.282
-group2       -0.15532    0.76373  -0.203
-time2:group2 -3.74877    1.08007  -3.471
-time3:group2 -0.65262    1.08007  -0.604
-
-Correlation of Fixed Effects:
-            (Intr) time2  time3  group2 tm2:g2
-time2       -0.558                            
-time3       -0.558  0.500                     
-group2      -0.558  0.500  0.500              
-time2:grop2  0.395 -0.707 -0.354 -0.707       
-time3:grop2  0.395 -0.354 -0.707 -0.707  0.500</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">summary</span>(fm_2)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Linear mixed model fit by REML ['lmerMod']
-Formula: y ~ hh - 1 + (1 | ID)
-   Data: dat
-
-REML criterion at convergence: 92.9
-
-Scaled residuals: 
-    Min      1Q  Median      3Q     Max 
--1.7375 -0.5930  0.2371  0.6309  1.1804 
-
-Random effects:
- Groups   Name        Variance Std.Dev.
- ID       (Intercept) 0.8816   0.9389  
- Residual             1.4582   1.2076  
-Number of obs: 30, groups:  ID, 5
-
-Fixed effects:
-                 Estimate Std. Error t value
-hhtime_1_group_1 -0.08427    0.68408  -0.123
-hhtime_1_group_2 -0.23959    0.68408  -0.350
-hhtime_2_group_1  2.04174    0.68408   2.985
-hhtime_2_group_2 -1.86234    0.68408  -2.722
-hhtime_3_group_1 -0.29973    0.68408  -0.438
-hhtime_3_group_2 -1.10767    0.68408  -1.619
-
-Correlation of Fixed Effects:
-            h_1__1 h_1__2 h_2__1 h_2__2 h_3__1
-hhtm_1_gr_2 0.377                             
-hhtm_2_gr_1 0.377  0.377                      
-hhtm_2_gr_2 0.377  0.377  0.377               
-hhtm_3_gr_1 0.377  0.377  0.377  0.377        
-hhtm_3_gr_2 0.377  0.377  0.377  0.377  0.377 </code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">fixef</span>(fm_1)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code> (Intercept)        time2        time3       group2 time2:group2 time3:group2 
- -0.08427219   2.12601590  -0.21545931  -0.15531723  -3.74876543  -0.65261665 </code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">fixef</span>(fm_2)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>hhtime_1_group_1 hhtime_1_group_2 hhtime_2_group_1 hhtime_2_group_2 
-     -0.08427219      -0.23958942       2.04174371      -1.86233895 
-hhtime_3_group_1 hhtime_3_group_2 
-     -0.29973150      -1.10766538 </code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb17" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">glht</span>(fm_1, <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'time2 == 0'</span>,</span>
-<span id="cb17-2">             <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'time3 == 0'</span>,</span>
-<span id="cb17-3">             <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'time2 + group2 + time2:group2 == 0'</span>,</span>
-<span id="cb17-4">             <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'time3 + group2 + time3:group2 == 0'</span>))</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-     General Linear Hypotheses
-
-Linear Hypotheses:
-                                   Estimate
-time2 == 0                           2.1260
-time3 == 0                          -0.2155
-time2 + group2 + time2:group2 == 0  -1.7781
-time3 + group2 + time3:group2 == 0  -1.0234</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb19" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">glht</span>(fm_2, <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'hhtime_2_group_1 - hhtime_1_group_1 == 0'</span>,</span>
-<span id="cb19-2">             <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'hhtime_3_group_1 - hhtime_1_group_1 == 0'</span>,</span>
-<span id="cb19-3">             <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'hhtime_2_group_2 - hhtime_1_group_2 == 0'</span>,</span>
-<span id="cb19-4">             <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'hhtime_3_group_2 - hhtime_1_group_2 == 0'</span>))</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-     General Linear Hypotheses
-
-Linear Hypotheses:
-                                         Estimate
-hhtime_2_group_1 - hhtime_1_group_1 == 0   2.1260
-hhtime_3_group_1 - hhtime_1_group_1 == 0  -0.2155
-hhtime_2_group_2 - hhtime_1_group_2 == 0  -1.6227
-hhtime_3_group_2 - hhtime_1_group_2 == 0  -0.8681</code></pre>
-</div>
-</div>
-
-
-
- ]]></description>
-  <category>R</category>
-  <guid>https://sbloggel.netlify.app/posts/2024-09-30-hypothesis-testing-in-mixed-linear-models-with-a-factorial-design/2024-09-30-hypothesis-testing-in-mixed-linear-models-with-a-factorial-design.html</guid>
-  <pubDate>Sun, 29 Sep 2024 22:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Pi mal Daumen - Elektromobilität</title>
-  <link>https://sbloggel.netlify.app/posts/2024-09-30-pi-mal-daumen---elektromobilität/2024-09-30-pi-mal-daumen---elektromobilität.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1">(J_per_kWh <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1e3</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3.6e3</span>)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 3600000</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1">(J_per_liter <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3e7</span>)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 3e+07</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1">(kWh_per_liter <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> J_per_liter <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span> J_per_kWh)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 8.333333</code></pre>
-</div>
-</div>
-<ul>
-<li>1 Liter Benzin hat ungefähr 8.3 kWh!</li>
-<li>Opel Corsa Elektor verbraucht ca. 20 kWh pro 100 Kilometer</li>
-<li>Opel Corsa Verbrenner verbraucht ca. 5 Liter pro 100 Kilometer</li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1">(verbrenner_fold_consumption <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> (<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">5</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> J_per_liter) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span> (<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">20</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> J_per_kWh))</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 2.083333</code></pre>
-</div>
-</div>
-<ul>
-<li>Primärenergieverbrauch eines Opel Benziner vs.&nbsp;Elektro ganz grob doppelt so groß!</li>
-<li>Unser Gesamtstromverbrauch entspricht ca. 7.000 km mit einem Opel Corsa Elektro</li>
-<li>Unsere Gesamtheizenergie enspricht ca. 40.000 km mit einem Opel Corsa Elektro</li>
-</ul>
-
-
-
- ]]></description>
-  <category>R</category>
-  <category>Sustainibility</category>
-  <guid>https://sbloggel.netlify.app/posts/2024-09-30-pi-mal-daumen---elektromobilität/2024-09-30-pi-mal-daumen---elektromobilität.html</guid>
   <pubDate>Sun, 29 Sep 2024 22:00:00 GMT</pubDate>
 </item>
 </channel>

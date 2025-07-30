@@ -1,0 +1,30 @@
+---
+title: Left censored predictors
+date: 2025-07-01
+categories:
+  - R
+---
+
+
+```{r}
+#| message: false
+set.seed(1)
+library('tidyverse')
+
+n <- 1000000
+beta <- 0.1
+dat <- tibble(x = runif(n, min = -6, max = 0),
+              slope = runif(n, 0, 0.1),
+              lql = -3, # runif(n, min = -5, max = -4),
+              p_hat = plogis(- mean(slope) + beta * slope),
+              y = rbinom(n, 1, p_hat),
+              x_observed = ifelse(x < lql, 0, x), 
+              under_threshold = ifelse(x < lql, 'yes', 'no'))
+
+(fm <- glm(y ~ slope + under_threshold, family = binomial(), data = dat))
+
+summary(fm)
+
+
+```
+

@@ -1,0 +1,72 @@
+---
+title: 'Assessing linearity in logistic regression'
+date: 2025-07-30
+categories:
+  - R
+---
+
+## Background
+https://chatgpt.com/share/6851c5ad-9c08-8013-ad26-d03c0de42079
+
+## Simulate some data
+```{r}
+n <- 1000
+p <- 3
+X1 <- matrix(rnorm(n * p), ncol = p)
+X2 <- X1
+X2[, 1] <- X2[, 1] ^ 2
+beta <- rep(1, p)
+y_logit <- X2 %*% beta
+p <- plogis(y_logit)
+outcome <- rbinom(n * p, 1, p)
+```
+
+## Fit a model
+```{r}
+fm1 <- glm(outcome ~ X1, family = binomial())
+fm2 <- glm(outcome ~ X2, family = binomial())
+```
+
+## Partial residual plots
+```{r}
+library(faraway)
+prplot(fm1, 1)
+prplot
+```
+
+```{r}
+library('tidyverse')
+prplot2 <- function (g, i) 
+{
+    xl <- attributes(g$terms)$term.labels[i]
+    yl <- paste("beta*", xl, "+res", sep = "")
+    x <- model.matrix(g)[, i + 1]
+    y <- g$coeff[i + 1] * x + g$res
+    tibble(x = x, y = y) |> 
+      ggplot(aes(x, y)) + geom_point() + geom_smooth()
+}
+
+prplot2(fm1, 1)
+prplot2(fm2, 1)
+```
+
+
+## Binned plot
+```{r}
+library(arm)
+binnedplot(predict(fm1), residuals(fm1, type = "response"))
+binnedplot(predict(fm2), residuals(fm2, type = "response"))
+```
+
+
+
+```{r}
+#| label: init
+#| cache: false
+#| include: false
+library('tidyverse')
+set.seed(1)
+
+library('reticulate')
+use_condaenv('sbloggel')
+```
