@@ -10,7 +10,338 @@
 <atom:link href="https://sbloggel.netlify.app/index.xml" rel="self" type="application/rss+xml"/>
 <description>Seb&#39;s private blog about statistics and other topics</description>
 <generator>quarto-1.4.553</generator>
-<lastBuildDate>Tue, 29 Jul 2025 22:00:00 GMT</lastBuildDate>
+<lastBuildDate>Mon, 15 Sep 2025 22:00:00 GMT</lastBuildDate>
+<item>
+  <title>Moran process</title>
+  <link>https://sbloggel.netlify.app/posts/2025-09-16-moran-process/2025-09-16-moran-process.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="what-causes-clinical-symptoms-in-hematological-malignancies" class="level2">
+<h2 class="anchored" data-anchor-id="what-causes-clinical-symptoms-in-hematological-malignancies">What causes clinical symptoms in hematological malignancies?</h2>
+<ul>
+<li>Malignant clone outcompetes own cell type</li>
+<li>Malignant clone outcompetes other needed cell types</li>
+<li>Malignant clone causes inflammation</li>
+<li>Malignant clone does other “bad” things (what?)</li>
+<li>???</li>
+</ul>
+</section>
+<section id="measuring-invasiveness" class="level2">
+<h2 class="anchored" data-anchor-id="measuring-invasiveness">Measuring invasiveness</h2>
+<ul>
+<li>Can we disentangle expansion in “own” niche vs.&nbsp;expansion in niches of other cell types?</li>
+<li>Generally:
+<ul>
+<li>First mutations lead to mutation in “own” niche</li>
+<li>Later mutations lead to invasion in other niches</li>
+</ul></li>
+</ul>
+</section>
+<section id="can-level-of-invasion-be-quantified-with-available-data" class="level2">
+<h2 class="anchored" data-anchor-id="can-level-of-invasion-be-quantified-with-available-data">Can level of invasion be quantified with available data?</h2>
+</section>
+<section id="model-sketch" class="level2">
+<h2 class="anchored" data-anchor-id="model-sketch">Model sketch</h2>
+<ul>
+<li>Two compartments
+<ul>
+<li>Compartment A, from which cancer arises</li>
+<li>Compartment B, that is an “umbrella compartment” for all other hematopoietic cells</li>
+</ul></li>
+<li>A and B contain <img src="https://latex.codecogs.com/png.latex?n_A"> and <img src="https://latex.codecogs.com/png.latex?n_B"> cells</li>
+<li>Each time step, one cell dies and cell divides</li>
+<li>Two phases:
+<ul>
+<li>Non-invasive expansion: Clone has increased probability to divide within A only</li>
+<li>Invasive expansion: Clone can now enter also compartment B</li>
+</ul></li>
+</ul>
+</section>
+<section id="can-this-model-be-fitted-to-mutation-trees-and-blood-count-data" class="level2">
+<h2 class="anchored" data-anchor-id="can-this-model-be-fitted-to-mutation-trees-and-blood-count-data">Can this model be fitted to mutation trees and blood count data?</h2>
+</section>
+<section id="what-would-we-learn" class="level2">
+<h2 class="anchored" data-anchor-id="what-would-we-learn">What would we learn?</h2>
+<ul>
+<li>Formal way to estimate invasive potential of new mutations</li>
+</ul>
+</section>
+<section id="additional-aspect" class="level2">
+<h2 class="anchored" data-anchor-id="additional-aspect">Additional aspect</h2>
+<ul>
+<li>More efficient utilization of niche resources
+<ul>
+<li>Asymptotically: Growth independent of niche</li>
+</ul></li>
+</ul>
+</section>
+<section id="background" class="level2">
+<h2 class="anchored" data-anchor-id="background">Background</h2>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Moran_process">Wikipedia page</a></li>
+</ul>
+</section>
+<section id="simulation" class="level2">
+<h2 class="anchored" data-anchor-id="simulation">Simulation</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(tidyverse)</span>
+<span id="cb1-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">set.seed</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)</span></code></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1">simulate_moran <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">function</span>(n, t_max, record_at) {</span>
+<span id="cb2-2">  current_state <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span>n</span>
+<span id="cb2-3">  contribution <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">tibble</span>()</span>
+<span id="cb2-4">  i <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span> <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># time counter</span></span>
+<span id="cb2-5">  j <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span> <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># recording counter</span></span>
+<span id="cb2-6">  <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">while</span>(i <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&lt;=</span> t_max <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&amp;</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">length</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">unique</span>(current_state)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>) {</span>
+<span id="cb2-7">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span>(record_at[j] <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> i) {</span>
+<span id="cb2-8">      clone_sizes <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">tabulate</span>(current_state, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">nbins =</span> n) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span> n</span>
+<span id="cb2-9">      contribution <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> </span>
+<span id="cb2-10">        <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">bind_rows</span>(</span>
+<span id="cb2-11">          contribution, </span>
+<span id="cb2-12">          <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">tibble</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">time =</span> i, </span>
+<span id="cb2-13">                 <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">id =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">paste0</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'c'</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span>n),</span>
+<span id="cb2-14">                 <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">size =</span> clone_sizes))</span>
+<span id="cb2-15">      j <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> j <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span></span>
+<span id="cb2-16">    }</span>
+<span id="cb2-17">    ii_death <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sample.int</span>(n, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)</span>
+<span id="cb2-18">    ii_birth <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sample.int</span>(n, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)</span>
+<span id="cb2-19">    current_state[ii_death] <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> current_state[ii_birth]</span>
+<span id="cb2-20">    i <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> i <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span></span>
+<span id="cb2-21">  }</span>
+<span id="cb2-22">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">return</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">list</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">clonal_conversion_time =</span> i, </span>
+<span id="cb2-23">              <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">contribution =</span> contribution))</span>
+<span id="cb2-24">}</span>
+<span id="cb2-25"></span>
+<span id="cb2-26">log_sim_length <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10</span></span>
+<span id="cb2-27">t_max <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">^</span>log_sim_length</span>
+<span id="cb2-28">record_at <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">^</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span>log_sim_length))</span>
+<span id="cb2-29">record_at <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1000</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10000</span>)</span>
+<span id="cb2-30"></span>
+<span id="cb2-31">result <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">simulate_moran</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">n =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">100</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">t_max =</span> t_max, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">record_at =</span> record_at)</span>
+<span id="cb2-32"></span>
+<span id="cb2-33">result<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>contribution <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> </span>
+<span id="cb2-34">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ggplot</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(time, size, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">fill =</span> id)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> </span>
+<span id="cb2-35">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_area</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> </span>
+<span id="cb2-36">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">theme_minimal</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb2-37">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">theme</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">legend.position=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"none"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb2-38">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">labs</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Time'</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Contribution'</span>)</span></code></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://sbloggel.netlify.app/posts/2025-09-16-moran-process/2025-09-16-moran-process_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+
+
+</section>
+
+ ]]></description>
+  <category>R</category>
+  <guid>https://sbloggel.netlify.app/posts/2025-09-16-moran-process/2025-09-16-moran-process.html</guid>
+  <pubDate>Mon, 15 Sep 2025 22:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Assessing linearity in logistic regression</title>
   <link>https://sbloggel.netlify.app/posts/2025-07-30-assessing-linearity-in-logistic-regression/2025-07-30-assessing-linearity-in-logistic-regression.html</link>
@@ -4472,305 +4803,6 @@ font-style: inherit;">150</span></span></code></pre></div>
   <category>Sustainibility</category>
   <guid>https://sbloggel.netlify.app/posts/2024-10-23-energie-haus/2024-10-23-energie-haus.html</guid>
   <pubDate>Tue, 22 Oct 2024 22:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>gglimpse or tibblet, tlimpse or dfsum</title>
-  <link>https://sbloggel.netlify.app/posts/2024-09-30-gglimpse/2024-09-30-gglimpse.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<p>All in all, I like the summarytools package – however – I don’t like its heavy dependencies. Here, I want to create a lightweight alternative!</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'tidyverse'</span>)</span>
-<span id="cb1-2"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'summarytools'</span>)</span></code></pre></div>
-</div>
-<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1">mm <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> mtcars <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span> </span>
-<span id="cb2-2">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">model_name =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">row.names</span>(mtcars), <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">.before =</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>)</span>
-<span id="cb2-3"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">dfSummary</span>(mm, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">style =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'grid'</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">plain.ascii =</span> <span class="cn" style="color: #8f5902;
-background-color: null;
-font-style: inherit;">FALSE</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">tmp.img.dir =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'plots'</span>)</span></code></pre></div>
-<pre><code>temporary images written to '/Users/seb/Documents/Projects/00_websites/sbloggel/posts/2024-09-30-gglimpse/plots'</code></pre>
-<section id="data-frame-summary" class="level3">
-<h3 class="anchored" data-anchor-id="data-frame-summary">Data Frame Summary</h3>
-<section id="mm" class="level4">
-<h4 class="anchored" data-anchor-id="mm">mm</h4>
-<p><strong>Dimensions:</strong> 32 x 12<br>
-<strong>Duplicates:</strong> 0</p>
-<table class="table">
-<colgroup>
-<col style="width: 4%">
-<col style="width: 11%">
-<col style="width: 24%">
-<col style="width: 17%">
-<col style="width: 20%">
-<col style="width: 9%">
-<col style="width: 8%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>No</th>
-<th>Variable</th>
-<th>Stats / Values</th>
-<th>Freqs (% of Valid)</th>
-<th>Graph</th>
-<th>Valid</th>
-<th>Missing</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>1</td>
-<td>model_name<br>
-[character]</td>
-<td>1. AMC Javelin<br>
-2. Cadillac Fleetwood<br>
-3. Camaro Z28<br>
-4. Chrysler Imperial<br>
-5. Datsun 710<br>
-6. Dodge Challenger<br>
-7. Duster 360<br>
-8. Ferrari Dino<br>
-9. Fiat 128<br>
-10. Fiat X1-9<br>
-[ 22 others ]</td>
-<td>1 ( 3.1%)<br>
-1 ( 3.1%)<br>
-1 ( 3.1%)<br>
-1 ( 3.1%)<br>
-1 ( 3.1%)<br>
-1 ( 3.1%)<br>
-1 ( 3.1%)<br>
-1 ( 3.1%)<br>
-1 ( 3.1%)<br>
-1 ( 3.1%)<br>
-22 (68.8%)</td>
-<td><img src="https://sbloggel.netlify.app/posts/2024-09-30-gglimpse/plots/ds0114.png" class="img-fluid"></td>
-<td>32<br>
-(100.0%)</td>
-<td>0<br>
-(0.0%)</td>
-</tr>
-<tr class="even">
-<td>2</td>
-<td>mpg<br>
-[numeric]</td>
-<td>Mean (sd) : 20.1 (6)<br>
-min &lt; med &lt; max:<br>
-10.4 &lt; 19.2 &lt; 33.9<br>
-IQR (CV) : 7.4 (0.3)</td>
-<td>25 distinct values</td>
-<td><img src="https://sbloggel.netlify.app/posts/2024-09-30-gglimpse/plots/ds0115.png" class="img-fluid"></td>
-<td>32<br>
-(100.0%)</td>
-<td>0<br>
-(0.0%)</td>
-</tr>
-<tr class="odd">
-<td>3</td>
-<td>cyl<br>
-[numeric]</td>
-<td>Mean (sd) : 6.2 (1.8)<br>
-min &lt; med &lt; max:<br>
-4 &lt; 6 &lt; 8<br>
-IQR (CV) : 4 (0.3)</td>
-<td>4 : 11 (34.4%)<br>
-6 : 7 (21.9%)<br>
-8 : 14 (43.8%)</td>
-<td><img src="https://sbloggel.netlify.app/posts/2024-09-30-gglimpse/plots/ds0116.png" class="img-fluid"></td>
-<td>32<br>
-(100.0%)</td>
-<td>0<br>
-(0.0%)</td>
-</tr>
-<tr class="even">
-<td>4</td>
-<td>disp<br>
-[numeric]</td>
-<td>Mean (sd) : 230.7 (123.9)<br>
-min &lt; med &lt; max:<br>
-71.1 &lt; 196.3 &lt; 472<br>
-IQR (CV) : 205.2 (0.5)</td>
-<td>27 distinct values</td>
-<td><img src="https://sbloggel.netlify.app/posts/2024-09-30-gglimpse/plots/ds0117.png" class="img-fluid"></td>
-<td>32<br>
-(100.0%)</td>
-<td>0<br>
-(0.0%)</td>
-</tr>
-<tr class="odd">
-<td>5</td>
-<td>hp<br>
-[numeric]</td>
-<td>Mean (sd) : 146.7 (68.6)<br>
-min &lt; med &lt; max:<br>
-52 &lt; 123 &lt; 335<br>
-IQR (CV) : 83.5 (0.5)</td>
-<td>22 distinct values</td>
-<td><img src="https://sbloggel.netlify.app/posts/2024-09-30-gglimpse/plots/ds0118.png" class="img-fluid"></td>
-<td>32<br>
-(100.0%)</td>
-<td>0<br>
-(0.0%)</td>
-</tr>
-<tr class="even">
-<td>6</td>
-<td>drat<br>
-[numeric]</td>
-<td>Mean (sd) : 3.6 (0.5)<br>
-min &lt; med &lt; max:<br>
-2.8 &lt; 3.7 &lt; 4.9<br>
-IQR (CV) : 0.8 (0.1)</td>
-<td>22 distinct values</td>
-<td><img src="https://sbloggel.netlify.app/posts/2024-09-30-gglimpse/plots/ds0119.png" class="img-fluid"></td>
-<td>32<br>
-(100.0%)</td>
-<td>0<br>
-(0.0%)</td>
-</tr>
-<tr class="odd">
-<td>7</td>
-<td>wt<br>
-[numeric]</td>
-<td>Mean (sd) : 3.2 (1)<br>
-min &lt; med &lt; max:<br>
-1.5 &lt; 3.3 &lt; 5.4<br>
-IQR (CV) : 1 (0.3)</td>
-<td>29 distinct values</td>
-<td><img src="https://sbloggel.netlify.app/posts/2024-09-30-gglimpse/plots/ds0120.png" class="img-fluid"></td>
-<td>32<br>
-(100.0%)</td>
-<td>0<br>
-(0.0%)</td>
-</tr>
-<tr class="even">
-<td>8</td>
-<td>qsec<br>
-[numeric]</td>
-<td>Mean (sd) : 17.8 (1.8)<br>
-min &lt; med &lt; max:<br>
-14.5 &lt; 17.7 &lt; 22.9<br>
-IQR (CV) : 2 (0.1)</td>
-<td>30 distinct values</td>
-<td><img src="https://sbloggel.netlify.app/posts/2024-09-30-gglimpse/plots/ds0121.png" class="img-fluid"></td>
-<td>32<br>
-(100.0%)</td>
-<td>0<br>
-(0.0%)</td>
-</tr>
-<tr class="odd">
-<td>9</td>
-<td>vs<br>
-[numeric]</td>
-<td>Min : 0<br>
-Mean : 0.4<br>
-Max : 1</td>
-<td>0 : 18 (56.2%)<br>
-1 : 14 (43.8%)</td>
-<td><img src="https://sbloggel.netlify.app/posts/2024-09-30-gglimpse/plots/ds0122.png" class="img-fluid"></td>
-<td>32<br>
-(100.0%)</td>
-<td>0<br>
-(0.0%)</td>
-</tr>
-<tr class="even">
-<td>10</td>
-<td>am<br>
-[numeric]</td>
-<td>Min : 0<br>
-Mean : 0.4<br>
-Max : 1</td>
-<td>0 : 19 (59.4%)<br>
-1 : 13 (40.6%)</td>
-<td><img src="https://sbloggel.netlify.app/posts/2024-09-30-gglimpse/plots/ds0123.png" class="img-fluid"></td>
-<td>32<br>
-(100.0%)</td>
-<td>0<br>
-(0.0%)</td>
-</tr>
-<tr class="odd">
-<td>11</td>
-<td>gear<br>
-[numeric]</td>
-<td>Mean (sd) : 3.7 (0.7)<br>
-min &lt; med &lt; max:<br>
-3 &lt; 4 &lt; 5<br>
-IQR (CV) : 1 (0.2)</td>
-<td>3 : 15 (46.9%)<br>
-4 : 12 (37.5%)<br>
-5 : 5 (15.6%)</td>
-<td><img src="https://sbloggel.netlify.app/posts/2024-09-30-gglimpse/plots/ds0124.png" class="img-fluid"></td>
-<td>32<br>
-(100.0%)</td>
-<td>0<br>
-(0.0%)</td>
-</tr>
-<tr class="even">
-<td>12</td>
-<td>carb<br>
-[numeric]</td>
-<td>Mean (sd) : 2.8 (1.6)<br>
-min &lt; med &lt; max:<br>
-1 &lt; 2 &lt; 8<br>
-IQR (CV) : 2 (0.6)</td>
-<td>1 : 7 (21.9%)<br>
-2 : 10 (31.2%)<br>
-3 : 3 ( 9.4%)<br>
-4 : 10 (31.2%)<br>
-6 : 1 ( 3.1%)<br>
-8 : 1 ( 3.1%)</td>
-<td><img src="https://sbloggel.netlify.app/posts/2024-09-30-gglimpse/plots/ds0125.png" class="img-fluid"></td>
-<td>32<br>
-(100.0%)</td>
-<td>0<br>
-(0.0%)</td>
-</tr>
-</tbody>
-</table>
-
-
-</section>
-</section>
-
- ]]></description>
-  <category>R</category>
-  <guid>https://sbloggel.netlify.app/posts/2024-09-30-gglimpse/2024-09-30-gglimpse.html</guid>
-  <pubDate>Sun, 29 Sep 2024 22:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
