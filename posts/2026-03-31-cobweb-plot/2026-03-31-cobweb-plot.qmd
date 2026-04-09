@@ -1,0 +1,65 @@
+---
+title: Cobweb plot
+date: 2026-03-31
+categories:
+  - R
+---
+
+
+https://chatgpt.com/share/69cb923e-49d8-8384-b1a2-ac1827402412
+
+```{r}
+logistic_map <- function(x0, r, n) {
+  result <- double(n + 1)
+  result[1] <- x0
+  for (i in 1:n) {
+    result[i + 1] <- r * result[i] * (1 - result[i])
+  }
+  result
+}
+
+
+n <- 100
+
+ll <- logistic_map(0.5, 2.7, n)
+
+x <- rep(ll, each = 2)
+y <- c(0, x[-length(x)])
+
+plot(x, y, type = 'l', xlim = c(0, 1), ylim = c(0, 1))
+
+```
+
+```{r}
+logistic_map <- function(x0, r, n) {
+  result <- numeric(n + 1)
+  result[1] <- x0
+  for (i in 1:n) {
+    result[i + 1] <- r * result[i] * (1 - result[i])
+  }
+  result
+}
+
+# parameters
+n <- 100
+r <- 3.9
+ll <- logistic_map(0.5, r, n)
+
+# function
+f <- function(x) r * x * (1 - x)
+
+# base plot
+curve(f(x), from = 0, to = 1, col = "blue", lwd = 2,
+      xlim = c(0, 1), ylim = c(0, 1))
+abline(0, 1, lty = 2)  # diagonal
+
+# cobweb
+for (i in 1:n) {
+  # vertical line
+  segments(ll[i], ll[i], ll[i], ll[i + 1], col = "red")
+  
+  # horizontal line
+  segments(ll[i], ll[i + 1], ll[i + 1], ll[i + 1], col = "red")
+}
+```
+

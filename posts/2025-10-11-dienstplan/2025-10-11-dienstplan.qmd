@@ -1,0 +1,13 @@
+---
+title: Dienstplan
+date: 2025-10-11
+categories:
+  - R
+---
+
+```{r}
+#| label: init
+#| message: false
+set.seed(1)
+library('tidyverse')
+```

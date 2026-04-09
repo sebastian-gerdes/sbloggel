@@ -10,7 +10,806 @@
 <atom:link href="https://sbloggel.netlify.app/index.xml" rel="self" type="application/rss+xml"/>
 <description>Seb&#39;s private blog about statistics and other topics</description>
 <generator>quarto-1.4.553</generator>
-<lastBuildDate>Mon, 15 Sep 2025 22:00:00 GMT</lastBuildDate>
+<lastBuildDate>Wed, 08 Apr 2026 22:00:00 GMT</lastBuildDate>
+<item>
+  <title>Zoeliakie</title>
+  <link>https://sbloggel.netlify.app/posts/2026-04-09-zoeliakie/2026-04-09-zoeliakie.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="zöliakie-wichtige-hinweise-für-die-küche" class="level2">
+<h2 class="anchored" data-anchor-id="zöliakie-wichtige-hinweise-für-die-küche">ZÖLIAKIE – WICHTIGE HINWEISE FÜR DIE KÜCHE</h2>
+<ul>
+<li>Dieses Kind darf kein Gluten essen.</li>
+<li>Schon kleinste Mengen können krank machen.</li>
+<li>Verboten sind u. a.:
+<ul>
+<li>Weizen, Roggen, Gerste, Dinkel</li>
+<li>Paniermehl, normale Nudeln, viele Soßen (z. B. mit Mehl gebunden)</li>
+</ul></li>
+</ul>
+<p>👉 Bitte unbedingt beachten:</p>
+<ul>
+<li>Sauber arbeiten</li>
+<li>Hände waschen</li>
+<li>Saubere Arbeitsfläche verwenden</li>
+<li>Getrennte Zubereitung
+<ul>
+<li>Keine gemeinsamen Pfannen, Töpfe oder Grillflächen</li>
+<li>Kein Kontakt mit glutenhaltigen Speisen</li>
+</ul></li>
+<li>Eigene Küchenutensilien
+<ul>
+<li>Saubere Messer, Bretter, Pfannen verwenden</li>
+<li>Kein Holzlöffel oder Brett, das zuvor mit Mehl in Kontakt war, am besten gar keine Holzutensilien verwenden</li>
+</ul></li>
+<li>Frittieren
+<ul>
+<li>Nur in frischem Öl (nicht, wenn darin paniertes Essen frittiert wurde)</li>
+</ul></li>
+<li>Kein „Abkratzen“ oder Entfernen
+<ul>
+<li>Ein kontaminiertes Gericht ist nicht mehr sicher</li>
+</ul></li>
+<li>Zutaten prüfen
+<ul>
+<li>Auch Gewürzmischungen, Soßen, Brühen können Gluten enthalten</li>
+</ul></li>
+<li>Geeignet sind z. B.:
+<ul>
+<li>Reis, Kartoffeln, Gemüse, Fleisch, Fisch</li>
+<li>Nur, wenn sie ohne Kontamination zubereitet wurden</li>
+</ul></li>
+</ul>
+<p>Vielen Dank für Ihre Sorgfalt!</p>
+</section>
+<section id="celiac-disease-important-notes-for-the-kitchen" class="level2">
+<h2 class="anchored" data-anchor-id="celiac-disease-important-notes-for-the-kitchen">CELIAC DISEASE – IMPORTANT NOTES FOR THE KITCHEN</h2>
+<ul>
+<li>This child must not eat gluten.</li>
+<li>Even the smallest amounts can cause illness.</li>
+<li>Prohibited foods include:
+<ul>
+<li>Wheat, rye, barley, spelt</li>
+<li>Breadcrumbs, regular pasta, many sauces (e.g., thickened with flour)</li>
+</ul></li>
+</ul>
+<p>👉 Please strictly observe the following:</p>
+<ul>
+<li>Work cleanly
+<ul>
+<li>Wash hands</li>
+<li>Use a clean work surface</li>
+</ul></li>
+<li>Separate preparation
+<ul>
+<li>Do not use shared pans, pots, or grill surfaces</li>
+<li>Avoid any contact with gluten-containing foods</li>
+</ul></li>
+<li>Dedicated kitchen utensils
+<ul>
+<li>Use clean knives, cutting boards, and pans</li>
+<li>Do not use wooden spoons or boards that have been in contact with flour; ideally, avoid wooden utensils altogether</li>
+</ul></li>
+<li>Frying
+<ul>
+<li>Only use fresh oil (not oil previously used for breaded foods)</li>
+</ul></li>
+<li>No “scraping off” or removal
+<ul>
+<li>A contaminated dish is no longer safe</li>
+</ul></li>
+<li>Check ingredients
+<ul>
+<li>Spice mixes, sauces, and broths may also contain gluten</li>
+</ul></li>
+<li>Suitable foods include:
+<ul>
+<li>Rice, potatoes, vegetables, meat, fish</li>
+<li>Only if prepared without contamination</li>
+</ul></li>
+</ul>
+<p>Thank you for your care!</p>
+
+
+</section>
+
+ ]]></description>
+  <category>Mishmash</category>
+  <guid>https://sbloggel.netlify.app/posts/2026-04-09-zoeliakie/2026-04-09-zoeliakie.html</guid>
+  <pubDate>Wed, 08 Apr 2026 22:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Cobweb plot</title>
+  <link>https://sbloggel.netlify.app/posts/2026-03-31-cobweb-plot/2026-03-31-cobweb-plot.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>https://chatgpt.com/share/69cb923e-49d8-8384-b1a2-ac1827402412</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1">logistic_map <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">function</span>(x0, r, n) {</span>
+<span id="cb1-2">  result <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">double</span>(n <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)</span>
+<span id="cb1-3">  result[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>] <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> x0</span>
+<span id="cb1-4">  <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span> (i <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span>n) {</span>
+<span id="cb1-5">    result[i <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>] <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> r <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> result[i] <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> (<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> result[i])</span>
+<span id="cb1-6">  }</span>
+<span id="cb1-7">  result</span>
+<span id="cb1-8">}</span>
+<span id="cb1-9"></span>
+<span id="cb1-10"></span>
+<span id="cb1-11">n <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">100</span></span>
+<span id="cb1-12"></span>
+<span id="cb1-13">ll <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">logistic_map</span>(<span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.5</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2.7</span>, n)</span>
+<span id="cb1-14"></span>
+<span id="cb1-15">x <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rep</span>(ll, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">each =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>)</span>
+<span id="cb1-16">y <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, x[<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">length</span>(x)])</span>
+<span id="cb1-17"></span>
+<span id="cb1-18"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">plot</span>(x, y, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">type =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'l'</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">xlim =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">ylim =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>))</span></code></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://sbloggel.netlify.app/posts/2026-03-31-cobweb-plot/2026-03-31-cobweb-plot_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1">logistic_map <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">function</span>(x0, r, n) {</span>
+<span id="cb2-2">  result <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">numeric</span>(n <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)</span>
+<span id="cb2-3">  result[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>] <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> x0</span>
+<span id="cb2-4">  <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span> (i <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span>n) {</span>
+<span id="cb2-5">    result[i <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>] <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> r <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> result[i] <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> (<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> result[i])</span>
+<span id="cb2-6">  }</span>
+<span id="cb2-7">  result</span>
+<span id="cb2-8">}</span>
+<span id="cb2-9"></span>
+<span id="cb2-10"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># parameters</span></span>
+<span id="cb2-11">n <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">100</span></span>
+<span id="cb2-12">r <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3.9</span></span>
+<span id="cb2-13">ll <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">logistic_map</span>(<span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.5</span>, r, n)</span>
+<span id="cb2-14"></span>
+<span id="cb2-15"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># function</span></span>
+<span id="cb2-16">f <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">function</span>(x) r <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> x <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> (<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> x)</span>
+<span id="cb2-17"></span>
+<span id="cb2-18"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># base plot</span></span>
+<span id="cb2-19"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">curve</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">f</span>(x), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">from =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">to =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">col =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"blue"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">lwd =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>,</span>
+<span id="cb2-20">      <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">xlim =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">ylim =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>))</span>
+<span id="cb2-21"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">abline</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">lty =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>)  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># diagonal</span></span>
+<span id="cb2-22"></span>
+<span id="cb2-23"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># cobweb</span></span>
+<span id="cb2-24"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span> (i <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span>n) {</span>
+<span id="cb2-25">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># vertical line</span></span>
+<span id="cb2-26">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">segments</span>(ll[i], ll[i], ll[i], ll[i <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>], <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">col =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"red"</span>)</span>
+<span id="cb2-27">  </span>
+<span id="cb2-28">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># horizontal line</span></span>
+<span id="cb2-29">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">segments</span>(ll[i], ll[i <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>], ll[i <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>], ll[i <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>], <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">col =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"red"</span>)</span>
+<span id="cb2-30">}</span></code></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://sbloggel.netlify.app/posts/2026-03-31-cobweb-plot/2026-03-31-cobweb-plot_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+
+
+
+ ]]></description>
+  <category>R</category>
+  <guid>https://sbloggel.netlify.app/posts/2026-03-31-cobweb-plot/2026-03-31-cobweb-plot.html</guid>
+  <pubDate>Mon, 30 Mar 2026 22:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Modeling autocorrelation</title>
+  <link>https://sbloggel.netlify.app/posts/2026-03-17-modeling-autocorrelation/2026-03-17-modeling-autocorrelation.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="background" class="level2">
+<h2 class="anchored" data-anchor-id="background">Background</h2>
+<ul>
+<li>Information from ChatGPT: <a href="https://chatgpt.com/share/69b91479-dd5c-8013-9c58-f29793f92393">Link</a></li>
+</ul>
+</section>
+<section id="wiener-process" class="level2">
+<h2 class="anchored" data-anchor-id="wiener-process">Wiener process</h2>
+<ul>
+<li>English wikipedia: <a href="https://en.wikipedia.org/wiki/Wiener_process">Link</a></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1">delta_x <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rnorm</span>(<span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1e3</span>)</span>
+<span id="cb1-2">x <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cumsum</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, delta_x))</span>
+<span id="cb1-3"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">plot</span>(x)</span></code></pre></div>
+</div>
+</section>
+<section id="ornsteinuhlenbeck-process" class="level2">
+<h2 class="anchored" data-anchor-id="ornsteinuhlenbeck-process">Ornstein–Uhlenbeck process</h2>
+</section>
+<section id="modling-autocorrelation-in-my-case" class="level2">
+<h2 class="anchored" data-anchor-id="modling-autocorrelation-in-my-case">Modling autocorrelation in my case</h2>
+<ul>
+<li>I have a mathematical model y(t) = systematic + error</li>
+<li>I assume that the error terms are correlated: <img src="https://latex.codecogs.com/png.latex?Cov(%5Cepsilon(t_1),%20%5Cepsilon(t_2)%20=%20%5Clambda%5E%7Bt_2%20-%20t_1%7D"> with <img src="https://latex.codecogs.com/png.latex?0%20%3E%20%5Clambda%20%3E%201"></li>
+<li>I want to derive a formular for my loss function that takes autocorrelation into account</li>
+</ul>
+</section>
+<section id="simulating-an-auto-correlated-time-series" class="level2">
+<h2 class="anchored" data-anchor-id="simulating-an-auto-correlated-time-series">Simulating an auto-correlated time series</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1">n <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10000</span></span>
+<span id="cb2-2"></span>
+<span id="cb2-3">x <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">seq</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">200</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">length.out =</span> n)</span>
+<span id="cb2-4">y_true <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sin</span>(x)</span>
+<span id="cb2-5"></span>
+<span id="cb2-6">sig_u <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.2</span></span>
+<span id="cb2-7">sig_v <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.2</span></span>
+<span id="cb2-8">lambda <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.1</span></span>
+<span id="cb2-9"></span>
+<span id="cb2-10">u <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rnorm</span>(n, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">sd =</span> sig_u)</span>
+<span id="cb2-11">v <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rnorm</span>(n, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">sd =</span> sig_v)</span>
+<span id="cb2-12"></span>
+<span id="cb2-13"></span>
+<span id="cb2-14"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span>(i <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span>n) {</span>
+<span id="cb2-15">  rho <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> lambda<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">^</span>(x[i] <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> x[i <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>])</span>
+<span id="cb2-16">  v[i] <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rnorm</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, </span>
+<span id="cb2-17">                rho <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> v[i <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>], </span>
+<span id="cb2-18">                sig_v<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">^</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> (<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> rho<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">^</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>))</span>
+<span id="cb2-19">  </span>
+<span id="cb2-20">}</span>
+<span id="cb2-21"></span>
+<span id="cb2-22">op <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">par</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">mfrow =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)); <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">plot</span>(y_true, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">type =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'l'</span>); <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">points</span>(y_true <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> u <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> v, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">col =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'red'</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">pch =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'.'</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">cex =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5</span>); <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">plot</span>(u); <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">plot</span>(v); <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">par</span>(op)</span>
+<span id="cb2-23"></span>
+<span id="cb2-24"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sd</span>(u)</span>
+<span id="cb2-25"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sd</span>(v)</span></code></pre></div>
+</div>
+</section>
+<section id="challenge" class="level2">
+<h2 class="anchored" data-anchor-id="challenge">Challenge</h2>
+<p>I am trying to simulate error terms <img src="https://latex.codecogs.com/png.latex?%5Cepsilon%20=%20Y_%7Bobs%7D%20-%20%5Cmathbb%7BE%7D%5BY%20%7C%20t,%20%5Ctheta%5D">, where <img src="https://latex.codecogs.com/png.latex?t"> is time and <img src="https://latex.codecogs.com/png.latex?%5Ctheta"> the parameter vector of my model.</p>
+<p>I want to simulate a vector <img src="https://latex.codecogs.com/png.latex?%5Cepsilon"> with <img src="https://latex.codecogs.com/png.latex?n"> entries that satisfies the following conditions:</p>
+<ul>
+<li><img src="https://latex.codecogs.com/png.latex?%5Cepsilon_i%20%5Csim%20%5Cmathcal%7BN%7D(0,%20%5Csigma%5E2)"></li>
+<li><img src="https://latex.codecogs.com/png.latex?%5Cmathrm%7BCov%7D(%5Cepsilon_i,%20%5Cepsilon_%7Bi%20+%201%7D)%20=%20%5Clambda%5E%7Bt_%7Bi%20+%201%7D%20-%20t_%7Bi%7D%7D">, <img src="https://latex.codecogs.com/png.latex?t"> being another vector with <img src="https://latex.codecogs.com/png.latex?n"> entries that satisfy <img src="https://latex.codecogs.com/png.latex?t_i%20%3E%20t_%7Bi-1%7D"> and <img src="https://latex.codecogs.com/png.latex?0%20%3C%20%5Clambda%20%3C%201"></li>
+</ul>
+</section>
+<section id="ornsteinuhlenbeck-process-1" class="level2">
+<h2 class="anchored" data-anchor-id="ornsteinuhlenbeck-process-1">Ornstein–Uhlenbeck process</h2>
+<p>Long chatGPT dialogue that contains the code to calculate the likelihood if the error terms are generated by an Ornstein-Uhlenbeck process.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1">sigma <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> .<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span></span>
+<span id="cb3-2">theta <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.0001</span></span>
+<span id="cb3-3">y <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rnorm</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, sigma<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">^</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>  <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span> (<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> theta))</span>
+<span id="cb3-4">n <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1e5</span></span>
+<span id="cb3-5"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span> (i <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span>n) {</span>
+<span id="cb3-6">  y[i] <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> y[i <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>] <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> theta <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> y[i <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>] <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rnorm</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, sigma)</span>
+<span id="cb3-7">}</span>
+<span id="cb3-8"></span>
+<span id="cb3-9"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">plot</span>(y, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">type =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'l'</span>)</span></code></pre></div>
+</div>
+</section>
+<section id="calculate-likelihood-for-ornstein-uhlenbeck-process-generated-residuals" class="level2">
+<h2 class="anchored" data-anchor-id="calculate-likelihood-for-ornstein-uhlenbeck-process-generated-residuals">Calculate likelihood for Ornstein-Uhlenbeck-process generated residuals</h2>
+<ul>
+<li><img src="https://latex.codecogs.com/png.latex?%5Ctheta"> and <img src="https://latex.codecogs.com/png.latex?%5Csigma"> unknown</li>
+<li>Approach:
+<ul>
+<li>Function that calculates loglik in dependence of <img src="https://latex.codecogs.com/png.latex?%5Ctheta"> and <img src="https://latex.codecogs.com/png.latex?%5Csigma"></li>
+<li>Optimize <img src="https://latex.codecogs.com/png.latex?%5Ctheta"> and <img src="https://latex.codecogs.com/png.latex?%5Csigma"></li>
+<li>Maybe calculate confidence interval for <img src="https://latex.codecogs.com/png.latex?%5Ctheta"> and see if parameters can be retrieved from simulated data?</li>
+</ul></li>
+</ul>
+
+
+</section>
+
+ ]]></description>
+  <category>R</category>
+  <guid>https://sbloggel.netlify.app/posts/2026-03-17-modeling-autocorrelation/2026-03-17-modeling-autocorrelation.html</guid>
+  <pubDate>Mon, 16 Mar 2026 23:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Dienstplan</title>
+  <link>https://sbloggel.netlify.app/posts/2025-10-11-dienstplan/2025-10-11-dienstplan.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">set.seed</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)</span>
+<span id="cb1-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'tidyverse'</span>)</span></code></pre></div>
+</div>
+
+
+
+ ]]></description>
+  <category>R</category>
+  <guid>https://sbloggel.netlify.app/posts/2025-10-11-dienstplan/2025-10-11-dienstplan.html</guid>
+  <pubDate>Fri, 10 Oct 2025 22:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Moran process</title>
   <link>https://sbloggel.netlify.app/posts/2025-09-16-moran-process/2025-09-16-moran-process.html</link>
@@ -4352,457 +5151,6 @@ font-style: inherit;">print</span>(python_runtime)</span></code></pre></div>
   <category>R</category>
   <guid>https://sbloggel.netlify.app/posts/2024-11-01-speed-of-ode-solving-in-r-and-python/2024-11-01-speed-of-ode-solving-in-r-and-python.html</guid>
   <pubDate>Thu, 31 Oct 2024 23:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Regal</title>
-  <link>https://sbloggel.netlify.app/posts/2024-10-25-regal/2024-10-25-regal.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<ul>
-<li>Innenmaß 336 mm</li>
-<li>Außenholz 15 mm</li>
-<li>Innenholz 12 mm</li>
-<li>Tiefe oben 415 mm</li>
-<li>Tiefe unten 390 mm</li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'tidyverse'</span>)</span>
-<span id="cb1-2"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'knitr'</span>)</span>
-<span id="cb1-3"></span>
-<span id="cb1-4">calc_regal <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">function</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">n =</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>, <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Zahl der Zeilen</span></span>
-<span id="cb1-5">                       <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">m =</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>, <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Zahl der Spalten</span></span>
-<span id="cb1-6">                       <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">d_0 =</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">336</span>, <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Kantenlänge Zelle</span></span>
-<span id="cb1-7">                       <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">d_1 =</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">15</span>, <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Dicke Außenbretter</span></span>
-<span id="cb1-8">                       <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">d_2 =</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">12</span>, <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Dicke Innenbretter</span></span>
-<span id="cb1-9">                       <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">t_0 =</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">415</span>, <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Tiefe höhere Ebenen</span></span>
-<span id="cb1-10">                       <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">t_1 =</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">390</span> <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Tiefe unterste Ebene</span></span>
-<span id="cb1-11">                       ) {</span>
-<span id="cb1-12">  breite <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> m <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> d_0 <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> d_1 <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> (m <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> d_2</span>
-<span id="cb1-13">  hoehe <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> n <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> d_0 <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> d_1 <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> (n <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> d_2</span>
-<span id="cb1-14"></span>
-<span id="cb1-15">    <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">tribble</span>(<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">~</span> name, <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">~</span> n, <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">~</span> x1, <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">~</span> x2, <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">~</span> x3,</span>
-<span id="cb1-16">          <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'gesamt'</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, breite, hoehe, t_0,</span>
-<span id="cb1-17">          <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'brett_oben'</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, breite, t_0, d_1,</span>
-<span id="cb1-18">          <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'brett_unten'</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, breite, t_1, d_1,</span>
-<span id="cb1-19">          <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'brett_mitte_horizontal'</span>, n <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, breite <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> d_1, t_0, d_2,</span>
-<span id="cb1-20">          <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'brett_seite'</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>, hoehe <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> d_1, t_0, d_1,</span>
-<span id="cb1-21">          <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'brett_vertikal_unten'</span>, m <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, d_0, t_1, d_2,</span>
-<span id="cb1-22">          <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'brett_vertikal_oben'</span>, (n <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> (m <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>), d_0, t_0, d_2,</span>
-<span id="cb1-23">          <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'brett_verkeilen'</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>, d_0, d_0, d_2)</span>
-<span id="cb1-24">  </span>
-<span id="cb1-25">}</span>
-<span id="cb1-26"></span>
-<span id="cb1-27"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">calc_regal</span>() <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">kable</span>()</span></code></pre></div>
-<div class="cell-output-display">
-<table class="table table-sm table-striped small">
-<thead>
-<tr class="header">
-<th style="text-align: left;">name</th>
-<th style="text-align: right;">n</th>
-<th style="text-align: right;">x1</th>
-<th style="text-align: right;">x2</th>
-<th style="text-align: right;">x3</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">gesamt</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">714</td>
-<td style="text-align: right;">714</td>
-<td style="text-align: right;">415</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">brett_oben</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">714</td>
-<td style="text-align: right;">415</td>
-<td style="text-align: right;">15</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">brett_unten</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">714</td>
-<td style="text-align: right;">390</td>
-<td style="text-align: right;">15</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">brett_mitte_horizontal</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">684</td>
-<td style="text-align: right;">415</td>
-<td style="text-align: right;">12</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">brett_seite</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">684</td>
-<td style="text-align: right;">415</td>
-<td style="text-align: right;">15</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">brett_vertikal_unten</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">336</td>
-<td style="text-align: right;">390</td>
-<td style="text-align: right;">12</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">brett_vertikal_oben</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">336</td>
-<td style="text-align: right;">415</td>
-<td style="text-align: right;">12</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">brett_verkeilen</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">336</td>
-<td style="text-align: right;">336</td>
-<td style="text-align: right;">12</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-
-
-
- ]]></description>
-  <category>Mishmash</category>
-  <guid>https://sbloggel.netlify.app/posts/2024-10-25-regal/2024-10-25-regal.html</guid>
-  <pubDate>Thu, 24 Oct 2024 22:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Energy consumption of artificial intelligence</title>
-  <link>https://sbloggel.netlify.app/posts/2024-10-24-energy-consumption-of-artificial-intelligence/2024-10-24-energy-consumption-of-artificial-intelligence.html</link>
-  <description><![CDATA[ 
-
-
-
-
-
-
-
- ]]></description>
-  <category>R</category>
-  <guid>https://sbloggel.netlify.app/posts/2024-10-24-energy-consumption-of-artificial-intelligence/2024-10-24-energy-consumption-of-artificial-intelligence.html</guid>
-  <pubDate>Wed, 23 Oct 2024 22:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Ventilation</title>
-  <link>https://sbloggel.netlify.app/posts/2024-10-23-ventilation/2024-10-23-ventilation.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<p>How much water in liters is removed from a flat with a volume if the air in the flat is changed?</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># devtools::install_github("sebastian-gerdes/smisc")</span></span>
-<span id="cb1-2"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'smisc'</span>)</span>
-<span id="cb1-3"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">diff_water</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">temperature_out =</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">8</span>, </span>
-<span id="cb1-4">           <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">relative_humidity_outside =</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">80</span>, </span>
-<span id="cb1-5">           <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">temperature_inside =</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">20</span>, </span>
-<span id="cb1-6">           <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">relative_humidity_inside =</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">70</span>, </span>
-<span id="cb1-7">           <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">volume =</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">300</span>)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] -1.644616</code></pre>
-</div>
-</div>
-
-
-
- ]]></description>
-  <category>Mishmash</category>
-  <category>Sustainibility</category>
-  <guid>https://sbloggel.netlify.app/posts/2024-10-23-ventilation/2024-10-23-ventilation.html</guid>
-  <pubDate>Tue, 22 Oct 2024 22:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Energie Haus</title>
-  <link>https://sbloggel.netlify.app/posts/2024-10-23-energie-haus/2024-10-23-energie-haus.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'tidyverse'</span>)</span></code></pre></div>
-</div>
-<ul>
-<li>ChatGPT sagt, dass ich ca. 1e3 Watt benötige, um 1 kg Stein um 1 Grad zu erwärmen (<a href="https://chatgpt.com/share/6718a0a2-68cc-8013-a9b6-aa25947e9b54">Quelle</a>)</li>
-<li>Ein Haus hat eine Masse von ca. 100 Tonnen (1e5 kg)</li>
-<li>ChatGPT sagt, dass ich ca. 1e3 Watt benötige, um 1 Kubikmeter Luft um 1 Grad zu erwärmen</li>
-<li>Ein Haus hat ein Volumen von ca. 500 Kubikmeter (<img src="https://latex.codecogs.com/png.latex?5e2%20m%5E3">)</li>
-</ul>
-<p>Der Quotient aus beiden:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1e5</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">5e2</span></span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 200</code></pre>
-</div>
-</div>
-<p>Ergo 200 mal so viel Energie um die Masse des Hauses um 1 Grad zu erwärmen im Vergleich zur Energie um die Masse der Luft um 1 Grad zu erwärmen!</p>
-<section id="wie-viel-energie-um-die-luft-in-einem-haus-500-m3-von-0-auf-20-zu-erwärmen" class="level2">
-<h2 class="anchored" data-anchor-id="wie-viel-energie-um-die-luft-in-einem-haus-500-m3-von-0-auf-20-zu-erwärmen">Wie viel Energie um die Luft in einem Haus (500 <img src="https://latex.codecogs.com/png.latex?m%5E3">) von 0° auf 20° zu erwärmen</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1">(E_in_J <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">5e2</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">20</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1e3</span>)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 1e+07</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1">(E_in_kWh <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> E_in_J <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3.6e6</span>)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 2.777778</code></pre>
-</div>
-</div>
-</section>
-<section id="heizenergie-pro-tag-im-kalten-halbjahr" class="level2">
-<h2 class="anchored" data-anchor-id="heizenergie-pro-tag-im-kalten-halbjahr">Heizenergie pro Tag im kalten Halbjahr</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1e4</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">150</span></span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 66.66667</code></pre>
-</div>
-</div>
-<p>–&gt; durch das Lüften entweicht eher der kleinere Teil der Energie</p>
-
-
-</section>
-
- ]]></description>
-  <category>Sustainibility</category>
-  <guid>https://sbloggel.netlify.app/posts/2024-10-23-energie-haus/2024-10-23-energie-haus.html</guid>
-  <pubDate>Tue, 22 Oct 2024 22:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
