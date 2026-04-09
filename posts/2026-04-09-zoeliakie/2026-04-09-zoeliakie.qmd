@@ -5,6 +5,8 @@ categories:
   - Mishmash
 ---
 
+![](qrcode.png)
+
 ## ZÖLIAKIE – WICHTIGE HINWEISE FÜR DIE KÜCHE
 * Dieses Kind darf kein Gluten essen.
 * Schon kleinste Mengen können krank machen.
