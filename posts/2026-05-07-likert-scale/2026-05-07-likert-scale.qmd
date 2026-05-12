@@ -1,0 +1,32 @@
+---
+title: Likert scale
+date: 2026-05-07
+categories:
+  - R
+---
+
+```{r}
+#| message: false
+set.seed(2)
+library('tidyverse')
+library('ordinal')
+
+n_per_group <- 50
+dat <- tibble(
+  group = rep(c('A', 'B'), each = n_per_group), 
+  rating = c(
+    rep(1:5, rmultinom(1, n_per_group, c(0.2, 0.3, 0.3, 0.1, 0.1))),
+    rep(1:5, rmultinom(1, n_per_group, c(0.1, 0.1, 0.3, 0.3, 0.2)))
+  )
+)
+
+# T-test:
+t.test(rating ~ group, data = dat)
+
+# Mann-Whitney-U-test:
+wilcox.test(rating ~ group, data = dat)
+
+# Ordinal (Proportional odds) regression:
+fm <- clm(factor(rating) ~ group, data = dat)
+summary(fm)
+```

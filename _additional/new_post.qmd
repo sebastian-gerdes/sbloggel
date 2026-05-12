@@ -21,7 +21,7 @@ set.seed(1)
 post_title <- "Moran process"
 post_title <- "Dienstplan"
 post_title <- "Cobweb plot"
-post_title <- "Zoeliakie"
+post_title <- "Likert scale"
 
 
 
